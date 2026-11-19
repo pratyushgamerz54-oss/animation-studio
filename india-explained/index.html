@@ -1,0 +1,789 @@
+<title>भारत की अंदरूनी चुनौतियाँ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Hind:wght@500;600&family=Kalam:wght@400;700&family=Tiro+Devanagari+Hindi&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one vertical 9:16 screen centred on a dark desk, with a play strip below. Single dark look. */
+:root{--bg:#0b0a09;--fg:#efe7d6;--muted:#9b9184;--red:#d1342b;--line:#2c2723;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:500 15px 'Hind',sans-serif;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 32px}
+.wrap{display:grid;justify-items:center;gap:12px}
+.screen{height:min(82vh,960px);aspect-ratio:9/16;max-width:100%;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#000}
+canvas{width:100%;height:100%;display:block}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+button{font:600 15px 'Hind',sans-serif;background:#1a1714;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:.45em 1em;cursor:pointer}
+button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.time{font:500 13px 'JetBrains Mono',monospace;color:var(--muted);font-variant-numeric:tabular-nums}
+</style>
+<div class="wrap">
+  <div class="screen"><canvas id="cv" width="1080" height="1920" aria-label="भारत की अंदरूनी चुनौतियों पर वीडियो"></canvas></div>
+  <div class="bar"><button id="play">▶ चलाएँ</button><button id="restart">↺ फिर से</button><span class="time" id="time">0:00 / 1:00</span></div>
+  <audio id="aud" src="music_sfx.wav" preload="auto"></audio>
+</div>
+<script>
+(() => {
+const INDIA = [[[77.52,35.49],[77.69,35.45],[77.81,35.52],[77.91,35.46],[77.94,35.56],[78.16,35.55],[78.24,35.73],[78.8,35.87],[78.86,35.97],[79.03,35.91],[79.27,35.93],[79.34,35.99],[79.44,35.97],[79.49,35.85],[79.57,35.9],[79.7,35.64],[79.85,35.57],[80.0,35.6],[79.97,35.55],[80.05,35.42],[80.21,35.58],[80.41,35.48],[80.29,35.35],[80.28,35.2],[80.19,35.12],[80.21,34.89],[80.14,34.87],[80.07,34.71],[79.79,34.63],[79.79,34.48],[79.51,34.45],[79.61,34.24],[79.49,34.19],[79.4,34.0],[79.0,34.04],[78.89,33.97],[79.03,33.75],[79.01,33.69],[79.09,33.64],[78.91,33.62],[78.94,33.38],[79.11,33.2],[79.22,33.24],[79.41,33.19],[79.33,33.0],[79.56,32.76],[79.55,32.68],[79.41,32.52],[79.28,32.56],[79.13,32.48],[79.1,32.37],[78.97,32.34],[78.78,32.48],[78.74,32.7],[78.4,32.53],[78.47,32.44],[78.49,32.28],[78.78,31.99],[78.7,31.81],[78.85,31.61],[78.72,31.51],[78.8,31.44],[78.78,31.31],[78.9,31.29],[79.1,31.45],[79.43,31.02],[79.51,31.03],[79.6,30.94],[79.75,31.01],[79.87,30.97],[79.93,30.88],[80.24,30.76],[80.22,30.58],[80.61,30.47],[80.8,30.32],[81.03,30.25],[81.0,30.19],[80.91,30.22],[80.75,30.01],[80.6,29.96],[80.49,29.8],[80.37,29.75],[80.41,29.6],[80.24,29.44],[80.32,29.31],[80.3,29.21],[80.25,29.22],[80.27,29.14],[80.14,29.1],[80.08,28.82],[80.52,28.55],[80.5,28.66],[80.57,28.69],[81.03,28.4],[81.21,28.36],[81.32,28.13],[81.45,28.16],[81.48,28.08],[81.88,27.86],[82.07,27.92],[82.45,27.68],[82.71,27.72],[82.74,27.5],[83.19,27.45],[83.32,27.33],[83.41,27.41],[83.39,27.48],[83.61,27.47],[83.86,27.35],[83.85,27.45],[84.02,27.43],[84.15,27.52],[84.29,27.39],[84.62,27.34],[84.69,27.22],[84.64,27.05],[84.96,26.96],[85.05,26.89],[85.02,26.85],[85.19,26.87],[85.21,26.76],[85.33,26.74],[85.63,26.87],[85.73,26.81],[85.73,26.65],[85.85,26.57],[86.03,26.67],[86.22,26.59],[86.33,26.62],[86.73,26.42],[87.07,26.59],[87.09,26.45],[87.34,26.35],[87.47,26.44],[87.6,26.38],[87.89,26.49],[88.01,26.36],[88.09,26.43],[88.19,26.74],[88.14,26.99],[87.99,27.12],[88.07,27.34],[88.04,27.5],[88.2,27.79],[88.12,27.92],[88.14,27.97],[88.41,27.98],[88.64,28.12],[88.84,28.02],[88.89,27.86],[88.76,27.57],[88.91,27.29],[88.8,27.25],[88.75,27.14],[88.87,27.11],[88.88,26.94],[88.92,26.99],[89.13,26.81],[89.38,26.86],[89.65,26.78],[89.63,26.72],[89.86,26.7],[90.19,26.77],[90.23,26.86],[90.36,26.9],[90.72,26.77],[91.1,26.82],[91.34,26.78],[91.41,26.84],[91.69,26.81],[91.89,26.92],[92.06,26.85],[92.12,26.96],[92.03,27.08],[92.04,27.26],[92.12,27.29],[92.02,27.48],[91.65,27.48],[91.56,27.63],[91.64,27.76],[91.92,27.72],[92.24,27.89],[92.32,27.8],[92.42,27.83],[92.46,27.79],[92.73,27.98],[92.73,28.05],[92.66,28.08],[92.68,28.15],[92.92,28.2],[93.43,28.66],[93.71,28.66],[94.26,28.93],[94.37,29.03],[94.28,29.09],[94.29,29.15],[94.63,29.3],[94.7,29.32],[94.81,29.16],[95.02,29.13],[94.99,29.17],[95.26,29.07],[95.3,29.14],[95.41,29.13],[95.43,29.19],[95.5,29.13],[95.5,29.19],[95.6,29.19],[95.61,29.24],[95.71,29.2],[95.81,29.35],[95.88,29.31],[96.05,29.38],[96.3,29.19],[96.19,29.04],[96.33,29.11],[96.45,28.94],[96.52,28.94],[96.63,28.73],[96.64,28.68],[96.54,28.69],[96.41,28.51],[96.5,28.43],[96.49,28.54],[96.71,28.61],[96.93,28.35],[97.13,28.36],[97.36,28.2],[97.31,28.06],[97.4,28.01],[97.37,27.88],[97.25,27.9],[96.89,27.61],[96.9,27.45],[97.16,27.14],[97.14,27.09],[96.87,27.18],[96.88,27.26],[96.7,27.37],[96.52,27.29],[96.23,27.28],[96.02,27.18],[95.95,27.05],[95.8,27.02],[95.72,26.88],[95.52,26.82],[95.43,26.7],[95.15,26.62],[95.06,26.45],[95.13,26.38],[95.12,26.1],[95.19,26.07],[95.01,25.9],[95.05,25.76],[94.9,25.57],[94.63,25.4],[94.58,25.21],[94.74,25.13],[94.71,24.94],[94.4,24.48],[94.16,23.85],[93.93,23.95],[93.81,23.93],[93.75,24.01],[93.51,23.94],[93.41,24.07],[93.33,24.08],[93.44,23.69],[93.36,23.35],[93.39,23.13],[93.29,23.01],[93.13,23.04],[93.16,22.91],[93.09,22.81],[93.11,22.53],[93.19,22.43],[93.2,22.26],[93.14,22.25],[93.15,22.18],[93.04,22.2],[93.01,21.99],[92.95,22.03],[92.91,21.94],[92.86,22.06],[92.7,22.16],[92.68,22.01],[92.6,21.98],[92.52,22.72],[92.45,22.89],[92.37,22.94],[92.35,23.24],[92.4,23.24],[92.28,23.72],[92.21,23.65],[92.15,23.74],[92.05,23.65],[91.96,23.73],[91.97,23.48],[91.76,23.3],[91.84,23.09],[91.62,22.94],[91.45,23.26],[91.41,23.29],[91.38,23.21],[91.42,23.06],[91.35,23.1],[91.32,23.36],[91.16,23.61],[91.21,23.69],[91.16,23.74],[91.22,23.74],[91.25,23.84],[91.23,23.93],[91.3,24.0],[91.38,23.98],[91.37,24.11],[91.59,24.07],[91.67,24.23],[91.76,24.14],[91.74,24.25],[91.85,24.22],[91.9,24.14],[91.92,24.34],[92.16,24.42],[92.15,24.52],[92.22,24.52],[92.3,24.74],[92.23,24.9],[92.5,24.88],[92.43,25.03],[92.06,25.19],[91.64,25.12],[91.61,25.18],[91.47,25.13],[91.27,25.21],[90.44,25.14],[89.97,25.3],[89.84,25.29],[89.88,25.62],[89.82,25.82],[89.89,25.95],[89.83,25.95],[89.87,25.98],[89.77,26.04],[89.79,26.09],[89.68,26.16],[89.68,26.24],[89.59,26.16],[89.65,26.06],[89.58,25.97],[89.42,26.05],[89.36,26.01],[89.16,26.14],[89.09,26.4],[88.96,26.46],[88.9,26.41],[89.0,26.29],[89.06,26.29],[89.05,26.24],[88.9,26.29],[88.84,26.23],[88.79,26.31],[88.67,26.26],[88.75,26.35],[88.44,26.55],[88.4,26.63],[88.33,26.48],[88.49,26.46],[88.52,26.36],[88.46,26.38],[88.35,26.22],[88.18,26.15],[88.18,26.03],[88.09,25.92],[88.11,25.82],[88.27,25.81],[88.45,25.66],[88.44,25.6],[88.54,25.51],[88.7,25.47],[88.81,25.52],[88.84,25.36],[89.01,25.26],[88.92,25.17],[88.84,25.21],[88.81,25.17],[88.44,25.21],[88.4,24.95],[88.33,24.87],[88.26,24.88],[88.22,24.96],[88.14,24.94],[88.18,24.86],[88.01,24.67],[88.33,24.38],[88.74,24.28],[88.75,24.15],[88.7,24.12],[88.77,23.98],[88.67,23.87],[88.58,23.86],[88.56,23.65],[88.74,23.48],[88.8,23.5],[88.72,23.26],[89.0,23.22],[88.84,23.01],[88.97,22.84],[88.91,22.76],[88.96,22.69],[88.94,22.56],[89.0,22.29],[89.1,22.16],[89.04,22.1],[89.06,21.94],[89.02,21.98],[88.99,21.9],[89.1,21.64],[88.92,21.63],[88.86,21.78],[88.85,21.62],[88.82,21.68],[88.72,21.68],[88.7,21.86],[88.78,22.01],[88.75,22.08],[88.69,22.07],[88.72,22.0],[88.64,22.08],[88.55,21.82],[88.52,21.95],[88.46,21.9],[88.45,21.61],[88.42,21.72],[88.4,21.59],[88.4,21.72],[88.37,21.68],[88.27,21.73],[88.31,21.58],[88.25,21.56],[88.16,21.96],[88.21,22.15],[88.02,22.22],[88.19,22.1],[88.05,22.01],[87.8,21.7],[87.35,21.58],[87.38,21.55],[87.09,21.54],[86.91,21.34],[86.83,21.14],[86.97,20.82],[86.87,20.78],[87.0,20.77],[87.0,20.71],[86.93,20.71],[86.96,20.69],[87.07,20.72],[86.77,20.5],[86.73,20.53],[86.71,20.41],[86.79,20.38],[86.67,20.29],[86.8,20.35],[86.52,20.18],[86.42,20.0],[86.32,19.99],[86.37,19.95],[85.54,19.7],[85.04,19.39],[85.08,19.37],[84.75,19.12],[84.75,19.07],[84.79,19.11],[84.77,19.07],[84.36,18.55],[84.1,18.35],[84.13,18.31],[83.56,18.03],[83.21,17.59],[82.6,17.28],[82.31,17.04],[82.25,16.88],[82.36,16.82],[82.33,16.99],[82.37,16.91],[82.34,16.74],[82.27,16.71],[82.37,16.71],[82.31,16.6],[82.26,16.69],[82.3,16.58],[82.26,16.56],[82.3,16.56],[81.72,16.31],[81.72,16.36],[81.71,16.31],[81.55,16.37],[81.27,16.29],[81.15,15.97],[81.0,15.82],[81.03,15.76],[80.94,15.71],[80.9,15.76],[80.92,15.71],[80.83,15.7],[80.81,15.84],[80.68,15.89],[80.52,15.86],[80.26,15.67],[80.05,15.07],[80.08,14.81],[80.19,14.6],[80.14,14.57],[80.2,14.58],[80.1,14.25],[80.13,14.07],[80.26,13.78],[80.24,13.64],[80.35,13.28],[80.16,12.46],[79.87,12.04],[79.76,11.67],[79.83,11.36],[79.76,11.38],[79.84,11.35],[79.86,11.2],[79.83,10.82],[79.88,10.31],[79.79,10.27],[79.64,10.37],[79.29,10.26],[79.23,10.15],[79.27,10.04],[79.0,9.71],[78.9,9.49],[79.0,9.35],[78.96,9.34],[79.19,9.28],[78.86,9.25],[78.27,9.02],[78.13,8.76],[78.2,8.76],[78.11,8.64],[78.13,8.49],[78.07,8.37],[77.55,8.07],[77.32,8.12],[77.01,8.35],[76.55,8.9],[76.67,8.99],[76.54,8.93],[76.46,9.14],[76.5,9.17],[76.43,9.25],[76.46,9.14],[76.36,9.36],[76.24,9.96],[76.29,9.95],[76.27,10.03],[76.22,10.0],[76.17,10.18],[76.21,10.2],[76.15,10.19],[76.07,10.54],[75.92,10.78],[75.96,10.81],[75.91,10.78],[75.83,11.12],[75.87,11.12],[75.81,11.15],[75.76,11.36],[75.62,11.48],[75.54,11.71],[75.36,11.86],[75.31,11.97],[75.2,12.0],[74.83,12.84],[74.87,12.84],[74.81,12.91],[74.82,12.85],[74.7,13.34],[74.67,13.63],[74.72,13.64],[74.65,13.66],[74.43,14.27],[74.52,14.24],[74.42,14.29],[74.38,14.54],[74.31,14.52],[74.29,14.59],[74.35,14.6],[74.27,14.62],[74.28,14.71],[74.12,14.77],[74.16,14.86],[74.12,14.84],[74.05,14.98],[73.91,15.08],[73.96,15.16],[73.9,15.33],[73.78,15.41],[73.89,15.43],[73.79,15.46],[73.83,15.5],[73.77,15.49],[73.73,15.59],[73.79,15.65],[73.73,15.61],[73.63,15.87],[73.46,16.05],[73.39,16.34],[73.43,16.37],[73.37,16.38],[73.47,16.41],[73.37,16.39],[73.32,16.51],[73.34,16.56],[73.36,16.48],[73.44,16.5],[73.32,16.6],[73.4,16.62],[73.33,16.62],[73.31,16.73],[73.35,16.83],[73.3,16.81],[73.28,16.95],[73.33,16.97],[73.26,17.05],[73.29,17.0],[73.33,17.04],[73.19,17.3],[73.3,17.29],[73.17,17.4],[73.21,17.43],[73.14,17.56],[73.22,17.59],[73.14,17.61],[73.09,17.83],[73.13,17.83],[73.05,17.9],[73.09,17.94],[73.03,17.95],[73.09,17.99],[73.02,17.99],[72.99,18.19],[72.93,18.22],[72.97,18.28],[73.1,18.14],[73.04,18.3],[73.09,18.32],[73.03,18.26],[72.92,18.35],[72.91,18.54],[73.01,18.47],[72.86,18.69],[72.87,18.8],[72.94,18.83],[73.02,18.72],[72.99,18.87],[72.91,18.9],[73.07,19.02],[73.0,19.0],[72.99,19.19],[72.96,19.04],[72.87,19.01],[72.81,18.89],[72.83,19.18],[72.78,19.15],[72.84,19.25],[72.78,19.19],[72.79,19.3],[72.91,19.29],[72.78,19.35],[72.74,19.46],[72.89,19.52],[72.73,19.53],[72.66,19.83],[72.67,19.93],[72.75,19.94],[72.71,20.07],[72.78,20.21],[72.75,20.29],[72.9,20.53],[72.85,20.74],[72.93,20.76],[72.83,20.79],[72.78,20.92],[72.85,20.97],[72.76,20.93],[72.73,21.0],[72.73,21.05],[72.85,21.03],[72.8,21.05],[72.83,21.09],[72.71,21.09],[72.79,21.18],[72.68,21.16],[72.64,21.08],[72.64,21.21],[72.74,21.2],[72.6,21.3],[72.69,21.35],[72.65,21.39],[72.7,21.46],[72.76,21.45],[72.65,21.45],[72.68,21.5],[72.83,21.67],[72.93,21.68],[72.54,21.66],[72.62,21.91],[72.75,21.97],[72.54,21.9],[72.51,21.98],[72.59,22.2],[72.76,22.17],[72.82,22.26],[72.91,22.26],[72.75,22.23],[72.54,22.31],[72.43,22.2],[72.38,22.34],[72.33,22.31],[72.3,22.1],[72.18,22.02],[72.25,21.92],[72.16,21.96],[72.25,21.91],[72.25,21.81],[72.21,21.86],[72.17,21.81],[72.31,21.63],[72.24,21.45],[72.09,21.32],[72.11,21.2],[71.51,20.96],[71.44,20.87],[70.82,20.69],[70.16,21.05],[69.4,21.85],[69.26,21.91],[68.94,22.31],[69.07,22.48],[69.04,22.39],[69.19,22.42],[69.16,22.31],[69.23,22.26],[69.48,22.33],[69.51,22.43],[69.57,22.32],[69.62,22.37],[69.67,22.32],[69.73,22.47],[69.81,22.4],[69.83,22.45],[69.92,22.44],[69.99,22.54],[70.17,22.54],[70.45,22.97],[70.29,22.94],[70.22,23.06],[70.22,22.95],[70.13,23.0],[70.1,22.91],[69.9,22.87],[69.88,22.91],[69.73,22.82],[69.71,22.74],[69.45,22.78],[69.35,22.82],[69.36,22.88],[69.35,22.82],[69.22,22.88],[69.2,22.84],[68.63,23.17],[68.72,23.13],[68.58,23.23],[68.68,23.3],[68.58,23.35],[68.51,23.49],[68.45,23.48],[68.47,23.55],[68.43,23.51],[68.55,23.71],[68.81,23.88],[68.66,23.86],[68.51,23.75],[68.43,23.74],[68.43,23.82],[68.35,23.58],[68.27,23.56],[68.27,23.62],[68.25,23.57],[68.17,23.62],[68.35,23.73],[68.26,23.74],[68.25,23.67],[68.19,23.73],[68.21,23.83],[68.36,23.97],[68.75,23.97],[68.81,24.31],[68.87,24.21],[68.95,24.3],[69.0,24.22],[69.09,24.27],[69.19,24.24],[69.59,24.29],[69.73,24.17],[70.03,24.17],[70.11,24.3],[70.56,24.42],[70.6,24.41],[70.57,24.25],[70.71,24.22],[70.91,24.26],[70.87,24.29],[70.95,24.35],[71.12,24.4],[71.0,24.44],[70.99,24.6],[71.1,24.69],[70.94,24.94],[70.89,25.15],[70.66,25.4],[70.66,25.7],[70.27,25.71],[70.1,25.94],[70.17,26.55],[69.82,26.59],[69.51,26.74],[69.51,27.01],[69.59,27.18],[70.03,27.56],[70.13,27.81],[70.37,28.01],[70.59,28.01],[70.74,27.74],[70.87,27.71],[71.21,27.84],[71.67,27.88],[71.9,27.96],[71.93,28.12],[72.21,28.39],[72.39,28.77],[72.95,29.03],[73.28,29.57],[73.4,29.95],[73.81,30.07],[73.97,30.2],[73.88,30.36],[73.97,30.44],[73.93,30.49],[74.07,30.52],[74.42,30.94],[74.7,31.07],[74.69,31.13],[74.57,31.08],[74.51,31.13],[74.55,31.36],[74.65,31.43],[74.49,31.72],[74.61,31.89],[74.82,31.96],[74.88,32.05],[75.24,32.09],[75.37,32.23],[75.32,32.34],[75.13,32.41],[75.1,32.48],[74.68,32.49],[74.64,32.61],[74.7,32.66],[74.65,32.73],[74.71,32.84],[74.64,32.75],[74.37,32.77],[73.93,33.03],[73.82,33.01],[73.63,33.09],[73.67,33.21],[73.58,33.38],[73.63,33.53],[73.57,33.63],[73.59,33.89],[73.5,34.02],[73.49,34.28],[73.4,34.38],[73.45,34.57],[73.66,34.56],[73.73,34.76],[74.05,34.89],[74.13,35.12],[73.75,35.22],[73.69,35.35],[73.79,35.45],[73.79,35.52],[73.41,35.53],[73.33,35.66],[73.13,35.72],[73.2,35.79],[73.18,35.86],[72.57,35.85],[72.51,35.9],[72.57,36.01],[72.52,36.08],[72.55,36.23],[72.97,36.48],[73.07,36.61],[73.06,36.7],[73.37,36.76],[73.85,36.72],[73.84,36.8],[73.67,36.92],[74.04,36.83],[74.42,37.01],[74.56,36.97],[74.57,37.04],[74.69,37.1],[74.73,37.04],[74.84,37.07],[74.9,36.94],[75.15,37.03],[75.42,36.96],[75.46,36.73],[75.54,36.78],[75.74,36.75],[75.94,36.61],[76.03,36.44],[76.72,36.16],[76.84,35.86],[77.09,35.74],[77.35,35.72],[77.47,35.65],[77.52,35.49]],[[93.85,7.24],[93.96,7.0],[93.93,7.0],[93.96,6.96],[93.91,6.91],[93.91,6.81],[93.87,6.82],[93.84,6.75],[93.8,6.88],[93.67,7.02],[93.66,7.13],[93.69,7.19],[93.85,7.24]],[[92.55,10.88],[92.62,10.76],[92.62,10.67],[92.55,10.59],[92.58,10.57],[92.52,10.51],[92.39,10.53],[92.38,10.79],[92.55,10.88]],[[92.71,12.23],[92.71,12.16],[92.76,12.17],[92.75,12.05],[92.71,12.05],[92.8,12.05],[92.74,12.03],[92.77,12.0],[92.72,11.92],[92.74,11.89],[92.79,11.94],[92.8,11.9],[92.76,11.7],[92.67,11.65],[92.7,11.62],[92.73,11.68],[92.76,11.66],[92.72,11.47],[92.63,11.56],[92.65,11.63],[92.61,11.63],[92.61,11.71],[92.57,11.69],[92.56,11.84],[92.52,11.84],[92.57,11.94],[92.61,11.85],[92.63,12.1],[92.71,12.23]],[[92.83,12.3],[92.89,12.28],[92.89,12.19],[92.77,12.06],[92.79,12.24],[92.75,12.25],[92.78,12.31],[92.83,12.3]],[[92.91,12.91],[92.99,12.71],[92.95,12.62],[92.98,12.49],[92.92,12.4],[92.91,12.46],[92.85,12.47],[92.89,12.41],[92.81,12.46],[92.9,12.32],[92.75,12.3],[92.71,12.33],[92.69,12.61],[92.76,12.67],[92.79,12.63],[92.8,12.7],[92.74,12.67],[92.73,12.82],[92.91,12.91]],[[93.05,13.55],[93.02,13.43],[93.07,13.41],[93.1,13.33],[92.96,13.34],[93.07,13.26],[93.04,13.06],[92.97,13.01],[92.95,13.1],[92.94,13.05],[92.9,13.09],[92.95,12.97],[92.91,12.94],[92.91,12.99],[92.88,12.88],[92.81,12.9],[92.84,13.01],[92.79,13.01],[92.8,13.09],[92.86,13.14],[92.82,13.15],[92.86,13.24],[92.83,13.31],[92.89,13.39],[92.85,13.4],[92.93,13.53],[93.05,13.55]],[[88.17,21.79],[88.15,21.63],[88.05,21.64],[88.12,21.86],[88.17,21.79]]];
+const W = 1080, H = 1920;
+const out = document.getElementById('cv').getContext('2d');
+let ctx = out, NOW = 0;
+const mk = (w = W, h = H) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const A = mk(), B = mk(), actx = A.getContext('2d'), bctx = B.getContext('2d');
+
+const C = {coal:'#0e0d0c', paper:'#ece3cf', ink:'#1c1814', red:'#d1342b', blood:'#a3211b', amber:'#f2a541', gold:'#e8b84a',
+  cyan:'#55d6ff', blue:'#2f7bff', green:'#45c46f', white:'#f7f3ea', grey:'#8a8f98', chalk:'#eef2e8', yellow:'#ffd23f'};
+const F = {head:"'Tiro Devanagari Hindi',serif", bold:"'Baloo 2',sans-serif", body:"'Hind',sans-serif", hand:"'Kalam',cursive", mono:"'JetBrains Mono',monospace"};
+
+/* ---------- math ---------- */
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const io = x => { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; };
+const eo = x => { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+const bk = x => { x = clamp(x); const c = 1.9; return 1 + (c+1)*Math.pow(x-1,3) + c*Math.pow(x-1,2); };
+const P = (t, a, d) => clamp((t - a) / d);
+const hash = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rng(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const num = (v, d = 0) => v.toLocaleString('en-IN', {minimumFractionDigits:d, maximumFractionDigits:d});
+const segm = (typeof Intl !== 'undefined' && Intl.Segmenter) ? new Intl.Segmenter('hi', {granularity:'grapheme'}) : null;
+const graph = s => segm ? Array.from(segm.segment(s), x => x.segment) : Array.from(s);
+const typed = (s, k) => { const g = graph(s); return g.slice(0, Math.round(g.length * clamp(k))).join(''); };
+
+/* ---------- drawing helpers ---------- */
+function T(s, x, y, size, color, o = {}) {
+  ctx.save(); ctx.font = `${o.w || 600} ${size}px ${o.f || F.body}`;
+  ctx.textAlign = o.a || 'left'; ctx.textBaseline = o.b || 'alphabetic'; ctx.globalAlpha *= (o.al ?? 1);
+  if (o.stroke) { ctx.lineJoin = 'round'; ctx.lineWidth = o.sw || 10; ctx.strokeStyle = o.stroke; ctx.strokeText(s, x, y); }
+  if (o.glow) { ctx.shadowColor = o.glow; ctx.shadowBlur = o.gb || 30; }
+  ctx.fillStyle = color; ctx.fillText(s, x, y); ctx.restore();
+}
+function tw(s, size, w = 600, f = F.body) { ctx.save(); ctx.font = `${w} ${size}px ${f}`; const m = ctx.measureText(s).width; ctx.restore(); return m; }
+function fitSize(s, size, maxW, w, f) { const m = tw(s, size, w, f); return m > maxW ? size * maxW / m : size; }
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+function pop(x, y, k, fn) { if (k <= 0) return; ctx.save(); ctx.translate(x, y); const s = bk(k); ctx.scale(s, s); ctx.globalAlpha *= clamp(k * 3); fn(); ctx.restore(); }
+function shake(t, at, amt = 18, dur = .35) { const k = 1 - P(t, at, dur); if (t < at || k <= 0) return;
+  ctx.translate((hash(NOW * 91) - .5) * amt * k, (hash(NOW * 57 + 3) - .5) * amt * k); }
+function cover(img, zoom = 1, ox = 0, oy = 0) {
+  const s = Math.max(W / img.width, H / img.height) * zoom, w = img.width * s, h = img.height * s;
+  ctx.drawImage(img, (W - w) / 2 + ox, (H - h) / 2 + oy, w, h);
+}
+function person(x, y, s, color, al = 1) {
+  ctx.save(); ctx.globalAlpha *= al; ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(x, y - s * 1.15, s * .55, 0, 7); ctx.fill();
+  rr(x - s * .72, y - s * .45, s * 1.44, s * 1.7, s * .55); ctx.fill(); ctx.restore();
+}
+function tornPath(x, y, w, h, seed) {
+  ctx.beginPath(); const st = 16;
+  for (let i = 0; i <= w; i += st) ctx.lineTo(x + i, y + hash(seed + i * .37) * 9);
+  for (let j = 0; j <= h; j += st) ctx.lineTo(x + w - hash(seed + 50 + j * .41) * 9, y + j);
+  for (let i = w; i >= 0; i -= st) ctx.lineTo(x + i, y + h - hash(seed + 90 + i * .29) * 9);
+  for (let j = h; j >= 0; j -= st) ctx.lineTo(x + hash(seed + 130 + j * .33) * 9, y + j);
+  ctx.closePath();
+}
+function clipping(x, y, w, h, rot, seed, k, content, color = C.paper) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.globalAlpha *= clamp(k * 2);
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 18;
+  tornPath(-w / 2, -h / 2, w, h, seed); ctx.fillStyle = color; ctx.fill(); ctx.restore();
+  ctx.save(); tornPath(-w / 2, -h / 2, w, h, seed); ctx.clip();
+  const g = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
+  g.addColorStop(0, 'rgba(140,100,40,0.06)'); g.addColorStop(1, 'rgba(110,70,25,0.28)');
+  ctx.fillStyle = g; ctx.fillRect(-w / 2, -h / 2, w, h);
+  content(-w / 2, -h / 2, w, h);
+  ctx.restore(); ctx.restore();
+}
+function textBars(x, y, w, h, seed, cols = 2, col = 'rgba(40,32,24,0.45)') {
+  const gap = 24, cw = (w - gap * (cols - 1)) / cols;
+  for (let c = 0; c < cols; c++) for (let yy = 0; yy < h; yy += 22) {
+    const lw = cw * (yy + 22 >= h ? .55 : .82 + hash(seed + c * 31 + yy) * .18);
+    ctx.fillStyle = col; ctx.fillRect(x + c * (cw + gap), y + yy, lw, 9);
+  }
+}
+function pin(x, y, col = C.red) {
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 5;
+  const g = ctx.createRadialGradient(x - 5, y - 5, 2, x, y, 16); g.addColorStop(0, '#ff8a80'); g.addColorStop(1, col);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 15, 0, 7); ctx.fill(); ctx.restore();
+}
+function rope(x1, y1, x2, y2, k, col = '#c62828') {
+  if (k <= 0) return; k = eo(k);
+  const ex = lerp(x1, x2, k), ey = lerp(y1, y2, k), mx = (x1 + ex) / 2, my = (y1 + ey) / 2 + 40 * k;
+  ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 5; ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 4;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(mx, my, ex, ey); ctx.stroke(); ctx.restore();
+}
+function stamp(text, x, y, rot, k, col = C.red, size = 90) {
+  if (k <= 0) return;
+  const s = lerp(2.4, 1, eo(k)), a = clamp(k * 4) * .88;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s); ctx.globalAlpha *= a;
+  const w = tw(text, size, 800, F.bold) + 60, h = size * 1.25;
+  ctx.strokeStyle = col; ctx.lineWidth = 8; ctx.strokeRect(-w / 2, -h / 2, w, h);
+  ctx.lineWidth = 3; ctx.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  T(text, 0, size * .36, size, col, {a: 'center', f: F.bold, w: 800});
+  ctx.restore();
+}
+function polaroid(x, y, w, h, rot, img, cap, k) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.globalAlpha *= clamp(k * 2);
+  ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 14;
+  ctx.fillStyle = '#f4f0e6'; ctx.fillRect(-w / 2, -h / 2, w, h); ctx.shadowColor = 'transparent';
+  const pad = 22, ih = h - pad - 90;
+  ctx.drawImage(img, -w / 2 + pad, -h / 2 + pad, w - pad * 2, ih);
+  T(cap, 0, h / 2 - 32, 40, '#2a2420', {a: 'center', f: F.hand, w: 700});
+  ctx.restore();
+}
+function flashOver(t, at, d = .35) { const k = 1 - P(t, at, d); if (t >= at && k > 0) { ctx.fillStyle = `rgba(255,250,235,${k})`; ctx.fillRect(0, 0, W, H); } }
+
+/* ---------- 3D map ---------- */
+const COSL = Math.cos(22.5 * Math.PI / 180);
+function proj(o) {
+  const cy = Math.cos(o.yaw || 0), sy = Math.sin(o.yaw || 0), ct = Math.cos(o.tilt), st = Math.sin(o.tilt);
+  const f = o.f || 2600, s = o.scale, fl = o.focus || [82.5, 22.5];
+  const pr = (lon, lat, z = 0) => {
+    const x = (lon - fl[0]) * COSL * s, y = -(lat - fl[1]) * s, zz = z * s;
+    const x1 = x * cy - y * sy, y1 = x * sy + y * cy;
+    const p = f / (f - y1 * st - zz * ct);
+    return [o.cx + x1 * p, o.cy + (y1 * ct - zz * st) * p, p];
+  };
+  pr.ct = ct; return pr;
+}
+function mapPath(pr, z) { ctx.beginPath(); for (const poly of INDIA) { poly.forEach(([lo, la], i) => { const [x, y] = pr(lo, la, z); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); } }
+const mix = (a, b, t) => `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], t))).join(',')})`;
+function drawMap(o) {
+  const pr = proj(o), th = o.thick ?? .7, fl = o.focus || [82.5, 22.5];
+  ctx.save(); ctx.globalAlpha *= o.alpha ?? 1;
+  if (o.grid) {
+    ctx.strokeStyle = o.grid; ctx.lineWidth = 1.5; ctx.beginPath();
+    for (let i = -24; i <= 24; i += 2) {
+      let [x, y] = pr(fl[0] + i, fl[1] - 24, -th); ctx.moveTo(x, y); [x, y] = pr(fl[0] + i, fl[1] + 24, -th); ctx.lineTo(x, y);
+      [x, y] = pr(fl[0] - 24, fl[1] + i, -th); ctx.moveTo(x, y); [x, y] = pr(fl[0] + 24, fl[1] + i, -th); ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowBlur = 60; ctx.shadowOffsetY = 30;
+  mapPath(pr, -th); ctx.fillStyle = mix(o.side[0], o.side[0], 0); ctx.fill(); ctx.restore();
+  const L = 9;
+  for (let l = 1; l <= L; l++) { mapPath(pr, -th + th * l / L); ctx.fillStyle = mix(o.side[0], o.side[1], l / L); ctx.fill(); }
+  mapPath(pr, 0);
+  const [, ty] = pr(fl[0], fl[1] + 14, 0), [, by] = pr(fl[0], fl[1] - 14, 0);
+  const g = ctx.createLinearGradient(0, ty, 0, by); g.addColorStop(0, o.top[0]); g.addColorStop(1, o.top[1]);
+  ctx.fillStyle = g; ctx.fill();
+  ctx.save(); ctx.shadowColor = o.edge; ctx.shadowBlur = 28; ctx.strokeStyle = o.edge; ctx.lineWidth = 3.5; ctx.lineJoin = 'round'; ctx.stroke(); ctx.restore();
+  if (o.blobs || o.dots) {
+    ctx.save(); mapPath(pr, 0); ctx.clip(); ctx.globalCompositeOperation = 'lighter';
+    for (const b of o.blobs || []) { if (!(b.a > 0)) continue;
+      const [x, y, p] = pr(b.lon, b.lat, 0), r = b.r * o.scale * p;
+      const gr = ctx.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, b.color); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalAlpha = b.a; ctx.fillStyle = gr; ctx.beginPath(); ctx.ellipse(x, y, r, r * pr.ct, 0, 0, 7); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    if (o.dots) { const n = Math.floor(DOTS.length * o.dots.k); ctx.fillStyle = o.dots.color;
+      for (let i = 0; i < n; i++) { const [x, y] = pr(DOTS[i][0], DOTS[i][1], 0); ctx.fillRect(x - 2, y - 2, 4, 4); } }
+    ctx.restore();
+  }
+  for (const p of o.pins || []) beam(pr, p);
+  ctx.restore();
+  return pr;
+}
+function beam(pr, p) {
+  if (!(p.k > 0)) return;
+  const [bx, by, s] = pr(p.lon, p.lat, 0), [tx, ty] = pr(p.lon, p.lat, (p.h || 3) * eo(p.k));
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  const g = ctx.createLinearGradient(bx, by, tx, ty); g.addColorStop(0, p.color); g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.strokeStyle = g; ctx.lineWidth = 7 * s; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(tx, ty); ctx.stroke();
+  const ph = (NOW * .9 + hash(p.lon)) % 1;
+  ctx.strokeStyle = p.color; ctx.globalAlpha = 1 - ph; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(bx, by, (8 + ph * 46) * s, (8 + ph * 46) * s * pr.ct, 0, 0, 7); ctx.stroke();
+  ctx.globalAlpha = 1; ctx.shadowColor = p.color; ctx.shadowBlur = 24; ctx.fillStyle = p.color;
+  ctx.beginPath(); ctx.ellipse(bx, by, 9 * s, 9 * s * pr.ct, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(tx, ty, 5 * s, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function inside(pt, poly) { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+  const [xi, yi] = poly[i], [xj, yj] = poly[j];
+  if ((yi > pt[1]) !== (yj > pt[1]) && pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi) c = !c; } return c; }
+const CITY = { delhi:[77.21,28.61], mumbai:[72.88,19.08], kolkata:[88.36,22.57], chennai:[80.27,13.08], blr:[77.59,12.97],
+  hyd:[78.49,17.39], lucknow:[80.95,26.85], patna:[85.14,25.59], ahm:[72.57,23.02], jaipur:[75.79,26.91], pune:[73.86,18.52], vidarbha:[78.6,20.6] };
+const POLLUTED = [[91.97,25.97],[77.21,28.66],[76.72,30.78],[77.32,28.41],[77.29,28.75],[77.2,28.6],[77.03,28.46],
+  [73.88,29.91],[77.5,28.47],[76.86,28.21],[77.7,29.47],[74.32,29.58],[77.39,28.54]];
+let DOTS = [];
+
+/* ---------- generated "archival" imagery ---------- */
+const IMG = {};
+function toneize(c, dark, light, noise = 22, vign = .55) {
+  const g = c.getContext('2d'), w = c.width, h = c.height, im = g.getImageData(0, 0, w, h), d = im.data, r = rng(9);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = (y * w + x) * 4; let l = (d[i] * .3 + d[i + 1] * .59 + d[i + 2] * .11) / 255;
+    const dx = x / w - .5, dy = y / h - .5; l *= 1 - vign * (dx * dx + dy * dy) * 1.7; l = clamp(l + (r() - .5) * noise / 255);
+    d[i] = dark[0] + (light[0] - dark[0]) * l; d[i + 1] = dark[1] + (light[1] - dark[1]) * l; d[i + 2] = dark[2] + (light[2] - dark[2]) * l;
+  }
+  g.putImageData(im, 0, 0);
+  const r2 = rng(4); g.strokeStyle = 'rgba(255,245,220,0.18)'; g.lineWidth = 1;
+  for (let i = 0; i < 14; i++) { const x = r2() * w; g.beginPath(); g.moveTo(x, r2() * h * .3); g.lineTo(x + (r2() - .5) * 20, h * (.6 + r2() * .4)); g.stroke(); }
+  return c;
+}
+function makeSmog() {
+  const c = mk(), g = c.getContext('2d'), r = rng(11);
+  let gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#a8a8a8'); gr.addColorStop(.5, '#dedede'); gr.addColorStop(1, '#8f8f8f');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  gr = g.createRadialGradient(720, 640, 10, 720, 640, 260); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.25, 'rgba(255,255,255,.7)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  [[1120, 140, 460, '#bcbcbc'], [1330, 120, 420, '#8e8e8e'], [1540, 100, 380, '#565656']].forEach(([base, hmin, hmax, col], li) => {
+    let x = -20; g.fillStyle = col;
+    while (x < W + 20) { const bw = 50 + r() * 90, bh = hmin + r() * (hmax - hmin);
+      g.fillRect(x, base - bh, bw, bh + (li === 2 ? 400 : 60));
+      if (r() > .5) g.fillRect(x + bw * .2, base - bh - 26, bw * .25, 26);
+      if (r() > .7) g.fillRect(x + bw * .6, base - bh - 70, 4, 70);
+      if (li > 0) { g.fillStyle = li === 1 ? '#9c9c9c' : '#6a6a6a';
+        for (let wy = base - bh + 20; wy < base - 10; wy += 34) for (let wx = x + 10; wx < x + bw - 14; wx += 22) if (r() > .55) g.fillRect(wx, wy, 10, 16);
+        g.fillStyle = col; }
+      x += bw + 4; }
+    const hz = g.createLinearGradient(0, base - hmax, 0, base + 60); hz.addColorStop(0, 'rgba(225,225,225,0)'); hz.addColorStop(1, 'rgba(225,225,225,.55)');
+    g.fillStyle = hz; g.fillRect(0, base - hmax, W, hmax + 60);
+  });
+  g.fillStyle = '#3c3c3c'; g.fillRect(0, 1560, W, 360);
+  g.strokeStyle = '#8a8a8a'; g.lineWidth = 6; for (let i = 0; i < 8; i++) { g.beginPath(); g.moveTo(540, 1560); g.lineTo(-400 + i * 270, 1920); g.stroke(); }
+  for (let i = 0; i < 60; i++) { const y = 1580 + r() * 320, x = r() * W, s = (y - 1560) / 360;
+    g.fillStyle = r() > .5 ? '#fff' : '#d0d0d0'; g.beginPath(); g.ellipse(x, y, 6 + s * 14, 3 + s * 6, 0, 0, 7); g.fill(); }
+  return toneize(c, [34, 28, 22], [214, 196, 160]);
+}
+function makeCrowd() {
+  const w = 840, h = 460, c = mk(w, h), g = c.getContext('2d'), r = rng(21);
+  let gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#d8d8d8'); gr.addColorStop(1, '#a0a0a0'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#2a2a2a'; g.fillRect(170, 30, 500, 92); g.fillStyle = '#f0f0f0'; g.font = `600 58px ${F.body}`; g.textAlign = 'center'; g.fillText('भर्ती केंद्र', 420, 98);
+  g.fillStyle = '#888'; g.fillRect(380, 122, 80, 120);
+  for (let row = 0; row < 6; row++) { const y = 210 + row * 52, s = .55 + row * .22, n = 9 + row * 2;
+    for (let i = 0; i < n; i++) { const x = (i + .5 + (r() - .5) * .4) * w / n; const sh = Math.round(40 + 120 * (1 - row / 6) + r() * 30);
+      g.fillStyle = `rgb(${sh},${sh},${sh})`; g.beginPath(); g.arc(x, y - 38 * s, 18 * s, 0, 7); g.fill();
+      g.beginPath(); g.ellipse(x, y + 10 * s, 36 * s, 34 * s, 0, Math.PI, 0); g.fill(); g.fillRect(x - 36 * s, y + 10 * s - 1, 72 * s, 60 * s); } }
+  return toneize(c, [30, 24, 18], [230, 214, 182], 26, .4);
+}
+function makeCracked() {
+  const c = mk(), g = c.getContext('2d'), r = rng(31), hz = 820;
+  let gr = g.createLinearGradient(0, 0, 0, hz); gr.addColorStop(0, '#bdbdbd'); gr.addColorStop(1, '#f2f2f2'); g.fillStyle = gr; g.fillRect(0, 0, W, hz);
+  gr = g.createRadialGradient(720, 720, 10, 720, 720, 300); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.3, 'rgba(255,255,255,.6)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, W, hz + 100);
+  gr = g.createLinearGradient(0, hz, 0, H); gr.addColorStop(0, '#9a9a9a'); gr.addColorStop(1, '#6a6a6a'); g.fillStyle = gr; g.fillRect(0, hz, W, H - hz);
+  const rows = []; for (let k = 0, y = hz + 6; y < H + 200; k++) { const pts = [], sp = 14 + k * k * 1.6;
+    for (let x = -sp; x < W + sp; x += sp) pts.push([x + (r() - .5) * sp * .6, y + (r() - .5) * sp * .25]); rows.push([pts, sp]); y += sp * .38; }
+  g.strokeStyle = '#2e2e2e'; g.lineCap = 'round';
+  rows.forEach(([pts, sp], k) => { g.lineWidth = .6 + sp * .05;
+    for (let i = 0; i < pts.length - 1; i++) { g.beginPath(); g.moveTo(...pts[i]); g.lineTo(...pts[i + 1]); g.stroke();
+      const nx = rows[k + 1]; if (nx && r() > .3) { const q = nx[0][Math.min(nx[0].length - 1, Math.round(i * nx[0].length / pts.length))]; g.beginPath(); g.moveTo(...pts[i]); g.lineTo(...q); g.stroke(); } } });
+  g.strokeStyle = '#1e1e1e';
+  const br = (x, y, len, a, d) => { if (d === 0) return; const x2 = x + Math.cos(a) * len, y2 = y + Math.sin(a) * len;
+    g.lineWidth = d * 2.6; g.beginPath(); g.moveTo(x, y); g.lineTo(x2, y2); g.stroke();
+    br(x2, y2, len * .72, a - .45 - r() * .3, d - 1); br(x2, y2, len * .7, a + .4 + r() * .3, d - 1); };
+  br(260, 880, 150, -Math.PI / 2, 7);
+  return toneize(c, [42, 26, 15], [236, 204, 158]);
+}
+function makeEnvelope() {
+  const w = 460, h = 360, c = mk(w, h), g = c.getContext('2d');
+  g.fillStyle = '#6e6e6e'; g.fillRect(0, 0, w, h); g.strokeStyle = 'rgba(0,0,0,.15)';
+  for (let y = 0; y < h; y += 9) { g.beginPath(); g.moveTo(0, y); g.bezierCurveTo(150, y + 6, 300, y - 6, w, y + 3); g.stroke(); }
+  g.save(); g.translate(230, 190); g.rotate(-.12);
+  g.fillStyle = '#a5a5a5'; g.fillRect(-150, -120, 260, 120); g.fillRect(-120, -140, 260, 120);
+  g.fillStyle = '#4a4a4a'; g.font = `600 70px ${F.body}`; g.fillText('₹', -110, -40); g.fillText('₹', -10, -60);
+  g.fillStyle = '#e9e9e9'; g.fillRect(-180, -40, 360, 170);
+  g.fillStyle = '#d0d0d0'; g.beginPath(); g.moveTo(-180, -40); g.lineTo(0, 50); g.lineTo(180, -40); g.closePath(); g.fill();
+  g.restore();
+  return toneize(c, [30, 24, 18], [232, 214, 180], 24, .4);
+}
+function makeNewsWall() {
+  const c = mk(), g = c.getContext('2d'), r = rng(41);
+  g.fillStyle = '#cfc4ab'; g.fillRect(0, 0, W, H);
+  const heads = ['महँगाई', 'बेरोज़गारी', 'प्रदूषण', 'किसान', 'शिक्षा', 'पानी', 'अदालत', 'गरीबी', 'स्वास्थ्य', 'भ्रष्टाचार', 'युवा', 'शहर'];
+  for (let i = 0; i < 14; i++) {
+    g.save(); g.translate(r() * W, r() * H); g.rotate((r() - .5) * .5);
+    const w = 520 + r() * 220, h = 700 + r() * 300; g.fillStyle = r() > .5 ? '#e6dcc4' : '#d8ccb0'; g.fillRect(-w / 2, -h / 2, w, h);
+    g.fillStyle = '#3a3128'; g.font = `400 54px ${F.head}`; g.fillText('समाचार', -w / 2 + 30, -h / 2 + 70);
+    g.fillRect(-w / 2 + 30, -h / 2 + 90, w - 60, 4);
+    g.font = `400 66px ${F.head}`; g.fillText(heads[i % heads.length], -w / 2 + 30, -h / 2 + 180);
+    g.fillStyle = 'rgba(58,49,40,.45)';
+    for (let y = -h / 2 + 220; y < h / 2 - 30; y += 22) { g.fillRect(-w / 2 + 30, y, (w - 90) / 2 * (.8 + r() * .2), 9); g.fillRect(15, y, (w - 90) / 2 * (.8 + r() * .2), 9); }
+    g.restore();
+  }
+  g.fillStyle = 'rgba(25,17,10,.58)'; g.fillRect(0, 0, W, H);
+  return c;
+}
+function makeCork() {
+  const c = mk(), g = c.getContext('2d'), r = rng(51);
+  g.fillStyle = '#4b3220'; g.fillRect(0, 0, W, H);
+  for (let i = 0; i < 26000; i++) { const s = r(); g.fillStyle = s > .5 ? `rgba(150,110,70,${r() * .35})` : `rgba(20,12,6,${r() * .4})`; g.fillRect(r() * W, r() * H, 2 + r() * 3, 2 + r() * 3); }
+  const v = g.createRadialGradient(W / 2, H / 2, 300, W / 2, H / 2, 1200); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.75)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H); return c;
+}
+function makeChalk() {
+  const c = mk(), g = c.getContext('2d'), r = rng(61);
+  g.fillStyle = '#1d3a2c'; g.fillRect(0, 0, W, H);
+  for (let i = 0; i < 40; i++) { const x = r() * W, y = r() * H, rad = 100 + r() * 300, gr = g.createRadialGradient(x, y, 0, x, y, rad);
+    gr.addColorStop(0, `rgba(230,240,230,${.03 + r() * .05})`); gr.addColorStop(1, 'rgba(230,240,230,0)'); g.fillStyle = gr; g.fillRect(x - rad, y - rad, rad * 2, rad * 2); }
+  g.fillStyle = '#5b3b22'; g.fillRect(0, 0, W, 60); g.fillRect(0, H - 90, W, 90);
+  g.fillStyle = '#3e2816'; g.fillRect(0, H - 110, W, 22); return c;
+}
+function makeArchive() {
+  const c = mk(), g = c.getContext('2d'), r = rng(71), vx = 540, vy = 760;
+  let gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#120d09'); gr.addColorStop(.5, '#2a1e14'); gr.addColorStop(1, '#0d0906');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  [-1, 1].forEach(side => {
+    const nearX = side < 0 ? 0 : W, farX = vx + side * 120;
+    for (let s = 0; s < 7; s++) {
+      const yN = 180 + s * 230, yF = vy - 200 + s * 62;
+      for (let k = 0; k < 14; k++) { const d0 = k / 14, d1 = (k + .85) / 14;
+        const f = d => [lerp(nearX, farX, Math.pow(d, .6)), lerp(yN, yF, Math.pow(d, .6))];
+        const [x0, y0] = f(d0), [x1, y1] = f(d1), h0 = lerp(170, 46, Math.pow(d0, .6)), h1 = lerp(170, 46, Math.pow(d1, .6));
+        const sh = 70 + r() * 70, dk = 1 - d0 * .75;
+        g.fillStyle = `rgb(${sh * dk * 1.25 | 0},${sh * dk | 0},${sh * dk * .7 | 0})`;
+        g.beginPath(); g.moveTo(x0, y0 - h0); g.lineTo(x1, y1 - h1); g.lineTo(x1, y1); g.lineTo(x0, y0); g.closePath(); g.fill();
+        g.fillStyle = 'rgba(240,220,180,.25)'; g.fillRect(lerp(x0, x1, .3), lerp(y0, y1, .3) - lerp(h0, h1, .3) * .6, side * 8 * dk, 10 * dk);
+      }
+      g.strokeStyle = 'rgba(0,0,0,.6)'; g.lineWidth = 6; g.beginPath(); g.moveTo(nearX, yN + 4); g.lineTo(farX, yF + 2); g.stroke();
+    }
+  });
+  gr = g.createRadialGradient(vx, vy, 10, vx, vy, 900); gr.addColorStop(0, 'rgba(0,0,0,.0)'); gr.addColorStop(1, 'rgba(0,0,0,.55)');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H); return c;
+}
+const GRAIN = [];
+function makeGrain() { for (let k = 0; k < 4; k++) { const c = mk(540, 960), g = c.getContext('2d'), im = g.createImageData(540, 960), r = rng(100 + k);
+  for (let i = 0; i < im.data.length; i += 4) { const v = r() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+  g.putImageData(im, 0, 0); GRAIN.push(c); } }
+
+/* ---------- reusable backgrounds ---------- */
+function bgDark(col1 = '#101a2c', col2 = '#05070c') {
+  const g = ctx.createRadialGradient(W / 2, H * .45, 50, W / 2, H * .5, 1300); g.addColorStop(0, col1); g.addColorStop(1, col2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+}
+function dust(t, col = 'rgba(255,230,190,', n = 50) {
+  for (let i = 0; i < n; i++) { const x = (hash(i) * W + NOW * 20 * (hash(i + 2) + .2)) % W, y = (hash(i + 5) * H + NOW * 14 * (hash(i + 9) - .5) + H) % H;
+    ctx.fillStyle = col + (.15 + hash(i + 7) * .35) + ')'; ctx.beginPath(); ctx.arc(x, y, 1.5 + hash(i + 4) * 3, 0, 7); ctx.fill(); }
+}
+function header(top, big, y, k, col, sub) {
+  pop(W / 2, y, k, () => {
+    if (top) T(top, 0, -178, 46, C.white, {a: 'center', w: 600, stroke: 'rgba(0,0,0,.7)', sw: 8});
+    const s = fitSize(big, 200, 980, 800, F.bold);
+    T(big, 0, 0, s, col, {a: 'center', f: F.bold, w: 800, stroke: 'rgba(0,0,0,.65)', sw: 14, glow: col, gb: 40});
+    if (sub) T(sub, 0, 78, 40, C.white, {a: 'center', w: 500, stroke: 'rgba(0,0,0,.7)', sw: 8});
+  });
+}
+
+/* ---------- scenes ---------- */
+const S = [
+/* 0 HOOK — pollution */
+{ dur: 4, file: 1, tin: null,
+  sfx: [[0, 'impact_big'], [.25, 'typewriter', 1.1], [1.0, 'impact'], [1.95, 'whoosh'], [2.2, 'blips'], [3.4, 'impact_small']],
+  draw(t) {
+    if (t < 2) {
+      ctx.save(); shake(t, 1, 22); cover(IMG.smog, lerp(1.05, 1.2, t / 2));
+      ctx.fillStyle = `rgba(150,40,20,${.18 + .08 * Math.sin(t * 6)})`; ctx.fillRect(0, 0, W, H);
+      clipping(540, 470, 920, 330, -.03, 7, eo(P(t, .1, .25)), (x, y, w) => {
+        T('विशेष रिपोर्ट · वायु गुणवत्ता', x + 40, y + 70, 34, C.red, {w: 600});
+        ctx.fillStyle = C.ink; ctx.fillRect(x + 40, y + 88, w - 80, 4);
+        T(typed('ज़हरीली हवा में घुटते शहर', P(t, .3, 1)), x + 40, y + 200, 84, C.ink, {f: F.head, w: 400});
+        textBars(x + 40, y + 240, w - 80, 60, 3);
+      });
+      pop(540, 1000, P(t, 1, .35), () => {
+        T('20 में से', 0, -170, 64, C.white, {a: 'center', f: F.bold, w: 800, stroke: '#000', sw: 10});
+        T('13', 0, 80, 300, C.red, {a: 'center', f: F.bold, w: 800, stroke: '#000', sw: 16, glow: C.red, gb: 50});
+      });
+      ctx.restore();
+    } else {
+      const k = t - 2;
+      bgDark('#2a120c', '#070302');
+      dust(t, 'rgba(255,120,80,', 40);
+      drawMap({cx: 540, cy: 980, scale: lerp(30, 44, io(k / 2)), tilt: .95, yaw: -.12 + k * .04, focus: [lerp(82.5, 79.5, io(k / 2)), lerp(22.5, 26.5, io(k / 2))],
+        top: ['#5a1f16', '#2a0e0a'], side: [[30, 8, 5], [90, 30, 20]], edge: '#ff5a3c', grid: 'rgba(255,90,60,.12)',
+        blobs: [{lon: 77.2, lat: 28.6, r: 4, color: 'rgba(255,70,40,.9)', a: eo(P(k, .2, 1))}, {lon: 91.9, lat: 26, r: 2.5, color: 'rgba(255,70,40,.9)', a: eo(P(k, .6, 1))}],
+        pins: POLLUTED.map((c, i) => ({lon: c[0], lat: c[1], h: 2.6 + hash(i) * 1.6, color: '#ff4a2e', k: P(k, .15 + i * .09, .3)}))});
+      const n = POLLUTED.filter((c, i) => k > .15 + i * .09).length;
+      T(String(n), 540, 470, 230, C.red, {a: 'center', f: F.bold, w: 800, glow: C.red, gb: 50, stroke: '#000', sw: 12});
+      T('भारतीय शहर', 540, 560, 64, C.white, {a: 'center', f: F.bold, w: 800, stroke: '#000', sw: 10});
+      T('स्रोत: IQAir World Air Quality Report 2024', 540, 1250, 30, 'rgba(255,230,210,.75)', {a: 'center', f: F.body, w: 500});
+      flashOver(t, 2, .3);
+    }
+  }},
+/* 1 population map */
+{ dur: 5, file: 2, tin: 'flash',
+  sfx: [[.2, 'rise', 2.2], [.4, 'ticks', 1.8], [2.6, 'impact_small'], [2.9, 'pins', 1.8]],
+  draw(t) {
+    bgDark('#0d2140', '#03060d'); dust(t, 'rgba(120,200,255,', 40);
+    const pr = drawMap({cx: 540, cy: 1000, scale: 31, tilt: .9, yaw: lerp(-.32, .08, io(t / 5)), top: ['#123a66', '#081a33'],
+      side: [[3, 10, 22], [20, 70, 120]], edge: C.cyan, grid: 'rgba(85,214,255,.10)', dots: {k: eo(P(t, .3, 2.2)), color: 'rgba(160,230,255,.9)'},
+      blobs: Object.values(CITY).map((c, i) => ({lon: c[0], lat: c[1], r: 2.4, color: 'rgba(85,214,255,.55)', a: eo(P(t, .4 + i * .1, .6))}))});
+    const v = 145 * eo(P(t, .3, 2));
+    pop(540, 420, P(t, .1, .3), () => {
+      T(num(Math.round(v)) + ' करोड़', 0, 0, 170, C.white, {a: 'center', f: F.bold, w: 800, glow: C.cyan, gb: 40});
+      T('लोग · दुनिया की सबसे बड़ी आबादी', 0, 70, 40, '#bfe9ff', {a: 'center', w: 500});
+    });
+    const tags = [['बेरोज़गारी', 150, 760, CITY.lucknow], ['भ्रष्टाचार', 930, 700, CITY.delhi], ['जल संकट', 140, 1010, CITY.jaipur],
+      ['किसान संकट', 935, 1000, CITY.vidarbha], ['असमानता', 160, 1220, CITY.mumbai], ['न्याय में देरी', 920, 1230, CITY.chennai]];
+    tags.forEach(([s, x, y, c], i) => { const k = P(t, 2.7 + i * .28, .35); if (k <= 0) return;
+      const [px, py] = pr(c[0], c[1], 0);
+      ctx.save(); ctx.strokeStyle = 'rgba(255,90,60,.8)'; ctx.lineWidth = 2.5; ctx.setLineDash([8, 6]); ctx.globalAlpha = eo(k);
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(lerp(x, px, eo(k)), lerp(y, py, eo(k))); ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.fillStyle = C.red; ctx.globalAlpha = eo(k); ctx.beginPath(); ctx.arc(px, py, 9, 0, 7); ctx.fill(); ctx.restore();
+      pop(x, y, k, () => { const w = tw(s, 40, 700, F.bold) + 40; rr(-w / 2, -34, w, 64, 6); ctx.fillStyle = 'rgba(10,8,8,.88)'; ctx.fill();
+        ctx.strokeStyle = C.red; ctx.lineWidth = 3; ctx.stroke(); T(s, 0, 12, 40, C.white, {a: 'center', f: F.bold, w: 700}); });
+    });
+  }},
+/* 2 unemployment — newspaper */
+{ dur: 6, file: 3, tin: 'tear',
+  sfx: [[.05, 'paper'], [.7, 'shutter'], [2.7, 'impact'], [2.9, 'ticks', 1.6], [4.6, 'stamp']],
+  draw(t) {
+    ctx.save(); ctx.translate(-20 * t / 6, 0); cover(IMG.news, 1.08); ctx.restore();
+    const slide = eo(P(t, 0, .55));
+    clipping(lerp(1500, 540, slide), 640, 940, 900, lerp(.2, -.035, slide), 17, 1, (x, y, w) => {
+      T('समाचार', x + 40, y + 92, 84, C.ink, {f: F.head, w: 400});
+      T('रोज़गार विशेष', x + w - 40, y + 82, 30, C.red, {a: 'right', w: 600});
+      ctx.fillStyle = C.ink; ctx.fillRect(x + 40, y + 115, w - 80, 5); ctx.fillRect(x + 40, y + 125, w - 80, 2);
+      T('डिग्री है, नौकरी नहीं', x + 40, y + 225, 86, C.ink, {f: F.head, w: 400});
+      ctx.drawImage(IMG.crowd, x + 40, y + 260, w - 80, 420);
+      ctx.fillStyle = `rgba(255,255,255,${1 - P(t, .7, .3)})`; if (t > .7) ctx.fillRect(x + 40, y + 260, w - 80, 420);
+      T('प्रतीकात्मक चित्र', x + 50, y + 712, 24, '#5a4f44', {w: 500});
+      textBars(x + 40, y + 735, w - 80, 140, 9, 3);
+    });
+    pop(540, 1170, P(t, 2.6, .35), () => {
+      ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 30; rr(-470, -150, 940, 300, 16); ctx.fillStyle = '#111'; ctx.fill(); ctx.shadowColor = 'transparent';
+      const k = eo(P(t, 2.9, 1.6)), lit = Math.round(83 * k);
+      T(lit + '%', -250, 40, 170, C.amber, {a: 'center', f: F.bold, w: 800, glow: C.amber, gb: 30});
+      T('बेरोज़गार युवा', -250, 110, 34, C.white, {a: 'center', w: 500});
+      for (let i = 0; i < 100; i++) { const cx = 40 + (i % 10) * 40, cy = -110 + Math.floor(i / 10) * 24;
+        ctx.fillStyle = i < lit ? C.amber : 'rgba(255,255,255,.22)'; ctx.beginPath(); ctx.arc(cx, cy, 8, 0, 7); ctx.fill(); }
+    });
+    stamp('ILO 2024', 860, 1010, .18, P(t, 4.6, .25), C.red, 50);
+  }},
+/* 3 corruption — evidence board */
+{ dur: 5.5, file: 4, tin: 'whip',
+  sfx: [[.1, 'pin'], [.4, 'pin'], [.7, 'pin'], [1.0, 'pin'], [1.2, 'string'], [1.6, 'string'], [2.0, 'string'], [2.3, 'impact'], [3.9, 'stamp']],
+  draw(t) {
+    ctx.save(); const z = lerp(1.06, 1, eo(t / 5.5)); ctx.translate(W / 2, H / 2); ctx.scale(z, z); ctx.translate(-W / 2, -H / 2);
+    cover(IMG.cork);
+    polaroid(260, 900, 400, 420, -.09, IMG.env, 'रिश्वत?', P(t, .1, .2)); pin(260, 712);
+    clipping(800, 860, 470, 400, .07, 27, P(t, .4, .2), (x, y, w) => {
+      T('समाचार', x + 26, y + 60, 46, C.ink, {f: F.head, w: 400}); ctx.fillStyle = C.ink; ctx.fillRect(x + 26, y + 74, w - 52, 3);
+      T('फ़ाइलें अटकीं,', x + 26, y + 150, 56, C.ink, {f: F.head, w: 400}); T('काम रुका', x + 26, y + 215, 56, C.ink, {f: F.head, w: 400});
+      textBars(x + 26, y + 245, w - 52, 120, 5, 2);
+    }); pin(800, 680);
+    pop(260, 1205, P(t, .7, .3), () => { ctx.rotate(-.05); ctx.fillStyle = '#f3d36b'; ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 16;
+      ctx.fillRect(-170, -70, 340, 140); ctx.shadowColor = 'transparent'; T('सिस्टम के अंदर?', 0, 14, 44, '#3a2a10', {a: 'center', f: F.hand, w: 700}); }); pin(260, 1140);
+    pop(800, 1200, P(t, 1.0, .3), () => { ctx.rotate(.04); ctx.fillStyle = '#c9a777'; ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 16;
+      ctx.fillRect(-190, -80, 380, 160); ctx.fillRect(-190, -105, 140, 30); ctx.shadowColor = 'transparent'; T('गोपनीय', 0, 20, 60, C.blood, {a: 'center', f: F.bold, w: 800}); }); pin(800, 1130);
+    const hub = [540, 360];
+    rope(...hub, 260, 712, P(t, 1.2, .5)); rope(...hub, 800, 680, P(t, 1.5, .5)); rope(...hub, 260, 1140, P(t, 1.8, .6)); rope(...hub, 800, 1130, P(t, 2.0, .6));
+    pop(540, 470, P(t, 2.25, .3), () => {
+      ctx.rotate(.015); ctx.shadowColor = 'rgba(0,0,0,.7)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 16; ctx.fillStyle = '#121010'; ctx.fillRect(-420, -170, 840, 340); ctx.shadowColor = 'transparent';
+      T('भ्रष्टाचार सूचकांक 2024', 0, -105, 38, '#c9bfae', {a: 'center', w: 600});
+      const rk = Math.round(lerp(1, 96, eo(P(t, 2.4, 1.3))));
+      T(rk + ' / 180', 0, 30, 140, C.white, {a: 'center', f: F.bold, w: 800});
+      const gr = ctx.createLinearGradient(-360, 0, 360, 0); gr.addColorStop(0, C.green); gr.addColorStop(.5, '#e7c14a'); gr.addColorStop(1, C.red);
+      ctx.fillStyle = gr; ctx.fillRect(-360, 90, 720, 16);
+      const mx = -360 + (rk - 1) / 179 * 720; ctx.fillStyle = C.white; ctx.beginPath(); ctx.moveTo(mx, 84); ctx.lineTo(mx - 14, 60); ctx.lineTo(mx + 14, 60); ctx.closePath(); ctx.fill();
+      T('साफ़', -360, 142, 26, C.green, {w: 600}); T('भ्रष्ट', 360, 142, 26, C.red, {a: 'right', w: 600});
+    }); pin(540, 310, '#b71c1c');
+    stamp('चिंताजनक', 760, 600, -.14, P(t, 3.9, .25), C.red, 52);
+    ctx.restore();
+    T('स्रोत: Transparency International, CPI 2024', 540, 1290, 28, 'rgba(255,240,220,.7)', {a: 'center', w: 500});
+  }},
+/* 4 water */
+{ dur: 5.5, file: 5, tin: 'zoom',
+  sfx: [[.1, 'drop'], [.6, 'drop'], [1.1, 'drop'], [1.3, 'impact'], [1.8, 'drop'], [2.6, 'drop'], [3.4, 'drop'], [4.2, 'drop']],
+  draw(t) {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#032040'); g.addColorStop(1, '#010812'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineWidth = 26;
+    for (let i = 0; i < 12; i++) { ctx.strokeStyle = `rgba(80,170,255,${.035 + hash(i) * .03})`; ctx.beginPath();
+      for (let x = -20; x <= W + 20; x += 30) { const y = i * 170 + Math.sin(x * .006 + NOW * (.6 + hash(i) * .6) + i) * 40 + Math.sin(x * .013 - NOW) * 20; x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke(); }
+    ctx.restore();
+    const stress = [[73, 27, 3.4], [75.6, 30.6, 2.4], [71.5, 22.6, 2.6], [78.4, 11.2, 2.6], [76, 14.6, 2.4], [77.2, 28.6, 1.8], [79.5, 17.5, 2.2], [76.5, 19.5, 2.4]];
+    const pr = drawMap({cx: 540, cy: 1010, scale: 30, tilt: .95, yaw: lerp(.12, -.08, io(t / 5.5)), top: ['#0d4a80', '#062546'],
+      side: [[2, 12, 28], [20, 80, 150]], edge: '#7fd4ff', grid: 'rgba(120,200,255,.10)',
+      blobs: stress.map(([lo, la, r], i) => ({lon: lo, lat: la, r, color: 'rgba(255,120,40,.85)', a: eo(P(t, .8 + i * .15, .6)) * (.75 + .25 * Math.sin(NOW * 3 + i))}))});
+    for (let i = 0; i < 7; i++) { const s = stress[i], st = .1 + i * .55, k = t - st; if (k < 0) continue;
+      const [px, py, p] = pr(s[0], s[1], 0);
+      if (k < .45) { const y = lerp(py - 700, py, (k / .45) ** 2); ctx.fillStyle = '#bfe8ff';
+        ctx.beginPath(); ctx.moveTo(px, y - 34); ctx.quadraticCurveTo(px + 16, y, px, y + 8); ctx.quadraticCurveTo(px - 16, y, px, y - 34); ctx.fill(); }
+      else { const r = (k - .45) * 160; ctx.strokeStyle = `rgba(190,232,255,${clamp(1 - (k - .45) / 1.4)})`; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.ellipse(px, py, r * p, r * p * pr.ct, 0, 0, 7); ctx.stroke(); } }
+    const v = 60 * eo(P(t, 1.2, 1.8));
+    header('करीब', num(Math.round(v)) + ' करोड़', 470, P(t, 1.2, .35), '#7fd4ff', 'लोग भारी जल-तनाव में');
+    T('स्रोत: नीति आयोग, CWMI 2018', 540, 1290, 28, 'rgba(210,235,255,.7)', {a: 'center', w: 500});
+  }},
+/* 5 farmers */
+{ dur: 5.5, file: 6, tin: 'burn',
+  sfx: [[0, 'wind', 5.5], [1.0, 'typewriter', 1.4], [3.0, 'stamp']],
+  draw(t) {
+    cover(IMG.cracked, lerp(1, 1.12, t / 5.5), lerp(0, -30, t / 5.5));
+    const gr = ctx.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, 'rgba(255,140,40,.12)'); gr.addColorStop(1, 'rgba(60,20,0,.35)'); ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+    dust(t, 'rgba(255,210,150,', 70);
+    clipping(540, 600, 900, 560, -.025, 37, eo(P(t, .2, .4)), (x, y, w) => {
+      T('NCRB · ADSI रिपोर्ट 2022', x + 40, y + 70, 32, C.red, {w: 600}); ctx.fillStyle = C.ink; ctx.fillRect(x + 40, y + 90, w - 80, 4);
+      T('अन्नदाता संकट', x + 40, y + 200, 96, C.ink, {f: F.head, w: 400});
+      T(typed('11,290', P(t, 1.0, 1.4)), x + 40, y + 380, 170, C.blood, {f: F.bold, w: 800});
+      T('खेती से जुड़े लोगों ने जान दी', x + 40, y + 450, 44, C.ink, {w: 600, al: eo(P(t, 2.2, .5))});
+      textBars(x + 40, y + 480, w - 80, 50, 13, 3);
+    });
+    stamp('हर दिन ~31', 720, 960, -.12, P(t, 3, .25), C.red, 70);
+    pop(540, 1215, P(t, 3.6, .3), () => { const s = 'मदद चाहिए? Tele-MANAS 14416 · निःशुल्क, 24×7', w = tw(s, 32, 600) + 50;
+      rr(-w / 2, -34, w, 60, 30); ctx.fillStyle = 'rgba(0,0,0,.72)'; ctx.fill(); T(s, 0, 10, 32, '#9ff0b8', {a: 'center', w: 600}); });
+  }},
+/* 6 MID HOOK — glitch */
+{ dur: 3, file: 0, tin: 'glitch',
+  sfx: [[0, 'glitch'], [.15, 'heartbeat'], [1.0, 'heartbeat'], [1.2, 'riser', 1.75], [1.85, 'glitch']],
+  draw(t) {
+    ctx.fillStyle = '#050505'; ctx.fillRect(0, 0, W, H);
+    for (let y = 0; y < H; y += 6) { ctx.fillStyle = 'rgba(255,255,255,.025)'; ctx.fillRect(0, y, W, 2); }
+    const fr = Math.floor(NOW * 30);
+    for (let i = 0; i < 8; i++) if (hash(fr + i * 13) > .6) { ctx.fillStyle = `rgba(${hash(i + fr) > .5 ? '255,40,40' : '200,200,200'},${.05 + hash(fr * i) * .12})`; ctx.fillRect(0, hash(fr + i) * H, W, 8 + hash(i * fr) * 60); }
+    const beat = Math.max(Math.exp(-(((t - .15) * 9) ** 2)), Math.exp(-(((t - 1) * 9) ** 2)));
+    const red = `rgba(209,52,43,${.12 + beat * .3})`; const v = ctx.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 1100);
+    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, red); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+    const rgb = (s, y, size, col, k) => { if (k <= 0) return; const j = (hash(fr * 3.1) - .5) * 26 * (1 - k * .7), sc = 1 + beat * .05;
+      ctx.save(); ctx.translate(W / 2, y); ctx.scale(sc, sc); ctx.globalCompositeOperation = 'lighter';
+      T(s, -8 + j, 0, size, 'rgba(255,0,40,.9)', {a: 'center', f: F.bold, w: 800});
+      T(s, 8 - j, 0, size, 'rgba(0,220,255,.9)', {a: 'center', f: F.bold, w: 800});
+      ctx.globalCompositeOperation = 'source-over'; T(s, 0, 0, size, col, {a: 'center', f: F.bold, w: 800}); ctx.restore(); };
+    rgb('लेकिन…', 640, 150, C.white, P(t, .05, .1));
+    rgb('असली झटका', 900, 170, C.red, P(t, .55, .1));
+    rgb('अभी बाकी है', 1120, 140, C.white, P(t, 1.45, .1));
+  }},
+/* 7 inequality */
+{ dur: 6, file: 7, tin: 'glitch',
+  sfx: [[.4, 'coins', 2], [2.5, 'impact'], [3.3, 'blips']],
+  draw(t) {
+    let g = ctx.createLinearGradient(0, 0, 0, 960); g.addColorStop(0, '#3a2706'); g.addColorStop(1, '#140c02'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, 960);
+    g = ctx.createLinearGradient(0, 960, 0, H); g.addColorStop(0, '#2b2d31'); g.addColorStop(1, '#0d0e10'); ctx.fillStyle = g; ctx.fillRect(0, 960, W, H - 960);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 40; i++) { const x = hash(i) * W, y = hash(i + 3) * 900, a = Math.max(0, Math.sin(NOW * 3 + i * 1.7)) * .8;
+      ctx.fillStyle = `rgba(255,215,120,${a})`; ctx.beginPath(); ctx.arc(x, y, 2 + hash(i + 8) * 3, 0, 7); ctx.fill(); }
+    ctx.restore();
+    ctx.fillStyle = C.gold; ctx.shadowColor = C.gold; ctx.shadowBlur = 20; ctx.fillRect(0, 958, W, 4); ctx.shadowColor = 'transparent';
+    const n = Math.floor(30 * eo(P(t, .4, 2))), bx = 770, base = 900;
+    for (let i = 0; i < n; i++) { const y = base - i * 17;
+      ctx.fillStyle = '#8a6114'; ctx.beginPath(); ctx.ellipse(bx, y + 6, 120, 30, 0, 0, Math.PI); ctx.fill(); ctx.fillRect(bx - 120, y, 240, 6);
+      const cg = ctx.createLinearGradient(bx - 120, 0, bx + 120, 0); cg.addColorStop(0, '#b8871f'); cg.addColorStop(.5, '#ffe08a'); cg.addColorStop(1, '#b8871f');
+      ctx.fillStyle = cg; ctx.beginPath(); ctx.ellipse(bx, y, 120, 30, 0, 0, 7); ctx.fill(); }
+    if (n > 0) person(bx, base - n * 17 - 30, 34, '#ffe08a', eo(P(t, 2.2, .3)));
+    T('सबसे अमीर 1%', 70, 380, 58, '#ffe6a8', {f: F.bold, w: 800, al: eo(P(t, .3, .4))});
+    T(num(40.5 * eo(P(t, 2.4, 1.2)), 1) + '%', 60, 580, 200, C.gold, {f: F.bold, w: 800, glow: C.gold, gb: 40, al: eo(P(t, 2.4, .3))});
+    T('देश की दौलत', 70, 660, 48, '#ffe6a8', {w: 600, al: eo(P(t, 2.6, .4))});
+    T('बाकी 99% लोग', 540, 1040, 50, '#c8ccd2', {a: 'center', f: F.bold, w: 800, al: eo(P(t, .6, .4))});
+    for (let i = 0; i < 99; i++) { const c = i % 15, r = Math.floor(i / 15), k = P(t, .7 + i * .012, .3);
+      person(92 + c * 64, 1120 + r * 36 + (1 - eo(k)) * 20, 10, '#7d838c', eo(k)); }
+    T('स्रोत: Oxfam India, 2023', 70, 730, 28, 'rgba(255,230,180,.7)', {w: 500});
+  }},
+/* 8 health */
+{ dur: 3.3, file: 8, tin: 'whip',
+  sfx: [[.2, 'beep'], [.95, 'beep'], [1.1, 'impact_small'], [1.7, 'beep'], [1.9, 'coins', .8], [2.45, 'beep']],
+  draw(t) {
+    let g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#062a2a'); g.addColorStop(1, '#020d0e'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(60,220,190,.07)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (let x = 0; x <= W; x += 60) { ctx.moveTo(x, 0); ctx.lineTo(x, H); } for (let y = 0; y <= H; y += 60) { ctx.moveTo(0, y); ctx.lineTo(W, y); } ctx.stroke();
+    const ecg = x => { const u = ((x % 380) + 380) % 380; if (u > 150 && u < 170) return -(u - 150) * 1.2; if (u >= 170 && u < 182) return -24 + (u - 170) * 16;
+      if (u >= 182 && u < 196) return 168 - (u - 182) * 15; if (u >= 196 && u < 206) return -42 + (u - 196) * 4.2; if (u > 250 && u < 300) return -Math.sin((u - 250) / 50 * Math.PI) * 26; return 0; };
+    const head = (t * 760) % (W + 200), y0 = 430;
+    ctx.save(); ctx.shadowColor = '#3cffc8'; ctx.shadowBlur = 18; ctx.lineWidth = 6;
+    for (let x = 0; x < W; x += 4) { const d = head - x; if (d < 0 || d > 900) continue;
+      ctx.strokeStyle = `rgba(60,255,200,${1 - d / 900})`; ctx.beginPath(); ctx.moveTo(x, y0 - ecg(x) * 1.3); ctx.lineTo(x + 4, y0 - ecg(x + 4) * 1.3); ctx.stroke(); }
+    ctx.restore();
+    T('♥ 78', 980, 260, 50, '#3cffc8', {a: 'right', f: F.mono, w: 700});
+    pop(540, 760, P(t, .2, .3), () => T('इलाज के हर ₹100 में से', 0, 0, 62, C.white, {a: 'center', f: F.bold, w: 800}));
+    pop(540, 990, P(t, 1.1, .3), () => { T('₹' + Math.round(39 * eo(P(t, 1.1, .8))), 0, 0, 260, C.amber, {a: 'center', f: F.bold, w: 800, glow: C.amber, gb: 40});
+      T('अपनी जेब से', 0, 80, 56, C.white, {a: 'center', f: F.bold, w: 800}); });
+    for (let i = 0; i < 8; i++) { const k = P(t, 1.9 + i * .06, .9); if (k <= 0 || k >= 1) continue;
+      const x = 540 + (hash(i) - .5) * 900 * k, y = 1250 - Math.sin(k * Math.PI) * 110 + k * 60;
+      ctx.fillStyle = C.gold; ctx.beginPath(); ctx.ellipse(x, y, 30, 30 * Math.abs(Math.cos(k * 9 + i)) + 4, 0, 0, 7); ctx.fill(); }
+    T('स्रोत: राष्ट्रीय स्वास्थ्य लेखा 2021-22', 540, 1290, 28, 'rgba(200,240,230,.7)', {a: 'center', w: 500});
+  }},
+/* 9 education — chalkboard */
+{ dur: 3.7, file: 9, tin: 'wipe',
+  sfx: [[.1, 'chalk', .9], [1.2, 'chalk', .7], [2.2, 'impact_small'], [2.3, 'chalk', .5]],
+  draw(t) {
+    cover(IMG.chalk);
+    const reveal = (s, x, y, size, col, a, d, o = {}) => { const k = P(t, a, d); if (k <= 0) return; const w = tw(s, size, 700, F.hand);
+      ctx.save(); ctx.beginPath(); ctx.rect(x - (o.a === 'center' ? w / 2 : 0) - 10, 0, (w + 20) * k, H); ctx.clip();
+      T(s, x, y, size, col, {f: F.hand, w: 700, a: o.a, al: .92}); ctx.restore(); };
+    reveal('कक्षा 2 का पाठ', 540, 330, 96, C.chalk, .05, .8, {a: 'center'});
+    reveal('“राम घर जाता है।”', 540, 450, 64, '#cfe3d2', .5, .6, {a: 'center'});
+    for (let i = 0; i < 4; i++) { const x = 225 + i * 210, y = 820, k = eo(P(t, .9 + i * .15, .3)), hl = i === 3 && t > 2.1;
+      ctx.save(); ctx.globalAlpha = k; ctx.strokeStyle = hl ? '#ffb4a8' : C.chalk; ctx.lineWidth = 7; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.arc(x, y - 110, 38, 0, 7); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, y - 70); ctx.lineTo(x, y + 30); ctx.moveTo(x - 50, y - 30); ctx.lineTo(x + 50, y - 30); ctx.moveTo(x, y + 30); ctx.lineTo(x - 36, y + 110); ctx.moveTo(x, y + 30); ctx.lineTo(x + 36, y + 110); ctx.stroke();
+      ctx.strokeRect(x - 46, y - 46, 92, 60); ctx.restore();
+      if (hl) { T('?', x, y - 190 + Math.sin(NOW * 5) * 8, 110, '#ffb4a8', {a: 'center', f: F.hand, w: 700});
+        ctx.save(); ctx.strokeStyle = '#ffb4a8'; ctx.lineWidth = 6; ctx.globalAlpha = .9; ctx.beginPath(); ctx.ellipse(x, y - 20, 105 * eo(P(t, 2.1, .4)) + 1, 190, .05, 0, 7); ctx.stroke(); ctx.restore(); } }
+    reveal('हर 4 में से 1 किशोर', 540, 1110, 92, '#ffe27a', 2.2, .7, {a: 'center'});
+    T('स्रोत: ASER 2023 (उम्र 14–18)', 540, 1290, 28, 'rgba(230,240,230,.7)', {a: 'center', w: 500});
+  }},
+/* 10 justice — archive */
+{ dur: 4.5, file: 10, tin: 'zoom',
+  sfx: [[.2, 'thuds', 2.2], [2.6, 'impact'], [3.0, 'stamp']],
+  draw(t) {
+    ctx.save(); const z = lerp(1, 1.1, t / 4.5); ctx.translate(W / 2, 760); ctx.scale(z, z); ctx.translate(-W / 2, -760); cover(IMG.archive); ctx.restore();
+    const sw = Math.sin(NOW * 1.3) * 30, lg = ctx.createRadialGradient(540 + sw, 160, 10, 540 + sw, 300, 900);
+    lg.addColorStop(0, 'rgba(255,200,120,.45)'); lg.addColorStop(1, 'rgba(255,200,120,0)'); ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H); ctx.restore();
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(540, 0); ctx.lineTo(540 + sw, 130); ctx.stroke();
+    ctx.fillStyle = '#ffd89a'; ctx.shadowColor = '#ffb347'; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(540 + sw, 150, 22, 0, 7); ctx.fill(); ctx.shadowColor = 'transparent';
+    const n = Math.floor(22 * eo(P(t, .2, 2.3)));
+    for (let i = 0; i < n; i++) { const y = 1230 - i * 26, x = 540 + (hash(i * 7) - .5) * 40, w = 420 + hash(i) * 40;
+      ctx.fillStyle = '#6b4c2a'; ctx.fillRect(x - w / 2, y - 22, w, 22);
+      ctx.fillStyle = i % 2 ? '#d9c7a1' : '#c4ab7e'; ctx.fillRect(x - w / 2, y - 26, w, 18);
+      ctx.fillStyle = '#8b1a1a'; ctx.fillRect(x - 6, y - 26, 12, 26); }
+    header('अदालतों में', num(Math.round(5 * eo(P(t, 2.5, .8)))) + ' करोड़+', 430, P(t, 2.5, .35), C.amber, 'केस लंबित');
+    stamp('लंबित', 560, 850, -.14, P(t, 3, .25), C.red, 100);
+    T('स्रोत: राष्ट्रीय न्यायिक डेटा ग्रिड', 540, 1290, 28, 'rgba(255,235,210,.7)', {a: 'center', w: 500});
+  }},
+/* 11 recap — evidence map */
+{ dur: 3.5, file: 11, tin: 'tear',
+  sfx: [[.15, 'impact_small'], [.9, 'string'], [1.2, 'string'], [1.5, 'string'], [1.8, 'string'], [2.3, 'rise', 1.2]],
+  draw(t) {
+    cover(IMG.cork); ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillRect(0, 0, W, H);
+    const pr = drawMap({cx: 540, cy: 1010, scale: 27, tilt: .75, yaw: lerp(-.1, .05, t / 3.5), top: ['#e6dcc4', '#c9bb98'],
+      side: [[60, 45, 30], [140, 110, 80]], edge: '#7a2a20',
+      pins: [CITY.delhi, CITY.jaipur, CITY.vidarbha, CITY.mumbai, CITY.chennai, CITY.lucknow].map((c, i) => ({lon: c[0], lat: c[1], h: 2.4, color: '#ff4a2e', k: P(t, .8 + i * .15, .3)}))});
+    pop(540, 400, P(t, .1, .35), () => {
+      ctx.rotate(-.02); ctx.fillStyle = '#0f2a18'; ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 30; ctx.fillRect(-430, -120, 860, 240); ctx.shadowColor = 'transparent';
+      ctx.strokeStyle = C.green; ctx.lineWidth = 4; ctx.strokeRect(-430, -120, 860, 240);
+      T('प्रगति ↑', -390, -55, 40, C.green, {f: F.bold, w: 800});
+      T('गरीबी 29% → 11%', 0, 50, 92, C.white, {a: 'center', f: F.bold, w: 800});
+      T('नीति आयोग 2024', 390, -55, 28, '#9fe0b3', {a: 'right', w: 500});
+    }); pin(540, 290, '#2e7d32');
+    const qs = [[160, 700], [920, 700], [160, 1230], [920, 1230]];
+    qs.forEach(([x, y], i) => { const k = P(t, 1.6 + i * .15, .3); const c = [CITY.delhi, CITY.lucknow, CITY.mumbai, CITY.chennai][i];
+      const [px, py] = pr(c[0], c[1], 0); rope(x, y, px, py, P(t, 1.6 + i * .15, .4));
+      pop(x, y, k, () => T('?', 0, 40, 150, C.red, {a: 'center', f: F.head, w: 400, stroke: '#000', sw: 8})); });
+  }},
+/* 12 END — question */
+{ dur: 4.5, file: 0, tin: 'flash',
+  sfx: [[0, 'impact_big'], [.6, 'blips'], [2.4, 'heartbeat'], [3.2, 'heartbeat']],
+  draw(t) {
+    bgDark('#1d0d0b', '#050303');
+    drawMap({cx: 540, cy: 900, scale: 34, tilt: .3, yaw: 0, top: ['rgba(120,30,20,.25)', 'rgba(60,10,5,.2)'], side: [[20, 5, 3], [40, 10, 6]], edge: 'rgba(255,90,60,.35)', thick: .2, alpha: .7});
+    const sp = Math.cos(NOW * 2.2);
+    ctx.save(); ctx.translate(540, 360); ctx.scale(sp, 1);
+    for (let i = 10; i > 0; i--) T('?', i * 2 * Math.sign(sp || 1), i * 2, 340, `rgb(${90 + i * 4},20,15)`, {a: 'center', f: F.head, w: 400});
+    T('?', 0, 0, 340, C.red, {a: 'center', f: F.head, w: 400, glow: C.red, gb: 40}); ctx.restore();
+    pop(540, 560, P(t, .1, .3), () => {
+      T('आपके हिसाब से', 0, 0, 58, '#ffd9cc', {a: 'center', f: F.bold, w: 800});
+      T('सबसे पहले कौन-सी समस्या', 0, 100, 76, C.white, {a: 'center', f: F.bold, w: 800});
+      T('हल होनी चाहिए?', 0, 190, 90, C.yellow, {a: 'center', f: F.bold, w: 800, glow: C.yellow, gb: 20});
+    });
+    const opts = ['बेरोज़गारी', 'भ्रष्टाचार', 'पानी', 'प्रदूषण', 'असमानता', 'शिक्षा'];
+    opts.forEach((s, i) => { const x = 300 + (i % 2) * 480, y = 930 + Math.floor(i / 2) * 130;
+      pop(x, y, P(t, .6 + i * .15, .3), () => { rr(-215, -50, 430, 100, 14); ctx.fillStyle = 'rgba(20,10,8,.9)'; ctx.fill();
+        ctx.strokeStyle = i % 2 ? C.amber : C.red; ctx.lineWidth = 3; ctx.stroke();
+        T(String.fromCharCode(65 + i), -175, 16, 44, i % 2 ? C.amber : C.red, {a: 'center', f: F.mono, w: 700});
+        T(s, 20, 16, 48, C.white, {a: 'center', f: F.bold, w: 800}); }); });
+    const pulse = 1 + Math.sin(NOW * 6) * .04;
+    pop(540, 1400, P(t, 1.8, .3), () => { ctx.scale(pulse, pulse); rr(-330, -60, 660, 120, 60); ctx.fillStyle = C.red; ctx.fill();
+      T('कमेंट में बताइए ↓', 0, 22, 62, C.white, {a: 'center', f: F.bold, w: 800}); });
+  }}
+];
+
+/* ---------- captions (match the voice-over script) ---------- */
+const CAP = [
+  [.15, 2, 'दुनिया के 20 सबसे', 'प्रदूषित शहरों में'], [2, 4, '13 शहर', 'भारत में!'],
+  [4, 6.4, 'और ये तो', 'बस शुरुआत है'], [6.4, 9, '145 करोड़ का देश', 'अंदर से लड़ रहा है'],
+  [9, 11.6, 'पहली लड़ाई', 'रोज़गार'], [11.6, 13.6, 'हर 100 बेरोज़गारों में', '83 युवा'], [13.6, 15, 'डिग्री है…', 'नौकरी नहीं'],
+  [15, 17.2, 'दूसरी लड़ाई', 'भ्रष्टाचार'], [17.2, 20.5, '180 देशों में', '96वाँ स्थान'],
+  [20.5, 22.6, 'तीसरी लड़ाई', 'पानी'], [22.6, 26, 'करीब 60 करोड़ लोग', 'पानी की किल्लत में'],
+  [26, 28.2, 'और', 'अन्नदाता…'], [28.2, 31.5, '2022 में खेती से जुड़े', '11,290 लोगों ने जान दी'],
+  [34.5, 37.4, 'देश की 40% से ज़्यादा', 'दौलत'], [37.4, 40.5, 'सिर्फ़', '1% लोगों के पास'],
+  [40.5, 43.8, 'इलाज का 39% खर्च', 'अपनी जेब से'], [43.8, 47.5, 'हर चौथा किशोर', 'कक्षा 2 का पाठ नहीं पढ़ पाता'],
+  [47.5, 52, 'अदालतों में', '5 करोड़+ केस लंबित'], [52, 53.8, 'गरीबी घटी है,', 'देश आगे बढ़ा है'], [53.8, 55.5, 'पर ये सवाल', 'अब भी खड़े हैं']
+];
+function captions(g) {
+  const c = CAP.find(c => g >= c[0] && g < c[1]); if (!c) return;
+  const k = P(g, c[0], .18), y = 1430;
+  ctx.save();
+  const s1 = fitSize(c[2], 60, 940, 800, F.bold);
+  pop(540, y - 70, k, () => T(c[2], 0, 0, s1, C.white, {a: 'center', f: F.bold, w: 800, stroke: '#000', sw: 12}));
+  const s2 = fitSize(c[3], 84, 900, 800, F.bold), w = tw(c[3], s2, 800, F.bold) + 50;
+  pop(540, y + 40, P(g, c[0] + .08, .2), () => { ctx.rotate(-.025); rr(-w / 2, -s2 * .85, w, s2 * 1.2, 10); ctx.fillStyle = C.yellow; ctx.fill();
+    T(c[3], 0, s2 * .12, s2, '#111', {a: 'center', f: F.bold, w: 800}); });
+  ctx.restore();
+}
+
+/* ---------- timeline + transitions ---------- */
+const starts = []; let TOTAL = 0; for (const s of S) { starts.push(TOTAL); TOTAL += s.dur; }
+const TR = .5;
+const sceneAt = g => { for (let i = 0; i < S.length; i++) if (g < starts[i] + S[i].dur) return i; return S.length - 1; };
+function drawScene(i, t, c) { ctx = c; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
+  c.clearRect(0, 0, W, H); S[i].draw(clamp(t, 0, S[i].dur), S[i].dur); c.restore(); }
+function composite(type, k) {
+  ctx = out; const e = io(k);
+  if (type === 'flash') { out.drawImage(k < .5 ? A : B, 0, 0); out.fillStyle = `rgba(255,248,230,${1 - Math.abs(k - .5) * 2})`; out.fillRect(0, 0, W, H); }
+  else if (type === 'whip') { const off = e * W, blur = Math.sin(k * Math.PI);
+    for (let j = 0; j < 5; j++) { out.globalAlpha = j ? .22 * blur : 1; const d = j * 40 * blur; out.drawImage(A, -off - d, 0); out.drawImage(B, W - off - d, 0); } out.globalAlpha = 1; }
+  else if (type === 'zoom') { out.drawImage(B, W / 2 - W * lerp(.6, 1, e) / 2, H / 2 - H * lerp(.6, 1, e) / 2, W * lerp(.6, 1, e), H * lerp(.6, 1, e));
+    out.globalAlpha = 1 - e; const s = lerp(1, 2.6, e); out.drawImage(A, W / 2 - W * s / 2, H / 2 - H * s / 2, W * s, H * s); out.globalAlpha = 1; }
+  else if (type === 'tear') { out.drawImage(A, 0, 0); const y0 = lerp(H + 60, -60, e); out.save(); out.beginPath(); out.moveTo(0, H);
+    for (let x = 0; x <= W; x += 30) out.lineTo(x, y0 + (hash(x) - .5) * 70 + Math.sin(x * .01) * 30); out.lineTo(W, H); out.closePath();
+    out.save(); out.clip(); out.drawImage(B, 0, 0); out.restore(); out.strokeStyle = '#efe6d2'; out.lineWidth = 14; out.stroke(); out.restore(); }
+  else if (type === 'glitch') { const fr = Math.floor(NOW * 30), n = 28, sh = H / n;
+    for (let j = 0; j < n; j++) { const src = hash(fr * .7 + j * 3.3) < e ? B : A, dx = (hash(fr + j) - .5) * 160 * Math.sin(k * Math.PI);
+      out.drawImage(src, 0, j * sh, W, sh, dx, j * sh, W, sh); }
+    out.globalCompositeOperation = 'lighter'; out.fillStyle = `rgba(255,0,60,${.25 * Math.sin(k * Math.PI)})`; out.fillRect(0, 0, W, H); out.globalCompositeOperation = 'source-over'; }
+  else if (type === 'burn') { out.drawImage(A, 0, 0); out.globalAlpha = e; out.drawImage(B, 0, 0); out.globalAlpha = 1;
+    const g = out.createRadialGradient(W * .7, H * .3, 10, W * .7, H * .3, 1400); g.addColorStop(0, `rgba(255,170,60,${Math.sin(k * Math.PI)})`); g.addColorStop(1, 'rgba(255,60,0,0)');
+    out.globalCompositeOperation = 'lighter'; out.fillStyle = g; out.fillRect(0, 0, W, H); out.globalCompositeOperation = 'source-over'; }
+  else if (type === 'wipe') { out.drawImage(A, 0, 0); const x = lerp(-700, W + 700, e); out.save(); out.beginPath(); out.moveTo(x - 600, H); out.lineTo(x + 600, 0); out.lineTo(-W, 0); out.lineTo(-W, H); out.closePath();
+    out.save(); out.clip(); out.drawImage(B, 0, 0); out.restore(); out.strokeStyle = C.red; out.lineWidth = 24; out.beginPath(); out.moveTo(x - 600, H); out.lineTo(x + 600, 0); out.stroke(); out.restore(); }
+  else out.drawImage(B, 0, 0);
+}
+function overlay(g, i) {
+  ctx = out;
+  const fi = S[i].file;
+  if (fi) { ctx.save(); ctx.globalAlpha = .92;
+    rr(48, 110, 250, 54, 6); ctx.fillStyle = C.red; ctx.fill(); T('EXPLAINED', 173, 147, 28, '#fff', {a: 'center', f: F.mono, w: 700});
+    T('फ़ाइल ' + String(fi).padStart(2, '0') + ' / 11', 1032, 147, 28, '#f2eadb', {a: 'right', f: F.mono, w: 500, stroke: 'rgba(0,0,0,.6)', sw: 6});
+    ctx.restore(); }
+  captions(g);
+  const v = out.createRadialGradient(W / 2, H / 2, 500, W / 2, H / 2, 1250); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.55)');
+  out.fillStyle = v; out.fillRect(0, 0, W, H);
+  const fr = Math.floor(g * 30); out.save(); out.globalCompositeOperation = 'overlay'; out.globalAlpha = .16;
+  const gx = -hash(fr) * 200, gy = -hash(fr + 1) * 300; out.drawImage(GRAIN[fr % 4], gx, gy, W + 200, H + 300); out.restore();
+  if (hash(fr * 1.3) > .7) { out.fillStyle = 'rgba(255,245,225,.07)'; out.fillRect(hash(fr * 2.1) * W, 0, 2, H); }
+}
+function render(g) {
+  NOW = g; const i = sceneAt(g);
+  let k = -1; for (let j = 1; j < S.length; j++) if (g >= starts[j] - TR / 2 && g < starts[j] + TR / 2) { k = j; break; }
+  if (k > 0) { drawScene(k - 1, g - starts[k - 1], actx); drawScene(k, g - starts[k], bctx); composite(S[k].tin, (g - starts[k] + TR / 2) / TR); }
+  else { drawScene(i, g - starts[i], actx); ctx = out; out.drawImage(A, 0, 0); }
+  overlay(g, i);
+}
+
+/* ---------- sound cue list (read by the audio generator) ---------- */
+const SFX = [];
+S.forEach((s, i) => { (s.sfx || []).forEach(([t, type, dur]) => SFX.push({t: +(starts[i] + t).toFixed(3), type, dur: dur || 0}));
+  if (i > 0) SFX.push({t: +(starts[i] - .3).toFixed(3), type: s.tin === 'glitch' ? 'glitch' : 'whoosh', dur: 0}); });
+SFX.sort((a, b) => a.t - b.t);
+
+/* ---------- player ---------- */
+let G = 0, playing = false, started = false, last = 0, stopped = false;
+const aud = document.getElementById('aud'), btn = document.getElementById('play'), timeEl = document.getElementById('time');
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+function setPlay(p) { playing = p; started = true; btn.textContent = p ? '⏸ रोकें' : '▶ चलाएँ';
+  try { if (p) { aud.currentTime = G; aud.play().catch(() => {}); } else aud.pause(); } catch (e) {} }
+btn.onclick = () => { if (G >= TOTAL - .05) G = 0; setPlay(!playing); };
+document.getElementById('restart').onclick = () => { G = 0; setPlay(true); };
+function loop(now) {
+  if (stopped) return;
+  const dt = last ? Math.min(.1, (now - last) / 1000) : 0; last = now;
+  if (playing) { G += dt; if (G >= TOTAL) { G = TOTAL - .001; setPlay(false); } }
+  if (window.__doc.ready) render(started ? G : 2.9);
+  timeEl.textContent = `${fmt(G)} / ${fmt(TOTAL)}`;
+  requestAnimationFrame(loop);
+}
+window.__doc = {total: TOTAL, sfx: SFX, render, stop: () => { stopped = true; }, ready: false};
+
+const fonts = ["800 40px 'Baloo 2'", "600 40px 'Baloo 2'", "500 40px 'Hind'", "600 40px 'Hind'", "700 40px 'Kalam'", "400 40px 'Tiro Devanagari Hindi'", "700 20px 'JetBrains Mono'", "500 20px 'JetBrains Mono'"];
+Promise.all(fonts.map(f => document.fonts.load(f, 'भारत 01'))).catch(() => {}).then(() => {
+  const r = rng(5), main = INDIA[0], cs = Object.values(CITY);
+  while (DOTS.length < 1400) { let p;
+    if (r() < .55) { const c = cs[Math.floor(r() * cs.length)], a = r() * 7, d = Math.sqrt(-2 * Math.log(r() + 1e-9)) * 1.1; p = [c[0] + Math.cos(a) * d, c[1] + Math.sin(a) * d]; }
+    else p = [68 + r() * 30, 6 + r() * 31];
+    if (inside(p, main)) DOTS.push(p); }
+  for (let i = DOTS.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [DOTS[i], DOTS[j]] = [DOTS[j], DOTS[i]]; }
+  IMG.smog = makeSmog(); IMG.crowd = makeCrowd(); IMG.cracked = makeCracked(); IMG.env = makeEnvelope();
+  IMG.news = makeNewsWall(); IMG.cork = makeCork(); IMG.chalk = makeChalk(); IMG.archive = makeArchive(); makeGrain();
+  window.__doc.ready = true;
+});
+requestAnimationFrame(loop);
+})();
+</script>

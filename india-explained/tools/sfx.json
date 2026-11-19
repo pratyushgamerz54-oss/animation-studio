@@ -1,0 +1,392 @@
+[
+ {
+  "t": 0,
+  "type": "impact_big",
+  "dur": 0
+ },
+ {
+  "t": 0.25,
+  "type": "typewriter",
+  "dur": 1.1
+ },
+ {
+  "t": 1,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 1.95,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 2.2,
+  "type": "blips",
+  "dur": 0
+ },
+ {
+  "t": 3.4,
+  "type": "impact_small",
+  "dur": 0
+ },
+ {
+  "t": 3.7,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 4.2,
+  "type": "rise",
+  "dur": 2.2
+ },
+ {
+  "t": 4.4,
+  "type": "ticks",
+  "dur": 1.8
+ },
+ {
+  "t": 6.6,
+  "type": "impact_small",
+  "dur": 0
+ },
+ {
+  "t": 6.9,
+  "type": "pins",
+  "dur": 1.8
+ },
+ {
+  "t": 8.7,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 9.05,
+  "type": "paper",
+  "dur": 0
+ },
+ {
+  "t": 9.7,
+  "type": "shutter",
+  "dur": 0
+ },
+ {
+  "t": 11.7,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 11.9,
+  "type": "ticks",
+  "dur": 1.6
+ },
+ {
+  "t": 13.6,
+  "type": "stamp",
+  "dur": 0
+ },
+ {
+  "t": 14.7,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 15.1,
+  "type": "pin",
+  "dur": 0
+ },
+ {
+  "t": 15.4,
+  "type": "pin",
+  "dur": 0
+ },
+ {
+  "t": 15.7,
+  "type": "pin",
+  "dur": 0
+ },
+ {
+  "t": 16,
+  "type": "pin",
+  "dur": 0
+ },
+ {
+  "t": 16.2,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 16.6,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 17,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 17.3,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 18.9,
+  "type": "stamp",
+  "dur": 0
+ },
+ {
+  "t": 20.2,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 20.6,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 21.1,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 21.6,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 21.8,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 22.3,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 23.1,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 23.9,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 24.7,
+  "type": "drop",
+  "dur": 0
+ },
+ {
+  "t": 25.7,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 26,
+  "type": "wind",
+  "dur": 5.5
+ },
+ {
+  "t": 27,
+  "type": "typewriter",
+  "dur": 1.4
+ },
+ {
+  "t": 29,
+  "type": "stamp",
+  "dur": 0
+ },
+ {
+  "t": 31.2,
+  "type": "glitch",
+  "dur": 0
+ },
+ {
+  "t": 31.5,
+  "type": "glitch",
+  "dur": 0
+ },
+ {
+  "t": 31.65,
+  "type": "heartbeat",
+  "dur": 0
+ },
+ {
+  "t": 32.5,
+  "type": "heartbeat",
+  "dur": 0
+ },
+ {
+  "t": 32.7,
+  "type": "riser",
+  "dur": 1.75
+ },
+ {
+  "t": 33.35,
+  "type": "glitch",
+  "dur": 0
+ },
+ {
+  "t": 34.2,
+  "type": "glitch",
+  "dur": 0
+ },
+ {
+  "t": 34.9,
+  "type": "coins",
+  "dur": 2
+ },
+ {
+  "t": 37,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 37.8,
+  "type": "blips",
+  "dur": 0
+ },
+ {
+  "t": 40.2,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 40.7,
+  "type": "beep",
+  "dur": 0
+ },
+ {
+  "t": 41.45,
+  "type": "beep",
+  "dur": 0
+ },
+ {
+  "t": 41.6,
+  "type": "impact_small",
+  "dur": 0
+ },
+ {
+  "t": 42.2,
+  "type": "beep",
+  "dur": 0
+ },
+ {
+  "t": 42.4,
+  "type": "coins",
+  "dur": 0.8
+ },
+ {
+  "t": 42.95,
+  "type": "beep",
+  "dur": 0
+ },
+ {
+  "t": 43.5,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 43.9,
+  "type": "chalk",
+  "dur": 0.9
+ },
+ {
+  "t": 45,
+  "type": "chalk",
+  "dur": 0.7
+ },
+ {
+  "t": 46,
+  "type": "impact_small",
+  "dur": 0
+ },
+ {
+  "t": 46.1,
+  "type": "chalk",
+  "dur": 0.5
+ },
+ {
+  "t": 47.2,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 47.7,
+  "type": "thuds",
+  "dur": 2.2
+ },
+ {
+  "t": 50.1,
+  "type": "impact",
+  "dur": 0
+ },
+ {
+  "t": 50.5,
+  "type": "stamp",
+  "dur": 0
+ },
+ {
+  "t": 51.7,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 52.15,
+  "type": "impact_small",
+  "dur": 0
+ },
+ {
+  "t": 52.9,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 53.2,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 53.5,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 53.8,
+  "type": "string",
+  "dur": 0
+ },
+ {
+  "t": 54.3,
+  "type": "rise",
+  "dur": 1.2
+ },
+ {
+  "t": 55.2,
+  "type": "whoosh",
+  "dur": 0
+ },
+ {
+  "t": 55.5,
+  "type": "impact_big",
+  "dur": 0
+ },
+ {
+  "t": 56.1,
+  "type": "blips",
+  "dur": 0
+ },
+ {
+  "t": 57.9,
+  "type": "heartbeat",
+  "dur": 0
+ },
+ {
+  "t": 58.7,
+  "type": "heartbeat",
+  "dur": 0
+ }
+]
