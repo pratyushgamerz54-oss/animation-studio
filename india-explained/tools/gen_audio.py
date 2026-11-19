@@ -1,8 +1,11 @@
 """Builds music_sfx.wav: a 60 s investigative music bed plus sound effects placed from sfx.json.
 Usage: python3 tools/gen_audio.py   (needs numpy only)"""
 import json, os, wave, numpy as np
-SR = 44100; DUR = 60.0; N = int(SR * DUR)
+SR = 44100
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'music_sfx.wav')
+TP = os.path.join(HERE, 'timing.json')
+TM = json.load(open(TP)) if os.path.exists(TP) else {'total': 60.0, 'mid': [31.5, 34.5], 'durs': [4] + [5] * 11 + [4.5]}
+DUR = float(TM['total']); N = int(SR * DUR); MID0, MID1 = TM['mid']; HOOK_END = TM['durs'][0]; END_START = DUR - TM['durs'][-1]
 rng = np.random.default_rng(7)
 def tt(d): return np.arange(int(SR * d)) / SR
 def band(n, lo, hi):
@@ -107,11 +110,11 @@ drone = sum(np.sin(2 * np.pi * hz(26) * n * t) / n for n in range(1, 7)) * .35 +
 kick = np.zeros(N); kt = tt(.35); kk = sweep(110, 42, .35) * np.exp(-kt * 9)
 hat = np.zeros(N); hh = band(int(SR * .03), 6000, 12000) * np.exp(-tt(.03) * 150)
 arp = np.zeros(N); beat = 60 / 100
-b = 4.0
-while b < DUR - 4.5:
-    if not (31.5 <= b < 34.5):
+b = HOOK_END
+while b < END_START:
+    if not (MID0 <= b < MID1):
         i = int(b * SR); kick[i:i + len(kk)] += kk[:N - i]
-        if b >= 34.5:
+        if b >= MID1:
             for half in (0, .5):
                 j = int((b + beat * half) * SR); hat[j + int(beat * .25 * SR): j + int(beat * .25 * SR) + len(hh)] += hh
                 notes = CH[int((b + beat * half) / seglen) % 4]; f = hz(notes[int(b * 2 / beat) % 4] + 24); pt = tt(.25)
@@ -119,7 +122,7 @@ while b < DUR - 4.5:
     b += beat
 music = pad * .9 + drone * .55 + kick * .9 + hat * .18 + arp
 sec = np.ones(N)
-sec[(t >= 31.5) & (t < 34.5)] = .12                      # drop out for the mid hook
+sec[(t >= MID0) & (t < MID1)] = .12                      # drop out for the mid hook
 sec *= np.clip(t / 1.2, .35, 1)                          # quiet under the opening impact
 sec *= np.clip((DUR - t) / 2.5, 0, 1) ** .7              # tail fade
 sm = np.convolve(sec, np.ones(2205) / 2205, mode='same')
@@ -139,8 +142,19 @@ def conv(a, ir):
 irt = tt(1.4); irL = rng.standard_normal(len(irt)) * np.exp(-irt * 4.5); irR = rng.standard_normal(len(irt)) * np.exp(-irt * 4.5)
 irL /= np.sqrt((irL ** 2).sum()); irR /= np.sqrt((irR ** 2).sum())
 L = L + conv(L, irL) * .35; R = R + conv(R, irR) * .35
-mixL = music + L; mixR = np.roll(music, 220) + R
-st = np.stack([mixL, mixR], 1); st = np.tanh(st * 1.3) / np.tanh(1.3); st = st / np.abs(st).max() * .89
-with wave.open(OUT, 'wb') as w:
-    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((st * 32767).astype('<i2').tobytes())
-print('wrote', OUT, len(cues), 'cues')
+def write(path, st):
+    st = np.tanh(st * 1.3) / np.tanh(1.3); st = st / np.abs(st).max() * .89
+    with wave.open(path, 'wb') as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((st * 32767).astype('<i2').tobytes())
+    print('wrote', path)
+musL, musR = music, np.roll(music, 220)
+write(OUT, np.stack([musL + L, musR + R], 1))
+VO = os.path.join(HERE, '..', 'voice_fitted.wav')
+if os.path.exists(VO):
+    with wave.open(VO) as w: v = np.frombuffer(w.readframes(w.getnframes()), '<i2').astype(np.float64) / 32768
+    v = np.pad(v, (0, max(0, N - len(v))))[:N]; v = v / (np.abs(v).max() + 1e-9) * .9
+    env = np.convolve(np.abs(v), np.ones(int(.25 * SR)) / int(.25 * SR), mode='same'); env = np.clip(env / (np.percentile(env, 95) + 1e-9), 0, 1)
+    duck = 1 - .55 * env                                   # music dips under the voice
+    bedL, bedR = musL * duck * .75 + L * .55, musR * duck * .75 + R * .55
+    write(os.path.join(HERE, '..', 'final_mix.wav'), np.stack([v + bedL, v + bedR], 1))
+print(len(cues), 'cues')
