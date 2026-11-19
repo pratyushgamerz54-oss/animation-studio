@@ -1,0 +1,600 @@
+<title>भीतर की लड़ाई</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Hind:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single cinema "screen" (16:9 canvas) with a control strip and chapter index beneath. Deliberately dark, single-theme. */
+:root{
+  --ink:#0a0f1e; --panel:#121a2e; --line:#26324f; --paper:#f3efe6; --muted:#93a0bd;
+  --saffron:#ff9a3c; --green:#2fbf71; --blue:#5b8cff;
+  --display:'Baloo 2','Noto Sans Devanagari','Nirmala UI',sans-serif;
+  --body:'Hind','Noto Sans Devanagari','Nirmala UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 40px}
+.wrap{max-width:1200px;margin:0 auto;display:grid;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.1;margin:0;text-wrap:balance}
+h1 span{color:var(--saffron)}
+.sub{color:var(--muted);margin:0}
+.stage{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;background:#000;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+canvas{width:100%;height:100%;display:block}
+.big{position:absolute;inset:auto auto 8% 50%;transform:translateX(-50%);font:600 clamp(15px,2vw,20px) var(--body);
+  background:var(--saffron);color:#1a1206;border:0;border-radius:999px;padding:.6em 1.4em;cursor:pointer;box-shadow:0 6px 30px rgba(255,154,60,.35)}
+.big:focus-visible,button:focus-visible{outline:3px solid var(--paper);outline-offset:2px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:500 15px var(--body);color:var(--paper);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.45em .9em;cursor:pointer}
+button:hover{border-color:var(--muted)}
+button[aria-pressed="true"]{background:#2a2113;border-color:var(--saffron);color:var(--saffron)}
+.time{font:500 14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;min-width:96px;text-align:center}
+.bar{flex:1 1 220px;min-width:0;height:30px;position:relative;cursor:pointer;touch-action:none}
+.bar .track{position:absolute;left:0;right:0;top:13px;height:4px;background:var(--line);border-radius:2px}
+.bar .fill{position:absolute;left:0;top:13px;height:4px;background:var(--saffron);border-radius:2px}
+.bar .tick{position:absolute;top:9px;width:2px;height:12px;background:var(--muted);opacity:.5}
+.note{color:var(--muted);font-size:14px;margin:0}
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;padding:0;margin:0;list-style:none}
+.chapters button{width:100%;text-align:left;display:flex;gap:8px;align-items:baseline}
+.chapters button small{font:500 12px var(--mono);color:var(--muted)}
+.chapters button.on{border-color:var(--saffron)}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>भीतर की <span>लड़ाई</span></h1>
+    <p class="sub">भारत की आंतरिक चुनौतियों पर एक मोशन ग्राफ़िक्स डॉक्यूमेंट्री</p>
+  </header>
+
+  <div class="stage">
+    <canvas id="cv" width="1920" height="1080" aria-label="डॉक्यूमेंट्री एनीमेशन"></canvas>
+    <button class="big" id="bigPlay">▶ डॉक्यूमेंट्री देखें</button>
+  </div>
+
+  <div class="controls">
+    <button id="prev" aria-label="पिछला अध्याय">⏮</button>
+    <button id="play" aria-label="चलाएँ">▶ चलाएँ</button>
+    <button id="next" aria-label="अगला अध्याय">⏭</button>
+    <span class="time" id="time">0:00 / 0:00</span>
+    <div class="bar" id="bar" role="slider" aria-label="समय" tabindex="0"><div class="track"></div><div class="fill" id="fill"></div></div>
+    <button id="narr" aria-pressed="true">🔊 हिंदी आवाज़</button>
+  </div>
+  <p class="note" id="voiceNote">आवाज़ आपके ब्राउज़र की हिंदी वॉइस से चलती है। हिंदी वॉइस न हो तो कैप्शन पढ़ें। स्पेस से चलाएँ/रोकें, ← → से अध्याय बदलें।</p>
+
+  <ul class="chapters" id="chapters"></ul>
+</div>
+
+<script>
+(() => {
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const W = 1920, H = 1080;
+const C = {ink:'#0a0f1e', panel:'#121a2e', line:'#26324f', paper:'#f3efe6', muted:'#93a0bd',
+  saffron:'#ff9a3c', green:'#2fbf71', blue:'#5b8cff', red:'#ff5a5a', earth:'#7a5a3a'};
+const FD = "'Baloo 2','Noto Sans Devanagari','Nirmala UI',sans-serif";
+const FB = "'Hind','Noto Sans Devanagari','Nirmala UI',sans-serif";
+const FM = "'JetBrains Mono',ui-monospace,monospace";
+
+/* ---------- helpers ---------- */
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const io = x => { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; };
+const out = x => { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+const back = x => { x = clamp(x); const c = 1.7; return 1 + (c+1)*Math.pow(x-1,3) + c*Math.pow(x-1,2); };
+const P = (t, a, d) => clamp((t - a) / d);
+const hash = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const num = (v, dec = 0) => v.toLocaleString('en-IN', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+
+function txt(s, x, y, size, color, o = {}) {
+  ctx.save();
+  ctx.font = `${o.w || 600} ${size}px ${o.f || FB}`;
+  ctx.fillStyle = color; ctx.textAlign = o.a || 'left'; ctx.textBaseline = o.b || 'alphabetic';
+  ctx.globalAlpha *= (o.al ?? 1);
+  if (o.dy) ctx.translate(0, o.dy);
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function lines(s, maxW, size, w = 500, f = FB) {
+  ctx.save(); ctx.font = `${w} ${size}px ${f}`;
+  const words = s.split(' '), res = []; let cur = '';
+  for (const wd of words) { const t = cur ? cur + ' ' + wd : wd;
+    if (ctx.measureText(t).width > maxW && cur) { res.push(cur); cur = wd; } else cur = t; }
+  if (cur) res.push(cur); ctx.restore(); return res;
+}
+function para(s, x, y, size, color, maxW, o = {}) {
+  const ls = lines(s, maxW, size, o.w || 500, o.f || FB), lh = size * (o.lh || 1.35);
+  ls.forEach((l, i) => txt(l, x, y + i * lh, size, color, {...o, w: o.w || 500}));
+  return ls.length * lh;
+}
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+function person(x, y, s, color, al = 1) {
+  ctx.save(); ctx.globalAlpha *= al; ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(x, y - s * 1.15, s * .55, 0, 7); ctx.fill();
+  rr(x - s * .72, y - s * .45, s * 1.44, s * 1.7, s * .55); ctx.fill();
+  ctx.restore();
+}
+function chakra(x, y, r, rot, al = 1, col = C.blue) {
+  if (r < 1 || al <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.globalAlpha *= al;
+  ctx.strokeStyle = col; ctx.lineWidth = r * .06;
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.stroke();
+  ctx.lineWidth = Math.max(2, r * .025);
+  for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2;
+    ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * .15, Math.sin(a) * r * .15); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); ctx.stroke(); }
+  ctx.fillStyle = col; ctx.beginPath(); ctx.arc(0, 0, r * .15, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function tricolor(x, y, w, h, prog = 1) {
+  const seg = w / 3;
+  [[C.saffron,0],[C.paper,1],[C.green,2]].forEach(([c, i]) => {
+    const pr = clamp(prog * 3 - i); if (pr <= 0) return;
+    ctx.fillStyle = c; ctx.fillRect(x + i * seg, y, seg * pr, h);
+  });
+}
+
+/* ---------- shared frame ---------- */
+function backdrop(g) {
+  ctx.fillStyle = C.ink; ctx.fillRect(0, 0, W, H);
+  const gr = ctx.createRadialGradient(W * .6, H * .4, 80, W * .5, H * .5, 1200);
+  gr.addColorStop(0, '#17213e'); gr.addColorStop(1, C.ink);
+  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = 'rgba(147,160,189,0.06)'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let x = 0; x <= W; x += 80) { ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, H); }
+  for (let y = 0; y <= H; y += 80) { ctx.moveTo(0, y + .5); ctx.lineTo(W, y + .5); }
+  ctx.stroke();
+  for (let i = 0; i < 70; i++) {
+    const sx = ((hash(i) * W + g * 14 * (.3 + hash(i + 7))) % W + W) % W;
+    const sy = ((hash(i + 3) * H - g * 7 * hash(i + 11)) % H + H) % H;
+    ctx.fillStyle = `rgba(243,239,230,${.04 + .12 * hash(i + 5)})`;
+    ctx.fillRect(sx, sy, 2 + hash(i+9) * 2, 2 + hash(i+9) * 2);
+  }
+}
+function chrome(s, t) {
+  const a = out(P(t, .2, .6));
+  txt(`अध्याय ${String(s.n).padStart(2, '0')} / 11`, 120, 96, 26, C.muted, {f: FM, w: 500, al: a});
+  txt(s.chapter, 120, 168, 68, C.paper, {f: FD, w: 800, al: a, dy: (1 - a) * 20});
+  tricolor(122, 192, 150, 6, out(P(t, .4, .8)));
+  ctx.save(); ctx.globalAlpha = a;
+  txt('स्रोत: ' + s.src, W - 120, 96, 24, C.muted, {a: 'right', f: FB, w: 500});
+  ctx.restore();
+}
+function caption(s, t) {
+  if (!s.say) return;
+  const a = out(P(t, .5, .5)) * (1 - P(t, s.dur - .5, .4));
+  if (a <= 0) return;
+  const size = 38, ls = lines(s.say, 1560, size, 500), lh = 52;
+  ctx.save(); ctx.font = `500 ${size}px ${FB}`;
+  const w = Math.max(...ls.map(l => ctx.measureText(l).width)) + 64;
+  const h = ls.length * lh + 30, y0 = H - 50 - h;
+  ctx.globalAlpha = a * .82; ctx.fillStyle = '#05080f'; rr(W / 2 - w / 2, y0, w, h, 12); ctx.fill();
+  ctx.restore();
+  ls.forEach((l, i) => txt(l, W / 2, y0 + 15 + lh * (i + .78), size, C.paper, {a: 'center', w: 500, al: a}));
+}
+function fade(t, d) {
+  const k = Math.max(1 - P(t, 0, .6), P(t, d - .5, .5));
+  if (k > 0) { ctx.fillStyle = `rgba(10,15,30,${k})`; ctx.fillRect(0, 0, W, H); }
+}
+function bigCount(v, x, y, size, color, suffix, sufSize) {
+  txt(v, x, y, size, color, {f: FD, w: 800});
+  if (suffix) { ctx.save(); ctx.font = `800 ${size}px ${FD}`; const w = ctx.measureText(v).width; ctx.restore();
+    txt(suffix, x + w + 18, y, sufSize, color, {f: FD, w: 800}); }
+}
+
+/* ---------- scenes ---------- */
+const S = [
+{ key:'intro', title:'शुरुआत', dur:9,
+  say:'भारत — दुनिया का सबसे बड़ा लोकतंत्र। पर इसकी सबसे कठिन लड़ाइयाँ सरहद पर नहीं, अपने भीतर लड़ी जा रही हैं।',
+  draw(t, d, g) {
+    const s = back(P(t, .3, 1.2));
+    chakra(W / 2, 330, 110 * s, g * .35, s);
+    ctx.save(); const cw = 1300 * io(P(t, 1, 1.4));
+    ctx.beginPath(); ctx.rect(W / 2 - 650, 420, cw, 220); ctx.clip();
+    txt('भीतर की लड़ाई', W / 2, 590, 170, C.paper, {a: 'center', f: FD, w: 800});
+    ctx.restore();
+    tricolor(W / 2 - 225, 632, 450, 8, io(P(t, 2, 1)));
+    txt('भारत की आंतरिक चुनौतियाँ · एक मोशन ग्राफ़िक्स डॉक्यूमेंट्री', W / 2, 710, 42, C.muted, {a: 'center', w: 500, al: out(P(t, 2.6, .8))});
+  }},
+{ key:'pop', n:1, chapter:'जनसंख्या', title:'जनसंख्या', dur:10, src:'UN World Population Prospects 2024',
+  say:'आज भारत की आबादी लगभग 145 करोड़ है, जो दुनिया में सबसे ज़्यादा है। इतने लोगों के लिए रोटी, रोज़गार और अवसर जुटाना आसान नहीं।',
+  draw(t) {
+    const v = 145 * out(P(t, .6, 3.2));
+    bigCount(num(Math.round(v)), 120, 540, 260, C.saffron, 'करोड़', 96);
+    para('लोग — दुनिया की सबसे बड़ी आबादी', 124, 640, 48, C.paper, 760, {w: 500, al: out(P(t, 1.5, .8))});
+    txt('2023 में चीन को पीछे छोड़ा', 124, 720, 34, C.muted, {w: 500, al: out(P(t, 2.5, .8))});
+    const cols = 16, rows = 10, x0 = 1010, y0 = 280, gx = 50, gy = 56;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const i = r * cols + c, a = out(P(t, .5 + i * .018, .4));
+      const col = hash(i * 3.3) > .9 ? C.saffron : 'rgba(243,239,230,0.75)';
+      person(x0 + c * gx, y0 + r * gy + (1 - a) * 20, 13, col, a);
+    }
+    txt('हर आकृति ≈ 90 लाख लोग', x0 - 10, 860, 26, C.muted, {f: FB, w: 500, al: out(P(t, 4, .6))});
+  }},
+{ key:'pov', n:2, chapter:'गरीबी', title:'गरीबी', dur:11, src:'नीति आयोग, बहुआयामी गरीबी पेपर 2024',
+  say:'गरीबी घटी है। नीति आयोग के अनुसार बहुआयामी गरीबी 29 प्रतिशत से घटकर लगभग 11 प्रतिशत रह गई। फिर भी, हर नौ में से एक भारतीय आज भी इसकी पकड़ में है।',
+  draw(t) {
+    txt('बहुआयामी गरीबी में रहने वाले लोग', 124, 300, 44, C.muted, {w: 500, al: out(P(t, .4, .6))});
+    const v = 24.82 * out(P(t, 3, 2));
+    if (t > 2.8) { bigCount(num(v, 2), 120, 500, 190, C.green, 'करोड़', 80);
+      txt('लोग 2013-14 से 2022-23 के बीच गरीबी से बाहर निकले', 124, 580, 38, C.paper, {w: 500, al: out(P(t, 3.5, .8))}); }
+    if (t > 6) { const a = out(P(t, 6, .8));
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(255,90,90,0.12)'; rr(118, 640, 760, 110, 10); ctx.fill(); ctx.restore();
+      txt('फिर भी हर 9 में से 1 भारतीय', 150, 712, 52, C.red, {f: FD, w: 800, al: a}); }
+    // chart
+    const bx = 1080, base = 820, sc = 15, bw = 200;
+    ctx.strokeStyle = 'rgba(147,160,189,0.25)'; ctx.lineWidth = 2;
+    for (let v2 = 0; v2 <= 30; v2 += 10) { const y = base - v2 * sc;
+      ctx.beginPath(); ctx.moveTo(bx - 60, y); ctx.lineTo(bx + 640, y); ctx.stroke();
+      txt(v2 + '%', bx - 75, y + 10, 26, C.muted, {a: 'right', f: FM, w: 500}); }
+    const bars = [[29.17, '2013-14', C.red, .6], [11.28, '2022-23', C.green, 1.8]];
+    bars.forEach(([val, yr, col, st], i) => {
+      const k = io(P(t, st, 1.2)), h = val * sc * k, x = bx + 40 + i * 340;
+      ctx.fillStyle = col; rr(x, base - h, bw, h, [8, 8, 0, 0]); ctx.fill();
+      txt(num(val * k, 2) + '%', x + bw / 2, base - h - 22, 46, C.paper, {a: 'center', f: FD, w: 800, al: k > 0 ? 1 : 0});
+      txt(yr, x + bw / 2, base + 50, 32, C.muted, {a: 'center', f: FM, w: 500});
+    });
+  }},
+{ key:'job', n:3, chapter:'बेरोज़गारी', title:'बेरोज़गारी', dur:10, src:'ILO–IHD, India Employment Report 2024',
+  say:'रोज़गार सबसे बड़ी चिंता है। अंतरराष्ट्रीय श्रम संगठन की रिपोर्ट कहती है कि भारत के हर 100 बेरोज़गारों में से लगभग 83 युवा हैं।',
+  draw(t) {
+    const k = out(P(t, .8, 3.5));
+    bigCount(num(Math.round(83 * k)), 120, 560, 300, C.saffron, '%', 160);
+    para('भारत के बेरोज़गारों में युवाओं की हिस्सेदारी', 124, 650, 48, C.paper, 720, {al: out(P(t, 1.5, .8))});
+    const x0 = 1120, y0 = 290, g = 56, lit = Math.floor(83 * k);
+    for (let i = 0; i < 100; i++) {
+      const r = Math.floor(i / 10), c = i % 10, a = out(P(t, .3 + i * .008, .3));
+      const x = x0 + c * g, y = y0 + r * g;
+      ctx.save(); ctx.globalAlpha = a;
+      ctx.beginPath(); ctx.arc(x, y, 21, 0, 7);
+      if (i < lit) { ctx.fillStyle = C.saffron; ctx.fill(); }
+      else { ctx.strokeStyle = C.muted; ctx.lineWidth = 3; ctx.stroke(); }
+      ctx.restore();
+    }
+    const la = out(P(t, 4.5, .6));
+    ctx.save(); ctx.globalAlpha = la; ctx.fillStyle = C.saffron; ctx.beginPath(); ctx.arc(1110, 880, 14, 0, 7); ctx.fill();
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(1440, 880, 14, 0, 7); ctx.stroke(); ctx.restore();
+    txt('युवा (15–29 वर्ष)', 1136, 890, 30, C.paper, {al: la, w: 500});
+    txt('अन्य', 1466, 890, 30, C.paper, {al: la, w: 500});
+  }},
+{ key:'cor', n:4, chapter:'भ्रष्टाचार', title:'भ्रष्टाचार', dur:10, src:'Transparency International, CPI 2024',
+  say:'भ्रष्टाचार व्यवस्था को अंदर से खोखला करता है। ट्रांसपेरेंसी इंटरनेशनल के सूचकांक में भारत 180 देशों में 96वें स्थान पर है।',
+  draw(t) {
+    const k = io(P(t, 1, 2.6)), rank = Math.round(lerp(1, 96, k));
+    bigCount(String(rank), 120, 470, 220, C.paper, '/ 180', 90);
+    txt('भ्रष्टाचार धारणा सूचकांक में भारत की रैंक', 124, 540, 40, C.muted, {w: 500, al: out(P(t, .6, .6))});
+    const x0 = 200, x1 = 1720, y = 680, wd = x1 - x0;
+    const gr = ctx.createLinearGradient(x0, 0, x1, 0);
+    gr.addColorStop(0, C.green); gr.addColorStop(.5, '#e7c14a'); gr.addColorStop(1, C.red);
+    const bk = io(P(t, .3, 1));
+    ctx.fillStyle = gr; rr(x0, y, wd * bk, 22, 11); ctx.fill();
+    for (let r = 1; r <= 180; r += (r === 1 ? 19 : 20)) { const x = x0 + (r - 1) / 179 * wd;
+      txt(String(r), x, y + 70, 24, C.muted, {a: 'center', f: FM, w: 500, al: bk}); }
+    txt('सबसे साफ़ छवि', x0, y - 24, 28, C.green, {w: 600, al: bk});
+    txt('सबसे भ्रष्ट छवि', x1, y - 24, 28, C.red, {a: 'right', w: 600, al: bk});
+    const mx = x0 + (rank - 1) / 179 * wd, ma = out(P(t, .9, .4));
+    ctx.save(); ctx.globalAlpha = ma; ctx.fillStyle = C.paper;
+    ctx.beginPath(); ctx.moveTo(mx, y - 4); ctx.lineTo(mx - 18, y - 40); ctx.lineTo(mx + 18, y - 40); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    txt('भारत', mx, y - 56, 34, C.paper, {a: 'center', f: FD, w: 800, al: ma});
+    const sa = out(P(t, 4.2, .8));
+    txt('स्कोर', 1180, 330, 36, C.muted, {w: 500, al: sa});
+    txt(num(Math.round(38 * P(t, 4.2, 1.5))) + ' / 100', 1180, 450, 120, C.saffron, {f: FD, w: 800, al: sa});
+    txt('(0 = बहुत भ्रष्ट, 100 = बहुत साफ़)', 1180, 510, 28, C.muted, {w: 500, al: sa});
+  }},
+{ key:'air', n:5, chapter:'प्रदूषण', title:'प्रदूषण', dur:10, src:'IQAir, World Air Quality Report 2024',
+  say:'हवा ज़हरीली होती जा रही है। दुनिया के 20 सबसे प्रदूषित शहरों में से 13 भारत में हैं।',
+  draw(t, d, g) {
+    const order = [...Array(20).keys()].sort((a, b) => hash(a + 40) - hash(b + 40));
+    const india = new Set(order.slice(0, 13));
+    let lit = 0;
+    const x0 = 1000, y0 = 270, tw = 150, th = 118, gx = 168, gy = 140;
+    for (let i = 0; i < 20; i++) {
+      const r = Math.floor(i / 5), c = i % 5, x = x0 + c * gx, y = y0 + r * gy;
+      const a = out(P(t, .3 + i * .04, .4));
+      const rank = order.indexOf(i), on = india.has(i) && t > 1.6 + rank * .18;
+      if (on) lit++;
+      ctx.save(); ctx.globalAlpha = a;
+      ctx.fillStyle = on ? 'rgba(255,90,90,0.16)' : C.panel; rr(x, y, tw, th, 8); ctx.fill();
+      ctx.strokeStyle = on ? C.red : C.line; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = on ? '#c9a8a0' : '#3a4766';
+      for (let b = 0; b < 5; b++) { const bh = 24 + hash(i * 7 + b) * 54; ctx.fillRect(x + 14 + b * 25, y + th - 12 - bh, 20, bh); }
+      if (on) for (let p = 0; p < 3; p++) {
+        const ph = ((g * .5 + p / 3 + hash(i)) % 1);
+        ctx.fillStyle = `rgba(160,150,140,${.45 * (1 - ph)})`;
+        ctx.beginPath(); ctx.arc(x + 40 + p * 35, y + th - 50 - ph * 60, 10 + ph * 16, 0, 7); ctx.fill();
+      }
+      ctx.restore();
+    }
+    bigCount(String(lit), 120, 540, 300, C.red, '/ 20', 120);
+    para('दुनिया के 20 सबसे प्रदूषित शहरों में से इतने भारत में', 124, 640, 46, C.paper, 760, {al: out(P(t, 1, .8))});
+    const ca = out(P(t, 5, .6));
+    ctx.save(); ctx.globalAlpha = ca; ctx.strokeStyle = C.muted; ctx.lineWidth = 2; rr(124, 760, 250, 56, 28); ctx.stroke(); ctx.restore();
+    txt('PM2.5 के आधार पर', 249, 798, 28, C.muted, {a: 'center', w: 500, al: ca});
+  }},
+{ key:'water', n:6, chapter:'जल संकट', title:'जल संकट', dur:10, src:'नीति आयोग, जल प्रबंधन सूचकांक 2018',
+  say:'पानी का संकट गहराता जा रहा है। लगभग 60 करोड़ भारतीय उच्च से अत्यधिक जल-तनाव में जी रहे हैं।',
+  draw(t, d, g) {
+    const k = out(P(t, .6, 3));
+    bigCount(num(Math.round(60 * k)), 120, 540, 280, C.blue, 'करोड़', 96);
+    para('लोग उच्च से अत्यधिक जल-तनाव में', 124, 640, 48, C.paper, 760, {al: out(P(t, 1.2, .8))});
+    txt('यानी उस समय की लगभग आधी आबादी', 124, 730, 34, C.muted, {w: 500, al: out(P(t, 4.5, .8))});
+    const cx = 1360, cy = 530, h = 580, wd = h * .62;
+    const path = () => { ctx.beginPath(); ctx.moveTo(cx, cy - h / 2);
+      ctx.bezierCurveTo(cx + wd * .15, cy - h * .2, cx + wd / 2, cy, cx + wd / 2, cy + h * .18);
+      ctx.arc(cx, cy + h * .18, wd / 2, 0, Math.PI, false);
+      ctx.bezierCurveTo(cx - wd / 2, cy, cx - wd * .15, cy - h * .2, cx, cy - h / 2); ctx.closePath(); };
+    const sa = back(P(t, .2, 1));
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(sa, sa); ctx.translate(-cx, -cy);
+    path(); ctx.fillStyle = 'rgba(91,140,255,0.08)'; ctx.fill();
+    ctx.save(); path(); ctx.clip();
+    const top = cy - h / 2, bot = cy + h * .18 + wd / 2;
+    const lvl = lerp(top + 40, lerp(top, bot, .78), io(P(t, 1.2, 4.5)));
+    ctx.fillStyle = C.blue; ctx.beginPath(); ctx.moveTo(cx - wd, bot + 10);
+    for (let x = cx - wd; x <= cx + wd; x += 10) ctx.lineTo(x, lvl + Math.sin(x / 40 + g * 3) * 8);
+    ctx.lineTo(cx + wd, bot + 10); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    path(); ctx.strokeStyle = C.blue; ctx.lineWidth = 6; ctx.stroke();
+    ctx.restore();
+  }},
+{ key:'farm', n:7, chapter:'किसान संकट', title:'किसान संकट', dur:11, src:'NCRB, ADSI रिपोर्ट 2022',
+  say:'अन्नदाता परेशान है। वर्ष 2022 में खेती से जुड़े 11,290 लोगों ने अपनी जान ले ली — यानी हर दिन औसतन 31 लोग।',
+  draw(t, d, g) {
+    const k = out(P(t, .6, 3.2));
+    txt(num(Math.round(11290 * k)), 120, 500, 240, C.paper, {f: FD, w: 800});
+    para('किसानों और खेतिहर मज़दूरों ने आत्महत्या की (2022)', 124, 590, 44, C.paper, 760, {al: out(P(t, 1.2, .8))});
+    txt('हर दिन औसतन 31', 124, 730, 54, C.saffron, {f: FD, w: 800, al: out(P(t, 4.5, .8))});
+    const ha = out(P(t, 6, .8));
+    txt('मदद चाहिए? Tele-MANAS 14416 · निःशुल्क, 24×7', 124, 810, 30, C.green, {w: 600, al: ha});
+    // landscape panel
+    const px = 1000, py = 250, pw = 800, ph = 600;
+    ctx.save(); rr(px, py, pw, ph, 14); ctx.clip();
+    const sky = ctx.createLinearGradient(0, py, 0, py + ph * .6);
+    sky.addColorStop(0, '#1b2440'); sky.addColorStop(1, '#4a3424');
+    ctx.fillStyle = sky; ctx.fillRect(px, py, pw, ph);
+    const sunY = lerp(py + 200, py + 380, io(P(t, 0, d)));
+    ctx.fillStyle = 'rgba(255,154,60,0.85)'; ctx.beginPath(); ctx.arc(px + 560, sunY, 70, 0, 7); ctx.fill();
+    const hz = py + 370;
+    ctx.fillStyle = '#3a2a1c'; ctx.fillRect(px, hz, pw, ph);
+    ctx.strokeStyle = 'rgba(160,120,80,0.5)'; ctx.lineWidth = 2;
+    for (let i = -8; i <= 8; i++) { ctx.beginPath(); ctx.moveTo(px + pw / 2 + i * 12, hz); ctx.lineTo(px + pw / 2 + i * 140, py + ph); ctx.stroke(); }
+    for (let i = 0; i < 26; i++) { const x = px + 30 + i * 30, base = py + ph - 20 - hash(i) * 40;
+      const sw = Math.sin(g * 1.6 + i * .6) * 6, hgt = 50 + hash(i + 2) * 40;
+      ctx.strokeStyle = '#a58b4a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, base); ctx.quadraticCurveTo(x + sw, base - hgt / 2, x + sw * 2, base - hgt); ctx.stroke(); }
+    ctx.restore();
+    ctx.strokeStyle = C.line; ctx.lineWidth = 2; rr(px, py, pw, ph, 14); ctx.stroke();
+  }},
+{ key:'health', n:8, chapter:'स्वास्थ्य', title:'स्वास्थ्य', dur:10, src:'राष्ट्रीय स्वास्थ्य लेखा 2021-22',
+  say:'इलाज महँगा है। स्वास्थ्य पर खर्च होने वाले हर 100 रुपये में से लगभग 39 रुपये लोग सीधे अपनी जेब से भरते हैं।',
+  draw(t) {
+    txt('इलाज पर खर्च होने वाले हर', 124, 330, 44, C.muted, {w: 500, al: out(P(t, .4, .6))});
+    txt('₹100 में से', 124, 450, 120, C.paper, {f: FD, w: 800, al: out(P(t, .8, .6))});
+    txt('₹' + num(Math.round(39 * out(P(t, 1.4, 2.4)))), 124, 640, 220, C.saffron, {f: FD, w: 800, al: out(P(t, 1.4, .5))});
+    txt('मरीज़ अपनी जेब से देते हैं', 124, 730, 48, C.paper, {w: 500, al: out(P(t, 2.4, .8))});
+    const cx = 1380, cy = 530, r = 240, k = io(P(t, 1.2, 2.6)), st = -Math.PI / 2;
+    ctx.lineWidth = 80; ctx.lineCap = 'butt';
+    ctx.strokeStyle = 'rgba(91,140,255,0.85)'; ctx.beginPath(); ctx.arc(cx, cy, r, st, st + Math.PI * 2 * out(P(t, .3, 1))); ctx.stroke();
+    ctx.strokeStyle = C.saffron; ctx.beginPath(); ctx.arc(cx, cy, r, st, st + Math.PI * 2 * .394 * k); ctx.stroke();
+    txt(num(39.4 * k, 1) + '%', cx, cy + 30, 96, C.paper, {a: 'center', f: FD, w: 800});
+    const la = out(P(t, 4, .6));
+    ctx.save(); ctx.globalAlpha = la;
+    ctx.fillStyle = C.saffron; ctx.fillRect(1120, 838, 26, 26); ctx.fillStyle = C.blue; ctx.fillRect(1440, 838, 26, 26); ctx.restore();
+    txt('जेब से', 1158, 860, 30, C.paper, {w: 500, al: la});
+    txt('सरकार, बीमा व अन्य', 1478, 860, 30, C.paper, {w: 500, al: la});
+  }},
+{ key:'edu', n:9, chapter:'शिक्षा', title:'शिक्षा', dur:10, src:'ASER 2023 “Beyond Basics”',
+  say:'बच्चे स्कूल तो पहुँचे, पर सीखना पीछे रह गया। 14 से 18 साल का लगभग हर चौथा किशोर कक्षा दो का पाठ भी ठीक से नहीं पढ़ पाता।',
+  draw(t, d, g) {
+    txt('4 में से 1', 120, 520, 220, C.saffron, {f: FD, w: 800, al: out(P(t, .6, .6)), dy: (1 - out(P(t, .6, .6))) * 30});
+    para('किशोर (14–18 वर्ष) कक्षा 2 स्तर का पाठ धाराप्रवाह नहीं पढ़ पाता', 124, 620, 46, C.paper, 760, {al: out(P(t, 1.4, .8))});
+    for (let i = 0; i < 4; i++) {
+      const x = 1080 + i * 200, y = 700, a = out(P(t, .5 + i * .35, .5));
+      const hl = i === 3 && t > 3;
+      person(x, y - (1 - a) * 30, 62, hl ? C.saffron : 'rgba(243,239,230,0.82)', a);
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = hl ? '#7a3d10' : C.blue;
+      rr(x - 50, y - 10, 100, 64, 6); ctx.fill(); ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fillRect(x - 2, y - 10, 4, 64); ctx.restore();
+      if (hl) { const b = Math.sin(g * 4) * 6;
+        txt('?', x, y - 170 + b, 90, C.saffron, {a: 'center', f: FD, w: 800, al: out(P(t, 3, .5))}); }
+    }
+    txt('ASER सर्वे: 28 राज्यों के 28 ज़िलों में लगभग 35,000 युवा', 1000, 860, 26, C.muted, {w: 500, al: out(P(t, 4.5, .6))});
+  }},
+{ key:'just', n:10, chapter:'न्याय में देरी', title:'न्याय में देरी', dur:10, src:'राष्ट्रीय न्यायिक डेटा ग्रिड (NJDG)',
+  say:'न्याय में देरी, न्याय से इनकार है। देश की अदालतों में पाँच करोड़ से ज़्यादा मामले लंबित हैं, और कुछ तो दशकों से चल रहे हैं।',
+  draw(t) {
+    const k = out(P(t, .6, 3));
+    bigCount(num(Math.round(5 * k)) + (k > .99 ? '+' : ''), 120, 540, 300, C.saffron, 'करोड़', 96);
+    para('मामले देश की अदालतों में लंबित', 124, 640, 48, C.paper, 760, {al: out(P(t, 1.2, .8))});
+    txt('कुछ मामले दशकों पुराने', 124, 730, 40, C.muted, {w: 500, al: out(P(t, 4.5, .8))});
+    const base = 830;
+    for (let c = 0; c < 6; c++) {
+      const n = Math.floor((10 + c * 3) * io(P(t, .4 + c * .2, 3)));
+      for (let j = 0; j < n; j++) {
+        const x = 1020 + c * 130 + (hash(c * 50 + j) - .5) * 14, y = base - (j + 1) * 22;
+        ctx.fillStyle = j % 2 ? '#d9c7a1' : '#c4ab7e'; rr(x, y, 110, 20, 3); ctx.fill();
+        ctx.fillStyle = 'rgba(122,90,58,0.6)'; ctx.fillRect(x + 48, y, 6, 20);
+      }
+    }
+    ctx.strokeStyle = C.line; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(990, base + 2); ctx.lineTo(1820, base + 2); ctx.stroke();
+  }},
+{ key:'ineq', n:11, chapter:'असमानता', title:'असमानता', dur:11, src:'Oxfam India, Survival of the Richest 2023',
+  say:'और सबसे गहरी खाई है असमानता। देश की 40 प्रतिशत से ज़्यादा संपत्ति सिर्फ़ एक प्रतिशत सबसे अमीर लोगों के पास है।',
+  draw(t) {
+    txt('सबसे अमीर 1% के पास', 120, 340, 64, C.paper, {f: FD, w: 800, al: out(P(t, .4, .6))});
+    txt(num(40.5 * io(P(t, 2.4, 2.2)), 1) + '% संपत्ति', 120, 470, 120, C.saffron, {f: FD, w: 800, al: out(P(t, 2.2, .5))});
+    const x0 = 360, wd = 1360, bh = 90;
+    const rows = [['आबादी', 1, 560, .8], ['संपत्ति', 40.5, 720, 2.4]];
+    rows.forEach(([lab, pct, y, st]) => {
+      const a = out(P(t, st - .4, .5)), k = io(P(t, st, 2.2));
+      txt(lab, x0 - 30, y + 60, 42, C.paper, {a: 'right', w: 600, al: a});
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = C.panel; rr(x0, y, wd, bh, 10); ctx.fill();
+      ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = C.saffron; rr(x0, y, Math.max(6, wd * pct / 100 * k), bh, 10); ctx.fill(); ctx.restore();
+      txt(`सबसे अमीर ${pct === 1 ? '1%' : num(pct * k, 1) + '%'}`, x0 + Math.max(6, wd * pct / 100 * k) + 20, y + 58, 32, C.paper, {w: 600, al: a});
+    });
+    txt('बाकी 99% लोग', x0 + wd - 20, 618, 30, C.muted, {a: 'right', w: 500, al: out(P(t, .8, .5))});
+  }},
+{ key:'outro', title:'आगे का रास्ता', dur:12,
+  say:'ये चुनौतियाँ बड़ी हैं, पर नामुमकिन नहीं। जागरूक नागरिक, पारदर्शी व्यवस्था और सही नीतियाँ ही बदलाव की चाबी हैं।',
+  draw(t, d, g) {
+    chakra(W / 2, 470, 380, g * .12, .1);
+    const a = out(P(t, .4, 1));
+    txt('बदलाव हमसे शुरू होता है', W / 2, 330, 120, C.paper, {a: 'center', f: FD, w: 800, al: a, dy: (1 - a) * 30});
+    tricolor(W / 2 - 225, 372, 450, 8, io(P(t, 1, 1)));
+    const chips = ['बेहतर शिक्षा', 'युवाओं को रोज़गार', 'पारदर्शिता', 'स्वच्छ हवा', 'जल संरक्षण', 'समय पर न्याय', 'सस्ता इलाज', 'समान अवसर'];
+    ctx.font = `600 44px ${FB}`;
+    const ws = chips.map(c => ctx.measureText(c).width + 70);
+    const rowsC = [chips.slice(0, 4), chips.slice(4)];
+    let idx = 0;
+    rowsC.forEach((row, r) => {
+      const rw = row.reduce((s, c, i) => s + ws[idx + i], 0) + (row.length - 1) * 28;
+      let x = W / 2 - rw / 2;
+      row.forEach((c, i) => {
+        const w = ws[idx + i], k = back(P(t, 2 + (idx + i) * .3, .7)), y = 480 + r * 120;
+        if (k > .01) {
+          ctx.save(); ctx.globalAlpha = clamp(k); ctx.translate(x + w / 2, y + 40); ctx.scale(k, k);
+          rr(-w / 2, -40, w, 80, 40); ctx.fillStyle = 'rgba(18,26,46,0.9)'; ctx.fill();
+          ctx.strokeStyle = (idx + i) % 2 ? C.green : C.saffron; ctx.lineWidth = 3; ctx.stroke();
+          ctx.font = `600 44px ${FB}`; ctx.fillStyle = C.paper; ctx.textAlign = 'center'; ctx.fillText(c, 0, 15);
+          ctx.restore();
+        }
+        x += w + 28;
+      });
+      idx += row.length;
+    });
+  }},
+{ key:'credits', title:'स्रोत', dur:10,
+  say:'ये सभी आँकड़े सार्वजनिक रिपोर्टों से लिए गए हैं। देखने के लिए धन्यवाद।',
+  draw(t) {
+    txt('स्रोत', 120, 150, 72, C.paper, {f: FD, w: 800, al: out(P(t, .3, .6))});
+    tricolor(122, 176, 150, 6, io(P(t, .5, .8)));
+    const list = S.filter(s => s.src);
+    list.forEach((s, i) => {
+      const col = i < 6 ? 0 : 1, row = i % 6, x = 120 + col * 860, y = 270 + row * 92;
+      const a = out(P(t, .8 + i * .12, .5));
+      txt(s.chapter, x, y, 34, C.saffron, {f: FD, w: 800, al: a});
+      txt(s.src, x, y + 40, 28, C.paper, {w: 500, al: a});
+    });
+    txt('आँकड़े प्रकाशित रिपोर्टों के अनुमान हैं; कुछ आँकड़े गोल किए गए हैं।', 120, 860, 28, C.muted, {w: 500, al: out(P(t, 2.5, .6))});
+  }}
+];
+
+/* ---------- timeline ---------- */
+const starts = []; let TOTAL = 0;
+for (const s of S) { starts.push(TOTAL); TOTAL += s.dur; }
+const sceneAt = g => { for (let i = 0; i < S.length; i++) if (g < starts[i] + S[i].dur) return i; return S.length - 1; };
+
+function render(g) {
+  const i = sceneAt(g), s = S[i], t = g - starts[i];
+  ctx.save(); backdrop(g); ctx.restore();
+  ctx.save(); s.draw(t, s.dur, g); ctx.restore();
+  if (s.chapter) chrome(s, t);
+  caption(s, t);
+  fade(t, s.dur);
+}
+
+let G = 0, playing = false, started = false, last = performance.now(), stopped = false;
+let narr = true, speaking = false, spokenFor = -1, curU = null, hiVoice = null;
+
+function pickVoice() {
+  if (!('speechSynthesis' in window)) return;
+  const vs = speechSynthesis.getVoices();
+  hiVoice = vs.find(v => /^hi/i.test(v.lang)) || null;
+}
+if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+else { narr = false; }
+
+function stopSpeech() { if ('speechSynthesis' in window) speechSynthesis.cancel(); speaking = false; curU = null; }
+function speak(i) {
+  spokenFor = i;
+  if (!narr || !('speechSynthesis' in window)) return;
+  stopSpeech();
+  const u = new SpeechSynthesisUtterance(S[i].say);
+  u.lang = 'hi-IN'; if (hiVoice) u.voice = hiVoice; u.rate = .95;
+  u.onend = u.onerror = () => { if (curU === u) speaking = false; };
+  curU = u; speaking = true; speechSynthesis.speak(u);
+}
+
+function frame(now) {
+  if (stopped) return;
+  const dt = Math.min(.1, (now - last) / 1000); last = now;
+  if (playing) {
+    const i = sceneAt(G);
+    if (spokenFor !== i) speak(i);
+    const holdAt = starts[i] + S[i].dur - .55;
+    let ng = G + dt;
+    if (narr && speaking && ng > holdAt && G <= holdAt + .01) ng = Math.max(G, holdAt);
+    G = ng;
+    if (G >= TOTAL) { G = TOTAL - .001; setPlaying(false); }
+  }
+  render(started ? G : 4.2);
+  ui();
+  requestAnimationFrame(frame);
+}
+
+/* ---------- UI ---------- */
+const $ = id => document.getElementById(id);
+const playBtn = $('play'), bigBtn = $('bigPlay'), bar = $('bar'), fill = $('fill'), timeEl = $('time'), narrBtn = $('narr');
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const chapEl = $('chapters');
+S.forEach((s, i) => {
+  const tk = document.createElement('div'); tk.className = 'tick'; tk.style.left = (starts[i] / TOTAL * 100) + '%'; bar.appendChild(tk);
+  const li = document.createElement('li'), b = document.createElement('button');
+  b.innerHTML = `<small>${fmt(starts[i])}</small><span>${s.title}</span>`;
+  b.addEventListener('click', () => seek(starts[i] + .01, true));
+  li.appendChild(b); chapEl.appendChild(li);
+});
+const chapBtns = [...chapEl.querySelectorAll('button')];
+let lastScene = -1;
+function ui() {
+  fill.style.width = (G / TOTAL * 100) + '%';
+  timeEl.textContent = `${fmt(G)} / ${fmt(TOTAL)}`;
+  const i = sceneAt(G);
+  if (i !== lastScene) { chapBtns.forEach((b, k) => b.classList.toggle('on', k === i)); lastScene = i; }
+}
+function setPlaying(p) {
+  playing = p; if (p) { started = true; bigBtn.hidden = true; if (G >= TOTAL - .01) G = 0; }
+  else { stopSpeech(); spokenFor = -1; }
+  playBtn.textContent = p ? '⏸ रोकें' : '▶ चलाएँ';
+  playBtn.setAttribute('aria-label', p ? 'रोकें' : 'चलाएँ');
+}
+function seek(g, play) {
+  started = true; bigBtn.hidden = true;
+  G = clamp(g, 0, TOTAL - .001); stopSpeech(); spokenFor = -1;
+  if (play) setPlaying(true);
+}
+playBtn.onclick = () => setPlaying(!playing);
+bigBtn.onclick = () => setPlaying(true);
+$('prev').onclick = () => { const i = sceneAt(G); seek(G - starts[i] > 1.5 ? starts[i] : starts[Math.max(0, i - 1)], playing); };
+$('next').onclick = () => { const i = sceneAt(G); if (i < S.length - 1) seek(starts[i + 1], playing); };
+narrBtn.onclick = () => {
+  narr = !narr && ('speechSynthesis' in window);
+  narrBtn.setAttribute('aria-pressed', String(narr));
+  if (!narr) stopSpeech(); else spokenFor = -1;
+};
+if (!narr) { narrBtn.setAttribute('aria-pressed', 'false'); narrBtn.disabled = true; }
+function barSeek(e) { const r = bar.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * TOTAL, playing); }
+bar.addEventListener('pointerdown', e => { barSeek(e); bar.setPointerCapture(e.pointerId); });
+bar.addEventListener('pointermove', e => { if (e.buttons) barSeek(e); });
+bar.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { seek(G + 5, playing); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { seek(G - 5, playing); e.preventDefault(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.target.closest('button,input,[role="slider"]')) return;
+  if (e.code === 'Space') { e.preventDefault(); setPlaying(!playing); }
+  if (e.key === 'ArrowRight') $('next').click();
+  if (e.key === 'ArrowLeft') $('prev').click();
+});
+
+/* export hooks (used for rendering the MP4 offline) */
+window.__doc = { total: TOTAL, render: g => render(g), stop: () => { stopped = true; stopSpeech(); },
+  scenes: S.map((s, i) => ({ start: starts[i], dur: s.dur, say: s.say })) };
+
+const fontsReady = document.fonts ? Promise.all([
+  document.fonts.load(`800 60px 'Baloo 2'`, 'भारत'), document.fonts.load(`500 40px 'Hind'`, 'भारत'),
+  document.fonts.load(`600 40px 'Hind'`, 'भारत'), document.fonts.load(`500 20px 'JetBrains Mono'`, '01')
+]).catch(() => {}) : Promise.resolve();
+fontsReady.then(() => { window.__doc.ready = true; });
+requestAnimationFrame(frame);
+})();
+</script>
