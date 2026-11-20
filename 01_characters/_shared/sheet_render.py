@@ -454,8 +454,8 @@ def g_powers(St):
         if key == 'invisibility':
             # base + fully refractive pass; the composer dissolves between them per stage
             clear_fx(); fn('full', M); save('power_invisibility_base.png', cam)
+            # same dark world as the base pass so the dissolve only changes the body, never the background
             bpy.context.view_layer.material_override = vx.invisibility_material('MAT_FX_INVIS', PAL.get('power_glow', '#9A7BFF'))
-            ck.world_color('#1B2230', .5)
             save('power_invisibility_glass.png', cam)
             bpy.context.view_layer.material_override = None
             ck.world_color('#0B0E14', .15)

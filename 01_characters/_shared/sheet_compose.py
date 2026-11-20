@@ -304,15 +304,15 @@ def p_powers():
 def p_extras():
     if not has('cost_A_fracture_veins.png'):
         return None
-    pg = Page('borrowed_power_cost', 'Borrowed-power life cost — 3 ALTERNATIVES for approval (U-08)', 1300)
+    pg = Page('borrowed_power_cost', 'Borrowed-power life cost — 3 ALTERNATIVES for approval (U-08)', 1120)
     alts = [('cost_A_fracture_veins.png', 'A · Fracture veins', 'Glowing red cracks spread over the skin with every borrowed power; more cost = more cracks.'),
             ('cost_B_ash_drain.png', 'B · Ash drain', 'Skin greys to ash and eyes dim while the borrowed power runs; colour returns slowly.'),
             ('cost_C_core_siphon.png', 'C · Core siphon', 'Energy is visibly pulled out of his chest core into the power; the core dims and flickers.')]
     x = 50
     for f, t, d in alts:
-        im = fit(bloom(raw(f)), h=900); pg.paste(im, x, 130)
-        pg.text(x, 1060, t, 28, True, ACC); pg.wrap(x, 1100, d, 52, 20, DIM)
-        x += im.width + 60
+        im = fit(bloom(raw(f)), h=760); pg.paste(im, x, 130)
+        pg.text(x, 920, t, 28, True, ACC); pg.wrap(x, 960, d, 46, 20, DIM)
+        x += im.width + 50
     pg.text(x + 20, 140, 'Story rule (confirmed):', 24, True, WARN)
     pg.wrap(x + 20, 180, 'Borrowing a power costs Saithan part of his own life. The exact visual is NOT decided — '
             'choose A, B, C or a mix.', 30, 21)
