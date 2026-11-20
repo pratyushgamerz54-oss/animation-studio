@@ -100,8 +100,8 @@ def p_turn():
 
 
 def p_poses():
-    pg = Page('poses_measurements', 'T-pose · A-pose · Neutral + measurement guide', 1080)
-    H = 760
+    pg = Page('poses_measurements', 'T-pose · A-pose · Neutral + measurement guide', 1000)
+    H = 660
     t = fit(raw('pose_T.png'), h=H); pg.paste(t, 50, 130, 'T-pose (modelling & rigging)')
     a = fit(raw('pose_A.png'), h=H); pg.paste(a, 50 + t.width + 40, 130, 'A-pose (deformation checks)')
     n = raw('pose_NEUTRAL.png')
@@ -136,22 +136,23 @@ def p_poses():
         ('Chest width', f"{SPEC['chest_width_m'] * 100:.0f} cm", f"{MEAS['chest_width_m'] * 100:.1f} cm"),
         ('Hip width', '—', f"{MEAS['hip_width_m'] * 100:.1f} cm"),
         ('Arm length', f"{SPEC['arm_length_m'] * 100:.0f} cm", f"{MEAS['arm_length_m'] * 100:.1f} cm"),
-        ('Leg length (hip→floor)', f"{SPEC['leg_length_m'] * 100:.0f} cm", f"{MEAS['leg_length_m'] * 100:.1f} cm"),
-        ('Hand length', f"{SPEC['hand_length_m'] * 100:.0f} cm", 'by build (palm 8.5 + finger 10)'),
-        ('Foot length', f"{SPEC['foot_length_m'] * 100:.0f} cm", 'by build'),
+        ('Leg (hip→floor)', f"{SPEC['leg_length_m'] * 100:.0f} cm", f"{MEAS['leg_length_m'] * 100:.1f} cm"),
+        ('Hand length', f"{SPEC['hand_length_m'] * 100:.0f} cm", '19 cm'),
+        ('Foot length', f"{SPEC['foot_length_m'] * 100:.0f} cm", '26 cm'),
     ]
-    pg.text(tx, 195, f"{'':26}{'SPEC':>12}{'MEASURED (model)':>22}", 20, mono=True, color=DIM)
+    pg.text(tx, 195, f"{'':20}{'SPEC':>10}{'MODEL':>11}", 20, mono=True, color=DIM)
     for i, (k, a_, b_) in enumerate(rows):
-        pg.text(tx, 230 + i * 38, f'{k:26}{a_:>12}{b_:>22}', 21, mono=True)
+        pg.text(tx, 230 + i * 38, f'{k:20}{a_:>10}{b_:>11}', 21, mono=True)
     y = 230 + len(rows) * 38 + 30
     pg.text(tx, y, 'BUILD', 26, True, ACC)
-    pg.text(tx, y + 40, SPEC['body_type'], 21)
-    pg.text(tx, y + 80, 'SILHOUETTE', 26, True, ACC)
+    pg.text(tx, y + 40, 'Lean athletic sprinter: long legs,', 21)
+    pg.text(tx, y + 66, 'narrow waist, defined shoulders', 21)
+    pg.text(tx, y + 104, 'SILHOUETTE', 26, True, ACC)
     for j, line in enumerate(['Upward-swept hair spikes + high armoured collar', '+ angular shoulder plates',
-                              '= forward-leaning "arrow" read, distinct from Hero 1']):
-        pg.text(tx, y + 120 + j * 32, line, 21)
-    pg.text(tx, y + 240, 'Measured values are read from the evaluated Blender', 19, color=DIM)
-    pg.text(tx, y + 266, 'mesh by render_sheet.py (qc/measurements.json).', 19, color=DIM)
+                              '= forward-leaning "arrow" shape']):
+        pg.text(tx, y + 144 + j * 30, line, 20)
+    pg.text(tx, y + 244, 'MODEL = measured on the Blender mesh', 19, color=DIM)
+    pg.text(tx, y + 268, '(qc/measurements.json)', 19, color=DIM)
     return pg
 
 
@@ -267,7 +268,7 @@ def power_img(n, after=None):
 
 
 def p_powers():
-    pg = Page('powers', 'Power activation design + VFX reference', 2140)
+    pg = Page('powers', 'Power activation design + VFX reference', 2200)
     stages = ['normal', 'activation', 'full', 'deactivation']
     rows = [('SUPER SPEED', 'speed', 'Trails + afterimages + footstep sparks', 'hand_speed.png'),
             ('LIGHTNING', 'lightning', 'Arcs along arms, palm discharge, body aura', 'hand_lightning.png'),
