@@ -1,9 +1,11 @@
-"""RAMARAT — Headmaster. POWERS NOT CONFIRMED (U-03): no power effects are created.
+"""RAMARAT — Headmaster. CONFIRMED (Director, 20 Nov): has ALL the heroes' powers (Fire, Magical Portal, Super Speed,
+Lightning) with no limit — "can do anything". His energy is golden-white so it reads as master-level control.
 No backstory/dialogue invented. Visual = PROPOSAL from the Director reference."""
 AX = lambda c: abs(c.x)
 CFG = {
     'id': 'RAMARAT', 'name': 'Ramarat', 'role': 'Headmaster',
-    'powers': [], 'power_rows': [],
+    'powers': ['Fire', 'Magical Portal', 'Super Speed', 'Lightning', 'Unlimited (all hero powers)'],
+    'power_rows': ['fire', 'portal', 'speed', 'lightning'],
     'reference': 'reference/ramarat_ref_01.png',
     'ref_notes': 'Taken: elderly man, long white hair swept back, long white beard, royal-blue robe with silver/gold '
                  'embroidery bands, shoulder mantle, red sash with hanging tail, grey-blue trousers, bare feet.',
@@ -18,7 +20,10 @@ CFG = {
     'pal': {
         'skin': '#C9A38A', 'skin_tint': '#C07A6A', 'lip': '#9A6A5C',
         'hair': '#E6E4DF', 'hair_tip': '#F5F4F0', 'brow': '#E8E6E1',
-        'eye': '#5D7A92', 'eye_dark': '#25384A', 'power_eye': '#5D7A92',
+        'eye': '#5D7A92', 'eye_dark': '#25384A', 'power_eye': '#FFE7A3',
+        'power_glow': '#FFE7A3', 'power_core': '#FFFFFF', 'speed_trail': '#FFD36B',
+        'fire_core': '#FFF6D0', 'fire_mid': '#FFB23F', 'fire_outer': '#C2410C',
+        'portal_rim': '#FFE7A3', 'portal_deep': '#1E2A6E',
         'robe': '#2346B8', 'trim': '#C9CED6', 'gold': '#C9A24A', 'sash': '#B3202A', 'trousers': '#7E8AA6', 'inner': '#D6D8DC',
     },
     'hair': {'style': 'long_back', 'drop': .26, 'hairline': {'front': .55, 'side': .15, 'back': -.6}, 'density': 380},
