@@ -40,8 +40,12 @@
 8. **Production pipeline** (`_shared/production.py`): UV + layouts, baked textures, IK/FK (hand/foot IK, poles,
    switches, COG), face controls (expressions, phonemes, jaw_open, blink, wide, eye aim), GLB/FBX export + re-import, QC report.
    Pratyush par test: sab checks PASS.
-9. **Batch render** saari design sheets: Hero 1 ✅, Pratyush ✅, Saithan ✅ (8 pages + life-cost A/B/C), baaki chal rahe.
+9. **Batch render** saari design sheets: saare 7 ✅ (Saithan 8 pages + life-cost A/B/C). Fix re-render batch 2 ✅.
 10. **Director rules:** final production mein saare VFX HIGH quality; memory reset ke baad bhi sab yaad rahe (ye log + STATUS.md).
+
+11. **Production v003 saare 7 ka DONE (20 Nov 19:00):** UV, baked textures, IK/FK rig, face controls, GLB/FBX, QC — sab PASS.
+    QC contact sheets `<name>/qc/<NAME>_qc_tests.png`. Known issues K-01..K-04 in PRODUCTION_INVENTORY §7
+    (robe stiff in action poses → cloth sim at scene stage). **Stage 1 complete; Director approval ka intezaar.**
 
 ## Director se jawab chahiye (pending)
 - Hero 1 ka naam · saare designs approve/badlav · Saithan life-cost: A (cracks) / B (ash) / C (core siphon)

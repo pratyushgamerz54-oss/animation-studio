@@ -1,6 +1,6 @@
 {
   "character": "PRATYUSH",
-  "started": "2026-11-20 14:54",
+  "started": "2026-11-20 18:35",
   "tests": {
     "uv_present_all_meshes": true,
     "textures_baked": 128,
@@ -53,8 +53,8 @@
     "mouth_shape_keys": 19,
     "phonemes_present": true,
     "export": {
-      "glb_mb": 2.82,
-      "fbx_mb": 9.25
+      "glb_mb": 9.71,
+      "fbx_mb": 16.18
     },
     "glb_reimport": {
       "objects": 34,

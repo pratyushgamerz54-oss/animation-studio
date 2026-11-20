@@ -1,6 +1,6 @@
 # QC REPORT — Pratyush (PRATYUSH)
 
-Generated 2026-11-20 15:00 by `_shared/production.py`.
+Generated 2026-11-20 18:41 by `_shared/production.py`.
 
 ## Automated checks
 
@@ -13,18 +13,18 @@ Generated 2026-11-20 15:00 by `_shared/production.py`.
 | IK/FK rest pose unchanged + IK follows target | ✅ PASS | follow error 0.02 mm |
 | Phoneme shape keys (10) | ✅ PASS | 19 mouth keys |
 | GLB export + re-import | ✅ PASS | {'objects': 34, 'armatures': 1, 'meshes': 33, 'bones': 63, 'shape_key_meshes': 2} |
-| FBX export | ✅ PASS | 9.25 |
+| FBX export | ✅ PASS | 16.18 |
 
 ## Render-based tests (images in `design/raw/`, review by eye)
 
 | Test | Image |
 |---|---|
 | Turnaround consistency (6 views) | `turn_front.png` ✅ rendered |
-| Joint / elbow / knee / finger deformation pose | ⬜ not rendered |
-| Run / jump / land / turn / fight poses | ⬜ not rendered |
+| Joint / elbow / knee / finger deformation pose | `test_deform_test.png` ✅ rendered |
+| Run / jump / land / turn / fight poses | `test_run.png` ✅ rendered |
 | Facial expressions | `expr_00_neutral.png` ✅ rendered |
 | Eye movement + blink | `expr_10_blink.png` ✅ rendered |
-| Lip-sync phonemes | ⬜ not rendered |
+| Lip-sync phonemes | `lipsync_PH_A.png` ✅ rendered |
 | Power activation renders | `power_normal.png` ✅ rendered |
 
 ## Rig

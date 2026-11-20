@@ -1,124 +1,121 @@
-# PRATYUSH — Hero 2 — Design Sheet v1 (PROPOSAL)
+# PRATYUSH — Hero 2 / main second lead — Design Sheet v1 (PROPOSAL)
 
-> **Status: awaiting Director approval.** Confirmed by Director: name, role (Hero 2 / main second lead),
-> powers (Super Speed, Magical Portal, Lightning) and the reference image `reference/pratyush_ref_01.png`.
-> Everything else (age, skin tone, hair, costume, colours) is a **proposal** (inventory U-04).
+> **Status: awaiting Director approval.** Confirmed: name (Pratyush), role, powers (Super Speed, Magical Portal, Lightning) and the reference. Everything else is a proposal.
 
-Sheet pages (3D renders of the real Blender model `blend/pratyush_v001.blend`):
+## Sheet pages (renders of the real Blender model)
 
-| Page | File |
-|---|---|
-| 1 Turnaround: front, 3/4 front, right, 3/4 back, back, left | `PRATYUSH_sheet_01_turnaround.png` |
-| 2 T-pose, A-pose, neutral + measurement guide | `PRATYUSH_sheet_02_poses_measurements.png` |
-| 3 Face front/3/4/side, hairstyle back, eye detail | `PRATYUSH_sheet_03_face.png` |
-| 4 Ten expressions + blink | `PRATYUSH_sheet_04_expressions.png` |
-| 5 Costume & accessories breakdown | `PRATYUSH_sheet_05_costume.png` |
-| 6 Colour palette (HEX + RGB) | `PRATYUSH_sheet_06_palette.png` |
-| 7 Powers: normal → activation → full → deactivation, hand FX, eyes | `PRATYUSH_sheet_07_powers.png` |
+- `PRATYUSH_sheet_01_turnaround.png`
+- `PRATYUSH_sheet_02_poses_measurements.png`
+- `PRATYUSH_sheet_03_face.png`
+- `PRATYUSH_sheet_04_expressions.png`
+- `PRATYUSH_sheet_05_costume.png`
+- `PRATYUSH_sheet_06_palette.png`
+- `PRATYUSH_sheet_07_powers.png`
 
-## 1. Reference interpretation
-Taken from the reference: sleek **armoured full-body speed suit**, full gloves, armoured boots,
-**crackling lightning hugging the body**, sprint pose, athletic build.
-Deliberately **changed to stay original**: colours (navy / electric blue instead of red / gold),
-emblem (an upward "speed chevron" with a lightning notch — not a bolt-in-circle), **no cowl / mask /
-ear wings**, face fully visible for acting, own spiky hairstyle with a blue streak.
+## Reference interpretation
 
-## 2. Identity (proposal)
-- Age: 17 (proposed) · Height 175 cm (without hair) · 7.5 heads
-- Build: Lean athletic sprinter build — long legs, narrow waist, defined shoulders
-- Silhouette: Sharp upward-swept hair spikes + high collar + angular shoulder plates = forward-leaning "arrow"
+Reference: `reference/pratyush_ref_01.png`
 
-## 3. Colour palette (single source: `pratyush_spec.py` → same values drive the materials)
+Taken: sleek armoured full-body speed suit, gloves, armoured boots, crackling lightning, sprint pose. Kept original: navy / electric-blue colours (not red/gold), chevron emblem (no bolt-in-circle), no cowl.
+
+## Identity (proposal)
+
+- Age: 17 (proposed)
+- Build: Lean athletic sprinter: long legs, narrow waist, defined shoulders
+- Silhouette: Upward-swept hair spikes + high armoured collar + angular shoulder plates
+
+## Colour palette (same values drive the 3D materials)
+
 | Name | HEX | RGB |
 |---|---|---|
 | skin | `#B07650` | 176, 118, 80 |
+| skin_tint | `#B5614A` | 181, 97, 74 |
 | lip | `#8E5141` | 142, 81, 65 |
 | hair | `#17120F` | 23, 18, 15 |
 | hair_streak | `#2EA8FF` | 46, 168, 255 |
+| brow | `#17120F` | 23, 18, 15 |
 | eye | `#5A361F` | 90, 54, 31 |
 | eye_dark | `#2A170C` | 42, 23, 12 |
+| power_eye | `#5BE0FF` | 91, 224, 255 |
 | suit | `#16243F` | 22, 36, 63 |
 | armor | `#5C6B80` | 92, 107, 128 |
-| boot | `#1E2C4A` | 30, 44, 74 |
 | accent | `#2EA8FF` | 46, 168, 255 |
-| under | `#262931` | 38, 41, 49 |
-| shoe_sole | `#2EA8FF` | 46, 168, 255 |
+| boot | `#1E2C4A` | 30, 44, 74 |
+| sole | `#2EA8FF` | 46, 168, 255 |
 | glove | `#141519` | 20, 21, 25 |
-| belt | `#1D1E23` | 29, 30, 35 |
 | metal | `#B7C0CC` | 183, 192, 204 |
 | power_glow | `#4FD8FF` | 79, 216, 255 |
 | power_core | `#F2FBFF` | 242, 251, 255 |
-| power_eye | `#5BE0FF` | 91, 224, 255 |
 | portal_rim | `#6FE7FF` | 111, 231, 255 |
 | portal_deep | `#0A2A5A` | 10, 42, 90 |
 | speed_trail | `#2EA8FF` | 46, 168, 255 |
 
-## 4. Costume breakdown
-| Layer | Item | Material / fabric | Cloth simulation |
-|---|---|---|---|
-| Main | Armoured speed suit (full body, wrist→ankle) | 4-way stretch technical knit, navy, emissive electric-blue piping (arms, sides, legs, chest V) | None — skin-tight, skinned to rig; corrective shapes at elbows/knees |
-| Inner | Under-layer | charcoal `#262931` (reserved for side panels in v2) | None |
-| Outer | Chest plate, 2 pauldrons, 2 knee guards, high collar | moulded composite, gunmetal-blue metallic 0.65, glowing edge | Rigid |
-| Shoes | Armoured sprint boots (to mid-calf) | synthetic leather `#1E2C4A`, electric-blue sole & bands | Rigid |
-| Gloves | Full-finger grip gloves | `#141519` synthetic | Skinned per finger |
-| Belt | Plate belt + silver buckle | gunmetal + brushed silver | Rigid |
-| Ornament | Chest emblem: speed chevron | emissive `#4FD8FF` | Rigid |
-| Special equipment | 2 speed bracers with energy cores | brushed silver + emissive core | Rigid |
+## Costume & accessories breakdown
 
-## 5. Body proportions
-Spec vs. **measured on the model** (`qc/measurements.json`) is printed on sheet page 2.
-Height 175 cm spec / 174.4 cm measured · head 23.1 cm · 7.54 heads · shoulders 51.5 cm (outer deltoids) ·
-chest 32.8 cm · hips 31.3 cm · arm 73.8 cm · leg 89.4 cm · hand 19 cm · foot 26 cm.
+| Item | Parts (objects) | Fabric | Material | Simulation |
+|---|---|---|---|---|
+| Main: armoured speed suit | CHAR_PRATYUSH_SUIT | Stretch technical knit (4-way) | #16243F rough .45 sheen .35; piping #2EA8FF emissive | Skin-tight: skinned, no sim; corrective shapes elbows/knees |
+| Outer: chest plate, pauldrons, knees, collar | CHAR_PRATYUSH_CHEST_PLATE, CHAR_PRATYUSH_PAULDRON_L, CHAR_PRATYUSH_PAULDRON_R, CHAR_PRATYUSH_KNEE_L, CHAR_PRATYUSH_KNEE_R, CHAR_PRATYUSH_COLLAR, CHAR_PRATYUSH_EMBLEM | Moulded composite plates | #5C6B80 metallic .65 rough .32; edge light #2EA8FF | Rigid, skinned 1:1 |
+| Shoes: armoured sprint boots | CHAR_PRATYUSH_BOOT_L, CHAR_PRATYUSH_BOOT_R | Armoured synthetic leather | #1E2C4A; sole & bands #2EA8FF | Rigid |
+| Gloves: full-finger grip | CHAR_PRATYUSH_GLOVE_L | Grip synthetic | #141519 rough .45 | Skinned per finger |
+| Belt + buckle | CHAR_PRATYUSH_BELT, CHAR_PRATYUSH_BELT_BUCKLE | Plate belt | #5C6B80 / #B7C0CC metal | Rigid |
+| Special equipment: speed bracers | CHAR_PRATYUSH_BRACER_L, CHAR_PRATYUSH_BRACER_CORE_L | Brushed metal + energy core | #B7C0CC metal; core #4FD8FF emission | Rigid on forearm |
+| Hair (cap + clumps) | CHAR_PRATYUSH_HAIR, CHAR_PRATYUSH_HAIR_CAP | Stylised clump geometry | #17120F rough .42 sheen .5 | Optional spring bones |
 
-## 6. Power activation design (confirmed powers only)
-| | Super Speed | Lightning | Magical Portal |
-|---|---|---|---|
-| Normal | No glow; bracer cores dim | same | same |
-| Activation | Eyes glow 3, cores brighten, short trails at legs, sparks at feet | Small arcs crawl over the hand | Portal opens at 25 %, rune ring at palm |
-| Eyes | Iris → `#5BE0FF` glow | same, strongest | same |
-| Body energy | Speed trails from limbs (`#2EA8FF`) | Arcs along arms + body aura (`#4FD8FF` glow, `#F2FBFF` core) | Hair streak + cores glow |
-| Hand / fingers | Streaks off forearm & hand | Arcs jump finger-to-finger, palm discharge | Double rune ring in front of palm |
-| Aura | Sparks along trail anchors | Crackling arcs over body | Light from portal rim |
-| Trails | Long horizontal trails + 2 afterimages | — | Spark ring around rim |
-| Intensity | activation → full → deactivation all parameterised | bolt radius/branches/glow | openness 0–1, intensity 0–1 |
-| Deactivation | Trails shrink, eyes fade to 1.2 | Residual sparks at fingertips | Portal shrinks to 35 % and dims |
+## Face
 
-Keeping powers distinct: **speed = long horizontal streaks**, **lightning = jagged white-blue branching arcs**,
-**portal = round swirling disc with white rim**.
-VFX are reusable functions in `../_shared/vfxkit.py` (`speed_trails`, `lightning`, `aura_arcs`, `portal`,
-`rune_ring`), each with timing/intensity parameters.
+- **EYES:** Dark-brown iris #5A361F, almond lids; glow #5BE0FF when powered
+- **BROWS:** Straight, slightly raised outer end, tapered; near-black
+- **NOSE / LIPS:** Straight bridge, rounded tip, defined alae; medium lips with philtrum
+- **JAW / CHIN:** Defined jawline and gonial angle, firm rounded chin; high cheekbones
+- **PROPORTIONS:** Eye line at 1/2 head height, eye spacing = 1 eye width, mouth at 2/3 of lower face
+- **HAIR:** Near-black spiky ribbon clumps swept up & back; 1 electric-blue streak in the fringe
 
-## 7. Technical 3D specification
-- **Topology:** body built as an all-quad cage (Skin modifier, then subdivided) with ring edge loops
-  around every limb and joint; anatomy added by a code "sculpt" pass. Head = all-quad sphere-derived mesh.
-  Render-time Subdivision Surface level 2.
-- **Edge loops:** rings at shoulder, elbow, wrist, each finger knuckle, hip, knee, ankle (from the joint skeleton).
-- **Facial topology (v1):** modular stylised face kit — eyeball spheres, upper/lower lid shells, brow strips,
-  mouth (interior + upper/lower lip grids) projected onto the head surface.
-- **Hands:** 5 fingers, 3 segments each, thumb from the wrist.
-- **Hair:** 100+ flattened tapered ribbon clumps + scalp cap (real geometry).
-- **Clothing:** separate meshes derived from the body surface (offset + solidify), so they fit exactly.
-- **Rig (v1 pose rig):** 53 deform bones — root, pelvis, 3 spine, neck, head, clavicles, arms, hands,
-  15 finger bones per hand, legs, feet, toes. Automatic heat weights on the body; clothing inherits the same weights.
-- **Facial blendshapes:** mouth & brows have shape keys for 10 expressions + **10 phonemes
-  (A, E, I, O, U, M/B/P, F/V, L, W, Rest)** already built; lids/eyes driven by rotation.
-- **Materials:** Principled PBR (skin with subsurface, cloth with sheen, metal, emissive energy).
+Expressions (11): neutral, happy, angry, sad, fear, shocked, confident, evil, serious, crying, blink
+Phonemes: A, E, I, O, U, M/B/P, F/V, L, W, Rest (shape keys on CHAR_PRATYUSH_MOUTH)
 
-## 8. Production status — honest
-| Deliverable | Status |
-|---|---|
-| Design sheet v1 (7 pages) | ✅ rendered from the real model — **awaiting approval** |
-| `.blend` with body, head, face kit, hair, clothing, accessories | ✅ exists, rebuilds from `build_pratyush.py` |
-| Pose rig + auto weights, T/A/neutral/dash/cast poses | ✅ works (used for the sheet) |
-| Expression + phoneme shape keys | ✅ built (lip-sync test not run yet) |
-| VFX references for 3 powers | ✅ rendered |
-| UV unwrap + baked texture maps | ⬜ not started (materials are procedural now) |
-| Rigify production rig with IK/FK, poles, controls | ⬜ not started (Stage 6) |
-| Real jaw/cheek facial deformation | ⬜ v1 mouth opens without moving the jaw |
-| Deformation tests (elbows, knees, fingers), run/jump/land tests | ⬜ not run |
-| FBX/GLB export | ⬜ not started |
+## Body proportions (measured on the model, `qc/measurements.json`)
 
-## 9. Known v1 limitations
-- Face is stylised and simpler than the reference render; close-up realism needs a further sculpt pass.
-- Mouth is a projected face-kit; the jaw does not open yet.
-- Materials are procedural (no image textures yet); UVs come in Stage 5.
+- height no hair: 174.4 cm
+- height total: 184.3 cm
+- head height: 21.7 cm
+- head-to-body ratio: 8.05 heads
+- shoulder width: 52.3 cm
+- chest width: 32.8 cm
+- hip width: 31.2 cm
+- leg length: 89.4 cm
+- arm length: 73.8 cm
+- hand length: 20.3 cm
+- foot length: 22.0 cm
+
+## Powers
+
+| Power | Normal | Activation | Full | Deactivation |
+|---|---|---|---|---|
+| Super Speed | no effect | Eyes glow, bracer/core brighten, short trails at the legs, sparks at the feet | Long horizontal streaks from every limb + 2 tinted afterimages + crackle | Trails shrink, eyes fade |
+| Lightning | no effect | Small arcs crawl over the hand | Branching bolt from the palm + arcs along the arms and body | Residual sparks at the fingertips |
+| Magical Portal | no effect | Portal opens at 25 % in front of the palm, rune ring on the hand | Full swirl disc, white-hot rim, spark ring, portal light | Portal shrinks to 35 % and dims |
+
+Eye transformation: iris emission ramps normal → activation → full (shared by all powers).
+Reusable VFX functions live in `../../_shared/vfxkit.py` (intensity / openness / length parameters).
+
+## Technical 3D specification
+
+- Topology: all-quad body cage (skin modifier + subdivision) with ring edge loops at every joint; code sculpt pass for anatomy; all-quad head (sculpted sphere, 26 cuts) with jawline, brow ridge, nose, philtrum, nasolabial folds.
+- Hands: 5 fingers × 3 segments; feet with heel/ball/toe.
+- Clothing: separate meshes generated from the body surface (offset + solidify) → exact fit; robes/capes are lofted sheets.
+- UVs: smart-projected per mesh; layouts in `uv/`. Textures: baked BaseColor / Roughness / Normal / Emission in `textures/`.
+- Rig: deform skeleton (pelvis, 3 spine, neck, head, clavicles, arms, 15 finger bones per hand, legs, feet, toes) + root, COG, hand/foot IK targets with pole targets and IK/FK switches; eye-aim control.
+- Facial rig: shape keys for every expression + 10 phonemes, `jaw_open`, blink / wide-eye per side, eye look; all driven by properties on the `root` pose bone.
+
+## Production status
+
+See `qc/QC_REPORT.md` for the automated checks and test renders.
+- `.blend`: `blend/pratyush_v002.blend` (design), `blend/pratyush_v003.blend` (production rig + controls)
+- Exports: `export/pratyush.glb` (9.71 MB), `export/pratyush.fbx` (16.18 MB)
+
+## Known limitations
+
+- Faces are stylised and code-sculpted; close-up photoreal detail needs a manual sculpt pass.
+- Jaw opens through mouth shape keys; the chin does not move.
+- Cloth simulation is specified but not simulated yet.

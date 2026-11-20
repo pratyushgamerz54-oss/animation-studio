@@ -1,12 +1,11 @@
-# STATUS — last updated 2026-11-20 18:20
+# STATUS — last updated 2026-11-20 19:15
 
 ## Ab kya chal raha hai
-- Pehla batch DONE: saare 7 characters ki design sheet v1 ban gayi (Hero1, Pratyush, Saithan 8pg, Soul, Max, Yayaki, Ramarat).
-- Doosra batch DONE + pushed (Hero1, Pratyush, Saithan, Soul, Max fixes). Ramarat re-render (gehra robe) ⏳ 18:16 se.
-- Uske baad apne aap: `01_characters/_shared/production_all.sh` (UV, 1K bake, IK/FK, face controls, GLB/FBX, QC, DESIGN_SHEET.md).
-- NOTE: `pgrep -f` waala waiter khud ko match karta hai — waiter mein pgrep mat use karo, seedha chain chalao.
-- Session restart hua to: `01_characters/_shared/render_all.sh hero1 pratyush saithan soul max ramarat` (jo bache)
-  phir `01_characters/_shared/production_all.sh`.
+- ✅ STAGE 1 (characters) ka saara kaam DONE: 7 design sheets + production v003 (UV, textures, rig IK/FK, face controls,
+  GLB/FBX, QC all PASS). Kuch bhi background mein nahi chal raha.
+- ⏸️ RUKA HUA: Director ke approval/feedback ka intezaar. Feedback aane par: config badlo → `render_all.sh <char>` →
+  `production_all.sh` (ya `production.py <char>`) → review → commit.
+- Known issues: PRODUCTION_INVENTORY.md §7 (K-01 robe stiff in action poses → cloth sim at scene stage).
 
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.

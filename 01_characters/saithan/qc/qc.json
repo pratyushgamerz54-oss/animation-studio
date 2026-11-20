@@ -1,0 +1,134 @@
+{
+  "character": "SAITHAN",
+  "started": "2026-11-20 18:41",
+  "tests": {
+    "uv_present_all_meshes": true,
+    "textures_baked": 152,
+    "ik_rest_deviation": {
+      "arm_L": {
+        "pole_angle": 180,
+        "rest_deviation_mm": 1.198
+      },
+      "leg_L": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 3.257
+      },
+      "arm_R": {
+        "pole_angle": 0,
+        "rest_deviation_mm": 1.198
+      },
+      "leg_R": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 3.257
+      }
+    },
+    "ik_follow_error_mm": 0.03,
+    "body_unweighted_verts": 0,
+    "non_manifold_edges_base_mesh": {
+      "CHAR_SAITHAN_BELT": 20,
+      "CHAR_SAITHAN_BOOT_L": 12,
+      "CHAR_SAITHAN_BOOT_R": 12,
+      "CHAR_SAITHAN_BROWS": 44,
+      "CHAR_SAITHAN_CAPE": 56,
+      "CHAR_SAITHAN_CHEST_PLATE": 24,
+      "CHAR_SAITHAN_COLLAR": 16,
+      "CHAR_SAITHAN_GAUNTLET_L": 16,
+      "CHAR_SAITHAN_GAUNTLET_R": 16,
+      "CHAR_SAITHAN_GLOVE_L": 9,
+      "CHAR_SAITHAN_GLOVE_R": 9,
+      "CHAR_SAITHAN_GREAVE_L": 32,
+      "CHAR_SAITHAN_GREAVE_R": 32,
+      "CHAR_SAITHAN_HAIR_CAP": 148,
+      "CHAR_SAITHAN_LID_LO_L": 64,
+      "CHAR_SAITHAN_LID_LO_R": 64,
+      "CHAR_SAITHAN_LID_UP_L": 64,
+      "CHAR_SAITHAN_LID_UP_R": 64,
+      "CHAR_SAITHAN_MOUTH": 120,
+      "CHAR_SAITHAN_PAULDRON_L": 20,
+      "CHAR_SAITHAN_PAULDRON_R": 20,
+      "CHAR_SAITHAN_SUIT": 48,
+      "CHAR_SAITHAN_TABARD": 56
+    },
+    "quad_ratio_body": 1.0,
+    "quad_ratio_head": 1.0,
+    "mouth_shape_keys": 19,
+    "phonemes_present": true,
+    "export": {
+      "glb_mb": 12.13,
+      "fbx_mb": 19.34
+    },
+    "glb_reimport": {
+      "objects": 40,
+      "armatures": 1,
+      "meshes": 39,
+      "bones": 63,
+      "shape_key_meshes": 2
+    }
+  },
+  "rig": {
+    "bones": 63,
+    "deform": 52,
+    "controls": [
+      "CTRL_COG",
+      "IK_hand_L",
+      "POLE_arm_L",
+      "IK_foot_L",
+      "POLE_leg_L",
+      "IK_hand_R",
+      "POLE_arm_R",
+      "IK_foot_R",
+      "POLE_leg_R",
+      "CTRL_EYES",
+      "root"
+    ],
+    "ik_fk_props": [
+      "ik_arm_L",
+      "ik_leg_L",
+      "ik_arm_R",
+      "ik_leg_R"
+    ]
+  },
+  "face_controls": [
+    "blink_L",
+    "blink_R",
+    "expr_angry",
+    "expr_concentration",
+    "expr_confident",
+    "expr_evil",
+    "expr_furious",
+    "expr_manipulative",
+    "expr_pain",
+    "expr_serious",
+    "expr_shocked",
+    "lid_wide_L",
+    "lid_wide_R",
+    "ph_a",
+    "ph_e",
+    "ph_fv",
+    "ph_i",
+    "ph_l",
+    "ph_mbp",
+    "ph_o",
+    "ph_rest",
+    "ph_u",
+    "ph_w"
+  ],
+  "meshes": 38,
+  "polycount_render_estimate": 481952,
+  "measurements": {
+    "height_no_hair_m": 1.9272,
+    "height_total_m": 2.0684,
+    "head_height_m": 0.2237,
+    "heads_tall": 8.61,
+    "shoulder_width_m": 0.6302,
+    "chest_width_m": 0.3767,
+    "hip_width_m": 0.3528,
+    "leg_length_m": 0.9961,
+    "head_top_z": 1.9339,
+    "chin_z": 1.7102,
+    "arm_length_m": 0.8225,
+    "hand_length_m": 0.2264,
+    "foot_length_m": 0.2463,
+    "mesh_sanity_fail": []
+  }
+}
