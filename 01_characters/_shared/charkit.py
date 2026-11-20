@@ -389,7 +389,9 @@ def trim_copy(src, name, coll, keep, offset=0.0, solid=0.0, offset_fn=None):
         s = ob.modifiers.new('Solidify', 'SOLIDIFY')
         s.thickness = solid
         s.offset = 1.0
-        s.use_even_offset = True
+        s.use_even_offset = False
+        s.use_quality_normals = True
+        s.thickness_clamp = 1.0          # prevents spikes at tiny fingertip / branch faces
     return ob
 
 

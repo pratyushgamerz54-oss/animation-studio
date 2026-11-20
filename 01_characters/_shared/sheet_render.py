@@ -338,8 +338,8 @@ def _portal(stage, M, corrupted=False):
         fx(vx.rune_ring('RUNE', FX, hand + fwd * .06, .07, M['rune'], (math.pi / 2, 0, math.radians(yaw))))
     elif stage == 'full':
         glow(3, 4, 2)
-        pc = Vector((-.95 * S, -.15, 1.0 * S))
-        fx(vx.portal('PORTAL', FX, pc, .70 * S, rim, deep, yaw_deg=25, openness=1.0, intensity=1.0, swirl=sw))
+        pc = Vector((-.95 * S, .05, 1.0 * S))
+        fx(vx.portal('PORTAL', FX, pc, .55 * S, rim, deep, yaw_deg=25, openness=1.0, intensity=1.0, swirl=sw))
         fx(vx.rune_ring('RUNE', FX, hand + fwd * .06, .08, M['rune'], (math.pi / 2, 0, math.radians(yaw))))
         if corrupted:
             fx(vx.flames('PORTAL_SMOKE', FX, [pc + Vector((math.cos(a) * .7 * S, 0, math.sin(a) * .7 * S)) for a in
@@ -496,7 +496,7 @@ def g_powers(St):
         clear_fx()
         POWERS[key]('full' if key not in ('invisibility', 'teleport') else 'activation', M)
         sd = 'R' if 'portal' in key else 'L'
-        if key in ('speed',):
+        if key in ('speed', 'fire', 'dark_magic'):
             h = bone(f'hand_{sd}'); c = ck.camera('CAM_HAND', St, h + Vector((0, -1.1, .1)), h, lens=50)
         else:
             h = bone(f'hand_{sd}'); c = ck.camera('CAM_HAND', St, h + Vector((.05 if sd == 'L' else -.10, -.55, .12)), h, lens=70)
