@@ -54,6 +54,9 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Har VFX shot ka preview dikhana aur Director approve kare tab final render.
 
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
+0. **SABSE PEHLE** `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
+   Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
+   Phir wahin se kaam shuru karo jahan ruka tha. Har bada kaam hone par `PROJECT_LOG.md` mein entry jodo.
 1. `pip install bpy` (Blender 5.3 Python module).
 2. Padho: `01_characters/PRODUCTION_INVENTORY.md` (status + pending decisions) aur `STATUS.md` (last kya chal raha tha).
 3. Har character ka sab kuch uski config mein hai: `01_characters/<name>/<name>_config.py`.
