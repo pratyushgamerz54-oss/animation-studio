@@ -94,6 +94,8 @@ class Page:
         d.text((x, 34), f"{CFG['role']}  ·  Design Sheet v1  ·  {title}", font=F(FR, 26), fill=DIM)
         d.text((W - 40, 34), 'PROPOSAL — awaiting Director approval', font=F(FB, 24), fill=WARN, anchor='ra')
         pw = ' · '.join(CFG['powers']) if CFG['powers'] else 'NOT CONFIRMED'
+        if len(pw) > 70:
+            pw = f"{len(CFG['powers'])} powers (see powers page)"
         d.text((40, h - 40), f'Powers (confirmed): {pw}   |  Appearance & costume = proposals   |  3D renders of '
                f'the real Blender model {FOLDER}_v002.blend', font=F(FR, 20), fill=DIM)
 
