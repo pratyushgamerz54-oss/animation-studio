@@ -60,3 +60,17 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 4. Pipeline: `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` → `_shared/production.py` → `_shared/sheet_doc.py`
    (batch: `_shared/render_all.sh`, `_shared/production_all.sh`). QC: `<name>/qc/QC_REPORT.md`.
 5. Kaam karte waqt `STATUS.md` update karte raho aur commit + push karte raho.
+
+## 🧠 Technical lessons (bugs already solved — don't repeat)
+- Bone-parenting: use `charkit.bone_parent` (compensation in `matrix_parent_inverse`), else eyelid/eye rotations break.
+- Clothing = trimmed copies of the WEIGHTED body: weight body first, keep face if its CENTRE is in the region,
+  create matching vertex groups right after trimming (else weights double → exploded verts).
+- Trimmed pieces: merge doubles 0.0015 m; Solidify `thickness_clamp=1.0`, quality normals (else fingertip spikes).
+- Big pauldrons fold when the arm drops → make them rigid on the clavicle (`'rigid': 'clavicle'`).
+- Bevel on tiny pieces: `limit_method='ANGLE'`, clamp overlap.
+- Design sheets use view transform 'Standard' so palette colours stay exact.
+- Portal disc shader uses object X/Y (circle primitive plane), not X/Z.
+- After an invisibility override, reset only the world colour — `studio()` deletes the cameras.
+- Beams/lasers must not point at the camera (read end-on as a square): flatten the Y component.
+- QC: `sheet_render.py <char> qc` writes `mesh_sanity_fail`; must be [] before rendering sheets.
+- Machine: 4 CPU, no GPU. Full sheet ≈ 12–25 min/char at 24 samples; production bake 1K ≈ 20+ min/char.

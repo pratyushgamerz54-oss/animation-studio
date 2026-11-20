@@ -1,4 +1,4 @@
-# STATUS — last updated 2026-11-20 15:30
+# STATUS — last updated 2026-11-20 15:35
 
 ## Ab kya chal raha hai
 - Design-sheet batch render (`01_characters/_shared/render_all.sh`): Hero 1 ✅, Pratyush ✅, Saithan ⏳, Soul/Max/Yayaki/Ramarat ⏳.
