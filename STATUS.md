@@ -1,10 +1,11 @@
-# STATUS — last updated 2026-11-20 15:45
+# STATUS — last updated 2026-11-20 16:20
 
 ## Ab kya chal raha hai
-- Design-sheet batch render (`01_characters/_shared/render_all.sh`): Hero 1 ✅, Pratyush ✅, Saithan ✅ (8 pages), Soul ✅, Max ✅, Yayaki ✅, Ramarat ⏳.
-- Uske baad: Hero 1 + Pratyush + Saithan + Soul + Max re-render (spike, invisibility bg, Soul robe, Max pauldron fixes), phir `production_all.sh` (UV, 1K bake, IK/FK, face controls, GLB/FBX, QC).
-- Agar session restart ho gaya aur ye beech mein ruk gaya: `01_characters/_shared/render_all.sh <bache hue characters>` phir
-  `01_characters/_shared/production_all.sh` chalao.
+- Pehla batch DONE: saare 7 characters ki design sheet v1 ban gayi (Hero1, Pratyush, Saithan 8pg, Soul, Max, Yayaki, Ramarat).
+- Doosra batch (fixes ke saath re-render): Hero1, Pratyush, Saithan, Soul, Max ⏳ → phir Ramarat (gehra robe) ⏳.
+- Uske baad apne aap: `01_characters/_shared/production_all.sh` (UV, 1K bake, IK/FK, face controls, GLB/FBX, QC, DESIGN_SHEET.md).
+- Session restart hua to: `01_characters/_shared/render_all.sh hero1 pratyush saithan soul max ramarat` (jo bache)
+  phir `01_characters/_shared/production_all.sh`.
 
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.
