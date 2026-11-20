@@ -1,0 +1,16 @@
+{
+  "height_no_hair_m": 1.9272,
+  "height_total_m": 2.0684,
+  "head_height_m": 0.2237,
+  "heads_tall": 8.61,
+  "shoulder_width_m": 0.6302,
+  "chest_width_m": 0.3767,
+  "hip_width_m": 0.3528,
+  "leg_length_m": 0.9961,
+  "head_top_z": 1.9339,
+  "chin_z": 1.7102,
+  "arm_length_m": 0.8225,
+  "hand_length_m": 0.2264,
+  "foot_length_m": 0.2463,
+  "mesh_sanity_fail": []
+}
