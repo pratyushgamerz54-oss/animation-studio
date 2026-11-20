@@ -52,3 +52,11 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Compositor: glare/bloom, light wrap, lens effects; colour grading per shot.
 - Render: high samples, full HD+ (user's GPU PC), motion blur on, denoise.
 - Har VFX shot ka preview dikhana aur Director approve kare tab final render.
+
+## 🔁 NEW SESSION? Start here (memory reset ke baad)
+1. `pip install bpy` (Blender 5.3 Python module).
+2. Padho: `01_characters/PRODUCTION_INVENTORY.md` (status + pending decisions) aur `STATUS.md` (last kya chal raha tha).
+3. Har character ka sab kuch uski config mein hai: `01_characters/<name>/<name>_config.py`.
+4. Pipeline: `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` → `_shared/production.py` → `_shared/sheet_doc.py`
+   (batch: `_shared/render_all.sh`, `_shared/production_all.sh`). QC: `<name>/qc/QC_REPORT.md`.
+5. Kaam karte waqt `STATUS.md` update karte raho aur commit + push karte raho.
