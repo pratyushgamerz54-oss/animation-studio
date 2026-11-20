@@ -7,20 +7,22 @@ Status legend: ⬜ not started · 🟨 in progress / proposal · ✅ approved & 
 
 ## 1. Characters
 
-| # | Role | Name | Confirmed powers | Design sheet | 3D model | UV/Tex | Rig | Face rig | VFX |
-|---|------|------|------------------|---|---|---|---|---|---|
-| 1 | Hero 1 | **[PENDING]** | Fire, Magical Portal | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 2 | Hero 2 | **Pratyush** | Super Speed, Magical Portal, Lightning | 🟨 v1 rendered, awaiting approval | 🟨 v1 mesh | ⬜ | 🟨 pose rig | 🟨 shape keys | 🟨 refs |
-| 3 | Main Villain | **Saithan** | Dark Magic, Invisibility, Super Speed, Fire, Magical Portal, Lightning | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 4 | Sub-villain 1 | **Soul** | **[PENDING — do not invent]** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⛔ blocked |
-| 5 | Sub-villain 2 | **Max** | Laser | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 6 | Sub-villain 3 | **Yayaki** | Teleportation | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 7 | Headmaster | **Ramarat** | **[PENDING — do not invent]** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⛔ blocked |
+Pipeline (same for all): `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` →
+`_shared/production.py` → `_shared/sheet_doc.py`. One config per character: `<folder>/<folder>_config.py`.
+Batch scripts: `_shared/render_all.sh`, `_shared/production_all.sh`.
 
-Production order (Director tasks): Task 01 Hero 1 · Task 02 Pratyush · Task 03 Saithan · Task 04 Soul · Task 05 Max · Task 06 Yayaki · Task 07 Ramarat.
-Pratyush ka design sheet pehle shuru ho chuka tha (Hero 1 ka naam/reference nahi tha), isliye wo pehle review ke liye ready hai.
-Pratyush first rakha gaya hai kyunki Hero 1 ka naam abhi confirm nahi hai.
+| # | Role | Name | Confirmed powers | Config | Design sheet | 3D model v002 | Production v003 (UV, bake, IK/FK, face ctrl, export, QC) |
+|---|------|------|------------------|---|---|---|---|
+| 1 | Hero 1 | **[PENDING]** | Fire, Magical Portal | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 2 | Hero 2 | **Pratyush** | Super Speed, Magical Portal, Lightning | ✅ | 🟨 v1 approved? (pending) | ✅ | 🟨 queued |
+| 3 | Main Villain | **Saithan** | Dark Magic, Invisibility, Super Speed, Fire, Magical Portal, Lightning | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 4 | Sub-villain 1 | **Soul** | **[PENDING — not invented]** | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 5 | Sub-villain 2 | **Max** | Laser | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 6 | Sub-villain 3 | **Yayaki** | Teleportation | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 7 | Headmaster | **Ramarat** | **[PENDING — not invented]** | ✅ | 🟨 rendering | ✅ | 🟨 queued |
 
+Legend: ✅ done & tested · 🟨 in progress / awaiting approval · ⬜ not started. Each character's real status is in
+`<folder>/qc/QC_REPORT.md` once production has run.
 
 ## 1b. Director references (received)
 
