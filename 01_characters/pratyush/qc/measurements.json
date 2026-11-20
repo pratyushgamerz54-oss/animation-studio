@@ -1,13 +1,16 @@
 {
-  "height_no_hair_m": 1.7436,
-  "height_with_hair_m": 1.8413,
-  "head_height_m": 0.2312,
-  "heads_tall": 7.54,
-  "shoulder_width_m": 0.515,
-  "chest_width_m": 0.328,
-  "hip_width_m": 0.3134,
+  "height_no_hair_m": 1.7438,
+  "height_total_m": 1.8432,
+  "head_height_m": 0.2166,
+  "heads_tall": 8.05,
+  "shoulder_width_m": 0.5226,
+  "chest_width_m": 0.3279,
+  "hip_width_m": 0.3116,
   "leg_length_m": 0.894,
-  "head_top_z": 1.7496,
-  "chin_z": 1.5185,
-  "arm_length_m": 0.7382
+  "head_top_z": 1.7498,
+  "chin_z": 1.5332,
+  "arm_length_m": 0.7382,
+  "hand_length_m": 0.2032,
+  "foot_length_m": 0.2198,
+  "mesh_sanity_fail": []
 }

@@ -52,6 +52,18 @@ def gauss(d, s):
     return math.exp(-(d * d) / (2 * s * s))
 
 
+def lerp_table(x, table):
+    """Smooth piecewise lookup; table = [(x0, y0), (x1, y1), ...] ascending in x."""
+    if x <= table[0][0]:
+        return table[0][1]
+    for (a, fa), (b, fb) in zip(table, table[1:]):
+        if x <= b:
+            t = (x - a) / (b - a)
+            t = t * t * (3 - 2 * t)
+            return fa + (fb - fa) * t
+    return table[-1][1]
+
+
 def mesh_object(name, verts, faces, coll, edges=()):
     me = bpy.data.meshes.new(name)
     me.from_pydata([tuple(v) for v in verts], list(edges), [tuple(f) for f in faces])
@@ -122,6 +134,34 @@ def principled(name, color, rough=0.5, metal=0.0, sss=0.0, sss_radius=(1.0, 0.35
     return mat
 
 
+def skin_material(name, skin_hex, tint_hex, rough=0.48, sss=0.18, age=0.0):
+    """PBR skin: subsurface, pore bump, and a 'blush' attribute that warms cheeks/nose/lips/ears."""
+    mat = principled(name, skin_hex, rough=rough, sss=sss, sss_radius=(1.0, 0.4, 0.25), bump=0.15 + 0.25 * age,
+                     bump_scale=600 - 300 * age, spec=0.45)
+    nodes, links = _nodes(mat)
+    a = nodes.new('ShaderNodeAttribute'); a.attribute_name = 'blush'
+    mul = nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'; mul.inputs[1].default_value = 0.55
+    links.new(a.outputs['Fac'], mul.inputs[0])
+    mix = nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
+    mix.inputs['A'].default_value = hexlin(skin_hex); mix.inputs['B'].default_value = hexlin(tint_hex)
+    links.new(mul.outputs[0], mix.inputs['Factor'])
+    links.new(mix.outputs['Result'], nodes['BSDF'].inputs['Base Color'])
+    return mat
+
+
+def hair_material(name, root_hex, tip_hex, rough=0.42):
+    """Hair with root->tip colour gradient (loft attribute 't')."""
+    mat = principled(name, root_hex, rough=rough, sheen=0.5, spec=0.35)
+    nodes, links = _nodes(mat)
+    a = nodes.new('ShaderNodeAttribute'); a.attribute_name = 't'
+    ramp = nodes.new('ShaderNodeValToRGB')
+    ramp.color_ramp.elements[0].position = 0.68; ramp.color_ramp.elements[0].color = hexlin(root_hex)
+    ramp.color_ramp.elements[1].position = 0.95; ramp.color_ramp.elements[1].color = hexlin(tip_hex)
+    links.new(a.outputs['Fac'], ramp.inputs['Fac'])
+    links.new(ramp.outputs['Color'], nodes['BSDF'].inputs['Base Color'])
+    return mat
+
+
 def emission(name, color, strength=5.0):
     mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
     nodes, links = _nodes(mat)
@@ -167,7 +207,7 @@ def attr_mix_material(name, attr, base_hex, accent_hex, threshold=0.5, rough=0.6
 
 
 def eye_material(name, iris_hex, iris_dark_hex, sclera_hex='#EDE8E2', pupil=0.22, iris=0.46,
-                 glow_hex=None):
+                 glow_hex=None, base_glow=0.0):
     """Procedural eyeball. Object coords on a unit sphere, cornea points -Y.
     A 'glow' value node (EYE_GLOW) blends in power-mode emission."""
     mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
@@ -207,7 +247,7 @@ def eye_material(name, iris_hex, iris_dark_hex, sclera_hex='#EDE8E2', pupil=0.22
         # emission only inside the iris ring, scaled by EYE_GLOW value
         g = nodes.new('ShaderNodeValue')
         g.name = 'EYE_GLOW'
-        g.outputs[0].default_value = 0.0
+        g.outputs[0].default_value = base_glow
         lt = nodes.new('ShaderNodeMath')
         lt.operation = 'LESS_THAN'
         lt.inputs[1].default_value = iris + 0.02
@@ -320,7 +360,7 @@ def surface_y(bvh, x, z, y_from=-1.0):
     return hit[0].y if hit[0] is not None else None
 
 
-def trim_copy(src, name, coll, keep, offset=0.0, solid=0.0):
+def trim_copy(src, name, coll, keep, offset=0.0, solid=0.0, offset_fn=None):
     """Copy a mesh, keep only faces whose verts satisfy keep(co), push along normal."""
     me = src.data.copy()
     me.name = name
@@ -330,14 +370,18 @@ def trim_copy(src, name, coll, keep, offset=0.0, solid=0.0):
     bm = bmesh.new()
     bm.from_mesh(me)
     bm.normal_update()
-    kill = [f for f in bm.faces if not all(keep(v.co) for v in f.verts)]
+    # keep a face when its centre is inside the region (robust for narrow bands)
+    kill = [f for f in bm.faces if not keep(f.calc_center_median())]
     bmesh.ops.delete(bm, geom=kill, context='FACES')
     loose = [v for v in bm.verts if not v.link_faces]
     bmesh.ops.delete(bm, geom=loose, context='VERTS')
+    # merge near-coincident verts (skin-modifier branch points) — they explode under bevel/solidify
+    bmesh.ops.remove_doubles(bm, verts=bm.verts[:], dist=0.0015)
+    bmesh.ops.dissolve_degenerate(bm, edges=bm.edges[:], dist=0.0005)
     bm.normal_update()
-    if offset:
+    if offset or offset_fn:
         for v in bm.verts:
-            v.co += v.normal * offset
+            v.co += v.normal * (offset + (offset_fn(v.co) if offset_fn else 0.0))
     bm.to_mesh(me)
     bm.free()
     me.shade_smooth()
@@ -395,7 +439,7 @@ def grid_faces(M, K, start=0):
     return f
 
 
-def build_mouth(name, coll, head, center_xz, shapes, mats, M=18, K=4):
+def build_mouth(name, coll, head, center_xz, shapes, mats, M=18, K=4, W=0.022):
     """Mouth = interior + upper lip + lower lip, projected on head surface.
     shapes: dict name -> params; 'neutral' is basis. Each becomes a shape key."""
     bvh = bvh_of(head)
@@ -410,7 +454,7 @@ def build_mouth(name, coll, head, center_xz, shapes, mats, M=18, K=4):
         return out
 
     def all_pts(p):
-        a, b, c = mouth_geometry(p, M=M, K=K)
+        a, b, c = mouth_geometry(p, W=W, M=M, K=K)
         pa = project(a)
         # interior is pushed slightly *into* the head so it reads as depth
         pa = [q + Vector((0, 0.0004, 0)) for q in pa]
@@ -454,7 +498,7 @@ def mouth_interior_material(name, teeth_hex='#EEE9E0', mouth_hex='#3A1418'):
     return mat
 
 
-def brow_points(p, side, W=0.026, N=10):
+def brow_points(p, side, W=0.026, N=10, thick=1.0):
     """Brow centreline in (u,v) relative to brow anchor; side +1 = character left (+X)."""
     inner, outer = p.get('inner', 0.0), p.get('outer', 0.0)
     arch = p.get('arch', 0.0025)
@@ -465,19 +509,19 @@ def brow_points(p, side, W=0.026, N=10):
         t = i / (N - 1)          # 0 = inner (near nose), 1 = outer
         u = side * (t * W)
         v = inner * (1 - t) + outer * t + arch * math.sin(math.pi * min(1, t * 1.15))
-        th = 0.0058 * (1 - 0.60 * t) + 0.0010  # tapered thickness
+        th = (0.0058 * (1 - 0.60 * t) + 0.0010) * thick  # tapered thickness
         pts.append((u, v, th))
     return pts
 
 
-def build_brows(name, coll, head, anchors, shapes, mat, N=10):
+def build_brows(name, coll, head, anchors, shapes, mat, N=10, W=0.026, thick=1.0):
     """Two brow strips, each a (N x 3) grid projected on the head; shape keys per expression."""
     bvh = bvh_of(head)
 
     def strip(p):
         out = []
         for side, (ax, az) in ((-1, anchors[0]), (1, anchors[1])):
-            for (u, v, th) in brow_points(p, side, N=N):
+            for (u, v, th) in brow_points(p, side, W=W, N=N, thick=thick):
                 for k in (-1, 0, 1):
                     x, z = ax + u, az + v + k * th / 2
                     y = surface_y(bvh, x, z)
@@ -592,11 +636,11 @@ def _catmull(pts, n):
     return out
 
 
-def loft_hair(name, coll, strands, center, samples=12, ring=8, mats=()):
+def loft_hair(name, coll, strands, center, samples=12, ring=8, mats=(), taper=True):
     """Stylized hair clumps as flattened, sharply tapered ribbons (real geometry).
     strands: list of dicts {pts, width, thick, mat, twist}. 'center' = head centre,
     used to orient the flat side of each clump toward the scalp."""
-    verts, faces, mat_idx = [], [], []
+    verts, faces, mat_idx, tvals = [], [], [], []
     for s in strands:
         path = _catmull([Vector(p) for p in s['pts']], samples)
         base = len(verts)
@@ -609,21 +653,27 @@ def loft_hair(name, coll, strands, center, samples=12, ring=8, mats=()):
             B = T.cross(N).normalized()
             tw = s.get('twist', 0.0) * t
             N, B = (N * math.cos(tw) + B * math.sin(tw)), (B * math.cos(tw) - N * math.sin(tw))
-            w = s['width'] * (1 - t ** 1.25) * (0.85 + 0.25 * math.sin(math.pi * min(1, t * 1.6)))
-            th = s['thick'] * (1 - t) ** 0.9
-            if i == samples - 1:
+            if taper:
+                w = s['width'] * (1 - t ** 1.25) * (0.85 + 0.25 * math.sin(math.pi * min(1, t * 1.6)))
+                th = s['thick'] * (1 - t) ** 0.9
+            else:
+                w, th = s['width'], s['thick']
+            if i == samples - 1 and taper:
                 rings.append([len(verts)])
                 verts.append(c)
+                tvals.append(1.0)
                 break
             r = []
             for k in range(ring):
                 a = 2 * math.pi * k / ring
                 r.append(len(verts))
                 verts.append(c + B * (w * math.cos(a)) + N * (th * math.sin(a)))
+                tvals.append(t)
             rings.append(r)
         # root cap
         cap_c = len(verts)
         verts.append(path[0])
+        tvals.append(0.0)
         for k in range(ring):
             faces.append((cap_c, rings[0][(k + 1) % ring], rings[0][k]))
             mat_idx.append(s.get('mat', 0))
@@ -640,6 +690,9 @@ def loft_hair(name, coll, strands, center, samples=12, ring=8, mats=()):
         ob.data.materials.append(m)
     for p, mi in zip(ob.data.polygons, mat_idx):
         p.material_index = mi
+    ta = ob.data.attributes.new('t', 'FLOAT', 'POINT')
+    for i, t in enumerate(tvals):
+        ta.data[i].value = t
     ob.data.shade_smooth()
     return ob
 

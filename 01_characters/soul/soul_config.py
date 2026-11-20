@@ -1,0 +1,67 @@
+"""SOUL — sub-villain 1. POWER NOT CONFIRMED (U-02): no power VFX are created.
+Reference weapon (curved blade) NOT added: not confirmed by the story (U-10). Visual = PROPOSAL."""
+AX = lambda c: abs(c.x)
+CFG = {
+    'id': 'SOUL', 'name': 'Soul', 'role': 'Sub-villain 1',
+    'powers': [], 'power_rows': [],
+    'reference': 'reference/soul_ref_01.png',
+    'ref_notes': 'Taken: tall gaunt pale-lavender figure, twin red horns, ornate black-gold high collar, bare sinewy '
+                 'torso, ornate belt, long dark robe with red-brown hem, back cape, bare feet. NOT taken: the curved '
+                 'blade (weapon not confirmed).',
+    'age': 'NOT CONFIRMED', 'height': 1.90,
+    'body_type': 'Tall, gaunt and sinewy — long limbs, narrow waist, ribbed torso',
+    'silhouette': 'Twin vertical horns + flared high collar + floor-length robe = tall narrow spire',
+    'build': {'shoulder': 1.02, 'chest': .97, 'waist': .86, 'hip': .95, 'limb': .93, 'muscle': 1.3},
+    'head': {'cranium': .92, 'depth': 1.04, 'jaw': .95, 'chin': 1.12, 'cheek': 1.45, 'nose': 1.0, 'nose_w': .9, 'brow': 1.4,
+             'width': .95, 'ears': 'pointed'},
+    'eyes': {'size': .95}, 'eye': {'base_glow': .6}, 'mouth_w': 1.0,
+    'expressions': ['neutral', 'angry', 'evil', 'serious', 'confident', 'shocked', 'frustrated', 'suspicious', 'fear',
+                    'furious', 'blink'],
+    'pal': {
+        'skin': '#9C88A6', 'skin_tint': '#8A6A92', 'lip': '#6E4F68', 'lash': '#1A1018', 'brow': '#3A2A36',
+        'eye': '#C23B2E', 'eye_dark': '#4A0E0A', 'sclera': '#E6DCD6', 'power_eye': '#FF4A3A',
+        'horn': '#8E1E1E', 'robe': '#16141A', 'hem': '#7A2A1E', 'gold': '#C9A24A', 'cape': '#2A0F12',
+    },
+    'hair': {'style': 'bald'},
+    'horns': [{'root': (.30, -.20, .90), 'radius': .022, 'mat': 'horn',
+               'path': [(.018, .005, .040), (.016, .010, .055), (.004, .012, .060), (-.010, .010, .050), (-.016, .006, .035)]}],
+    'materials': {
+        'robe': {'type': 'accent', 'base': '#16141A', 'accent': '#7A2A1E', 'threshold': .5, 'rough': .65, 'sheen': .5, 'bump': .4},
+        'gold': {'type': 'accent', 'base': '#1B1A1F', 'accent': '#C9A24A', 'threshold': .5, 'rough': .35, 'metal': .7},
+        'goldm': {'base': '#C9A24A', 'rough': .3, 'metal': 1.0},
+        'cape': {'type': 'accent', 'base': '#2A0F12', 'accent': '#C9A24A', 'threshold': .5, 'rough': .7, 'sheen': .4, 'bump': .4},
+        'horn': {'base': '#8E1E1E', 'rough': .4, 'bump': .4, 'bump_scale': 150},
+    },
+    'costume': [
+        {'kind': 'trim', 'name': 'YOKE', 'mat': 'gold', 'coll': 'ACCESSORIES', 'offset': .012, 'solid': .004, 'bevel': True,
+         'keep': lambda c: c.z > 1.36 - .0 and AX(c) < .19 and c.z > 1.47 - .55 * AX(c) - .0 and c.z < 1.52,
+         'accent': lambda c, n: c.z < 1.40 or AX(c) > .17 or AX(c) < .012},
+        {'kind': 'collar', 'name': 'HIGH_COLLAR', 'mat': 'gold', 'z0': 1.43, 'z1': 1.585, 'r0': .085, 'r1': .13,
+         'open_front': True, 'dip': True},
+        {'kind': 'trim', 'name': 'BELT', 'mat': 'gold', 'coll': 'ACCESSORIES', 'offset': .016, 'solid': .006, 'bevel': True,
+         'keep': lambda c: .92 < c.z < 1.12 and AX(c) < .25, 'accent': lambda c, n: abs(c.z - 1.02) < .02 or c.z > 1.10},
+        {'kind': 'skirt', 'name': 'ROBE', 'mat': 'robe', 'z_top': 1.0, 'z_bottom': .02, 'flare': .30, 'open_front': .30,
+         'offset': .025, 'hem': .22, 'front_band': 0},
+        {'kind': 'trim', 'name': 'WRIST_BAND', 'mirror': True, 'mat': 'goldm', 'coll': 'ACCESSORIES', 'offset': .008,
+         'solid': .004, 'keep': lambda c: .66 < c.x < .72},
+        {'kind': 'cape', 'name': 'CAPE', 'mat': 'cape', 'side': 'back', 'z_top': 1.47, 'z_bottom': .06, 'width': .26,
+         'flare': .55, 'offset': .03},
+    ],
+    'face_notes': [
+        ('EYES', 'Deep red iris #C23B2E with a faint glow; narrow, heavy-lidded'),
+        ('BROWS', 'Thin, sparse, sharply angled'),
+        ('NOSE / LIPS', 'Long narrow nose; thin lavender-grey lips'),
+        ('JAW / CHEEK', 'Very hollow cheeks, prominent cheekbones, long pointed chin'),
+        ('EARS / HORNS', 'Pointed ears; two blood-red horns rising straight up from the crown'),
+        ('HAIR', 'Bald, smooth pale-lavender skin'),
+    ],
+    'costume_groups': [
+        ('yoke', 'Ornate chest yoke', ['YOKE'], 'Lacquered leather + gold leaf', '#1B1A1F; filigree #C9A24A', 'Rigid'),
+        ('collar', 'High flared collar', ['HIGH_COLLAR'], 'Gilded plate', 'black + gold edge', 'Rigid (head clearance checked)'),
+        ('belt', 'Ornate belt', ['BELT'], 'Gold-trimmed plate', '#C9A24A', 'Rigid'),
+        ('robe', 'Main: floor-length robe', ['ROBE'], 'Heavy silk-wool', '#16141A; hem gradient #7A2A1E', 'Cloth sim (pinned at waist)'),
+        ('cape', 'Back cape', ['CAPE'], 'Velvet', '#2A0F12; gold edge', 'Cloth sim (pinned at shoulders)'),
+        ('wrist', 'Wrist bands', ['WRIST_BAND_L'], 'Gold', '#C9A24A metal', 'Rigid'),
+        ('horns', 'Horns', ['HORN_0_L', 'HORN_0_R'], 'Lacquered horn', '#8E1E1E', 'Rigid'),
+    ],
+}

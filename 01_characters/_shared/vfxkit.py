@@ -229,3 +229,179 @@ def rune_ring(name, coll, center, radius, mat, facing_rot=(0, 0, 0), ticks=12):
         ck.assign(t, mat)
         obs.append(t)
     return obs
+
+
+# ---------------------------------------------------------------- fire / dark energy
+def flame_material(name, core_hex, mid_hex, outer_hex, strength=12.0, fade=0.75):
+    """Emission graded along the flame ('t' attribute 0 root -> 1 tip), fading to transparent."""
+    mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
+    if mat.node_tree is None:
+        mat.use_nodes = True
+    N, L = mat.node_tree.nodes, mat.node_tree.links
+    N.clear()
+    out = N.new('ShaderNodeOutputMaterial')
+    a = N.new('ShaderNodeAttribute'); a.attribute_name = 't'
+    ramp = N.new('ShaderNodeValToRGB')
+    cr = ramp.color_ramp
+    cr.elements[0].position = 0.0; cr.elements[0].color = ck.hexlin(core_hex)
+    cr.elements[1].position = 1.0; cr.elements[1].color = ck.hexlin(outer_hex)
+    e = cr.elements.new(0.45); e.color = ck.hexlin(mid_hex)
+    L.new(a.outputs['Fac'], ramp.inputs['Fac'])
+    em = N.new('ShaderNodeEmission'); em.name = 'EMIT'
+    em.inputs[1].default_value = strength
+    L.new(ramp.outputs['Color'], em.inputs['Color'])
+    tr = N.new('ShaderNodeBsdfTransparent')
+    fr = N.new('ShaderNodeMapRange')
+    fr.inputs['From Min'].default_value = fade; fr.inputs['From Max'].default_value = 1.0
+    L.new(a.outputs['Fac'], fr.inputs['Value'])
+    mix = N.new('ShaderNodeMixShader')
+    L.new(fr.outputs['Result'], mix.inputs['Fac'])
+    L.new(em.outputs[0], mix.inputs[1]); L.new(tr.outputs[0], mix.inputs[2])
+    L.new(mix.outputs[0], out.inputs[0])
+    return mat
+
+
+def flames(name, coll, anchors, mat, up=(0, 0, 1), count=24, length=0.25, width=0.03, seed=21, swirl=0.0,
+           spread=0.04):
+    """Licking flame tongues rising from anchor points (fire aura, hand fire, dark wisps)."""
+    rnd = random.Random(seed)
+    u = Vector(up).normalized()
+    strands = []
+    for i in range(count):
+        p = Vector(rnd.choice(anchors)) + Vector((rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(-1, 1))) * spread
+        L = length * rnd.uniform(.55, 1.25)
+        side = u.orthogonal().normalized()
+        side.rotate(__import__('mathutils').Quaternion(u, rnd.uniform(0, 2 * math.pi)))
+        pts = [p]
+        for k in range(1, 5):
+            t = k / 4
+            wob = side * math.sin(t * 3.2 + i) * L * .12 * (1 + swirl * t)
+            pts.append(p + u * L * t + wob)
+        strands.append({'pts': pts, 'width': width * rnd.uniform(.6, 1.3), 'thick': width * .5, 'mat': 0,
+                        'twist': rnd.uniform(-1, 1)})
+    ob = ck.loft_hair(name, coll, strands, Vector(anchors[0]) - u * 3, samples=10, ring=6, mats=[mat])
+    ob.visible_shadow = False
+    return ob
+
+
+def fireball(name, coll, center, radius, core_hex, mid_hex, outer_hex, motion=(0, -1, 0), seed=5):
+    obs = []
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3, radius=radius, location=center)
+    s = bpy.context.object; s.name = f'{name}_CORE'
+    ck.link(s, coll)
+    ck.assign(s, ck.emission(f'MAT_{name}_CORE', core_hex, 30))
+    s.visible_shadow = False
+    obs.append(s)
+    fm = flame_material(f'MAT_{name}_FLAME', core_hex, mid_hex, outer_hex, 14)
+    pts = [Vector(center) + Vector((math.cos(a), 0, math.sin(a))) * radius * .6 for a in [i * .6 for i in range(11)]]
+    back = -Vector(motion).normalized()
+    obs.append(flames(f'{name}_TAIL', coll, pts, fm, up=back + Vector((0, 0, .25)), count=26, length=radius * 4,
+                      width=radius * .55, seed=seed, spread=radius * .5))
+    ld = bpy.data.lights.new(f'{name}_LIGHT', 'POINT'); ld.energy = 150; ld.color = ck.hexlin(mid_hex)[:3]
+    lo = bpy.data.objects.new(f'{name}_LIGHT', ld); lo.location = center; coll.objects.link(lo)
+    obs.append(lo)
+    return obs
+
+
+# ---------------------------------------------------------------- laser
+def laser(name, coll, a, b, core_hex, glow_hex, radius=0.012, intensity=1.0, impact=True, charge=True):
+    """Straight coherent beam: white core + coloured sheath + charge orb + impact burst.
+    Deliberately straight and cylindrical so it never reads as lightning (jagged) or magic (swirling)."""
+    a, b = Vector(a), Vector(b)
+    obs = []
+    d = b - a
+    L = d.length
+    rot = d.to_track_quat('Z', 'Y').to_euler()
+    mid = (a + b) / 2
+    for lay, r, hx, st in (('CORE', radius, core_hex, 40), ('SHEATH', radius * 2.6, glow_hex, 8),
+                           ('HALO', radius * 6, glow_hex, 1.5)):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=24, radius=r, depth=L, location=mid, rotation=rot)
+        c = bpy.context.object; c.name = f'{name}_{lay}'
+        ck.link(c, coll)
+        ck.assign(c, ck.emission(f'MAT_{name}_{lay}', hx, st * intensity))
+        c.visible_shadow = False
+        obs.append(c)
+    if charge:
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=radius * 4, location=a)
+        o = bpy.context.object; o.name = f'{name}_CHARGE'; ck.link(o, coll)
+        ck.assign(o, ck.emission(f'MAT_{name}_CHARGE', core_hex, 25 * intensity)); o.visible_shadow = False
+        obs.append(o)
+    if impact:
+        rnd = random.Random(2)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=radius * 7, location=b)
+        o = bpy.context.object; o.name = f'{name}_IMPACT'; ck.link(o, coll)
+        ck.assign(o, ck.emission(f'MAT_{name}_IMPACT', core_hex, 20 * intensity)); o.visible_shadow = False
+        obs.append(o)
+        sp = ck.emission(f'MAT_{name}_SPARK', glow_hex, 25 * intensity)
+        for i in range(18):
+            dv = Vector((rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(-1, 1))).normalized()
+            p0 = b + dv * radius * 6
+            strand = {'pts': [p0, p0 + dv * .05, p0 + dv * .12], 'width': .004, 'thick': .002, 'mat': 0}
+            s = ck.loft_hair(f'{name}_SPARK_{i:02d}', coll, [strand], b, samples=6, ring=5, mats=[sp])
+            s.visible_shadow = False
+            obs.append(s)
+    for p, e in ((a, 40), (b, 80)):
+        ld = bpy.data.lights.new(f'{name}_L', 'POINT'); ld.energy = e * intensity; ld.color = ck.hexlin(glow_hex)[:3]
+        lo = bpy.data.objects.new(f'{name}_L', ld); lo.location = p; coll.objects.link(lo); obs.append(lo)
+    return obs
+
+
+# ---------------------------------------------------------------- teleport
+def teleport_rings(name, coll, base, height, hex_, intensity=1.0, rings=5, radius=0.45, seed=4, sparks=40):
+    """Vertical stack of thin light rings + spiralling motes around a body volume.
+    Reads as a body-hugging 'blink', distinct from a round portal disc."""
+    rnd = random.Random(seed)
+    obs = []
+    m = ck.emission(f'MAT_{name}_RING', hex_, 10 * intensity)
+    for i in range(rings):
+        z = base[2] + height * (i + .5) / rings
+        r = radius * (1 - .35 * abs((i + .5) / rings - .5) * 2)
+        bpy.ops.mesh.primitive_torus_add(major_radius=r, minor_radius=.004, major_segments=64, minor_segments=6,
+                                         location=(base[0], base[1], z))
+        t = bpy.context.object; t.name = f'{name}_RING_{i}'; ck.link(t, coll); ck.assign(t, m)
+        t.visible_shadow = False
+        obs.append(t)
+    sm = ck.emission(f'MAT_{name}_MOTE', hex_, 20 * intensity)
+    for i in range(sparks):
+        a = rnd.uniform(0, 2 * math.pi); z = base[2] + rnd.uniform(0, height)
+        r = radius * rnd.uniform(.7, 1.15)
+        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=rnd.uniform(.004, .010),
+                                              location=(base[0] + math.cos(a) * r, base[1] + math.sin(a) * r, z))
+        s = bpy.context.object; s.name = f'{name}_MOTE_{i:02d}'; ck.link(s, coll); ck.assign(s, sm)
+        s.visible_shadow = False
+        obs.append(s)
+    bpy.ops.mesh.primitive_circle_add(vertices=64, radius=radius * 1.3, fill_type='NGON', location=(base[0], base[1], base[2] + .003))
+    g = bpy.context.object; g.name = f'{name}_GROUND'; ck.link(g, coll)
+    ck.assign(g, ck.emission(f'MAT_{name}_GROUND', hex_, 3 * intensity)); obs.append(g)
+    return obs
+
+
+def distortion_sphere(name, coll, center, radius, ior=1.12):
+    """Refractive bubble that bends the background — spatial distortion."""
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=48, ring_count=24, radius=radius, location=center)
+    o = bpy.context.object; o.name = name; ck.link(o, coll)
+    m = ck.principled(f'MAT_{name}', '#FFFFFF', rough=0.0)
+    b = m.node_tree.nodes['BSDF']
+    b.inputs['Transmission Weight'].default_value = 1.0
+    b.inputs['IOR'].default_value = ior
+    ck.assign(o, m)
+    o.visible_shadow = False
+    return o
+
+
+def invisibility_material(name, rim_hex, ior=1.03):
+    """Near-invisible refractive body with a faint fresnel rim (used as view-layer override)."""
+    mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
+    if mat.node_tree is None:
+        mat.use_nodes = True
+    N, L = mat.node_tree.nodes, mat.node_tree.links
+    N.clear()
+    out = N.new('ShaderNodeOutputMaterial')
+    gl = N.new('ShaderNodeBsdfGlass'); gl.inputs['IOR'].default_value = ior; gl.inputs['Roughness'].default_value = 0
+    em = N.new('ShaderNodeEmission'); em.inputs[0].default_value = ck.hexlin(rim_hex); em.inputs[1].default_value = 2.0
+    fr = N.new('ShaderNodeLayerWeight'); fr.inputs['Blend'].default_value = 0.15
+    mix = N.new('ShaderNodeMixShader')
+    L.new(fr.outputs['Facing'], mix.inputs['Fac'])
+    L.new(gl.outputs[0], mix.inputs[1]); L.new(em.outputs[0], mix.inputs[2])
+    L.new(mix.outputs[0], out.inputs[0])
+    return mat
