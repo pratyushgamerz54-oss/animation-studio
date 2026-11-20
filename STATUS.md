@@ -1,8 +1,8 @@
-# STATUS — last updated 2026-11-20 15:35
+# STATUS — last updated 2026-11-20 15:45
 
 ## Ab kya chal raha hai
-- Design-sheet batch render (`01_characters/_shared/render_all.sh`): Hero 1 ✅, Pratyush ✅, Saithan ⏳, Soul/Max/Yayaki/Ramarat ⏳.
-- Uske baad: Hero 1 + Pratyush re-render (glove spike fix), phir `production_all.sh` (UV, 1K bake, IK/FK, face controls, GLB/FBX, QC).
+- Design-sheet batch render (`01_characters/_shared/render_all.sh`): Hero 1 ✅, Pratyush ✅, Saithan ✅ (8 pages), Soul/Max/Yayaki/Ramarat ⏳.
+- Uske baad: Hero 1 + Pratyush + Saithan re-render (glove spike fix, invisibility bg fix), phir `production_all.sh` (UV, 1K bake, IK/FK, face controls, GLB/FBX, QC).
 - Agar session restart ho gaya aur ye beech mein ruk gaya: `01_characters/_shared/render_all.sh <bache hue characters>` phir
   `01_characters/_shared/production_all.sh` chalao.
 
