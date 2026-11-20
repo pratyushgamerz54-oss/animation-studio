@@ -19,7 +19,7 @@ Batch scripts: `_shared/render_all.sh`, `_shared/production_all.sh`.
 | 4 | Sub-villain 1 | **Soul** | Lightning (confirmed 20 Nov) | ✅ | 🟨 rendering | ✅ | 🟨 queued |
 | 5 | Sub-villain 2 | **Max** | Laser | ✅ | 🟨 rendering | ✅ | 🟨 queued |
 | 6 | Sub-villain 3 | **Yayaki** | Teleportation | ✅ | 🟨 rendering | ✅ | 🟨 queued |
-| 7 | Headmaster | **Ramarat** | ALL hero powers — Fire, Magical Portal, Super Speed, Lightning — unlimited (confirmed 20 Nov) | ✅ | 🟨 rendering | ✅ | 🟨 queued |
+| 7 | Headmaster | **Ramarat** | EVERY power (heroes + villains): Fire, Portal, Speed, Lightning, Dark Magic, Invisibility, Laser, Teleportation — unlimited (confirmed 20 Nov) | ✅ | 🟨 rendering | ✅ | 🟨 queued |
 
 Legend: ✅ done & tested · 🟨 in progress / awaiting approval · ⬜ not started. Each character's real status is in
 `<folder>/qc/QC_REPORT.md` once production has run.
@@ -92,7 +92,7 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
 |---|---|---|
 | U-01 | Hero 1 ka naam | PENDING |
 | U-02 | Soul ki power | ✅ RESOLVED: Lightning (crimson-red look proposed) |
-| U-03 | Ramarat ki powers | ✅ RESOLVED: all hero powers, unlimited (golden-white look proposed). Open: do villain powers also count? |
+| U-03 | Ramarat ki powers | ✅ RESOLVED: every power of heroes AND villains, unlimited (golden-white look proposed) |
 | U-04 | Kisi bhi character ka appearance (umar, kad, skin tone, hair, costume) diya nahi gaya hai → sab designs **PROPOSALS** hain jab tak Director approve na kare | PENDING |
 | U-05 | Duniya / setting (magic school? city? time period?) — headmaster se school-type setting lagti hai, par confirm nahi | PENDING |
 | U-06 | Har character ki portal ka rang/style (Hero 1, Pratyush, Saithan teeno ke paas portal hai) | PROPOSED in sheets |
