@@ -201,9 +201,9 @@ def build_head(C, M):
     # ears
     for sd, sx in (('L', 1), ('R', -1)):
         def ear(p, sx=sx):
-            X = p.x * 0.011
-            Y = p.y * 0.021
-            Z = p.z * 0.032
+            X = p.x * 0.010
+            Y = p.y * 0.017
+            Z = p.z * 0.029
             # cup: push centre inward
             X -= 0.004 * max(0, 1 - (p.y ** 2 + p.z ** 2)) * (1 if p.x > 0 else 0.3)
             return Vector((X * sx, Y, Z))
@@ -399,7 +399,7 @@ def build_clothing(C, M, body, arm):
         out[f'core_{sd}'] = core
 
     be = ck.trim_copy(body, name('BELT'), C['ACCESSORIES'],
-                      lambda c: 0.95 < c.z < 1.05 and abs(c.x) < 0.25, offset=0.010, solid=0.006)
+                      lambda c: 0.92 < c.z < 1.08 and abs(c.x) < 0.25, offset=0.010, solid=0.006)
     ck.float_attr(be, 'accent', lambda c, n: 1.0 if abs(c.z - 1.0) < 0.012 else 0.0)
     ck.assign(be, M['armor'])
     out['belt'] = be

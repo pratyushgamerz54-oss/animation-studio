@@ -100,8 +100,8 @@ def p_turn():
 
 
 def p_poses():
-    pg = Page('poses_measurements', 'T-pose · A-pose · Neutral + measurement guide', 1180)
-    H = 860
+    pg = Page('poses_measurements', 'T-pose · A-pose · Neutral + measurement guide', 1080)
+    H = 760
     t = fit(raw('pose_T.png'), h=H); pg.paste(t, 50, 130, 'T-pose (modelling & rigging)')
     a = fit(raw('pose_A.png'), h=H); pg.paste(a, 50 + t.width + 40, 130, 'A-pose (deformation checks)')
     n = raw('pose_NEUTRAL.png')
@@ -156,7 +156,7 @@ def p_poses():
 
 
 def p_face():
-    pg = Page('face', 'Face design · hairline · eye', 1180)
+    pg = Page('face', 'Face design · hairline · eye', 1260)
     views = [('front', 'Face — front'), ('three_quarter', 'Face — 3/4'), ('side', 'Face — side'),
              ('back_three_quarter', 'Hairstyle — back 3/4')]
     x = 50
@@ -215,7 +215,14 @@ def p_costume():
         x = 50 + (i % 4) * 590
         y = 130 + (i // 4) * 540
         pg.paste(im, x, y)
-        pg.text(x + 330, y + 10, lab, 21, True, ACC)
+        tl, tline = [], ''
+        for w_ in lab.split():
+            if len(tline) + len(w_) > 19:
+                tl.append(tline); tline = ''
+            tline += w_ + ' '
+        tl.append(tline)
+        for q, l in enumerate(tl[:2]):
+            pg.text(x + 330, y - 4 + q * 26, l, 20, True, ACC)
         fab, mat, sim = COST_TEXT[k]
         for j, (h_, v) in enumerate((('Fabric', fab), ('Material', mat), ('Sim', sim))):
             words, line, lines = v.split(), '', []
@@ -224,9 +231,9 @@ def p_costume():
                     lines.append(line); line = ''
                 line += w_ + ' '
             lines.append(line)
-            pg.text(x + 330, y + 50 + j * 110, h_, 18, True, DIM)
+            pg.text(x + 330, y + 62 + j * 110, h_, 18, True, DIM)
             for q, l in enumerate(lines[:4]):
-                pg.text(x + 330, y + 74 + j * 110 + q * 22, l, 17)
+                pg.text(x + 330, y + 86 + j * 110 + q * 22, l, 17)
     return pg
 
 
@@ -260,7 +267,7 @@ def power_img(n, after=None):
 
 
 def p_powers():
-    pg = Page('powers', 'Power activation design + VFX reference', 2060)
+    pg = Page('powers', 'Power activation design + VFX reference', 2140)
     stages = ['normal', 'activation', 'full', 'deactivation']
     rows = [('SUPER SPEED', 'speed', 'Trails + afterimages + footstep sparks', 'hand_speed.png'),
             ('LIGHTNING', 'lightning', 'Arcs along arms, palm discharge, body aura', 'hand_lightning.png'),
@@ -286,12 +293,13 @@ def p_powers():
         pg.paste(hi, x + 10, y + 90)
         pg.text(x + 20, y + 100, 'HAND FX', 20, True)
     y = 130 + 3 * 600
-    pg.text(50, y, 'EYE TRANSFORMATION (all powers)', 28, True, ACC)
-    x = 600
+    pg.text(50, y + 10, 'EYE TRANSFORMATION', 28, True, ACC)
+    pg.text(50, y + 50, '(all powers)', 21, color=DIM)
+    x = 420
     for s in ('normal', 'activation', 'full'):
-        im = fit(power_img(f'eyes_{s}.png'), h=180)
-        pg.paste(im, x, y - 10)
-        pg.text(x + 10, y, s.upper(), 18, True)
+        im = fit(power_img(f'eyes_{s}.png'), h=170)
+        pg.paste(im, x, y + 10)
+        pg.text(x + 10, y + 20, s.upper(), 18, True)
         x += im.width + 30
     return pg
 

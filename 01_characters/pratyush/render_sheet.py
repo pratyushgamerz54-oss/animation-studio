@@ -209,9 +209,9 @@ COSTUME = [
     ('armor', 'Outer: chest plate, pauldrons, knee guards, collar',
      ['CHEST_PLATE', 'PAULDRON_L', 'PAULDRON_R', 'KNEE_L', 'KNEE_R', 'COLLAR', 'EMBLEM']),
     ('boots', 'Shoes: armoured sprint boots', ['BOOT_L', 'BOOT_R']),
-    ('gloves', 'Gloves: full-finger grip gloves', ['GLOVE_L', 'GLOVE_R']),
+    ('gloves', 'Gloves: full-finger grip gloves', ['GLOVE_L']),
     ('belt', 'Belt + buckle', ['BELT', 'BELT_BUCKLE']),
-    ('bracers', 'Special equipment: speed bracers', ['BRACER_L', 'BRACER_R', 'BRACER_CORE_L', 'BRACER_CORE_R']),
+    ('bracers', 'Special equipment: speed bracers', ['BRACER_L', 'BRACER_CORE_L']),
     ('hair', 'Hair (cap + clumps)', ['HAIR', 'HAIR_CAP']),
 ]
 
@@ -304,12 +304,12 @@ def g_powers(S):
         legs = ['shin_L', 'shin_R', 'thigh_L', 'thigh_R', 'forearm_L', 'forearm_R', 'spine_02', 'head']
         anchors = body_anchors(legs)
         if stage == 'activation':
-            power_glow(3, 12, 0.5)
+            power_glow(1.5, 12, 0.5)
             fx_obj(vx.speed_trails('SPEED_TRAIL', FX, anchors, mo, trail, length=0.35, count=8))
             fx_obj(vx.aura_arcs('SPEED_SPARK', FX, body_anchors(['shin_L', 'shin_R', 'foot_L', 'foot_R']),
                                 core, glow, size=0.08, count=5))
         elif stage == 'full':
-            power_glow(8, 25, 2.0)
+            power_glow(4, 25, 2.0)
             fx_obj(vx.speed_trails('SPEED_TRAIL', FX, anchors, mo, trail, length=1.1, count=20))
             fx_obj(vx.aura_arcs('SPEED_SPARK', FX, anchors, core, glow, size=0.18, count=16))
         elif stage == 'deactivation':
@@ -321,7 +321,7 @@ def g_powers(S):
     for st in ('activation', 'full', 'deactivation'):
         speed(st)
     # afterimages for the full stage: character only, shifted back along motion
-    clear_fx(); pose('DASH'); turn(90); power_glow(8, 25, 2.0)
+    clear_fx(); pose('DASH'); turn(90); power_glow(4, 25, 2.0)
     bpy.context.scene.render.film_transparent = True
     for k, dx in enumerate((-0.38, -0.76)):
         rig().location.x = dx
@@ -339,10 +339,10 @@ def g_powers(S):
         hand = bone_world('middle_01_L')
         fwd = (bone_world('middle_03_L', True) - bone_world('hand_L')).normalized()
         if stage == 'activation':
-            power_glow(3, 10, 0.5)
+            power_glow(1.5, 10, 0.5)
             fx_obj(vx.aura_arcs('LT_HAND', FX, [hand], core, glow, size=0.07, count=6))
         elif stage == 'full':
-            power_glow(8, 30, 3.0)
+            power_glow(4, 30, 3.0)
             fx_obj(vx.lightning('LT_BOLT', FX, hand, hand + fwd * 1.6 + Vector((0, 0, -0.5)), core, glow,
                                 seed=11, branches=5, radius=0.004))
             fx_obj(vx.aura_arcs('LT_AURA', FX, body_anchors(['upperarm_L', 'forearm_L', 'spine_02', 'spine_03',
@@ -372,13 +372,13 @@ def g_powers(S):
         c.z = max(c.z, 1.0)
         yaw = math.degrees(math.atan2(-fwd.x, fwd.y)) + 180
         if stage == 'activation':
-            power_glow(3, 10, 0.5)
+            power_glow(1.5, 10, 0.5)
             fx_obj(vx.portal('PORTAL', FX, c, 0.75, PAL['portal_rim'], PAL['portal_deep'], yaw_deg=yaw,
                              openness=0.25, intensity=0.7))
             fx_obj(vx.rune_ring('RUNE', FX, hand + fwd * 0.06, 0.07, rune, (math.pi / 2, 0, math.radians(yaw))))
         elif stage == 'full':
-            power_glow(6, 20, 2.0)
-            fx_obj(vx.portal('PORTAL', FX, c + fwd * 0.15, 0.85, PAL['portal_rim'], PAL['portal_deep'],
+            power_glow(3, 20, 2.0)
+            fx_obj(vx.portal('PORTAL', FX, c + fwd * 0.35, 0.70, PAL['portal_rim'], PAL['portal_deep'],
                              yaw_deg=yaw, openness=1.0, intensity=1.0))
             fx_obj(vx.rune_ring('RUNE', FX, hand + fwd * 0.06, 0.08, rune, (math.pi / 2, 0, math.radians(yaw))))
         elif stage == 'deactivation':
@@ -397,7 +397,7 @@ def g_powers(S):
         h = bone_world(bone_root)
         return ck.camera('CAM_HAND', S, h + Vector(side_offset), h, lens=70)
 
-    clear_fx(); pose('CAST_L'); turn(20); power_glow(6, 30, 2)
+    clear_fx(); pose('CAST_L'); turn(20); power_glow(3, 30, 2)
     tips = [bone_world(f'{f}_03_L', True) for f in ('thumb', 'index', 'middle', 'ring', 'pinky')]
     for i, (p, q) in enumerate(zip(tips, tips[1:])):
         fx_obj(vx.lightning(f'LT_FINGER_{i}', FX, p, q, core, glow, seed=40 + i, branches=0, radius=0.0012,
@@ -405,7 +405,7 @@ def g_powers(S):
     fx_obj(vx.aura_arcs('LT_PALM', FX, tips, core, glow, size=0.05, count=6))
     c = hand_cam('hand_L', (0.05, -0.55, 0.12)); shot('hand_lightning.png', c); bpy.data.objects.remove(c)
 
-    clear_fx(); pose('CAST_R'); turn(20); power_glow(6, 20, 2)
+    clear_fx(); pose('CAST_R'); turn(20); power_glow(3, 20, 2)
     hand = bone_world('middle_01_R')
     fwd = (bone_world('middle_03_R', True) - bone_world('hand_R')).normalized()
     yaw = math.degrees(math.atan2(-fwd.x, fwd.y)) + 180
@@ -413,17 +413,17 @@ def g_powers(S):
     fx_obj(vx.aura_arcs('PT_SPARK', FX, [hand + fwd * 0.07], core, glow, size=0.05, count=4))
     c = hand_cam('hand_R', (-0.10, -0.55, 0.10)); shot('hand_portal.png', c); bpy.data.objects.remove(c)
 
-    clear_fx(); pose('DASH'); turn(90); power_glow(6, 30, 2)
+    clear_fx(); pose('DASH'); turn(90); power_glow(3, 30, 2)
     fa = body_anchors(['forearm_L', 'hand_L'])
     fx_obj(vx.speed_trails('HAND_TRAIL', FX, fa, Vector((1, 0, 0)), trail, length=0.45, count=10, width=0.004))
-    c = hand_cam('forearm_L', (0.10, -0.75, 0.05)); shot('hand_speed.png', c); bpy.data.objects.remove(c)
+    c = hand_cam('hand_L', (0.0, -1.1, 0.10)); c.data.lens = 50; shot('hand_speed.png', c); bpy.data.objects.remove(c)
 
     # ---------- eye transformation
     clear_fx(); pose('NEUTRAL'); turn(0)
     ck.setup_render((900, 420), SAMPLES)
     h = head_world() + Vector((0, 0, 0.004))
     c = ck.camera('CAM_EYES', S, h + Vector((0, -0.42, 0)), h, lens=85)
-    for label, g in (('normal', 0.0), ('activation', 3.0), ('full', 9.0)):
+    for label, g in (('normal', 0.0), ('activation', 1.5), ('full', 4.0)):
         power_glow(g, 6, g * 0.3)
         shot(f'eyes_{label}.png', c)
     bpy.data.objects.remove(c)

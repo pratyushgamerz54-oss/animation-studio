@@ -102,12 +102,13 @@ def portal_material(name, rim_hex, deep_hex, swirl=5.0, strength=6.0):
     x2 = N.new('ShaderNodeMath'); x2.operation = 'MULTIPLY'
     y2 = N.new('ShaderNodeMath'); y2.operation = 'MULTIPLY'
     L.new(sep.outputs['X'], x2.inputs[0]); L.new(sep.outputs['X'], x2.inputs[1])
-    L.new(sep.outputs['Z'], y2.inputs[0]); L.new(sep.outputs['Z'], y2.inputs[1])
+    # disc is a circle primitive: its local plane is X/Y
+    L.new(sep.outputs['Y'], y2.inputs[0]); L.new(sep.outputs['Y'], y2.inputs[1])
     add = N.new('ShaderNodeMath'); add.operation = 'ADD'
     L.new(x2.outputs[0], add.inputs[0]); L.new(y2.outputs[0], add.inputs[1])
     L.new(add.outputs[0], r.inputs[0]); r.inputs[1].default_value = 0.5
     ang = N.new('ShaderNodeMath'); ang.operation = 'ARCTAN2'
-    L.new(sep.outputs['Z'], ang.inputs[0]); L.new(sep.outputs['X'], ang.inputs[1])
+    L.new(sep.outputs['Y'], ang.inputs[0]); L.new(sep.outputs['X'], ang.inputs[1])
     tw = N.new('ShaderNodeMath'); tw.operation = 'MULTIPLY_ADD'
     L.new(r.outputs[0], tw.inputs[0]); tw.inputs[1].default_value = swirl
     L.new(ang.outputs[0], tw.inputs[2])
@@ -164,14 +165,14 @@ def portal(name, coll, center, radius, rim_hex, deep_hex, yaw_deg=0.0, openness=
     disc.name = f'{name}_DISC'
     disc.scale = (r, r, r)
     ck.assign(disc, portal_material(f'MAT_{name}_SWIRL', rim_hex, deep_hex, swirl=swirl,
-                                    strength=6.0 * intensity))
+                                    strength=2.5 * intensity))
     bpy.ops.mesh.primitive_torus_add(major_radius=r, minor_radius=r * 0.035, major_segments=96,
                                      minor_segments=12, location=(0, 0, 0), rotation=(math.pi / 2, 0, 0))
     rim = bpy.context.object
     rim.name = f'{name}_RIM'
-    ck.assign(rim, ck.emission(f'MAT_{name}_RIM', '#FFFFFF', 18.0 * intensity))
+    ck.assign(rim, ck.emission(f'MAT_{name}_RIM', '#DDFBFF', 7.0 * intensity))
     parts = [disc, rim]
-    glow = ck.emission(f'MAT_{name}_SPARK', rim_hex, 25.0 * intensity)
+    glow = ck.emission(f'MAT_{name}_SPARK', rim_hex, 12.0 * intensity)
     rnd = random.Random(seed)
     for i in range(int(60 * openness)):
         a = rnd.uniform(0, 2 * math.pi)
