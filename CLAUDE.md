@@ -41,3 +41,14 @@ Kaam Blender (Python `bpy`) se hota hai. Har step ka kaam isi repo mein save hot
 - Strong: hard-surface models (robot, mech, vehicles, buildings, props), procedural models (ped, chattaan, terrain), stylized/cartoon characters, saare VFX, simulations, particles, environment, shaders, lighting, camera.
 - Weak: realistic insaan (chehra, skin, baal), mocap jaisi natural movement. Iske liye ready-made models/mocap better hain.
 - Claude real-time mein dekh nahi sakta: render karke image dekhta hai, phir sudhaarta hai.
+
+## ⚠️ FINAL PRODUCTION RULE — VFX QUALITY (Director, 20 Nov)
+Final film production ke samay (abhi nahi — design-sheet VFX sirf reference hain) **saare special effects HIGH QUALITY**
+hone chahiye. Final shots ke liye VFX upgrade karna hai:
+- Fire / smoke / explosions: real Mantaflow volumetric simulation (fire + smoke domains), not emissive ribbons.
+- Lightning: animated branching bolts with flicker, volumetric glow, light that actually lights the scene.
+- Portals / dark magic / teleport: particle systems (thousands of particles), volumetric fog, animated swirl, distortion.
+- Speed / afterimages: real motion blur + animated trails; laser: heat-distortion, sparks, impact decals, light.
+- Compositor: glare/bloom, light wrap, lens effects; colour grading per shot.
+- Render: high samples, full HD+ (user's GPU PC), motion blur on, denoise.
+- Har VFX shot ka preview dikhana aur Director approve kare tab final render.
