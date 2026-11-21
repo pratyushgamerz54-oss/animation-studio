@@ -1,6 +1,6 @@
 {
   "character": "SOUL",
-  "started": "2026-11-20 23:55",
+  "started": "2026-11-21 01:49",
   "tests": {
     "uv_present_all_meshes": true,
     "textures_baked": 84,
@@ -28,7 +28,7 @@
       "constraints": 72,
       "ok": true
     },
-    "jaw_open_chin_drop_mm": 0.0,
+    "jaw_open_chin_drop_mm": 10.4,
     "body_unweighted_verts": 0,
     "non_manifold_edges_base_mesh": {
       "CHAR_SOUL_BELT": 20,
@@ -50,8 +50,8 @@
     "mouth_shape_keys": 19,
     "phonemes_present": true,
     "export": {
-      "glb_mb": 1.52,
-      "fbx_mb": 4.74
+      "glb_mb": 6.74,
+      "fbx_mb": 9.99
     },
     "glb_reimport": {
       "objects": 23,

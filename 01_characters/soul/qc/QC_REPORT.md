@@ -1,6 +1,6 @@
 # QC REPORT — Soul (SOUL)
 
-Generated 2026-11-20 23:56 by `_shared/production.py`.
+Generated 2026-11-21 01:51 by `_shared/production.py`.
 
 ## Automated checks
 
@@ -12,10 +12,10 @@ Generated 2026-11-20 23:56 by `_shared/production.py`.
 | Textures baked | ✅ PASS | 84 maps |
 | IK/FK rest pose unchanged + IK follows target | ✅ PASS | follow error 0.02 mm |
 | Phoneme shape keys (10) | ✅ PASS | 19 mouth keys |
-| Jaw bone opens the chin (jaw_open = 1) | ❌ FAIL | chin drop 0.0 mm |
+| Jaw bone opens the chin (jaw_open = 1) | ✅ PASS | chin drop 10.4 mm |
 | Robe / skirt follow-rig (chains follow the thighs) | ✅ PASS | {'bones': 36, 'constraints': 72, 'ok': True} |
 | GLB export + re-import | ✅ PASS | {'objects': 23, 'armatures': 1, 'meshes': 22, 'bones': 100, 'shape_key_meshes': 2} |
-| FBX export | ✅ PASS | 4.74 |
+| FBX export | ✅ PASS | 9.99 |
 
 ## Render-based tests (images in `design/raw/`, review by eye)
 
@@ -46,3 +46,19 @@ Generated 2026-11-20 23:56 by `_shared/production.py`.
 - Non-manifold edge counts: {"CHAR_SOUL_BELT": 20, "CHAR_SOUL_BROWS": 44, "CHAR_SOUL_CAPE": 56, "CHAR_SOUL_HIGH_COLLAR": 80, "CHAR_SOUL_LID_LO_L": 64, "CHAR_SOUL_LID_LO_R": 64, "CHAR_SOUL_LID_UP_L": 64, "CHAR_SOUL_LID_UP_R": 64, "CHAR_SOUL_MOUTH": 120, "CHAR_SOUL_ROBE": 96, "CHAR_SOUL_WRIST_BAND_L": 16, "CHAR_SOUL_WRIST_BAND_R": 16, "CHAR_SOUL_YOKE": 46}
 
 Quad ratio body 1.0, head 1.0; meshes 21; render-time polycount ≈ 187,808
+
+## RIGIFY animation rig (v004) — `blend/soul_v004_rigify.blend`
+
+Rigify rig generated from a meta-rig fitted to the deform skeleton: IK/FK arms + legs (poles, IK/FK sliders, foot roll), torso / hips / chest, neck + head follow, palms + 15 finger bones per hand (finger curl controls), jaw control, eye-aim control, robe/skirt chain controls (follow the thighs). Face controls (expressions, phonemes, jaw_open, blink, wide eyes) are custom properties on the Rigify `root` bone.
+
+| Check | Result | Detail |
+|---|---|---|
+| Rest pose unchanged after moving to Rigify | ✅ PASS | max 0.005 mm |
+| Leg IK follows foot control | ✅ PASS | error 0.04 mm, ankle lift 217.1 mm |
+| FK arm moves the elbow | ✅ PASS | 261.8 mm |
+| Jaw control opens the chin | ✅ PASS | 10.4 mm |
+| All weights moved to Rigify DEF bones | ✅ PASS | unmapped: [] |
+| Face drivers re-targeted / skirt follow constraints | ✅ | 60 / 72 |
+
+Bones: 534 (97 deform). Posed test render: `qc/SOUL_rigify_test.png`.
+GLB/FBX in `export/` use the clean v003 game skeleton (Rigify control bones are Blender-only).

@@ -1,6 +1,6 @@
-# SOUL — Sub-villain 1 — Design Sheet v1 (PROPOSAL)
+# SOUL — Sub-villain 1 — Design Sheet v1 (APPROVED 20 Nov)
 
-> **Status: awaiting Director approval.** Confirmed: name (Soul), role, powers (Lightning) and the reference. Everything else is a proposal.
+> **Status: design APPROVED by the Director (20 Nov).** Confirmed: name (Soul), role, powers (Lightning), the reference and the full design.
 
 ## Sheet pages (renders of the real Blender model)
 
@@ -99,16 +99,16 @@ Reusable VFX functions live in `../../_shared/vfxkit.py` (intensity / openness /
 - Clothing: separate meshes generated from the body surface (offset + solidify) → exact fit; robes/capes are lofted sheets.
 - UVs: smart-projected per mesh; layouts in `uv/`. Textures: baked BaseColor / Roughness / Normal / Emission in `textures/`.
 - Rig: deform skeleton (pelvis, 3 spine, neck, head, clavicles, arms, 15 finger bones per hand, legs, feet, toes) + root, COG, hand/foot IK targets with pole targets and IK/FK switches; eye-aim control.
+- **Rigify animation rig** (`blend/<name>_v004_rigify.blend`): IK/FK arms + legs, foot roll, torso/hips/chest, neck/head follow, finger curls, jaw + eye-aim controls, robe/skirt chain controls; same face controls on `root`.
 - Facial rig: shape keys for every expression + 10 phonemes, `jaw_open`, blink / wide-eye per side, eye look; all driven by properties on the `root` pose bone.
 
 ## Production status
 
 See `qc/QC_REPORT.md` for the automated checks and test renders.
-- `.blend`: `blend/soul_v002.blend` (design), `blend/soul_v003.blend` (production rig + controls)
-- Exports: `export/soul.glb` (6.76 MB), `export/soul.fbx` (9.69 MB)
+- `.blend`: `blend/soul_v002.blend` (design), `blend/soul_v003.blend` (game/export rig + controls), `blend/soul_v004_rigify.blend` (Rigify animation rig — use this for animation)
+- Exports: `export/soul.glb` (6.74 MB), `export/soul.fbx` (9.99 MB)
 
 ## Known limitations
 
 - Faces are stylised and code-sculpted; close-up photoreal detail needs a manual sculpt pass.
-- Jaw opens through mouth shape keys; the chin does not move.
-- Cloth simulation is specified but not simulated yet.
+- Robes / skirts use a 12-chain follow rig (no stiff tube); a cloth simulation pass is still recommended for final shots.
