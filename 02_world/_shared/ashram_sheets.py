@@ -13,7 +13,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import worldgen as wg
 
-A = os.path.join(HERE, '..', 'ashram'); R = os.path.join(A, '09_RENDER', 'concept_v1'); O = os.path.join(A, '00_REFERENCE')
+V2 = 'v1' not in sys.argv
+A = os.path.join(HERE, '..', 'ashram'); R = os.path.join(A, '09_RENDER', 'concept_v2' if V2 else 'concept_v1'); O = os.path.join(A, '00_REFERENCE')
+VER = 'v2' if V2 else 'v1'; DAY = 'golden' if V2 else 'day'
 F = lambda p, s: ImageFont.truetype(p, s)
 BG = (16, 18, 24); INK = (240, 230, 205); DIM = (170, 170, 180); GOLD = (255, 214, 90)
 
@@ -31,27 +33,27 @@ def img(n, w):
     im = Image.open(p).convert('RGB'); return im.resize((w, int(w * im.height / im.width)), Image.LANCZOS)
 
 
-VIEWS = [('CAM_01_WIDE_ESTABLISHING', 'Wide establishing — valley, lake, northern range'), ('CAM_02_FRONT', 'Front (south axis through the gate)'),
-         ('CAM_03_BACK', 'Back (from the north slope)'), ('CAM_04_SIDE_EAST', 'Side — east'), ('CAM_05_SIDE_WEST', 'Side — west'),
-         ('CAM_06_GROUND_LEVEL', 'Ground level · character height 1.6 m'), ('CAM_07_ARCH_DETAIL', 'Architectural detail — verandah, pillars, eaves'),
-         ('CAM_08_TRAINING_GROUND', 'Training ground'), ('CAM_09_PAVILION_LAKE', 'Meditation pavilion + lake ghat')]
+VIEWS = [('CAM_01_WIDE_ESTABLISHING', 'Wide establishing — valley, lake, northern range'), ('CAM_02_FRONT_GATE', 'Front — approach to the gate'),
+         ('CAM_03_COURTYARD', 'Courtyard · character height 1.65 m'), ('CAM_04_HALL_DETAIL', 'Detail — verandah, carved pillars, brackets, eaves'),
+         ('CAM_05_PAVILION_LAKE', 'Meditation pavilion + lake ghat'), ('CAM_06_BACK_FROM_SLOPE', 'Back — from the forest slope'),
+         ('CAM_07_SIDE_WEST', 'Side — west'), ('CAM_08_TRAINING', 'Training ground (Ø 44 m)'), ('CAM_09_BIRDSEYE_ORTHO', 'Bird’s-eye (ortho)')]
 
 
 def concept():
     W = 2600
-    big = img(VIEWS[0][0] + '_day.png', W - 80)
+    big = img(VIEWS[0][0] + f'_{DAY}.png', W - 80)
     tw = (W - 80 - 2 * 30) // 3
     th = int(tw * 9 / 16)
     H = 140 + big.height + 60 + 3 * (th + 60) + 40
     S = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(S)
-    head(d, W, 'ASHRAM — ENVIRONMENT CONCEPT v1', 'Renders of the real 3D blockout (ASHRAM_blockout_v001.blend) · direction: “Himalayan foothill gurukul” · '
+    head(d, W, f'ASHRAM — ENVIRONMENT CONCEPT {VER}', 'Renders of the real 3D scene (ASHRAM_concept_v002.blend) · direction: “Himalayan foothill gurukul” · golden hour · '
          'same model in every view · red cylinders = 1.75 m scale figures')
     S.paste(big, (40, 140)); d.text((56, 152), VIEWS[0][1], font=F(wg.FB, 28), fill=(255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0))
     y0 = 140 + big.height + 40
     for k, (n, cap) in enumerate(VIEWS[1:]):
         x = 40 + (k % 3) * (tw + 30); y = y0 + (k // 3) * (th + 60)
-        S.paste(img(n + '_day.png', tw), (x, y)); d.text((x, y + th + 8), cap, font=F(wg.FB, 22), fill=INK)
-    S.save(os.path.join(O, 'ASHRAM_concept_sheet_v1.png'), optimize=True)
+        S.paste(img(n + f'_{DAY}.png', tw), (x, y)); d.text((x, y + th + 8), cap, font=F(wg.FB, 22), fill=INK)
+    S.save(os.path.join(O, f'ASHRAM_concept_sheet_{VER}.png'), optimize=True)
 
 
 ZONES = [((0, 34), '1', 'Main hall (Headmaster / assembly)'), ((-42, 0), '2', 'Student residence — west'), ((42, 0), '3', 'Student residence — east'),
@@ -61,13 +63,13 @@ ZONES = [((0, 34), '1', 'Main hall (Headmaster / assembly)'), ((-42, 0), '2', 'S
 
 
 def layout():
-    top = os.path.join(R, 'CAM_10_BIRDSEYE_ORTHO_day.png')
+    top = os.path.join(R, ('CAM_09_BIRDSEYE_ORTHO' if V2 else 'CAM_10_BIRDSEYE_ORTHO') + f'_{DAY}.png')
     base = Image.open(top).convert('RGB') if os.path.exists(top) else Image.new('RGB', (1400, 1400), (60, 80, 50))
     N = base.width; scale = 300.0
     P = lambda x, y: ((x / scale + .5) * N, (-(y + 20) / scale + .5) * N)
     W = N + 900
     S = Image.new('RGB', (W, N + 160), BG); d = ImageDraw.Draw(S)
-    head(d, W, 'ASHRAM — BIRD’S-EYE LAYOUT PLAN v1', 'Orthographic top view of the 3D blockout · north up · 300 m frame · grid 25 m · local origin = courtyard centre')
+    head(d, W, f'ASHRAM — BIRD’S-EYE LAYOUT PLAN {VER}', 'Orthographic top view of the 3D blockout · north up · 300 m frame · grid 25 m · local origin = courtyard centre')
     S.paste(base, (0, 140))
     ov = Image.new('RGBA', base.size, (0, 0, 0, 0)); o = ImageDraw.Draw(ov)
     for g in range(-150, 151, 25):
@@ -97,20 +99,21 @@ def layout():
              'Lake ghat + pavilion = calm contrast location.']
     for t in notes:
         d.text((x, y), t, font=F(wg.FR, 21), fill=DIM if not t.startswith(('CONFIRMED', 'PROPOSED', 'NOT')) else INK); y += 32
-    S.save(os.path.join(O, 'ASHRAM_layout_plan_v1.png'), optimize=True)
+    S.save(os.path.join(O, f'ASHRAM_layout_plan_{VER}.png'), optimize=True)
 
 
 def lighting():
-    pairs = [('CAM_01_WIDE_ESTABLISHING', 'Wide'), ('CAM_02_FRONT', 'Front'), ('CAM_06_GROUND_LEVEL', 'Ground level')]
+    pairs = [('CAM_01_WIDE_ESTABLISHING', 'Wide'), ('CAM_02_FRONT_GATE', 'Front gate'), ('CAM_03_COURTYARD', 'Courtyard')] if V2 else \
+        [('CAM_01_WIDE_ESTABLISHING', 'Wide'), ('CAM_02_FRONT', 'Front'), ('CAM_06_GROUND_LEVEL', 'Ground level')]
     tw = 1180; th = int(tw * 9 / 16)
     W = 40 + 2 * (tw + 30) + 10
     S = Image.new('RGB', (W, 140 + 3 * (th + 60) + 20), BG); d = ImageDraw.Draw(S)
-    head(d, W, 'ASHRAM — LIGHTING TEST v1', 'Day: sun + physical sky + haze volume · Night: moon + lanterns + hall glow · time of day in the story = NOT CONFIRMED')
+    head(d, W, f'ASHRAM — LIGHTING TEST {VER}', 'Golden hour: low west sun + physical sky + haze + lake mist · Night: moon + lanterns + window glow · story time of day = NOT CONFIRMED')
     for k, (n, cap) in enumerate(pairs):
-        for j, tod in enumerate(('day', 'night')):
+        for j, tod in enumerate((DAY, 'night')):
             x = 40 + j * (tw + 30); y = 140 + k * (th + 60)
             S.paste(img(f'{n}_{tod}.png', tw), (x, y)); d.text((x, y + th + 8), f'{cap} — {tod.upper()}', font=F(wg.FB, 22), fill=INK)
-    S.save(os.path.join(O, 'ASHRAM_lighting_sheet_v1.png'), optimize=True)
+    S.save(os.path.join(O, f'ASHRAM_lighting_sheet_{VER}.png'), optimize=True)
 
 
 def materials():
@@ -121,13 +124,13 @@ def materials():
           ('Path earth', '#A88A5E', 'paths, training ground'), ('Grass', '#6E8F45', 'valley floor'), ('Foliage', '#3E6B32', 'trees'),
           ('Lake water', '#2B5D73', 'rough .04'), ('Lantern glow', '#FFB35A', 'emission (night)'), ('Snow', '#EEF2F5', 'peaks > 1 050 m (tile)')]
     W = 2400; S = Image.new('RGB', (W, 140 + ((len(sw) - 1) // 4 + 1) * 170 + 40), BG); d = ImageDraw.Draw(S)
-    head(d, W, 'ASHRAM — MATERIAL PALETTE v1', 'PBR standard in WORLD_BIBLE.md §6 · blockout uses procedural shaders, final assets get baked BaseColor / Roughness / Normal / AO')
+    head(d, W, f'ASHRAM — MATERIAL PALETTE {VER}', 'PBR standard in WORLD_BIBLE.md §6 · blockout uses procedural shaders, final assets get baked BaseColor / Roughness / Normal / AO')
     for k, (n, hx, note) in enumerate(sw):
         x = 40 + (k % 4) * 590; y = 150 + (k // 4) * 170
         d.rounded_rectangle((x, y, x + 140, y + 140), 14, fill=tuple(int(v) for v in wg.hexrgb(hx)))
         d.text((x + 160, y + 10), n, font=F(wg.FB, 26), fill=INK); d.text((x + 160, y + 50), hx, font=F(wg.FR, 22), fill=INK)
         d.text((x + 160, y + 84), note, font=F(wg.FR, 18), fill=DIM)
-    S.save(os.path.join(O, 'ASHRAM_materials_sheet_v1.png'), optimize=True)
+    S.save(os.path.join(O, f'ASHRAM_materials_sheet_{VER}.png'), optimize=True)
 
 
 if __name__ == '__main__':
