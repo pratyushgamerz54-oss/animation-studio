@@ -177,7 +177,7 @@
  },
  "MAT_T5_MIST": {
   "source": "procedural volume",
-  "maps": "Principled Volume, density 1.2 (mist)",
+  "maps": "Principled Volume, density 0.3 (mist)",
   "resolution": "procedural"
  },
  "MAT_T5_HAZE": {
