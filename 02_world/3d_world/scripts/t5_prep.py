@@ -147,6 +147,38 @@ for f in FEATURED:
              lip_x=float(r[k + 1, 0]), lip_y=float(r[k + 1, 1]), out_x=float(r[k + 2, 0]), out_y=float(r[k + 2, 1]))
 
 
+# ------------------------------------------------------------------ WIDE CASCADE (Director, 21 Nov): the steep gorge reach around the
+# featured falls becomes a ~60 m wide, 6-tier cascade. Same total drop, same river, same place — only the shape of the fall changes.
+_cr = FEATURED[0]['river']; _r = RIVERS[_cr]
+_sr = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(_r[:, :2], axis=0).T))])
+_k0 = min(f['k'] for f in FEATURED) - 2; _k1 = FEATURED[0]['k'] + 4
+CASC = dict(river=int(_cr), s0=float(_sr[_k0]), s1=float(_sr[_k1]), z_top=float(_r[_k0, 2]), z_bot=float(_r[_k1, 2]), half_width=30.0)
+_fr = [.06, .22, .37, .55, .74, .9]; _dr = [.11, .19, .09, .30, .17, .14]
+_D = CASC['z_top'] - CASC['z_bot']
+CASC['lips'] = []
+_zl = CASC['z_top']
+for fr_, dr_ in zip(_fr, _dr):
+    s_ = CASC['s0'] + fr_ * (CASC['s1'] - CASC['s0'])
+    x_, y_ = np.interp(s_, _sr, _r[:, 0]), np.interp(s_, _sr, _r[:, 1])
+    tx, ty = np.interp(s_ + 5, _sr, _r[:, 0]) - np.interp(s_ - 5, _sr, _r[:, 0]), np.interp(s_ + 5, _sr, _r[:, 1]) - np.interp(s_ - 5, _sr, _r[:, 1])
+    L_ = math.hypot(tx, ty)
+    CASC['lips'].append(dict(s=float(s_), x=float(x_), y=float(y_), dir=[tx / L_, ty / L_], z_top=float(_zl), z_bot=float(_zl - dr_ * _D),
+                             drop_m=float(dr_ * _D)))
+    _zl -= dr_ * _D
+
+
+def casc_hw(sg):
+    env = sstep(CASC['s0'] - 70, CASC['s0'], sg) * (1 - sstep(CASC['s1'], CASC['s1'] + 70, sg))
+    return 9.0 + (CASC['half_width'] - 9.0) * env
+
+
+def casc_level(sg):
+    z = np.full(np.shape(sg), CASC['z_top'], np.float64)
+    for L_ in CASC['lips']:
+        z = z - L_['drop_m'] * np.clip((sg - L_['s']) / 1.5, 0, 1)
+    return z
+
+
 CASCADE_STEP = None  # (14 m quantisation looked artificial)          # m — inside the waterfall gorge the steep river profile becomes pools + drops of ≈ this height
 
 
@@ -161,15 +193,10 @@ def water_profile(ri, a, ss, s, z, X, Y):
     rest of the steep profile is turned into a cascade of pools and drops (quantised to CASCADE_STEP, faded out toward the
     WF border so it joins the normal profile seamlessly). Always monotonic downstream."""
     zlin = np.interp(ss, s, z); zz = zlin.copy()
-    for f in FEATURED:
-        if f['river'] != ri:
-            continue
-        k = f['k'] - a
-        if k < 0 or k + 2 >= len(s):
-            continue
-        s_lip = s[k + 1]; zt, zb = z[k], z[k + 2]
-        m1 = (ss >= s[k]) & (ss < s_lip); m2 = (ss >= s_lip) & (ss < s_lip + 3); m3 = (ss >= s_lip + 3) & (ss <= s[k + 2])
-        zz[m1] = zt; zz[m2] = zt + (zb - zt) * (ss[m2] - s_lip) / 3; zz[m3] = zb
+    if ri == CASC['river']:
+        sg = ss + _sr[a]
+        inz = (sg >= CASC['s0']) & (sg <= CASC['s1'])
+        zz[inz] = casc_level(sg[inz])
     w = wf_weight(X, Y)
     if CASCADE_STEP and (w > 0).any():
         q = CASCADE_STEP * np.ceil(zz / CASCADE_STEP)
@@ -194,12 +221,17 @@ def river_samples(t, step):
         ss = np.arange(0, s[-1], step)
         cx, cy = CubicSpline(s, rr[:, 0]), CubicSpline(s, rr[:, 1])
         X, Y = cx(ss), cy(ss)
+        ri_ = _ri(r)
         if step <= 5:
-            zz, zl = water_profile(_ri(r), a, ss, s, rr[:, 2], X, Y)
+            zz, zl = water_profile(ri_, a, ss, s, rr[:, 2], X, Y)
         else:
             zz = zl = np.interp(ss, s, rr[:, 2])
-        out.append(np.column_stack([X, Y, zz, np.interp(ss, s, rr[:, 3]), zl]))
-    return np.concatenate(out) if out else np.zeros((0, 5))
+        wd = np.interp(ss, s, rr[:, 3]); sg = np.full(len(ss), -1.0)
+        if ri_ == CASC['river'] and step <= 5:
+            sg = ss + _sr[a]
+            wd = np.maximum(wd, 2 * casc_hw(sg))
+        out.append(np.column_stack([X, Y, zz, wd, zl, sg]))
+    return np.concatenate(out) if out else np.zeros((0, 6))
 
 
 def _ri(r):
@@ -263,6 +295,9 @@ def detail(X, Y, z0, t):
             dk = np.zeros(k.sum())
             for wl, amp, s in ((900, 170, 112), (300, 55, 113), (100, 12, 114)):
                 dk += bl(sp, wl) * N.ridged(wx, wy, wl, 3, s) * amp * m[k] ** 1.2
+            hi = sstep(3600, 4800, z0[k])                                # sharper arêtes / horns on the high summits
+            for wl, amp, s in ((650, 150, 172), (220, 45, 173)):
+                dk += bl(sp, wl) * N.ridged(wx, wy, wl, 4, s) * amp * hi
             d[k] += dk
         d += bl(sp, 140) * N.fbm(X, Y, 140, 3, 115) * 8 * (.3 + hill)
     return d
@@ -282,7 +317,7 @@ def slope_of(z, sp, smooth_m=0.0):
 
 
 EROSION = {   # (downsample, drops per cell, radius, erode, deposit) passes; thermal talus (deg)
-    'mountain': dict(passes=[(4, 1.5, 2, .3, .2), (1, 1.0, 3, .3, .3)], talus=50, cap=4.0),
+    'mountain': dict(passes=[(4, 1.5, 2, .3, .2), (1, 1.0, 3, .3, .3)], talus=58, cap=4.0),
     'horizon': dict(passes=[(1, 1.5, 2, .3, .3)], talus=45, cap=4.0),
     'valley': dict(passes=[(1, .45, 2, .12, .3)], talus=40, cap=2.0),
     'hero': dict(passes=[], talus=None, cap=0),
@@ -342,6 +377,12 @@ def build(name):
         d, j = cKDTree(R[:, :2]).query(np.column_stack([x, y]), distance_upper_bound=4000)
         ok = np.isfinite(d); jj = np.where(ok, j, 0)
         d = d.reshape(n, m); ok = ok.reshape(n, m); jj = jj.reshape(n, m)
+        if t['kind'] == 'wf':                                           # irregular (not straight) cascade lips
+            tg = np.gradient(R[:, :2], axis=0); tg /= np.maximum(np.linalg.norm(tg, axis=1, keepdims=True), 1e-9)
+            sh = (N.fbm(X, Y, 16, 3, 170) * 4.5 + N.fbm(X, Y, 5, 2, 171) * 1.0) * (d < 90)
+            P2 = np.column_stack([x, y]) - tg[jj.ravel()] * sh.ravel()[:, None]
+            _, j2 = cKDTree(R[:, :2]).query(P2, distance_upper_bound=4000)
+            jj = np.where(d < 90, np.where(j2 < len(R), j2, jj.ravel()).reshape(n, m), jj)
         w = R[jj, 3]; zr = R[jj, 2]
         far = sp >= 400
         if t['kind'] == 'wf':                                           # rock steps / cliff bands across the gorge at each drop
@@ -358,12 +399,11 @@ def build(name):
         z_in = (zr - .4 - depth) + depth * (np.clip(d, 0, None) / ri) ** 2
         if sp <= 10:                                                    # bed roughness (stones / pools)
             z_in = z_in + fbm(X, Y, 7, 2, 122) * .18 * (d / ri)
-        if t['kind'] == 'wf':                                           # plunge pools at the foot of each fall
-            for f in FEATURED:
-                dp = np.hypot(X - f['out_x'], Y - f['out_y'])
-                pool = (1 - sstep(4, 22, dp)) * 4.5
-                z_in = z_in - pool * inner
-                z = np.where(dp < 26, np.minimum(z, f['z_bottom'] - .4 + (z - f['z_bottom']) * sstep(10, 26, dp)), z)
+        if t['kind'] == 'wf':                                           # plunge pool below every cascade tier
+            sgp = R[jj, 5]
+            for L_ in CASC['lips']:
+                dsp = np.abs(sgp - (L_['s'] + 8))
+                z_in = z_in - (1 - sstep(2, 9, dsp)) * (1.2 + .04 * L_['drop_m']) * inner * (sgp > 0)
         z = np.where(inner, np.minimum(z, z_in), z)
         mid = ok & (d >= ri) & (d < ri + bank)
         tb = np.clip((d - ri) / bank, 0, 1) ** 1.6
@@ -479,7 +519,10 @@ if __name__ == '__main__':
             lo, hi = ss[fine].min() - 60, ss[fine].max() + 60
             ss = np.unique(np.concatenate([ss[(ss < lo) | (ss > hi)], np.arange(max(lo, 0), min(hi, s[-1]), 1.5)]))
         zz, _ = water_profile(len(riv), 0, ss, s, r[:, 2], cx(ss), cy(ss))
-        riv.append(np.column_stack([cx(ss), cy(ss), zz, np.interp(ss, s, r[:, 3])]).astype(np.float32))
+        wd = np.interp(ss, s, r[:, 3])
+        if len(riv) == CASC['river']:
+            wd = np.maximum(wd, 2 * casc_hw(ss) * 1.05 / 1.4)            # ribbon (1.4 w) spans the whole cascade width
+        riv.append(np.column_stack([cx(ss), cy(ss), zz, wd]).astype(np.float32))
     np.savez_compressed(os.path.join(OUT, 'water.npz'), RIV=np.concatenate(riv), RIVO=np.cumsum([0] + [len(a) for a in riv]))
     prev = {}
     pj = os.path.join(OUT, 'prep_v002.json')
@@ -490,7 +533,7 @@ if __name__ == '__main__':
     meta = dict(status='TASK 05 detail on the APPROVED TASK 04 blockout (map rev 01 = PROPOSAL)', site_elev_m=SITE,
                 verify_v001_max_abs_dz_m=err, frame=MET1['frame'], river_level_change_vs_v001=RIVER_LEVEL_CHANGE,
                 tiles=[prev[k] for k in TILES if k in prev], tile_defs=TILES, lakes=LAKES, waterfalls=wf,
-                n_rivers=len(RIVERS), erosion=EROSION, featured_waterfalls=FEATURED)
+                n_rivers=len(RIVERS), erosion=EROSION, featured_waterfalls=FEATURED, cascade=CASC)
     json.dump(meta, open(pj, 'w'), indent=1)
     print('waterfalls', len(wf), [(round(w['x']), round(w['y']), round(w['z_top'] - w['z_bottom'])) for w in wf][:20])
     print('featured', FEATURED); print('lakes', LAKES); print('river level change vs v001', RIVER_LEVEL_CHANGE)

@@ -358,7 +358,7 @@ def heightfield_group():
             geo = store(an, cs.outputs[i])
     # helper masks for scattering: m_one (everywhere) and m_bare (path, Ashram pad, water / wet banks → no plants)
     geo = store('m_one', 1.0)
-    geo = store('m_bare', b.math('MAXIMUM', b.math('MAXIMUM', VAL['m_path'], VAL['m_pad']), b.maprange(VAL['m_wet'], .8, .97)))
+    geo = store('m_bare', b.math('MAXIMUM', b.math('MAXIMUM', b.maprange(VAL['m_path'], .2, .45), VAL['m_pad']), b.maprange(VAL['m_wet'], .7, .9)))
     sp = b.node('GeometryNodeSetPosition'); b.link(geo, sp.inputs['Geometry']); b.link(off.outputs[0], sp.inputs['Offset'])
     geo = sp.outputs['Geometry']
     # holes (finer nested LODs live there): delete faces whose centre is inside a hole rectangle

@@ -101,17 +101,17 @@ x, y = 700.0, 24150.0
 gz = ground(x, y)
 cam('CAM_T5_02_FOREST_ESTABLISHING', (x, y, gz + 45), (-350, 25700, ground(-350, 25700) + 8), 24,
     'Forest establishing shot — edge of the northern forest belt where the river enters it (FH, 2 m terrain + real trees)', 40000, .22)
-# 3 river + waterfall — looking upstream at the featured fall in the NW01 gorge (WF, 1.5 m terrain)
-f = PREP['featured_waterfalls'][0]
-d = np.array([f['out_x'] - f['x'], f['out_y'] - f['y']]); d /= np.linalg.norm(d); side = np.array([-d[1], d[0]])
-p = np.array([f['out_x'], f['out_y']]) + d * 60 + side * 7
-cz = max(ground(*p), f['z_bottom'] - .4) + 3.0
-cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (f['lip_x'], f['lip_y'], f['z_top'] - .35 * (f['z_top'] - f['z_bottom'])), 20,
-    f'River + waterfall — featured fall ({f["z_top"] - f["z_bottom"]:.0f} m drop, largest of the network in NW01) and its plunge pool', 3000, .25)
+# 3 river + waterfall — the WIDE CASCADE (6 tiers) seen from downstream, slightly raised so every tier reads
+C5 = PREP['cascade']; Ls = C5['lips']; Lb = Ls[-1]; Lm = Ls[len(Ls) // 2]
+d = np.array(Lb['dir']); side = np.array([-d[1], d[0]])
+p = np.array([Lb['x'], Lb['y']]) + d * 150 + side * 30
+cz = max(ground(*p), Lb['z_bot']) + 24
+cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (Lm['x'], Lm['y'], Lm['z_bot'] - 20), 22,
+    f'River + waterfall — wide cascade, {len(Ls)} tiers, {Ls[0]["z_top"] - Lb["z_bot"]:.0f} m total drop (NW01 gorge), ballistic spray + mist', 4000, .2)
 # 4 snowy mountain — highest summit of NW01, from the south-south-east, side-lit by the afternoon sun
-ang = math.radians(160); dist = 7800
+ang = math.radians(160); dist = 5600
 cx, cy = px_ + math.sin(ang) * dist, py_ + math.cos(ang) * dist
-cam('CAM_T5_04_SNOWY_PEAKS', (cx, cy, pz - 250), (px_, py_, pz - 450), 42,
+cam('CAM_T5_04_SNOWY_PEAKS', (cx, cy, pz - 380), (px_, py_, pz - 380), 40,
     f'Snowy mountain — highest summit of NW01 ({pz:.0f} m) from the SSE, glaciers / couloirs / rock bands', 120000, .22)
 # 6 valley aerial — over the Ashram toward the northern forest belt and the range on the horizon
 cam('CAM_T5_06_VALLEY_AERIAL', (3800, -6200, ground(3800, -6200) + 420), (-9000, 14000, 760), 32,

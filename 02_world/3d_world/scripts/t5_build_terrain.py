@@ -214,7 +214,7 @@ elif COMP == 'water':
         for t in FINE:
             k |= (P[:, 0] > t['x0'] - m) & (P[:, 0] < t['x1'] + m) & (P[:, 1] > t['y0'] - m) & (P[:, 1] < t['y1'] + m)
         return k
-    falls = PREP['featured_waterfalls']
+    lips = PREP['cascade']['lips']
     vs, fs, foam, n0 = [], [], [], 0
     for i in range(len(RIVO) - 1):
         r = RIV[RIVO[i]:RIVO[i + 1]]
@@ -232,9 +232,10 @@ elif COMP == 'water':
         ds = np.maximum(np.hypot(*np.diff(r[:, :2], axis=0).T), 1e-3)
         sl = np.concatenate([[0], np.abs(np.diff(z)) / ds])
         fo = np.clip((sl - .03) / .2, 0, 1)                             # rapids: foam where the water surface is steep
-        for f in falls:
-            dp = np.hypot(r[:, 0] - f['out_x'], r[:, 1] - f['out_y'])
-            fo = np.maximum(fo, np.clip(1 - (dp - 6) / 40, 0, 1))      # churning pool + run-out below each fall
+        for L_ in lips:                                                 # churning pool + run-out below each cascade tier
+            bx, by = L_['x'] + L_['dir'][0] * 8, L_['y'] + L_['dir'][1] * 8
+            dp = np.hypot(r[:, 0] - bx, r[:, 1] - by)
+            fo = np.maximum(fo, np.clip(1 - (dp - 4) / 28, 0, 1))
         fv = np.repeat(fo, 3); fv[0::3] = np.maximum(fv[0::3], .12); fv[2::3] = np.maximum(fv[2::3], .12)   # thin bank foam line
         k = np.arange(len(r) - 1) * 3 + n0
         fs.append(np.concatenate([np.stack([k, k + 1, k + 4, k + 3], 1), np.stack([k + 1, k + 2, k + 5, k + 4], 1)]))
@@ -260,41 +261,99 @@ elif COMP == 'water':
     wk.add_props(o, status=STATUS, level_m=lev, note='map lake (C1 lakes data) at its spill level; the shoreline is where the terrain '
                  'crosses the level → smooth shore at terrain resolution (no stair-steps)')
     INFO['lake'] = dict(level_m=lev, faces=len(Fk))
-    # waterfall curtains (+ inner layer), mist volumes
-    for j, f in enumerate(falls):
-        d = np.array([f['out_x'] - f['x'], f['out_y'] - f['y']]); d /= np.linalg.norm(d)
-        side = np.array([-d[1], d[0]])
-        h = f['z_top'] - f['z_bottom']; w = f['width_m'] * .95
-        lip = np.array([f['lip_x'], f['lip_y']])
-        for layer, (v0, off, wf) in enumerate(((2.8, 0.0, 1.0), (2.0, -.6, .8))):
-            nu, nv = 14, 28
-            T = np.sqrt(2 * h / 9.81)
-            V, Fq = [], []
-            for a in range(nv + 1):
-                tt = T * (a / nv) ** 1.0
-                hz = f['z_top'] - .35 - .5 * 9.81 * tt * tt
-                ho = v0 * tt + off
-                for b_ in range(nu + 1):
-                    u = (b_ / nu - .5) * w * wf * (1 + .25 * a / nv)          # the curtain widens as it falls
-                    p = lip + d * ho + side * u
-                    V.append((p[0], p[1], max(hz, f['z_bottom'] - .3)))
-            for a in range(nv):
-                for b_ in range(nu):
-                    i0 = a * (nu + 1) + b_
-                    Fq.append((i0, i0 + 1, i0 + nu + 2, i0 + nu + 1))
-            o = wk.mesh_from_arrays(f'T5_WATERFALL_{j + 1:02d}_CURTAIN_{layer + 1}', np.array(V), np.array(Fq), cf, MAT['MAT_T5_WATERFALL'])
-            o.data.shade_smooth()
-            wk.add_props(o, status=STATUS, drop_m=round(h, 1), width_m=round(w, 1),
-                         note='featured waterfall: largest drop of the river network inside the first mountain region (terrain-derived, '
-                              'not a story location); ballistic curtain, animated material')
+    # ---- WIDE CASCADE: per tier several falling streams (ballistic sheets), spray particles (GN, ballistic), mist volumes
+    rng = np.random.default_rng(21)
+    g = 9.81
+    emit_v, emit_attr = [], []
+    for j, L_ in enumerate(lips):
+        d = np.array(L_['dir']); side = np.array([-d[1], d[0]])
+        h = L_['z_top'] - L_['z_bot']; hw = PREP['cascade']['half_width'] * .95
+        T = math.sqrt(2 * h / g)
+        v0 = 2.2 + .015 * h                                            # approach speed of the water over the lip (m/s)
+        # split the lip into streams (gaps where rock breaks the flow) — 70–85 % of the width carries water
+        u = -hw
+        streams = []
+        while u < hw:
+            wseg = rng.uniform(5, 16); gap = rng.uniform(1.0, 5.0)
+            streams.append((u, min(u + wseg, hw))); u += wseg + gap
+        for si, (u0, u1) in enumerate(streams):
+            for layer, (vf, off, thick) in enumerate(((1.0, 0.0, 1.0), (.75, -.5, .85))):
+                nu, nv = max(3, int((u1 - u0) / 1.5)), 26
+                V, Fq = [], []
+                lipoff = rng.uniform(-2.0, 2.0)
+                for a_ in range(nv + 1):
+                    tt = T * a_ / nv
+                    hz = L_['z_top'] - .3 - .5 * g * tt * tt
+                    for b_ in range(nu + 1):
+                        uu = u0 + (u1 - u0) * b_ / nu
+                        spread = 1 + .18 * a_ / nv                       # streams fan out slightly while falling
+                        p = np.array([L_['x'], L_['y']]) + d * (v0 * vf * tt + off + lipoff) + side * uu * spread
+                        V.append((p[0], p[1], max(hz, L_['z_bot'] - .3)))
+                for a_ in range(nv):
+                    for b_ in range(nu):
+                        i0 = a_ * (nu + 1) + b_
+                        Fq.append((i0, i0 + 1, i0 + nu + 2, i0 + nu + 1))
+                o = wk.mesh_from_arrays(f'T5_CASCADE_T{j + 1}_S{si + 1:02d}_L{layer + 1}', np.array(V), np.array(Fq), cf, MAT['MAT_T5_WATERFALL'])
+                o.data.shade_smooth()
+                wk.add_props(o, status=STATUS, tier=j + 1, drop_m=round(h, 1), fall_time_s=round(T, 2),
+                             impact_speed_ms=round(math.sqrt(2 * g * h), 1), note='ballistic sheet: x = v0·t, z = −½·g·t² (g = 9.81)')
+            # spray emitters along the impact line of this stream
+            for uu in np.arange(u0, u1, 1.2):
+                p = np.array([L_['x'], L_['y']]) + d * (v0 * T) + side * uu
+                emit_v.append((p[0], p[1], L_['z_bot'] - .2))
+                emit_attr.append(math.sqrt(2 * g * h))
+        # mist / spray cloud at the foot of the tier (volume)
         bm = bmesh.new(); bmesh.ops.create_icosphere(bm, subdivisions=3, radius=1.0)
-        me = bpy.data.meshes.new(f'T5_WATERFALL_{j + 1:02d}_MIST'); bm.to_mesh(me); bm.free()
+        me = bpy.data.meshes.new(f'T5_CASCADE_T{j + 1}_MIST'); bm.to_mesh(me); bm.free()
         mo = bpy.data.objects.new(me.name, me); cf.objects.link(mo); me.materials.append(MAT['MAT_T5_MIST'])
-        base = lip + d * (2.8 * math.sqrt(2 * h / 9.81))
-        mo.location = (base[0], base[1], f['z_bottom'] + .2 * w); mo.scale = (w * 1.1, w * 1.1, w * .55)
+        base = np.array([L_['x'], L_['y']]) + d * (v0 * T)
+        mo.location = (base[0], base[1], L_['z_bot'] + .15 * h)
+        mo.rotation_euler = (0, 0, math.atan2(d[1], d[0]))
+        mo.scale = (8 + .15 * h, hw * 1.15, 3 + .25 * h)
         mo.display_type = 'BOUNDS'
-        wk.add_props(mo, status=STATUS, note='spray / mist volume at the plunge pool')
-    INFO['waterfalls'] = falls
+        wk.add_props(mo, status=STATUS, note='spray / mist volume at the foot of a cascade tier')
+    # spray particles: GN ballistic droplets (age = (time·rate + random) mod life; p = p0 + v·t + ½·g·t²) — animated, no bake
+    me = bpy.data.meshes.new('T5_CASCADE_SPRAY'); me.vertices.add(len(emit_v)); me.vertices.foreach_set('co', np.array(emit_v, np.float32).ravel())
+    em = bpy.data.objects.new('T5_CASCADE_SPRAY', me); cf.objects.link(em)
+    wk.set_float_attr(em, 'impact_speed', np.array(emit_attr))
+    drop = bpy.data.meshes.new('T5_DROPLET'); bm = bmesh.new(); bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0); bm.to_mesh(drop); bm.free()
+    drop.materials.append(MAT['MAT_T5_FOAM'])
+    dob = bpy.data.objects.new('T5_DROPLET_PROTO', drop); cf.objects.link(dob); dob.hide_render = True; dob.hide_viewport = True
+    ng = tk.new_tree('NG_T5_SPRAY', 'GeometryNodeTree'); b = tk.NB(ng)
+    tk.sock_new(ng, 'Geometry', 'OUTPUT', 'NodeSocketGeometry'); tk.sock_new(ng, 'Geometry', 'INPUT', 'NodeSocketGeometry')
+    for nm, dv in (('Particles per Emitter', 14), ('Life (s)', 1.6), ('Speed Factor', .35), ('Droplet Size', .09), ('Seed', 3)):
+        tk.sock_new(ng, nm, 'INPUT', 'NodeSocketFloat', float(dv))
+    gi = b.node('NodeGroupInput'); go = b.node('NodeGroupOutput')
+    G = lambda k: b.out(gi, k)
+    dup = b.node('GeometryNodeDuplicateElements', domain='POINT'); b.link(G('Geometry'), dup.inputs['Geometry'])
+    b.link(G('Particles per Emitter'), dup.inputs['Amount'])
+    idx = b.node('GeometryNodeInputIndex')
+    def rnd(lo, hi, seed, vec=False):
+        r_ = b.node('FunctionNodeRandomValue', data_type='FLOAT_VECTOR' if vec else 'FLOAT')
+        tp = 'VECTOR' if vec else 'VALUE'
+        b.sock(r_, 'Min', typ=tp).default_value = lo; b.sock(r_, 'Max', typ=tp).default_value = hi
+        b.link(idx.outputs[0], b.sock(r_, 'ID', typ='INT')); b.sock(r_, 'Seed', typ='INT').default_value = seed
+        return b.out(r_, 'Value', typ=tp)
+    tm = b.node('GeometryNodeInputSceneTime')
+    life = G('Life (s)')
+    age = b.math('MULTIPLY', b.math('FRACT', b.math('ADD', b.math('DIVIDE', b.out(tm, 'Seconds'), life), rnd(0, 1, 11))), life)
+    na = b.node('GeometryNodeInputNamedAttribute', data_type='FLOAT'); na.inputs['Name'].default_value = 'impact_speed'
+    spd = b.math('MULTIPLY', b.out(na, 'Attribute', typ='VALUE'), G('Speed Factor'))
+    dirv = b.vmath('NORMALIZE', rnd((-1, -1, .35), (1, 1, 1.2), 12, True))
+    vel = b.vmath('SCALE', dirv, scale=b.math('MULTIPLY', spd, rnd(.3, 1.0, 13)))
+    grav = b.node('ShaderNodeCombineXYZ'); b.link(b.math('MULTIPLY', b.math('MULTIPLY', age, age), -4.905), grav.inputs['Z'])
+    off = b.vmath('ADD', b.vmath('SCALE', vel, scale=age), grav.outputs[0])
+    sp_ = b.node('GeometryNodeSetPosition'); b.link(dup.outputs['Geometry'], sp_.inputs['Geometry']); b.link(off, sp_.inputs['Offset'])
+    oi = b.node('GeometryNodeObjectInfo'); oi.inputs['Object'].default_value = dob
+    ip = b.node('GeometryNodeInstanceOnPoints'); b.link(sp_.outputs['Geometry'], ip.inputs['Points']); b.link(b.out(oi, 'Geometry'), ip.inputs['Instance'])
+    sz = b.math('MULTIPLY', G('Droplet Size'), b.math('MULTIPLY', rnd(.4, 1.6, 14), b.math('SUBTRACT', 1.0, b.math('DIVIDE', age, life))))
+    b.link(sz, ip.inputs['Scale'])
+    b.link(ip.outputs[0], go.inputs['Geometry'])
+    md = em.modifiers.new('SPRAY', 'NODES'); md.node_group = ng
+    wk.add_props(em, status=STATUS, emitters=len(emit_v), note='ballistic spray: speed from impact velocity √(2gh) × factor, gravity 9.81, '
+                 'life-cycled per particle (seamless loop, deterministic)')
+    INFO['cascade'] = dict(tiers=len(lips), total_drop_m=round(lips[0]['z_top'] - lips[-1]['z_bot'], 1), spray_emitters=len(emit_v),
+                           spray_particles=int(len(emit_v) * 14))
 
 wk.add_props(sc, info=json.dumps(INFO, default=str))
 # viewport: Solid shading with material colour; scatter carriers show bounds only in the viewport

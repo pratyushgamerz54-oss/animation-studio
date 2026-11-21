@@ -208,8 +208,15 @@ def terrain_material():
     sn = lerp_layer(far, sn, snf)
     snowmask = b.math('MULTIPLY', A['m_snow'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .12)), .70, .84))
     base, sfac = hblend(base, sn, snowmask, .25)
-    ice = [b.mixc(b.math('MULTIPLY', meso, .5), lin('#B8D4E6'), lin('#8DB6D2')), .1, base[2], .6]
-    icef = b.math('MULTIPLY', b.math('MULTIPLY', A['m_snow'], b.maprange(A['m_flow'], .45, .8)), b.maprange(zpos, 4300, 4700))
+    # glacier ice in the high, gentle, wet valley floors: blue-white with stretched crevasse bands
+    cv = b.node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); cv.inputs['Scale'].default_value = 1 / 14.0
+    b.link(b.vmath('MULTIPLY', v, (1.0, 3.5, 1.0)), cv.inputs['Vector'])
+    crev = b.maprange(cv.outputs['Distance'], 0.0, .05, 1.0, 0.0)
+    icecol = b.mixc(b.math('MULTIPLY', meso, .6), lin('#A9CBE0'), lin('#7FAACB'))
+    icecol = b.mixc(b.math('MULTIPLY', crev, .7), icecol, lin('#2E4A63'))
+    ice = [icecol, .12, base[2], .6]
+    icef = b.math('MULTIPLY', b.math('MULTIPLY', A['m_snow'], b.maprange(A['m_flow'], .25, .55)), b.maprange(zpos, 3900, 4400))
+    icef = b.math('MULTIPLY', icef, b.maprange(nz, .86, .95))
     base = lerp_layer(icef, base, ice)
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
     bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .4
