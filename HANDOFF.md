@@ -1,4 +1,4 @@
-# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026
+# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 2)
 
 > **Nayi session mein sabse pehle ye file padho**, phir `STATUS.md`, `PROJECT_LOG.md`, `01_characters/PRODUCTION_INVENTORY.md`,
 > `02_world/map_v2/GEOGRAPHY.md`, `02_world/WORLD_BIBLE.md`. Director ko Hinglish mein summary do, phir jahan ruka tha wahin se kaam karo.
@@ -76,8 +76,8 @@ jaw + eye_aim controls, skirt controls).
 Scripts: `charkit.py` (primitives), `charbuild.py` (builder), `vfxkit.py`, `sheet_render.py`, `sheet_compose.py`, `production.py`,
 `rigify_build.py`, `sheet_doc.py`, `qc_contact.py`.
 
-**Known small issues:** Ramarat robe par kuch poses mein safed daag (hem accent band) · jaw/robe ke liye final shots mein cloth sim
-recommended · Hero 1 ka naam pending.
+**Known small issues:** Ramarat robe par DEFORM/JUMP/LAND poses mein safed daag = ghutna (trousers/skin) skirt ke aar-paar (K-01 clipping,
+material bug NAHI — 21 Nov diagnose) → scene stage par cloth sim · jaw/robe ke liye final shots mein cloth sim recommended · Hero 1 ka naam pending.
 
 ---
 
