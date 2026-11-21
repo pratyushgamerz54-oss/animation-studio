@@ -48,5 +48,15 @@
   ],
   "description": "Valley aerial \u2014 Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_07_GROUND_LEVEL": {
+  "seconds": 286.4,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Ground level (1.6 m eye) \u2014 river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon",
+  "blender": "4.5.16 LTS"
  }
 }
