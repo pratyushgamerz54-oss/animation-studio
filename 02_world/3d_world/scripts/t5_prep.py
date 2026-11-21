@@ -42,6 +42,9 @@ TILES = {
     'L1': dict(x0=-32000, x1=32000, y0=-32000, y1=32000, sp=40.0, kind='valley', band=1500, holes=['L0', 'FH']),
     'MT': dict(x0=-116000, x1=-56000, y0=44000, y1=104000, sp=30.0, kind='mountain', band=2500, holes=['WF']),
     'L2': dict(x0=-160000, x1=160000, y0=-160000, y1=160000, sp=400.0, kind='horizon', band=6000, holes=['L1', 'MT']),
+    # milestone 2: R03 Great Northern Range core (map region centre C1 (626, 138) = +90 km E, +285 km N of the Ashram)
+    'R3F': dict(x0=-30000, x1=210000, y0=165000, y1=405000, sp=400.0, kind='horizon', band=8000, holes=['R3N']),
+    'R3N': dict(x0=60000, x1=120000, y0=255000, y1=315000, sp=30.0, kind='mountain', band=2500, holes=[]),
 }
 
 
@@ -346,9 +349,9 @@ def erode(z, sp, kind, seed):
     return z, flow, scree
 
 
-PARENT = {'VH': 'L0', 'L0': 'L1', 'FH': 'L1', 'L1': 'L2', 'MT': 'L2', 'WF': 'MT'}
-SEAM_BLEND = {'VH': 60, 'L0': 300, 'FH': 150, 'L1': 2000, 'MT': 2400, 'WF': 150}     # m — ≥ 4 parent cells
-LEVELS = [['L2'], ['L1', 'MT'], ['L0', 'FH', 'WF'], ['VH']]                          # parents first
+PARENT = {'VH': 'L0', 'L0': 'L1', 'FH': 'L1', 'L1': 'L2', 'MT': 'L2', 'WF': 'MT', 'R3N': 'R3F'}
+SEAM_BLEND = {'VH': 60, 'L0': 300, 'FH': 150, 'L1': 2000, 'MT': 2400, 'WF': 150, 'R3N': 2400}     # m — ≥ 4 parent cells
+LEVELS = [['L2', 'R3F'], ['L1', 'MT', 'R3N'], ['L0', 'FH', 'WF'], ['VH']]                          # parents first
 
 
 def build(name):

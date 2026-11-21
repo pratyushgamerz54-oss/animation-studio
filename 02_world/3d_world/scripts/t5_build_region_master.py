@@ -15,8 +15,15 @@ CFG = {'R04': dict(file='06_DESERTS/DESERT_R04_v002.blend', coll='T5_DESERT_R04'
        'R05': dict(file='06_DESERTS/FORBIDDEN_R05_v002.blend', coll='T5_FORBIDDEN_R05', data='06_DESERTS/data_v002',
                    out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 18.0), tiles=('XH', 'XN', 'XF')),
        'R02': dict(file='04_FORESTS/ENCHANTED_FOREST_R02_v002.blend', coll='T5_ENCHANTED_R02', data='04_FORESTS/data_v002',
-                   out='T5_REGION_R02_ENCHANTED_master_v002.blend', sun=(240.0, 34.0), tiles=('EH', 'EN', 'EF'))}[RK]
-DD = wk.P(*CFG['data'].split('/')); RJ = json.load(open(os.path.join(DD, f'region_{RK}.json')))
+                   out='T5_REGION_R02_ENCHANTED_master_v002.blend', sun=(240.0, 34.0), tiles=('EH', 'EN', 'EF')),
+       'R03': dict(file='03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend', coll='T5_RANGE_R03', data='08_ASHRAM_VALLEY/data_v002',
+                   out='T5_REGION_R03_RANGE_master_v002.blend', sun=(215.0, 26.0), tiles=())}[RK]
+DD = wk.P(*CFG['data'].split('/'))
+if RK == 'R03':                                  # R03 lives in the Ashram-local frame (t5_prep tiles R3N / R3F)
+    PJ = json.load(open(os.path.join(DD, 'prep_v002.json')))
+    RJ = dict(name='Great Northern Range (core)', frame=PJ['frame'] + ' (R03 tiles R3N / R3F)', tiles={})
+else:
+    RJ = json.load(open(os.path.join(DD, f'region_{RK}.json')))
 wk.new_file()
 sc = bpy.context.scene; sc.name = f'T5_REGION_{RK}'
 sc['status'] = f'TASK 05 milestone 2 — {RJ["name"]} (map revision 01 = PROPOSAL)'; sc['frame'] = RJ['frame']
@@ -24,9 +31,16 @@ c = wk.link_collections(wk.P(*CFG['file'].split('/')), [CFG['coll']])[CFG['coll'
 sc.collection.children.link(c)
 cams = wk.coll('T5_CAMERAS'); light = wk.coll('T5_LIGHTING')
 TL = {k: (np.load(os.path.join(DD, f'{k}.npz')), RJ['tiles'][k]) for k in CFG['tiles']}
+R3 = {k: np.load(os.path.join(DD, f'{k}.npz'))['z'] for k in ('R3N', 'R3F')} if RK == 'R03' else {}
 
 
 def ground(x, y):
+    if RK == 'R03':
+        for k in ('R3N', 'R3F'):
+            t = PJ['tile_defs'][k]
+            if t['x0'] <= x <= t['x1'] and t['y0'] <= y <= t['y1']:
+                z = R3[k]; sp = t['sp']; c_ = (x - t['x0']) / sp; r_ = (t['y1'] - y) / sp
+                return float(z[int(min(r_, z.shape[0] - 1)), int(min(c_, z.shape[1] - 1))])
     for k, (D, t) in TL.items():
         h = t['half']
         if abs(x) <= h and abs(y) <= h:
@@ -91,6 +105,16 @@ if RK == 'R02':
     cx2, cy2 = 1300.0, -2600.0
     cam('CAM_T5_10B_ENCHANTED_CANOPY', (cx2, cy2, ground(cx2, cy2) + 140), (-1500, 4000, ground(-1500, 4000) + 30), 28,
         'Enchanted Forest canopy — giant old-growth over rolling hills, deep teal-green', 60000, .3)
+if RK == 'R03':
+    t = PJ['tile_defs']['R3N']; z = R3['R3N']; m = 250
+    r, c_ = np.unravel_index(np.argmax(z[m:-m, m:-m]), z[m:-m, m:-m].shape); r += m; c_ += m
+    px, py, pz = t['x0'] + c_ * t['sp'], t['y1'] - r * t['sp'], float(z[r, c_])
+    for nm, ang, dst, dz, lens, desc in (
+            ('CAM_T5_11_RANGE_PEAKS', 165, 9000, -500, 38, f'Great Northern Range (R03) core — highest summit ({pz:.0f} m) and its glaciated neighbours from the SSE'),
+            ('CAM_T5_11B_RANGE_PANORAMA', 200, 22000, -1800, 24, 'Great Northern Range panorama — ridges, glaciers, forested lower valleys')):
+        a = math.radians(ang); cx, cy = px + math.sin(a) * dst, py + math.cos(a) * dst
+        cz = max(ground(cx, cy) + 200, pz + dz)
+        cam(nm, (cx, cy, cz), (px, py, pz - 600 if dst > 10000 else pz - 400), lens, desc, 150000, .3)
 sc.camera = C[0]
 wk.setup_cycles(sc, (1280, 720), 48)
 cy_ = sc.cycles
