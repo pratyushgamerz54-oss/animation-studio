@@ -20,6 +20,16 @@
    "spacing_m": 30.0,
    "viewport_res": 0.2,
    "skirt_m": 60
+  },
+  "CV": {
+   "object": "T5_TERRAIN_CV",
+   "grid": [
+    801,
+    801
+   ],
+   "spacing_m": 2.0,
+   "viewport_res": 0.3,
+   "skirt_m": 4
   }
  },
  "scatter": {
@@ -50,6 +60,77 @@
    "LOD Near\u2192Mid": 200.0,
    "LOD Mid\u2192Far": 900.0
   },
+  "SC_CV_CONIFERS": {
+   "terrain": "T5_TERRAIN_CV",
+   "near": "LIB_TREES_NEAR",
+   "mid": "LIB_TREES_MID",
+   "far": "LIB_TREES_FAR",
+   "Density": 0.03,
+   "Viewport Density": 0.05,
+   "Mask": "m_forest",
+   "Mask Min": 0.25,
+   "Mask Max": 0.6,
+   "Avoid Mask": "m_bare",
+   "Slope Max": 40.0,
+   "Cluster Scale": 35.0,
+   "Cluster Amount": 0.35,
+   "Scale Min": 0.7,
+   "Scale Max": 1.3,
+   "Seed": 93,
+   "Cull Distance": 2000.0,
+   "Cull Angle": 55.0,
+   "Keep Near": 40.0,
+   "LOD Near\u2192Mid": 120.0,
+   "LOD Mid\u2192Far": 700.0
+  },
+  "SC_CV_UNDERSTORY": {
+   "terrain": "T5_TERRAIN_CV",
+   "near": "LIB_UNDERSTORY",
+   "mid": null,
+   "far": null,
+   "Density": 0.2,
+   "Viewport Density": 0.03,
+   "Mask": "m_forest",
+   "Mask Min": 0.1,
+   "Mask Max": 0.5,
+   "Slope Max": 45.0,
+   "Cluster Scale": 8.0,
+   "Cluster Amount": 0.7,
+   "Scale Min": 0.8,
+   "Scale Max": 1.6,
+   "Align To Normal": 0.4,
+   "Seed": 94,
+   "Cull Distance": 150.0,
+   "Cull Angle": 55.0,
+   "Keep Near": 6.0,
+   "LOD Near\u2192Mid": 100000.0,
+   "LOD Mid\u2192Far": 100000.0
+  },
+  "SC_CV_ROCKFALL": {
+   "terrain": "T5_TERRAIN_CV",
+   "near": "LIB_ROCKS_MEDIUM",
+   "mid": null,
+   "far": null,
+   "Density": 0.004,
+   "Viewport Density": 0.2,
+   "Mask": "m_one",
+   "Mask Min": 0.0,
+   "Mask Max": 0.5,
+   "Slope Max": 50.0,
+   "Cluster Scale": 25.0,
+   "Cluster Amount": 0.7,
+   "Scale Min": 0.6,
+   "Scale Max": 2.2,
+   "Align To Normal": 0.7,
+   "Random Tilt": 15.0,
+   "Sink": 0.3,
+   "Seed": 95,
+   "Cull Distance": 600.0,
+   "Cull Angle": 55.0,
+   "Keep Near": 15.0,
+   "LOD Near\u2192Mid": 100000.0,
+   "LOD Mid\u2192Far": 100000.0
+  },
   "SC_R3N_TALUS_BOULDERS": {
    "terrain": "T5_TERRAIN_R3N",
    "near": "LIB_ROCKS_LARGE",
@@ -75,5 +156,11 @@
    "LOD Near\u2192Mid": 100000.0,
    "LOD Mid\u2192Far": 100000.0
   }
+ },
+ "cave": {
+  "x": 11990.0,
+  "y": 339100.0,
+  "z": 2086.061767578125,
+  "facing_deg": 180.0
  }
 }

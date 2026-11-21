@@ -270,7 +270,44 @@ elif COMP in ('desert', 'crater'):
 
 elif COMP == 'range':
     ct = C('T5_RANGE_TERRAIN'); cs = C('T5_RANGE_SCATTER')
-    RF = tile('R3F', ct, 300, .5); RN = tile('R3N', ct, 60, .2)
+    RF = tile('R3F', ct, 300, .5); RN = tile('R3N', ct, 60, .2); CVo = tile('CV', ct, 4, .3)
+    # ---- cave entrance at the map's cave marker: rock outcrop with an arched mouth + tunnel into the hillside (Boolean, live)
+    import bmesh
+    DCV = np.load(os.path.join(DATA, 'CV.npz')); zc_ = DCV['z']; tcv = TD['CV']
+    CX, CY = 11990.0, 339100.0
+    ci = int(round((CX - tcv['x0']) / tcv['sp'])); ri_ = int(round((tcv['y1'] - CY) / tcv['sp']))
+    gz = float(zc_[ri_, ci]); gy_, gx_ = np.gradient(zc_.astype(float), tcv['sp'])
+    up = np.array([gx_[ri_, ci], -gy_[ri_, ci]]); up = up / max(np.linalg.norm(up), 1e-6)      # uphill direction (into the hill)
+    ang = math.atan2(up[1], up[0])
+    ccv = C('T5_CAVE_ENTRANCE')
+    bm = bmesh.new(); bmesh.ops.create_icosphere(bm, subdivisions=5, radius=1.0)
+    rng = np.random.default_rng(5)
+    import mathutils
+    for vtx in bm.verts:
+        p_ = vtx.co.copy()
+        nval = mathutils.noise.fractal(p_ * 1.7, 0.55, 2.1, 5) * .22 + mathutils.noise.noise(p_ * 6.0) * .05
+        vtx.co = p_ * (1 + nval)
+    me = bpy.data.meshes.new('T5_CAVE_ROCK'); bm.to_mesh(me); bm.free()
+    rock = bpy.data.objects.new('T5_CAVE_ROCK', me); ccv.objects.link(rock)
+    rock.scale = (26, 34, 18); rock.rotation_euler = (0, 0, ang)
+    rock.location = (CX + up[0] * 16, CY + up[1] * 16, gz + 2)
+    me.materials.append(MAT['MAT_T5_ROCK_DARK']); me.shade_smooth()
+    bm = bmesh.new(); bmesh.ops.create_cone(bm, cap_ends=True, segments=40, radius1=1.0, radius2=.8, depth=2.0)
+    for vtx in bm.verts:                                                   # irregular mouth outline
+        vtx.co.x *= 1 + mathutils.noise.noise(vtx.co * 3.0) * .12; vtx.co.y *= 1 + mathutils.noise.noise(vtx.co * 3.0 + mathutils.Vector((5, 1, 2))) * .12
+    tm = bpy.data.meshes.new('T5_CAVE_TUNNEL_CUTTER'); bm.to_mesh(tm); bm.free()
+    cut = bpy.data.objects.new('T5_CAVE_TUNNEL_CUTTER', tm); ccv.objects.link(cut)
+    cut.scale = (7.0, 5.5, 34.0); cut.rotation_euler = (math.pi / 2, 0, ang - math.pi / 2)
+    cut.location = (CX + up[0] * 10, CY + up[1] * 10, gz + 4.5)          # spans −24 … +44 m along the uphill axis
+    cut.display_type = 'WIRE'; cut.hide_render = True
+    bo = rock.modifiers.new('CAVE_MOUTH', 'BOOLEAN'); bo.operation = 'DIFFERENCE'; bo.object = cut
+    try:
+        bo.solver = 'EXACT'
+    except Exception:
+        pass
+    wk.add_props(rock, status=STATUS, note='cave entrance at the map cave marker (world features: C1 caves) — interior not modelled yet '
+                 '(underground system = later task); tunnel = live Boolean with T5_CAVE_TUNNEL_CUTTER', ground_z=gz)
+    INFO['cave'] = dict(x=CX, y=CY, z=gz, facing_deg=math.degrees(ang + math.pi))
 
     def S(name, T_, near=None, mid=None, far=None, **p):
         q = {k.replace('_', ' ').replace('Near to Mid', 'LOD Near→Mid').replace('Mid to Far', 'LOD Mid→Far'): v for k, v in p.items()}
@@ -279,6 +316,15 @@ elif COMP == 'range':
       Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_snow', Avoid_Mask_2='m_rock', Avoid_Strength_2=.8, Slope_Max=40.0, Altitude_Max=3550.0,
       Cluster_Scale=80.0, Cluster_Amount=.4, Scale_Min=.7, Scale_Max=1.3, Scale_By_Mask=.6, Seed=91, Cull_Distance=14000.0,
       Cull_Angle=50.0, Keep_Near=60.0, Near_to_Mid=200.0, Mid_to_Far=900.0)
+    S('SC_CV_CONIFERS', CVo, 'LIB_TREES_NEAR', 'LIB_TREES_MID', 'LIB_TREES_FAR', Density=.03, Viewport_Density=.05, Mask='m_forest',
+      Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_bare', Slope_Max=40.0, Cluster_Scale=35.0, Cluster_Amount=.35, Scale_Min=.7, Scale_Max=1.3,
+      Seed=93, Cull_Distance=2000.0, Cull_Angle=55.0, Keep_Near=40.0, Near_to_Mid=120.0, Mid_to_Far=700.0)
+    S('SC_CV_UNDERSTORY', CVo, 'LIB_UNDERSTORY', Density=.2, Viewport_Density=.03, Mask='m_forest', Mask_Min=.1, Mask_Max=.5,
+      Slope_Max=45.0, Cluster_Scale=8.0, Cluster_Amount=.7, Scale_Min=.8, Scale_Max=1.6, Align_To_Normal=.4, Seed=94, Cull_Distance=150.0,
+      Cull_Angle=55.0, Keep_Near=6.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_CV_ROCKFALL', CVo, 'LIB_ROCKS_MEDIUM', Density=.004, Viewport_Density=.2, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+      Slope_Max=50.0, Cluster_Scale=25.0, Cluster_Amount=.7, Scale_Min=.6, Scale_Max=2.2, Align_To_Normal=.7, Random_Tilt=15.0, Sink=.3,
+      Seed=95, Cull_Distance=600.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_R3N_TALUS_BOULDERS', RN, 'LIB_ROCKS_LARGE', Density=.0006, Viewport_Density=.2, Mask='m_scree', Mask_Min=.1, Mask_Max=.5,
       Slope_Max=50.0, Cluster_Scale=150.0, Cluster_Amount=.5, Scale_Min=1.2, Scale_Max=3.5, Align_To_Normal=.7, Random_Tilt=20.0,
       Sink=.3, Seed=92, Cull_Distance=5000.0, Cull_Angle=50.0, Keep_Near=60.0, Near_to_Mid=1e5, Mid_to_Far=1e5)

@@ -43,7 +43,9 @@ TILES = {
     'MT': dict(x0=-116000, x1=-56000, y0=44000, y1=104000, sp=30.0, kind='mountain', band=2500, holes=['WF']),
     'L2': dict(x0=-160000, x1=160000, y0=-160000, y1=160000, sp=400.0, kind='horizon', band=6000, holes=['L1', 'MT']),
     # milestone 2: R03 Great Northern Range core (map region centre C1 (626, 138) = +90 km E, +285 km N of the Ashram)
-    'R3F': dict(x0=-30000, x1=210000, y0=165000, y1=405000, sp=400.0, kind='horizon', band=8000, holes=['R3N']),
+    'R3F': dict(x0=-30000, x1=210000, y0=165000, y1=405000, sp=400.0, kind='horizon', band=8000, holes=['R3N', 'CV']),
+    # map cave entrance (world features, C1 'caves') at Ashram-local (11.99 km, 339.10 km) — hero tile for the cave mouth
+    'CV': dict(x0=11200, x1=12800, y0=338400, y1=340000, sp=2.0, kind='mountain', band=200, holes=[]),
     'R3N': dict(x0=60000, x1=120000, y0=255000, y1=315000, sp=30.0, kind='mountain', band=2500, holes=[]),
 }
 
@@ -349,9 +351,9 @@ def erode(z, sp, kind, seed):
     return z, flow, scree
 
 
-PARENT = {'VH': 'L0', 'L0': 'L1', 'FH': 'L1', 'L1': 'L2', 'MT': 'L2', 'WF': 'MT', 'R3N': 'R3F'}
-SEAM_BLEND = {'VH': 60, 'L0': 300, 'FH': 150, 'L1': 2000, 'MT': 2400, 'WF': 150, 'R3N': 2400}     # m — ≥ 4 parent cells
-LEVELS = [['L2', 'R3F'], ['L1', 'MT', 'R3N'], ['L0', 'FH', 'WF'], ['VH']]                          # parents first
+PARENT = {'VH': 'L0', 'L0': 'L1', 'FH': 'L1', 'L1': 'L2', 'MT': 'L2', 'WF': 'MT', 'R3N': 'R3F', 'CV': 'R3F'}
+SEAM_BLEND = {'VH': 60, 'L0': 300, 'FH': 150, 'L1': 2000, 'MT': 2400, 'WF': 150, 'R3N': 2400, 'CV': 250}     # m — ≥ 4 parent cells
+LEVELS = [['L2', 'R3F'], ['L1', 'MT', 'R3N', 'CV'], ['L0', 'FH', 'WF'], ['VH']]                          # parents first
 
 
 def build(name):
@@ -437,6 +439,13 @@ def build(name):
         e = np.minimum.reduce([X - t['x0'], t['x1'] - X, Y - t['y0'], t['y1'] - Y])
         wb = sstep(0, SEAM_BLEND[name], e)
         z = z * wb + zpar * (1 - wb)
+    # ---------------- cave entrance site (map cave marker): small level apron below the mouth, no trees on it
+    CAVE = (11990.0, 339100.0)
+    dcv = np.hypot(X - CAVE[0], Y - CAVE[1]) if name == 'CV' else None
+    if name == 'CV':
+        zc = float(z[np.unravel_index(np.argmin(dcv), dcv.shape)])
+        ap = (1 - sstep(8, 18, np.hypot(X - CAVE[0], Y - CAVE[1])))
+        z = np.minimum(z, z * (1 - ap) + (zc - .5) * ap)                  # only cut a small level floor at the mouth (never raise)
     # ---------------- masks (v001 formulas + new detail masks)
     slope = slope_of(z, sp, 12.0)
     forest, rock, snow, dry, b = F.biome_masks(x, y, z.ravel(), slope.ravel())
@@ -446,6 +455,8 @@ def build(name):
         forest = forest * sstep(.15, .5, forest + ns) * (1 - .9 * sstep(.38, .5, fbm(X, Y, 260, 3, 132)))
     clear = sstep(650, 1100, np.hypot(X, Y + 40))
     forest = forest * clear * (1 - wet) * (1 - pw)
+    if name == 'CV':
+        forest = forest * sstep(60, 85, dcv)                            # clearing around the cave mouth
     gn = fbm(X, Y, 1800, 4, 40) + fbm(X, Y, 400, 2, 41) * .35
     grove = sstep(.18, .42, gn) * (1 - forest) * (1 - rock) * (1 - snow) * (1 - dry) * clear * (1 - wet) * (1 - pw) * (1 - sstep(2400, 2900, z))
     padc = sstep(.93, .995, pw)

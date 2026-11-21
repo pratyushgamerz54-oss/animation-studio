@@ -31,12 +31,12 @@ c = wk.link_collections(wk.P(*CFG['file'].split('/')), [CFG['coll']])[CFG['coll'
 sc.collection.children.link(c)
 cams = wk.coll('T5_CAMERAS'); light = wk.coll('T5_LIGHTING')
 TL = {k: (np.load(os.path.join(DD, f'{k}.npz')), RJ['tiles'][k]) for k in CFG['tiles']}
-R3 = {k: np.load(os.path.join(DD, f'{k}.npz'))['z'] for k in ('R3N', 'R3F')} if RK == 'R03' else {}
+R3 = {k: np.load(os.path.join(DD, f'{k}.npz'))['z'] for k in ('CV', 'R3N', 'R3F')} if RK == 'R03' else {}
 
 
 def ground(x, y):
     if RK == 'R03':
-        for k in ('R3N', 'R3F'):
+        for k in ('CV', 'R3N', 'R3F'):
             t = PJ['tile_defs'][k]
             if t['x0'] <= x <= t['x1'] and t['y0'] <= y <= t['y1']:
                 z = R3[k]; sp = t['sp']; c_ = (x - t['x0']) / sp; r_ = (t['y1'] - y) / sp
@@ -111,10 +111,20 @@ if RK == 'R03':
     px, py, pz = t['x0'] + c_ * t['sp'], t['y1'] - r * t['sp'], float(z[r, c_])
     for nm, ang, dst, dz, lens, desc in (
             ('CAM_T5_11_RANGE_PEAKS', 165, 9000, -500, 38, f'Great Northern Range (R03) core — highest summit ({pz:.0f} m) and its glaciated neighbours from the SSE'),
-            ('CAM_T5_11B_RANGE_PANORAMA', 200, 22000, -1800, 24, 'Great Northern Range panorama — ridges, glaciers, forested lower valleys')):
+            ('CAM_T5_11B_RANGE_PANORAMA', 150, 12500, -1500, 24, 'Great Northern Range panorama — ridges, glaciers, forested lower valleys')):
         a = math.radians(ang); cx, cy = px + math.sin(a) * dst, py + math.cos(a) * dst
         cz = max(ground(cx, cy) + 200, pz + dz)
         cam(nm, (cx, cy, cz), (px, py, pz - 600 if dst > 10000 else pz - 400), lens, desc, 150000, .3)
+    tcv = PJ['tile_defs']['CV']; zc = np.load(os.path.join(DD, 'CV.npz'))['z']
+    CXc, CYc = 11990.0, 339100.0
+    gyc, gxc = np.gradient(zc.astype(float), tcv['sp'])
+    ci = int(round((CXc - tcv['x0']) / tcv['sp'])); ri = int(round((tcv['y1'] - CYc) / tcv['sp']))
+    upv = np.array([gxc[ri, ci], -gyc[ri, ci]]); upv /= max(np.linalg.norm(upv), 1e-6)
+    gzc = float(zc[ri, ci])
+    ex, ey = CXc - upv[0] * 40 + upv[1] * 5, CYc - upv[1] * 40 - upv[0] * 5
+    ezg = float(zc[int(round((tcv['y1'] - ey) / tcv['sp'])), int(round((ex - tcv['x0']) / tcv['sp']))])
+    cam('CAM_T5_12_CAVE_ENTRANCE', (ex, ey, max(ezg + 1.7, gzc + 3.0)), (CXc - upv[0] * 8, CYc - upv[1] * 8, gzc + 4), 28,
+        'Cave entrance (map cave marker in the Great Northern Range foothills) — rock outcrop, arched mouth, forest clearing', 6000, .15, 64)
 sc.camera = C[0]
 wk.setup_cycles(sc, (1280, 720), 48)
 cy_ = sc.cycles
