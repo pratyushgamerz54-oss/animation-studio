@@ -582,6 +582,12 @@ def build_tree(S, seed=0, collection=None, mats=None):
             t = rng.uniform(.05, .45); p, d, r = stems[0].at(t)
             a = rng.uniform(0, 2 * np.pi); radial = Vector((math.cos(a), math.sin(a), 0))
             bracket(G, p + radial * r * .92, radial, Fu['size'] * rng.uniform(.6, 1.3), rng)
+    # height normalisation: keep the finished plant within ±10 % of its (seed-varied) design height
+    top = max(float(v[:, 2].max()) for v in G.V)
+    f = 1.0
+    if top > H * 1.10 or top < H * .90:
+        f = H / top
+        G.V = [v * f for v in G.V]
     mats = mats or []
     me = G.to_mesh(S['name'], mats)
     o = bpy.data.objects.new(S['name'], me)
@@ -589,9 +595,9 @@ def build_tree(S, seed=0, collection=None, mats=None):
         collection.objects.link(o)
     bb = np.array([v.co[:] for v in me.vertices])
     stats = dict(height_m=round(float(bb[:, 2].max()), 2), canopy_x_m=round(float(np.ptp(bb[:, 0])), 2),
-                 canopy_y_m=round(float(np.ptp(bb[:, 1])), 2), trunk_d_m=round(2 * stems[0].R[0] * (1 + Tk.get('flare', 0)), 2) if not Tk.get('clump')
+                 canopy_y_m=round(float(np.ptp(bb[:, 1])), 2), trunk_d_m=round(2 * stems[0].R[0] * (1 + Tk.get('flare', 0)) * f, 2) if not Tk.get('clump')
                  else round(2 * Tk['clump']['radius'], 2), branches=nb, leaf_cards=ncards, tris=sum(len(p.vertices) - 2 for p in me.polygons),
-                 verts=len(me.vertices), lowest_z=round(float(bb[:, 2].min()), 2))
+                 verts=len(me.vertices), lowest_z=round(float(bb[:, 2].min()), 2), height_scale=round(f, 3))
     for k, v in stats.items():
         o[f't6_{k}'] = v
     return o, stats
@@ -873,7 +879,7 @@ def wind_group():
     pv = VM('ADD', VM('SCALE', pos, scale=3.0), comb.outputs[0])
     fn = N('ShaderNodeTexNoise'); fn.noise_dimensions = '3D'; fn.inputs['Scale'].default_value = 1.0; L(pv, fn.inputs['Vector'])
     fv = VM('SUBTRACT', fn.outputs['Color'], (.5, .5, .5))
-    fl = M('MULTIPLY', M('MULTIPLY', A('wind_leaf'), gi.outputs['Leaf Flutter (m)']), M('MULTIPLY', gi.outputs['Flutter'], M('ADD', .3, M('MULTIPLY', S_, .7))))
+    fl = M('MULTIPLY', M('MULTIPLY', A('wind_leaf'), gi.outputs['Leaf Flutter (m)']), M('MULTIPLY', gi.outputs['Flutter'], M('MINIMUM', S_, 4.0)))   # calm = still
     off3 = VM('SCALE', fv, scale=M('MULTIPLY', fl, 2.0))
     off = VM('ADD', VM('ADD', off1, off2), off3)
     sp = N('GeometryNodeSetPosition'); L(gi.outputs['Geometry'], sp.inputs['Geometry']); L(off, sp.inputs['Offset'])
@@ -906,3 +912,46 @@ def add_wind(o, trunk=.15, branch=.12, leaf=.03, flex=1.0):
         v = dr.variables.new(); v.type = 'SINGLE_PROP'; v.targets[0].id_type = 'OBJECT'; v.targets[0].id = ctrl
         v.targets[0].data_path = f'["{prop}"]'
     return md
+
+
+def mat_herbleaf(name, base, vein='#9AC070', rough=.45, transl=.35):
+    """geometry leaf (herbs / alpine plants): UV u = across, v = along → procedural midrib + lateral veins (colour + bump),
+    darker base, lighter tip, translucency."""
+    m, nt, b = new_mat(name)
+    out = b.n('ShaderNodeOutputMaterial'); bsdf = b.n('ShaderNodeBsdfPrincipled')
+    uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]; sep = b.n('ShaderNodeSeparateXYZ'); b.l(uv, sep.inputs[0])
+    du = b.math('ABSOLUTE', b.math('SUBTRACT', sep.outputs['X'], .5))
+    mid = b.math('LESS_THAN', du, .035)
+    lat = b.math('LESS_THAN', b.math('ABSOLUTE', b.math('SUBTRACT', b.math('FRACT', b.math('SUBTRACT', b.math('MULTIPLY', sep.outputs['Y'], 7.0),
+                                                                                              b.math('MULTIPLY', du, 3.0))), .5)), .06)
+    veins = b.math('MAXIMUM', mid, b.math('MULTIPLY', lat, .6))
+    geo = b.n('ShaderNodeNewGeometry'); nz = b.noise(geo.outputs['Position'], 60, 3, .5)
+    col = b.mix(b.math('MULTIPLY', sep.outputs['Y'], .5), hexc(base), tuple(min(1, c * 1.35) for c in hexc(base)[:3]) + (1,))
+    col = b.mix(b.math('MULTIPLY', nz.outputs['Fac'], .25), col, (0.02, .03, .01, 1), 'MULTIPLY') if False else col
+    col = b.mix(b.math('MULTIPLY', veins, .7), col, hexc(vein))
+    col = b.mix(b.math('MULTIPLY', b.math('SUBTRACT', nz.outputs['Fac'], .5), .3), col, (0, 0, 0, 1))
+    b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = rough
+    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = .35; bp.inputs['Distance'].default_value = .002
+    b.l(b.math('SUBTRACT', 1.0, veins), bp.inputs['Height']); b.l(bp.outputs['Normal'], bsdf.inputs['Normal'])
+    tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color']); b.l(bp.outputs['Normal'], tl.inputs['Normal'])
+    mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])
+    b.l(mx.outputs[0], out.inputs['Surface']); m.diffuse_color = hexc(base)
+    return m
+
+
+def mat_petal(name, base, rough=.4, transl=.35, sss=.25):
+    """petal: colour ramp along the petal (grad attribute: 0 base → 1 tip), fine streaks along UV v, translucency, subsurface."""
+    m, nt, b = new_mat(name)
+    out = b.n('ShaderNodeOutputMaterial'); bsdf = b.n('ShaderNodeBsdfPrincipled')
+    c = hexc(base); dark = tuple(x * .55 for x in c[:3]) + (1,); light = tuple(min(1, x * 1.25 + .03) for x in c[:3]) + (1,)
+    col = b.ramp(b.attr('grad'), [(0.0, dark), (.35, c), (1.0, light)])
+    uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]; sep = b.n('ShaderNodeSeparateXYZ'); b.l(uv, sep.inputs[0])
+    st = b.n('ShaderNodeTexWave'); st.wave_type = 'BANDS'; st.bands_direction = 'X'; st.inputs['Scale'].default_value = 6
+    st.inputs['Distortion'].default_value = 2; b.l(uv, st.inputs['Vector'])
+    col = b.mix(b.math('MULTIPLY', st.outputs['Fac'], .18), col, dark)
+    b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = rough
+    bsdf.inputs['Subsurface Weight'].default_value = sss; bsdf.inputs['Sheen Weight'].default_value = .3
+    tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color'])
+    mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])
+    b.l(mx.outputs[0], out.inputs['Surface']); m.diffuse_color = c
+    return m

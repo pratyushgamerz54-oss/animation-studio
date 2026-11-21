@@ -5,3 +5,4 @@ __pycache__/
 # Poly Haven CC0 downloads (re-fetch with 03_assets/external/polyhaven_fetch.py)
 03_assets/external/polyhaven/
 
+03_assets/vegetation/library/_backups/

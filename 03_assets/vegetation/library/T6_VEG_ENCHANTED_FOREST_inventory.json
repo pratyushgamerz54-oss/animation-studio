@@ -25,7 +25,8 @@
    "leaf_cards": 25132,
    "tris": 503266,
    "verts": 388302,
-   "lowest_z": -1.06
+   "lowest_z": -1.06,
+   "height_scale": 1.0
   },
   "bark": "metasequoia_bark",
   "atlas": "ef_elder",
@@ -48,15 +49,16 @@
    "#5A5E58"
   ],
   "stats": {
-   "height_m": 41.47,
-   "canopy_x_m": 22.6,
-   "canopy_y_m": 22.32,
-   "trunk_d_m": 1.67,
+   "height_m": 34.6,
+   "canopy_x_m": 18.85,
+   "canopy_y_m": 18.62,
+   "trunk_d_m": 1.39,
    "branches": 4785,
    "leaf_cards": 16902,
    "tris": 250800,
    "verts": 213529,
-   "lowest_z": -0.42
+   "lowest_z": -0.35,
+   "height_scale": 0.834
   },
   "bark": "japanese_zelkova_bark",
   "atlas": "ef_beech",
@@ -87,7 +89,8 @@
    "leaf_cards": 11480,
    "tris": 225404,
    "verts": 178097,
-   "lowest_z": -0.83
+   "lowest_z": -0.83,
+   "height_scale": 1.0
   },
   "bark": "bark_brown_02",
   "atlas": "ef_oak",
@@ -110,15 +113,16 @@
    "#3E6A3A"
   ],
   "stats": {
-   "height_m": 10.0,
-   "canopy_x_m": 14.0,
-   "canopy_y_m": 14.1,
-   "trunk_d_m": 1.42,
+   "height_m": 8.69,
+   "canopy_x_m": 12.16,
+   "canopy_y_m": 12.25,
+   "trunk_d_m": 1.23,
    "branches": 4564,
    "leaf_cards": 7424,
    "tris": 144544,
    "verts": 117558,
-   "lowest_z": -0.39
+   "lowest_z": -0.34,
+   "height_scale": 0.869
   },
   "bark": "tree_bark_03",
   "atlas": "ef_yew",
@@ -141,15 +145,16 @@
    "#3E6A44"
   ],
   "stats": {
-   "height_m": 20.79,
-   "canopy_x_m": 27.12,
-   "canopy_y_m": 22.71,
-   "trunk_d_m": 1.67,
+   "height_m": 18.39,
+   "canopy_x_m": 23.99,
+   "canopy_y_m": 20.09,
+   "trunk_d_m": 1.47,
    "branches": 5080,
    "leaf_cards": 29132,
    "tris": 437672,
    "verts": 357472,
-   "lowest_z": -0.51
+   "lowest_z": -0.46,
+   "height_scale": 0.885
   },
   "bark": "bark_willow",
   "atlas": "ef_veil",
@@ -172,15 +177,16 @@
    "#6A6A70"
   ],
   "stats": {
-   "height_m": 26.53,
-   "canopy_x_m": 18.41,
-   "canopy_y_m": 20.29,
-   "trunk_d_m": 1.59,
+   "height_m": 22.85,
+   "canopy_x_m": 15.86,
+   "canopy_y_m": 17.48,
+   "trunk_d_m": 1.37,
    "branches": 4434,
    "leaf_cards": 11672,
    "tris": 223324,
    "verts": 177599,
-   "lowest_z": -2.71
+   "lowest_z": -2.34,
+   "height_scale": 0.862
   },
   "bark": "bark_platanus",
   "atlas": "ef_spiral",
@@ -203,15 +209,16 @@
    "#6A6A60"
   ],
   "stats": {
-   "height_m": 18.94,
-   "canopy_x_m": 22.59,
-   "canopy_y_m": 19.75,
-   "trunk_d_m": 1.16,
+   "height_m": 15.11,
+   "canopy_x_m": 18.03,
+   "canopy_y_m": 15.76,
+   "trunk_d_m": 0.93,
    "branches": 4289,
    "leaf_cards": 4103,
    "tris": 159094,
    "verts": 115732,
-   "lowest_z": -0.39
+   "lowest_z": -0.31,
+   "height_scale": 0.798
   },
   "bark": "bark_brown_01",
   "atlas": "ef_lantern",
@@ -242,7 +249,8 @@
    "leaf_cards": 0,
    "tris": 9816,
    "verts": 5898,
-   "lowest_z": -0.5
+   "lowest_z": -0.5,
+   "height_scale": 1.0
   },
   "bark": "eucalyptus_bark",
   "atlas": null,
@@ -331,7 +339,7 @@
   "latin": "inspired by woody lianas (Entada / Bauhinia vahlii)",
   "label": "SPECIES-INSPIRED",
   "region": "R-02",
-  "category": "Vine",
+  "category": "Vine (hanging)",
   "habitat": "",
   "altitude": "",
   "kind": "plant",

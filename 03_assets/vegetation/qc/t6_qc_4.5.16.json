@@ -1,0 +1,1690 @@
+{
+ "version": "4.5.16 LTS",
+ "results": [
+  {
+   "check": "AV: library file exists",
+   "ok": true,
+   "detail": "library/T6_VEG_ASHRAM_VALLEY_v001.blend"
+  },
+  {
+   "check": "AV: file size < 100 MB (GitHub limit)",
+   "ok": true,
+   "detail": "33.0 MB"
+  },
+  {
+   "check": "AV: opens in Blender 4.5.16 LTS, no missing images",
+   "ok": true,
+   "detail": "60 images, missing []"
+  },
+  {
+   "check": "AV: image paths relative (portable to the Director PC)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV: T6_WIND_CONTROL present with strength/gust/speed/flutter",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV: assets in library",
+   "ok": true,
+   "detail": "20 assets"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,244 tris, 1,774 verts"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: PBR materials (4 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_AQ01_LOTUS_0, MAT_T6_AV_AQ01_LOTUS_1, MAT_T6_AV_AQ01_LOTUS_2, MAT_T6_AV_AQ01_LOTUS_3"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2, 3]"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: aquatic plant sits at the water surface (z = 0) with stems below",
+   "ok": true,
+   "detail": "lowest -0.60 m, top 0.99 m"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,800 tris, 2,055 verts"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_AQ02_CATTAIL_0, MAT_T6_AV_AQ02_CATTAIL_1"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: aquatic plant sits at the water surface (z = 0) with stems below",
+   "ok": true,
+   "detail": "lowest -0.15 m, top 2.02 m"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,000 tris, 748 verts"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_F01_BUTTERCUP_0, MAT_T6_AV_F01_BUTTERCUP_1, MAT_T6_AV_F01_BUTTERCUP_2"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "AV_F01_BUTTERCUP: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_F02_PRIMULA: valid mesh, UVs",
+   "ok": true,
+   "detail": "8,660 tris, 7,107 verts"
+  },
+  {
+   "check": "AV_F02_PRIMULA: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_F02_PRIMULA: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_F02_PRIMULA_0, MAT_T6_AV_F02_PRIMULA_1, MAT_T6_AV_F02_PRIMULA_2"
+  },
+  {
+   "check": "AV_F02_PRIMULA: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_F02_PRIMULA: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.000 m"
+  },
+  {
+   "check": "AV_F02_PRIMULA: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,280 tris, 1,901 verts"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_F03_WILD_DAISY_0, MAT_T6_AV_F03_WILD_DAISY_1, MAT_T6_AV_F03_WILD_DAISY_2"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "AV_F03_WILD_DAISY: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: valid mesh, UVs",
+   "ok": true,
+   "detail": "8,064 tris, 7,191 verts"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_F04_MARIGOLD_0, MAT_T6_AV_F04_MARIGOLD_1, MAT_T6_AV_F04_MARIGOLD_2"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.002 m"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: valid mesh, UVs",
+   "ok": true,
+   "detail": "12,240 tris, 10,440 verts"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_FE01_SWORD_FERN_0, MAT_T6_AV_FE01_SWORD_FERN_1"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.010 m"
+  },
+  {
+   "check": "AV_FE01_SWORD_FERN: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: valid mesh, UVs",
+   "ok": true,
+   "detail": "5,200 tris, 4,680 verts"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_G01_MEADOW_GRASS_0, MAT_T6_AV_G01_MEADOW_GRASS_1"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: valid mesh, UVs",
+   "ok": true,
+   "detail": "4,312 tris, 3,468 verts"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_G02_KANS_GRASS_0, MAT_T6_AV_G02_KANS_GRASS_1, MAT_T6_AV_G02_KANS_GRASS_2"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G02_KANS_GRASS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,600 tris, 2,340 verts"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_G03_DRY_PATH_GRASS_0, MAT_T6_AV_G03_DRY_PATH_GRASS_1"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_M01_MOSS_CUSHION: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,780 tris, 1,836 verts"
+  },
+  {
+   "check": "AV_M01_MOSS_CUSHION: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_M01_MOSS_CUSHION: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_M01_MOSS_CUSHION_0, MAT_T6_AV_M01_MOSS_CUSHION_1"
+  },
+  {
+   "check": "AV_M01_MOSS_CUSHION: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_M01_MOSS_CUSHION: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.020 m"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,736 tris, 1,120 verts"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_MU01_BROWN_MUSHROOMS_0, MAT_T6_AV_MU01_BROWN_MUSHROOMS_1, MAT_T6_AV_MU01_BROWN_MUSHROOMS_2"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.007 m"
+  },
+  {
+   "check": "AV_S01_BERBERIS: valid mesh, UVs",
+   "ok": true,
+   "detail": "5,008 tris, 4,842 verts"
+  },
+  {
+   "check": "AV_S01_BERBERIS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_S01_BERBERIS: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_S01_BERBERIS_BARK, MAT_T6_AV_S01_BERBERIS_LEAF, MAT_T6_AV_S01_BERBERIS_BARK"
+  },
+  {
+   "check": "AV_S01_BERBERIS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_S01_BERBERIS: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "1.83 m vs design 1.9 m"
+  },
+  {
+   "check": "AV_S01_BERBERIS: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.34 m, 411 verts at the foot"
+  },
+  {
+   "check": "AV_S01_BERBERIS: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_S01_BERBERIS: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_S01_BERBERIS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_S02_TULSI: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,636 tris, 1,774 verts"
+  },
+  {
+   "check": "AV_S02_TULSI: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_S02_TULSI: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_S02_TULSI_BARK, MAT_T6_AV_S02_TULSI_LEAF, MAT_T6_AV_S02_TULSI_BARK"
+  },
+  {
+   "check": "AV_S02_TULSI: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_S02_TULSI: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "0.83 m vs design 0.75 m"
+  },
+  {
+   "check": "AV_S02_TULSI: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.16 m, 246 verts at the foot"
+  },
+  {
+   "check": "AV_S02_TULSI: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_S02_TULSI: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_S02_TULSI: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T01_PEEPAL: valid mesh, UVs",
+   "ok": true,
+   "detail": "422,738 tris, 327,262 verts"
+  },
+  {
+   "check": "AV_T01_PEEPAL: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T01_PEEPAL: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T01_PEEPAL_BARK, MAT_T6_AV_T01_PEEPAL_LEAF, MAT_T6_AV_T01_PEEPAL_BARK"
+  },
+  {
+   "check": "AV_T01_PEEPAL: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T01_PEEPAL: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "23.72 m vs design 22.0 m"
+  },
+  {
+   "check": "AV_T01_PEEPAL: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.62 m, 118 verts at the foot"
+  },
+  {
+   "check": "AV_T01_PEEPAL: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T01_PEEPAL: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T01_PEEPAL: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T02_DEODAR: valid mesh, UVs",
+   "ok": true,
+   "detail": "310,460 tris, 268,360 verts"
+  },
+  {
+   "check": "AV_T02_DEODAR: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T02_DEODAR: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T02_DEODAR_BARK, MAT_T6_AV_T02_DEODAR_LEAF, MAT_T6_AV_T02_DEODAR_BARK"
+  },
+  {
+   "check": "AV_T02_DEODAR: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T02_DEODAR: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "34.94 m vs design 34.0 m"
+  },
+  {
+   "check": "AV_T02_DEODAR: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.43 m, 305 verts at the foot"
+  },
+  {
+   "check": "AV_T02_DEODAR: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T02_DEODAR: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T02_DEODAR: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: valid mesh, UVs",
+   "ok": true,
+   "detail": "100,120 tris, 87,092 verts"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T03_CHIR_PINE_BARK, MAT_T6_AV_T03_CHIR_PINE_LEAF, MAT_T6_AV_T03_CHIR_PINE_BARK"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "31.42 m vs design 28.0 m"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.43 m, 22 verts at the foot"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: valid mesh, UVs",
+   "ok": true,
+   "detail": "223,300 tris, 172,224 verts"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T04_BANJ_OAK_BARK, MAT_T6_AV_T04_BANJ_OAK_LEAF, MAT_T6_AV_T04_BANJ_OAK_BARK"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "19.39 m vs design 17.0 m"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.41 m, 310 verts at the foot"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T04_BANJ_OAK: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: valid mesh, UVs",
+   "ok": true,
+   "detail": "57,460 tris, 42,884 verts"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T05_RHODODENDRON_BARK, MAT_T6_AV_T05_RHODODENDRON_LEAF, MAT_T6_AV_T05_RHODODENDRON_BARK"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "9.71 m vs design 8.5 m"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.32 m, 45 verts at the foot"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T05_RHODODENDRON: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: valid mesh, UVs",
+   "ok": true,
+   "detail": "44,470 tris, 45,220 verts"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_T06_BAMBOO_CLUMP_CULM, MAT_T6_AV_T06_BAMBOO_CLUMP_LEAF, MAT_T6_AV_T06_BAMBOO_CLUMP_CULM"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "15.14 m vs design 15.0 m"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.18 m, 341 verts at the foot"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_T02_DEODAR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 4.9e-01 m \u00b7 moving \u0394max 0.510 m \u00b7 foot \u0394 0.000 m"
+  },
+  {
+   "check": "AV_AQ01_LOTUS: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 9.3e-02 m \u00b7 moving \u0394max 0.084 m \u00b7 foot \u0394 0.015 m"
+  },
+  {
+   "check": "EF: library file exists",
+   "ok": true,
+   "detail": "library/T6_VEG_ENCHANTED_FOREST_v001.blend"
+  },
+  {
+   "check": "EF: file size < 100 MB (GitHub limit)",
+   "ok": true,
+   "detail": "52.8 MB"
+  },
+  {
+   "check": "EF: opens in Blender 4.5.16 LTS, no missing images",
+   "ok": true,
+   "detail": "64 images, missing []"
+  },
+  {
+   "check": "EF: image paths relative (portable to the Director PC)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF: T6_WIND_CONTROL present with strength/gust/speed/flutter",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF: assets in library",
+   "ok": true,
+   "detail": "12 assets"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: valid mesh, UVs",
+   "ok": true,
+   "detail": "19,328 tris, 16,656 verts"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_FE01_GIANT_FERN_0, MAT_T6_EF_FE01_GIANT_FERN_1"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.010 m"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_M01_MOSS_CARPET: valid mesh, UVs",
+   "ok": true,
+   "detail": "8,200 tris, 5,424 verts"
+  },
+  {
+   "check": "EF_M01_MOSS_CARPET: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_M01_MOSS_CARPET: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_M01_MOSS_CARPET_0, MAT_T6_EF_M01_MOSS_CARPET_1"
+  },
+  {
+   "check": "EF_M01_MOSS_CARPET: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_M01_MOSS_CARPET: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.020 m"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,728 tris, 1,760 verts"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_MU01_GLOWCAP_0, MAT_T6_EF_MU01_GLOWCAP_1, MAT_T6_EF_MU01_GLOWCAP_2"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.007 m"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: valid mesh, UVs",
+   "ok": true,
+   "detail": "503,266 tris, 388,302 verts"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T01_GIANT_ELDER_BARK, MAT_T6_EF_T01_GIANT_ELDER_LEAF, MAT_T6_EF_T01_GIANT_ELDER_BEARD"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "66.90 m vs design 62.0 m"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -1.06 m, 499 verts at the foot"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: valid mesh, UVs",
+   "ok": true,
+   "detail": "250,800 tris, 213,529 verts"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T02_TEAL_BEECH_BARK, MAT_T6_EF_T02_TEAL_BEECH_LEAF, MAT_T6_EF_T02_TEAL_BEECH_BARK"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: height within \u00b115 % of the design height",
+   "ok": false,
+   "detail": "41.47 m vs design 34.0 m"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.42 m, 338 verts at the foot"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T02_TEAL_BEECH: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: valid mesh, UVs",
+   "ok": true,
+   "detail": "225,404 tris, 178,097 verts"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T03_MOSS_OAK_BARK, MAT_T6_EF_T03_MOSS_OAK_LEAF, MAT_T6_EF_T03_MOSS_OAK_BEARD"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "24.29 m vs design 23.0 m"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.83 m, 246 verts at the foot"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T04_YEW: valid mesh, UVs",
+   "ok": true,
+   "detail": "144,544 tris, 117,558 verts"
+  },
+  {
+   "check": "EF_T04_YEW: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T04_YEW: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T04_YEW_BARK, MAT_T6_EF_T04_YEW_LEAF, MAT_T6_EF_T04_YEW_BARK"
+  },
+  {
+   "check": "EF_T04_YEW: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T04_YEW: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "10.00 m vs design 9.0 m"
+  },
+  {
+   "check": "EF_T04_YEW: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.39 m, 55 verts at the foot"
+  },
+  {
+   "check": "EF_T04_YEW: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T04_YEW: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T04_YEW: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: valid mesh, UVs",
+   "ok": true,
+   "detail": "437,672 tris, 357,472 verts"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T05_VEIL_WILLOW_BARK, MAT_T6_EF_T05_VEIL_WILLOW_LEAF, MAT_T6_EF_T05_VEIL_WILLOW_BARK"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: height within \u00b115 % of the design height",
+   "ok": false,
+   "detail": "20.79 m vs design 18.0 m"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.51 m, 44 verts at the foot"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: label set (PROPOSED FANTASY)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: fantasy asset marked as proposal in its habitat text",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: valid mesh, UVs",
+   "ok": true,
+   "detail": "223,324 tris, 177,599 verts"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T06_SPIRAL_ROOT_BARK, MAT_T6_EF_T06_SPIRAL_ROOT_LEAF, MAT_T6_EF_T06_SPIRAL_ROOT_BARK"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "26.53 m vs design 24.0 m"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -2.71 m, 390 verts at the foot"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: label set (PROPOSED FANTASY)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: fantasy asset marked as proposal in its habitat text",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: valid mesh, UVs",
+   "ok": true,
+   "detail": "159,094 tris, 115,732 verts"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T07_LANTERN_TREE_BARK, MAT_T6_EF_T07_LANTERN_TREE_LEAF, MAT_T6_EF_T07_LANTERN_TREE_POD"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: height within \u00b115 % of the design height",
+   "ok": false,
+   "detail": "18.94 m vs design 15.0 m"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.39 m, 26 verts at the foot"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: label set (PROPOSED FANTASY)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: fantasy asset marked as proposal in its habitat text",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: valid mesh, UVs",
+   "ok": true,
+   "detail": "9,816 tris, 5,898 verts"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_T08_DEAD_SNAG_BARK, MAT_T6_EF_T08_DEAD_SNAG_NOLEAF, MAT_T6_EF_T08_DEAD_SNAG_FUNGUS"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 2]"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "18.74 m vs design 17.0 m"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.50 m, 244 verts at the foot"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_T08_DEAD_SNAG: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: valid mesh, UVs",
+   "ok": true,
+   "detail": "4,080 tris, 4,710 verts"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_V01_HANGING_VINE_0, MAT_T6_EF_V01_HANGING_VINE_1"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: plant base on the ground (no floating)",
+   "ok": false,
+   "detail": "lowest z 0.454 m"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 7.0e-01 m \u00b7 moving \u0394max 0.682 m \u00b7 foot \u0394 0.000 m"
+  },
+  {
+   "check": "EF_FE01_GIANT_FERN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 9.7e-02 m \u00b7 moving \u0394max 0.113 m \u00b7 foot \u0394 0.004 m"
+  },
+  {
+   "check": "MK: library file exists",
+   "ok": true,
+   "detail": "library/T6_VEG_MOUNTAIN_KINGDOM_v001.blend"
+  },
+  {
+   "check": "MK: file size < 100 MB (GitHub limit)",
+   "ok": true,
+   "detail": "10.0 MB"
+  },
+  {
+   "check": "MK: opens in Blender 4.5.16 LTS, no missing images",
+   "ok": true,
+   "detail": "35 images, missing []"
+  },
+  {
+   "check": "MK: image paths relative (portable to the Director PC)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK: T6_WIND_CONTROL present with strength/gust/speed/flutter",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK: assets in library",
+   "ok": true,
+   "detail": "10 assets"
+  },
+  {
+   "check": "MK_F01_GENTIAN: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,300 tris, 980 verts"
+  },
+  {
+   "check": "MK_F01_GENTIAN: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_F01_GENTIAN: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_F01_GENTIAN_0, MAT_T6_MK_F01_GENTIAN_1, MAT_T6_MK_F01_GENTIAN_2"
+  },
+  {
+   "check": "MK_F01_GENTIAN: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_F01_GENTIAN: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "MK_F01_GENTIAN: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,632 tris, 1,296 verts"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_F02_EDELWEISS_0, MAT_T6_MK_F02_EDELWEISS_1, MAT_T6_MK_F02_EDELWEISS_2"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: valid mesh, UVs",
+   "ok": true,
+   "detail": "752 tris, 561 verts"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_F03_BLUE_POPPY_0, MAT_T6_MK_F03_BLUE_POPPY_1, MAT_T6_MK_F03_BLUE_POPPY_2"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1, 2]"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: valid mesh, UVs",
+   "ok": true,
+   "detail": "4,000 tris, 3,600 verts"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_G01_ALPINE_TUSSOCK_0, MAT_T6_MK_G01_ALPINE_TUSSOCK_1"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.172 m"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,980 tris, 2,040 verts"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_M01_ALPINE_CUSHION_0, MAT_T6_MK_M01_ALPINE_CUSHION_1"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.020 m"
+  },
+  {
+   "check": "MK_S01_JUNIPER: valid mesh, UVs",
+   "ok": true,
+   "detail": "2,538 tris, 2,262 verts"
+  },
+  {
+   "check": "MK_S01_JUNIPER: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_S01_JUNIPER: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_S01_JUNIPER_BARK, MAT_T6_MK_S01_JUNIPER_LEAF, MAT_T6_MK_S01_JUNIPER_BARK"
+  },
+  {
+   "check": "MK_S01_JUNIPER: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_S01_JUNIPER: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "0.82 m vs design 0.9 m"
+  },
+  {
+   "check": "MK_S01_JUNIPER: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.54 m, 987 verts at the foot"
+  },
+  {
+   "check": "MK_S01_JUNIPER: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_S01_JUNIPER: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_S01_JUNIPER: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: valid mesh, UVs",
+   "ok": true,
+   "detail": "1,776 tris, 1,644 verts"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_S02_DWARF_RHODODENDRON_BARK, MAT_T6_MK_S02_DWARF_RHODODENDRON_LEAF, MAT_T6_MK_S02_DWARF_RHODODENDRON_BARK"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "0.54 m vs design 0.6 m"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.24 m, 724 verts at the foot"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_S02_DWARF_RHODODENDRON: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: valid mesh, UVs",
+   "ok": true,
+   "detail": "225,678 tris, 188,336 verts"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_T01_HIMALAYAN_SPRUCE_BARK, MAT_T6_MK_T01_HIMALAYAN_SPRUCE_LEAF, MAT_T6_MK_T01_HIMALAYAN_SPRUCE_BARK"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "31.32 m vs design 32.0 m"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.41 m, 309 verts at the foot"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: valid mesh, UVs",
+   "ok": true,
+   "detail": "95,664 tris, 76,036 verts"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_T02_HIMALAYAN_BIRCH_BARK, MAT_T6_MK_T02_HIMALAYAN_BIRCH_LEAF, MAT_T6_MK_T02_HIMALAYAN_BIRCH_BARK"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: height within \u00b115 % of the design height",
+   "ok": false,
+   "detail": "13.99 m vs design 12.0 m"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.34 m, 32 verts at the foot"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_T02_HIMALAYAN_BIRCH: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: valid mesh, UVs",
+   "ok": true,
+   "detail": "21,942 tris, 15,328 verts"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_T03_KRUMMHOLZ_PINE_BARK, MAT_T6_MK_T03_KRUMMHOLZ_PINE_LEAF, MAT_T6_MK_T03_KRUMMHOLZ_PINE_BARK"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "6.12 m vs design 5.5 m"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.40 m, 272 verts at the foot"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 4.6e-01 m \u00b7 moving \u0394max 0.490 m \u00b7 foot \u0394 0.220 m"
+  },
+  {
+   "check": "MK_F01_GENTIAN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": false,
+   "detail": "calm \u0394 1.0e-02 m \u00b7 moving \u0394max 0.015 m \u00b7 foot \u0394 0.005 m"
+  }
+ ]
+}

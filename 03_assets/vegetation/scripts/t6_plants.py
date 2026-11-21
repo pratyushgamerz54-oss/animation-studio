@@ -374,21 +374,21 @@ PLANTS = [
     dict(name='AV_F01_BUTTERCUP', common='Himalayan buttercup', latin='Ranunculus hirtellus', label=SI, region='R-01', category='Wildflower',
          kind='herb', seed=111, P=dict(h=.32, stems=4, spread=18, basal=6, leaf_l=.07, leaf_w=.06, leaf_shape='round', leaf_rough=.25,
                                         flower=dict(type='radial', n=5, L=.013, W=.014, cup=.6, shape='round', centre=.005)),
-         mats=[('simple', '#3E6A2A'), ('simple_gloss', '#F2C21A'), ('simple', '#C89A1A')], palette=['#F2C21A', '#C89A1A', '#3E6A2A']),
+         mats=[('herbleaf', '#3E6A2A'), ('simple_gloss', '#F2C21A'), ('simple', '#C89A1A')], palette=['#F2C21A', '#C89A1A', '#3E6A2A']),
     dict(name='AV_F02_PRIMULA', common='Drumstick primula', latin='Primula denticulata', label=SI, region='R-01', category='Wildflower',
          kind='herb', seed=112, P=dict(h=.22, stems=1, spread=4, basal=9, leaf_l=.11, leaf_w=.04, leaf_shape='obovate', leaf_droop=.4,
                                         flower=dict(type='ball', n=60, R=.026, L=.011, W=.010)),
-         mats=[('simple', '#4E7A34'), ('simple', '#A87AD0'), ('simple', '#F0E06A')], palette=['#A87AD0', '#7A4AA8', '#4E7A34']),
+         mats=[('herbleaf', '#4E7A34'), ('petal', '#A87AD0'), ('simple', '#F0E06A')], palette=['#A87AD0', '#7A4AA8', '#4E7A34']),
     dict(name='AV_F03_WILD_DAISY', common='Wild daisy / pearly everlasting', latin='Anaphalis / Bellis-like (meadow daisy)', label=SI,
          region='R-01', category='Wildflower', kind='herb', seed=113,
          P=dict(h=.16, stems=5, spread=22, basal=7, leaf_l=.05, leaf_w=.02, leaf_shape='obovate',
                 flower=dict(type='radial', n=18, L=.012, W=.004, cup=.05, shape='lance', centre=.004, centre_h=.003)),
-         mats=[('simple', '#4A7230'), ('simple', '#F4F2EA'), ('simple', '#F0C02A')], palette=['#F4F2EA', '#F0C02A', '#4A7230']),
+         mats=[('herbleaf', '#4A7230'), ('petal', '#F4F2EA'), ('simple', '#F0C02A')], palette=['#F4F2EA', '#F0C02A', '#4A7230']),
     dict(name='AV_F04_MARIGOLD', common='Marigold (genda) — cultivated', latin='Tagetes erecta', label=SI, region='R-01 (Ashram gardens)',
          category='Garden flower', kind='herb', seed=114, P=dict(h=.5, stems=9, spread=22, basal=0, stem_leaves=12, leaf_l=.09, leaf_w=.022,
                                                                   leaf_shape='lance', stem_r=.004,
                                                                   flower=dict(type='pompom', n=14, layers=4, L=.03, W=.018)),
-         mats=[('simple', '#3A6228'), ('simple', '#F08A12'), ('simple', '#C86A0A')], palette=['#F08A12', '#F2B21A', '#3A6228']),
+         mats=[('herbleaf', '#3A6228'), ('petal', '#F08A12'), ('simple', '#C86A0A')], palette=['#F08A12', '#F2B21A', '#3A6228']),
     dict(name='AV_FE01_SWORD_FERN', common='Valley sword fern', latin='Polystichum / Dryopteris-like', label=SI, region='R-01', category='Fern',
          kind='fern', seed=121, P=dict(fronds=14, size=.30, chain=3, elev=(40, 72), arch=.45, pinnae=24, pin_len=.17),
          mats=[('grass', [(0, '#2E5A1E'), (.6, '#4E8A30'), (1, '#7FB060')]), ('simple', '#5A4A2E')], palette=['#3F7A2C', '#5E9640', '#7FB060']),
@@ -417,7 +417,7 @@ PLANTS = [
          label=PF, region='R-02', category='Rare fantasy fungus', kind='mushrooms', seed=251, P=dict(n=11, radius=.12, h=.09, cap=.03, dome=1.4),
          mats=[('simple', '#D8E6DA'), ('glow', '#8FE6D2'), ('glow_dim', '#5AB8A6')], palette=['#8FE6D2', '#5AB8A6', '#D8E6DA']),
     dict(name='EF_V01_HANGING_VINE', common='Hanging liana', latin='inspired by woody lianas (Entada / Bauhinia vahlii)', label=SI, region='R-02',
-         category='Vine', kind='vine', seed=261, P=dict(h=9.0, strands=6, spread=.8, r=.025, leaves_per=5, card=.32),
+         category='Vine (hanging)', kind='vine', hanging=True, seed=261, P=dict(h=9.0, strands=6, spread=.8, r=.025, leaves_per=5, card=.32),
          mats=[('bark', 'bark_willow'), ('leaf', 'ef_beech')], palette=['#5A5048', '#2F6A4A', '#4A8A60']),
     # ------------------------------------------------------------------ R-03 MOUNTAIN KINGDOM
     dict(name='MK_G01_ALPINE_TUSSOCK', common='Alpine tussock grass', latin='Festuca / Kobresia tussock', label=SI, region='R-03',
@@ -427,7 +427,7 @@ PLANTS = [
     dict(name='MK_F01_GENTIAN', common='Himalayan gentian', latin='Gentiana ornata', label=SI, region='R-03', category='Alpine flower',
          kind='herb', seed=311, P=dict(h=.08, stems=5, spread=30, basal=10, leaf_l=.03, leaf_w=.006, leaf_shape='lance', stem_grav=-.2,
                                         flower=dict(type='trumpet', L=.035)),
-         mats=[('simple', '#3E5E2E'), ('petal', '#2E5ED8'), ('simple', '#E8E0C0')], palette=['#2E5ED8', '#7FA8F0', '#3E5E2E']),
+         mats=[('herbleaf', '#3E5E2E'), ('petal', '#2E5ED8'), ('simple', '#E8E0C0')], palette=['#2E5ED8', '#7FA8F0', '#3E5E2E']),
     dict(name='MK_F02_EDELWEISS', common='Himalayan edelweiss', latin='Leontopodium himalayanum', label=SI, region='R-03', category='Alpine flower',
          kind='herb', seed=312, P=dict(h=.14, stems=4, spread=18, basal=8, leaf_l=.035, leaf_w=.008, leaf_shape='lance',
                                         flower=dict(type='star', n=9, L=.022, W=.008)),
@@ -436,7 +436,7 @@ PLANTS = [
          category='Alpine flower', kind='herb', seed=313, P=dict(h=.75, stems=3, spread=10, basal=7, leaf_l=.14, leaf_w=.05, leaf_shape='oval',
                                                                  leaf_rough=.2, stem_r=.004, stem_grav=-.25,
                                                                  flower=dict(type='radial', n=4, L=.045, W=.05, cup=.55, shape='round', centre=.01, centre_h=.012, droop=.2)),
-         mats=[('simple', '#5A7A4A'), ('petal', '#5A9AE0'), ('simple', '#E8C83A')], palette=['#5A9AE0', '#8AB8F0', '#E8C83A', '#5A7A4A']),
+         mats=[('herbleaf', '#5A7A4A'), ('petal', '#5A9AE0'), ('simple', '#E8C83A')], palette=['#5A9AE0', '#8AB8F0', '#E8C83A', '#5A7A4A']),
     dict(name='MK_M01_ALPINE_CUSHION', common='Alpine cushion plant', latin='Arenaria / Thylacospermum cushion', label=SI, region='R-03',
          category='Mountain vegetation', kind='moss', seed=341, P=dict(n=5, radius=.15, r=.16, flat=.5, sporophytes=60),
          mats=[('moss', ('#4A5E2E', '#7A8A46', '#9A9A6A')), ('simple', '#F4F0E8')], palette=['#4A5E2E', '#7A8A46', '#F4F0E8']),
@@ -458,7 +458,9 @@ def plant_mats(D):
         elif kind == 'simple_var':
             out.append(K.mat_simple(nm, v[0], rough=.5, var_col=v[1], var_scale=40))
         elif kind == 'petal':
-            out.append(K.mat_simple(nm, v, rough=.4, sss=.25, transl=.3))
+            out.append(K.mat_petal(nm, v))
+        elif kind == 'herbleaf':
+            out.append(K.mat_herbleaf(nm, v))
         elif kind == 'woolly':
             out.append(K.mat_simple(nm, v, rough=.9, sheen=1.0))
         elif kind == 'moss':
