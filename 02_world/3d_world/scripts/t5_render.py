@@ -19,7 +19,7 @@ while i < len(argv):
         opt[argv[i][2:]] = argv[i + 1]; i += 2
     else:
         names.append(argv[i]); i += 1
-bpy.ops.wm.open_mainfile(filepath=wk.P('00_MASTER_WORLD', 'T5_LANDSCAPE_master_v002.blend'))
+bpy.ops.wm.open_mainfile(filepath=wk.P('00_MASTER_WORLD', opt.get('master', 'T5_LANDSCAPE_master_v002.blend')))
 sc = bpy.context.scene
 cams = [o for o in sc.objects if o.type == 'CAMERA' and o.name.startswith('CAM_T5_')]
 if names:
@@ -34,7 +34,8 @@ log = json.load(open(logp)) if os.path.exists(logp) else {}
 REL = {'CAM_T5_01_MOUNTAIN_WIDE': ('SC_MT_',), 'CAM_T5_03_RIVER_WATERFALL': ('SC_WF_', 'SC_MT_'),
        'CAM_T5_04_SNOWY_PEAKS': ('SC_MT_',), 'CAM_T5_02_FOREST_ESTABLISHING': ('SC_FH_', 'SC_L1_'),
        'CAM_T5_08_FOREST_FLOOR': ('SC_FH_',), 'CAM_T5_06_VALLEY_AERIAL': ('SC_VH_GROVES', 'SC_L0_', 'SC_L1_', 'SC_VH_BOULDERS'),
-       'CAM_T5_07_GROUND_LEVEL': ('SC_VH_', 'SC_L0_', 'SC_L1_')}
+       'CAM_T5_07_GROUND_LEVEL': ('SC_VH_', 'SC_L0_', 'SC_L1_'),
+       'CAM_T5_05_DESERT': ('SC_DH_', 'SC_DN_'), 'CAM_T5_05B_DESERT_MESAS_AERIAL': ('SC_DN_',)}
 for cam in cams:
     keep = REL.get(cam.name)
     for o in sc.objects:

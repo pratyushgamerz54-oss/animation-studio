@@ -157,6 +157,20 @@
   ],
   "drivers": "mask attributes from NG_T5_HEIGHTFIELD + geometry slope + altitude + camera distance"
  },
+ "MAT_T5_TERRAIN_DESERT": {
+  "source": "Poly Haven 2K: dry_ground_01, gravel_ground_01, sand_01, coast_sand_01, mud_cracked_dry_03, rocky_gravel, rock_ground, cliff_side (biplanar strata) + procedural far sand / far cliff / ripples",
+  "maps": "Base Color, Roughness, Normal GL, Displacement (height blend)",
+  "resolution": "2K per layer",
+  "metallic": 0.0,
+  "layers": [
+   "pavement",
+   "sand + wind ripples",
+   "playa (cracked)",
+   "scree",
+   "rock",
+   "sandstone cliff"
+  ]
+ },
  "MAT_T5_WATER_RIVER": {
   "source": "procedural",
   "maps": "transmission IOR 1.333, animated ripple bump, foam (attribute \"foam\" \u00d7 noise)",

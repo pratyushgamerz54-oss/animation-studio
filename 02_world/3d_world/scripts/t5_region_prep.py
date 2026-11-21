@@ -95,10 +95,10 @@ def dunes(X, Y, wind_deg, sp):
     th = math.radians(wind_deg + 180)                                  # direction the wind blows TO
     ux, uy = math.sin(th), math.cos(th)
     out = np.zeros_like(X)
-    for lam, amp, seed in ((780.0, 34.0, 190), (240.0, 9.0, 191), (60.0, 1.6, 192)):
+    for lam, amp, seed in ((900.0, 48.0, 190), (260.0, 8.0, 191), (60.0, 1.4, 192)):
         if lam < 3 * sp:
             continue
-        wx, wy = N.warp(X, Y, lam * 2.2, lam * .45, seed)
+        wx, wy = N.warp(X, Y, lam * 2.5, lam * .25, seed)
         ph = (wx * ux + wy * uy) / lam + N.fbm(X, Y, lam * 4, 2, seed + 5) * .35
         f = ph - np.floor(ph)
         prof = np.where(f < .78, f / .78, (1 - f) / .22)               # rise 78 %, slip face 22 %
@@ -109,10 +109,11 @@ def dunes(X, Y, wind_deg, sp):
 
 def mesas(X, Y, z0, sp):
     """rock tablelands / buttes / inselbergs: terraced, flat-topped, steep walls (strata)."""
-    m = sstep(.12, .3, N.ridged(X, Y, 5200, 3, 200) + N.fbm(X, Y, 2200, 3, 201) * .25)
-    top = 90 + N.fbm(X, Y, 3000, 2, 202) * 40
+    n_ = N.fbm(X, Y, 2600, 4, 200) + N.fbm(X, Y, 700, 3, 201) * .22
+    m = sstep(.30, .34, n_)                                            # sharp plateau rims (steep walls), buttes + tablelands
+    top = 230 + N.fbm(X, Y, 3000, 2, 202) * 90
     h = m * top
-    st = 18.0
+    st = 24.0
     t = h / st; fr = t - np.floor(t)
     h = (np.floor(t) + sstep(.8, 1.0, fr)) * st                        # terraces (ledges every ~18 m)
     return h, m
@@ -180,7 +181,7 @@ def build(rkey, tkey):
     rock = np.maximum(sstep(26, 38, slope), cliff) * (1 - sandsea * .7)
     sand = np.clip(sandsea * 1.2, 0, 1) * (1 - cliff) + wadi * .6
     loc = ze - ndi.gaussian_filter(ze, 2000 / sp)                       # basins → playas with cracked mud
-    playa = sstep(-2, -8, loc) * sstep(4, 1.5, slope) * (1 - sandsea) * (~sea)
+    playa = sstep(-6, -14, loc) * sstep(2, .8, slope) * (1 - sandsea) * (~sea)
     lf = np.log1p(flow) / max(np.log1p(flow).max(), 1e-9) if flow.max() > 0 else flow
     sc = np.clip(scree / max(np.percentile(scree[scree > 0], 95) if (scree > 0).any() else 1, 1e-6), 0, 1)
     pave = (1 - sand) * (1 - rock) * (1 - playa) * sstep(.0, .3, N.fbm(X + OX, Y + OY, 400, 2, 230) + .2)

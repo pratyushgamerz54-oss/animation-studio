@@ -235,6 +235,82 @@ def terrain_material():
 L['TERRAIN'] = terrain_material()
 
 
+# =========================================================================== desert terrain shader (milestone 2, region R04)
+def desert_material():
+    """MAT_T5_TERRAIN_DESERT — same mask slots, desert meaning: m_dry = SAND (dunes), m_pad = PLAYA (cracked mud),
+    m_gravel = desert PAVEMENT, m_grove = sparse shrubs (wadi), m_scree, m_rock, m_cliff (sandstone strata, biplanar so the
+    layers stay horizontal on every wall), m_wet = water / sea."""
+    m, b, bs, out = newmat('MAT_T5_TERRAIN_DESERT')
+    v = coords(b)
+    A = {k: b.attr(k) for k in ('m_rock', 'm_wet', 'm_dry', 'm_pad', 'm_grove', 'm_scree', 'm_gravel', 'm_flow', 'm_cliff')}
+    cam = b.node('ShaderNodeCameraData'); dist = cam.outputs['View Distance']
+    geo = b.node('ShaderNodeNewGeometry')
+    nsep = b.node('ShaderNodeSeparateXYZ'); b.link(geo.outputs['Normal'], nsep.inputs[0]); nz = nsep.outputs['Z']
+    vs = b.node('ShaderNodeSeparateXYZ'); b.link(v, vs.inputs[0])
+    macro = b.noise(v, 1 / 1500.0, 4, .55); meso = b.noise(v, 1 / 90.0, 4, .6)
+    far = b.maprange(dist, 200, 1200)
+    flat_ok = b.maprange(nz, .55, .78)
+
+    def L_(tex, scale, box=False, at=False, tint=None, vec=None):
+        g = use_group(b, tex, vec if vec is not None else v, scale, box, at, False, None, tint)
+        return [g.outputs['Color'], g.outputs['Roughness'], g.outputs['Normal'], g.outputs['Height']]
+
+    def lerp(f, a_, c_):
+        return [b.mixc(f, a_[0], c_[0]), b.mixf(f, a_[1], c_[1]), b.mixv(f, a_[2], c_[2]), b.mixf(f, a_[3], c_[3])]
+
+    def hb(base, lay, mask, k=.35):
+        val = b.math('ADD', b.math('MULTIPLY', mask, 1.3), b.math('MULTIPLY', b.math('SUBTRACT', lay[3], base[3]), k))
+        return lerp(b.maprange(b.math('SUBTRACT', val, .15), .4, .6), base, lay)
+    # base: desert pavement / dry hardpan
+    base = L_('dry_ground_01', 3.0, at=True, tint='#E8C9A0')
+    pav = L_('gravel_ground_01', 2.5, tint='#F0D2AA')
+    base = lerp(b.math('MULTIPLY', b.maprange(b.math('ADD', A['m_gravel'], b.math('MULTIPLY', meso, .3)), .3, .9), .7), base, pav)
+    # sand (near scans + far procedural) with wind ripples (anisotropic waves across the wind, W → E)
+    sd = L_('sand_01', 3.0, at=True, tint='#F2CFA0')
+    sd2 = L_('coast_sand_01', 4.0, tint='#EDC292')
+    sd = lerp(b.maprange(macro, .42, .6), sd, sd2)
+    sfar = [b.mixc(b.maprange(b.noise(v, 1 / 60.0, 4, .5), .3, .7), lin('#C99A64'), lin('#E6BE88')), .9, sd[2], .5]
+    sd = lerp(far, sd, sfar)
+    wv = b.node('ShaderNodeTexWave', wave_type='BANDS', bands_direction='X'); wv.inputs['Scale'].default_value = 1 / 0.18
+    wv.inputs['Distortion'].default_value = 6.0; wv.inputs['Detail'].default_value = 3.0
+    b.link(b.vmath('SCALE', v, scale=1 / 4.0), wv.inputs['Vector'])
+    rip = b.node('ShaderNodeBump'); rip.inputs['Strength'].default_value = .25; rip.inputs['Distance'].default_value = .02
+    b.link(b.math('MULTIPLY', wv.outputs['Fac'], b.maprange(dist, 60, 5)), rip.inputs['Height']); b.link(sd[2], rip.inputs['Normal'])
+    sd[2] = rip.outputs['Normal']
+    base = hb(base, sd, b.maprange(b.math('ADD', A['m_dry'], b.math('MULTIPLY', macro, .25)), .05, .75), .2)
+    # playas — cracked dry mud
+    pl = L_('mud_cracked_dry_03', 4.0, tint='#E7D2B6')
+    base = hb(base, pl, b.math('MULTIPLY', A['m_pad'], flat_ok))
+    # scree / talus
+    sc_ = L_('rocky_gravel', 3.0, tint='#E0B892')
+    base = hb(base, sc_, b.math('MULTIPLY', A['m_scree'], flat_ok))
+    # rock (gentle outcrops) — triplanar
+    rk = L_('rock_ground', 4.0, box=True, tint='#E2B88C')
+    base = hb(base, rk, b.math('MAXIMUM', A['m_rock'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .08)), .82, .7)))
+    # cliffs — sandstone strata, BIPLANAR (x-z and y-z planes, blended by the normal) → layers stay horizontal on every wall
+    sc6 = 1 / 14.0
+    xz = b.node('ShaderNodeCombineXYZ'); b.link(vs.outputs['X'], xz.inputs['X']); b.link(vs.outputs['Z'], xz.inputs['Y'])
+    yz = b.node('ShaderNodeCombineXYZ'); b.link(vs.outputs['Y'], yz.inputs['X']); b.link(vs.outputs['Z'], yz.inputs['Y'])
+    c1 = L_('cliff_side', 14.0, vec=xz.outputs[0], tint='#F0D2B4'); c2 = L_('cliff_side', 14.0, vec=yz.outputs[0], tint='#F0D2B4')
+    wy = b.math('ABSOLUTE', nsep.outputs['Y']); wx_ = b.math('ABSOLUTE', nsep.outputs['X'])
+    cl = lerp(b.math('DIVIDE', wx_, b.math('ADD', b.math('ADD', wx_, wy), 1e-4)), c1, c2)
+    cfar = [b.mixc(b.maprange(b.noise(v, 1 / 25.0, 4, .6), .3, .7), lin('#9C5E3A'), lin('#C88E62')), .85, cl[2], .5]
+    cl = lerp(b.maprange(dist, 500, 2500), cl, cfar)
+    base = hb(base, cl, b.math('MAXIMUM', A['m_cliff'], b.maprange(nz, .6, .45)))
+    # wadi shrub litter / darker damp sand in channels
+    base[0] = b.mixc(b.math('MULTIPLY', A['m_grove'], .35), base[0], lin('#8A7A5A'))
+    b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
+    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .35
+    SPEC['MAT_T5_TERRAIN_DESERT'] = dict(source='Poly Haven 2K: dry_ground_01, gravel_ground_01, sand_01, coast_sand_01, mud_cracked_dry_03, '
+                                         'rocky_gravel, rock_ground, cliff_side (biplanar strata) + procedural far sand / far cliff / ripples',
+                                         maps='Base Color, Roughness, Normal GL, Displacement (height blend)', resolution='2K per layer',
+                                         metallic=0.0, layers=['pavement', 'sand + wind ripples', 'playa (cracked)', 'scree', 'rock', 'sandstone cliff'])
+    return m
+
+
+L['TERRAIN_DESERT'] = desert_material()
+
+
 # =========================================================================== water, mist, haze, far trees
 def water(name, deep, shallow, rough=.02, wave=1.0):
     m, b, bs, out = newmat(name)
