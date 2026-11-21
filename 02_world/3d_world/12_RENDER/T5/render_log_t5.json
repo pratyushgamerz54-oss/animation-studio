@@ -70,7 +70,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_05_DESERT": {
-  "seconds": 155.1,
+  "seconds": 124.2,
   "samples": 48,
   "res": [
    1280,
@@ -80,7 +80,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_05B_DESERT_MESAS_AERIAL": {
-  "seconds": 135.6,
+  "seconds": 116.6,
   "samples": 48,
   "res": [
    1280,
@@ -90,23 +90,23 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_09_FORBIDDEN_RIM": {
-  "seconds": 123.0,
+  "seconds": 105.9,
   "samples": 48,
   "res": [
    1280,
    720
   ],
-  "description": "Forbidden Region (R05) \u2014 the blasted crater rim: ash ground, fissures, dead trees, the dark crater lake beyond",
+  "description": "Forbidden Region (R05) \u2014 from the blasted rim: the steep inner crater wall falls to the black crater lake; ejecta blocks, fissures, ash",
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_09B_FORBIDDEN_AERIAL": {
-  "seconds": 83.5,
+  "seconds": 108.7,
   "samples": 48,
   "res": [
    1280,
    720
   ],
-  "description": "Forbidden Region aerial \u2014 ejecta ridges on the blasted plain, the crater rim and the crater lake",
+  "description": "Forbidden Region \u2014 the ~150 m inner crater wall rising from the black crater lake, ejecta on the rim above",
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_10_ENCHANTED_FLOOR": {
@@ -150,7 +150,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_12_CAVE_ENTRANCE": {
-  "seconds": 332.7,
+  "seconds": 345.1,
   "samples": 64,
   "res": [
    1280,

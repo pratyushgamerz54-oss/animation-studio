@@ -1,6 +1,6 @@
 {
  "blender": "4.5.16 LTS",
- "time": "2026-11-21 15:48",
+ "time": "2026-11-21 16:50",
  "passed": 45,
  "total": 45,
  "checks": [
@@ -32,12 +32,12 @@
   {
    "check": "file size < 100 MB: 06_DESERTS/FORBIDDEN_R05_v002.blend",
    "result": "PASS",
-   "detail": "2.0 MB"
+   "detail": "2.4 MB"
   },
   {
    "check": "opens + no missing images: 06_DESERTS/FORBIDDEN_R05_v002.blend",
    "result": "PASS",
-   "detail": "93 images, missing []"
+   "detail": "94 images, missing []"
   },
   {
    "check": "06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XF evaluates to a real mesh with mask attributes",
@@ -137,7 +137,7 @@
   {
    "check": "opens + no missing images: 00_MASTER_WORLD/T5_REGION_R05_FORBIDDEN_master_v002.blend",
    "result": "PASS",
-   "detail": "95 images, missing []"
+   "detail": "96 images, missing []"
   },
   {
    "check": "file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R02_ENCHANTED_master_v002.blend",
@@ -162,7 +162,7 @@
   {
    "check": "file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
    "result": "PASS",
-   "detail": "1.1 MB"
+   "detail": "1.0 MB"
   },
   {
    "check": "opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
