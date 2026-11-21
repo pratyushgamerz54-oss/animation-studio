@@ -133,7 +133,7 @@
    "near": "LIB_ROCKS_LARGE",
    "mid": null,
    "far": null,
-   "Density": 0.0012,
+   "Density": 0.0003,
    "Viewport Density": 0.3,
    "Mask": "m_cliff",
    "Mask Min": 0.05,
