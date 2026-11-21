@@ -1,4 +1,8 @@
-# STATUS — last updated 2026-11-21 (session 3: TASK 04 CLOSED, waiting for TASK 05 brief)
+# STATUS — last updated 2026-11-21 (session 4: restore done, TASK 05 CLOSED, waiting for TASK 06 brief)
+
+## Session 4 (21 Nov)
+- Restore: branch `ccr-a129fdfc-g3v4k0` ka kaam working branch `ccr-c375d59d-2qaoyn` par (same history), `setup_session.sh` chalaya. Kuch rebuild nahi.
+- **NEXT: TASK 06 brief ka intezaar** (Director bhejega).
 
 ## Session 3 (21 Nov)
 - **NOW: TASK 05 COMPLETE (21 Nov)** — milestone 1 approved (QC 56/56) + milestone 2 built (QC 45/45): R04 desert, R05 forbidden crater, R02 enchanted forest, R03 Great Northern Range + cave entrance, main world v002. Previews: `02_world/3d_world/12_RENDER/T5/T5_SHEET_01_CINEMATIC_TESTS.png`, `T5_SHEET_02_MILESTONE2.png`. **Director: milestone 2 + crater/cave/dune fixes APPROVED ("Badhiya hai", 21 Nov) → TASK 05 CLOSED. Next: TASK 06 prompt.**
