@@ -24,6 +24,13 @@ KM = 12000 / W
 SEED = 11
 F = lambda p, s: ImageFont.truetype(p, s)
 Y, X = np.mgrid[0:H, 0:W].astype(np.float32)
+# ---- merged home continent: the detailed v1 continent (02_world/map, 1 cell = 2 km) becomes C1 HIMAVANT
+OLD = os.path.join(HERE, '..', 'map', 'data'); OLD_KM = 3.0
+C1W, C1H = int(round(1024 * OLD_KM / (12000 / 1536))), int(round(768 * OLD_KM / (12000 / 1536)))
+C1X0, C1Y0 = int(.29 * 1536 - C1W / 2), int(.37 * 768 - C1H / 2)
+SXo, SYo = C1W / 1024, C1H / 768
+TO = lambda p: (C1X0 + p[0] * SXo, C1Y0 + p[1] * SYo)          # old map cell -> world cell
+OLDB = None; OLDLAKE = None
 nx, ny = X / W, Y / H                               # ny = 0 north
 
 
@@ -45,13 +52,12 @@ ISLANDS = [  # archipelagos (proposed): centre, spread, count, size
     ('A3', 'WESTERN ISLES', (.06, .55), (.025, .08), 8, 9),
 ]
 RANGES = [  # (code, proposed name, continent, polyline (nx, ny), width, peak m, kind)
-    ('M1', 'MAHAGIRI RANGE', 'C1', [(.17, .27), (.24, .22), (.32, .21), (.40, .24), (.45, .30)], .028, 8200, 'main'),
-    ('M2', 'WESTERN SPINE', 'C1', [(.16, .33), (.15, .43), (.18, .52)], .02, 4200, 'secondary'),
+    ('M1', 'MAHAGIRI RANGE', 'C1', [((C1X0 + u * C1W) / 1536, (C1Y0 + (.20 + .06 * math.sin(u * 5.1 + .7) + .03 * math.sin(u * 13 + 2)) * C1H) / 768)
+                                     for u in (.3, .45, .58, .7, .8)], .028, 0, 'main'),
     ('M3', 'SUNSTONE RIDGE', 'C2', [(.58, .47), (.62, .56), (.66, .68)], .022, 5200, 'main'),
     ('M4', 'VERDANT CROWN', 'C3', [(.86, .19), (.88, .29), (.86, .40)], .018, 4600, 'main'),
     ('M5', 'ICE WALL', 'C4', [(.42, .08), (.58, .06), (.74, .085)], .02, 5600, 'main'),
     ('M6', 'SOUTHERN TEETH', 'C5', [(.14, .78), (.21, .83), (.28, .80)], .016, 3900, 'secondary'),
-    ('M7', 'TWIN HILLS', 'C1', [(.33, .44), (.38, .49)], .016, 2600, 'secondary'),
 ]
 
 
@@ -71,6 +77,8 @@ def terrain():
     land = np.full((H, W), -1.0, np.float32)
     cid = np.zeros((H, W), np.int8)
     for k, (key, nm, (cx, cy), (rx, ry), rot, _) in enumerate(CONT):
+        if key == 'C1':
+            continue                                  # C1 = the detailed v1 continent, embedded below
         dx, dy = px - cx, (py - cy) * H / W
         c, s = math.cos(rot), math.sin(rot)
         u, v = (dx * c + dy * s) / rx, (-dx * s + dy * c) / (ry * H / W)
@@ -91,11 +99,25 @@ def terrain():
     h += np.where(base > 0, hills * 420 * np.clip(base * 3, 0, 1), 0)
     ridged = np.clip(1 - np.abs(fbm(26, 7, SEED + 5)) * 2.0, 0, 1) ** 1.5
     for code, nm, ck, pts, wdt, peak, kind in RANGES:
+        if peak <= 0:
+            continue                                  # label-only range (relief comes from the embedded C1 data)
         d = seg_dist(px, py, pts)
         g = np.exp(-(d / wdt) ** 2)
         h += np.where(base > -.05, g * peak * (.42 + .58 * ridged), 0)
     # crater-like Forbidden basin (proposal) on C5 and a great rift valley on C2
     h = smooth_h(h)
+    # ---- embed the detailed home continent (v1 map) as C1
+    global OLDB, OLDLAKE
+    oh = np.load(os.path.join(OLD, 'height_m.npy')); ob = np.load(os.path.join(OLD, 'biome.npy')); ol = np.load(os.path.join(OLD, 'lakes.npy'))
+    fz = (C1H / oh.shape[0], C1W / oh.shape[1])
+    ohz = ndi.zoom(ndi.gaussian_filter(oh, 1.2), fz, order=1)[:C1H, :C1W]
+    obz = ndi.zoom(ob, fz, order=0)[:C1H, :C1W]; olz = ndi.zoom(ol.astype(np.uint8), fz, order=0)[:C1H, :C1W].astype(bool)
+    sl = (slice(C1Y0, C1Y0 + ohz.shape[0]), slice(C1X0, C1X0 + ohz.shape[1]))
+    sub = h[sl]
+    h[sl] = np.where(ohz > 0, ohz, np.minimum(sub, np.maximum(ohz, -2500)))
+    cid[sl] = np.where(ohz > 0, 1, np.where(sub > 0, cid[sl], 0))
+    OLDB = np.full((H, W), 255, np.uint8); OLDB[sl] = np.where(ohz > 0, np.vectorize(OLD2NEW.get)(obz), 255)
+    OLDLAKE = np.zeros((H, W), bool); OLDLAKE[sl] = olz
     return h.astype(np.float32), cid
 
 
@@ -146,7 +168,9 @@ BIOMES = [  # id, name, hex
     (4, 'Enchanted forest (proposal)', '#2A6B5E'), (5, 'Desert', '#DDB878'), (6, 'Savanna', '#C2B45E'), (7, 'Tropical rainforest', '#1E5E32'),
     (8, 'Taiga / conifer forest', '#2F5A40'), (9, 'Tundra', '#A7A88E'), (10, 'Ice sheet', '#EEF3F7'), (11, 'High rock', '#8C857C'),
     (12, 'Snow peaks', '#F6F8FA'), (13, 'Wetland', '#5E8A6E'), (14, 'Lake', '#3C8FC0'), (15, 'Wasteland (proposal)', '#8E7A68'),
+    (16, 'Forbidden zone (proposal)', '#3B2A3F'),
 ]
+OLD2NEW = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 15, 7: 11, 8: 12, 9: 16, 10: 14}
 BCOL = {b: h for b, n, h in BIOMES}
 
 
@@ -197,6 +221,8 @@ def biomes(h, sea, lakes, temp, moist, dsea):
     B[(~sea) & (dsea < 9) & (h < 30)] = 1
     B[sea] = 0
     B[lakes] = 14
+    B = np.where(OLDB != 255, OLDB, B).astype(np.uint8)         # C1 keeps the approved-for-review v1 terrain classes
+    B[OLDLAKE] = 14
     return B
 
 
@@ -230,6 +256,8 @@ def features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea):
     cand = P(ok)
     sc = np.array([math.log1p(acc[int(y), int(x)]) * 1.0 - lake_d[int(y), int(x)] / 60 + green[int(y), int(x)] * 3 for x, y in cand])
     fe['ashram'] = cand[int(np.argmax(sc))] if cand else (W * .3, H * .32)
+    OF = json.load(open(os.path.join(OLD, 'features.json')))
+    fe['ashram'] = TO(OF['ashram'])                     # same proposed position as the detailed C1 map + 3D concept
     good = land & np.isin(B, [2, 3, 6, 13, 7, 8, 4]) & (h < 600)
     cp = P(good & (acc > 900) & (dsea < 160)); fe['cities'] = spaced(cp, np.array([acc[int(y), int(x)] for x, y in cp]), 18, 600, [fe['ashram']])
     cp = P(good & (acc > 150)); fe['towns'] = spaced(cp, rng.random(len(cp)) + np.array([math.log1p(acc[int(y), int(x)]) for x, y in cp]) * .2, 44, 260, fe['cities'] + [fe['ashram']])
@@ -239,6 +267,14 @@ def features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea):
     cp = P(land & (h > 900) & (h < 3200)); fe['caves'] = spaced(cp, rng.random(len(cp)), 16, 420, [])
     hd = np.where(riv.ravel(), h.ravel() - np.where(down >= 0, h.ravel()[np.clip(down, 0, None)], 0), 0).reshape(H, W)
     cp = P(riv & (hd > 180)); fe['waterfalls'] = spaced(cp, np.array([hd[int(y), int(x)] for x, y in cp]), 14, 350, []) if cp else []
+    inC1 = lambda p: cid[min(H - 1, int(p[1])), min(W - 1, int(p[0]))] == 1
+    for key, okey in (('cities', 'cities'), ('villages', 'villages'), ('ruins', 'ruins'), ('caves', 'caves'), ('waterfalls', 'waterfalls')):
+        fe[key] = [p for p in fe[key] if not inC1(p)] + [TO(p) for p in OF[okey]]
+    for key in ('towns', 'remote'):
+        fe[key] = [p for p in fe[key] if not inC1(p)]
+    fe['c1_hidden'] = [TO(p) for p in OF['hidden']]
+    fe['c1_regions'] = [(c, n, TO(p) if p else None, st) for c, n, p, st in OF['regions']]
+    fe['c1_city_codes'] = [f'C-{i + 1:02d}' for i in range(len(OF['cities']))]
     # unexplored territories: polar continent interior + far east ocean margin + C5 south-west plateau
     une = (cid == 4) & land & (ny < .09)
     fe['unexplored_mask'] = une
@@ -251,7 +287,7 @@ def features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea):
             big = 1 + int(np.argmax(ndi.sum(m, lab, range(1, n + 1)))); m = lab == big
         rows, cols = np.nonzero(m)
         area = m.sum() * KM * KM
-        bc = {BIOMES[b][1]: round(float((B[m] == b).mean() * 100), 1) for b in range(16) if (B[m] == b).mean() > .02}
+        bc = {BIOMES[b][1]: round(float((B[m] == b).mean() * 100), 1) for b in range(len(BIOMES)) if (B[m] == b).mean() > .02}
         stats[key] = {'name_proposed': nm, 'area_km2_est': int(area), 'extent_km_est': (int((cols.max() - cols.min()) * KM), int((rows.max() - rows.min()) * KM)),
                       'max_elev_m': int(h[m].max()), 'mean_elev_m': int(h[m].mean()), 'biome_pct': bc, 'desc': desc,
                       'forest_pct': round(float(np.isin(B[m], [3, 4, 7, 8]).mean() * 100), 1),
@@ -259,8 +295,8 @@ def features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea):
                       'ranges': [r[1] for r in RANGES if r[2] == key],
                       'cities': sum(1 for x, y in fe['cities'] if m[int(y), int(x)]), 'towns': sum(1 for x, y in fe['towns'] if m[int(y), int(x)]),
                       'villages': sum(1 for x, y in fe['villages'] if m[int(y), int(x)])}
-        mm = m & riv
-        stats[key]['major_rivers'] = int(ndi.label(m & (acc > 2500))[1])
+        idx = np.nonzero((m & (acc > 1500)).ravel())[0]
+        stats[key]['major_rivers'] = int(sum(1 for i in idx if down[i] >= 0 and sea.ravel()[down[i]]))   # big rivers reaching the sea
     fe['continents'] = stats
     return fe, riv
 
@@ -413,12 +449,12 @@ def scalebar(d, x, y, S, km=2000, col=(240, 240, 240)):
 
 
 def frame(img, title, sub, legend_w=0, extra_h=0, status='PROPOSAL — NOT LOCKED · awaiting Director approval'):
-    Wd, Hd = img.width + legend_w + 80, img.height + 220 + extra_h
+    Wd, Hd = img.width + legend_w + 80, img.height + 250 + extra_h
     S = Image.new('RGBA', (Wd, Hd), (24, 20, 16, 255)); d = ImageDraw.Draw(S)
     d.rectangle((14, 14, Wd - 14, Hd - 14), outline=(190, 160, 100), width=4); d.rectangle((24, 24, Wd - 24, Hd - 24), outline=(110, 90, 60), width=2)
     d.text((50, 44), title, font=F(wg.FS, 62), fill=(240, 226, 190))
     d.text((52, 122), sub, font=F(wg.FR, 24), fill=(185, 175, 155))
-    d.text((Wd - 50, 60), status, font=F(wg.FB, 26), fill=(255, 190, 70), anchor='ra')
+    d.text((50, Hd - 34), status, font=F(wg.FB, 22), fill=(255, 190, 70), anchor='ld')
     S.alpha_composite(img.convert('RGBA'), (40, 180))
     return S, d
 
@@ -478,7 +514,7 @@ def main():
     dep = (~sea) & (Fh - h > 6)
     lab, n = ndi.label(dep)
     keep = sorted(((ndi.sum(dep, lab, i), i) for i in range(1, n + 1) if ndi.sum(dep, lab, i) > 12 and ndi.maximum(Fh - h, lab, i) > 35), reverse=True)[:22]
-    lakes = ndi.binary_opening(np.isin(lab, [i for _, i in keep]), iterations=1)
+    lakes = ndi.binary_opening(np.isin(lab, [i for _, i in keep]), iterations=1) | OLDLAKE
     temp, moist, dsea = climate(h, sea, acc)
     B = biomes(h, sea, lakes, temp, moist, dsea)
     fe, riv = features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea)
@@ -625,7 +661,7 @@ def render_all(h, B, acc, down, riv, lakes, temp, moist, cid, fe, une, sea):
     # ================= B. continent maps
     continent_maps(base, h, B, acc, down, riv, fe)
     # ================= G. Ashram regional map
-    ashram_map(base, h, B, acc, down, riv, lakes, fe)
+    fe['ashram_routes_detailed'] = ashram_map_detailed(fe)
     # ================= H/I. dimensions + portals
     dimensions()
     portals()
@@ -641,7 +677,7 @@ def labels(d, fe, S, size, illustrated=True):
     for p in fe['cities']:
         boxes.append((p[0] * S - 16, p[1] * S - 16, p[0] * S + 16, p[1] * S + 16))
     a = fe['ashram']; sym(d, 'ashram', a[0] * S, a[1] * S, 1.3)
-    place(d, a[0] * S + 210, a[1] * S + 6, [('ASHRAM', 30, {'color': (255, 214, 90), 'serif': True}), ('CONFIRMED location · position PROPOSED', 15, {})], boxes, bnd)
+    place(d, a[0] * S - 190, a[1] * S - 40, [('ASHRAM', 30, {'color': (255, 214, 90), 'serif': True}), ('CONFIRMED location · position PROPOSED', 15, {})], boxes, bnd)
     for k, (key, nm, c, rr, rot, desc) in enumerate(CONT):
         st = fe['continents'][key]; cx, cy = st['centre']
         place(d, cx * S, cy * S + (60 if key == 'C1' else 0), [(' '.join(nm) if illustrated else nm, 46 if illustrated else 34, {'serif': True, 'color': (255, 240, 210)}),
@@ -651,6 +687,11 @@ def labels(d, fe, S, size, illustrated=True):
         place(d, x * W * S, y * H * S - 40, [(nm.title() if illustrated else f'{code} {nm}', 22 if kind == 'main' else 18, {'serif': illustrated, 'color': (250, 225, 200)})], boxes, bnd)
     for a_, nm, (cx, cy), sp, n, s in ISLANDS:
         place(d, cx * W * S, (cy - sp[1] * .8) * H * S, [(nm.title() if illustrated else nm, 20, {'serif': illustrated, 'color': (220, 240, 255)}), ('proposed', 14, {})], boxes, bnd)
+    for c, nm, p, st in fe.get('c1_regions', []):
+        if p and c not in ('R-01', 'R-07') and 'Range' not in nm:
+            place(d, p[0] * S, p[1] * S, [(nm if not illustrated else nm.title(), 17, {'serif': illustrated, 'color': (235, 235, 215)}), (c, 13, {})], boxes, bnd)
+    for p in fe.get('c1_hidden', []):
+        sym(d, 'hidden', p[0] * S, p[1] * S, .8)
     for (x, y), nm in (((.47, .2), 'NORTHERN OCEAN'), ((.40, .66), 'CENTRAL SEA'), ((.95, .72), 'EASTERN OCEAN'), ((.06, .25), 'WESTERN OCEAN')):
         place(d, x * W * S, y * H * S, [(nm + ' (proposed)', 22, {'serif': True, 'color': (170, 205, 235)})], boxes, bnd)
     if illustrated:
@@ -744,6 +785,111 @@ def ashram_map(base, h, B, acc, down, riv, lakes, fe):
     for rt in fe['routes']:
         fd.text((x, y), f"Route to nearest {rt['to'][:-1]}: ≈ {rt['length_km_est']} km (est.)", font=F(wg.FR, 19), fill=(255, 170, 140)); y += 30
     full.convert('RGB').save(os.path.join(OUT, 'MAP_G_ashram_region_v2.png'), optimize=True)
+
+
+def ashram_map_detailed(fe):
+    """G. Ashram region from the DETAILED C1 data (2 km cells) — same data as the C1 map and the 3D concept."""
+    oh = np.load(os.path.join(OLD, 'height_m.npy')); oF = np.load(os.path.join(OLD, 'filled_m.npy'))
+    oacc = np.load(os.path.join(OLD, 'accum.npy')); ob = np.load(os.path.join(OLD, 'biome.npy')); ol = np.load(os.path.join(OLD, 'lakes.npy'))
+    OF = json.load(open(os.path.join(OLD, 'features.json')))
+    osea = oh <= 0; odown, _ = wg.flow(oF, osea)
+    ax, ay = OF['ashram']; R = 80; Z = 8
+    x0, y0 = int(max(0, ax - R)), int(max(0, ay - 105)); x1, y1 = int(min(oh.shape[1], ax + R + 20)), int(min(oh.shape[0], ay + 75))
+    sy_, sx_ = np.nonzero(ob == 8)                                    # nearest snow peaks (detailed data)
+    k_ = int(np.argmin((sx_ - ax) ** 2 + (sy_ - ay) ** 2)); rdx, rdy = sx_[k_] - ax, ay - sy_[k_]
+    rdir = ['east', 'north-east', 'north', 'north-west', 'west', 'south-west', 'south', 'south-east'][int(((math.degrees(math.atan2(rdy, rdx)) + 22.5) % 360) // 45)]
+    rdist = int(math.hypot(rdx, rdy) * OLD_KM)
+    hs = oh[y0:y1, x0:x1]
+    hz = ndi.zoom(hs, Z, order=3)
+    hz = hz + wg.fbm(hz.shape, 24, 5, .5, 77) * 45 * (hz > 0)
+    Bz = ndi.zoom(ob[y0:y1, x0:x1], Z, order=0)
+    col = np.zeros(hz.shape + (3,), np.float32); ws = np.zeros(hz.shape, np.float32)
+    for b, hx in wg.PAL.items():
+        m = ndi.gaussian_filter((Bz == b).astype(np.float32), 5); col += m[..., None] * hexrgb(hx); ws += m
+    col /= np.maximum(ws, 1e-3)[..., None]
+    col = col * (.45 + .75 * wg.shade(np.maximum(hz, 0) * Z / OLD_KM, 1.0)[..., None])
+    im = Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)).convert('RGBA')
+    lv = np.floor(np.maximum(hz, 0) / 200); e = ((lv != np.roll(lv, 1, 0)) | (lv != np.roll(lv, 1, 1))) & (hz > 0)
+    a = np.zeros(hz.shape + (4,), np.uint8); a[e] = (40, 30, 20, 60); im.alpha_composite(Image.fromarray(a))
+    d = ImageDraw.Draw(im)
+    oriv = (~osea) & (oacc > 40) & ~ol
+    for r, c in zip(*np.nonzero(oriv[y0:y1, x0:x1])):
+        r += y0; c += x0; j = odown[r * oh.shape[1] + c]
+        if j < 0:
+            continue
+        r2, c2 = divmod(int(j), oh.shape[1])
+        w = max(2, int(Z * .45 * math.log10(oacc[r, c] / 30 + 1)))
+        d.line(((c - x0 + .5) * Z, (r - y0 + .5) * Z, (c2 - x0 + .5) * Z, (r2 - y0 + .5) * Z), fill=(84, 165, 225), width=w)
+    forest_glyphs_local(d, np.where(np.isin(Bz, [3, 4]), 3, 0), 22)
+    # PROPOSED access routes: least-effort path to the nearest city site and nearest village
+    gy, gx = np.gradient(hs, OLD_KM * 1000)
+    cost = 1 + np.hypot(gx, gy) * 40 + np.where(osea[y0:y1, x0:x1] | ol[y0:y1, x0:x1], 60, 0)
+    routes = []
+    for key in ('cities', 'villages'):
+        tgt = [p for p in OF[key] if x0 <= p[0] < x1 and y0 <= p[1] < y1]
+        if not tgt:
+            continue
+        tx, ty = min(tgt, key=lambda p: math.dist(p, (ax, ay)))
+        start, goal = (int(ay) - y0, int(ax) - x0), (int(ty) - y0, int(tx) - x0)
+        dist = {start: 0.0}; prev = {}; pq = [(0.0, start)]
+        while pq:
+            dd, u = heapq.heappop(pq)
+            if u == goal:
+                break
+            if dd > dist.get(u, 1e18):
+                continue
+            for dr in (-1, 0, 1):
+                for dc in (-1, 0, 1):
+                    v = (u[0] + dr, u[1] + dc)
+                    if (dr or dc) and 0 <= v[0] < hs.shape[0] and 0 <= v[1] < hs.shape[1]:
+                        nd = dd + cost[v] * math.hypot(dr, dc)
+                        if nd < dist.get(v, 1e18):
+                            dist[v] = nd; prev[v] = u; heapq.heappush(pq, (nd, v))
+        path = [goal]
+        while path[-1] in prev:
+            path.append(prev[path[-1]])
+        pp = [((c + .5) * Z, (r + .5) * Z) for r, c in path[::-1]]
+        for k in range(0, len(pp) - 1, 2):
+            d.line((pp[k], pp[k + 1]), fill=(150, 45, 20), width=5)
+        routes.append((key[:-1] if key != 'cities' else 'city site', int(sum(math.dist(a_, b_) for a_, b_ in zip(path[:-1], path[1:])) * OLD_KM)))
+    boxes = []
+    for kind, key in (('village', 'villages'), ('city', 'cities'), ('ruin', 'ruins'), ('cave', 'caves'), ('fall', 'waterfalls')):
+        for i, p in enumerate(OF[key]):
+            if x0 <= p[0] < x1 and y0 <= p[1] < y1:
+                sym(d, kind, (p[0] - x0 + .5) * Z, (p[1] - y0 + .5) * Z, 1.5)
+                lab = {'villages': 'village', 'cities': f'C-{i + 1:02d} city site', 'ruins': f'RU-{i + 1:02d} ruins', 'caves': f'CV-{i + 1:02d} cave',
+                       'waterfalls': 'waterfall'}[key]
+                place(d, (p[0] - x0) * Z, (p[1] - y0) * Z + 32, [(lab + ' (proposed)', 16, {})], boxes, (0, 0, im.width, im.height))
+    px, py = (ax - x0 + .5) * Z, (ay - y0 + .5) * Z
+    sym(d, 'ashram', px, py, 2.0)
+    place(d, px, py - 70, [('ASHRAM', 36, {'serif': True, 'color': (255, 214, 90)}), ('proposed position (NOT locked)', 17, {})], boxes, (0, 0, im.width, im.height))
+    place(d, im.width * .5, 50, [(f'Nearest snow peaks: ≈ {rdist} km {rdir} (estimate) · Great Northern Range R-03 further NE', 22, {'serif': True, 'color': (250, 235, 215)})], boxes, (0, 0, im.width, im.height))
+    scalebar(d, 30, im.height - 60, Z / OLD_KM * KM, km=100)
+    elev = int(oh[int(ay), int(ax)])
+    wx, wy = TO((ax, ay))
+    full, fd = frame(im, 'ASHRAM REGION — LOCATION PROPOSAL', f'≈ {(x1 - x0) * OLD_KM:.0f} x {(y1 - y0) * OLD_KM:.0f} km around the proposed site (detailed C1 data, 3 km cells) · '
+                     'contours 200 m · dashed red = PROPOSED access routes (least-effort paths)', 660)
+    x = im.width + 70; y = 200
+    rows = [('Status', 'Ashram = CONFIRMED story location; this position = PROPOSAL'), ('Continent', 'C1 HIMAVANT (proposed name) — region R-01 Ashram Valley'),
+            ('World position (est.)', f'({wx * KM:.0f}, {(H - wy) * KM:.0f}) km in the main-world grid'), ('Elevation (est.)', f'{elev} m'),
+            ('Setting', f'foothill valley on a lake shore; local hills around it; main snow range ≈ {rdist} km {rdir} (estimate)'), ('Water', 'lake + rivers draining the range (all flow downhill to the sea)'),
+            ('Forest', 'forest + grassland valley floor, conifer slopes'), ('Matches', 'Ashram 3D concept v3 (valley + lake). NOTE: the 3D concept shows snow peaks close behind — on this map the big range is further away; to be aligned after map approval'),
+            ('Surrounding settlements', 'proposed villages / city site shown — no names, people or politics invented')]
+    for k, v in rows:
+        fd.text((x, y), k, font=F(wg.FB, 21), fill=(240, 226, 190))
+        lines, cur = [], ''
+        for w_ in v.split():
+            if len(cur) + len(w_) > 44:
+                lines.append(cur); cur = ''
+            cur += w_ + ' '
+        lines.append(cur)
+        for j, ln in enumerate(lines):
+            fd.text((x, y + 28 + j * 26), ln, font=F(wg.FR, 19), fill=(225, 220, 210))
+        y += 44 + 26 * len(lines)
+    for to, km in routes:
+        fd.text((x, y), f'Route to nearest {to}: ≈ {km} km (estimate)', font=F(wg.FR, 19), fill=(255, 170, 140)); y += 30
+    full.convert('RGB').save(os.path.join(OUT, 'MAP_G_ashram_region_v2.png'), optimize=True)
+    return routes
 
 
 def forest_glyphs_local(d, Bz, step=26):

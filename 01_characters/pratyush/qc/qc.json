@@ -1,6 +1,6 @@
 {
   "character": "PRATYUSH",
-  "started": "2026-11-20 18:35",
+  "started": "2026-11-21 01:33",
   "tests": {
     "uv_present_all_meshes": true,
     "textures_baked": 128,
@@ -23,6 +23,7 @@
       }
     },
     "ik_follow_error_mm": 0.02,
+    "jaw_open_chin_drop_mm": 9.7,
     "body_unweighted_verts": 0,
     "non_manifold_edges_base_mesh": {
       "CHAR_PRATYUSH_BELT": 20,
@@ -53,20 +54,20 @@
     "mouth_shape_keys": 19,
     "phonemes_present": true,
     "export": {
-      "glb_mb": 9.71,
-      "fbx_mb": 16.18
+      "glb_mb": 9.81,
+      "fbx_mb": 16.3
     },
     "glb_reimport": {
       "objects": 34,
       "armatures": 1,
       "meshes": 33,
-      "bones": 63,
+      "bones": 64,
       "shape_key_meshes": 2
     }
   },
   "rig": {
-    "bones": 63,
-    "deform": 52,
+    "bones": 64,
+    "deform": 53,
     "controls": [
       "CTRL_COG",
       "IK_hand_L",
@@ -99,6 +100,7 @@
     "expr_sad",
     "expr_serious",
     "expr_shocked",
+    "jaw (bone)",
     "lid_wide_L",
     "lid_wide_R",
     "ph_a",

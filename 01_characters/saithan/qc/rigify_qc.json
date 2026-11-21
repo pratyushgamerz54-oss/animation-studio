@@ -1,0 +1,31 @@
+{
+  "generated_bones": 534,
+  "deform_bones": 97,
+  "unmapped_groups": [],
+  "face_drivers_retargeted": 62,
+  "skirt_follow_constraints": 72,
+  "rest_deviation_worst": [
+    [
+      0.01,
+      "CHAR_SAITHAN_BOOT_R"
+    ],
+    [
+      0.01,
+      "CHAR_SAITHAN_BOOT_L"
+    ],
+    [
+      0.0,
+      "CHAR_SAITHAN_TABARD"
+    ],
+    [
+      0.0,
+      "CHAR_SAITHAN_SUIT"
+    ]
+  ],
+  "rest_pose_max_deviation_mm": 0.005,
+  "ik_leg_follow_error_mm": 0.04,
+  "ik_leg_ankle_lift_mm": 222.8,
+  "fk_arm_moves_elbow_mm": 268.7,
+  "jaw_open_chin_drop_mm": 10.0,
+  "pass": true
+}

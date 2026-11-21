@@ -22,6 +22,11 @@
 - **Detailed modelling SHURU NAHI karni jab tak Director map + Ashram direction approve na kare.**
 - Story/script document repo mein NAHI hai → Director se maangna hai. Blender version (4.5?) Director ke PC par — poochna hai.
 
+### C. TASK 02 — Grand world map (21 Nov)
+- Director: "dono ko ek me jod ke continue karo" → v1 continent = home continent C1 HIMAVANT (3 km/cell) inside the main world v2
+  (12 000 x 6 000 km, 5 continents + 3 archipelagos). Maps A–I + GEOGRAPHY.md in `02_world/map_v2/` (`_shared/worldgen2.py`).
+- NOT LOCKED — Director approval pending (list in GEOGRAPHY.md). Detailed modelling of other regions: NOT started.
+
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.
 - Soul = Lightning (crimson). Ramarat = har power (heroes + villains), unlimited (golden-white).

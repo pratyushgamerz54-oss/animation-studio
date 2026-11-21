@@ -21,7 +21,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..')
 OUT = os.path.join(ROOT, 'map'); DATA = os.path.join(OUT, 'data')
 os.makedirs(DATA, exist_ok=True)
-SEED = int(sys.argv[1]) if len(sys.argv) > 1 else 7
+SEED = int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else 7
+SC = 3.0      # km per map cell — this map is the detailed map of the home continent C1 HIMAVANT inside the main world (worldgen2)
 W, H = 1024, 768            # km
 FB = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 FR = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
@@ -226,7 +227,7 @@ def main():
         ('R-07', 'Eastern Spine', (float(W * .80), float(H * .55)), 'PROPOSED'),
         ('R-08', 'Lake District', lake_c[0] if lake_c else None, 'PROPOSED'),
     ]
-    feats = {'wcs': 'origin SW corner, +X east km, +Y north km, Z metres; image row 0 = north (WCS y = 768 - row)',
+    feats = {'wcs': f'local C1 frame: 1 cell = {SC} km, origin SW corner, +X east, +Y north, Z metres; image row 0 = north',
              'ashram': ash, 'cities': cities, 'villages': villages, 'ruins': ruins, 'caves': caves, 'waterfalls': falls,
              'hidden': hidden, 'lakes': lake_c, 'regions': regions, 'crater': crater}
     json.dump(feats, open(os.path.join(DATA, 'features.json'), 'w'), indent=1, default=float)
@@ -443,8 +444,8 @@ def render(h, B, acc, down, lakes, riv, feats):
     full.alpha_composite(m, (0, 150))
     d = ImageDraw.Draw(full)
     d.rectangle((0, 0, full.width, 146), fill=(12, 13, 18)); d.rectangle((0, 142, full.width, 146), fill=(214, 166, 60))
-    d.text((40, 22), 'MASTER WORLD MAP', font=F(FS, 64), fill=(240, 230, 205))
-    d.text((40, 100), 'Proposal v1  ·  physical world (one continent + seas)  ·  1024 km x 768 km  ·  region names = working labels, pending approval',
+    d.text((40, 22), 'HIMAVANT — HOME CONTINENT (C1)', font=F(FS, 64), fill=(240, 230, 205))
+    d.text((40, 100), f'Detailed map of continent C1 of the main world (see map_v2 atlas)  ·  ≈ {int(1024 * SC)} x {int(768 * SC)} km (estimate)  ·  names = working labels, pending approval',
            font=F(FR, 24), fill=(170, 170, 180))
     d.text((full.width - 40, 40), 'NOT LOCKED — awaiting Director approval', font=F(FB, 28), fill=(255, 190, 70), anchor='ra')
     x0 = m.width + 40; y = 190
@@ -465,9 +466,9 @@ def render(h, B, acc, down, lakes, riv, feats):
     for i in range(4):
         d.rectangle((x0 + i * 100 * S / 2 * 1, y, x0 + (i + 1) * 100 * S / 2, y + 16), fill=(240, 240, 240) if i % 2 == 0 else (40, 40, 40), outline=(240, 240, 240))
     for i in range(5):
-        d.text((x0 + i * 100, y + 22), f'{i * 50} km', font=F(FR, 18), fill=(200, 200, 200), anchor='ma')
+        d.text((x0 + i * 100, y + 22), f'{int(i * 50 * SC)} km', font=F(FR, 18), fill=(200, 200, 200), anchor='ma')
     y += 60
-    d.text((x0, y), 'Grid square = 100 km · WCS origin = SW corner (A1)', font=F(FR, 19), fill=(160, 160, 170)); y += 50
+    d.text((x0, y), f'Grid square = {int(100 * SC)} km · local origin = SW corner (A1)', font=F(FR, 19), fill=(160, 160, 170)); y += 50
     # compass
     cx, cy = full.width - 110, y - 120
     d.polygon([(cx, cy - 60), (cx - 16, cy), (cx + 16, cy)], fill=(240, 230, 205)); d.polygon([(cx, cy + 60), (cx - 16, cy), (cx + 16, cy)], fill=(90, 90, 100))
@@ -507,7 +508,7 @@ def regional(base, h, acc, down, riv, feats):
     picks = [r for r in feats['regions'] if r[2] is not None][:6]
     sheet = Image.new('RGB', (3 * (cell + 40) + 40, 2 * (cell + 110) + 150), (16, 18, 24))
     d0 = ImageDraw.Draw(sheet)
-    d0.text((40, 30), 'REGIONAL MAPS  ·  proposal v1  ·  each panel 240 km x 240 km  ·  contours 100 m', font=F(FS, 40), fill=(240, 230, 205))
+    d0.text((40, 30), f'REGIONAL MAPS (C1 HIMAVANT)  ·  each panel {int(240 * SC)} x {int(240 * SC)} km  ·  contours 100 m', font=F(FS, 40), fill=(240, 230, 205))
     for k, (code, nm, p, st) in enumerate(picks):
         cx, cy = int(np.clip(p[0], R / 2, W - R / 2)), int(np.clip(p[1], R / 2, H - R / 2))
         x0, y0 = cx - R // 2, cy - R // 2
@@ -527,14 +528,14 @@ def regional(base, h, acc, down, riv, feats):
         q = feats['ashram']
         if x0 <= q[0] < x0 + R and y0 <= q[1] < y0 + R:
             marker(d, 'ashram', (q[0] - x0) * Z, (q[1] - y0) * Z, 1.4)
-        d.rectangle((20, cell - 50, 20 + 50 * Z, cell - 38), fill=(255, 255, 255)); d.text((20, cell - 34), '50 km', font=F(FB, 18), fill=(255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0))
+        d.rectangle((20, cell - 50, 20 + 50 * Z, cell - 38), fill=(255, 255, 255)); d.text((20, cell - 34), f'{int(50 * SC)} km', font=F(FB, 18), fill=(255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0))
         hmax, hmin = int(h[y0:y0 + R, x0:x0 + R].max()), int(max(0, h[y0:y0 + R, x0:x0 + R].min()))
         col, row = k % 3, k // 3
         px, py = 40 + col * (cell + 40), 120 + row * (cell + 110)
         sheet.paste(crop.convert('RGB'), (px, py))
         gxl = 'ABCDEFGHIJK'[int(cx // 100)]; gyl = int((H - cy) // 100) + 1
         d0.text((px, py + cell + 10), f'{code}  {nm}', font=F(FB, 26), fill=(255, 214, 90) if code == 'R-01' else (240, 230, 205))
-        d0.text((px, py + cell + 46), f'{st} · grid {gxl}{gyl} · centre WCS ({cx}, {H - cy}) km · elev {hmin}–{hmax} m', font=F(FR, 18), fill=(170, 170, 180))
+        d0.text((px, py + cell + 46), f'{st} · grid {gxl}{gyl} · centre ({int(cx * SC)}, {int((H - cy) * SC)}) km local · elev {hmin}–{hmax} m', font=F(FR, 18), fill=(170, 170, 180))
     sheet.save(os.path.join(OUT, 'WORLD_MAP_regional_v1.png'), optimize=True)
     print('wrote regional sheet')
 

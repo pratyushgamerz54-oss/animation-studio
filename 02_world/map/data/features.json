@@ -1,5 +1,5 @@
 {
- "wcs": "origin SW corner, +X east km, +Y north km, Z metres; image row 0 = north (WCS y = 768 - row)",
+ "wcs": "local C1 frame: 1 cell = 3.0 km, origin SW corner, +X east, +Y north, Z metres; image row 0 = north",
  "ashram": [
   474.0,
   233.0
