@@ -1,7 +1,7 @@
 {
  "blender": "4.5.16 LTS",
- "time": "2026-11-21 11:29",
- "passed": 55,
+ "time": "2026-11-21 12:28",
+ "passed": 56,
  "total": 56,
  "checks": [
   {
@@ -82,7 +82,7 @@
   {
    "check": "file size < 100 MB: 05_RIVERS_AND_LAKES/WATER_v002.blend",
    "result": "PASS",
-   "detail": "11.1 MB"
+   "detail": "11.2 MB"
   },
   {
    "check": "opens + no missing images: 05_RIVERS_AND_LAKES/WATER_v002.blend",
@@ -266,32 +266,32 @@
    "check": "scatter produces instances (CAM_T5_07_GROUND_LEVEL)",
    "result": "PASS",
    "detail": {
-    "SC_VH_MEADOW_GRASS_FAR": 441,
-    "SC_VH_MEADOW_GRASS": 553,
-    "SC_VH_WILDFLOWERS": 36,
+    "SC_VH_MEADOW_GRASS_FAR": 405,
+    "SC_VH_MEADOW_GRASS": 542,
+    "SC_VH_WILDFLOWERS": 33,
     "SC_VH_GROVES": 68,
     "SC_L0_GROVES": 4845,
     "SC_L1_GROVES": 714,
     "SC_VH_RIVER_STONES": 108,
     "SC_VH_RIVERBED_STONES": 162,
-    "SC_VH_BOULDERS": 75,
-    "SC_L0_BOULDERS": 70
+    "SC_VH_BOULDERS": 73,
+    "SC_L0_BOULDERS": 68
    }
   },
   {
    "check": "SC_VH_MEADOW_GRASS_FAR: plants / trees not on paths, Ashram pad or water",
-   "result": "FAIL",
-   "detail": "2.49% of 441 sampled"
+   "result": "PASS",
+   "detail": "0.25% of 405 sampled"
   },
   {
    "check": "SC_VH_MEADOW_GRASS: plants / trees not on paths, Ashram pad or water",
    "result": "PASS",
-   "detail": "0.00% of 553 sampled"
+   "detail": "0.00% of 542 sampled"
   },
   {
    "check": "SC_VH_WILDFLOWERS: plants / trees not on paths, Ashram pad or water",
    "result": "PASS",
-   "detail": "0.00% of 36 sampled"
+   "detail": "0.00% of 33 sampled"
   },
   {
    "check": "SC_VH_GROVES: plants / trees not on paths, Ashram pad or water",
