@@ -95,12 +95,12 @@ sc['nw01_summit'] = [px_, py_, pz]
 ang = math.radians(152); dist = 16000
 x, y = px_ + math.sin(ang) * dist, py_ + math.cos(ang) * dist
 cam('CAM_T5_01_MOUNTAIN_WIDE', (x, y, max(ground(x, y) + 180, pz - 1500)), (px_ - 2500, py_ + 1500, pz - 1300), 24,
-    'Wide mountain landscape — the NW01 range (snowy range ≈100 km NW of the Ashram) from a high shoulder south of the main summit', 120000, .35)
+    'Wide mountain landscape — the NW01 range (snowy range ≈100 km NW of the Ashram) from a high shoulder south of the main summit', 150000, .3)
 # 2 forest establishing — the river leaving the northern forest belt (forest hero tile FH)
-x, y = 650.0, 22650.0
+x, y = 700.0, 24150.0
 gz = ground(x, y)
-cam('CAM_T5_02_FOREST_ESTABLISHING', (x, y, gz + 95), (-250, 25900, ground(-250, 25900) + 5), 26,
-    'Forest establishing shot — edge of the northern forest belt where the river enters it (FH, 2 m terrain + real trees)', 18000, .45)
+cam('CAM_T5_02_FOREST_ESTABLISHING', (x, y, gz + 45), (-350, 25700, ground(-350, 25700) + 8), 24,
+    'Forest establishing shot — edge of the northern forest belt where the river enters it (FH, 2 m terrain + real trees)', 40000, .22)
 # 3 river + waterfall — looking upstream at the featured fall in the NW01 gorge (WF, 1.5 m terrain)
 f = PREP['featured_waterfalls'][0]
 d = np.array([f['out_x'] - f['x'], f['out_y'] - f['y']]); d /= np.linalg.norm(d); side = np.array([-d[1], d[0]])
@@ -112,10 +112,10 @@ cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (f['lip_x'], f['lip_y'], f['z
 ang = math.radians(160); dist = 7800
 cx, cy = px_ + math.sin(ang) * dist, py_ + math.cos(ang) * dist
 cam('CAM_T5_04_SNOWY_PEAKS', (cx, cy, pz - 250), (px_, py_, pz - 450), 42,
-    f'Snowy mountain — highest summit of NW01 ({pz:.0f} m) from the SSE, glaciers / couloirs / rock bands', 80000, .3)
+    f'Snowy mountain — highest summit of NW01 ({pz:.0f} m) from the SSE, glaciers / couloirs / rock bands', 120000, .22)
 # 6 valley aerial — over the Ashram toward the northern forest belt and the range on the horizon
 cam('CAM_T5_06_VALLEY_AERIAL', (3800, -6200, ground(3800, -6200) + 420), (-9000, 14000, 760), 32,
-    'Valley aerial — Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon', 120000, .35)
+    'Valley aerial — Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon', 150000, .3)
 # 7 ground level — meadow by the river next to the Ashram pad (VH, 2 m terrain, grass + flowers + stones)
 W = np.load(os.path.join(DATA, 'water.npz')); RIV = W['RIV']
 k = (np.abs(RIV[:, 0]) < 1100) & (np.abs(RIV[:, 1]) < 1100)
@@ -127,7 +127,7 @@ rs = np.array([rdir[1], -rdir[0]])                                     # right-h
 cp = rp[:2] + rs * (rp[3] * .7 + 14) - rdir * 10
 tg = rp[:2] + rdir * 160 + rs * 4
 cam('CAM_T5_07_GROUND_LEVEL', (cp[0], cp[1], ground(*cp) + 1.6), (tg[0], tg[1], ground(*tg) + 2.5), 28,
-    'Ground level (1.6 m eye) — river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon', 9000, .35, 64)
+    'Ground level (1.6 m eye) — river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon', 60000, .2, 64)
 # 8 forest floor — inside the forest hero tile among the trees
 best = None
 for yy_ in np.arange(25000, 26600, 40.0):
@@ -139,7 +139,7 @@ for yy_ in np.arange(25000, 26600, 40.0):
         break
 fx, fy = best
 cam('CAM_T5_08_FOREST_FLOOR', (fx, fy, ground(fx, fy) + 1.6), (fx - 60, fy + 90, ground(fx - 60, fy + 90) + 3.0), 24,
-    'Ground level in the forest — forest floor, ferns, roots, fallen logs, mossy rocks, fir / pine trunks', 1500, .25, 64)
+    'Ground level in the forest — forest floor, ferns, roots, fallen logs, mossy rocks, fir / pine trunks', 3000, .15, 64)
 sc.camera = C[0]
 
 # ------------------------------------------------------------------ render + compositor

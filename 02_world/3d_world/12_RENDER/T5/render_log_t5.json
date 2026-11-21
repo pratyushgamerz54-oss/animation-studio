@@ -38,5 +38,15 @@
   ],
   "description": "River + waterfall \u2014 featured fall (86 m drop, largest of the network in NW01) and its plunge pool",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_04_SNOWY_PEAKS": {
+  "seconds": 61.6,
+  "samples": 12,
+  "res": [
+   480,
+   270
+  ],
+  "description": "Snowy mountain \u2014 highest summit of NW01 (5755 m) from the SSE, glaciers / couloirs / rock bands",
+  "blender": "4.5.16 LTS"
  }
 }

@@ -297,7 +297,7 @@ def volume(name, col, dens, mode='mist'):
     return m
 
 
-L['MIST'] = volume('MAT_T5_MIST', '#F4F6F8', 1.2, 'mist')
+L['MIST'] = volume('MAT_T5_MIST', '#F4F6F8', .3, 'mist')
 L['HAZE'] = volume('MAT_T5_HAZE', '#C9D6E4', 1.6e-5, 'haze')
 
 m, b, bs, out = newmat('MAT_T5_TREE_FAR')        # far-forest proxy canopy (>1.5 km): needle-green with clumped noise

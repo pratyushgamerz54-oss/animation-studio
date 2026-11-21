@@ -184,7 +184,7 @@ elif COMP == 'mountain':
       Mask_Min=.15, Mask_Max=.5, Avoid_Mask='m_bare', Avoid_Mask_2='m_rock', Avoid_Strength_2=.8, Slope_Max=40.0, Altitude_Max=3550.0,
       Cluster_Scale=40.0, Cluster_Amount=.5, Scale_Min=.6, Scale_Max=1.2, Seed=63, Cull_Distance=3000.0, Cull_Angle=55.0,
       Keep_Near=40.0, Near_to_Mid=120.0, Mid_to_Far=800.0)
-    S('SC_WF_ROCKS', WF, 'LIB_ROCKS_MEDIUM', Density=.012, Viewport_Density=.1, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+    S('SC_WF_ROCKS', WF, 'LIB_ROCKS_MEDIUM', Density=.004, Viewport_Density=.1, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_wet', Avoid_Strength=.7, Slope_Max=55.0, Cluster_Scale=30.0, Cluster_Amount=.7, Scale_Min=.8, Scale_Max=3.0,
       Align_To_Normal=.7, Random_Tilt=15.0, Sink=.3, Seed=64, Cull_Distance=900.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_WF_LARGE_ROCKS', WF, 'LIB_ROCKS_LARGE', Density=.0012, Viewport_Density=.3, Mask='m_cliff', Mask_Min=.05, Mask_Max=.4,

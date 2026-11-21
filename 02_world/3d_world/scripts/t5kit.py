@@ -255,10 +255,13 @@ def img_float(name, arr, path):
     px = np.repeat(np.ascontiguousarray(arr[::-1], np.float32).reshape(-1, 1), 4, 1); px[:, 3] = 1
     im.pixels.foreach_set(px.ravel())
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    # raw save (NOT save_render: that applies the scene view transform → data would be altered)
     im.filepath_raw = path; im.file_format = 'OPEN_EXR'
-    sc = bpy.context.scene; s = sc.render.image_settings
-    s.file_format = 'OPEN_EXR'; s.color_depth = '32'; s.exr_codec = 'ZIP'; s.color_mode = 'BW'
-    im.save_render(path, scene=sc)
+    try:
+        im.use_half_precision = False
+    except Exception:
+        pass
+    im.save()
     bpy.data.images.remove(im)
     im = bpy.data.images.load(path); im.name = name; im.colorspace_settings.name = 'Non-Color'
     im.alpha_mode = 'NONE'
@@ -275,9 +278,8 @@ def img_rgb(name, arr3, path):
     im = bpy.data.images.new(name, m, n, alpha=False, float_buffer=False, is_data=True)
     im.pixels.foreach_set(from_.ravel())
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    sc = bpy.context.scene; s = sc.render.image_settings
-    s.file_format = 'PNG'; s.color_depth = '8'; s.color_mode = 'RGB'; s.compression = 90
-    im.save_render(path, scene=sc)
+    im.filepath_raw = path; im.file_format = 'PNG'
+    im.save()                                     # raw bytes (no view transform)
     bpy.data.images.remove(im)
     im = bpy.data.images.load(path); im.name = name; im.colorspace_settings.name = 'Non-Color'
     return im

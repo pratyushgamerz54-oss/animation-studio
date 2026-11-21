@@ -147,9 +147,20 @@ for f in FEATURED:
              lip_x=float(r[k + 1, 0]), lip_y=float(r[k + 1, 1]), out_x=float(r[k + 2, 0]), out_y=float(r[k + 2, 1]))
 
 
-def lip_profile(ri, a, ss, s, z):
-    """vertical waterfall lip for featured falls (only used at ≤ 5 m resolution): hold the upper level until the lip,
-    drop within 3 m, then continue at the lower level → a real fall instead of a steep chute."""
+CASCADE_STEP = 14.0          # m — inside the waterfall gorge the steep river profile becomes pools + drops of ≈ this height
+
+
+def wf_weight(x, y):
+    t = TILES['WF']; cx, cy = (t['x0'] + t['x1']) / 2, (t['y0'] + t['y1']) / 2
+    return 1 - sstep(220, 380, np.maximum(np.abs(x - cx), np.abs(y - cy)))
+
+
+def water_profile(ri, a, ss, s, z, X, Y):
+    """water level along a river at arclengths ss. Returns (z_water, z_linear).
+    Featured falls get a vertical lip (hold the upper level to the lip, drop within 3 m); inside the waterfall gorge the
+    rest of the steep profile is turned into a cascade of pools and drops (quantised to CASCADE_STEP, faded out toward the
+    WF border so it joins the normal profile seamlessly). Always monotonic downstream."""
+    zlin = np.interp(ss, s, z); zz = zlin.copy()
     for f in FEATURED:
         if f['river'] != ri:
             continue
@@ -158,13 +169,17 @@ def lip_profile(ri, a, ss, s, z):
             continue
         s_lip = s[k + 1]; zt, zb = z[k], z[k + 2]
         m1 = (ss >= s[k]) & (ss < s_lip); m2 = (ss >= s_lip) & (ss < s_lip + 3); m3 = (ss >= s_lip + 3) & (ss <= s[k + 2])
-        z_ = np.interp(ss, s, z)
-        z_[m1] = zt; z_[m2] = zt + (zb - zt) * (ss[m2] - s_lip) / 3; z_[m3] = zb
-        yield z_
+        zz[m1] = zt; zz[m2] = zt + (zb - zt) * (ss[m2] - s_lip) / 3; zz[m3] = zb
+    w = wf_weight(X, Y)
+    if (w > 0).any():
+        q = CASCADE_STEP * np.ceil(zz / CASCADE_STEP)
+        zz = zz + (q - zz) * w
+    zz = np.minimum.accumulate(zz)
+    return zz, zlin
 
 
 def river_samples(t, step):
-    """river points (x, y, z_water, width) resampled with a cubic spline at `step` m, only near tile t."""
+    """river points (x, y, z_water, width, z_linear) resampled with a cubic spline at `step` m, only near tile t."""
     m = 400 + 3 * 140
     out = []
     for r in RIVERS:
@@ -178,12 +193,13 @@ def river_samples(t, step):
             continue
         ss = np.arange(0, s[-1], step)
         cx, cy = CubicSpline(s, rr[:, 0]), CubicSpline(s, rr[:, 1])
-        zz = np.interp(ss, s, rr[:, 2])
+        X, Y = cx(ss), cy(ss)
         if step <= 5:
-            for z_ in lip_profile(_ri(r), a, ss, s, rr[:, 2]):
-                zz = np.minimum(zz, z_)
-        out.append(np.column_stack([cx(ss), cy(ss), zz, np.interp(ss, s, rr[:, 3])]))
-    return np.concatenate(out) if out else np.zeros((0, 4))
+            zz, zl = water_profile(_ri(r), a, ss, s, rr[:, 2], X, Y)
+        else:
+            zz = zl = np.interp(ss, s, rr[:, 2])
+        out.append(np.column_stack([X, Y, zz, np.interp(ss, s, rr[:, 3]), zl]))
+    return np.concatenate(out) if out else np.zeros((0, 5))
 
 
 def _ri(r):
@@ -323,6 +339,8 @@ def build(name):
         d = d.reshape(n, m); ok = ok.reshape(n, m); jj = jj.reshape(n, m)
         w = R[jj, 3]; zr = R[jj, 2]
         far = sp >= 400
+        if t['kind'] == 'wf':                                           # rock steps / cliff bands across the gorge at each drop
+            z = z + (R[jj, 2] - R[jj, 4]) * (1 - sstep(60, 260, d)) * ok
         if sp <= 10:                                                    # natural, irregular banks at fine resolution
             d = d + (fbm(X, Y, 45, 3, 120) * .22 + fbm(X, Y, 9, 2, 121) * .06) * w * ok
         bank = np.maximum(3 * w, (.6 if far else 1.6) * sp)
@@ -439,9 +457,11 @@ if __name__ == '__main__':
         s = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(r[:, :2], axis=0).T))])
         ss = np.arange(0, s[-1], 5.0)
         cx, cy = CubicSpline(s, r[:, 0]), CubicSpline(s, r[:, 1])
-        zz = np.interp(ss, s, r[:, 2])
-        for z_ in lip_profile(len(riv), 0, ss, s, r[:, 2]):              # featured falls: vertical lip in the water surface too
-            zz = np.minimum(zz, z_)
+        fine = wf_weight(cx(ss), cy(ss)) > 0
+        if fine.any():                                                  # 1.5 m samples through the waterfall gorge
+            lo, hi = ss[fine].min() - 60, ss[fine].max() + 60
+            ss = np.unique(np.concatenate([ss[(ss < lo) | (ss > hi)], np.arange(max(lo, 0), min(hi, s[-1]), 1.5)]))
+        zz, _ = water_profile(len(riv), 0, ss, s, r[:, 2], cx(ss), cy(ss))
         riv.append(np.column_stack([cx(ss), cy(ss), zz, np.interp(ss, s, r[:, 3])]).astype(np.float32))
     np.savez_compressed(os.path.join(OUT, 'water.npz'), RIV=np.concatenate(riv), RIVO=np.cumsum([0] + [len(a) for a in riv]))
     prev = {}
