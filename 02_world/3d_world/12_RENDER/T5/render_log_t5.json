@@ -28,5 +28,25 @@
   ],
   "description": "River + waterfall \u2014 featured fall (86 m drop, largest of the network in NW01) and its plunge pool",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_04_SNOWY_PEAKS": {
+  "seconds": 243.4,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Snowy mountain \u2014 highest summit of NW01 (5758 m) from the SSE, glaciers / couloirs / rock bands",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_06_VALLEY_AERIAL": {
+  "seconds": 220.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Valley aerial \u2014 Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon",
+  "blender": "4.5.16 LTS"
  }
 }
