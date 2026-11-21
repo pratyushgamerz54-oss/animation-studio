@@ -13,7 +13,7 @@ RK = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'R04'
 CFG = {'R04': dict(file='06_DESERTS/DESERT_R04_v002.blend', coll='T5_DESERT_R04', data='06_DESERTS/data_v002',
                    out='T5_REGION_R04_DESERT_master_v002.blend', sun=(232.0, 12.0), tiles=('DH', 'DN', 'DF')),
        'R05': dict(file='06_DESERTS/FORBIDDEN_R05_v002.blend', coll='T5_FORBIDDEN_R05', data='06_DESERTS/data_v002',
-                   out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 18.0), tiles=('XH', 'XN', 'XF')),
+                   out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 14.0), tiles=('XH', 'XN', 'XF')),
        'R02': dict(file='04_FORESTS/ENCHANTED_FOREST_R02_v002.blend', coll='T5_ENCHANTED_R02', data='04_FORESTS/data_v002',
                    out='T5_REGION_R02_ENCHANTED_master_v002.blend', sun=(240.0, 34.0), tiles=('EH', 'EN', 'EF')),
        'R03': dict(file='03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend', coll='T5_RANGE_R03', data='08_ASHRAM_VALLEY/data_v002',
@@ -92,12 +92,12 @@ if RK == 'R04':
     sc['butte'] = [bx, by, bz]
 if RK == 'R05':
     lev = list(RJ['lakes'].values())[0] if RJ.get('lakes') else 490.0
-    cx, cy = 300.0, -900.0
-    cam('CAM_T5_09_FORBIDDEN_RIM', (cx, cy, ground(cx, cy) + 60), (-1500, 9000, lev), 35,
-        'Forbidden Region (R05) — the blasted crater rim: ash ground, fissures, dead trees, the dark crater lake beyond', 120000, .15)
-    cx2, cy2 = 5000.0, -9000.0
-    cam('CAM_T5_09B_FORBIDDEN_AERIAL', (cx2, cy2, ground(cx2, cy2) + 900), (-6000, 30000, lev), 26,
-        'Forbidden Region aerial — ejecta ridges on the blasted plain, the crater rim and the crater lake', 200000, .18)
+    cx, cy = -700.0, -2250.0                                                # on the rim, just behind the lip of the ~150 m inner wall
+    cam('CAM_T5_09_FORBIDDEN_RIM', (cx, cy, ground(cx, cy) + 25), (600, 2500, lev - 25), 26,
+        'Forbidden Region (R05) — from the blasted rim: the steep inner crater wall falls to the black crater lake; ejecta blocks, fissures, ash', 120000, .2)
+    cx2, cy2 = 3600.0, -300.0                                               # low over the black lake, close to the inner crater wall
+    cam('CAM_T5_09B_FORBIDDEN_AERIAL', (cx2, cy2, lev + 30), (2900, -1800, lev + 95), 30,
+        'Forbidden Region — the ~150 m inner crater wall rising from the black crater lake, ejecta on the rim above', 60000, .15)
 if RK == 'R02':
     cx, cy = 200.0, -300.0
     cam('CAM_T5_10_ENCHANTED_FLOOR', (cx, cy, ground(cx, cy) + 1.6), (cx - 80, cy + 110, ground(cx - 80, cy + 110) + 6), 22,

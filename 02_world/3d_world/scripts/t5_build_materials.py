@@ -336,19 +336,19 @@ def forbidden_material():
     def dark(col, sat, val):
         h = b.node('ShaderNodeHueSaturation'); h.inputs['Saturation'].default_value = sat; h.inputs['Value'].default_value = val
         b.link(col, h.inputs['Color']); return h.outputs['Color']
-    base = L_('dry_ground_01', 3.0, at=True); base[0] = dark(base[0], .2, .22)
-    ash = L_('dry_ground_01', 5.0); ash[0] = b.mixc(1.0, dark(ash[0], .0, .16), lin('#8A8288'), 'MULTIPLY')
+    base = L_('dry_ground_01', 3.0, at=True); base[0] = b.mixc(1.0, dark(base[0], .1, .09), lin('#6E625C'), 'MULTIPLY')
+    ash = L_('dry_ground_01', 5.0); ash[0] = b.mixc(1.0, dark(ash[0], .0, .07), lin('#5E5A5E'), 'MULTIPLY')
     base = hb(base, ash, b.maprange(b.math('ADD', A['m_dry'], b.math('MULTIPLY', macro, .25)), .1, .8), .2)
-    rub = L_('rocky_gravel', 2.5); rub[0] = dark(rub[0], .15, .25)
+    rub = L_('rocky_gravel', 2.5); rub[0] = dark(rub[0], .1, .13)
     base = hb(base, rub, b.math('MULTIPLY', A['m_gravel'], flat_ok))
-    fis = L_('mud_cracked_dry_03', 3.0); fis[0] = b.mixc(1.0, dark(fis[0], .4, .28), lin('#7A5446'), 'MULTIPLY')
+    fis = L_('mud_cracked_dry_03', 3.0); fis[0] = b.mixc(1.0, dark(fis[0], .25, .2), lin('#5A4038'), 'MULTIPLY')
     base = hb(base, fis, b.math('MULTIPLY', A['m_pad'], flat_ok), .5)
-    sc_ = L_('gravel_ground_01', 3.0); sc_[0] = dark(sc_[0], .2, .22)
+    sc_ = L_('gravel_ground_01', 3.0); sc_[0] = dark(sc_[0], .1, .13)
     base = hb(base, sc_, b.math('MULTIPLY', A['m_scree'], flat_ok))
     rk = L_('dark_rock', 6.0, box=True, at=True)
     rfar = [b.mixc(b.maprange(b.noise(v, 1 / 20.0, 4, .6), .3, .7), lin('#1E1B1C'), lin('#3B3536')), .8, rk[2], .5]
     rk = lerp(b.maprange(dist, 500, 2500), rk, rfar)
-    base = hb(base, rk, b.math('MAXIMUM', b.math('MAXIMUM', A['m_rock'], A['m_cliff']), b.maprange(nz, .7, .5)))
+    base = hb(base, rk, b.math('MAXIMUM', b.math('MAXIMUM', A['m_rock'], A['m_cliff']), b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .1)), .9, .76)))
     far = [b.mixc(b.maprange(macro, .35, .65), lin('#1C1819'), lin('#332C2F')), .9, base[2], .5]
     base = lerp(b.maprange(dist, 1500, 6000), base, far)
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
@@ -456,6 +456,13 @@ def water(name, deep, shallow, rough=.02, wave=1.0):
 
 L['WATER_RIVER'] = water('MAT_T5_WATER_RIVER', '#16352E', '#5E7C66', .03, 1.3)
 L['WATER_LAKE'] = water('MAT_T5_WATER_LAKE', '#0E2A33', '#3E6E72', .02, .5)
+m, b, bs, out = newmat('MAT_T5_WATER_DARK')                        # forbidden crater lake: black, dull, no transmission (opaque murk)
+v = coords(b); wv_ = b.noise(v, .25, 3, .5)
+bp = b.node('ShaderNodeBump'); bp.inputs['Strength'].default_value = .08; b.link(wv_, bp.inputs['Height']); b.link(bp.outputs[0], bs.inputs['Normal'])
+bs.inputs['Base Color'].default_value = lin('#050807'); bs.inputs['Roughness'].default_value = .32; bs.inputs['Specular IOR Level'].default_value = .35
+b.link(b.attr('foam'), b.node('ShaderNodeMath').inputs[0])
+SPEC['MAT_T5_WATER_DARK'] = dict(source='procedural', maps='opaque black water, roughness 0.32, small ripple bump', resolution='procedural', metallic=0.0)
+L['WATER_DARK'] = m
 
 # waterfall sheet: falling streaks (animated), foam white + translucent water, alpha at the streak gaps
 m, b, bs, out = newmat('MAT_T5_WATERFALL')

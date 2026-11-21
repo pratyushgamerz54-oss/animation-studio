@@ -168,15 +168,27 @@ def build(rkey, tkey):
         terr = (sstep(.7, 1.0, fr) - .5) * 26 * sstep(R0 * .55, R0 * .8, rad) * (1 - sstep(R0 * .95, R0 * 1.02, rad))
         vor = N.fbm(AX_, AY_, 140, 2, 242)
         fiss = sstep(.0, .06, np.abs(N.fbm(AX_, AY_, 900, 3, 243) + .3 * vor)) - 1                # 0 off-crack, −1 in a crack
-        d = ej + rim * 90 + fiss * 6 * P.bl(sp, 40) + N.fbm(AX_, AY_, 220, 3, 244) * 6 * P.bl(sp, 220)
+        # steep inner crater wall just inside the rim: ~240 m drop over ~3 km, cut by gullies and broken ledges
+        rj = (N.fbm(AX_, AY_, 2500, 3, 245) * 700 + N.fbm(AX_, AY_, 350, 3, 250) * 220
+              + N.ridged(ang * R0 / 140.0, rad / 1200.0, 1.0, 3, 251) * 260)                 # bays, buttresses, gullies along the wall
+        wall = -240 * sstep(R0 - 500, R0 - 3500, rad + rj)
+        gul = N.ridged(ang * R0 / 260.0, rad / 900.0, 1.0, 3, 246) * 35 * sstep(R0 - 4500, R0 - 1500, rad) * (1 - sstep(R0 - 600, R0, rad))
+        led = (N.fbm(AX_, AY_, 60, 3, 247) * 6 + N.ridged(AX_, AY_, 25, 3, 248) * 3) * sstep(R0 - 4000, R0 - 2000, rad) * (1 - sstep(R0 - 700, R0, rad))
+        d = ej + rim * 90 + wall + gul + led * P.bl(sp, 25) + fiss * 6 * P.bl(sp, 40) + N.fbm(AX_, AY_, 220, 3, 244) * 6 * P.bl(sp, 220)
         sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
+        CRATER_IN = sstep(R0 - 900, R0 - 2600, rad + N.fbm(AX_, AY_, 2500, 3, 245) * 700)   # 1 inside the inner wall foot
     if reg.get('kind') == 'enchanted':
         d = (N.fbm(AX_, AY_, 1800, 4, 260) * 25 + N.fbm(AX_, AY_, 300, 3, 261) * 5 * P.bl(sp, 300)
              + N.fbm(AX_, AY_, 40, 3, 262) * .9 * P.bl(sp, 40) + N.fbm(AX_, AY_, 9, 2, 263) * .25 * P.bl(sp, 9))   # hummocks, root mounds
         sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
     ze = z0 + d
     flow = np.zeros_like(ze); scree = np.zeros_like(ze)
-    if sp >= 15 and reg.get('kind') != 'enchanted':                    # gullies on the mesa walls, talus aprons below
+    if sp >= 15 and reg.get('kind') == 'crater':                       # crater wall: rockfall talus aprons, broken cliff bands
+        H2, dep = E.thermal(ze / sp, math.tan(math.radians(52)), 20, .25)
+        ze = H2 * sp; scree = dep * sp
+        st_ = ze / 22.0; fr_ = st_ - np.floor(st_)
+        ze = ze + ((np.floor(st_) + sstep(.7, 1.0, fr_)) * 22.0 - ze) * .4 * sstep(30, 50, np.degrees(np.arctan(np.hypot(*np.gradient(ze, sp)))))
+    if sp >= 15 and reg.get('kind') not in ('enchanted', 'crater'):                    # gullies on the mesa walls, talus aprons below
         H, fl = E.hydraulic(ze / sp, .8 * ze.size, 41, 2, erode=.3, deposit=.25, capacity=4.0)
         ze = ze + ndi.gaussian_filter(H * sp - ze, 1.0) * (1 - sandsea); flow = fl
         H2, dep = E.thermal(ze / sp, math.tan(math.radians(55)), 15, .25)
@@ -212,6 +224,14 @@ def build(rkey, tkey):
         ins = sstep(.35, .65, mk)
         ze = np.where(ins > 0, np.minimum(ze, level - ins * 35 - .6), ze)
         lakeinside = np.maximum(lakeinside, ins)
+        if reg.get('kind') == 'crater':
+            # the crater lake fills the whole basin up to the foot of the inner wall (black water against the cliffs) …
+            basin = np.maximum(ins, CRATER_IN * sstep(level + 12, level + 2, ze))   # only where the wall has already come down
+            ze = np.where(basin > 0, np.minimum(ze, level - basin * 40 - .8), ze)
+            ins = basin; lakeinside = np.maximum(lakeinside, basin)
+            # … and outside the crater no stray puddles: land below the level is lifted just above it
+            shelf = level + 1.2 + np.abs(N.fbm(AX_, AY_, 150, 3, 249)) * 2.5
+            ze = np.where((basin < .02) & (ze < shelf), shelf, ze)
         reg.setdefault('lakes', {})[int(k_)] = level
     # ---- seamless border onto the parent tile
     if t['parent']:
@@ -237,7 +257,7 @@ def build(rkey, tkey):
         crack = sstep(.05, .012, np.abs(N.fbm(X + OX, Y + OY, 900, 3, 243) + .3 * N.fbm(X + OX, Y + OY, 140, 2, 242)))   # thin fissure bands
         sand = sstep(.2, .6, N.fbm(X + OX, Y + OY, 2000, 3, 250) + .4) * (1 - rock) * (1 - lakeinside)      # → ASH
         playa = np.clip(crack + sstep(1.5, .5, slope) * .3 * sstep(.3, .6, N.fbm(X + OX, Y + OY, 700, 2, 251)), 0, 1) * (1 - lakeinside)
-        pave = sstep(.1, .45, N.fbm(X + OX, Y + OY, 300, 3, 252)) * (1 - rock) * (1 - lakeinside)       # → RUBBLE
+        pave = np.clip(sstep(.1, .45, N.fbm(X + OX, Y + OY, 300, 3, 252)) + sc, 0, 1) * (1 - rock) * (1 - lakeinside)   # → RUBBLE (+ talus)
         veg = sstep(.25, .55, N.fbm(X + OX, Y + OY, 900, 3, 253)) * (1 - lakeinside) * sstep(25, 12, slope)  # → dead trees
         wet = np.maximum(wet, lakeinside)
     if reg.get('kind') == 'enchanted':                                 # old-growth forest everywhere (map biome 4), small natural gaps

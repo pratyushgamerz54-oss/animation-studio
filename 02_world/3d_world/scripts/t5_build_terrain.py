@@ -227,16 +227,36 @@ elif COMP in ('desert', 'crater'):
         q = {k.replace('_', ' ').replace('Near to Mid', 'LOD Near→Mid').replace('Mid to Far', 'LOD Mid→Far'): v for k, v in p.items()}
         return scatter(name, T_, cs, near, mid, far, **q)
     for tn, T_, sd in (('DH', DHo, 71), ('DN', DNo, 72)):
-        S(f'SC_{tn}_TALUS_BOULDERS', T_, 'LIB_ROCKS_MEDIUM', Density=.004 if tn == 'DH' else .0015, Viewport_Density=.2, Mask='m_scree',
+        S(f'SC_{tn}_TALUS_BOULDERS', T_, 'LIB_ROCKS_MEDIUM', Density=(.004 if tn == 'DH' else .0015) * (COMP == 'desert'), Viewport_Density=.2, Mask='m_scree',
           Mask_Min=.1, Mask_Max=.5, Slope_Max=50.0, Cluster_Scale=40.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=3.0, Align_To_Normal=.7,
           Random_Tilt=20.0, Sink=.3, Seed=sd, Cull_Distance=4000.0, Cull_Angle=55.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-        S(f'SC_{tn}_CLIFF_BLOCKS', T_, 'LIB_ROCKS_LARGE', Density=.0002 if tn == 'DH' else .0001, Viewport_Density=.3, Mask='m_cliff',
+        S(f'SC_{tn}_CLIFF_BLOCKS', T_, 'LIB_ROCKS_LARGE', Density=(.0002 if tn == 'DH' else .0001) * (COMP == 'desert'), Viewport_Density=.3, Mask='m_cliff',
           Mask_Min=.2, Mask_Max=.6, Slope_Min=25.0, Slope_Max=90.0, Cluster_Scale=60.0, Cluster_Amount=.4, Scale_Min=1.2, Scale_Max=3.5,
           Align_To_Normal=.8, Random_Tilt=25.0, Sink=.4, Seed=sd + 10, Cull_Distance=5000.0, Cull_Angle=55.0, Keep_Near=30.0,
           Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_DH_PAVEMENT_STONES', DHo, 'LIB_ROCKS_SMALL', Density=.6, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.2, Mask_Max=.6,
       Avoid_Mask='m_dry', Slope_Max=30.0, Cluster_Scale=6.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=2.5, Align_To_Normal=1.0,
       Random_Tilt=10.0, Sink=.02, Seed=73, Cull_Distance=120.0, Cull_Angle=55.0, Keep_Near=6.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    if COMP == 'crater':                                           # ejecta blocks: procedural dark basalt boulders (local collection)
+        import mathutils
+        ej = bpy.data.collections.new('LIB_EJECTA_BLOCKS')
+        for i in range(6):
+            bm = bmesh.new(); bmesh.ops.create_icosphere(bm, subdivisions=4, radius=1.0)
+            for vtx in bm.verts:
+                p_ = vtx.co.copy(); vtx.co = p_ * (1 + mathutils.noise.fractal(p_ * 1.3 + mathutils.Vector((i * 7.1, 0, 0)), .6, 2.0, 4) * .35)
+            bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=(0, 0, -.35 + .1 * i), plane_no=(0, 0, 1), clear_inner=True)
+            me = bpy.data.meshes.new(f'EJECTA_BLOCK_{i + 1}'); bm.to_mesh(me); bm.free()
+            sx, sy, sz = 1.0 + .3 * (i % 3), .8 + .2 * (i % 2), .55 + .1 * (i % 4)
+            me.transform(mathutils.Matrix.Diagonal((sx, sy, sz, 1))); me.materials.append(MAT['MAT_T5_ROCK_DARK']); me.shade_smooth()
+            ob_ = bpy.data.objects.new(me.name, me); ej.objects.link(ob_)
+        LIB['LIB_EJECTA_BLOCKS'] = ej
+        for tn, T_, dens, sd in (('DH', DHo, .006, 76), ('DN', DNo, .0015, 77)):
+            S(f'SC_{tn}_EJECTA_BLOCKS', T_, 'LIB_EJECTA_BLOCKS', Density=dens, Viewport_Density=.2, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+              Avoid_Mask='m_wet', Slope_Max=45.0, Cluster_Scale=90.0, Cluster_Amount=.8, Scale_Min=1.0, Scale_Max=6.0, Align_To_Normal=.5,
+              Random_Tilt=20.0, Sink=.25, Seed=sd, Cull_Distance=3000.0, Cull_Angle=55.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+        S('SC_DH_EJECTA_RUBBLE', DHo, 'LIB_EJECTA_BLOCKS', Density=.25, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.2, Mask_Max=.7,
+          Avoid_Mask='m_wet', Slope_Max=45.0, Cluster_Scale=10.0, Cluster_Amount=.6, Scale_Min=.1, Scale_Max=.5, Align_To_Normal=.8,
+          Random_Tilt=25.0, Sink=.2, Seed=78, Cull_Distance=120.0, Cull_Angle=55.0, Keep_Near=8.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     if COMP == 'crater':                                           # dead, burnt trees on the ash plain (no living plants)
         S('SC_DH_DEAD_TREES', DHo, 'LIB_LOGS', Density=.0025, Viewport_Density=.3, Mask='m_grove', Mask_Min=.2, Mask_Max=.6,
           Slope_Max=25.0, Cluster_Scale=60.0, Cluster_Amount=.6, Scale_Min=.9, Scale_Max=1.8, Align_To_Normal=1.0, Random_Tilt=6.0,
@@ -253,7 +273,8 @@ elif COMP in ('desert', 'crater'):
       fz = ((z2.ravel() < lev + .5) & inl)[Fq].any(1)
       if fz.any():
         V, Fk, _ = wk.subset(np.column_stack([X.ravel(), Y.ravel(), np.full(X.size, lev)]), Fq[fz])
-        o = wk.mesh_from_arrays(f'{TOP}_WATER_{lid}', V, Fk, cw, MAT['MAT_T5_WATER_LAKE']); wk.set_float_attr(o, 'foam', np.zeros(len(V)))
+        o = wk.mesh_from_arrays(f'{TOP}_WATER_{lid}', V, Fk, cw, MAT['MAT_T5_WATER_LAKE' if COMP == 'desert' else 'MAT_T5_WATER_DARK'])
+        wk.set_float_attr(o, 'foam', np.zeros(len(V)))
         wk.add_props(o, status=STATUS, note=f'level {lev:.1f} m; shoreline = terrain ∩ level')
     W2 = np.load(os.path.join(DD, 'water.npz' if COMP == 'desert' else f'water_{RK_}.npz')); RIV, RIVO = W2['RIV'].astype(float), W2['RIVO']
     vs, fs, n0 = [], [], 0

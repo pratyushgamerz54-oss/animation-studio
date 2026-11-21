@@ -215,6 +215,12 @@
   "resolution": "procedural",
   "metallic": 0.0
  },
+ "MAT_T5_WATER_DARK": {
+  "source": "procedural",
+  "maps": "opaque black water, roughness 0.32, small ripple bump",
+  "resolution": "procedural",
+  "metallic": 0.0
+ },
  "MAT_T5_WATERFALL": {
   "source": "procedural",
   "maps": "animated falling streaks (noise stretched in Z), subsurface white water, alpha mix",
