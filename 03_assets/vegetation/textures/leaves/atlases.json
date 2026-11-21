@@ -1,0 +1,177 @@
+{
+ "av_peepal": {
+  "size_m": 0.688,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_deodar": {
+  "size_m": 0.56,
+  "zoom": 1.12,
+  "layout": "needle_tuft",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_chir": {
+  "size_m": 0.91,
+  "zoom": 1.4,
+  "layout": "needle_bundle",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_banj": {
+  "size_m": 0.525,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_rhodo": {
+  "size_m": 0.5,
+  "zoom": 1.0,
+  "layout": "rosette",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_bamboo": {
+  "size_m": 0.84,
+  "zoom": 1.4,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_berberis": {
+  "size_m": 0.28,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_tulsi": {
+  "size_m": 0.202,
+  "zoom": 1.12,
+  "layout": "opposite",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_fern": {
+  "size_m": 0.448,
+  "zoom": 1.12,
+  "layout": "pinnate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_kans": {
+  "size_m": 0.504,
+  "zoom": 1.12,
+  "layout": "plume",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "av_lotus": {
+  "size_m": 0.55,
+  "zoom": 1.0,
+  "layout": "single",
+  "tiles": 4,
+  "pivot": "centre"
+ },
+ "ef_elder": {
+  "size_m": 0.784,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_beech": {
+  "size_m": 0.504,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_oak": {
+  "size_m": 0.562,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_yew": {
+  "size_m": 0.448,
+  "zoom": 1.12,
+  "layout": "needle_flat",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_veil": {
+  "size_m": 0.625,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_spiral": {
+  "size_m": 0.504,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_lantern": {
+  "size_m": 0.6,
+  "zoom": 1.0,
+  "layout": "rosette",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ef_moss": {
+  "size_m": 0.6,
+  "zoom": 1.0,
+  "layout": "beard",
+  "tiles": 4,
+  "pivot": "top-centre"
+ },
+ "ef_fern": {
+  "size_m": 0.616,
+  "zoom": 1.12,
+  "layout": "pinnate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_spruce": {
+  "size_m": 0.56,
+  "zoom": 1.12,
+  "layout": "needle_flat",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_birch": {
+  "size_m": 0.358,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_krumm": {
+  "size_m": 0.562,
+  "zoom": 1.25,
+  "layout": "needle_bundle",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_juniper": {
+  "size_m": 0.336,
+  "zoom": 1.12,
+  "layout": "scale",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_rhodo_dwarf": {
+  "size_m": 0.2,
+  "zoom": 1.0,
+  "layout": "rosette",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ }
+}

@@ -1,0 +1,564 @@
+{
+ "AV_T01_PEEPAL": {
+  "common": "Ancient Peepal",
+  "latin": "Ficus religiosa",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Ancient tree",
+  "habitat": "open valley floor, single ancient tree near the Ashram / village sites; never in dense forest",
+  "altitude": "300\u20131 500 m",
+  "kind": "tree",
+  "palette": [
+   "#3E7A2A",
+   "#5E9A38",
+   "#A8C77A",
+   "#B5863A",
+   "#8C8A80",
+   "#5E5A52"
+  ],
+  "stats": {
+   "height_m": 23.72,
+   "canopy_x_m": 28.27,
+   "canopy_y_m": 33.69,
+   "trunk_d_m": 3.04,
+   "branches": 7003,
+   "leaf_cards": 21298,
+   "tris": 422738,
+   "verts": 327262,
+   "lowest_z": -0.62
+  },
+  "bark": "japanese_hackberry_bark",
+  "atlas": "av_peepal",
+  "collection": "T6_AV_T01_PEEPAL"
+ },
+ "AV_T02_DEODAR": {
+  "common": "Deodar Cedar",
+  "latin": "Cedrus deodara",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Tall forest tree",
+  "habitat": "forest ring around the valley, north- and east-facing slopes, 1 800 m+ in the hills above the Ashram",
+  "altitude": "1 500\u20133 000 m",
+  "kind": "tree",
+  "palette": [
+   "#4E6E5A",
+   "#6E8D78",
+   "#3A5444",
+   "#5D4A3A",
+   "#6A5E54"
+  ],
+  "stats": {
+   "height_m": 34.94,
+   "canopy_x_m": 23.9,
+   "canopy_y_m": 23.42,
+   "trunk_d_m": 1.76,
+   "branches": 9203,
+   "leaf_cards": 20477,
+   "tris": 310460,
+   "verts": 268360,
+   "lowest_z": -0.43
+  },
+  "bark": "chinese_cedar_bark",
+  "atlas": "av_deodar",
+  "collection": "T6_AV_T02_DEODAR"
+ },
+ "AV_T03_CHIR_PINE": {
+  "common": "Chir Pine (long-leaf)",
+  "latin": "Pinus roxburghii",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Pine tree",
+  "habitat": "dry, sunny south-facing slopes and ridges of the valley; open stands with grass understorey",
+  "altitude": "500\u20132 000 m",
+  "kind": "tree",
+  "palette": [
+   "#7C9A3C",
+   "#A5B65A",
+   "#7A5238",
+   "#9A6A4A",
+   "#5A6E2C"
+  ],
+  "stats": {
+   "height_m": 31.42,
+   "canopy_x_m": 14.38,
+   "canopy_y_m": 16.36,
+   "trunk_d_m": 1.28,
+   "branches": 2665,
+   "leaf_cards": 6928,
+   "tris": 100120,
+   "verts": 87092,
+   "lowest_z": -0.43
+  },
+  "bark": "pine_bark",
+  "atlas": "av_chir",
+  "collection": "T6_AV_T03_CHIR_PINE"
+ },
+ "AV_T04_BANJ_OAK": {
+  "common": "Banj Oak (Himalayan white oak)",
+  "latin": "Quercus leucotrichophora",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Broadleaf tree",
+  "habitat": "moist valley sides, stream banks, groves around villages and the Ashram",
+  "altitude": "1 000\u20132 400 m",
+  "kind": "tree",
+  "palette": [
+   "#2F5A2E",
+   "#7F9A72",
+   "#8FA884",
+   "#6E6A60",
+   "#4A463E"
+  ],
+  "stats": {
+   "height_m": 19.39,
+   "canopy_x_m": 24.16,
+   "canopy_y_m": 20.66,
+   "trunk_d_m": 1.21,
+   "branches": 4771,
+   "leaf_cards": 10019,
+   "tris": 223300,
+   "verts": 172224,
+   "lowest_z": -0.41
+  },
+  "bark": "jolcham_oak_bark_01",
+  "atlas": "av_banj",
+  "collection": "T6_AV_T04_BANJ_OAK"
+ },
+ "AV_T05_RHODODENDRON": {
+  "common": "Tree Rhododendron (Burans)",
+  "latin": "Rhododendron arboreum",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Small tree (flowering)",
+  "habitat": "forest edges and oak groves on the valley slopes; crimson flowers in spring",
+  "altitude": "1 200\u20133 000 m",
+  "kind": "tree",
+  "palette": [
+   "#2E4F2A",
+   "#4D6B3A",
+   "#C0182B",
+   "#7A1020",
+   "#7A5A4A"
+  ],
+  "stats": {
+   "height_m": 9.71,
+   "canopy_x_m": 7.08,
+   "canopy_y_m": 10.64,
+   "trunk_d_m": 0.56,
+   "branches": 1538,
+   "leaf_cards": 1876,
+   "tris": 57460,
+   "verts": 42884,
+   "lowest_z": -0.32
+  },
+  "bark": "sakura_bark",
+  "atlas": "av_rhodo",
+  "collection": "T6_AV_T05_RHODODENDRON"
+ },
+ "AV_T06_BAMBOO_CLUMP": {
+  "common": "Giant Clumping Bamboo",
+  "latin": "Dendrocalamus hamiltonii",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Bushy tree (clump)",
+  "habitat": "stream banks and moist hollows of the valley floor; near villages",
+  "altitude": "300\u20132 000 m",
+  "kind": "tree",
+  "palette": [
+   "#5F8A35",
+   "#88A851",
+   "#7E9A3A",
+   "#B6A45A",
+   "#4A6A2A"
+  ],
+  "stats": {
+   "height_m": 15.14,
+   "canopy_x_m": 17.31,
+   "canopy_y_m": 13.18,
+   "trunk_d_m": 3.2,
+   "branches": 107,
+   "leaf_cards": 5601,
+   "tris": 44470,
+   "verts": 45220,
+   "lowest_z": -0.18
+  },
+  "bark": "culm",
+  "atlas": "av_bamboo",
+  "collection": "T6_AV_T06_BAMBOO_CLUMP"
+ },
+ "AV_S01_BERBERIS": {
+  "common": "Himalayan Barberry (Kilmora)",
+  "latin": "Berberis aristata",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Bush",
+  "habitat": "forest edges, path sides, dry slopes",
+  "altitude": "1 000\u20133 000 m",
+  "kind": "shrub",
+  "palette": [
+   "#3C6A2E",
+   "#5E8A3C",
+   "#E8C23A",
+   "#8A5A3A"
+  ],
+  "stats": {
+   "height_m": 1.83,
+   "canopy_x_m": 2.77,
+   "canopy_y_m": 3.22,
+   "trunk_d_m": 0.5,
+   "branches": 60,
+   "leaf_cards": 517,
+   "tris": 5008,
+   "verts": 4842,
+   "lowest_z": -0.34
+  },
+  "bark": "bark_brown_01",
+  "atlas": "av_berberis",
+  "collection": "T6_AV_S01_BERBERIS"
+ },
+ "AV_S02_TULSI": {
+  "common": "Holy Basil (Tulsi)",
+  "latin": "Ocimum tenuiflorum",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 (Ashram gardens, cultivated)",
+  "category": "Small plant / herb bush",
+  "habitat": "PROPOSED: planted in the Ashram courtyard and gardens (cultivated, not wild)",
+  "altitude": "cultivated",
+  "kind": "shrub",
+  "palette": [
+   "#3E6A2C",
+   "#5C7E3A",
+   "#6A4A6A",
+   "#9A7AA0"
+  ],
+  "stats": {
+   "height_m": 0.83,
+   "canopy_x_m": 1.15,
+   "canopy_y_m": 0.88,
+   "trunk_d_m": 0.1,
+   "branches": 11,
+   "leaf_cards": 225,
+   "tris": 1636,
+   "verts": 1774,
+   "lowest_z": -0.16
+  },
+  "bark": "bark_brown_01",
+  "atlas": "av_tulsi",
+  "collection": "T6_AV_S02_TULSI"
+ },
+ "AV_G01_MEADOW_GRASS": {
+  "common": "Valley meadow grass",
+  "latin": "Poa / Festuca mix",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Grass",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2E4A1E",
+   "#5E8A34",
+   "#A9B862",
+   "#D1BE7E"
+  ],
+  "stats": {
+   "height_m": 0.351,
+   "spread_x_m": 0.901,
+   "spread_y_m": 0.812,
+   "tris": 5200,
+   "verts": 4680,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_G01_MEADOW_GRASS"
+ },
+ "AV_G02_KANS_GRASS": {
+  "common": "Kans grass (tall, plumed)",
+  "latin": "Saccharum spontaneum",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Grass",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3A4E22",
+   "#6E8A3A",
+   "#F1ECE0",
+   "#D8CCB4"
+  ],
+  "stats": {
+   "height_m": 2.838,
+   "spread_x_m": 3.131,
+   "spread_y_m": 3.329,
+   "tris": 4312,
+   "verts": 3468,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_G02_KANS_GRASS"
+ },
+ "AV_G03_DRY_PATH_GRASS": {
+  "common": "Dry path-edge grass",
+  "latin": "Heteropogon contortus (spear grass)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Grass",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#7A8A3A",
+   "#A88A4A",
+   "#D8C08A"
+  ],
+  "stats": {
+   "height_m": 0.445,
+   "spread_x_m": 1.018,
+   "spread_y_m": 0.983,
+   "tris": 2600,
+   "verts": 2340,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_G03_DRY_PATH_GRASS"
+ },
+ "AV_F01_BUTTERCUP": {
+  "common": "Himalayan buttercup",
+  "latin": "Ranunculus hirtellus",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Wildflower",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#F2C21A",
+   "#C89A1A",
+   "#3E6A2A"
+  ],
+  "stats": {
+   "height_m": 0.323,
+   "spread_x_m": 0.176,
+   "spread_y_m": 0.133,
+   "tris": 1000,
+   "verts": 748,
+   "lowest_z": -0.001
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_F01_BUTTERCUP"
+ },
+ "AV_F02_PRIMULA": {
+  "common": "Drumstick primula",
+  "latin": "Primula denticulata",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Wildflower",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#A87AD0",
+   "#7A4AA8",
+   "#4E7A34"
+  ],
+  "stats": {
+   "height_m": 0.228,
+   "spread_x_m": 0.206,
+   "spread_y_m": 0.209,
+   "tris": 8660,
+   "verts": 7107,
+   "lowest_z": -0.0
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_F02_PRIMULA"
+ },
+ "AV_F03_WILD_DAISY": {
+  "common": "Wild daisy / pearly everlasting",
+  "latin": "Anaphalis / Bellis-like (meadow daisy)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Wildflower",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#F4F2EA",
+   "#F0C02A",
+   "#4A7230"
+  ],
+  "stats": {
+   "height_m": 0.148,
+   "spread_x_m": 0.094,
+   "spread_y_m": 0.09,
+   "tris": 2280,
+   "verts": 1901,
+   "lowest_z": -0.001
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_F03_WILD_DAISY"
+ },
+ "AV_F04_MARIGOLD": {
+  "common": "Marigold (genda) \u2014 cultivated",
+  "latin": "Tagetes erecta",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 (Ashram gardens)",
+  "category": "Garden flower",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#F08A12",
+   "#F2B21A",
+   "#3A6228"
+  ],
+  "stats": {
+   "height_m": 0.491,
+   "spread_x_m": 0.361,
+   "spread_y_m": 0.306,
+   "tris": 8064,
+   "verts": 7191,
+   "lowest_z": -0.002
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_F04_MARIGOLD"
+ },
+ "AV_FE01_SWORD_FERN": {
+  "common": "Valley sword fern",
+  "latin": "Polystichum / Dryopteris-like",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Fern",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3F7A2C",
+   "#5E9640",
+   "#7FB060"
+  ],
+  "stats": {
+   "height_m": 0.656,
+   "spread_x_m": 1.372,
+   "spread_y_m": 1.361,
+   "tris": 12240,
+   "verts": 10440,
+   "lowest_z": -0.01
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_FE01_SWORD_FERN"
+ },
+ "AV_AQ01_LOTUS": {
+  "common": "Sacred lotus",
+  "latin": "Nelumbo nucifera",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 (Ashram pond / still water)",
+  "category": "Aquatic plant",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3F7B3A",
+   "#F2A6C0",
+   "#E06A92",
+   "#E8C84A"
+  ],
+  "stats": {
+   "height_m": 0.991,
+   "spread_x_m": 2.485,
+   "spread_y_m": 2.231,
+   "tris": 2244,
+   "verts": 1774,
+   "lowest_z": -0.601
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_AQ01_LOTUS"
+ },
+ "AV_AQ02_CATTAIL": {
+  "common": "Reed-mace / cattail",
+  "latin": "Typha angustifolia",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 (pond + river margins)",
+  "category": "Aquatic plant",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6A8A3E",
+   "#9AA66A",
+   "#5A3A22"
+  ],
+  "stats": {
+   "height_m": 2.021,
+   "spread_x_m": 0.945,
+   "spread_y_m": 1.067,
+   "tris": 2800,
+   "verts": 2055,
+   "lowest_z": -0.151
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_AQ02_CATTAIL"
+ },
+ "AV_M01_MOSS_CUSHION": {
+  "common": "Cushion moss",
+  "latin": "Leucobryum-like",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 / R-02",
+  "category": "Moss",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3F5E22",
+   "#7E9A3A",
+   "#8A8A55"
+  ],
+  "stats": {
+   "height_m": 0.057,
+   "spread_x_m": 0.448,
+   "spread_y_m": 0.473,
+   "tris": 2780,
+   "verts": 1836,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_M01_MOSS_CUSHION"
+ },
+ "AV_MU01_BROWN_MUSHROOMS": {
+  "common": "Brown woodland mushrooms",
+  "latin": "Agaricales (generic)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 / R-02",
+  "category": "Mushroom",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#8A5A34",
+   "#5A3A22",
+   "#E2D6BE"
+  ],
+  "stats": {
+   "height_m": 0.076,
+   "spread_x_m": 0.132,
+   "spread_y_m": 0.132,
+   "tris": 1736,
+   "verts": 1120,
+   "lowest_z": -0.007
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_MU01_BROWN_MUSHROOMS"
+ }
+}

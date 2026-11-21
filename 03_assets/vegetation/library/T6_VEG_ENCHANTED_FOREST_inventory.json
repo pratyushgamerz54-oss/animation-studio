@@ -1,0 +1,355 @@
+{
+ "EF_T01_GIANT_ELDER": {
+  "common": "Giant Elder",
+  "latin": "inspired by Agathis australis (kauri) + Sequoiadendron (giant sequoia)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Giant tree",
+  "habitat": "core of the Enchanted Forest; emergent trees rising above the main canopy",
+  "altitude": "400\u20131 200 m",
+  "kind": "tree",
+  "palette": [
+   "#1F4F44",
+   "#2F6A58",
+   "#5E8F7A",
+   "#8A5E4A",
+   "#3F6A3A",
+   "#6A4A3E"
+  ],
+  "stats": {
+   "height_m": 66.9,
+   "canopy_x_m": 53.9,
+   "canopy_y_m": 52.2,
+   "trunk_d_m": 9.12,
+   "branches": 8229,
+   "leaf_cards": 25132,
+   "tris": 503266,
+   "verts": 388302,
+   "lowest_z": -1.06
+  },
+  "bark": "metasequoia_bark",
+  "atlas": "ef_elder",
+  "collection": "T6_EF_T01_GIANT_ELDER"
+ },
+ "EF_T02_TEAL_BEECH": {
+  "common": "Teal Beech",
+  "latin": "inspired by Fagus sylvatica (European beech)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Tall forest tree",
+  "habitat": "main canopy of the Enchanted Forest; smooth grey columns, shade-tolerant",
+  "altitude": "300\u20131 400 m",
+  "kind": "tree",
+  "palette": [
+   "#2F6A4A",
+   "#4A8A60",
+   "#7FAE88",
+   "#9A9C96",
+   "#5A5E58"
+  ],
+  "stats": {
+   "height_m": 41.47,
+   "canopy_x_m": 22.6,
+   "canopy_y_m": 22.32,
+   "trunk_d_m": 1.67,
+   "branches": 4785,
+   "leaf_cards": 16902,
+   "tris": 250800,
+   "verts": 213529,
+   "lowest_z": -0.42
+  },
+  "bark": "japanese_zelkova_bark",
+  "atlas": "ef_beech",
+  "collection": "T6_EF_T02_TEAL_BEECH"
+ },
+ "EF_T03_MOSS_OAK": {
+  "common": "Ancient Moss Oak",
+  "latin": "inspired by Quercus robur (pedunculate oak)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Ancient tree",
+  "habitat": "clearings and stream sides in the Enchanted Forest; huge low limbs draped with moss",
+  "altitude": "200\u20131 000 m",
+  "kind": "tree",
+  "palette": [
+   "#2C5A3C",
+   "#3E7448",
+   "#8A9A6E",
+   "#3E6A2E",
+   "#5A5048"
+  ],
+  "stats": {
+   "height_m": 24.29,
+   "canopy_x_m": 30.89,
+   "canopy_y_m": 34.34,
+   "trunk_d_m": 3.89,
+   "branches": 4370,
+   "leaf_cards": 11480,
+   "tris": 225404,
+   "verts": 178097,
+   "lowest_z": -0.83
+  },
+  "bark": "bark_brown_02",
+  "atlas": "ef_oak",
+  "collection": "T6_EF_T03_MOSS_OAK"
+ },
+ "EF_T04_YEW": {
+  "common": "Old Yew",
+  "latin": "inspired by Taxus baccata (yew)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Small tree (understorey)",
+  "habitat": "shaded understorey and rocky banks; very dark evergreen mass",
+  "altitude": "200\u20131 500 m",
+  "kind": "tree",
+  "palette": [
+   "#17382C",
+   "#2C5240",
+   "#8A4A34",
+   "#5A3A2A",
+   "#3E6A3A"
+  ],
+  "stats": {
+   "height_m": 10.0,
+   "canopy_x_m": 14.0,
+   "canopy_y_m": 14.1,
+   "trunk_d_m": 1.42,
+   "branches": 4564,
+   "leaf_cards": 7424,
+   "tris": 144544,
+   "verts": 117558,
+   "lowest_z": -0.39
+  },
+  "bark": "tree_bark_03",
+  "atlas": "ef_yew",
+  "collection": "T6_EF_T04_YEW"
+ },
+ "EF_T05_VEIL_WILLOW": {
+  "common": "Veil Willow",
+  "latin": "fictional (weeping form loosely based on Salix babylonica)",
+  "label": "PROPOSED FANTASY",
+  "region": "R-02",
+  "category": "Rare fantasy tree",
+  "habitat": "PROPOSAL: forest pools and slow streams; curtains of silver-teal leaves to the ground",
+  "altitude": "\u2014",
+  "kind": "tree",
+  "palette": [
+   "#4F8F86",
+   "#A6C9C0",
+   "#C8E0D8",
+   "#6A6A5E",
+   "#3E6A44"
+  ],
+  "stats": {
+   "height_m": 20.79,
+   "canopy_x_m": 27.12,
+   "canopy_y_m": 22.71,
+   "trunk_d_m": 1.67,
+   "branches": 5080,
+   "leaf_cards": 29132,
+   "tris": 437672,
+   "verts": 357472,
+   "lowest_z": -0.51
+  },
+  "bark": "bark_willow",
+  "atlas": "ef_veil",
+  "collection": "T6_EF_T05_VEIL_WILLOW"
+ },
+ "EF_T06_SPIRAL_ROOT": {
+  "common": "Spiral-root Tree",
+  "latin": "fictional (stilt roots like Rhizophora / Pandanus, twisted trunk)",
+  "label": "PROPOSED FANTASY",
+  "region": "R-02",
+  "category": "Rare fantasy tree",
+  "habitat": "PROPOSAL: wet hollows of the Enchanted Forest; trunk raised on a cage of stilt roots, spiral bark, silver-blue round leaves",
+  "altitude": "\u2014",
+  "kind": "tree",
+  "palette": [
+   "#5C8C9A",
+   "#A9C4CC",
+   "#D0E2E6",
+   "#B8BAB4",
+   "#6A6A70"
+  ],
+  "stats": {
+   "height_m": 26.53,
+   "canopy_x_m": 18.41,
+   "canopy_y_m": 20.29,
+   "trunk_d_m": 1.59,
+   "branches": 4434,
+   "leaf_cards": 11672,
+   "tris": 223324,
+   "verts": 177599,
+   "lowest_z": -2.71
+  },
+  "bark": "bark_platanus",
+  "atlas": "ef_spiral",
+  "collection": "T6_EF_T06_SPIRAL_ROOT"
+ },
+ "EF_T07_LANTERN_TREE": {
+  "common": "Lantern Tree",
+  "latin": "fictional",
+  "label": "PROPOSED FANTASY",
+  "region": "R-02",
+  "category": "Rare fantasy tree",
+  "habitat": "PROPOSAL: glades of the Enchanted Forest; umbrella crown of fan leaves with hanging pale seed-pods that glow faintly at dusk",
+  "altitude": "\u2014",
+  "kind": "tree",
+  "palette": [
+   "#2E6A5E",
+   "#4A9A86",
+   "#9FDCCB",
+   "#E8F6D8",
+   "#6A6A60"
+  ],
+  "stats": {
+   "height_m": 18.94,
+   "canopy_x_m": 22.59,
+   "canopy_y_m": 19.75,
+   "trunk_d_m": 1.16,
+   "branches": 4289,
+   "leaf_cards": 4103,
+   "tris": 159094,
+   "verts": 115732,
+   "lowest_z": -0.39
+  },
+  "bark": "bark_brown_01",
+  "atlas": "ef_lantern",
+  "collection": "T6_EF_T07_LANTERN_TREE"
+ },
+ "EF_T08_DEAD_SNAG": {
+  "common": "Dead Snag",
+  "latin": "dead standing tree (any species)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02 (also R-03, R-05)",
+  "category": "Dead tree",
+  "habitat": "scattered through old forest; broken top, bracket fungi, woodpecker habitat",
+  "altitude": "any",
+  "kind": "tree",
+  "palette": [
+   "#9C968C",
+   "#6A645C",
+   "#C8B48A",
+   "#4E6A3A",
+   "#3A3630"
+  ],
+  "stats": {
+   "height_m": 18.74,
+   "canopy_x_m": 7.28,
+   "canopy_y_m": 7.52,
+   "trunk_d_m": 1.98,
+   "branches": 147,
+   "leaf_cards": 0,
+   "tris": 9816,
+   "verts": 5898,
+   "lowest_z": -0.5
+  },
+  "bark": "eucalyptus_bark",
+  "atlas": null,
+  "collection": "T6_EF_T08_DEAD_SNAG"
+ },
+ "EF_FE01_GIANT_FERN": {
+  "common": "Giant forest fern",
+  "latin": "inspired by Dryopteris / Dicksonia fronds",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Fern",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2A6A4A",
+   "#4A8A5C",
+   "#6FA880"
+  ],
+  "stats": {
+   "height_m": 1.404,
+   "spread_x_m": 2.329,
+   "spread_y_m": 2.724,
+   "tris": 19328,
+   "verts": 16656,
+   "lowest_z": -0.01
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_EF_FE01_GIANT_FERN"
+ },
+ "EF_M01_MOSS_CARPET": {
+  "common": "Deep moss carpet",
+  "latin": "Thuidium / Hypnum-like",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Moss",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2E5A2E",
+   "#5E8A3A",
+   "#6A7A48"
+  ],
+  "stats": {
+   "height_m": 0.067,
+   "spread_x_m": 1.344,
+   "spread_y_m": 1.579,
+   "tris": 8200,
+   "verts": 5424,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_EF_M01_MOSS_CARPET"
+ },
+ "EF_MU01_GLOWCAP": {
+  "common": "Glowcap mushrooms",
+  "latin": "fictional (bioluminescent fungi exist, e.g. Mycena \u2014 look is a proposal)",
+  "label": "PROPOSED FANTASY",
+  "region": "R-02",
+  "category": "Rare fantasy fungus",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#8FE6D2",
+   "#5AB8A6",
+   "#D8E6DA"
+  ],
+  "stats": {
+   "height_m": 0.124,
+   "spread_x_m": 0.195,
+   "spread_y_m": 0.283,
+   "tris": 2728,
+   "verts": 1760,
+   "lowest_z": -0.007
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_EF_MU01_GLOWCAP"
+ },
+ "EF_V01_HANGING_VINE": {
+  "common": "Hanging liana",
+  "latin": "inspired by woody lianas (Entada / Bauhinia vahlii)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02",
+  "category": "Vine",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#5A5048",
+   "#2F6A4A",
+   "#4A8A60"
+  ],
+  "stats": {
+   "height_m": 9.0,
+   "spread_x_m": 2.063,
+   "spread_y_m": 1.411,
+   "tris": 4080,
+   "verts": 4710,
+   "lowest_z": 0.454
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_EF_V01_HANGING_VINE"
+ }
+}

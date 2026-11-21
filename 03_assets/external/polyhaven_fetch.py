@@ -24,14 +24,20 @@ MODELS = ['fir_tree_01', 'fir_sapling_medium', 'tree_small_02', 'shrub_01', 'shr
           'pine_tree_01', 'pine_sapling_small', 'fir_sapling', 'dead_tree_trunk', 'dead_tree_trunk_02', 'tree_stump_01',
           'root_cluster_01', 'root_cluster_02', 'pine_roots', 'rock_07', 'rock_09', 'rock_face_01', 'rock_face_02', 'stone_01',
           'namaqualand_boulder_02', 'namaqualand_boulder_03', 'coast_rocks_01', 'dry_branches_medium_01', 'bark_debris_01',
-          'shrub_04', 'grass_bermuda_01', 'nettle_plant', 'dandelion_01']
+          'shrub_04', 'grass_bermuda_01', 'nettle_plant', 'dandelion_01',
+          # TASK 06 ecosystem library (supplementary scans)
+          'celandine_01', 'periwinkle_plant', 'shrub_sorrel_01', 'weed_plant_02', 'tree_stump_02', 'single_root']
 TEXTURES = ['clay_roof_tiles_02', 'plastered_stone_wall', 'rustic_stone_wall', 'cobblestone_floor_04', 'mossy_cobblestone',
             'dark_wooden_planks', 'medieval_wood', 'forest_ground_04', 'grass_path_2', 'aerial_grass_rock', 'aerial_rocks_02',
             'snow_02', 'brown_mud_leaves_01', 'sparse_grass', 'cliff_side', 'worn_mossy_plasterwall',
             # TASK 05 terrain PBR library
             'leafy_grass', 'grass_ground', 'forest_floor', 'mud_forest', 'brown_mud', 'rocky_gravel', 'gravel_ground_01',
             'coast_sand_01', 'sand_01', 'dark_rock', 'rock_ground', 'mossy_rock', 'river_small_rocks', 'snow_field_aerial',
-            'snow_04', 'dry_ground_01', 'mud_cracked_dry_03', 'aerial_ground_rock']
+            'snow_04', 'dry_ground_01', 'mud_cracked_dry_03', 'aerial_ground_rock',
+            # TASK 06 bark library (real scanned bark, CC0)
+            'bark_brown_01', 'bark_brown_02', 'pine_bark', 'knotted_pine_bark', 'japanese_cedar_bark', 'metasequoia_bark',
+            'bark_willow', 'bark_platanus', 'japanese_hackberry_bark', 'japanese_zelkova_bark', 'jolcham_oak_bark_01',
+            'sakura_bark', 'eucalyptus_bark', 'tree_bark_03', 'chinese_cedar_bark', 'trident_maple_bark']
 HDRIS = [('kloofendal_48d_partly_cloudy_puresky', '4k'), ('qwantani_dusk_2_puresky', '4k'), ('qwantani_night_puresky', '4k')]
 MODEL_RES, TEX_RES = '1k', '2k'
 TEX_MAPS = {'Diffuse': 'diff', 'nor_gl': 'nor_gl', 'Rough': 'rough', 'AO': 'ao', 'Displacement': 'disp'}
