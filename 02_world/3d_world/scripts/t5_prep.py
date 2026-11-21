@@ -37,7 +37,7 @@ sstep, fbm, ridged = F.sstep, F.fbm, F.ridged
 
 TILES = {
     'VH': dict(x0=-1200, x1=1200, y0=-1200, y1=1200, sp=2.0, kind='hero', band=150, holes=[]),
-    'FH': dict(x0=-1500, x1=1500, y0=24000, y1=27000, sp=2.0, kind='hero', band=150, holes=[]),
+    'FH': dict(x0=-1520, x1=1480, y0=24000, y1=27000, sp=2.0, kind='hero', band=150, holes=[]),   # edges on the 40 m L1 grid
     'L0': dict(x0=-6000, x1=6000, y0=-6000, y1=6000, sp=10.0, kind='valley', band=500, holes=['VH']),
     'L1': dict(x0=-32000, x1=32000, y0=-32000, y1=32000, sp=40.0, kind='valley', band=1500, holes=['L0', 'FH']),
     'MT': dict(x0=-116000, x1=-56000, y0=44000, y1=104000, sp=30.0, kind='mountain', band=2500, holes=['WF']),
@@ -137,8 +137,9 @@ _main = max(_cand, key=lambda c: c[2])
 _up = [c for c in _cand if c[0] == _main[0] and 3 <= _main[1] - c[1] <= 10 and c[2] >= 25]
 FEATURED = [dict(river=int(_main[0]), k=int(_main[1]), drop_m=float(_main[2]))] + \
            [dict(river=int(c[0]), k=int(c[1]), drop_m=float(c[2])) for c in _up[:1]]
-_cx = round(np.mean([RIVERS[f['river']][f['k'], 0] for f in FEATURED]) / 30) * 30
-_cy = round(np.mean([RIVERS[f['river']][f['k'], 1] for f in FEATURED]) / 30) * 30
+# snap the tile to the MT grid lines (x = x0 + i·30, y = y1 − j·30) so the MT hole edges coincide with the WF border
+_cx = _mt['x0'] + round((np.mean([RIVERS[f['river']][f['k'], 0] for f in FEATURED]) - _mt['x0']) / 30) * 30
+_cy = _mt['y1'] - round((_mt['y1'] - np.mean([RIVERS[f['river']][f['k'], 1] for f in FEATURED])) / 30) * 30
 TILES['WF'] = dict(x0=_cx - 450, x1=_cx + 450, y0=_cy - 450, y1=_cy + 450, sp=1.5, kind='wf', band=120, holes=[])
 for f in FEATURED:
     r = RIVERS[f['river']]; k = f['k']
