@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__)); VEG = os.path.abspath(os.path.join(HERE, '..'))
 PH = os.path.abspath(os.path.join(VEG, '..', 'external', 'polyhaven'))
 FD = '/usr/share/fonts/truetype/dejavu/'
-F = lambda n, b=False, i=False: ImageFont.truetype(FD + ('DejaVuSans-Bold.ttf' if b else 'DejaVuSans-Oblique.ttf' if i else 'DejaVuSans.ttf'), n)
+F = lambda n, b=False, i=False: ImageFont.truetype('/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf', n + 2) if i else ImageFont.truetype(FD + ('DejaVuSans-Bold.ttf' if b else 'DejaVuSans.ttf'), n)
 BG, INK, SUB, LINE = (236, 234, 228), (28, 34, 30), (92, 98, 94), (170, 172, 166)
 HEAD = (30, 44, 38)
 BADGE = {'SPECIES-INSPIRED': ((46, 110, 64), 'SPECIES-INSPIRED (real plant reference)'),
@@ -143,20 +143,20 @@ def tree_sheet(reg, name, v, V, outd):
     yy = 220 + hw + 30
     sw = (cw - 40) // 3
     bark = v.get('bark'); B = v.get('bark_tint', '#FFFFFF')
-    d.text((X, yy), 'BARK MATERIAL (scan + tint)', fill=INK, font=F(18, True))
-    d.text((X + sw + 20, yy), 'LEAF ATLAS (colour + alpha)', fill=INK, font=F(18, True))
-    d.text((X + 2 * (sw + 20), yy), 'LEAF NORMAL MAP', fill=INK, font=F(18, True))
+    d.text((X, yy), 'BARK (scan + tint)', fill=INK, font=F(18, True))
+    d.text((X + sw + 20, yy), 'LEAF ATLAS', fill=INK, font=F(18, True))
+    d.text((X + 2 * (sw + 20), yy), 'LEAF NORMAL', fill=INK, font=F(18, True))
     yy += 28
     if bark and bark != 'culm':
         bp = os.path.join(PH, 'textures', bark, f'{bark}_diff_2k.jpg')
         if os.path.exists(bp):
             im.paste(tex_swatch(bp, (sw, sw), B), (X, yy))
-            d.text((X, yy + sw + 4), f'Poly Haven CC0: {bark}', fill=SUB, font=F(14))
+            d.text((X, yy + sw + 4), f'Poly Haven: {bark}', fill=SUB, font=font_fit(d, f'Poly Haven: {bark}', sw, 14))
     elif bark == 'culm':
         d.rectangle([X, yy, X + sw, yy + sw], fill=(110, 140, 58)); d.text((X + 10, yy + 10), 'procedural culm\n(waxy green, nodes)', fill=(255, 255, 255), font=F(16))
     if v.get('atlas'):
         im.paste(atlas_tile(v['atlas'], (sw, sw)), (X + sw + 20, yy)); im.paste(atlas_tile(v['atlas'], (sw, sw), 'nor'), (X + 2 * (sw + 20), yy))
-        d.text((X + sw + 20, yy + sw + 4), f"procedural atlas: {v['atlas']} (4 variants, 2K)", fill=SUB, font=F(14))
+        d.text((X + sw + 20, yy + sw + 4), f"{v['atlas']} · 4 var · 2K", fill=SUB, font=font_fit(d, f"{v['atlas']} · 4 var · 2K", sw, 14))
     yy += sw + 36
     d.text((X, yy), 'COLOUR PALETTE', fill=INK, font=F(18, True)); palette(d, X, yy + 28, v['palette'][:7], 66); yy += 130
     d.text((X, yy), 'SPECIFICATION', fill=INK, font=F(18, True)); yy += 30
@@ -169,7 +169,13 @@ def tree_sheet(reg, name, v, V, outd):
             ('Rig / wind', 'wind attributes + NG_T6_WIND (T6_WIND_CONTROL)'), ('File', f"library/T6_VEG_{NAMES[reg]}_v001.blend → T6_{name}")]
     for k_, val in rows:
         d.text((X, yy), k_, fill=SUB, font=F(17, True))
-        f = font_fit(d, val, cw - 200, 17); d.text((X + 200, yy), val, fill=INK, font=f); yy += 27
+        words = val.split(); line = ''
+        for wd in words:
+            if d.textlength((line + ' ' + wd).strip(), font=F(17)) > cw - 200 and line:
+                d.text((X + 200, yy), line.strip(), fill=INK, font=F(17)); yy += 24; line = ''
+            line += ' ' + wd
+        d.text((X + 200, yy), line.strip(), fill=INK, font=F(17)); yy += 28
+    im = im.crop((0, 0, W, max(y0 + 1060, yy) + 40)); Hh = im.height
     im.save(os.path.join(outd, f'TREE_{name}.png'), optimize=True)
     im.resize((W // 3, Hh // 3), Image.LANCZOS).save(os.path.join(outd, 'thumbs', f'TREE_{name}.jpg'), quality=88)
 
@@ -215,7 +221,7 @@ def plant_sheet(reg, inv, V, outd):
 
 
 def region_sheet(reg, inv, V, outd):
-    W, Hh = 3300, 2350
+    W, Hh = 3300, 3200
     im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
     header(d, W, f'REGIONAL VEGETATION SHEET  ·  {TITLE[reg]}', 'vegetation identity · height comparison · plant palette (map rev 01 = PROPOSAL; layout preserved)',
            None, 'TASK 06 milestone 1 concept (v001)')

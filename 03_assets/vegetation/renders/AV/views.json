@@ -222,5 +222,95 @@
   "detail": true,
   "height_m": 0.3312965929508209,
   "spread_m": 0.18914621323347092
+ },
+ "AV_F02_PRIMULA": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.23323270678520203,
+  "spread_m": 0.21590441465377808
+ },
+ "AV_F03_WILD_DAISY": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.15070003271102905,
+  "spread_m": 0.09916625916957855
+ },
+ "AV_F04_MARIGOLD": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.5099866986274719,
+  "spread_m": 0.38180267810821533
+ },
+ "AV_FE01_SWORD_FERN": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.6766496300697327,
+  "spread_m": 1.3626039624214172
+ },
+ "AV_AQ01_LOTUS": {
+  "hero": true,
+  "detail": true,
+  "height_m": 1.024369716644287,
+  "spread_m": 2.48590350151062
+ },
+ "AV_AQ02_CATTAIL": {
+  "hero": true,
+  "detail": true,
+  "height_m": 2.027064800262451,
+  "spread_m": 1.1937351822853088
+ },
+ "AV_M01_MOSS_CUSHION": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.057179175317287445,
+  "spread_m": 0.4727836698293686
+ },
+ "AV_MU01_BROWN_MUSHROOMS": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.0756986141204834,
+  "spread_m": 0.13235076144337654
+ },
+ "LINEUP_TREES": {
+  "ortho_scale": 142.18284799999998,
+  "zc": 26.059283999999995,
+  "rx": 2400,
+  "ry": 900,
+  "px_per_m": 16.87967313750812,
+  "x0": 0.0,
+  "items": [
+   {
+    "name": "AV_T02_DEODAR",
+    "x": 11.949999809265137
+   },
+   {
+    "name": "AV_T03_CHIR_PINE",
+    "x": 34.00199890136719
+   },
+   {
+    "name": "AV_T01_PEEPAL",
+    "x": 57.47740173339844
+   },
+   {
+    "name": "AV_T04_BANJ_OAK",
+    "x": 86.9540023803711
+   },
+   {
+    "name": "AV_T06_BAMBOO_CLUMP",
+    "x": 110.6218032836914
+   },
+   {
+    "name": "AV_T05_RHODODENDRON",
+    "x": 125.20159912109375
+   },
+   {
+    "name": "AV_S01_BERBERIS",
+    "x": 131.6929931640625
+   },
+   {
+    "name": "AV_S02_TULSI",
+    "x": 134.87460327148438
+   }
+  ]
  }
 }

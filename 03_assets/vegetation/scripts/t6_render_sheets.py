@@ -175,7 +175,7 @@ def plant_views(o, name):
     show([o, soil]); render(os.path.join(OUTD, f'{name}_hero.png'), 700, 700)
     # detail: the top 25 % (flower heads / blade tips / caps)
     top = V[V[:, 2] > mx[2] - .25 * H]; c = top.mean(0) if len(top) else np.array(tgt)
-    dd = max(size * .55, .04)
+    dd = max(size * .8, .14)
     look(cam, (c[0] + dd * .4, c[1] - dd, c[2] + dd * .35), tuple(c), 60)
     show([o, soil]); render(os.path.join(OUTD, f'{name}_detail.png'), 700, 700)
     return dict(hero=True, detail=True, height_m=float(H), spread_m=float(Wd))
@@ -207,7 +207,7 @@ def lineup(kind):
     else:
         soil.hide_render = False
         Hm = max(INV[n]['stats']['height_m'] for n in names)
-        tgt = Vector((x / 2, 0, Hm * .25)); d = x * .62
+        tgt = Vector((x / 2, 0, Hm * .2)); d = x * .95
         look(cam, (x / 2, -d, Hm * .55 + d * .18), tgt, 40)
         render(os.path.join(OUTD, 'LINEUP_PLANTS.png'), 2400, 900)
     for o in objs:
