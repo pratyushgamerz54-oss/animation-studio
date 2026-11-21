@@ -108,5 +108,25 @@
   ],
   "description": "Forbidden Region aerial \u2014 ejecta ridges on the blasted plain, the crater rim and the crater lake",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_10_ENCHANTED_FLOOR": {
+  "seconds": 854.7,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Enchanted Forest (R02) \u2014 inside the old-growth: giant trunks, moss carpet, ferns, fallen giants, low mist",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_10B_ENCHANTED_CANOPY": {
+  "seconds": 199.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Enchanted Forest canopy \u2014 giant old-growth over rolling hills, deep teal-green",
+  "blender": "4.5.16 LTS"
  }
 }

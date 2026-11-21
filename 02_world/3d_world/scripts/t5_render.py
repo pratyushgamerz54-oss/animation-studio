@@ -41,8 +41,10 @@ for cam in cams:
     for o in sc.objects:
         if o.name.startswith('SC_'):
             o.hide_render = bool(keep) and not o.name.startswith(keep)
-    sc.world.mist_settings.depth = float(cam.get('haze_depth_m', 60000))
-    sc.node_tree.nodes['HAZE_STRENGTH'].outputs[0].default_value = float(cam.get('haze_strength', .4))
+    if sc.world:
+        sc.world.mist_settings.depth = float(cam.get('haze_depth_m', 60000))
+    if sc.node_tree and 'HAZE_STRENGTH' in sc.node_tree.nodes:
+        sc.node_tree.nodes['HAZE_STRENGTH'].outputs[0].default_value = float(cam.get('haze_strength', .4))
     sc.cycles.samples = int(opt.get('samples', cam.get('samples', 48)))
     sc.cycles.time_limit = float(opt.get('time_limit', 1500))
     t0 = time.time()
