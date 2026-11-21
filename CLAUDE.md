@@ -53,6 +53,16 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Render: high samples, full HD+ (user's GPU PC), motion blur on, denoise.
 - Har VFX shot ka preview dikhana aur Director approve kare tab final render.
 
+## ⚠️ FINAL OUTPUT RESOLUTION RULE (Director, 21 Nov)
+Final film / MP4 **FHD se zyada** (target **4K UHD 3840×2160**) — zoom / crop karne par bhi blur nahi, pahaad aur zameen sharp.
+Abhi ke 1280×720 renders sirf approval previews hain. Final shots ke liye:
+- Render 4K (Director ke GPU PC par), high samples + denoise, zarurat ho to 8K stills.
+- Terrain: har final shot ke camera ke liye hero detail tile (pahaad ≤ 5–10 m grid + true displacement / adaptive subdivision),
+  door ke LOD bhi camera ke hisaab se; 30 m / 400 m tiles sirf door ke horizon ke liye.
+- Textures: Poly Haven 4K/8K version final close-ups ke liye (abhi 2K), texel density check per shot.
+- Trees/rocks: close-up mein LOD0 (abhi near = LOD1/LOD2).
+- QC: har final frame 100% zoom par check (blur / noise / tiling / aliasing).
+
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
 0. **SABSE PEHLE** `HANDOFF.md` padho aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.

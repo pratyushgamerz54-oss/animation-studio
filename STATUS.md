@@ -1,6 +1,7 @@
 # STATUS — last updated 2026-11-21 (session 3: TASK 04 CLOSED, waiting for TASK 05 brief)
 
 ## Session 3 (21 Nov)
+- **Director rule:** final MP4 **FHD se zyada (4K UHD target)**, zoom par blur nahi — CLAUDE.md mein 'FINAL OUTPUT RESOLUTION RULE'. Abhi 1280×720 = sirf previews.
 - Branch restore + `setup_session.sh`. Director decisions: **Hero 1 = Shiv**; **K-01 robe clipping → cloth simulation** at scene stage.
 
 ## Abhi kahan hain
