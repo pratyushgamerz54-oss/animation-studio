@@ -333,20 +333,32 @@ def heightfield_group():
         b.link(img_sock, t.inputs['Image']); b.link(uv.outputs[0], t.inputs['Vector'])
         return t
     hz = sample(G('Height'))
-    zsep = b.node('ShaderNodeSeparateColor'); b.link(hz.outputs['Color'], zsep.inputs['Color'])
+    zsep = b.node('FunctionNodeSeparateColor'); b.link(hz.outputs['Color'], zsep.inputs['Color'])
     cx = b.math('MULTIPLY', b.math('ADD', G('Min X'), G('Max X')), .5); cy = b.math('MULTIPLY', b.math('ADD', G('Min Y'), G('Max Y')), .5)
     off = b.node('ShaderNodeCombineXYZ'); b.link(cx, off.inputs['X']); b.link(cy, off.inputs['Y']); b.link(zsep.outputs[0], off.inputs['Z'])
     sp = b.node('GeometryNodeSetPosition'); b.link(grid.outputs['Mesh'], sp.inputs['Geometry']); b.link(off.outputs[0], sp.inputs['Offset'])
     geo = sp.outputs['Geometry']
     # masks → named float attributes (shader + scatter read them)
+    VAL = {}
+
+    def store(an, val):
+        st = b.node('GeometryNodeStoreNamedAttribute', data_type='FLOAT', domain='POINT')
+        b.link(geo, st.inputs['Geometry']); st.inputs['Name'].default_value = an
+        s_ = b.sock(st, 'Value', typ='VALUE')
+        if isinstance(val, float):
+            s_.default_value = val
+        else:
+            b.link(val, s_)
+        return st.outputs['Geometry']
     for k, names in MASKS:
         t = sample(G(f'Mask {k}'))
-        cs = b.node('ShaderNodeSeparateColor'); b.link(t.outputs['Color'], cs.inputs['Color'])
+        cs = b.node('FunctionNodeSeparateColor'); b.link(t.outputs['Color'], cs.inputs['Color'])
         for i, an in enumerate(names):
-            st = b.node('GeometryNodeStoreNamedAttribute', data_type='FLOAT', domain='POINT')
-            b.link(geo, st.inputs['Geometry']); st.inputs['Name'].default_value = an
-            b.link(cs.outputs[i], b.sock(st, 'Value', typ='VALUE'))
-            geo = st.outputs['Geometry']
+            VAL[an] = cs.outputs[i]
+            geo = store(an, cs.outputs[i])
+    # helper masks for scattering: m_one (everywhere) and m_bare (path, Ashram pad, water / wet banks → no plants)
+    geo = store('m_one', 1.0)
+    geo = store('m_bare', b.math('MAXIMUM', b.math('MAXIMUM', VAL['m_path'], VAL['m_pad']), b.maprange(VAL['m_wet'], .35, .65)))
     # holes (finer nested LODs live there): delete faces whose centre is inside a hole rectangle
     pos2 = b.node('GeometryNodeInputPosition')
     sels = []

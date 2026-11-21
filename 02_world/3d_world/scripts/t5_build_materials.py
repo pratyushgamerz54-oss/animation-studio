@@ -85,7 +85,7 @@ L['FOREST_FLOOR'] = simple_pbr('MAT_T5_FOREST_FLOOR', 'forest_floor', 3.0, spec_
 L['MUD'] = simple_pbr('MAT_T5_MUD', 'mud_forest', 2.5, wet=.35, spec_note='river-bank mud')
 L['GRAVEL'] = simple_pbr('MAT_T5_GRAVEL', 'rocky_gravel', 2.0, spec_note='gravel / scree fines')
 L['ROCK'] = simple_pbr('MAT_T5_ROCK', 'rock_ground', 4.0, box=True, spec_note='rocky ground, outcrops')
-L['CLIFF'] = simple_pbr('MAT_T5_CLIFF', 'cliff_side', 12.0, box=True, ao=True, spec_note='cliff faces (triplanar)')
+L['CLIFF'] = simple_pbr('MAT_T5_CLIFF', 'cliff_side', 12.0, box=True, ao=True, tint='#B8B4AE', spec_note='cliff faces (triplanar)')
 L['SCREE'] = simple_pbr('MAT_T5_SCREE', 'gravel_ground_01', 3.0, spec_note='talus aprons below cliffs')
 L['SNOW'] = simple_pbr('MAT_T5_SNOW', 'snow_02', 4.0, spec_note='fresh snow')
 L['SAND'] = simple_pbr('MAT_T5_SAND', 'coast_sand_01', 3.0, spec_note='lake / river sand')
@@ -129,6 +129,11 @@ def terrain_material():
         g = use_group(b, tex, v, scale, box, at, False, wet, tint, nstr)
         return [g.outputs['Color'], g.outputs['Roughness'], g.outputs['Normal'], g.outputs['Height']]
 
+    def recolor(col, sat, val):
+        h = b.node('ShaderNodeHueSaturation'); h.inputs['Saturation'].default_value = sat; h.inputs['Value'].default_value = val
+        b.link(col, h.inputs['Color'])
+        return h.outputs['Color']
+
     def lerp_layer(f, a, c):
         return [b.mixc(f, a[0], c[0]), b.mixf(f, a[1], c[1]), b.mixv(f, a[2], c[2]), b.mixf(f, a[3], c[3])]
 
@@ -142,8 +147,15 @@ def terrain_material():
     gA = L_('leafy_grass', 2.2, at=True, tint='#C6D9A0')
     gB = L_('grass_ground', 2.9, tint='#D4E0B0')
     g = lerp_layer(b.maprange(macro, .42, .6), gA, gB)
-    gf = L_('aerial_grass_rock', 38.0, tint='#B8CC90')
+    gf = L_('aerial_grass_rock', 55.0, at=True, tint='#B8CC90')
     g = lerp_layer(far, g, gf)
+    # the CC0 grass scans are dry / brownish → keep their luminance detail, re-colour to the approved lush valley green
+    bw = b.node('ShaderNodeRGBToBW'); b.link(g[0], bw.inputs[0])
+    rmp = b.node('ShaderNodeValToRGB'); b.link(b.math('MULTIPLY', bw.outputs[0], 1.6), rmp.inputs['Fac'])
+    el = rmp.color_ramp.elements
+    el[0].position = 0.0; el[0].color = lin('#1C3410'); el[1].position = .75; el[1].color = lin('#86A64A')
+    e2 = el.new(.38); e2.color = lin('#45692A')
+    g[0] = b.mixc(.28, rmp.outputs['Color'], g[0])
     hsv = b.node('ShaderNodeHueSaturation'); b.link(g[0], hsv.inputs['Color'])
     b.link(b.maprange(macro, .3, .7, .485, .52), hsv.inputs['Hue']); b.link(b.maprange(meso, .3, .7, .85, 1.1), hsv.inputs['Value'])
     g[0] = hsv.outputs['Color']
@@ -153,6 +165,7 @@ def terrain_material():
     base, _ = hblend(base, dry, b.math('ADD', A['m_dry'], b.math('MULTIPLY', b.maprange(meso, .62, .8), .5)))
     # --- groves / forest floor (needles + leaves under trees); far away → canopy colour (trees not instanced there)
     ff = L_('forest_floor', 3.0)
+    ff[0] = recolor(ff[0], .45, .72)                                  # conifer needle litter, not autumn leaves
     fmask = b.math('MAXIMUM', A['m_forest'], b.math('MULTIPLY', A['m_grove'], .45))
     base, _ = hblend(base, ff, fmask)
     canopy = [b.mixc(b.noise(v, 1 / 35.0, 5, .65), lin('#1E3318'), lin('#2F4A22')), .85, base[2], .5]
@@ -173,11 +186,13 @@ def terrain_material():
     base, _ = hblend(base, sand, sf)
     # --- scree, rock, cliff (slope from the real geometry normal + masks)
     scr = L_('rocky_gravel', 3.0)
+    scr[0] = recolor(scr[0], .35, .9)
     base, _ = hblend(base, scr, A['m_scree'])
     rk = L_('rock_ground', 4.0, box=True)
     rockmask = b.math('MAXIMUM', A['m_rock'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .08)), .80, .66))
     base, _ = hblend(base, rk, rockmask)
     cl = L_('cliff_side', 12.0, box=True)
+    cl[0] = recolor(cl[0], .3, .95)                                   # grey-brown granite / gneiss (not red sandstone)
     dk = b.mixc(b.maprange(macro, .45, .62), lin('#FFFFFF'), lin('#8C8880'))       # darker rock bands at altitude
     cl[0] = b.mixc(1.0, cl[0], dk, 'MULTIPLY')
     cliffmask = b.math('MAXIMUM', A['m_cliff'], b.maprange(nz, .58, .44))

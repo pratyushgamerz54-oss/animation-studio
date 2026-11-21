@@ -1,0 +1,32 @@
+{
+ "CAM_T5_06_VALLEY_AERIAL": {
+  "seconds": 92.7,
+  "samples": 16,
+  "res": [
+   640,
+   360
+  ],
+  "description": "Valley aerial \u2014 Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_01_MOUNTAIN_WIDE": {
+  "seconds": 64.0,
+  "samples": 12,
+  "res": [
+   480,
+   270
+  ],
+  "description": "Wide mountain landscape \u2014 mountain region NW01 (snowy range \u2248100 km NW of the Ashram) from its SE foothills",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_02_FOREST_ESTABLISHING": {
+  "seconds": 97.6,
+  "samples": 12,
+  "res": [
+   480,
+   270
+  ],
+  "description": "Forest establishing shot \u2014 edge of the northern forest belt where the river enters it (FH, 2 m terrain + real trees)",
+  "blender": "4.5.16 LTS"
+ }
+}

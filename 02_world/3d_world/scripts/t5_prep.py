@@ -438,7 +438,10 @@ if __name__ == '__main__':
         s = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(r[:, :2], axis=0).T))])
         ss = np.arange(0, s[-1], 5.0)
         cx, cy = CubicSpline(s, r[:, 0]), CubicSpline(s, r[:, 1])
-        riv.append(np.column_stack([cx(ss), cy(ss), np.interp(ss, s, r[:, 2]), np.interp(ss, s, r[:, 3])]).astype(np.float32))
+        zz = np.interp(ss, s, r[:, 2])
+        for z_ in lip_profile(len(riv), 0, ss, s, r[:, 2]):              # featured falls: vertical lip in the water surface too
+            zz = np.minimum(zz, z_)
+        riv.append(np.column_stack([cx(ss), cy(ss), zz, np.interp(ss, s, r[:, 3])]).astype(np.float32))
     np.savez_compressed(os.path.join(OUT, 'water.npz'), RIV=np.concatenate(riv), RIVO=np.cumsum([0] + [len(a) for a in riv]))
     prev = {}
     pj = os.path.join(OUT, 'prep_v002.json')
