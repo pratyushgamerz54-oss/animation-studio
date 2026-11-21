@@ -189,10 +189,15 @@ def terrain_material():
     scr[0] = recolor(scr[0], .35, .9)
     base, _ = hblend(base, scr, A['m_scree'])
     rk = L_('rock_ground', 4.0, box=True)
+    # far rock (> 0.4–2 km): no image texture (2K scans alias into a moiré grid from km away) → noise-based rock colour
+    rfar = [b.mixc(b.maprange(b.noise(v, 1 / 18.0, 5, .62), .3, .7), lin('#5E5A55'), lin('#8E8A84')), .8, rk[2], .5]
+    rfar[0] = b.mixc(b.maprange(macro, .4, .65), rfar[0], lin('#4A4642'))
+    rk = lerp_layer(b.maprange(dist, 400, 2000), rk, rfar)
     rockmask = b.math('MAXIMUM', A['m_rock'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .08)), .80, .66))
     base, _ = hblend(base, rk, rockmask)
-    cl = L_('cliff_side', 12.0, box=True)
-    cl[0] = recolor(cl[0], .3, .95)                                   # grey-brown granite / gneiss (not red sandstone)
+    cl = L_('dark_rock', 7.0, box=True, at=True)                     # isotropic scan (cliff_side's strata cross-hatch in triplanar)
+    cl[0] = recolor(cl[0], .5, 1.9)                                   # grey granite / gneiss
+    cl = lerp_layer(b.maprange(dist, 400, 2000), cl, rfar)
     dk = b.mixc(b.maprange(macro, .45, .62), lin('#FFFFFF'), lin('#8C8880'))       # darker rock bands at altitude
     cl[0] = b.mixc(1.0, cl[0], dk, 'MULTIPLY')
     cliffmask = b.math('MAXIMUM', A['m_cliff'], b.maprange(nz, .58, .44))

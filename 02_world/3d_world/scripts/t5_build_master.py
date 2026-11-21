@@ -104,9 +104,9 @@ cam('CAM_T5_02_FOREST_ESTABLISHING', (x, y, gz + 45), (-350, 25700, ground(-350,
 # 3 river + waterfall — looking upstream at the featured fall in the NW01 gorge (WF, 1.5 m terrain)
 f = PREP['featured_waterfalls'][0]
 d = np.array([f['out_x'] - f['x'], f['out_y'] - f['y']]); d /= np.linalg.norm(d); side = np.array([-d[1], d[0]])
-p = np.array([f['out_x'], f['out_y']]) + d * 170 + side * 45
-cz = max(ground(*p), f['z_bottom']) + 22
-cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (f['lip_x'], f['lip_y'], f['z_top'] - .45 * (f['z_top'] - f['z_bottom'])), 26,
+p = np.array([f['out_x'], f['out_y']]) + d * 60 + side * 7
+cz = max(ground(*p), f['z_bottom'] - .4) + 3.0
+cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (f['lip_x'], f['lip_y'], f['z_top'] - .35 * (f['z_top'] - f['z_bottom'])), 20,
     f'River + waterfall — featured fall ({f["z_top"] - f["z_bottom"]:.0f} m drop, largest of the network in NW01) and its plunge pool', 3000, .25)
 # 4 snowy mountain — highest summit of NW01, from the south-south-east, side-lit by the afternoon sun
 ang = math.radians(160); dist = 7800
