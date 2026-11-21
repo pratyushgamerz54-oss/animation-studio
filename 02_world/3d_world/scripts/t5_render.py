@@ -28,7 +28,7 @@ outdir = opt.get('out', wk.P('12_RENDER', 'T5', 'cycles'))
 os.makedirs(outdir, exist_ok=True)
 if 'res' in opt:
     w, h = opt['res'].split('x'); sc.render.resolution_x, sc.render.resolution_y = int(w), int(h)
-logp = wk.P('12_RENDER', 'T5', 'render_log_t5.json')
+logp = wk.P('12_RENDER', 'T5', 'render_log_t5.json') if 'out' not in opt else os.path.join(outdir, 'render_log_test.json')
 log = json.load(open(logp)) if os.path.exists(logp) else {}
 # which scatter groups are relevant to which shot (others are disabled for that render only → less memory / BVH time)
 REL = {'CAM_T5_01_MOUNTAIN_WIDE': ('SC_MT_',), 'CAM_T5_03_RIVER_WATERFALL': ('SC_WF_', 'SC_MT_'),
