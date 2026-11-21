@@ -96,9 +96,13 @@ if COMP == 'valley':
     def S(name, terrain, coll, near=None, mid=None, far=None, **p):
         q = {k.replace('_', ' ').replace('Near to Mid', 'LOD Near→Mid').replace('Mid to Far', 'LOD Mid→Far'): v for k, v in p.items()}
         return scatter(name, terrain, coll, near, mid, far, **q)
-    S('SC_VH_MEADOW_GRASS', VH, cs, 'LIB_GRASS', Density=7.0, Viewport_Density=.02, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+    S('SC_VH_MEADOW_GRASS_FAR', VH, cs, 'LIB_GRASS', Density=2.5, Viewport_Density=.01, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+      Avoid_Mask='m_bare', Avoid_Mask_2='m_grove', Avoid_Strength_2=.4, Slope_Max=40.0, Cluster_Scale=8.0, Cluster_Amount=.5,
+      Scale_Min=2.0, Scale_Max=3.4, Align_To_Normal=.6, Random_Tilt=8.0, Seed=18, Cull_Distance=220.0, Cull_Angle=45.0,
+      Keep_Near=0.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_VH_MEADOW_GRASS', VH, cs, 'LIB_GRASS', Density=16.0, Viewport_Density=.02, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_bare', Avoid_Mask_2='m_grove', Avoid_Strength_2=.4, Slope_Max=40.0, Cluster_Scale=5.0, Cluster_Amount=.45,
-      Scale_Min=1.4, Scale_Max=2.6, Align_To_Normal=.6, Random_Tilt=8.0, Seed=11, Cull_Distance=55.0, Cull_Angle=50.0,
+      Scale_Min=1.6, Scale_Max=3.0, Align_To_Normal=.6, Random_Tilt=8.0, Seed=11, Cull_Distance=55.0, Cull_Angle=50.0,
       Keep_Near=4.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_VH_WILDFLOWERS', VH, cs, 'LIB_FLOWERS', Density=.35, Viewport_Density=.05, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_bare', Avoid_Mask_2='m_dry', Slope_Max=35.0, Cluster_Scale=9.0, Cluster_Amount=.85, Scale_Min=1.0, Scale_Max=1.9,

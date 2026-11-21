@@ -155,9 +155,9 @@ def terrain_material():
     el = rmp.color_ramp.elements
     el[0].position = 0.0; el[0].color = lin('#1C3410'); el[1].position = .75; el[1].color = lin('#86A64A')
     e2 = el.new(.38); e2.color = lin('#45692A')
-    g[0] = b.mixc(.28, rmp.outputs['Color'], g[0])
+    g[0] = b.mixc(.4, rmp.outputs['Color'], g[0])
     hsv = b.node('ShaderNodeHueSaturation'); b.link(g[0], hsv.inputs['Color'])
-    b.link(b.maprange(macro, .3, .7, .485, .52), hsv.inputs['Hue']); b.link(b.maprange(meso, .3, .7, .85, 1.1), hsv.inputs['Value'])
+    b.link(b.maprange(macro, .3, .7, .485, .52), hsv.inputs['Hue']); b.link(b.maprange(meso, .3, .7, .72, 1.15), hsv.inputs['Value'])
     g[0] = hsv.outputs['Color']
     base = g
     # --- dry grass
@@ -165,7 +165,7 @@ def terrain_material():
     base, _ = hblend(base, dry, b.math('ADD', A['m_dry'], b.math('MULTIPLY', b.maprange(meso, .62, .8), .5)))
     # --- groves / forest floor (needles + leaves under trees); far away → canopy colour (trees not instanced there)
     ff = L_('forest_floor', 3.0)
-    ff[0] = recolor(ff[0], .55, .5)                                  # conifer needle litter, not autumn leaves
+    ff[0] = b.mixc(1.0, recolor(ff[0], .5, .42), lin('#B08A62'), 'MULTIPLY')   # darker needle litter                                  # conifer needle litter, not autumn leaves
     fmask = b.math('MAXIMUM', A['m_forest'], b.math('MULTIPLY', A['m_grove'], .45))
     base, _ = hblend(base, ff, fmask)
     canopy = [b.mixc(b.noise(v, 1 / 35.0, 5, .65), lin('#1E3318'), lin('#2F4A22')), .85, base[2], .5]
