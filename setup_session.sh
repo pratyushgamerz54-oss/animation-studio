@@ -19,7 +19,7 @@ echo "== 3. Mesa software OpenGL (Workbench viewport screenshots / EEVEE, headle
 dpkg -s libegl-mesa0 >/dev/null 2>&1 || (apt-get install -y -q libegl1 libegl-mesa0 libgl1-mesa-dri libgbm1 >/dev/null 2>&1 || \
   (apt-get update -q >/dev/null 2>&1 && apt-get install -y -q libegl1 libegl-mesa0 libgl1-mesa-dri libgbm1 >/dev/null 2>&1))
 echo "== 4. Poly Haven CC0 assets (~860 MB, gitignored; needs environment 'animation-studio')"
-if [ ! -d 03_assets/external/polyhaven/textures/snow_02 ]; then python3 03_assets/external/polyhaven_fetch.py | tail -1; else echo "  already present"; fi
+python3 03_assets/external/polyhaven_fetch.py | tail -1   # idempotent: downloads only files that are missing (TASK 05 list included)
 echo "== 5. Task 04 baseline integrity (v001 files must be unchanged)"
 python3 - <<'EOF'
 import json, hashlib, os
