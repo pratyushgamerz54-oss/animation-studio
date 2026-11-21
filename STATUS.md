@@ -1,15 +1,21 @@
 # STATUS — last updated 2026-11-20 19:15
 
 ## Ab kya chal raha hai (21 Nov)
-- Director ne SAARE designs APPROVE kiye (20 Nov). Faisle: Max laser = haath + aankh; Saithan life-cost = A + B + C teeno.
-- Director: "saari kamiyan theek karo" → ye fixes code mein ho gaye:
-  1. Robe/skirt: 12x3 skirt bone chains, thigh-follow (front/back/side alag) → ab pipe jaisa nahi mudta.
-  2. Soul robe front gap band (open_front 0). 3. Saithan powers page footer overlap theek.
-  4. Asli jaw bone (head + beard weighted), jaw_open/phonemes/expressions se driven.
-  5. Rigify rig v004 (`_shared/rigify_build.py`) → `<name>/blend/<name>_v004_rigify.blend` + QC section.
-  6. Max eye-laser power row; Saithan cost page = A + B + C combined.
-- ⏳ Full batch chal raha hai: `render_all.sh` (saare 7) → `production_all.sh` (production + rigify + docs + contact sheet).
-  Log: scratchpad all4.log / prod2.log. Restart ho to wahi do commands chalao.
+### A. Characters (background batch)
+- Director ne SAARE designs APPROVE kiye (20 Nov). Max laser = haath + aankh; Saithan life-cost = A + B + C.
+- Fixes code mein ho gaye (skirt follow-rig, jaw bone, Rigify v004, Soul robe, Max eye laser, Saithan A+B+C page, footer).
+- ⏳ Full batch: `render_all.sh` (7 chars) → `production_all.sh` (production + rigify + docs). Logs: scratchpad all4.log / prod2.log.
+  Session restart ho to dono commands dobara chalao.
+### B. STAGE 2 — World (Director TASK 01, 21 Nov) — FIRST MILESTONE
+- Bible draft: `02_world/WORLD_BIBLE.md` (story analysis CONFIRMED/PROPOSED/NOT CONFIRMED, geography, lore questions,
+  architecture, colour bible, PBR, lighting, asset list, naming, approval checklist).
+- Master map + regional + elevation maps: `02_world/map/` (script `_shared/worldgen.py`, seed 7). **NOT LOCKED.**
+- Aerial 3D refs: `02_world/map/aerial/` + `02_world/blend/WORLD_overview_v001.blend` (`_shared/world_terrain.py`).
+- Colour bible + location comparison: `02_world/bible/` (`_shared/world_bible_sheets.py`).
+- Ashram concept blockout (PROPOSAL): `02_world/ashram/` (`_shared/ashram_blockout.py`, `_shared/ashram_sheets.py`),
+  doc `02_world/ashram/ASHRAM_CONCEPT.md`. ⏳ renders chal rahe (scratchpad ashram.log), phir `ashram_sheets.py`.
+- **Detailed modelling SHURU NAHI karni jab tak Director map + Ashram direction approve na kare.**
+- Story/script document repo mein NAHI hai → Director se maangna hai. Blender version (4.5?) Director ke PC par — poochna hai.
 
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.

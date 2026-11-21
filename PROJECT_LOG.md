@@ -47,9 +47,19 @@
     QC contact sheets `<name>/qc/<NAME>_qc_tests.png`. Known issues K-01..K-04 in PRODUCTION_INVENTORY §7
     (robe stiff in action poses → cloth sim at scene stage). **Stage 1 complete; Director approval ka intezaar.**
 
+12. **20-21 Nov — Director ne saare character designs APPROVE kiye.** Max laser = haath + aankh, Saithan cost = A+B+C.
+    "Saari kamiyan theek karo" → skirt follow-rig (12x3 chains), asli jaw bone, Rigify rig v004 (`rigify_build.py`),
+    Soul robe band, Max eye-laser row, Saithan A+B+C page. Full re-render + production batch chalaya.
+13. **21 Nov — STAGE 2 shuru (World, Director TASK 01).** Pehla milestone: procedural master world map (1024x768 km,
+    8 proposed regions, rivers/lakes from real hydrology, cities/villages/ruins/caves/waterfalls/hidden areas, dimensions panel,
+    GEM unplaced), regional + elevation maps, Blender overview terrain + aerial renders, Environment Bible draft
+    (`02_world/WORLD_BIBLE.md`), colour bible + contrast check, location comparison, Ashram 3D concept blockout
+    (Himalayan foothill gurukul PROPOSAL) + concept/layout/lighting/material sheets. **Sab PROPOSAL, map NOT LOCKED.**
+
 ## Director se jawab chahiye (pending)
 - Hero 1 ka naam · saare designs approve/badlav · Saithan life-cost: A (cracks) / B (ash) / C (core siphon)
-- Soul ka hathiyaar story mein hai? · Max ka laser kahan se (proposal: palms)?
+- Soul ka hathiyaar story mein hai? · (Max laser + Saithan cost RESOLVED 20 Nov)
+- WORLD: master map approve? region names? Ashram direction? story/script document? Blender version on PC? (WORLD_BIBLE.md §3, §10)
 
 ## Kahan kya hai
 - Rules: `CLAUDE.md` · Abhi ka status: `STATUS.md` · Characters ka status: `01_characters/PRODUCTION_INVENTORY.md`
