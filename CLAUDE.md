@@ -54,10 +54,10 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Har VFX shot ka preview dikhana aur Director approve kare tab final render.
 
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
-0. **SABSE PEHLE** `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
+0. **SABSE PEHLE** `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
    Phir wahin se kaam shuru karo jahan ruka tha. Har bada kaam hone par `PROJECT_LOG.md` mein entry jodo.
-1. `pip install bpy` (Blender 5.3 Python module).
+1. `pip install bpy scipy` (Blender 5.3 Python module) + `python3 03_assets/external/polyhaven_fetch.py` (Poly Haven CC0 assets, gitignored; environment `animation-studio`).
 2. Padho: `01_characters/PRODUCTION_INVENTORY.md` (status + pending decisions) aur `STATUS.md` (last kya chal raha tha).
 3. Har character ka sab kuch uski config mein hai: `01_characters/<name>/<name>_config.py`.
 4. Pipeline: `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` → `_shared/production.py` → `_shared/sheet_doc.py`
@@ -77,3 +77,10 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Beams/lasers must not point at the camera (read end-on as a square): flatten the Y component.
 - QC: `sheet_render.py <char> qc` writes `mesh_sanity_fail`; must be [] before rendering sheets.
 - Machine: 4 CPU, no GPU. Full sheet ≈ 12–25 min/char at 24 samples; production bake 1K ≈ 20+ min/char.
+- Background waiters: never `pgrep -f` (matches itself) — grep a log marker instead.
+- Alpha foliage cards: Cycles `transparent_max_bounces = 64`; same UV layer name on all meshes before joining.
+- Driven bones (jaw): reset_pose must not change their rotation mode; `arm.update_tag()` before evaluating drivers.
+- Rigify: re-fit the human template (bone collections), `spine.004 connect_chain=False`, set rigify_type on template bones too,
+  mute constraints while re-parenting, check skirt TRANSFORM ranges after Rigify re-rolls bones.
+- Poly Haven API needs a User-Agent; append LOD collections + fix image paths; save with relative_remap.
+- Don't use a world volume for haze (blocks the sun) — bounded volume box; sun behind camera = flat light.
