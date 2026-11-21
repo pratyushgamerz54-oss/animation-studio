@@ -8,8 +8,11 @@ echo "== 1. Blender 5.3 Python module (characters, Ashram v3) + scipy"
 python3 -c "import bpy" 2>/dev/null || pip install -q bpy scipy
 python3 -c "import scipy" 2>/dev/null || pip install -q scipy
 echo "== 2. Blender 4.5 LTS Python module (TASK 04+ world files MUST use 4.5)"
+export PATH="$HOME/.local/bin:$PATH"
+command -v uv >/dev/null || pip install -q uv
+PY311=/usr/bin/python3.11; [ -x "$PY311" ] || PY311=3.11          # uv downloads Python 3.11 if the system has none
 if [ ! -x "$SP/bpy45/bin/python" ]; then
-  uv venv -q -p /usr/bin/python3.11 "$SP/bpy45" && VIRTUAL_ENV="$SP/bpy45" uv pip install -q "bpy>=4.5,<4.6" numpy
+  uv venv -q -p "$PY311" "$SP/bpy45" && VIRTUAL_ENV="$SP/bpy45" uv pip install -q "bpy>=4.5,<4.6" numpy
 fi
 "$SP/bpy45/bin/python" -c "import bpy; print('  bpy', bpy.app.version_string)"
 echo "== 3. Mesa software OpenGL (Workbench viewport screenshots / EEVEE, headless)"
