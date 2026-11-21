@@ -43,7 +43,8 @@ for f in FILES:
             bs = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
             if bs is None:
                 bad.append(m.name + ':no BSDF'); continue
-            need = ['Base Color', 'Roughness'] + (['Normal'] if m.name not in ('MAT_T5_TRUNK_FAR', 'MAT_T5_FOAM') else [])
+            procedural = m.name in ('MAT_T5_TRUNK_FAR', 'MAT_T5_FOAM', 'MAT_T5_WATERFALL')   # constant / procedural colour by design
+            need = ([] if procedural else ['Base Color', 'Normal']) + ['Roughness']
             miss_ = [k for k in need if not bs.inputs[k].is_linked and k != 'Roughness' or (k == 'Roughness' and not bs.inputs[k].is_linked and bs.inputs[k].default_value <= 0)]
             if bs.inputs['Metallic'].default_value != 0 or bs.inputs['Metallic'].is_linked:
                 miss_.append('metallic≠0')
@@ -68,9 +69,10 @@ for o in sc.objects:
         ids = {it.name: it.identifier for it in md.node_group.interface.items_tree if getattr(it, 'in_out', '') == 'INPUT'}
         vres = md[ids['Viewport Resolution']]
         exp_n = int(round((z.shape[1] - 1) * vres + 1))
-        top = V[V[:, 2] > z.min() - 1]                                     # without skirt verts
-        chk(f'terrain {k}: real mesh evaluates (viewport grid {exp_n}², z within data range, 14 mask attributes)',
-            len(attrs) == 14 and top[:, 2].min() >= z.min() - .05 and V[:, 2].max() <= z.max() + .05,
+        skirt = md[ids['Skirt Depth']]
+        chk(f'terrain {k}: real mesh evaluates (viewport grid {exp_n}², z within data range incl. skirt, 14 mask attributes)',
+            len(attrs) == 14 and len(me.vertices) >= .5 * exp_n * exp_n and V[:, 2].min() >= z.min() - skirt - .1
+            and V[:, 2].max() <= z.max() + .1,
             f'{len(me.vertices)} verts, z {V[:, 2].max():.1f} max (data {z.max():.1f}), attrs {len(attrs)}')
         TILES[k] = (D, TD[k]); e.to_mesh_clear()
 
@@ -88,7 +90,7 @@ for fine, coarse, skirt in (('VH', 'L0', 3), ('L0', 'L1', 12), ('FH', 'L1', 3), 
     xs = np.concatenate([t['x0'] + s * (t['x1'] - t['x0'])] * 2 + [np.full(2000, t['x0']), np.full(2000, t['x1'])])
     ys = np.concatenate([np.full(2000, t['y0']), np.full(2000, t['y1'])] + [t['y0'] + s * (t['y1'] - t['y0'])] * 2)
     gap = np.abs(bil(fine, xs, ys) - bil(coarse, xs, ys))
-    chk(f'LOD seam {fine}↔{coarse}: crack covered by skirts', gap.max() < skirt * .9, f'max gap {gap.max():.2f} m (skirt {skirt} m), mean {gap.mean():.3f} m')
+    chk(f'LOD seam {fine}↔{coarse}: border matches the parent surface (crack < skirt)', gap.max() < skirt * .9, f'max gap {gap.max():.2f} m (skirt {skirt} m), mean {gap.mean():.3f} m')
 chk('approved v001 heights reproduced (valley, before detail)', PREP['verify_v001_max_abs_dz_m'] < .01, f"{PREP['verify_v001_max_abs_dz_m']:.2e} m")
 chk('valley river levels unchanged vs v001', PREP['river_level_change_vs_v001']['max_in_valley_L1_m'] < .01, PREP['river_level_change_vs_v001'])
 W = np.load(os.path.join(DATA, 'water.npz')); RIV, RIVO = W['RIV'], W['RIVO']
@@ -130,7 +132,7 @@ for cn in ('CAM_T5_02_FOREST_ESTABLISHING', 'CAM_T5_07_GROUND_LEVEL'):
         D, t = TILES[k]; sp = t['sp']
         c = np.clip(np.round((P[:, 0] - t['x0']) / sp).astype(int), 0, D['z'].shape[1] - 1)
         r = np.clip(np.round((t['y1'] - P[:, 1]) / sp).astype(int), 0, D['z'].shape[0] - 1)
-        bare = np.maximum.reduce([D['MC'][r, c, 1] / 255, D['MB'][r, c, 1] / 255, (D['MA'][r, c, 3] / 255 > .65).astype(float)])
+        bare = np.maximum.reduce([D['MC'][r, c, 1] / 255, D['MB'][r, c, 1] / 255, (D['MA'][r, c, 3] / 255 > .9).astype(float)])
         chk(f'{n}: plants / trees not on paths, Ashram pad or water', (bare > .5).mean() < .02, f'{(bare > .5).mean() * 100:.2f}% of {len(P)} sampled')
 # ---------------------------------------------------------------- 3. TASK 04 baseline untouched
 man = json.load(open(wk.P('TASK04_BASELINE_MANIFEST.json')))

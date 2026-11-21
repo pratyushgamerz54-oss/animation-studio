@@ -36,7 +36,7 @@ for i, (cam, title) in enumerate(ORDER):
     d.text((x, y + H + 6), title, font=F3, fill=(255, 212, 100))
     if cam and cam in log:
         L = log[cam]
-        d.text((x, y + H + 32), f"{L['description'][:120]}  ·  {L['res'][0]}×{L['res'][1]}, {L['samples']} spp, {L['seconds']:.0f} s",
+        d.text((x, y + H + 32), f"{L['description'][:78]}…  ·  {L['res'][0]}×{L['res'][1]}, {L['samples']} spp, {L['seconds']:.0f} s",
                font=F2, fill=(185, 185, 195))
 sheet.save(out)
 print('SHEET', out)

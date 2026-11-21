@@ -311,6 +311,11 @@ def erode(z, sp, kind, seed):
     return z, flow, scree
 
 
+PARENT = {'VH': 'L0', 'L0': 'L1', 'FH': 'L1', 'L1': 'L2', 'MT': 'L2', 'WF': 'MT'}
+SEAM_BLEND = {'VH': 60, 'L0': 300, 'FH': 150, 'L1': 2000, 'MT': 2400, 'WF': 150}     # m — ≥ 4 parent cells
+LEVELS = [['L2'], ['L1', 'MT'], ['L0', 'FH', 'WF'], ['VH']]                          # parents first
+
+
 def build(name):
     t0 = time.time(); t = TILES[name]; sp = t['sp']
     X, Y = grid(t); n, m = X.shape
@@ -381,6 +386,14 @@ def build(name):
         pd = path_dist(X, Y)
         pth = 1 - sstep(1.3, 2.6 + sp * .5, pd)
         z = z - .06 * pth * (sp <= 10)
+    # ---------------- seamless LOD border: blend the outer band onto the PARENT tile's surface (bilinear) → zero crack
+    if name in PARENT:
+        pt = TILES[PARENT[name]]; zp = np.load(os.path.join(OUT, f'{PARENT[name]}.npz'))['z'].astype(np.float64)
+        cc = (X - pt['x0']) / pt['sp']; rr = (pt['y1'] - Y) / pt['sp']
+        zpar = ndi.map_coordinates(zp, [rr.ravel(), cc.ravel()], order=1, mode='nearest').reshape(n, m)
+        e = np.minimum.reduce([X - t['x0'], t['x1'] - X, Y - t['y0'], t['y1'] - Y])
+        wb = sstep(0, SEAM_BLEND[name], e)
+        z = z * wb + zpar * (1 - wb)
     # ---------------- masks (v001 formulas + new detail masks)
     slope = slope_of(z, sp, 12.0)
     forest, rock, snow, dry, b = F.biome_masks(x, y, z.ravel(), slope.ravel())
@@ -448,11 +461,12 @@ if __name__ == '__main__':
     print('VERIFY v001 LOD0 reproduction: max |dz| =', err, 'm over', cnt, 'samples', flush=True)
     assert err < .01, 'height function does not reproduce TASK 04 — stop'
     order = sorted(names, key=lambda k: -np.prod([(TILES[k]['x1'] - TILES[k]['x0']) / TILES[k]['sp'], (TILES[k]['y1'] - TILES[k]['y0']) / TILES[k]['sp']]))
-    first = [k for k in order if k != 'WF']
+    stats = []
     with Pool(int(os.environ.get('T5_PROCS', '3'))) as pool:
-        stats = pool.map(build, first)
-    if 'WF' in names:
-        stats.append(build('WF'))
+        for lev in LEVELS:                                                # parents before children (seam blending)
+            todo = [k for k in lev if k in names]
+            if todo:
+                stats += pool.map(build, todo)
     wf = waterfalls()
     # water data for Blender: smooth river centrelines (5 m) within the L2 window, lakes, waterfalls
     riv = []

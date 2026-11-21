@@ -1,0 +1,320 @@
+{
+ "blender": "4.5.16 LTS",
+ "time": "2026-11-21 11:24",
+ "passed": 43,
+ "total": 56,
+ "checks": [
+  {
+   "check": "file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
+   "result": "PASS",
+   "detail": "0.9 MB"
+  },
+  {
+   "check": "opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
+   "result": "PASS",
+   "detail": "77 images, missing []"
+  },
+  {
+   "check": "PBR channels (Base Color / Roughness / Normal, Metallic 0) on every terrain material",
+   "result": "FAIL",
+   "detail": [
+    "MAT_T5_TRUNK_FAR:['Base Color']",
+    "MAT_T5_WATERFALL:['Base Color', 'Normal']"
+   ]
+  },
+  {
+   "check": "texture resolution = 2K (2048\u00b2) for all Poly Haven maps",
+   "result": "PASS",
+   "detail": [
+    [
+     2048,
+     2048
+    ]
+   ]
+  },
+  {
+   "check": "file size < 100 MB: 14_NATURE_LIBRARY/T5_NATURE_LIBRARY_TREES_v002.blend",
+   "result": "PASS",
+   "detail": "59.7 MB"
+  },
+  {
+   "check": "opens + no missing images: 14_NATURE_LIBRARY/T5_NATURE_LIBRARY_TREES_v002.blend",
+   "result": "PASS",
+   "detail": "73 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 14_NATURE_LIBRARY/T5_NATURE_LIBRARY_GROUND_v002.blend",
+   "result": "PASS",
+   "detail": "44.4 MB"
+  },
+  {
+   "check": "opens + no missing images: 14_NATURE_LIBRARY/T5_NATURE_LIBRARY_GROUND_v002.blend",
+   "result": "PASS",
+   "detail": "96 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v002.blend",
+   "result": "PASS",
+   "detail": "0.2 MB"
+  },
+  {
+   "check": "opens + no missing images: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v002.blend",
+   "result": "PASS",
+   "detail": "203 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 04_FORESTS/FOREST_NORTH_BELT_v002.blend",
+   "result": "PASS",
+   "detail": "0.2 MB"
+  },
+  {
+   "check": "opens + no missing images: 04_FORESTS/FOREST_NORTH_BELT_v002.blend",
+   "result": "PASS",
+   "detail": "211 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 03_MOUNTAINS/MOUNTAIN_NW01_v002.blend",
+   "result": "PASS",
+   "detail": "0.2 MB"
+  },
+  {
+   "check": "opens + no missing images: 03_MOUNTAINS/MOUNTAIN_NW01_v002.blend",
+   "result": "PASS",
+   "detail": "164 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 05_RIVERS_AND_LAKES/WATER_v002.blend",
+   "result": "PASS",
+   "detail": "11.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 05_RIVERS_AND_LAKES/WATER_v002.blend",
+   "result": "PASS",
+   "detail": "0 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 00_MASTER_WORLD/T5_LANDSCAPE_master_v002.blend",
+   "result": "PASS",
+   "detail": "0.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 00_MASTER_WORLD/T5_LANDSCAPE_master_v002.blend",
+   "result": "PASS",
+   "detail": "262 images, missing []"
+  },
+  {
+   "check": "terrain VH: real mesh evaluates (viewport grid 301\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "91801 verts, z 704.6 max (data 704.6), attrs 14"
+  },
+  {
+   "check": "terrain L0: real mesh evaluates (viewport grid 361\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "127008 verts, z 755.4 max (data 755.4), attrs 14"
+  },
+  {
+   "check": "terrain L1: real mesh evaluates (viewport grid 401\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "157136 verts, z 922.5 max (data 923.2), attrs 14"
+  },
+  {
+   "check": "terrain L2: real mesh evaluates (viewport grid 481\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "217079 verts, z 6417.6 max (data 6514.4), attrs 14"
+  },
+  {
+   "check": "terrain FH: real mesh evaluates (viewport grid 376\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "142876 verts, z 858.7 max (data 858.7), attrs 14"
+  },
+  {
+   "check": "terrain MT: real mesh evaluates (viewport grid 401\u00b2, z within data range, 14 mask attributes)",
+   "result": "FAIL",
+   "detail": "162400 verts, z 6088.4 max (data 6107.9), attrs 14"
+  },
+  {
+   "check": "terrain WF: real mesh evaluates (viewport grid 211\u00b2, z within data range, 14 mask attributes)",
+   "result": "PASS",
+   "detail": "45361 verts, z 3741.6 max (data 3741.6), attrs 14"
+  },
+  {
+   "check": "LOD seam VH\u2194L0: crack covered by skirts",
+   "result": "PASS",
+   "detail": "max gap 0.70 m (skirt 3 m), mean 0.005 m"
+  },
+  {
+   "check": "LOD seam L0\u2194L1: crack covered by skirts",
+   "result": "PASS",
+   "detail": "max gap 8.80 m (skirt 12 m), mean 0.071 m"
+  },
+  {
+   "check": "LOD seam FH\u2194L1: crack covered by skirts",
+   "result": "PASS",
+   "detail": "max gap 2.25 m (skirt 3 m), mean 0.077 m"
+  },
+  {
+   "check": "LOD seam L1\u2194L2: crack covered by skirts",
+   "result": "FAIL",
+   "detail": "max gap 71.41 m (skirt 40 m), mean 1.431 m"
+  },
+  {
+   "check": "LOD seam MT\u2194L2: crack covered by skirts",
+   "result": "FAIL",
+   "detail": "max gap 253.93 m (skirt 60 m), mean 19.697 m"
+  },
+  {
+   "check": "LOD seam WF\u2194MT: crack covered by skirts",
+   "result": "FAIL",
+   "detail": "max gap 32.67 m (skirt 4 m), mean 1.628 m"
+  },
+  {
+   "check": "approved v001 heights reproduced (valley, before detail)",
+   "result": "PASS",
+   "detail": "3.05e-05 m"
+  },
+  {
+   "check": "valley river levels unchanged vs v001",
+   "result": "PASS",
+   "detail": {
+    "max_all_m": 926.633247708874,
+    "max_in_valley_L1_m": 7.29953922018467e-05
+   }
+  },
+  {
+   "check": "rivers never flow uphill (water surface monotonic downstream)",
+   "result": "PASS",
+   "detail": "max rise 0.0000 m over 96 rivers"
+  },
+  {
+   "check": "water surface above the river bed in VH",
+   "result": "PASS",
+   "detail": "480 centreline samples, 0.00% bed above water"
+  },
+  {
+   "check": "water surface above the river bed in FH",
+   "result": "PASS",
+   "detail": "601 centreline samples, 0.00% bed above water"
+  },
+  {
+   "check": "water surface above the river bed in WF",
+   "result": "PASS",
+   "detail": "793 centreline samples, 0.00% bed above water"
+  },
+  {
+   "check": "water surface above the river bed in L0",
+   "result": "PASS",
+   "detail": "4842 centreline samples, 0.02% bed above water"
+  },
+  {
+   "check": "lake: water-plane edges lie under the terrain (shoreline = terrain \u2229 level)",
+   "result": "PASS",
+   "detail": "99.4% of 659 edge vertices covered"
+  },
+  {
+   "check": "scatter produces instances (CAM_T5_02_FOREST_ESTABLISHING)",
+   "result": "PASS",
+   "detail": {
+    "SC_L1_GROVES": 23,
+    "SC_L1_FOREST_BELTS": 16821,
+    "SC_FH_TREES": 10226,
+    "SC_FH_SAPLINGS": 186,
+    "SC_FH_GROVES": 81,
+    "SC_FH_UNDERSTORY": 116,
+    "SC_FH_FALLEN_LOGS": 105,
+    "SC_FH_ROOTS_STUMPS_DEBRIS": 30,
+    "SC_FH_MOSSY_ROCKS": 247
+   }
+  },
+  {
+   "check": "SC_L1_GROVES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 23 sampled"
+  },
+  {
+   "check": "SC_L1_FOREST_BELTS: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 3999 sampled"
+  },
+  {
+   "check": "SC_FH_TREES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 3999 sampled"
+  },
+  {
+   "check": "SC_FH_SAPLINGS: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 186 sampled"
+  },
+  {
+   "check": "SC_FH_GROVES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 81 sampled"
+  },
+  {
+   "check": "SC_FH_UNDERSTORY: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 116 sampled"
+  },
+  {
+   "check": "SC_FH_FALLEN_LOGS: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 105 sampled"
+  },
+  {
+   "check": "SC_FH_ROOTS_STUMPS_DEBRIS: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 30 sampled"
+  },
+  {
+   "check": "scatter produces instances (CAM_T5_07_GROUND_LEVEL)",
+   "result": "PASS",
+   "detail": {
+    "SC_VH_MEADOW_GRASS_FAR": 441,
+    "SC_VH_MEADOW_GRASS": 553,
+    "SC_VH_WILDFLOWERS": 36,
+    "SC_VH_GROVES": 68,
+    "SC_L0_GROVES": 4845,
+    "SC_L1_GROVES": 714,
+    "SC_VH_RIVER_STONES": 108,
+    "SC_VH_RIVERBED_STONES": 162,
+    "SC_VH_BOULDERS": 75,
+    "SC_L0_BOULDERS": 70
+   }
+  },
+  {
+   "check": "SC_VH_MEADOW_GRASS_FAR: plants / trees not on paths, Ashram pad or water",
+   "result": "FAIL",
+   "detail": "17.46% of 441 sampled"
+  },
+  {
+   "check": "SC_VH_MEADOW_GRASS: plants / trees not on paths, Ashram pad or water",
+   "result": "FAIL",
+   "detail": "11.57% of 553 sampled"
+  },
+  {
+   "check": "SC_VH_WILDFLOWERS: plants / trees not on paths, Ashram pad or water",
+   "result": "FAIL",
+   "detail": "11.11% of 36 sampled"
+  },
+  {
+   "check": "SC_VH_GROVES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.00% of 68 sampled"
+  },
+  {
+   "check": "SC_L0_GROVES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.15% of 3999 sampled"
+  },
+  {
+   "check": "SC_L1_GROVES: plants / trees not on paths, Ashram pad or water",
+   "result": "PASS",
+   "detail": "0.56% of 714 sampled"
+  },
+  {
+   "check": "TASK 04 v001 baseline files unchanged",
+   "result": "PASS",
+   "detail": "21 files identical"
+  }
+ ]
+}
