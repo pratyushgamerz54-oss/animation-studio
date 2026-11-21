@@ -444,8 +444,17 @@ def build(name):
     dcv = np.hypot(X - CAVE[0], Y - CAVE[1]) if name == 'CV' else None
     if name == 'CV':
         zc = float(z[np.unravel_index(np.argmin(dcv), dcv.shape)])
+        angs = np.linspace(0, 2 * np.pi, 72, endpoint=False)
+        cc_ = np.clip(np.round((CAVE[0] + 60 * np.cos(angs) - t['x0']) / sp).astype(int), 0, m - 1)
+        rr_ = np.clip(np.round((t['y1'] - (CAVE[1] + 60 * np.sin(angs))) / sp).astype(int), 0, n - 1)
+        a_up = angs[np.argmax(z[rr_, cc_])]
         ap = (1 - sstep(8, 18, np.hypot(X - CAVE[0], Y - CAVE[1])))
         z = np.minimum(z, z * (1 - ap) + (zc - .5) * ap)                  # only cut a small level floor at the mouth (never raise)
+        upv = np.array([np.cos(a_up), np.sin(a_up)])                     # uphill = highest ground on a 60 m ring
+        uu = (X - CAVE[0]) * upv[0] + (Y - CAVE[1]) * upv[1]; ss_ = -(X - CAVE[0]) * upv[1] + (Y - CAVE[1]) * upv[0]
+        tun = sstep(-14, -8, uu) * (1 - sstep(26, 32, uu)) * (1 - sstep(7, 10, np.abs(ss_)))
+        z = np.minimum(z, z * (1 - tun) + (zc - .8) * tun)                # level stone floor inside the tunnel (under the outcrop)
+        CAVE_TUN = tun
     # ---------------- masks (v001 formulas + new detail masks)
     slope = slope_of(z, sp, 12.0)
     forest, rock, snow, dry, b = F.biome_masks(x, y, z.ravel(), slope.ravel())
@@ -457,6 +466,7 @@ def build(name):
     forest = forest * clear * (1 - wet) * (1 - pw)
     if name == 'CV':
         forest = forest * sstep(60, 85, dcv)                            # clearing around the cave mouth
+        scree = np.maximum(scree, CAVE_TUN * 5.0)                       # stony floor (scree mask) inside the cave
     gn = fbm(X, Y, 1800, 4, 40) + fbm(X, Y, 400, 2, 41) * .35
     grove = sstep(.18, .42, gn) * (1 - forest) * (1 - rock) * (1 - snow) * (1 - dry) * clear * (1 - wet) * (1 - pw) * (1 - sstep(2400, 2900, z))
     padc = sstep(.93, .995, pw)

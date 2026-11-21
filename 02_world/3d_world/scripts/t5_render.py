@@ -47,6 +47,7 @@ for cam in cams:
         sc.node_tree.nodes['HAZE_STRENGTH'].outputs[0].default_value = float(cam.get('haze_strength', .4))
     sc.cycles.samples = int(opt.get('samples', cam.get('samples', 48)))
     sc.cycles.time_limit = float(opt.get('time_limit', 1500))
+    s_ = sc.render.image_settings; s_.file_format = 'PNG'; s_.color_mode = 'RGB'; s_.color_depth = '8'
     t0 = time.time()
     wk.render(sc, cam, os.path.join(outdir, f'{cam.name}.png'))
     dt = time.time() - t0

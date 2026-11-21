@@ -27,8 +27,9 @@ for i, a in enumerate(('m_forest', 'm_rock', 'm_snow')):
 geo = b.node('ShaderNodeNewGeometry'); pz = b.node('ShaderNodeSeparateXYZ'); b.link(geo.outputs['Position'], pz.inputs[0])
 nz = b.node('ShaderNodeSeparateXYZ'); b.link(geo.outputs['Normal'], nz.inputs[0])
 v = b.node('ShaderNodeTexCoord').outputs['Object']
-base = b.mixc(b.math('MULTIPLY', b.noise(v, 1 / 30.0, 5, .6), .25), cr.outputs[0], lin('#5A5248'))
-base = b.mixc(b.maprange(nz.outputs['Z'], .9, .6), base, lin('#6E675E'))                      # rock on steep relief
+gm = b.node('ShaderNodeGamma'); gm.inputs['Gamma'].default_value = 2.2; b.link(cr.outputs[0], gm.inputs['Color'])   # map colours are sRGB
+base = b.mixc(b.math('MULTIPLY', b.noise(v, 1 / 30.0, 5, .6), .15), gm.outputs[0], lin('#5A5248'))
+base = b.mixc(b.maprange(nz.outputs['Z'], .6, .35), base, lin('#6E675E'))                     # rock only on the steepest relief (×20)
 base = b.mixc(b.maprange(b.math('ADD', pz.outputs['Z'], b.math('MULTIPLY', b.noise(v, 1 / 20.0, 3, .5), 8)), 4200 * ZS, 5000 * ZS), base, lin('#F2F5F8'))
 b.link(base, bs.inputs['Base Color']); bs.inputs['Roughness'].default_value = .85
 hf = tk.heightfield_group()
@@ -45,7 +46,10 @@ tk.set_mod(md, **{'Height': H, 'Mask MA': MAi, 'Mask MB': MBi, 'Mask MC': MBi, '
                   'Min Y': -half_y, 'Max Y': half_y, 'Viewport Resolution': .35, 'Render Resolution': 1.0, 'Skirt Depth': 5.0, 'Material': m_})
 wk.add_props(o, status=STATUS, grid=[n, m], km_per_cell=KMc, note='coastline = terrain ∩ 0; lakes = planes at their levels (smooth shores)')
 # ocean + lakes
-oc = wk.box('T5_WORLD_OCEAN', (half_x * 2 + 400, half_y * 2 + 400, .02), (0, 0, -.01), cw, MAT['MAT_T5_WATER_LAKE'])
+om = bpy.data.materials.new('MAT_T5_WORLD_OCEAN'); om.use_nodes = True; ob_ = om.node_tree.nodes['Principled BSDF']
+ob_.inputs['Base Color'].default_value = lin('#0C2B45'); ob_.inputs['Roughness'].default_value = .18
+oc = wk.mesh_from_arrays('T5_WORLD_OCEAN', np.array([[-half_x - 200, -half_y - 200, 0], [half_x + 200, -half_y - 200, 0], [half_x + 200, half_y + 200, 0],
+                                                    [-half_x - 200, half_y + 200, 0]]), np.array([[0, 1, 2, 3]]), cw, om)
 gx = (np.arange(m) + .5) * KMc - half_x; gy = half_y - (np.arange(n) + .5) * KMc
 for L in MJ['lakes']:
     r0, r1, c0, c1 = L['bbox_rc']; r0, c0 = max(r0 - 1, 0), max(c0 - 1, 0); r1, c1 = min(r1 + 2, n - 1), min(c1 + 2, m - 1)

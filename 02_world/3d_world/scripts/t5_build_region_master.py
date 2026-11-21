@@ -117,9 +117,10 @@ if RK == 'R03':
         cam(nm, (cx, cy, cz), (px, py, pz - 600 if dst > 10000 else pz - 400), lens, desc, 150000, .3)
     tcv = PJ['tile_defs']['CV']; zc = np.load(os.path.join(DD, 'CV.npz'))['z']
     CXc, CYc = 11990.0, 339100.0
-    gyc, gxc = np.gradient(zc.astype(float), tcv['sp'])
     ci = int(round((CXc - tcv['x0']) / tcv['sp'])); ri = int(round((tcv['y1'] - CYc) / tcv['sp']))
-    upv = np.array([gxc[ri, ci], -gyc[ri, ci]]); upv /= max(np.linalg.norm(upv), 1e-6)
+    angs = np.linspace(0, 2 * np.pi, 72, endpoint=False)
+    ring = [zc[int(round((tcv['y1'] - (CYc + 70 * math.sin(a_))) / tcv['sp'])), int(round((CXc + 70 * math.cos(a_) - tcv['x0']) / tcv['sp']))] for a_ in angs]
+    a_up = angs[int(np.argmax(ring))]; upv = np.array([math.cos(a_up), math.sin(a_up)])
     gzc = float(zc[ri, ci])
     ex, ey = CXc - upv[0] * 40 + upv[1] * 5, CYc - upv[1] * 40 - upv[0] * 5
     ezg = float(zc[int(round((tcv['y1'] - ey) / tcv['sp'])), int(round((ex - tcv['x0']) / tcv['sp']))])

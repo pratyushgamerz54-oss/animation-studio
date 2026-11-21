@@ -261,6 +261,7 @@ def img_float(name, arr, path):
     s.file_format = 'OPEN_EXR'; s.color_depth = '32'; s.exr_codec = 'ZIP'; s.color_mode = 'BW'
     im.save_render(path, scene=sc)
     sc.view_settings.view_transform = vt
+    s.file_format = 'PNG'; s.color_mode = 'RGB'; s.color_depth = '8'      # restore (else later renders save BW 16-bit)
     bpy.data.images.remove(im)
     im = bpy.data.images.load(path); im.name = name; im.colorspace_settings.name = 'Non-Color'
     im.alpha_mode = 'NONE'

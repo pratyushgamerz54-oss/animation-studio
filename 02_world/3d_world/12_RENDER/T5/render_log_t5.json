@@ -128,5 +128,65 @@
   ],
   "description": "Enchanted Forest canopy \u2014 giant old-growth over rolling hills, deep teal-green",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_11_RANGE_PEAKS": {
+  "seconds": 232.4,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Great Northern Range (R03) core \u2014 highest summit (6171 m) and its glaciated neighbours from the SSE",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_11B_RANGE_PANORAMA": {
+  "seconds": 326.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Great Northern Range panorama \u2014 ridges, glaciers, forested lower valleys",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_12_CAVE_ENTRANCE": {
+  "seconds": 332.7,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Cave entrance (map cave marker in the Great Northern Range foothills) \u2014 rock outcrop, arched mouth, forest clearing",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W01_WORLD": {
+  "seconds": 37.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Main world v002 \u2014 all continents, oceans, lakes (relief \u00d720)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W02_AETHERIA": {
+  "seconds": 40.6,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Aetheria (home continent) v002 \u2014 smooth lake shores, coasts, ranges around the Ashram valley (relief \u00d720)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W03_COAST_ISLANDS": {
+  "seconds": 36.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Western archipelago / coasts v002 \u2014 island outlines at 3.9 km (relief \u00d720)",
+  "blender": "4.5.16 LTS"
  }
 }

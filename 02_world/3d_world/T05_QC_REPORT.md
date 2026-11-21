@@ -65,3 +65,58 @@ Automated by `scripts/t5_qc.py` in **Blender 4.5.16 LTS** · 2026-11-21 12:28 ·
 - Run 1 found real LOD seam steps (33–254 m between the 400 m horizon and finer tiles) → fixed by blending every tile border onto its parent surface (parents built first). Run 2: 55/56; the last soft-edge grass check fixed with a tighter bare-ground mask.
 - Image round-trip (EXR heights, PNG masks) verified exact (error 0) after the save fix.
 - TASK 04 v001 baseline: all 21 files byte-identical (sha256).
+
+
+# Milestone 2 QC
+
+Automated by `scripts/t5_qc_m2.py` in **Blender 4.5.16 LTS** · 2026-11-21 15:48 · **45/45 PASS**
+
+| # | Check | Result | Detail |
+|---|---|---|---|
+| 1 | file size < 100 MB: 06_DESERTS/DESERT_R04_v002.blend | ✅ PASS | 0.2 MB |
+| 2 | opens + no missing images: 06_DESERTS/DESERT_R04_v002.blend | ✅ PASS | 99 images, missing [] |
+| 3 | 06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DF evaluates to a real mesh with mask attributes | ✅ PASS | 57024 viewport verts, 14 mask attributes |
+| 4 | 06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DN evaluates to a real mesh with mask attributes | ✅ PASS | 130005 viewport verts, 14 mask attributes |
+| 5 | 06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DH evaluates to a real mesh with mask attributes | ✅ PASS | 142876 viewport verts, 14 mask attributes |
+| 6 | file size < 100 MB: 06_DESERTS/FORBIDDEN_R05_v002.blend | ✅ PASS | 2.0 MB |
+| 7 | opens + no missing images: 06_DESERTS/FORBIDDEN_R05_v002.blend | ✅ PASS | 93 images, missing [] |
+| 8 | 06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XF evaluates to a real mesh with mask attributes | ✅ PASS | 83592 viewport verts, 14 mask attributes |
+| 9 | 06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XN evaluates to a real mesh with mask attributes | ✅ PASS | 130005 viewport verts, 14 mask attributes |
+| 10 | 06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XH evaluates to a real mesh with mask attributes | ✅ PASS | 142876 viewport verts, 14 mask attributes |
+| 11 | file size < 100 MB: 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend | ✅ PASS | 0.2 MB |
+| 12 | opens + no missing images: 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend | ✅ PASS | 155 images, missing [] |
+| 13 | 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EF evaluates to a real mesh with mask attributes | ✅ PASS | 57960 viewport verts, 14 mask attributes |
+| 14 | 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EN evaluates to a real mesh with mask attributes | ✅ PASS | 124200 viewport verts, 14 mask attributes |
+| 15 | 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EH evaluates to a real mesh with mask attributes | ✅ PASS | 142876 viewport verts, 14 mask attributes |
+| 16 | file size < 100 MB: 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend | ✅ PASS | 0.3 MB |
+| 17 | opens + no missing images: 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend | ✅ PASS | 205 images, missing [] |
+| 18 | 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_R3F evaluates to a real mesh with mask attributes | ✅ PASS | 86774 viewport verts, 14 mask attributes |
+| 19 | 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_R3N evaluates to a real mesh with mask attributes | ✅ PASS | 162401 viewport verts, 14 mask attributes |
+| 20 | 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_CV evaluates to a real mesh with mask attributes | ✅ PASS | 59041 viewport verts, 14 mask attributes |
+| 21 | file size < 100 MB: 02_TERRAIN/WORLD_terrain_v002.blend | ✅ PASS | 0.8 MB |
+| 22 | opens + no missing images: 02_TERRAIN/WORLD_terrain_v002.blend | ✅ PASS | 3 images, missing [] |
+| 23 | 02_TERRAIN/WORLD_terrain_v002.blend: T5_WORLD_TERRAIN evaluates to a real mesh with mask attributes | ✅ PASS | 582112 viewport verts, 14 mask attributes |
+| 24 | file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend | ✅ PASS | 0.1 MB |
+| 25 | opens + no missing images: 00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend | ✅ PASS | 101 images, missing [] |
+| 26 | file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R05_FORBIDDEN_master_v002.blend | ✅ PASS | 0.1 MB |
+| 27 | opens + no missing images: 00_MASTER_WORLD/T5_REGION_R05_FORBIDDEN_master_v002.blend | ✅ PASS | 95 images, missing [] |
+| 28 | file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R02_ENCHANTED_master_v002.blend | ✅ PASS | 0.1 MB |
+| 29 | opens + no missing images: 00_MASTER_WORLD/T5_REGION_R02_ENCHANTED_master_v002.blend | ✅ PASS | 157 images, missing [] |
+| 30 | file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R03_RANGE_master_v002.blend | ✅ PASS | 0.1 MB |
+| 31 | opens + no missing images: 00_MASTER_WORLD/T5_REGION_R03_RANGE_master_v002.blend | ✅ PASS | 207 images, missing [] |
+| 32 | file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend | ✅ PASS | 1.1 MB |
+| 33 | opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend | ✅ PASS | 89 images, missing [] |
+| 34 | LOD seam DN↔DF: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 20 m) |
+| 35 | LOD seam DH↔DN: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 3 m) |
+| 36 | R04: drainage lines never flow uphill | ✅ PASS | max rise 0.0000 m over 8 lines |
+| 37 | LOD seam XN↔XF: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 20 m) |
+| 38 | LOD seam XH↔XN: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 3 m) |
+| 39 | R05: drainage lines never flow uphill | ✅ PASS | max rise 0.0000 m over 9 lines |
+| 40 | LOD seam EN↔EF: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 12 m) |
+| 41 | LOD seam EH↔EN: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 3 m) |
+| 42 | R02: drainage lines never flow uphill | ✅ PASS | max rise 0.0000 m over 2 lines |
+| 43 | LOD seam R3N↔R3F: border matches the parent surface | ✅ PASS | max gap 9.67 m (skirt 60 m) |
+| 44 | LOD seam CV↔R3F: border matches the parent surface | ✅ PASS | max gap 0.00 m (skirt 4 m) |
+| 45 | TASK 04 v001 baseline files unchanged | ✅ PASS | 21 files identical |
+
+Fixed during milestone 2: renders saved as 16-bit grey after EXR export (image settings restored), cave direction from a 60–70 m height ring (flattened floor made the gradient random), scanned rock meshes are open → no Boolean on them.
