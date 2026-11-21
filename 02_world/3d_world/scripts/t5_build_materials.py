@@ -173,13 +173,14 @@ def terrain_material():
     base = lerp_layer(cf, base, canopy)
     # --- path / Ashram pad: compacted earth
     soil = L_('dry_ground_01', 2.5)
-    base, _ = hblend(base, soil, b.math('MAXIMUM', A['m_path'], A['m_pad']))
+    flat_ok = b.maprange(nz, .55, .78)                                # top-down projected layers only on gentle ground
+    base, _ = hblend(base, soil, b.math('MULTIPLY', b.math('MAXIMUM', A['m_path'], A['m_pad']), flat_ok))
     # --- river banks: mud, then gravel bars + river bed (wet stones)
     mud = L_('mud_forest', 2.5, wet=b.math('MULTIPLY', A['m_wet'], .6))
-    base, _ = hblend(base, mud, b.math('MULTIPLY', A['m_wet'], .85))
+    base, _ = hblend(base, mud, b.math('MULTIPLY', b.math('MULTIPLY', A['m_wet'], .85), flat_ok))
     bed = b.maprange(A['m_wet'], .9, 1.0)
     gv = L_('river_small_rocks', 1.6, wet=b.maprange(A['m_wet'], .5, 1.0))
-    base, _ = hblend(base, gv, b.math('MAXIMUM', A['m_gravel'], bed), .5)
+    base, _ = hblend(base, gv, b.math('MULTIPLY', b.math('MAXIMUM', A['m_gravel'], bed), flat_ok), .5)
     # --- lake shore sand (map lake, SW of the valley window)
     sand = L_('coast_sand_01', 3.0)
     sf = b.math('MULTIPLY', b.maprange(zpos, LAKE_LEVEL + 7, LAKE_LEVEL + 1.5), b.maprange(px, -128000, -132000))
@@ -187,7 +188,7 @@ def terrain_material():
     # --- scree, rock, cliff (slope from the real geometry normal + masks)
     scr = L_('rocky_gravel', 3.0)
     scr[0] = recolor(scr[0], .35, .9)
-    base, _ = hblend(base, scr, A['m_scree'])
+    base, _ = hblend(base, scr, b.math('MULTIPLY', A['m_scree'], flat_ok))
     rk = L_('rock_ground', 4.0, box=True)
     # far rock (> 0.4–2 km): no image texture (2K scans alias into a moiré grid from km away) → noise-based rock colour
     rfar = [b.mixc(b.maprange(b.noise(v, 1 / 18.0, 5, .62), .3, .7), lin('#5E5A55'), lin('#8E8A84')), .8, rk[2], .5]
@@ -211,7 +212,7 @@ def terrain_material():
     # glacier ice in the high, gentle, wet valley floors: blue-white with stretched crevasse bands
     cv = b.node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); cv.inputs['Scale'].default_value = 1 / 14.0
     b.link(b.vmath('MULTIPLY', v, (1.0, 3.5, 1.0)), cv.inputs['Vector'])
-    crev = b.maprange(cv.outputs['Distance'], 0.0, .05, 1.0, 0.0)
+    crev = b.math('MULTIPLY', b.maprange(cv.outputs['Distance'], 0.0, .05, 1.0, 0.0), b.maprange(dist, 3000, 800))   # fades far away
     icecol = b.mixc(b.math('MULTIPLY', meso, .6), lin('#A9CBE0'), lin('#7FAACB'))
     icecol = b.mixc(b.math('MULTIPLY', crev, .7), icecol, lin('#2E4A63'))
     ice = [icecol, .12, base[2], .6]
@@ -274,6 +275,10 @@ mp = b.node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1.6, 1.6, 
 b.link(b.vmath('ADD', v, off.outputs[0]), mp.inputs['Vector'])
 st = b.noise(mp.outputs[0], 3.0, 6, .7)
 streak = b.maprange(st, .38, .62)
+uvn = b.node('ShaderNodeUVMap'); uvs = b.node('ShaderNodeSeparateXYZ'); b.link(uvn.outputs[0], uvs.inputs[0])
+edge = b.math('MINIMUM', uvs.outputs['X'], b.math('SUBTRACT', 1.0, uvs.outputs['X']))
+rag = b.maprange(b.math('ADD', edge, b.math('MULTIPLY', b.noise(mp.outputs[0], 1.4, 4, .6), .12)), .06, .2)
+streak = b.math('MULTIPLY', streak, rag)
 bs.inputs['Base Color'].default_value = lin('#EEF3F2'); bs.inputs['Roughness'].default_value = .35
 bs.inputs['Subsurface Weight'].default_value = .5; bs.inputs['Transmission Weight'].default_value = .3
 tr = b.node('ShaderNodeBsdfTransparent')

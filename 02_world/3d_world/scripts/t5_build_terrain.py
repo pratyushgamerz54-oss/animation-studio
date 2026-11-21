@@ -191,7 +191,7 @@ elif COMP == 'mountain':
     S('SC_WF_ROCKS', WF, 'LIB_ROCKS_MEDIUM', Density=.004, Viewport_Density=.1, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_wet', Avoid_Strength=.7, Slope_Max=55.0, Cluster_Scale=30.0, Cluster_Amount=.7, Scale_Min=.8, Scale_Max=3.0,
       Align_To_Normal=.7, Random_Tilt=15.0, Sink=.3, Seed=64, Cull_Distance=900.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-    S('SC_WF_LARGE_ROCKS', WF, 'LIB_ROCKS_LARGE', Density=.0012, Viewport_Density=.3, Mask='m_cliff', Mask_Min=.05, Mask_Max=.4,
+    S('SC_WF_LARGE_ROCKS', WF, 'LIB_ROCKS_LARGE', Density=.0003, Viewport_Density=.3, Mask='m_cliff', Mask_Min=.05, Mask_Max=.4,
       Slope_Max=80.0, Cluster_Scale=50.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=2.2, Align_To_Normal=.9, Random_Tilt=20.0,
       Sink=.35, Seed=65, Cull_Distance=900.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_WF_STREAM_BOULDERS', WF, 'LIB_ROCKS_MEDIUM', Density=.05, Viewport_Density=.1, Mask='m_wet', Mask_Min=.6, Mask_Max=1.0,
@@ -295,6 +295,10 @@ elif COMP == 'water':
                         Fq.append((i0, i0 + 1, i0 + nu + 2, i0 + nu + 1))
                 o = wk.mesh_from_arrays(f'T5_CASCADE_T{j + 1}_S{si + 1:02d}_L{layer + 1}', np.array(V), np.array(Fq), cf, MAT['MAT_T5_WATERFALL'])
                 o.data.shade_smooth()
+                uvl = o.data.uv_layers.new(name='UVMap')                  # u across the stream (ragged edges), v down the fall
+                lv = np.empty(len(o.data.loops), np.int32); o.data.loops.foreach_get('vertex_index', lv)
+                uvv = np.column_stack([(lv % (nu + 1)) / nu, 1 - (lv // (nu + 1)) / nv]).astype(np.float32)
+                uvl.data.foreach_set('uv', uvv.ravel())
                 wk.add_props(o, status=STATUS, tier=j + 1, drop_m=round(h, 1), fall_time_s=round(T, 2),
                              impact_speed_ms=round(math.sqrt(2 * g * h), 1), note='ballistic sheet: x = v0·t, z = −½·g·t² (g = 9.81)')
             # spray emitters along the impact line of this stream
