@@ -10,7 +10,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_02_FOREST_ESTABLISHING": {
-  "seconds": 303.3,
+  "seconds": 290.4,
   "samples": 48,
   "res": [
    1280,
@@ -20,7 +20,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_03_RIVER_WATERFALL": {
-  "seconds": 380.6,
+  "seconds": 376.2,
   "samples": 48,
   "res": [
    1280,
@@ -30,7 +30,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_04_SNOWY_PEAKS": {
-  "seconds": 243.4,
+  "seconds": 241.4,
   "samples": 48,
   "res": [
    1280,
@@ -40,7 +40,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_06_VALLEY_AERIAL": {
-  "seconds": 220.2,
+  "seconds": 215.6,
   "samples": 48,
   "res": [
    1280,
