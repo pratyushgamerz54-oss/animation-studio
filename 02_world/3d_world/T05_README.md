@@ -1,6 +1,6 @@
 # TASK 05 — THE GRAND UNIVERSE · DETAILED TERRAIN & LANDSCAPE PRODUCTION
 
-> **Status: 🟨 MILESTONE 1 — previews ready, awaiting Director approval.** Built + tested in **Blender 4.5.16 LTS** (Cycles CPU).
+> **Status: ✅ MILESTONE 1 APPROVED (Director, 21 Nov: shots 1, 2, 6, 7, 7b + revised cascade & peaks) · ✅ MILESTONE 2 built (rest of the world, previews in `T5_SHEET_02_MILESTONE2.png`).** Built + tested in **Blender 4.5.16 LTS** (Cycles CPU).
 > Built ON TOP of the approved TASK 04 blockout: same coordinates, same scale (1 BU = 1 m, true scale), same rivers / layout.
 > v001 baseline untouched (checksums verified); all new work = **v002** files. Map revision 01 stays a **PROPOSAL** (not canon);
 > GEM still unconfirmed; no story location invented (the featured waterfall is simply the largest drop of the existing river network).
@@ -68,15 +68,28 @@ for c in valley forest mountain water; do $B t5_build_terrain.py -- $c; done
 $B t5_build_master.py ; $B t5_render.py ; python3 t5_contact_sheet.py ; $B t5_qc.py
 ```
 
+## Milestone 2 — rest of the world (region sites, each with its own local frame)
+| Region | Files | Detail | Shots |
+|---|---|---|---|
+| **R04 Western Desert & Wastelands** | `06_DESERTS/DESERT_R04_v002.blend` (+ `data_v002/`, `heightfields_v002/`) | 120 km @300 m · 24 km @20 m · 3 km @2 m; wind-shaped dunes (steep slip faces), sandstone mesas/buttes with strata + talus aprons, canyons/wadis along the map drainage (big channels wet, small dry — proposal), playas (cracked ground), desert pavement; `MAT_T5_TERRAIN_DESERT` (biplanar strata) | 5, 5b |
+| **R05 Forbidden Region** (blasted crater) | `06_DESERTS/FORBIDDEN_R05_v002.blend` | 192 km @400 m · 24 km @20 m · 3 km @2 m; raised rim, radial ejecta ridges, fissures, ash ground, rubble, dead trees, the map's crater lake at spill level; `MAT_T5_TERRAIN_FORBIDDEN` (no lava / glow — not approved) | 9, 9b |
+| **R02 Enchanted Forest** | `04_FORESTS/ENCHANTED_FOREST_R02_v002.blend` | 80 km @200 m · 12 km @10 m · 3 km @2 m; ancient trees ×1.7–2.8, moss carpet, dense ferns, fallen giants, roots, mossy rocks, ground mist; `MAT_T5_TERRAIN_ENCHANTED` (teal-green key from the World Bible) | 10, 10b |
+| **R03 Great Northern Range (core)** | `03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend` | 240 km @400 m · 60 km @30 m (milestone-1 mountain pipeline: isotropic ridges, erosion, strata, snow, glaciers, arêtes) | 11, 11b |
+| **Cave entrance** (map cave marker, R03 foothills) | in the R03 file, tile `CV` 1.6 km @2 m | rock outcrop with Boolean mouth + tunnel, forest clearing, rockfall; interior = later (underground task) | 12 |
+| **Main world v002** | `02_TERRAIN/WORLD_terrain_v002.blend` (+ `01_GEOGRAPHY/data_v002/`) | whole map as one real mesh, 3.9 km grid (×2 v001), isotropic ranges + erosion, smoother coasts/islands, 26 lakes as planes at their levels (smooth shores — fixes v001 stair-steps), ocean | W1–W3 |
+Region masters: `00_MASTER_WORLD/T5_REGION_<R>_…_master_v002.blend` (HDRI + sun + compositor + cameras). Scripts: `t5_region_prep.py <R04|R05|R02>`,
+`t5_prep.py R3F R3N CV`, `t5_world_prep.py`, `t5_build_terrain.py -- desert|crater|enchanted|range`, `t5_build_world.py`,
+`t5_build_region_master.py -- <R>`, `t5_render.py -- --master <file>`, `SHEET=2 python3 t5_contact_sheet.py`, `t5_qc_m2.py`.
+
 ## Completed · pending
 **Completed (milestone 1):** detailed terrain for the Ashram Valley + surroundings, northern forest belt, mountain region NW01 with a
 waterfall gorge; mountain ranges / peaks / ridges / cliffs / scree / snow + ice / erosion; valley hills / meadows / riverbanks / gravel
 bars; forest floor, tree zones, roots, logs, understory, paths; rivers, streams, waterfalls, the map lake, water + foam + mist materials;
 PBR library; nature asset library; procedural systems; 6 of 7 cinematic tests (+ forest-floor ground shot); QC.
-**Pending:**
-* Desert landscape (test 5) and the **forbidden / ruined terrain** — the milestone-1 area has no desert; next milestone (R-04 west, R-05).
-* Remaining world regions at detail: enchanted forest R-02 (visually distinct), other ranges (R-03 core, NW massif), plains, coasts,
-  islands, underground entrances, lake-district shores.
-* Waterfall shot = first pass (gorge walls + curtain need another iteration: more natural rock walls, layered spray).
-* Mountains: sharper arêtes / glacier tongues for close shots; final 4K shots need per-camera hero tiles + 4K/8K textures (Director rule).
+**Completed (milestone 2):** desert (R04) + desert shot 5, forbidden / ruined crater terrain (R05), enchanted forest (R02, distinct look),
+Great Northern Range core (R03), a cave entrance at the map's cave marker, main-world v002 (coasts, islands, ranges, smooth lake shores).
+**Pending / later tasks (not blocking TASK 05):**
+* Other continents (C2–C5) and archipelagos only at main-world v002 detail (3.9 km) — true-scale region sites are built per story need.
+* Cave interiors / underground systems (only entrances now); Lake District shore close-ups; NW massif.
+* Final film shots: per-camera hero tiles + 4K/8K textures + LOD0 assets + 4K render on the GPU PC (Director rule).
 * Ashram building is a separate asset (concept v3) — to be placed on the VH pad later.
