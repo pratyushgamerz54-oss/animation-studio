@@ -1,0 +1,576 @@
+{
+ "cameras": [
+  {
+   "name": "CAM_W00_TOP_ORTHO",
+   "desc": "Technical top view of the whole main world (orthographic)",
+   "loc": [
+    0.0,
+    0.0,
+    6000.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W01_ENTIRE_WORLD",
+   "desc": "Entire main world \u2014 cinematic aerial",
+   "loc": [
+    0.0,
+    -9600.0,
+    7400.0
+   ],
+   "target": [
+    0.0,
+    250.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W02_REGION_C1_AETHERIA",
+   "desc": "Region \u2014 C1 AETHERIA (proposed name)",
+   "loc": [
+    -3200.0,
+    -2200.0,
+    1984.0
+   ],
+   "target": [
+    -2400.0,
+    880.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W02_REGION_C2_SOLMARA",
+   "desc": "Region \u2014 C2 SOLMARA (proposed name)",
+   "loc": [
+    540.0,
+    -3899.9999999999995,
+    2232.0
+   ],
+   "target": [
+    1440.0,
+    -439.99999999999955,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W02_REGION_C3_VEYLORA",
+   "desc": "Region \u2014 C3 VEYLORA (proposed name)",
+   "loc": [
+    3645.0,
+    -1365.0,
+    1674.0
+   ],
+   "target": [
+    4320.0,
+    1240.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W02_REGION_C4_NOXARA",
+   "desc": "Region \u2014 C4 NOXARA (proposed name)",
+   "loc": [
+    59.99999999999909,
+    -870.0,
+    2232.0
+   ],
+   "target": [
+    959.9999999999991,
+    2590.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W02_REGION_C5_DRAKMOR",
+   "desc": "Region \u2014 C5 DRAKMOR (proposed name)",
+   "loc": [
+    -4150.0,
+    -3890.0,
+    1364.0
+   ],
+   "target": [
+    -3600.0,
+    -1760.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W03_MOUNTAINS_MAHAGIRI",
+   "desc": "Mountain range \u2014 Mahagiri (C1, proposed name), low aerial",
+   "loc": [
+    -2801.7187499999995,
+    912.7890425104233,
+    190.0
+   ],
+   "target": [
+    -2201.7187499999995,
+    1612.7890425104233,
+    40.0
+   ]
+  },
+  {
+   "name": "CAM_W03_MOUNTAINS_SUNSTONE",
+   "desc": "Mountain range \u2014 Sunstone Ridge (C2)",
+   "loc": [
+    360.0,
+    -1200.0,
+    300.0
+   ],
+   "target": [
+    1320.0,
+    -300.00000000000045,
+    40.0
+   ]
+  },
+  {
+   "name": "CAM_W04_FORESTS_VEYLORA",
+   "desc": "Forest zones \u2014 Veylora wet / enchanted forests",
+   "loc": [
+    3600.0,
+    300.0,
+    520.0
+   ],
+   "target": [
+    4440.0,
+    1200.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W04_FORESTS_AETHERIA",
+   "desc": "Forest zones \u2014 Aetheria enchanted forest + lake district",
+   "loc": [
+    -1919.9999999999995,
+    -120.0,
+    420.0
+   ],
+   "target": [
+    -2040.0,
+    600.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W05_RIVERS_SOLMARA",
+   "desc": "River systems \u2014 Solmara east",
+   "loc": [
+    2400.0,
+    -1320.0,
+    520.0
+   ],
+   "target": [
+    1920.0,
+    -300.00000000000045,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W05_RIVERS_AETHERIA",
+   "desc": "River systems \u2014 Aetheria lake district",
+   "loc": [
+    -1680.0,
+    1200.0,
+    380.0
+   ],
+   "target": [
+    -2520.0000000000005,
+    780.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W06_DESERT_SOLMARA",
+   "desc": "Desert \u2014 Solmara interior",
+   "loc": [
+    0.0,
+    -1200.0,
+    420.0
+   ],
+   "target": [
+    839.9999999999991,
+    -720.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W06_DESERT_AETHERIA_WEST",
+   "desc": "Desert + wasteland \u2014 Aetheria west (R-04, proposal)",
+   "loc": [
+    -3120.0,
+    -360.00000000000045,
+    300.0
+   ],
+   "target": [
+    -3480.0,
+    240.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W07_ISLANDS_SAGARA",
+   "desc": "Islands \u2014 Sagara archipelago (A1)",
+   "loc": [
+    -720.0,
+    -300.00000000000045,
+    520.0
+   ],
+   "target": [
+    -360.0,
+    360.0,
+    0.0
+   ]
+  },
+  {
+   "name": "CAM_W08_ASHRAM_VALLEY_REGION",
+   "desc": "Ashram Valley \u2014 position in the main world (world scale)",
+   "loc": [
+    -2335.48,
+    908.29,
+    150.0
+   ],
+   "target": [
+    -2275.48,
+    1278.29,
+    14.024873733520508
+   ]
+  }
+ ],
+ "inventory": {
+  "TER_PLN_C1": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C1",
+   "verts": 10749,
+   "faces": 8290
+  },
+  "TER_COA_C1": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C1",
+   "verts": 2205,
+   "faces": 806
+  },
+  "TER_RUI_C1": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "RUI_C1",
+   "verts": 5700,
+   "faces": 4487
+  },
+  "TER_PLN_C2": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C2",
+   "verts": 13552,
+   "faces": 11421
+  },
+  "TER_COA_C2": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C2",
+   "verts": 7867,
+   "faces": 5771
+  },
+  "TER_RUI_C2": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "RUI_C2",
+   "verts": 1761,
+   "faces": 1501
+  },
+  "TER_PLN_C3": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C3",
+   "verts": 10952,
+   "faces": 8901
+  },
+  "TER_COA_C3": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C3",
+   "verts": 10001,
+   "faces": 7908
+  },
+  "TER_ICE_C3": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "ICE_C3",
+   "verts": 4177,
+   "faces": 3465
+  },
+  "TER_RUI_C3": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "RUI_C3",
+   "verts": 533,
+   "faces": 456
+  },
+  "TER_PLN_C4": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C4",
+   "verts": 86,
+   "faces": 22
+  },
+  "TER_COA_C4": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C4",
+   "verts": 1510,
+   "faces": 541
+  },
+  "TER_ICE_C4": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "ICE_C4",
+   "verts": 7094,
+   "faces": 6118
+  },
+  "TER_PLN_C4U": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C4U",
+   "verts": 58,
+   "faces": 15
+  },
+  "TER_COA_C4U": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C4U",
+   "verts": 2026,
+   "faces": 976
+  },
+  "TER_ICE_C4U": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "ICE_C4U",
+   "verts": 3610,
+   "faces": 2967
+  },
+  "TER_PLN_C5": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "PLN_C5",
+   "verts": 887,
+   "faces": 454
+  },
+  "TER_COA_C5": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "COA_C5",
+   "verts": 6853,
+   "faces": 5598
+  },
+  "TER_ICE_C5": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "ICE_C5",
+   "verts": 9654,
+   "faces": 8824
+  },
+  "TER_SEABED_WORLD": {
+   "file": "02_TERRAIN/WORLD_terrain_v001.blend",
+   "collection": "SEABED",
+   "verts": 73728,
+   "faces": 73153
+  },
+  "TER_MTN_C1": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C1",
+   "verts": 2899,
+   "faces": 2509
+  },
+  "TER_MTN_C2": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C2",
+   "verts": 10372,
+   "faces": 9841
+  },
+  "TER_MTN_C3": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C3",
+   "verts": 5353,
+   "faces": 4872
+  },
+  "TER_MTN_C4": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C4",
+   "verts": 9154,
+   "faces": 8600
+  },
+  "TER_MTN_C4U": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C4U",
+   "verts": 4612,
+   "faces": 4255
+  },
+  "TER_MTN_C5": {
+   "file": "03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "collection": "MTN_C5",
+   "verts": 4165,
+   "faces": 3765
+  },
+  "TER_FOR_C1": {
+   "file": "04_FORESTS/WORLD_forests_v001.blend",
+   "collection": "FOR_C1",
+   "verts": 38284,
+   "faces": 35863
+  },
+  "TER_FOR_C2": {
+   "file": "04_FORESTS/WORLD_forests_v001.blend",
+   "collection": "FOR_C2",
+   "verts": 51454,
+   "faces": 49070
+  },
+  "TER_FOR_C3": {
+   "file": "04_FORESTS/WORLD_forests_v001.blend",
+   "collection": "FOR_C3",
+   "verts": 25689,
+   "faces": 23437
+  },
+  "TER_FOR_C4": {
+   "file": "04_FORESTS/WORLD_forests_v001.blend",
+   "collection": "FOR_C4",
+   "verts": 2079,
+   "faces": 1443
+  },
+  "TER_FOR_C5": {
+   "file": "04_FORESTS/WORLD_forests_v001.blend",
+   "collection": "FOR_C5",
+   "verts": 10367,
+   "faces": 9658
+  },
+  "TER_LKB_C1": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LKB_C1",
+   "verts": 5877,
+   "faces": 4941
+  },
+  "TER_LKB_C2": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LKB_C2",
+   "verts": 2197,
+   "faces": 1849
+  },
+  "TER_LKB_C3": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LKB_C3",
+   "verts": 302,
+   "faces": 260
+  },
+  "TER_LKB_C5": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LKB_C5",
+   "verts": 233,
+   "faces": 186
+  },
+  "WAT_RIVERS_C4": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C4",
+   "verts": 636,
+   "rivers": 24
+  },
+  "WAT_RIVERS_C4U": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C4U",
+   "verts": 138,
+   "rivers": 7
+  },
+  "WAT_RIVERS_C2": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C2",
+   "verts": 6812,
+   "rivers": 149
+  },
+  "WAT_RIVERS_C3": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C3",
+   "verts": 3594,
+   "rivers": 86
+  },
+  "WAT_RIVERS_C5": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C5",
+   "verts": 1760,
+   "rivers": 42
+  },
+  "WAT_RIVERS_IN": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_IN",
+   "verts": 226,
+   "rivers": 8
+  },
+  "WAT_RIVERS_C1": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "RIVERS_C1",
+   "verts": 3634,
+   "rivers": 107
+  },
+  "WAT_LAKES_C1": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LAKES_C1",
+   "lakes": 18
+  },
+  "WAT_LAKES_C2": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LAKES_C2",
+   "lakes": 6
+  },
+  "WAT_LAKES_C3": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LAKES_C3",
+   "lakes": 1
+  },
+  "WAT_LAKES_C5": {
+   "file": "05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "collection": "LAKES_C5",
+   "lakes": 1
+  },
+  "TER_DES_C1": {
+   "file": "06_DESERTS/WORLD_deserts_v001.blend",
+   "collection": "DES_C1",
+   "verts": 4026,
+   "faces": 3390
+  },
+  "TER_DES_C2": {
+   "file": "06_DESERTS/WORLD_deserts_v001.blend",
+   "collection": "DES_C2",
+   "verts": 7831,
+   "faces": 7135
+  },
+  "TER_DES_C3": {
+   "file": "06_DESERTS/WORLD_deserts_v001.blend",
+   "collection": "DES_C3",
+   "verts": 7755,
+   "faces": 7188
+  },
+  "TER_ISL_A1": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_A1",
+   "verts": 3669,
+   "faces": 3299
+  },
+  "TER_ISL_A2": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_A2",
+   "verts": 942,
+   "faces": 812
+  },
+  "TER_ISL_A3": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_A3",
+   "verts": 1351,
+   "faces": 1153
+  },
+  "TER_ISL_IW": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_IW",
+   "verts": 3390,
+   "faces": 3048
+  },
+  "TER_ISL_IE": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_IE",
+   "verts": 826,
+   "faces": 694
+  },
+  "TER_ISL_IN": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_IN",
+   "verts": 5684,
+   "faces": 5319
+  },
+  "TER_ISL_IS": {
+   "file": "07_ISLANDS/WORLD_islands_v001.blend",
+   "collection": "ISL_IS",
+   "verts": 1284,
+   "faces": 1084
+  }
+ }
+}

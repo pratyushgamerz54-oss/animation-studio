@@ -57,7 +57,10 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 0. **SABSE PEHLE** `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
    Phir wahin se kaam shuru karo jahan ruka tha. Har bada kaam hone par `PROJECT_LOG.md` mein entry jodo.
-1. `pip install bpy scipy` (Blender 5.3 Python module) + `python3 03_assets/external/polyhaven_fetch.py` (Poly Haven CC0 assets, gitignored; environment `animation-studio`).
+1. `pip install bpy scipy` (Blender 5.3 Python module). **TASK 04 world files need Blender 4.5:**
+   `uv venv -p /usr/bin/python3.11 <scratch>/bpy45 && VIRTUAL_ENV=<scratch>/bpy45 uv pip install "bpy>=4.5,<4.6" numpy`
+   then `BLENDER=<scratch>/bpy45/bin/python 02_world/3d_world/scripts/run_all.sh`. Viewport (Workbench/EEVEE) renders need
+   `apt-get install -y libegl1 libegl-mesa0 libgl1-mesa-dri libgbm1` and `EGL_PLATFORM=surfaceless`. + `python3 03_assets/external/polyhaven_fetch.py` (Poly Haven CC0 assets, gitignored; environment `animation-studio`).
 2. Padho: `01_characters/PRODUCTION_INVENTORY.md` (status + pending decisions) aur `STATUS.md` (last kya chal raha tha).
 3. Har character ka sab kuch uski config mein hai: `01_characters/<name>/<name>_config.py`.
 4. Pipeline: `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` → `_shared/production.py` → `_shared/sheet_doc.py`
@@ -84,3 +87,8 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
   mute constraints while re-parenting, check skirt TRANSFORM ranges after Rigify re-rolls bones.
 - Poly Haven API needs a User-Agent; append LOD collections + fix image paths; save with relative_remap.
 - Don't use a world volume for haze (blocks the sun) — bounded volume box; sun behind camera = flat light.
+- Blender 4.5: shading colour enum for attributes is 'VERTEX' (not 'ATTRIBUTE'); disable `.blend1` with
+  `preferences.filepaths.save_version = 0`; join objects only after deselecting everything.
+- World-scale terrain: cut ONE height grid into pieces (shared border verts + global custom normals) → seamless; huge single
+  world volumes are slow/opaque — bounded haze boxes; coarse LODs need the river channel ≥ 1 vertex row wide (else water hides).
+- Linked data cannot be edited in memory → control render visibility of linked overlays with view-layer collection exclude.

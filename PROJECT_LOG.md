@@ -73,3 +73,8 @@
 
 15. **21 Nov (nayi session):** setup restore (bpy 5.3, scipy, Poly Haven fetch). Ramarat robe "safed daag" diagnose = knee clipping
     through skirt (K-01), material nahi. Sab Stage 2 kaam Director approval par ruka hai.
+
+16. **21 Nov — TASK 04 (3D world blockout) milestone 1:** `02_world/3d_world/` — real 3D terrain of the whole main world from
+    map v2 rev 01 (Blender 4.5.16 LTS), regions by direction + theme, rivers/lakes/ocean/islands/underground/ruined zones, Ashram Valley
+    true-scale LOD terrain (snow range ≈101 km NW), Black Hole + Dark World dimension blockouts, 38 preview images, QC 70/70 (4.5 + 5.3).
+    Sab PROPOSAL — Director review ka intezaar.

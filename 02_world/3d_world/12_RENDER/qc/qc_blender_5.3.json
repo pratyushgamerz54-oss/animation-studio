@@ -1,0 +1,607 @@
+{
+ "blender": "5.3.0",
+ "files": {
+  "00_MASTER_WORLD/WORLD_master_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "MAIN_WORLD",
+    "ASHRAM_VALLEY",
+    "DIM_BLACK_HOLE_TRAINING",
+    "DIM_SAITHAN_DARK_WORLD"
+   ],
+   "objects": 1091,
+   "meshes": 1004,
+   "verts": 2819967,
+   "cameras": 31,
+   "collections": 138,
+   "libraries": [
+    "//../08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend",
+    "//../09_DIMENSIONS/DIM_black_hole_training_v001.blend",
+    "//../09_DIMENSIONS/DIM_saithan_dark_world_v001.blend",
+    "//../04_FORESTS/FOREST_proxies_v001.blend",
+    "//../10_CAMERAS/WORLD_cameras_v001.blend",
+    "//../06_DESERTS/WORLD_deserts_v001.blend",
+    "//../04_FORESTS/WORLD_forests_v001.blend",
+    "//../01_GEOGRAPHY/WORLD_geography_v001.blend",
+    "//../07_ISLANDS/WORLD_islands_v001.blend",
+    "//../11_MATERIALS/WORLD_materials_v001.blend",
+    "//../03_MOUNTAINS/WORLD_mountains_v001.blend",
+    "//../02_TERRAIN/WORLD_terrain_v001.blend",
+    "//../05_RIVERS_AND_LAKES/WORLD_water_v001.blend"
+   ],
+   "materials": 40,
+   "node_groups": 4,
+   "images": 0
+  },
+  "01_GEOGRAPHY/WORLD_geography_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_01_GEOGRAPHY"
+   ],
+   "objects": 274,
+   "meshes": 257,
+   "verts": 2035,
+   "cameras": 0,
+   "collections": 9,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 12,
+   "node_groups": 0,
+   "images": 0
+  },
+  "02_TERRAIN/WORLD_terrain_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_02_TERRAIN"
+   ],
+   "objects": 37,
+   "meshes": 20,
+   "verts": 173003,
+   "cameras": 0,
+   "collections": 22,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 2,
+   "node_groups": 0,
+   "images": 0
+  },
+  "03_MOUNTAINS/WORLD_mountains_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_03_MOUNTAINS"
+   ],
+   "objects": 11,
+   "meshes": 11,
+   "verts": 36589,
+   "cameras": 0,
+   "collections": 8,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 2,
+   "node_groups": 0,
+   "images": 0
+  },
+  "04_FORESTS/FOREST_proxies_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_04_FOREST_PROXIES"
+   ],
+   "objects": 5,
+   "meshes": 5,
+   "verts": 168,
+   "cameras": 0,
+   "collections": 3,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 4,
+   "node_groups": 0,
+   "images": 0
+  },
+  "04_FORESTS/WORLD_forests_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_04_FORESTS"
+   ],
+   "objects": 5,
+   "meshes": 5,
+   "verts": 127873,
+   "cameras": 0,
+   "collections": 6,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 1,
+   "node_groups": 0,
+   "images": 0
+  },
+  "05_RIVERS_AND_LAKES/WORLD_water_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_05_RIVERS_AND_LAKES"
+   ],
+   "objects": 21,
+   "meshes": 21,
+   "verts": 110767,
+   "cameras": 0,
+   "collections": 20,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 5,
+   "node_groups": 0,
+   "images": 0
+  },
+  "06_DESERTS/WORLD_deserts_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_06_DESERTS"
+   ],
+   "objects": 3,
+   "meshes": 3,
+   "verts": 19612,
+   "cameras": 0,
+   "collections": 4,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 1,
+   "node_groups": 0,
+   "images": 0
+  },
+  "07_ISLANDS/WORLD_islands_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_07_ISLANDS"
+   ],
+   "objects": 7,
+   "meshes": 7,
+   "verts": 17146,
+   "cameras": 0,
+   "collections": 8,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 1,
+   "node_groups": 0,
+   "images": 0
+  },
+  "08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "ASHRAM_VALLEY"
+   ],
+   "objects": 33,
+   "meshes": 20,
+   "verts": 2176808,
+   "cameras": 8,
+   "collections": 16,
+   "libraries": [
+    "//../04_FORESTS/FOREST_proxies_v001.blend",
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 11,
+   "node_groups": 4,
+   "images": 0
+  },
+  "09_DIMENSIONS/DIM_black_hole_training_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "DIM_BLACK_HOLE_TRAINING"
+   ],
+   "objects": 317,
+   "meshes": 306,
+   "verts": 7486,
+   "cameras": 3,
+   "collections": 9,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 6,
+   "node_groups": 0,
+   "images": 0
+  },
+  "09_DIMENSIONS/DIM_saithan_dark_world_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "DIM_SAITHAN_DARK_WORLD"
+   ],
+   "objects": 365,
+   "meshes": 354,
+   "verts": 148648,
+   "cameras": 3,
+   "collections": 8,
+   "libraries": [
+    "//../11_MATERIALS/WORLD_materials_v001.blend"
+   ],
+   "materials": 5,
+   "node_groups": 0,
+   "images": 0
+  },
+  "10_CAMERAS/WORLD_cameras_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "COMPONENT_10_CAMERAS"
+   ],
+   "objects": 18,
+   "meshes": 0,
+   "verts": 0,
+   "cameras": 17,
+   "collections": 2,
+   "libraries": [],
+   "materials": 0,
+   "node_groups": 0,
+   "images": 0
+  },
+  "11_MATERIALS/WORLD_materials_v001.blend": {
+   "saved_with": "4.5.92",
+   "scenes": [
+    "Scene"
+   ],
+   "objects": 0,
+   "meshes": 0,
+   "verts": 0,
+   "cameras": 0,
+   "collections": 0,
+   "libraries": [],
+   "materials": 42,
+   "node_groups": 0,
+   "images": 0
+  }
+ },
+ "checks": [
+  {
+   "check": "opens: 00_MASTER_WORLD/WORLD_master_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 1091 objects, 2,819,967 verts"
+  },
+  {
+   "check": "no missing linked data: 00_MASTER_WORLD/WORLD_master_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 00_MASTER_WORLD/WORLD_master_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 00_MASTER_WORLD/WORLD_master_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 01_GEOGRAPHY/WORLD_geography_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 274 objects, 2,035 verts"
+  },
+  {
+   "check": "no missing linked data: 01_GEOGRAPHY/WORLD_geography_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 01_GEOGRAPHY/WORLD_geography_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 01_GEOGRAPHY/WORLD_geography_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 02_TERRAIN/WORLD_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 37 objects, 173,003 verts"
+  },
+  {
+   "check": "no missing linked data: 02_TERRAIN/WORLD_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 02_TERRAIN/WORLD_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 02_TERRAIN/WORLD_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 11 objects, 36,589 verts"
+  },
+  {
+   "check": "no missing linked data: 03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 03_MOUNTAINS/WORLD_mountains_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 04_FORESTS/FOREST_proxies_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 5 objects, 168 verts"
+  },
+  {
+   "check": "no missing linked data: 04_FORESTS/FOREST_proxies_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 04_FORESTS/FOREST_proxies_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 04_FORESTS/FOREST_proxies_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 04_FORESTS/WORLD_forests_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 5 objects, 127,873 verts"
+  },
+  {
+   "check": "no missing linked data: 04_FORESTS/WORLD_forests_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 04_FORESTS/WORLD_forests_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 04_FORESTS/WORLD_forests_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 21 objects, 110,767 verts"
+  },
+  {
+   "check": "no missing linked data: 05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 05_RIVERS_AND_LAKES/WORLD_water_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 06_DESERTS/WORLD_deserts_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 3 objects, 19,612 verts"
+  },
+  {
+   "check": "no missing linked data: 06_DESERTS/WORLD_deserts_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 06_DESERTS/WORLD_deserts_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 06_DESERTS/WORLD_deserts_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 07_ISLANDS/WORLD_islands_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 7 objects, 17,146 verts"
+  },
+  {
+   "check": "no missing linked data: 07_ISLANDS/WORLD_islands_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 07_ISLANDS/WORLD_islands_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 07_ISLANDS/WORLD_islands_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 33 objects, 2,176,808 verts"
+  },
+  {
+   "check": "no missing linked data: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 09_DIMENSIONS/DIM_black_hole_training_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 317 objects, 7,486 verts"
+  },
+  {
+   "check": "no missing linked data: 09_DIMENSIONS/DIM_black_hole_training_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 09_DIMENSIONS/DIM_black_hole_training_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 09_DIMENSIONS/DIM_black_hole_training_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 09_DIMENSIONS/DIM_saithan_dark_world_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 365 objects, 148,648 verts"
+  },
+  {
+   "check": "no missing linked data: 09_DIMENSIONS/DIM_saithan_dark_world_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 09_DIMENSIONS/DIM_saithan_dark_world_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 09_DIMENSIONS/DIM_saithan_dark_world_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 10_CAMERAS/WORLD_cameras_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 18 objects, 0 verts"
+  },
+  {
+   "check": "no missing linked data: 10_CAMERAS/WORLD_cameras_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "geometry exists: 10_CAMERAS/WORLD_cameras_v001.blend",
+   "result": "PASS",
+   "detail": "empty meshes: []"
+  },
+  {
+   "check": "no broken image paths: 10_CAMERAS/WORLD_cameras_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "opens: 11_MATERIALS/WORLD_materials_v001.blend",
+   "result": "PASS",
+   "detail": "saved with Blender 4.5.92, 0 objects, 0 verts"
+  },
+  {
+   "check": "no missing linked data: 11_MATERIALS/WORLD_materials_v001.blend",
+   "result": "PASS",
+   "detail": "missing=[] libs_ok=True"
+  },
+  {
+   "check": "library content exists: 11_MATERIALS/WORLD_materials_v001.blend",
+   "result": "PASS",
+   "detail": "42 materials (material library \u2014 no geometry by design)"
+  },
+  {
+   "check": "no broken image paths: 11_MATERIALS/WORLD_materials_v001.blend",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "required collections exist and are non-empty",
+   "result": "PASS",
+   "detail": "MAIN_WORLD=376, NORTHERN_REGIONS=13, SOUTHERN_REGIONS=18, EASTERN_REGIONS=12, WESTERN_REGIONS=12, MOUNTAIN_REGIONS=11, FOREST_REGIONS=5, WATER_SYSTEMS=21, DESERT_REGIONS=3, ISLANDS=7, ASHRAM_VALLEY=33, UNEXPLORED_REGIONS=10"
+  },
+  {
+   "check": "separate dimensions are separate scenes (not in MAIN_WORLD)",
+   "result": "PASS",
+   "detail": "scenes: MAIN_WORLD, ASHRAM_VALLEY, DIM_BLACK_HOLE_TRAINING, DIM_SAITHAN_DARK_WORLD"
+  },
+  {
+   "check": "consistent world scale (1 BU = 1 km, vexag on every piece)",
+   "result": "PASS",
+   "detail": "vexag values {20.0}, pieces 44"
+  },
+  {
+   "check": "terrain inside the 12 000 x 6 000 km world rectangle",
+   "result": "PASS",
+   "detail": "x -5715..5723 km, y -2652..2980 km, z -90.0..133.6 BU (= -4500..6682 m)"
+  },
+  {
+   "check": "terrain pieces tile the land window exactly (no gaps, no overlaps)",
+   "result": "PASS",
+   "detail": "faces expected 272,192, covered once 272,192, overlaps 0, gaps 0"
+  },
+  {
+   "check": "connected landmasses (3D faces) match the 2D map",
+   "result": "PASS",
+   "detail": "3D connected land masses 41 (5 largest: [23082, 23456, 49489, 60286, 81465]) vs 2D audit 43 (face- vs cell-connectivity)"
+  },
+  {
+   "check": "main-world rivers never flow uphill",
+   "result": "PASS",
+   "detail": "423 rivers, 8,400 points, uphill steps = 0"
+  },
+  {
+   "check": "main-world rivers sit on the terrain (not below ground)",
+   "result": "PASS",
+   "detail": "0 of 7977 river points below the terrain cell"
+  },
+  {
+   "check": "Ashram-valley rivers never flow uphill",
+   "result": "PASS",
+   "detail": "96 rivers, 157,494 points (25 m spacing), uphill steps = 0"
+  },
+  {
+   "check": "valley river water surface above the carved bed (LOD0/LOD1)",
+   "result": "PASS",
+   "detail": "LOD0: 0.0% of 395 pts covered by terrain, LOD1: 0.0% of 4,843 pts covered by terrain, LOD2: 41.1% of 130,159 pts covered by terrain (LOD2 = far horizon only)"
+  },
+  {
+   "check": "valley LODs nest exactly (hole = inner extent, skirts present)",
+   "result": "PASS",
+   "detail": "LOD0 \u00b13 km @ 12.5 m, hole \u00b10 km, skirt 15 m, 233,281 verts, LOD1 \u00b130 km @ 100 m, hole \u00b13 km, skirt 120 m, 363,601 verts, LOD2 \u00b1160 km @ 1000 m, hole \u00b130 km, skirt 400 m, 104,321 verts"
+  },
+  {
+   "check": "vegetation instancing evaluates on every LOD (viewport density)",
+   "result": "PASS",
+   "detail": "AV_FOREST_LOD0=0, AV_FOREST_LOD1=9,625, AV_GROVES_LOD0=2,592, AV_GROVES_LOD1=10,546 \u2014 LOD0 forest = 0 is correct: the map has grassland within \u00b13 km (forest belt starts \u224822 km away); groves fill LOD0"
+  },
+  {
+   "check": "Ashram building kept as a separate asset (only placement refs here)",
+   "result": "PASS",
+   "detail": "site elevation 692.3 m; pad = concept v3 compound footprint"
+  },
+  {
+   "check": "camera previews rendered successfully",
+   "result": "PASS",
+   "detail": "38/38 images (27 Cycles, 11 viewport/Workbench)"
+  }
+ ]
+}

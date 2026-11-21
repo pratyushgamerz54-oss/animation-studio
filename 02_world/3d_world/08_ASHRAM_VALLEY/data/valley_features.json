@@ -1,0 +1,60 @@
+{
+ "status": "PROPOSAL \u2014 Ashram position + valley = map revision 01 (NOT LOCKED)",
+ "frame": "local metres; origin = proposed Ashram position; +X east, +Y north; Z = elevation above sea level",
+ "ashram_cell_C1": [
+  596.0,
+  233.0
+ ],
+ "site_elev_m": 692.3057071558301,
+ "pad_rect_m": [
+  -75.0,
+  75.0,
+  -135.0,
+  75.0
+ ],
+ "lods": {
+  "LOD0": {
+   "half_extent_m": 3000.0,
+   "spacing_m": 12.5
+  },
+  "LOD1": {
+   "half_extent_m": 30000.0,
+   "spacing_m": 100.0
+  },
+  "LOD2": {
+   "half_extent_m": 160000.0,
+   "spacing_m": 1000.0
+  }
+ },
+ "n_rivers": 96,
+ "river_len_km": 3985.2033800297027,
+ "river_width_m": [
+  15.111805529092463,
+  140.0
+ ],
+ "path_target": {
+  "kind": "villages",
+  "dist_km": 273.72431386341987,
+  "dir_deg": 27.407575437818405
+ },
+ "path_len_km": 30.794840468127205,
+ "nearest_snow_cell": {
+  "x_km": -81.0,
+  "y_km": 60.0,
+  "dist_km": 100.80178569846865
+ },
+ "markers": {
+  "villages": [],
+  "cities": [],
+  "ruins": [],
+  "caves": [],
+  "waterfalls": [
+   [
+    57000.0,
+    159000.0,
+    2272.120849609376
+   ]
+  ],
+  "hidden": []
+ }
+}
