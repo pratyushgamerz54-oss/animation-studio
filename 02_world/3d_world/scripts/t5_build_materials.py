@@ -198,10 +198,10 @@ def terrain_material():
     cliffmask = b.math('MAXIMUM', A['m_cliff'], b.maprange(nz, .58, .44))
     base, _ = hblend(base, cl, cliffmask)
     # --- snow (+ far aerial snow), sticks to flatter ground; ice in steep, wet couloirs high up
-    sn = L_('snow_02', 4.0)
-    snf = L_('snow_field_aerial', 70.0)
+    sn = L_('snow_02', 4.0, at=True)
+    snf = L_('snow_field_aerial', 90.0, at=True)
     sn = lerp_layer(far, sn, snf)
-    snowmask = b.math('MULTIPLY', A['m_snow'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .12)), .42, .6))
+    snowmask = b.math('MULTIPLY', A['m_snow'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .12)), .70, .84))
     base, sfac = hblend(base, sn, snowmask, .25)
     ice = [b.mixc(b.math('MULTIPLY', meso, .5), lin('#B8D4E6'), lin('#8DB6D2')), .1, base[2], .6]
     icef = b.math('MULTIPLY', b.math('MULTIPLY', A['m_snow'], b.maprange(A['m_flow'], .45, .8)), b.maprange(zpos, 4300, 4700))
@@ -265,7 +265,7 @@ streak = b.maprange(st, .38, .62)
 bs.inputs['Base Color'].default_value = lin('#EEF3F2'); bs.inputs['Roughness'].default_value = .35
 bs.inputs['Subsurface Weight'].default_value = .5; bs.inputs['Transmission Weight'].default_value = .3
 tr = b.node('ShaderNodeBsdfTransparent')
-mx = b.node('ShaderNodeMixShader'); b.link(b.math('ADD', b.math('MULTIPLY', streak, .85), .1, clamp=True), mx.inputs[0])
+mx = b.node('ShaderNodeMixShader'); b.link(b.math('ADD', b.math('MULTIPLY', streak, .7), .05, clamp=True), mx.inputs[0])
 b.link(tr.outputs[0], mx.inputs[1]); b.link(bs.outputs[0], mx.inputs[2]); b.link(mx.outputs[0], out.inputs['Surface'])
 m.blend_method = 'HASHED' if hasattr(m, 'blend_method') else None
 SPEC['MAT_T5_WATERFALL'] = dict(source='procedural', maps='animated falling streaks (noise stretched in Z), subsurface white water, alpha mix',

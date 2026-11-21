@@ -147,7 +147,7 @@ for f in FEATURED:
              lip_x=float(r[k + 1, 0]), lip_y=float(r[k + 1, 1]), out_x=float(r[k + 2, 0]), out_y=float(r[k + 2, 1]))
 
 
-CASCADE_STEP = 14.0          # m — inside the waterfall gorge the steep river profile becomes pools + drops of ≈ this height
+CASCADE_STEP = None  # (14 m quantisation looked artificial)          # m — inside the waterfall gorge the steep river profile becomes pools + drops of ≈ this height
 
 
 def wf_weight(x, y):
@@ -171,7 +171,7 @@ def water_profile(ri, a, ss, s, z, X, Y):
         m1 = (ss >= s[k]) & (ss < s_lip); m2 = (ss >= s_lip) & (ss < s_lip + 3); m3 = (ss >= s_lip + 3) & (ss <= s[k + 2])
         zz[m1] = zt; zz[m2] = zt + (zb - zt) * (ss[m2] - s_lip) / 3; zz[m3] = zb
     w = wf_weight(X, Y)
-    if (w > 0).any():
+    if CASCADE_STEP and (w > 0).any():
         q = CASCADE_STEP * np.ceil(zz / CASCADE_STEP)
         zz = zz + (q - zz) * w
     zz = np.minimum.accumulate(zz)
@@ -268,7 +268,7 @@ def detail(X, Y, z0, t):
     return d
 
 
-def strata(z, slope_deg, h=38.0, k=.45):
+def strata(z, slope_deg, h=38.0, k=.22):
     """rock layering on steep faces: ledges every ~h m (only where the slope is cliff-like)."""
     t = z / h; fr = t - np.floor(t)
     zt = (np.floor(t) + sstep(.72, 1.0, fr)) * h
@@ -341,6 +341,9 @@ def build(name):
         far = sp >= 400
         if t['kind'] == 'wf':                                           # rock steps / cliff bands across the gorge at each drop
             z = z + (R[jj, 2] - R[jj, 4]) * (1 - sstep(60, 260, d)) * ok
+            # the river runs in a narrow rock gorge: walls ≈ 30 m, irregular, fading out at the tile border
+            gw = w * .8 + 10 + N.fbm(X, Y, 60, 3, 160) * 8
+            z = z - (28 + N.fbm(X, Y, 120, 2, 161) * 10) * (1 - sstep(gw, gw + 70, d)) * ok * W
         if sp <= 10:                                                    # natural, irregular banks at fine resolution
             d = d + (fbm(X, Y, 45, 3, 120) * .22 + fbm(X, Y, 9, 2, 121) * .06) * w * ok
         bank = np.maximum(3 * w, (.6 if far else 1.6) * sp)
