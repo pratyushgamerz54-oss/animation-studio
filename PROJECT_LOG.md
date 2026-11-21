@@ -81,3 +81,5 @@
 17. **21 Nov — TASK 04 CLOSED.** Director ne blockout layout ko APPROVED FOR DETAILED ENVIRONMENT PRODUCTION kiya (conditions: layout
     preserve, map rev 01 = proposal, GEM unconfirmed, dimensions preserve, files + backups safe). v001 baseline checksummed + save-guard;
     saare 16 backups git mein. Closeout `02_world/3d_world/TASK04_CLOSEOUT.md`. Ab TASK 05 ki taiyaari.
+18. **21 Nov — Session 2 handoff:** `HANDOFF.md` poora naya (sab kaam + kya dobara nahi banana + Task 05 plan), `setup_session.sh`
+    (ek command setup: bpy 5.3 + bpy 4.5 + Mesa + Poly Haven + baseline check). Next session: TASK 05 brief se shuru.

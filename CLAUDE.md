@@ -54,7 +54,7 @@ hone chahiye. Final shots ke liye VFX upgrade karna hai:
 - Har VFX shot ka preview dikhana aur Director approve kare tab final render.
 
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
-0. **SABSE PEHLE** `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
+0. **SABSE PEHLE** `HANDOFF.md` padho aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
    Phir wahin se kaam shuru karo jahan ruka tha. Har bada kaam hone par `PROJECT_LOG.md` mein entry jodo.
 1. `pip install bpy scipy` (Blender 5.3 Python module). **TASK 04 world files need Blender 4.5:**
