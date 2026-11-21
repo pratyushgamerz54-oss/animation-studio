@@ -311,6 +311,57 @@ def desert_material():
 L['TERRAIN_DESERT'] = desert_material()
 
 
+def forbidden_material():
+    """MAT_T5_TERRAIN_FORBIDDEN — the blasted crater region (map biome 'forbidden'): dark ash ground (m_dry), fissures with
+    scorched reddish-brown soil (m_pad), dark rubble (m_gravel), dark fractured rock + cliffs. No lava / glow (not approved)."""
+    m, b, bs, out = newmat('MAT_T5_TERRAIN_FORBIDDEN')
+    v = coords(b)
+    A = {k: b.attr(k) for k in ('m_rock', 'm_dry', 'm_pad', 'm_scree', 'm_gravel', 'm_cliff')}
+    cam = b.node('ShaderNodeCameraData'); dist = cam.outputs['View Distance']
+    geo = b.node('ShaderNodeNewGeometry'); ns = b.node('ShaderNodeSeparateXYZ'); b.link(geo.outputs['Normal'], ns.inputs[0]); nz = ns.outputs['Z']
+    macro = b.noise(v, 1 / 1500.0, 4, .55); meso = b.noise(v, 1 / 70.0, 4, .6)
+    flat_ok = b.maprange(nz, .55, .78)
+
+    def L_(tex, scale, box=False, at=False, tint=None):
+        g = use_group(b, tex, v, scale, box, at, False, None, tint)
+        return [g.outputs['Color'], g.outputs['Roughness'], g.outputs['Normal'], g.outputs['Height']]
+
+    def lerp(f, a_, c_):
+        return [b.mixc(f, a_[0], c_[0]), b.mixf(f, a_[1], c_[1]), b.mixv(f, a_[2], c_[2]), b.mixf(f, a_[3], c_[3])]
+
+    def hb(base, lay, mask, k=.35):
+        val = b.math('ADD', b.math('MULTIPLY', mask, 1.3), b.math('MULTIPLY', b.math('SUBTRACT', lay[3], base[3]), k))
+        return lerp(b.maprange(b.math('SUBTRACT', val, .15), .4, .6), base, lay)
+
+    def dark(col, sat, val):
+        h = b.node('ShaderNodeHueSaturation'); h.inputs['Saturation'].default_value = sat; h.inputs['Value'].default_value = val
+        b.link(col, h.inputs['Color']); return h.outputs['Color']
+    base = L_('dry_ground_01', 3.0, at=True); base[0] = dark(base[0], .2, .22)
+    ash = L_('dry_ground_01', 5.0); ash[0] = b.mixc(1.0, dark(ash[0], .0, .16), lin('#8A8288'), 'MULTIPLY')
+    base = hb(base, ash, b.maprange(b.math('ADD', A['m_dry'], b.math('MULTIPLY', macro, .25)), .1, .8), .2)
+    rub = L_('rocky_gravel', 2.5); rub[0] = dark(rub[0], .15, .25)
+    base = hb(base, rub, b.math('MULTIPLY', A['m_gravel'], flat_ok))
+    fis = L_('mud_cracked_dry_03', 3.0); fis[0] = b.mixc(1.0, dark(fis[0], .4, .28), lin('#7A5446'), 'MULTIPLY')
+    base = hb(base, fis, b.math('MULTIPLY', A['m_pad'], flat_ok), .5)
+    sc_ = L_('gravel_ground_01', 3.0); sc_[0] = dark(sc_[0], .2, .22)
+    base = hb(base, sc_, b.math('MULTIPLY', A['m_scree'], flat_ok))
+    rk = L_('dark_rock', 6.0, box=True, at=True)
+    rfar = [b.mixc(b.maprange(b.noise(v, 1 / 20.0, 4, .6), .3, .7), lin('#1E1B1C'), lin('#3B3536')), .8, rk[2], .5]
+    rk = lerp(b.maprange(dist, 500, 2500), rk, rfar)
+    base = hb(base, rk, b.math('MAXIMUM', b.math('MAXIMUM', A['m_rock'], A['m_cliff']), b.maprange(nz, .7, .5)))
+    far = [b.mixc(b.maprange(macro, .35, .65), lin('#1C1819'), lin('#332C2F')), .9, base[2], .5]
+    base = lerp(b.maprange(dist, 1500, 6000), base, far)
+    b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
+    bs.inputs['Metallic'].default_value = 0.0
+    SPEC['MAT_T5_TERRAIN_FORBIDDEN'] = dict(source='Poly Haven 2K dry_ground_01, rocky_gravel, mud_cracked_dry_03, gravel_ground_01, dark_rock '
+                                            '(darkened / desaturated) + procedural far', maps='Base Color, Roughness, Normal GL, Displacement',
+                                            resolution='2K per layer', metallic=0.0, layers=['ash ground', 'rubble', 'fissures', 'scree', 'dark rock'])
+    return m
+
+
+L['TERRAIN_FORBIDDEN'] = forbidden_material()
+
+
 # =========================================================================== water, mist, haze, far trees
 def water(name, deep, shallow, rough=.02, wave=1.0):
     m, b, bs, out = newmat(name)

@@ -171,6 +171,19 @@
    "sandstone cliff"
   ]
  },
+ "MAT_T5_TERRAIN_FORBIDDEN": {
+  "source": "Poly Haven 2K dry_ground_01, rocky_gravel, mud_cracked_dry_03, gravel_ground_01, dark_rock (darkened / desaturated) + procedural far",
+  "maps": "Base Color, Roughness, Normal GL, Displacement",
+  "resolution": "2K per layer",
+  "metallic": 0.0,
+  "layers": [
+   "ash ground",
+   "rubble",
+   "fissures",
+   "scree",
+   "dark rock"
+  ]
+ },
  "MAT_T5_WATER_RIVER": {
   "source": "procedural",
   "maps": "transmission IOR 1.333, animated ripple bump, foam (attribute \"foam\" \u00d7 noise)",

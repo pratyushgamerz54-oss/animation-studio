@@ -26,7 +26,8 @@ OUTS = {'valley': ('08_ASHRAM_VALLEY', 'ASHRAM_VALLEY_terrain_v002.blend', 'T5_V
         'forest': ('04_FORESTS', 'FOREST_NORTH_BELT_v002.blend', 'T5_FOREST_NORTH'),
         'mountain': ('03_MOUNTAINS', 'MOUNTAIN_NW01_v002.blend', 'T5_MOUNTAIN_NW'),
         'water': ('05_RIVERS_AND_LAKES', 'WATER_v002.blend', 'T5_WATER'),
-        'desert': ('06_DESERTS', 'DESERT_R04_v002.blend', 'T5_DESERT_R04')}
+        'desert': ('06_DESERTS', 'DESERT_R04_v002.blend', 'T5_DESERT_R04'),
+        'crater': ('06_DESERTS', 'FORBIDDEN_R05_v002.blend', 'T5_FORBIDDEN_R05')}
 FOLDER, FNAME, TOP = OUTS[COMP]
 
 wk.new_file()
@@ -207,14 +208,18 @@ elif COMP == 'mountain':
       Avoid_Mask='m_rock', Avoid_Mask_2='m_bare', Slope_Max=38.0, Cluster_Scale=4.0, Cluster_Amount=.6, Scale_Min=1.0, Scale_Max=2.0,
       Align_To_Normal=.7, Random_Tilt=8.0, Seed=68, Cull_Distance=50.0, Cull_Angle=50.0, Keep_Near=4.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
 
-elif COMP == 'desert':
-    DD = wk.P('06_DESERTS', 'data_v002'); RJ = json.load(open(os.path.join(DD, 'region_R04.json')))
+elif COMP in ('desert', 'crater'):
+    RK_ = 'R04' if COMP == 'desert' else 'R05'
+    KF, KN, KH = ('DF', 'DN', 'DH') if COMP == 'desert' else ('XF', 'XN', 'XH')
+    MATR = 'MAT_T5_TERRAIN_DESERT' if COMP == 'desert' else 'MAT_T5_TERRAIN_FORBIDDEN'
+    DD = wk.P('06_DESERTS', 'data_v002'); RJ = json.load(open(os.path.join(DD, f'region_{RK_}.json')))
     TT = {k: dict(x0=-v['half'], x1=v['half'], y0=-v['half'], y1=v['half'], sp=v['sp']) for k, v in RJ['tiles'].items()}
-    sc['frame'] = RJ['frame']; sc['region'] = 'R04 Western Desert & Wastelands (map revision 01 = PROPOSAL)'
-    ct = C('T5_DESERT_TERRAIN'); cs = C('T5_DESERT_SCATTER'); cw = C('T5_DESERT_WATER')
-    DFo = tile('DF', ct, 150, .6, DD, TT['DF'], [TT['DN']], 'MAT_T5_TERRAIN_DESERT')
-    DNo = tile('DN', ct, 20, .3, DD, TT['DN'], [TT['DH']], 'MAT_T5_TERRAIN_DESERT')
-    DHo = tile('DH', ct, 3, .25, DD, TT['DH'], [], 'MAT_T5_TERRAIN_DESERT')
+    sc['frame'] = RJ['frame']; sc['region'] = f"{RK_} {RJ['name']} (map revision 01 = PROPOSAL)"
+    ct = C(f'{TOP}_TERRAIN'); cs = C(f'{TOP}_SCATTER'); cw = C(f'{TOP}_WATER')
+    DFo = tile(KF, ct, 150, .6, DD, TT[KF], [TT[KN]], MATR)
+    DNo = tile(KN, ct, 20, .3, DD, TT[KN], [TT[KH]], MATR)
+    DHo = tile(KH, ct, 3, .25, DD, TT[KH], [], MATR)
+    TT['DF'], TT['DN'], TT['DH'] = TT[KF], TT[KN], TT[KH]
 
     def S(name, T_, near=None, mid=None, far=None, **p):
         q = {k.replace('_', ' ').replace('Near to Mid', 'LOD Near→Mid').replace('Mid to Far', 'LOD Mid→Far'): v for k, v in p.items()}
@@ -230,18 +235,25 @@ elif COMP == 'desert':
     S('SC_DH_PAVEMENT_STONES', DHo, 'LIB_ROCKS_SMALL', Density=.6, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.2, Mask_Max=.6,
       Avoid_Mask='m_dry', Slope_Max=30.0, Cluster_Scale=6.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=2.5, Align_To_Normal=1.0,
       Random_Tilt=10.0, Sink=.02, Seed=73, Cull_Distance=120.0, Cull_Angle=55.0, Keep_Near=6.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-    S('SC_DH_DESERT_SHRUBS', DHo, 'LIB_UNDERSTORY', Density=.02, Viewport_Density=.1, Mask='m_grove', Mask_Min=.2, Mask_Max=.6,
+    if COMP == 'crater':                                           # dead, burnt trees on the ash plain (no living plants)
+        S('SC_DH_DEAD_TREES', DHo, 'LIB_LOGS', Density=.0025, Viewport_Density=.3, Mask='m_grove', Mask_Min=.2, Mask_Max=.6,
+          Slope_Max=25.0, Cluster_Scale=60.0, Cluster_Amount=.6, Scale_Min=.9, Scale_Max=1.8, Align_To_Normal=1.0, Random_Tilt=6.0,
+          Sink=.1, Seed=75, Cull_Distance=900.0, Cull_Angle=55.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_DH_DESERT_SHRUBS', DHo, 'LIB_UNDERSTORY', Density=.02 if COMP == 'desert' else 0.0, Viewport_Density=.1, Mask='m_grove', Mask_Min=.2, Mask_Max=.6,
       Slope_Max=30.0, Cluster_Scale=20.0, Cluster_Amount=.7, Scale_Min=.5, Scale_Max=1.1, Seed=74, Cull_Distance=400.0,
       Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     # sea (west coast of the region) + the few perennial channels
-    D2 = np.load(os.path.join(DD, 'DF.npz')); z2 = D2['z']; n = z2.shape[0]; h_ = TT['DF']['x1']
+    D2 = np.load(os.path.join(DD, f'{KF}.npz')); z2 = D2['z']; n = z2.shape[0]; h_ = TT['DF']['x1']
     g = np.linspace(-h_, h_, n); X, Y = np.meshgrid(g, g[::-1])
-    Fq = wk.grid_faces(n, n).reshape(-1, 4); fz = (z2.ravel() < .5)[Fq].any(1)
-    if fz.any():
-        V, Fk, _ = wk.subset(np.column_stack([X.ravel(), Y.ravel(), np.zeros(X.size)]), Fq[fz])
-        o = wk.mesh_from_arrays('T5_DESERT_SEA', V, Fk, cw, MAT['MAT_T5_WATER_LAKE']); wk.set_float_attr(o, 'foam', np.zeros(len(V)))
-        wk.add_props(o, status=STATUS, note='sea level 0 m; shoreline = terrain ∩ 0 m')
-    W2 = np.load(os.path.join(DD, 'water.npz')); RIV, RIVO = W2['RIV'].astype(float), W2['RIVO']
+    Fq = wk.grid_faces(n, n).reshape(-1, 4)
+    for lid, lev in ([('SEA', 0.0)] if COMP == 'desert' else list(RJ.get('lakes', {}).items())):
+      inl = (D2['MA'][..., 3].ravel() > 100) if COMP == 'crater' else np.ones(z2.size, bool)
+      fz = ((z2.ravel() < lev + .5) & inl)[Fq].any(1)
+      if fz.any():
+        V, Fk, _ = wk.subset(np.column_stack([X.ravel(), Y.ravel(), np.full(X.size, lev)]), Fq[fz])
+        o = wk.mesh_from_arrays(f'{TOP}_WATER_{lid}', V, Fk, cw, MAT['MAT_T5_WATER_LAKE']); wk.set_float_attr(o, 'foam', np.zeros(len(V)))
+        wk.add_props(o, status=STATUS, note=f'level {lev:.1f} m; shoreline = terrain ∩ level')
+    W2 = np.load(os.path.join(DD, 'water.npz' if COMP == 'desert' else f'water_{RK_}.npz')); RIV, RIVO = W2['RIV'].astype(float), W2['RIVO']
     vs, fs, n0 = [], [], 0
     for i in range(len(RIVO) - 1):
         r = RIV[RIVO[i]:RIVO[i + 1]]; r = r[r[:, 4] > .5]

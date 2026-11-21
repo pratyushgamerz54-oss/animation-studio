@@ -1,0 +1,104 @@
+{
+ "region": "R05",
+ "name": "Forbidden Region (blasted crater, crater lake)",
+ "status": "PROPOSAL \u2014 detailed terrain inside the approved map region (map rev 01 = proposal)",
+ "frame": "local metres; origin = site centre = C1 cell (276.48, 508.0) = Ashram-local (-958560, -825000) m; +X east, +Y north",
+ "origin_ashram_local_m": [
+  -958560.0,
+  -825000.0
+ ],
+ "lakes": {
+  "8": 490.6181640625
+ },
+ "kind": "crater",
+ "tiles": {
+  "XF": {
+   "half": 96000,
+   "sp": 400.0,
+   "parent": null,
+   "band": 9000
+  },
+  "XN": {
+   "half": 12000,
+   "sp": 20.0,
+   "parent": "XF",
+   "band": 1500
+  },
+  "XH": {
+   "half": 1500,
+   "sp": 2.0,
+   "parent": "XN",
+   "band": 150
+  }
+ },
+ "stats": [
+  {
+   "region": "R05",
+   "tile": "XF",
+   "shape": [
+    481,
+    481
+   ],
+   "spacing_m": 400.0,
+   "half_m": 96000,
+   "z_min": 103.68947986975108,
+   "z_max": 1075.5265307534598,
+   "cover": {
+    "sand": 0.3477811731449985,
+    "rock": 0.0,
+    "playa": 0.05586075440545295,
+    "cliff": 0.0,
+    "wet": 0.30712609298887883
+   },
+   "drainage_lines": 164,
+   "seconds": 11.4
+  },
+  {
+   "region": "R05",
+   "tile": "XN",
+   "shape": [
+    1201,
+    1201
+   ],
+   "spacing_m": 20.0,
+   "half_m": 12000,
+   "z_min": 455.0181579589844,
+   "z_max": 691.669309528552,
+   "cover": {
+    "sand": 0.45535256839117555,
+    "rock": 0.0016527997415420538,
+    "playa": 0.07384284952658796,
+    "cliff": 0.00047559589878265474,
+    "wet": 0.08385393520941818
+   },
+   "drainage_lines": 9,
+   "seconds": 33.2
+  },
+  {
+   "region": "R05",
+   "tile": "XH",
+   "shape": [
+    1501,
+    1501
+   ],
+   "spacing_m": 2.0,
+   "half_m": 1500,
+   "z_min": 563.0972778328136,
+   "z_max": 660.6884563477233,
+   "cover": {
+    "sand": 0.5430627860351593,
+    "rock": 0.0,
+    "playa": 0.07789210923563727,
+    "cliff": 0.0,
+    "wet": 0.0
+   },
+   "drainage_lines": 2,
+   "seconds": 52.5
+  }
+ ],
+ "wind_deg": 280.0,
+ "notes": [
+  "dunes / mesas / playas are procedural detail inside the map's desert + wasteland biomes",
+  "drainage = the map's own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)"
+ ]
+}

@@ -35,7 +35,7 @@ REL = {'CAM_T5_01_MOUNTAIN_WIDE': ('SC_MT_',), 'CAM_T5_03_RIVER_WATERFALL': ('SC
        'CAM_T5_04_SNOWY_PEAKS': ('SC_MT_',), 'CAM_T5_02_FOREST_ESTABLISHING': ('SC_FH_', 'SC_L1_'),
        'CAM_T5_08_FOREST_FLOOR': ('SC_FH_',), 'CAM_T5_06_VALLEY_AERIAL': ('SC_VH_GROVES', 'SC_L0_', 'SC_L1_', 'SC_VH_BOULDERS'),
        'CAM_T5_07_GROUND_LEVEL': ('SC_VH_', 'SC_L0_', 'SC_L1_'),
-       'CAM_T5_05_DESERT': ('SC_DH_', 'SC_DN_'), 'CAM_T5_05B_DESERT_MESAS_AERIAL': ('SC_DN_',)}
+       'CAM_T5_05_DESERT': ('SC_DH_', 'SC_DN_'), 'CAM_T5_05B_DESERT_MESAS_AERIAL': ('SC_DN_',), 'CAM_T5_09_FORBIDDEN_RIM': ('SC_DH_', 'SC_DN_'), 'CAM_T5_09B_FORBIDDEN_AERIAL': ('SC_DN_',)}
 for cam in cams:
     keep = REL.get(cam.name)
     for o in sc.objects:

@@ -68,5 +68,25 @@
   ],
   "description": "Ground level in the forest \u2014 forest floor, ferns, roots, fallen logs, mossy rocks, fir / pine trunks",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_05_DESERT": {
+  "seconds": 155.1,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Desert landscape \u2014 R04 Western Desert: wind-shaped dune field, sandstone butte with strata, desert pavement",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_05B_DESERT_MESAS_AERIAL": {
+  "seconds": 135.6,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Desert aerial \u2014 dune seas between mesas / buttes, dry wadis and playas (cracked ground)",
+  "blender": "4.5.16 LTS"
  }
 }

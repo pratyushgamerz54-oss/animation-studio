@@ -24,8 +24,15 @@ REGIONS = {
                 tiles={'DF': dict(half=60000, sp=300.0, parent=None, band=8000),
                        'DN': dict(half=12000, sp=20.0, parent='DF', band=1500),
                        'DH': dict(half=1500, sp=2.0, parent='DN', band=150)},
-                wind_deg=280.0),        # prevailing wind FROM the west (slip faces face east) — proposal
+                wind_deg=280.0, kind='desert'),        # prevailing wind FROM the west (slip faces face east) — proposal
+    'R05': dict(name='Forbidden Region (blasted crater, crater lake)', folder='06_DESERTS', cell=(276.48, 508.0),
+                crater_cell=(276.48, 483.84),
+                tiles={'XF': dict(half=96000, sp=400.0, parent=None, band=9000),
+                       'XN': dict(half=12000, sp=20.0, parent='XF', band=1500),
+                       'XH': dict(half=1500, sp=2.0, parent='XN', band=150)},
+                wind_deg=280.0, kind='crater'),
 }
+KIND_FILES = {'desert': ('DF', 'DN', 'DH'), 'crater': ('XF', 'XN', 'XH')}
 
 
 def frame(reg):
@@ -141,7 +148,23 @@ def build(rkey, tkey):
     mesa_amt = np.clip(was * .9 + des * .35, 0, 1) * (~sea)
     dn = dunes(AX_, AY_, reg['wind_deg'], sp)
     sandsea = des * sstep(-.05, .25, N.fbm(AX_, AY_, 9000, 3, 210)) * (1 - mm) * (~sea)
-    d = mh * mesa_amt + dn * sandsea + N.fbm(AX_, AY_, 300, 3, 211) * 3 * (1 - sandsea) * P.bl(sp, 300)
+    if reg.get('kind') == 'crater':
+        sandsea = sandsea * 0
+    d = mh * mesa_amt * (reg.get('kind') != 'crater') + dn * sandsea + N.fbm(AX_, AY_, 300, 3, 211) * 3 * (1 - sandsea) * P.bl(sp, 300)
+    if reg.get('kind') == 'crater':
+        # forbidden crater: no dunes; radial ejecta ridges outside the rim, slump terraces on the inner wall, fissures, rubble
+        ccx, ccy = F.to_local(np.array(reg['crater_cell'][0]), np.array(reg['crater_cell'][1]))
+        rx, ry = AX_ - float(ccx), AY_ - float(ccy); rad = np.hypot(rx, ry); ang = np.arctan2(ry, rx)
+        R0 = 75000.0
+        rim = np.exp(-((rad - R0) / 9000.0) ** 2)
+        ej = (N.ridged(ang * 9000.0, rad * .25, 2600, 4, 240) * 120 + N.ridged(ang * 30000.0, rad * .4, 600, 3, 241) * 25) \
+            * sstep(R0 * .9, R0, rad) * np.exp(-np.clip(rad - R0, 0, None) / 30000.0)
+        t_ = rad / 900.0; fr = t_ - np.floor(t_)
+        terr = (sstep(.7, 1.0, fr) - .5) * 26 * sstep(R0 * .55, R0 * .8, rad) * (1 - sstep(R0 * .95, R0 * 1.02, rad))
+        vor = N.fbm(AX_, AY_, 140, 2, 242)
+        fiss = sstep(.0, .06, np.abs(N.fbm(AX_, AY_, 900, 3, 243) + .3 * vor)) - 1                # 0 off-crack, −1 in a crack
+        d = ej + rim * 90 + fiss * 6 * P.bl(sp, 40) + N.fbm(AX_, AY_, 220, 3, 244) * 6 * P.bl(sp, 220)
+        sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
     ze = z0 + d
     flow = np.zeros_like(ze); scree = np.zeros_like(ze)
     if sp >= 15:                                                       # gullies on the mesa walls, talus aprons below
@@ -168,6 +191,19 @@ def build(rkey, tkey):
         ze = np.where(mid & (ze > zr), zr + tb * (ze - zr), ze)
         wet = np.where(ok, (1 - sstep(ri, ri + bank * .3, dd)) * wt, 0)
         wadi = np.where(ok, 1 - sstep(ri * .8, ri + bank * .5, dd), 0) * (1 - wt)
+    # ---- map lake(s) at spill level (crater lake)
+    LAB_, NL_ = ndi.label(F.ol)
+    ids = np.unique(LAB_[np.clip(np.round(r).astype(int), 0, F.OH - 1), np.clip(np.round(c).astype(int), 0, F.OW - 1)])
+    lakeinside = np.zeros_like(ze)
+    for k_ in ids[ids > 0]:
+        cells = LAB_ == k_
+        level = float(np.median(F.oF[cells]))
+        mS = ndi.gaussian_filter(cells.astype(float), .7)
+        mk = ndi.map_coordinates(mS, [r, c], order=1, mode='constant')
+        ins = sstep(.35, .65, mk)
+        ze = np.where(ins > 0, np.minimum(ze, level - ins * 35 - .6), ze)
+        lakeinside = np.maximum(lakeinside, ins)
+        reg.setdefault('lakes', {})[int(k_)] = level
     # ---- seamless border onto the parent tile
     if t['parent']:
         pt = reg['tiles'][t['parent']]; zp = np.load(os.path.join(ROOT, reg['folder'], 'data_v002', f"{t['parent']}.npz"))['z'].astype(float)
@@ -188,6 +224,13 @@ def build(rkey, tkey):
     sc = np.clip(scree / max(np.percentile(scree[scree > 0], 95) if (scree > 0).any() else 1, 1e-6), 0, 1)
     pave = (1 - sand) * (1 - rock) * (1 - playa) * sstep(.0, .3, N.fbm(X + OX, Y + OY, 400, 2, 230) + .2)
     veg = wadi * sstep(.2, .5, N.fbm(X + OX, Y + OY, 120, 2, 231)) * (1 - sandsea)   # sparse shrubs in the wadis
+    if reg.get('kind') == 'crater':                                    # forbidden: ash ground, fissures, ejecta rubble, dead trees
+        crack = sstep(.05, .012, np.abs(N.fbm(X + OX, Y + OY, 900, 3, 243) + .3 * N.fbm(X + OX, Y + OY, 140, 2, 242)))   # thin fissure bands
+        sand = sstep(.2, .6, N.fbm(X + OX, Y + OY, 2000, 3, 250) + .4) * (1 - rock) * (1 - lakeinside)      # → ASH
+        playa = np.clip(crack + sstep(1.5, .5, slope) * .3 * sstep(.3, .6, N.fbm(X + OX, Y + OY, 700, 2, 251)), 0, 1) * (1 - lakeinside)
+        pave = sstep(.1, .45, N.fbm(X + OX, Y + OY, 300, 3, 252)) * (1 - rock) * (1 - lakeinside)       # → RUBBLE
+        veg = sstep(.25, .55, N.fbm(X + OX, Y + OY, 900, 3, 253)) * (1 - lakeinside) * sstep(25, 12, slope)  # → dead trees
+        wet = np.maximum(wet, lakeinside)
     U = lambda a: np.clip(np.round(a * 255), 0, 255).astype(np.uint8)
     Z = np.zeros_like(ze)
     MA = np.stack([U(Z), U(rock), U(Z), U(np.maximum(wet, sea))], -1)            # forest, rock, snow, wet
@@ -207,16 +250,17 @@ if __name__ == '__main__':
     rk = sys.argv[1] if len(sys.argv) > 1 else 'R04'
     reg = REGIONS[rk]; OX, OY = frame(reg)
     stats = []; RVs = None
-    for tk_ in ('DF', 'DN', 'DH'):
+    TK = KIND_FILES[reg.get('kind', 'desert')]
+    for tk_ in TK:
         st, RV = build(rk, tk_)
         stats.append(st)
-        if tk_ == 'DN':
+        if tk_ == TK[1]:
             RVs = RV
-    W = [r.astype(np.float32) for r in RVs]
-    np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', 'water.npz'), RIV=np.concatenate(W), RIVO=np.cumsum([0] + [len(a) for a in W]))
+    W = [r.astype(np.float32) for r in RVs] or [np.zeros((0, 5), np.float32)]
+    np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', f'water_{rk}.npz' if rk != 'R04' else 'water.npz'), RIV=np.concatenate(W), RIVO=np.cumsum([0] + [len(a) for a in W]))
     meta = dict(region=rk, name=reg['name'], status='PROPOSAL — detailed terrain inside the approved map region (map rev 01 = proposal)',
                 frame=f'local metres; origin = site centre = C1 cell {reg["cell"]} = Ashram-local ({OX:.0f}, {OY:.0f}) m; +X east, +Y north',
-                origin_ashram_local_m=[OX, OY], tiles={k: dict(v) for k, v in reg['tiles'].items()}, stats=stats, wind_deg=reg['wind_deg'],
+                origin_ashram_local_m=[OX, OY], lakes=reg.get('lakes', {}), kind=reg.get('kind'), tiles={k: dict(v) for k, v in reg['tiles'].items()}, stats=stats, wind_deg=reg['wind_deg'],
                 notes=['dunes / mesas / playas are procedural detail inside the map\'s desert + wasteland biomes',
                        'drainage = the map\'s own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)'])
     json.dump(meta, open(os.path.join(ROOT, reg['folder'], 'data_v002', f'region_{rk}.json'), 'w'), indent=1)
