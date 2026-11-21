@@ -770,9 +770,13 @@ def world_rot(arm_ob, bone, axis, deg):
 
 
 def reset_pose(arm_ob):
+    driven = {f.data_path.split('"')[1] for f in (arm_ob.animation_data.drivers if arm_ob.animation_data else [])
+              if f.data_path.startswith('pose.bones["')}
     for pb in arm_ob.pose.bones:
-        pb.rotation_mode = 'QUATERNION'
+        if pb.name not in driven:          # driven bones (jaw) keep their euler mode for the driver
+            pb.rotation_mode = 'QUATERNION'
         pb.rotation_quaternion = (1, 0, 0, 0)
+        pb.rotation_euler = (0, 0, 0)
         pb.location = (0, 0, 0)
 
 

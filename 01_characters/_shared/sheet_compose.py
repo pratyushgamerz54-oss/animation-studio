@@ -92,11 +92,11 @@ class Page:
         d.text((40, 20), nm, font=F(FB, 44), fill=INK)
         x = 40 + d.textlength(nm, font=F(FB, 44)) + 30
         d.text((x, 34), f"{CFG['role']}  ·  Design Sheet v1  ·  {title}", font=F(FR, 26), fill=DIM)
-        d.text((W - 40, 34), 'PROPOSAL — awaiting Director approval', font=F(FB, 24), fill=WARN, anchor='ra')
+        d.text((W - 40, 34), 'APPROVED by Director (20 Nov)', font=F(FB, 24), fill=(90, 220, 120), anchor='ra')
         pw = ' · '.join(CFG['powers']) if CFG['powers'] else 'NOT CONFIRMED'
         if len(pw) > 70:
             pw = f"{len(CFG['powers'])} powers (see powers page)"
-        d.text((40, h - 40), f'Powers (confirmed): {pw}   |  Appearance & costume = proposals   |  3D renders of '
+        d.text((40, h - 40), f'Powers (confirmed): {pw}   |  Design approved 20 Nov   |  3D renders of '
                f'the real Blender model {FOLDER}_v002.blend', font=F(FR, 20), fill=DIM)
 
     def paste(self, im, x, y, label=None):
@@ -254,6 +254,7 @@ TITLES = {'speed': ('SUPER SPEED', 'Long horizontal trails + afterimages + foots
           'dark_magic': ('DARK MAGIC', 'Violet-black licking wisps, dark orb between the hands, crackle'),
           'invisibility': ('INVISIBILITY', 'Noise dissolve into refractive glass body with faint rim → reappear'),
           'laser': ('LASER', 'Perfectly straight coherent beam: white core, coloured sheath, charge orb, impact burst'),
+          'laser_eyes': ('LASER — EYES', 'Twin straight beams from both eyes (Director: laser from eyes AND hands)'),
           'teleport': ('TELEPORTATION', 'Body-hugging light rings + warp bubble; body breaks into motes (no round portal)')}
 
 
@@ -281,7 +282,7 @@ def hand_img(key):
 
 def p_powers():
     rows = CFG['power_rows']
-    pg = Page('powers', 'Power activation design + VFX reference', 330 + len(rows) * 600)
+    pg = Page('powers', 'Power activation design + VFX reference', 420 + len(rows) * 600)
     for r, key in enumerate(rows):
         title, desc = TITLES[key]
         y = 130 + r * 600
@@ -293,7 +294,7 @@ def p_powers():
                                       ('ARRIVAL' if key == 'teleport' else 'DEACTIVATION'),
                                       'full': 'DEPARTURE' if key == 'teleport' else 'FULL'}.get(s, s.upper()), 20, True)
             x += im.width + 30
-        hi = fit(hand_img(key), w=470); pg.paste(hi, x + 10, y + 90); pg.text(x + 20, y + 100, 'HAND FX', 20, True)
+        hi = fit(hand_img(key), w=470); pg.paste(hi, x + 10, y + 90); pg.text(x + 20, y + 100, 'EYE FX' if key == 'laser_eyes' else 'HAND FX', 20, True)
     y = 130 + len(rows) * 600
     pg.text(50, y + 10, 'EYE TRANSFORMATION', 28, True, ACC); pg.text(50, y + 50, '(all powers)', 21, color=DIM)
     x = 420
@@ -306,18 +307,20 @@ def p_powers():
 def p_extras():
     if not has('cost_A_fracture_veins.png'):
         return None
-    pg = Page('borrowed_power_cost', 'Borrowed-power life cost — 3 ALTERNATIVES for approval (U-08)', 1120)
-    alts = [('cost_A_fracture_veins.png', 'A · Fracture veins', 'Glowing red cracks spread over the skin with every borrowed power; more cost = more cracks.'),
-            ('cost_B_ash_drain.png', 'B · Ash drain', 'Skin greys to ash and eyes dim while the borrowed power runs; colour returns slowly.'),
-            ('cost_C_core_siphon.png', 'C · Core siphon', 'Energy is visibly pulled out of his chest core into the power; the core dims and flickers.')]
+    pg = Page('borrowed_power_cost', 'Borrowed-power life cost — APPROVED: all three (A + B + C)', 1120)
+    alts = [('cost_A_fracture_veins.png', 'A · Fracture veins', 'Glowing red cracks spread over the skin with every borrowed power.'),
+            ('cost_B_ash_drain.png', 'B · Ash drain', 'Skin greys to ash and the eyes dim while the borrowed power runs.'),
+            ('cost_C_core_siphon.png', 'C · Core siphon', 'Energy is pulled out of his chest core into the power; the core dims.'),
+            ('cost_ABC_combined.png', 'A + B + C · Full cost', 'All three at once: veins, ash skin, drained core.')]
     x = 50
     for f, t, d in alts:
-        im = fit(bloom(raw(f)), h=760); pg.paste(im, x, 130)
-        pg.text(x, 920, t, 28, True, ACC); pg.wrap(x, 960, d, 46, 20, DIM)
-        x += im.width + 50
-    pg.text(x + 20, 140, 'Story rule (confirmed):', 24, True, WARN)
-    pg.wrap(x + 20, 180, 'Borrowing a power costs Saithan part of his own life. The exact visual is NOT decided — '
-            'choose A, B, C or a mix.', 30, 21)
+        if not has(f):
+            continue
+        im = fit(bloom(raw(f)), h=700); pg.paste(im, x, 130)
+        pg.text(x, 860, t, 28, True, ACC); pg.wrap(x, 900, d, 40, 20, DIM)
+        x += im.width + 40
+    pg.text(50, 990, 'Story rule (confirmed): borrowing a power costs Saithan part of his own life. Director 20 Nov: ALL THREE visuals are used.', 22, True, WARN)
+    pg.text(50, 1024, 'Proposed escalation (for approval): small borrow = C core dims  →  longer = + A veins  →  heavy = + B ash  →  extreme = A + B + C.', 20, color=DIM)
     return pg
 
 

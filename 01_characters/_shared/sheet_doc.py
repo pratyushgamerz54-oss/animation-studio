@@ -23,6 +23,8 @@ POWER_TEXT = {
                      'Fully refractive body (IOR 1.03) with faint fresnel rim = distortion only', 'Reappears through the same dissolve (70 %)'),
     'laser': ('Laser', 'Charge orb + sparks at the palm, chest lenses glow', 'Perfectly straight beam: white core, coloured sheath and halo, impact burst',
               'Beam thins to a fading thread, no impact'),
+    'laser_eyes': ('Laser (eyes)', 'Eyes flare, small charge points at both eyes', 'Two parallel straight beams from the eyes, impact burst',
+                   'Beams thin to fading threads'),
     'teleport': ('Teleportation', 'Body-hugging light rings + spatial warp bubble', 'DEPARTURE: body breaks into glowing motes inside the rings',
                  'ARRIVAL: motes reassemble the body with a ground ring'),
 }
@@ -38,10 +40,10 @@ def main(folder):
     M = json.load(open(os.path.join(q, 'measurements.json'))) if os.path.exists(os.path.join(q, 'measurements.json')) else {}
     Q = json.load(open(os.path.join(q, 'qc.json'))) if os.path.exists(os.path.join(q, 'qc.json')) else {}
     pages = sorted(os.path.basename(p) for p in glob.glob(os.path.join(D, 'design', f"{C['id']}_sheet_*.png")))
-    L = [f"# {C['name'].upper()} — {C['role']} — Design Sheet v1 (PROPOSAL)", '',
-         '> **Status: awaiting Director approval.** Confirmed: ' +
+    L = [f"# {C['name'].upper()} — {C['role']} — Design Sheet v1 (APPROVED 20 Nov)", '',
+         '> **Status: design APPROVED by the Director (20 Nov).** Confirmed: ' +
          f"name ({'PENDING — using HERO 1' if C['id'] == 'HERO1' else C['name']}), role, powers "
-         f"({', '.join(C['powers']) or 'NOT CONFIRMED — no power VFX made'}) and the reference. Everything else is a proposal.", '',
+         f"({', '.join(C['powers']) or 'NOT CONFIRMED — no power VFX made'}), the reference and the full design.", '',
          '## Sheet pages (renders of the real Blender model)', '']
     L += [f'- `{p}`' for p in pages] or ['- (not rendered yet)']
     L += ['', '## Reference interpretation', '', f"Reference: `{C['reference']}`", '', C['ref_notes'], '',
@@ -73,11 +75,12 @@ def main(folder):
     else:
         L.append('**Powers NOT CONFIRMED** — no power activation effects, attacks or energy VFX were created (by instruction).')
     if C.get('cost_alts'):
-        L += ['', '## Borrowed-power life cost (story mechanic) — 3 alternatives for approval', '',
+        L += ['', '## Borrowed-power life cost (story mechanic) — APPROVED: all three are used (Director 20 Nov)', '',
               '- **A · Fracture veins:** glowing red cracks spread across the skin; more borrowing = more cracks.',
               '- **B · Ash drain:** skin greys to ash and the eyes dim while a borrowed power runs.',
               '- **C · Core siphon:** energy is visibly pulled out of his chest core; the core dims and flickers.',
-              '', 'The exact mechanism is NOT decided — Director chooses A, B, C or a mix.']
+              '- **A + B + C · Full cost:** all three together (rendered on sheet page 8).',
+              '', 'Proposed escalation (to confirm when scripting scenes): small borrow = C, longer = C + A, heavy = + B, extreme = all three.']
     L += ['', '## Technical 3D specification', '',
           '- Topology: all-quad body cage (skin modifier + subdivision) with ring edge loops at every joint; code sculpt pass for anatomy; '
           'all-quad head (sculpted sphere, 26 cuts) with jawline, brow ridge, nose, philtrum, nasolabial folds.',
@@ -86,18 +89,21 @@ def main(folder):
           '- UVs: smart-projected per mesh; layouts in `uv/`. Textures: baked BaseColor / Roughness / Normal / Emission in `textures/`.',
           '- Rig: deform skeleton (pelvis, 3 spine, neck, head, clavicles, arms, 15 finger bones per hand, legs, feet, toes) + '
           'root, COG, hand/foot IK targets with pole targets and IK/FK switches; eye-aim control.',
+          '- **Rigify animation rig** (`blend/<name>_v004_rigify.blend`): IK/FK arms + legs, foot roll, torso/hips/chest, '
+          'neck/head follow, finger curls, jaw + eye-aim controls, robe/skirt chain controls; same face controls on `root`.',
           '- Facial rig: shape keys for every expression + 10 phonemes, `jaw_open`, blink / wide-eye per side, eye look; all driven by '
           'properties on the `root` pose bone.', '',
           '## Production status', '']
     if Q:
         L.append('See `qc/QC_REPORT.md` for the automated checks and test renders.')
-        L.append(f"- `.blend`: `blend/{folder}_v002.blend` (design), `blend/{folder}_v003.blend` (production rig + controls)")
+        L.append(f"- `.blend`: `blend/{folder}_v002.blend` (design), `blend/{folder}_v003.blend` (game/export rig + controls), "
+                 f"`blend/{folder}_v004_rigify.blend` (Rigify animation rig — use this for animation)")
         ex = Q.get('tests', {}).get('export', {})
         L.append(f"- Exports: `export/{folder}.glb` ({ex.get('glb_mb', '?')} MB), `export/{folder}.fbx` ({ex.get('fbx_mb', '?')} MB)")
     else:
         L.append('- Production stage not run yet.')
     L += ['', '## Known limitations', '', '- Faces are stylised and code-sculpted; close-up photoreal detail needs a manual sculpt pass.',
-          '- Jaw opens through mouth shape keys; the chin does not move.', '- Cloth simulation is specified but not simulated yet.']
+          '- Robes / skirts use a 12-chain follow rig (no stiff tube); a cloth simulation pass is still recommended for final shots.']
     open(os.path.join(D, 'design', 'DESIGN_SHEET.md'), 'w').write('\n'.join(L) + '\n')
     print('wrote', os.path.join(D, 'design', 'DESIGN_SHEET.md'))
 

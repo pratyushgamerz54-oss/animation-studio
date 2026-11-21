@@ -3,7 +3,7 @@ Laser source proposal: palms (primary) — chest lenses glow when charging. (Sou
 AX = lambda c: abs(c.x)
 CFG = {
     'id': 'MAX', 'name': 'Max', 'role': 'Sub-villain 2',
-    'powers': ['Laser'], 'power_rows': ['laser'],
+    'powers': ['Laser (hands + eyes)'], 'power_rows': ['laser', 'laser_eyes'],
     'reference': 'reference/max_ref_01.png',
     'ref_notes': 'Taken: bald, blue-grey skin, red eyes, heavy blue-grey sci-fi armour, two green chest lenses and green '
                  'light lines, big pauldrons and gauntlets. Own plate layout; no added weapons.',

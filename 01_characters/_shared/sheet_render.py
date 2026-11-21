@@ -420,6 +420,30 @@ def p_laser(stage, M):
         fx(vx.laser('LASER', FX, src, src + fwd * .5, core, g, radius=.003, intensity=.25, impact=False, charge=False))
 
 
+def p_laser_eyes(stage, M):
+    """Eye laser: two parallel beams from the eyes (Max: eyes AND hands, Director 20 Nov)."""
+    pose('NEUTRAL'); turn(55)
+    a = math.radians(55)
+    f0 = Vector((math.sin(a), -math.cos(a), 0))                      # character forward after the turn
+    fwd = Vector((f0.x, f0.y * .25, -.04)).normalized()                # beam reads side-on, slight downward aim
+    core, g = PAL.get('laser_core', '#F2FFF4'), PAL.get('laser', '#39FF6A')
+    eyes = [ob(f'EYE_{sd}').matrix_world.translation + fwd * .012 for sd in ('L', 'R')]
+    if stage == 'activation':
+        glow(4, 2, 0)
+        for k, e in enumerate(eyes):
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=.011 * S, location=e)
+            o = bpy.context.object; o.name = f'FX_EYE_CHARGE_{k}'; ck.link(o, FX); ck.assign(o, ck.emission('MAT_FX_ECH', core, 30))
+        light_at(eyes[0], g, 15)
+    elif stage == 'full':
+        glow(6, 4, 0)
+        for k, e in enumerate(eyes):
+            fx(vx.laser(f'EYE_LASER_{k}', FX, e, e + fwd * 2.0 * S, core, g, radius=.0045 * S, impact=k == 0))
+    elif stage == 'deactivation':
+        glow(1.5, 1.2, 0)
+        for k, e in enumerate(eyes):
+            fx(vx.laser(f'EYE_LASER_{k}', FX, e, e + fwd * .35, core, g, radius=.0015, intensity=.25, impact=False, charge=False))
+
+
 def p_teleport(stage, M):
     pose('NEUTRAL'); turn(20)
     col = PAL.get('teleport', '#B57BFF')
@@ -496,7 +520,9 @@ def g_powers(St):
         clear_fx()
         POWERS[key]('full' if key not in ('invisibility', 'teleport') else 'activation', M)
         sd = 'R' if 'portal' in key else 'L'
-        if key in ('speed', 'fire', 'dark_magic'):
+        if key == 'laser_eyes':
+            h = head_c(); c = ck.camera('CAM_HAND', St, h + Vector((-.25, -.75, .06)), h + Vector((.12, -.05, 0)), lens=50)
+        elif key in ('speed', 'fire', 'dark_magic'):
             h = bone(f'hand_{sd}'); c = ck.camera('CAM_HAND', St, h + Vector((0, -1.1, .1)), h, lens=50)
         else:
             h = bone(f'hand_{sd}'); c = ck.camera('CAM_HAND', St, h + Vector((.05 if sd == 'L' else -.10, -.55, .12)), h, lens=70)
@@ -569,6 +595,19 @@ def g_extras(St):
         fx(vx.lightning(f'COST_C_{sd}', FX, core, bone(f'middle_01_{sd}'), M['core'], M['glow'], seed=7 if sd == 'L' else 9,
                         branches=2, radius=.003))
     save('cost_C_core_siphon.png', cam)
+    # APPROVED (Director 20 Nov): all three together — veins + ash + siphon at full cost
+    lk = links.new(mul.outputs[0], bs.inputs['Emission Strength'])
+    for l in list(links):
+        if l.to_socket == bs.inputs['Base Color']:
+            links.remove(l)
+    bs.inputs['Base Color'].default_value = ck.hexlin(PAL.get('cost_ash', '#6E6A6E'))
+    glow(.4, .3, 0)
+    fx(vx.flames('COST_ABC', FX, anchors(['forearm_L', 'forearm_R', 'spine_03']), M['dark'], count=12, length=.10, width=.018))
+    save('cost_ABC_combined.png', cam)
+    links.remove(lk); bs.inputs['Emission Strength'].default_value = 0
+    bs.inputs['Base Color'].default_value = orig
+    if nodes_mix:
+        links.new(nodes_mix[0].outputs['Result'], bs.inputs['Base Color'])
     glow(0, 1, 0); clear_fx(); pose('NEUTRAL'); turn(0)
 
 

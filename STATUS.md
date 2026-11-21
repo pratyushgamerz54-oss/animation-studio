@@ -1,11 +1,15 @@
 # STATUS — last updated 2026-11-20 19:15
 
-## Ab kya chal raha hai
-- ✅ STAGE 1 (characters) ka saara kaam DONE: 7 design sheets + production v003 (UV, textures, rig IK/FK, face controls,
-  GLB/FBX, QC all PASS). Kuch bhi background mein nahi chal raha.
-- ⏸️ RUKA HUA: Director ke approval/feedback ka intezaar. Feedback aane par: config badlo → `render_all.sh <char>` →
-  `production_all.sh` (ya `production.py <char>`) → review → commit.
-- Known issues: PRODUCTION_INVENTORY.md §7 (K-01 robe stiff in action poses → cloth sim at scene stage).
+## Ab kya chal raha hai (21 Nov)
+- Director ne SAARE designs APPROVE kiye (20 Nov). Faisle: Max laser = haath + aankh; Saithan life-cost = A + B + C teeno.
+- Director: "saari kamiyan theek karo" → ye fixes code mein ho gaye:
+  1. Robe/skirt: 12x3 skirt bone chains, thigh-follow (front/back/side alag) → ab pipe jaisa nahi mudta.
+  2. Soul robe front gap band (open_front 0). 3. Saithan powers page footer overlap theek.
+  4. Asli jaw bone (head + beard weighted), jaw_open/phonemes/expressions se driven.
+  5. Rigify rig v004 (`_shared/rigify_build.py`) → `<name>/blend/<name>_v004_rigify.blend` + QC section.
+  6. Max eye-laser power row; Saithan cost page = A + B + C combined.
+- ⏳ Full batch chal raha hai: `render_all.sh` (saare 7) → `production_all.sh` (production + rigify + docs + contact sheet).
+  Log: scratchpad all4.log / prod2.log. Restart ho to wahi do commands chalao.
 
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.

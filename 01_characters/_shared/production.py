@@ -257,6 +257,10 @@ def upgrade_rig():
     QC['tests']['ik_rest_deviation'] = results
     QC['tests']['ik_follow_error_mm'] = round(follow * 1000, 2)
     bpy.ops.object.mode_set(mode='OBJECT')
+    sk = [b for b in arm.pose.bones if b.name.startswith('skirt_')]
+    if sk:
+        QC['tests']['skirt_rig'] = {'bones': len(sk), 'constraints': sum(len(b.constraints) for b in sk),
+                                    'ok': all(len(b.constraints) > 0 for b in sk if b.name.endswith('_1'))}
     QC['rig'] = {'bones': len(arm.data.bones), 'deform': sum(1 for b in arm.data.bones if b.use_deform),
                  'controls': new + ['root'], 'ik_fk_props': [k for k in pb_root.keys() if k.startswith('ik_')]}
     return arm
@@ -306,6 +310,32 @@ def face_controls(arm):
         eye = F[f'eye_{sd}']
         c = eye.constraints.new('DAMPED_TRACK')
         c.target = arm; c.subtarget = 'CTRL_EYES'; c.track_axis = 'TRACK_NEGATIVE_Y'
+    # real jaw bone: rotates with every mouth-open shape (phonemes + expressions) and jaw_open
+    if 'jaw' in arm.pose.bones:
+        pj = arm.pose.bones['jaw']; pj.rotation_mode = 'XYZ'
+        sgn = 1 if arm.data.bones['jaw'].matrix_local.col[0].x > 0 else -1
+        d = pj.driver_add('rotation_euler', 0).driver
+        terms = []
+        for i, kb in enumerate(keys[1:]):
+            deg = cb.jaw_deg(kb.name)
+            if deg <= .05:
+                continue
+            prop = ('ph_' + kb.name[3:].lower()) if kb.name.startswith('PH_') else f'expr_{kb.name}'
+            v = d.variables.new(); v.name = f'v{i}'
+            v.targets[0].id = arm; v.targets[0].data_path = f'pose.bones["root"]["{prop}"]'
+            terms.append(f'{deg:.2f}*v{i}')
+        v = d.variables.new(); v.name = 'j'
+        v.targets[0].id = arm; v.targets[0].data_path = 'pose.bones["root"]["jaw_open"]'
+        d.expression = f'{sgn}*radians(min(22, max(16*j, ' + ('+'.join(terms) or '0') + ')))'
+        added.append('jaw (bone)')
+        # functional test: jaw_open=1 must lower the chin
+        head = bpy.data.objects[f'CHAR_{CID}_HEAD']
+        def chin():
+            dg = bpy.context.evaluated_depsgraph_get(); e = head.evaluated_get(dg); m = e.to_mesh()
+            z = min((head.matrix_world @ v.co).z for v in m.vertices); e.to_mesh_clear(); return z
+        z0 = chin(); pb['jaw_open'] = 1.0; arm.update_tag(); bpy.context.view_layer.update(); z1 = chin(); pb['jaw_open'] = 0.0; arm.update_tag()
+        bpy.context.view_layer.update()
+        QC['tests']['jaw_open_chin_drop_mm'] = round((z0 - z1) * 1000, 1)
     QC['face_controls'] = sorted(set(added))
     return added
 
@@ -397,6 +427,8 @@ def report():
         ('Textures baked', bool(t.get('textures_baked')), f"{t.get('textures_baked', 0)} maps"),
         ('IK/FK rest pose unchanged + IK follows target', ik_ok, f"follow error {t.get('ik_follow_error_mm')} mm"),
         ('Phoneme shape keys (10)', t.get('phonemes_present'), f"{t.get('mouth_shape_keys')} mouth keys"),
+        ('Jaw bone opens the chin (jaw_open = 1)', t.get('jaw_open_chin_drop_mm', 0) > 3, f"chin drop {t.get('jaw_open_chin_drop_mm')} mm"),
+        ('Robe / skirt follow-rig (chains follow the thighs)', t.get('skirt_rig', {}).get('ok', True), str(t.get('skirt_rig', 'no long skirt'))),
         ('GLB export + re-import', 'error' not in t.get('glb_reimport', {'error': 1}), str(t.get('glb_reimport'))),
         ('FBX export', 'fbx_mb' in t.get('export', {}), str(t.get('export', {}).get('fbx_mb', t.get('export', {}).get('fbx_error')))),
     ]
@@ -421,8 +453,8 @@ def report():
           f"- Pole angles / rest deviation: {json.dumps(ikd)}",
           f"- Face controls (on `root`): {len(QC['face_controls'])} — {', '.join(QC['face_controls'])}", '',
           '## Known limitations (honest)', '',
-          '- Body rig is a custom deform skeleton + IK/FK controls, not a full Rigify rig (no stretch/twist bones).',
-          '- Jaw is driven through the mouth shape keys (`jaw_open` → PH_A); the chin mesh does not move yet.',
+          '- This v003 rig is the clean game/export skeleton (custom IK/FK). The full Rigify animation rig is `blend/<name>_v004_rigify.blend` (see RIGIFY section).',
+          '- Jaw: real `jaw` bone (head + beard weighted), driven by `jaw_open`, phonemes and open-mouth expressions.',
           '- Textures are baked from procedural materials (no hand-painted detail).',
           '- Base meshes contain non-manifold edges where garment pieces are open shells (expected for clothing).',
           f"- Non-manifold edge counts: {json.dumps(t.get('non_manifold_edges_base_mesh', {}))[:600]}",

@@ -40,7 +40,7 @@ CFG = {
          'open_front': True, 'dip': True},
         {'kind': 'trim', 'name': 'BELT', 'mat': 'gold', 'coll': 'ACCESSORIES', 'offset': .016, 'solid': .006, 'bevel': True,
          'keep': lambda c: .92 < c.z < 1.12 and AX(c) < .25, 'accent': lambda c, n: abs(c.z - 1.02) < .02 or c.z > 1.10},
-        {'kind': 'skirt', 'name': 'ROBE', 'mat': 'robe', 'z_top': 1.0, 'z_bottom': .02, 'flare': .42, 'open_front': .30,
+        {'kind': 'skirt', 'name': 'ROBE', 'mat': 'robe', 'z_top': 1.0, 'z_bottom': .02, 'flare': .42, 'open_front': 0.0,
          'offset': .055, 'hem': .22, 'front_band': 0},
         {'kind': 'trim', 'name': 'WRIST_BAND', 'mirror': True, 'mat': 'goldm', 'coll': 'ACCESSORIES', 'offset': .008,
          'solid': .004, 'keep': lambda c: .66 < c.x < .72},
