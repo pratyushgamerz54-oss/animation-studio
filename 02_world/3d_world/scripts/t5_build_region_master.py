@@ -11,7 +11,7 @@ import t5kit as tk
 
 RK = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'R04'
 CFG = {'R04': dict(file='06_DESERTS/DESERT_R04_v002.blend', coll='T5_DESERT_R04', data='06_DESERTS/data_v002',
-                   out='T5_REGION_R04_DESERT_master_v002.blend', sun=(232.0, 12.0), tiles=('DH', 'DN', 'DF')),
+                   out='T5_REGION_R04_DESERT_master_v002.blend', sun=(250.0, 9.0), tiles=('DH', 'DN', 'DF')),
        'R05': dict(file='06_DESERTS/FORBIDDEN_R05_v002.blend', coll='T5_FORBIDDEN_R05', data='06_DESERTS/data_v002',
                    out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 14.0), tiles=('XH', 'XN', 'XF')),
        'R02': dict(file='04_FORESTS/ENCHANTED_FOREST_R02_v002.blend', coll='T5_ENCHANTED_R02', data='04_FORESTS/data_v002',
@@ -82,9 +82,12 @@ if RK == 'R04':
     r, c_ = np.unravel_index(np.argmax(z[m:-m, m:-m]), z[m:-m, m:-m].shape); r += m; c_ += m
     bx, by, bz = -h + c_ * sp, h - r * sp, float(z[r, c_])                       # the butte / mesa in the hero tile
     ang = math.radians(135); dst = 1250
-    cx, cy = bx + math.sin(ang) * dst, by + math.cos(ang) * dst
-    cx, cy = float(np.clip(cx, -h + 60, h - 60)), float(np.clip(cy, -h + 60, h - 60))
-    cam('CAM_T5_05_DESERT', (cx, cy, ground(cx, cy) + 55), (bx, by, bz - 90), 35,
+    # stand on a dune crest (sand mask) in the hero tile, look across the dune field toward the butte (low evening sun from the WSW)
+    sand = D['MB'][..., 0] / 255.0
+    zz = np.where(sand > .85, z, -1e9); zz[:150, :] = zz[-150:, :] = -1e9; zz[:, :150] = zz[:, -150:] = -1e9
+    r2, c2 = np.unravel_index(np.argmax(zz), zz.shape)
+    cx, cy = -h + c2 * sp, h - r2 * sp
+    cam('CAM_T5_05_DESERT', (cx, cy, ground(cx, cy) + 2.0), (bx, by, bz - 120), 28,
         'Desert landscape — R04 Western Desert: wind-shaped dune field, sandstone butte with strata, desert pavement', 60000, .3)
     cx2, cy2 = 1500.0, -10500.0
     cam('CAM_T5_05B_DESERT_MESAS_AERIAL', (cx2, cy2, ground(cx2, cy2) + 260), (0, 6000, ground(0, 6000) + 40), 30,

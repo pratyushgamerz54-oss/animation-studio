@@ -107,15 +107,19 @@ def dunes(X, Y, wind_deg, sp):
     th = math.radians(wind_deg + 180)                                  # direction the wind blows TO
     ux, uy = math.sin(th), math.cos(th)
     out = np.zeros_like(X)
-    for lam, amp, seed in ((900.0, 62.0, 190), (280.0, 15.0, 191), (60.0, 1.4, 192)):
+    # megadune swell (2.6 km) carrying the transverse dunes; an oblique secondary set (+38°) gives linked / star-like crests
+    out += N.fbm(X, Y, 2600, 3, 189) * 55 * (1 if 2600 >= 3 * sp else 0)
+    for lam, amp, seed, rot in ((900.0, 70.0, 190, 0.0), (520.0, 26.0, 193, 38.0), (280.0, 14.0, 191, 0.0), (60.0, 1.4, 192, 0.0)):
         if lam < 3 * sp:
             continue
+        th2 = th + math.radians(rot); vx, vy = math.sin(th2), math.cos(th2)
         wx, wy = N.warp(X, Y, lam * 2.5, lam * .25, seed)
-        ph = (wx * ux + wy * uy) / lam + N.fbm(X, Y, lam * 4, 2, seed + 5) * .35
+        ph = (wx * vx + wy * vy) / lam + N.fbm(X, Y, lam * 4, 2, seed + 5) * .35
         f = ph - np.floor(ph)
-        prof = np.where(f < .88, f / .88, (1 - f) / .12)               # long stoss slope, steep (~30°) slip face
-        prof = prof ** 1.4                                             # sharper crests
-        out += (prof - .4) * amp * (.55 + .45 * N.fbm(X, Y, lam * 3, 2, seed + 9))
+        stoss = (np.clip(f / .86, 0, 1)) ** 1.7                        # concave-up windward slope …
+        slip = np.clip((1 - f) / .14, 0, 1)                              # … knife-edge crest, straight ~32° slip face
+        prof = np.where(f < .86, stoss, slip)
+        out += (prof - .38) * amp * (.5 + .5 * N.fbm(X, Y, lam * 3, 2, seed + 9))
     return out
 
 

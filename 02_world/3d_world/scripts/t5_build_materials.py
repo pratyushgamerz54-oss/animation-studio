@@ -266,8 +266,8 @@ def desert_material():
     pav = L_('gravel_ground_01', 2.5, tint='#F0D2AA')
     base = lerp(b.math('MULTIPLY', b.maprange(b.math('ADD', A['m_gravel'], b.math('MULTIPLY', meso, .3)), .3, .9), .7), base, pav)
     # sand (near scans + far procedural) with wind ripples (anisotropic waves across the wind, W → E)
-    sd = L_('sand_01', 3.0, at=True, tint='#F2CFA0')
-    sd2 = L_('coast_sand_01', 4.0, tint='#EDC292')
+    sd = L_('sand_01', 3.0, at=True, tint='#E2AE78')
+    sd2 = L_('coast_sand_01', 4.0, tint='#D9A06A')
     sd = lerp(b.maprange(macro, .42, .6), sd, sd2)
     sfar = [b.mixc(b.maprange(b.noise(v, 1 / 60.0, 4, .5), .3, .7), lin('#C99A64'), lin('#E6BE88')), .9, sd[2], .5]
     sd = lerp(far, sd, sfar)
@@ -277,6 +277,20 @@ def desert_material():
     rip = b.node('ShaderNodeBump'); rip.inputs['Strength'].default_value = .25; rip.inputs['Distance'].default_value = .02
     b.link(b.math('MULTIPLY', wv.outputs['Fac'], b.maprange(dist, 60, 5)), rip.inputs['Height']); b.link(sd[2], rip.inputs['Normal'])
     sd[2] = rip.outputs['Normal']
+    # aspect / slope colouring of the sand: lee (slip) faces a touch redder + darker, crests lighter (wind-sorted grains)
+    nx_ = ns_ = None
+    asp = b.math('ADD', b.math('MULTIPLY', nsep.outputs['X'], -.8), b.math('MULTIPLY', nsep.outputs['Y'], .2))   # wind from W → lee faces E
+    lee = b.maprange(asp, .05, .45)
+    sd[0] = b.mixc(b.math('MULTIPLY', lee, .45), sd[0], b.mixc(1.0, sd[0], lin('#C98A5E'), 'MULTIPLY'))
+    crest = b.maprange(nz, .97, 1.0)
+    sd[0] = b.mixc(b.math('MULTIPLY', crest, .25), sd[0], lin('#F6DDB4'))
+    # far ripples (normal only, scaled with distance) so the dune field never looks plastic
+    wv2 = b.node('ShaderNodeTexWave', wave_type='BANDS', bands_direction='X'); wv2.inputs['Scale'].default_value = 1 / 1.2
+    wv2.inputs['Distortion'].default_value = 8.0; wv2.inputs['Detail'].default_value = 2.0
+    b.link(b.vmath('SCALE', v, scale=1 / 30.0), wv2.inputs['Vector'])
+    bp2 = b.node('ShaderNodeBump'); bp2.inputs['Strength'].default_value = .12
+    b.link(b.math('MULTIPLY', wv2.outputs['Fac'], b.maprange(dist, 40, 400)), bp2.inputs['Height']); b.link(sd[2], bp2.inputs['Normal'])
+    sd[2] = bp2.outputs['Normal']
     base = hb(base, sd, b.maprange(b.math('ADD', A['m_dry'], b.math('MULTIPLY', macro, .25)), .05, .75), .2)
     # playas — cracked dry mud
     pl = L_('mud_cracked_dry_03', 4.0, tint='#E7D2B6')
