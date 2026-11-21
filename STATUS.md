@@ -25,7 +25,9 @@
 ### C. TASK 02 — Grand world map (21 Nov)
 - Director: "dono ko ek me jod ke continue karo" → v1 continent = home continent C1 HIMAVANT (3 km/cell) inside the main world v2
   (12 000 x 6 000 km, 5 continents + 3 archipelagos). Maps A–I + GEOGRAPHY.md in `02_world/map_v2/` (`_shared/worldgen2.py`).
-- NOT LOCKED — Director approval pending (list in GEOGRAPHY.md). Detailed modelling of other regions: NOT started.
+- REVISION 01 applied (names Aetheria/Solmara/Veylora/Noxara/Drakmor, Ashram green valley, distant snow, H1/H2 dimension maps,
+  GEM hidden region + chamber MAP_J, portal diagram confirmed vs hypothetical). NOT LOCKED — awaiting approval.
+- Characters: production + Rigify for all 7 DONE (QC 0 FAIL, Rigify pass). Ashram v3 renders + sheets DONE.
 
 ## Director decisions (confirmed)
 - Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.

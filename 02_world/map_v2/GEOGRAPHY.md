@@ -1,7 +1,20 @@
-# THE MAIN WORLD — Geography v2 (TASK 02) — PROPOSAL, NOT LOCKED
+# THE MAIN WORLD — Geography v2 + REVISION 01 — PROPOSAL, NOT LOCKED
+
+> **Revision 01 (Director, 21 Nov) applied — all still PROPOSALS, not story canon:**
+> 1. Continents renamed: **Aetheria** (C1, home, Ashram) · **Solmara** (C2) · **Veylora** (C3) · **Noxara** (C4, polar) · **Drakmor** (C5).
+> 2. **Ashram** moved to a **large green valley in Aetheria** (grassland floor, forest ring, rivers) — new site ≈ (3724, 4238) km.
+> 3. **Snowy range** ≈ 100 km NW of the Ashram: visible from the region, separated from it by a forest belt and foothills (map G).
+> 4. **Dimensions** developed as two visually separate proposals: `MAP_H1_black_hole_training_dimension_v2.png` (floating platform
+>    rings around a black hole, orange/blue, vacuum) and `MAP_H2_saithan_dark_world_dimension_v2.png` (ash plains, obsidian spires,
+>    corruption rivers, corrupted-portal site; red/violet fog). No connection or dimensional rules invented.
+> 5. **GEM** — exact location NOT CONFIRMED → proposal: **hidden ancient region in Veylora** (deep enchanted forest, ≥ 170 km from
+>    any proposed settlement, ancient ruins) with a **GEM chamber plan** → `MAP_J_gem_hidden_region_v2.png` ≈ (11460, 4664) km.
+> 6. **Portals** → `MAP_I_portal_connections_v2.png`: CONFIRMED = portals exist + portal users (Hero 1, Pratyush, Saithan, Ramarat);
+>    routes H1–H5 are HYPOTHETICAL (dashed) until the Director confirms them; no confirmed route yet.
+
 
 > **Director (21 Nov): “dono ko ek me jod ke continue karo”** → the detailed v1 continent (`02_world/map/`) is now the
-> **home continent C1 HIMAVANT** inside a much larger main world. Everything below is **PROPOSED**; every number is an
+> **home continent C1 AETHERIA** inside a much larger main world. Everything below is **PROPOSED**; every number is an
 > **ESTIMATE**; no civilisations, rulers, history or portal rules were invented. Generator: `02_world/_shared/worldgen2.py`
 > (re-runs exactly; C1 data comes from `02_world/_shared/worldgen.py`, seed 7).
 
@@ -17,9 +30,11 @@
 | E | Climate + terrain map (latitude zones × moisture, rain shadows) | `MAP_E_climate_terrain_v2.png` |
 | F | Cities + settlements map | `MAP_F_settlements_v2.png` |
 | G | Ashram regional map (detailed C1 data) + access-route proposal | `MAP_G_ashram_region_v2.png` |
+| H1 / H2 | Black Hole Training dimension layout · Saithan's Dark World layout | `MAP_H1_*.png`, `MAP_H2_*.png` |
+| J | GEM hidden ancient region + chamber plan (proposal) | `MAP_J_gem_hidden_region_v2.png` |
 | H | Separate dimensions map | `MAP_H_dimensions_v2.png` |
 | I | Portal connection diagram (only confirmed links solid — currently none confirmed) | `MAP_I_portal_connections_v2.png` |
-| — | Detailed C1 HIMAVANT map + 6 regional maps (3 km cells) | `../map/WORLD_MAP_master_v1.png` (now titled HIMAVANT), `../map/WORLD_MAP_regional_v1.png` |
+| — | Detailed C1 AETHERIA map + 6 regional maps (3 km cells) | `../map/WORLD_MAP_master_v1.png` (now titled AETHERIA), `../map/WORLD_MAP_regional_v1.png` |
 | — | Data (heights, flow, biomes, climate, features) — continuity source of truth | `map_v2/data/` |
 
 ## World structure
@@ -36,11 +51,11 @@
 
 | Code | Proposed name | Area | Extent W–E × N–S | Highest | Forest cover | Ranges | Big rivers to the sea | Proposed settlements (cities / towns / villages) | Character |
 |---|---|---|---|---|---|---|---|---|---|
-| C1 | **HIMAVANT** (home) | ≈ 3.6 M km² | 2 810 × 2 030 km | ≈ 6 200 m | 60 % | Mahagiri / Great Northern Range (R-03) | 9 | 3 / – / 14 (from the detailed C1 map) | the v1 continent: great northern range, Ashram Valley (R-01), Lake District, Enchanted Forest, western desert & wastelands, Forbidden crater, southern grasslands |
-| C2 | MARUDVIPA | ≈ 4.9 M km² | 3 220 × 3 280 km | ≈ 6 170 m | 62 % | Sunstone Ridge | 12 | 9 / 12 / 62 | equatorial / sub-tropical: desert interior + wasteland, savanna, rainforest coasts, great lakes |
-| C3 | VANADVIPA | ≈ 3.0 M km² | 2 980 × 1 880 km | ≈ 5 250 m | 48 % | Verdant Crown | 5 | 3 / 13 / 35 | wet forest continent with enchanted-forest belts, highlands |
-| C4 | HIMADVIPA | ≈ 1.4 M km² | 3 850 × 1 200 km | ≈ 6 680 m | 6 % | Ice Wall | 0 | 0 / 1 / 2 | polar: ice sheets, tundra, glaciers — mostly **unexplored** |
-| C5 | DAKSHINA | ≈ 1.4 M km² | 1 740 × 1 260 km | ≈ 4 980 m | 42 % | Southern Teeth | 2 | 1 / 3 / 12 | southern grasslands, plateaus, tundra edge, ruins |
+| C1 | **AETHERIA** (home) | ≈ 3.6 M km² | 2 810 × 2 030 km | ≈ 6 200 m | 60 % | Mahagiri / Great Northern Range (R-03) | 9 | 3 / – / 14 (from the detailed C1 map) | the v1 continent: great northern range, Ashram Valley (R-01), Lake District, Enchanted Forest, western desert & wastelands, Forbidden crater, southern grasslands |
+| C2 | SOLMARA | ≈ 4.9 M km² | 3 220 × 3 280 km | ≈ 6 170 m | 62 % | Sunstone Ridge | 12 | 9 / 12 / 62 | equatorial / sub-tropical: desert interior + wasteland, savanna, rainforest coasts, great lakes |
+| C3 | VEYLORA | ≈ 3.0 M km² | 2 980 × 1 880 km | ≈ 5 250 m | 48 % | Verdant Crown | 5 | 3 / 13 / 35 | wet forest continent with enchanted-forest belts, highlands |
+| C4 | NOXARA | ≈ 1.4 M km² | 3 850 × 1 200 km | ≈ 6 680 m | 6 % | Ice Wall | 0 | 0 / 1 / 2 | polar: ice sheets, tundra, glaciers — mostly **unexplored** |
+| C5 | DRAKMOR | ≈ 1.4 M km² | 1 740 × 1 260 km | ≈ 4 980 m | 42 % | Southern Teeth | 2 | 1 / 3 / 12 | southern grasslands, plateaus, tundra edge, ruins |
 | A1–A3 | Sagara Archipelago · Agni Island Arc · Western Isles | small | — | — | — | — | — | coastal villages | island chains between the continents |
 
 Oceans (proposed): Northern Ocean, Central Sea, Eastern Ocean, Western Ocean.
@@ -50,11 +65,10 @@ Settlement totals (all PROPOSED, codes only — no names or politics): 17 city s
 ## Ashram location proposal (map G)
 
 - **Ashram = CONFIRMED story location. Its position = PROPOSAL (not locked).**
-- C1 HIMAVANT, region **R-01 Ashram Valley**, ≈ 720 m, on a lake shore in a forest/grassland valley; rivers from the hills feed the lake.
-- World position ≈ (3 360, 4 240) km. Nearest snow peaks are shown on map G with distance/direction; the main Great Northern Range lies further NE.
-- **Proposed access route:** least-effort path to the nearest proposed village ≈ 188 km (estimate). No roads are canon.
-- ⚠️ **Alignment note:** the Ashram 3D concept (v3) shows snow peaks directly behind the valley; on this map the big range is farther.
-  After the map is approved, either the 3D backdrop or the map position will be adjusted so both match.
+- C1 AETHERIA, region **R-01 Ashram Valley** (revision 01): large green valley ≈ 680 m, grassland floor, forest ring, several rivers.
+- Snowy range ≈ 100 km NW beyond forests + foothills (visible on clear days). Lakes further SW / SE.
+- **Proposed access route:** least-effort path to the nearest proposed village ≈ 300 km (estimate). No roads are canon.
+- The Ashram 3D concept v3 backdrop (snow peaks close behind) will be re-fitted to this terrain after approval.
 
 ## Climate model (proposal)
 
@@ -78,9 +92,9 @@ its detailed map so the two maps match.
 ## Pending Director approvals (nothing is locked)
 
 1. Overall layout: 5 continents + 3 archipelagos — approve / change shapes, sizes, positions?
-2. Proposed names: HIMAVANT, MARUDVIPA, VANADVIPA, HIMADVIPA, DAKSHINA, range / ocean / archipelago names.
-3. Ashram position (R-01 on HIMAVANT) and how close the snow peaks should be.
+2. Continent names (Director-proposed) Aetheria / Solmara / Veylora / Noxara / Drakmor — which continent gets which name? (current assignment is a proposal); range / ocean / archipelago names.
+3. Ashram position (R-01 on AETHERIA) and how close the snow peaks should be.
 4. Black Hole Training Area and Saithan’s Dark World as separate dimensions — correct?
-5. GEM location: on the main world or a dimension? Where?
+5. GEM: accept the proposed hidden ancient region in Veylora + chamber, or another place?
 6. Which portal connections exist in the story (map I shows none as confirmed).
 7. Which regions the story actually uses → only those get detailed 3D environments.

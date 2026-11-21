@@ -1,6 +1,6 @@
 {
   "character": "YAYAKI",
-  "started": "2026-11-20 18:54",
+  "started": "2026-11-21 01:55",
   "tests": {
     "uv_present_all_meshes": true,
     "textures_baked": 116,
@@ -23,6 +23,12 @@
       }
     },
     "ik_follow_error_mm": 0.02,
+    "skirt_rig": {
+      "bones": 36,
+      "constraints": 72,
+      "ok": true
+    },
+    "jaw_open_chin_drop_mm": 9.8,
     "body_unweighted_verts": 0,
     "non_manifold_edges_base_mesh": {
       "CHAR_YAYAKI_BELT": 22,
@@ -51,20 +57,20 @@
     "mouth_shape_keys": 19,
     "phonemes_present": true,
     "export": {
-      "glb_mb": 11.17,
-      "fbx_mb": 15.94
+      "glb_mb": 11.28,
+      "fbx_mb": 16.7
     },
     "glb_reimport": {
       "objects": 31,
       "armatures": 1,
       "meshes": 30,
-      "bones": 63,
+      "bones": 100,
       "shape_key_meshes": 2
     }
   },
   "rig": {
-    "bones": 63,
-    "deform": 52,
+    "bones": 100,
+    "deform": 89,
     "controls": [
       "CTRL_COG",
       "IK_hand_L",
@@ -97,6 +103,7 @@
     "expr_serious",
     "expr_shocked",
     "expr_suspicious",
+    "jaw (bone)",
     "lid_wide_L",
     "lid_wide_R",
     "ph_a",

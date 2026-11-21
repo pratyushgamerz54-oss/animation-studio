@@ -175,11 +175,19 @@ def main():
     # ------------------------------------------------------------------ features (all PROPOSED)
     riv = land & (acc > 140) & ~lakes
     pts = lambda m: [(float(c), float(r)) for r, c in zip(*np.nonzero(m))]
-    # Ashram Valley: foothill valley on a strong river, 700-1600 m, south of the great range
-    cand = land & (acc > 600) & (h > 700) & (h < 1600) & (ny > .25) & (ny < .55) & (nx > .3) & (nx < .7)
+    # Ashram Valley (Director revision 01, PROPOSAL): a LARGE GREEN VALLEY surrounded by forests and rivers, with snowy
+    # ranges visible in the distance but separated from it by forests and foothills (60–180 km to the nearest snow)
+    dsnow = ndi.distance_transform_edt(B != 8) * SC
+    gfrac = ndi.uniform_filter((B == 2).astype(np.float32), 13)
+    ffrac = ndi.uniform_filter(np.isin(B, [3, 4]).astype(np.float32), 41)
+    cand = land & (B == 2) & (h > 150) & (h < 1400) & (dsnow > 60) & (dsnow < 180) & (acc > 120)
     cp = pts(cand)
-    ash = spaced(cp, np.array([acc[int(p[1]), int(p[0])] for p in cp]), 1, 0) if cp else [(W * .5, H * .4)]
-    ash = ash[0]
+    if cp:
+        sc_ = np.array([gfrac[int(y), int(x)] * 2.5 + ffrac[int(y), int(x)] * 2 + math.log1p(acc[int(y), int(x)]) * .25
+                        - abs(dsnow[int(y), int(x)] - 110) / 120 for x, y in cp])
+        ash = cp[int(np.argmax(sc_))]
+    else:
+        ash = (W * .5, H * .4)
     cities_c = land & (acc > 1500) & (h < 300) & (h > 5)
     cp = pts(cities_c)
     cities = spaced(cp, np.array([acc[int(p[1]), int(p[0])] for p in cp]), 3, 170, [ash])
@@ -444,7 +452,7 @@ def render(h, B, acc, down, lakes, riv, feats):
     full.alpha_composite(m, (0, 150))
     d = ImageDraw.Draw(full)
     d.rectangle((0, 0, full.width, 146), fill=(12, 13, 18)); d.rectangle((0, 142, full.width, 146), fill=(214, 166, 60))
-    d.text((40, 22), 'HIMAVANT — HOME CONTINENT (C1)', font=F(FS, 64), fill=(240, 230, 205))
+    d.text((40, 22), 'AETHERIA — HOME CONTINENT (C1)', font=F(FS, 64), fill=(240, 230, 205))
     d.text((40, 100), f'Detailed map of continent C1 of the main world (see map_v2 atlas)  ·  ≈ {int(1024 * SC)} x {int(768 * SC)} km (estimate)  ·  names = working labels, pending approval',
            font=F(FR, 24), fill=(170, 170, 180))
     d.text((full.width - 40, 40), 'NOT LOCKED — awaiting Director approval', font=F(FB, 28), fill=(255, 190, 70), anchor='ra')
@@ -508,7 +516,7 @@ def regional(base, h, acc, down, riv, feats):
     picks = [r for r in feats['regions'] if r[2] is not None][:6]
     sheet = Image.new('RGB', (3 * (cell + 40) + 40, 2 * (cell + 110) + 150), (16, 18, 24))
     d0 = ImageDraw.Draw(sheet)
-    d0.text((40, 30), f'REGIONAL MAPS (C1 HIMAVANT)  ·  each panel {int(240 * SC)} x {int(240 * SC)} km  ·  contours 100 m', font=F(FS, 40), fill=(240, 230, 205))
+    d0.text((40, 30), f'REGIONAL MAPS (C1 AETHERIA)  ·  each panel {int(240 * SC)} x {int(240 * SC)} km  ·  contours 100 m', font=F(FS, 40), fill=(240, 230, 205))
     for k, (code, nm, p, st) in enumerate(picks):
         cx, cy = int(np.clip(p[0], R / 2, W - R / 2)), int(np.clip(p[1], R / 2, H - R / 2))
         x0, y0 = cx - R // 2, cy - R // 2

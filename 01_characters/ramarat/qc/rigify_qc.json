@@ -1,0 +1,31 @@
+{
+  "generated_bones": 534,
+  "deform_bones": 97,
+  "unmapped_groups": [],
+  "face_drivers_retargeted": 59,
+  "skirt_follow_constraints": 72,
+  "rest_deviation_worst": [
+    [
+      0.0,
+      "CHAR_RAMARAT_TROUSERS"
+    ],
+    [
+      0.0,
+      "CHAR_RAMARAT_SASH_TAIL"
+    ],
+    [
+      0.0,
+      "CHAR_RAMARAT_SASH"
+    ],
+    [
+      0.0,
+      "CHAR_RAMARAT_ROBE_UPPER"
+    ]
+  ],
+  "rest_pose_max_deviation_mm": 0.002,
+  "ik_leg_follow_error_mm": 0.03,
+  "ik_leg_ankle_lift_mm": 203.4,
+  "fk_arm_moves_elbow_mm": 245.3,
+  "jaw_open_chin_drop_mm": 9.7,
+  "pass": true
+}

@@ -1,6 +1,6 @@
-# MAX — Sub-villain 2 — Design Sheet v1 (PROPOSAL)
+# MAX — Sub-villain 2 — Design Sheet v1 (APPROVED 20 Nov)
 
-> **Status: awaiting Director approval.** Confirmed: name (Max), role, powers (Laser) and the reference. Everything else is a proposal.
+> **Status: design APPROVED by the Director (20 Nov).** Confirmed: name (Max), role, powers (Laser (hands + eyes)), the reference and the full design.
 
 ## Sheet pages (renders of the real Blender model)
 
@@ -87,6 +87,7 @@ Phonemes: A, E, I, O, U, M/B/P, F/V, L, W, Rest (shape keys on CHAR_MAX_MOUTH)
 | Power | Normal | Activation | Full | Deactivation |
 |---|---|---|---|---|
 | Laser | no effect | Charge orb + sparks at the palm, chest lenses glow | Perfectly straight beam: white core, coloured sheath and halo, impact burst | Beam thins to a fading thread, no impact |
+| Laser (eyes) | no effect | Eyes flare, small charge points at both eyes | Two parallel straight beams from the eyes, impact burst | Beams thin to fading threads |
 
 Eye transformation: iris emission ramps normal → activation → full (shared by all powers).
 Reusable VFX functions live in `../../_shared/vfxkit.py` (intensity / openness / length parameters).
@@ -98,16 +99,16 @@ Reusable VFX functions live in `../../_shared/vfxkit.py` (intensity / openness /
 - Clothing: separate meshes generated from the body surface (offset + solidify) → exact fit; robes/capes are lofted sheets.
 - UVs: smart-projected per mesh; layouts in `uv/`. Textures: baked BaseColor / Roughness / Normal / Emission in `textures/`.
 - Rig: deform skeleton (pelvis, 3 spine, neck, head, clavicles, arms, 15 finger bones per hand, legs, feet, toes) + root, COG, hand/foot IK targets with pole targets and IK/FK switches; eye-aim control.
+- **Rigify animation rig** (`blend/<name>_v004_rigify.blend`): IK/FK arms + legs, foot roll, torso/hips/chest, neck/head follow, finger curls, jaw + eye-aim controls, robe/skirt chain controls; same face controls on `root`.
 - Facial rig: shape keys for every expression + 10 phonemes, `jaw_open`, blink / wide-eye per side, eye look; all driven by properties on the `root` pose bone.
 
 ## Production status
 
 See `qc/QC_REPORT.md` for the automated checks and test renders.
-- `.blend`: `blend/max_v002.blend` (design), `blend/max_v003.blend` (production rig + controls)
-- Exports: `export/max.glb` (10.01 MB), `export/max.fbx` (13.83 MB)
+- `.blend`: `blend/max_v002.blend` (design), `blend/max_v003.blend` (game/export rig + controls), `blend/max_v004_rigify.blend` (Rigify animation rig — use this for animation)
+- Exports: `export/max.glb` (10.11 MB), `export/max.fbx` (13.95 MB)
 
 ## Known limitations
 
 - Faces are stylised and code-sculpted; close-up photoreal detail needs a manual sculpt pass.
-- Jaw opens through mouth shape keys; the chin does not move.
-- Cloth simulation is specified but not simulated yet.
+- Robes / skirts use a 12-chain follow rig (no stiff tube); a cloth simulation pass is still recommended for final shots.

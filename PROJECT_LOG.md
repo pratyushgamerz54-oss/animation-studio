@@ -56,6 +56,11 @@
     (`02_world/WORLD_BIBLE.md`), colour bible + contrast check, location comparison, Ashram 3D concept blockout
     (Himalayan foothill gurukul PROPOSAL) + concept/layout/lighting/material sheets. **Sab PROPOSAL, map NOT LOCKED.**
 
+14. **21 Nov — TASK 02 grand world map + REVISION 01:** v1 continent merged as home continent Aetheria in a 12 000 x 6 000 km
+    main world (5 continents, 3 archipelagos), maps A–J (`02_world/map_v2/`), Ashram moved to a large green valley, GEM hidden
+    region proposal, two dimension layouts, portal diagram (all routes hypothetical). Ashram v3 (Poly Haven assets) renders + sheets done.
+    Characters: production v003 + Rigify v004 for all 7 — all QC pass.
+
 ## Director se jawab chahiye (pending)
 - Hero 1 ka naam · saare designs approve/badlav · Saithan life-cost: A (cracks) / B (ash) / C (core siphon)
 - Soul ka hathiyaar story mein hai? · (Max laser + Saithan cost RESOLVED 20 Nov)

@@ -40,11 +40,11 @@ def fbm(base, octaves, seed, persist=.5):
 
 # ---------------------------------------------------------------- continents (all names PROPOSED)
 CONT = [  # key, proposed name, centre (nx, ny), radii, rotation, character
-    ('C1', 'HIMAVANT', (.30, .36), (.165, .17), .25, 'home continent: great northern range, foothill valleys, lakes (Ashram proposed here)'),
-    ('C2', 'MARUDVIPA', (.62, .58), (.13, .17), -.35, 'equatorial / sub-tropical: desert interior, savanna, rainforest coast'),
-    ('C3', 'VANADVIPA', (.86, .30), (.09, .15), .1, 'wet forest continent: enchanted forests, rivers, misty highlands'),
-    ('C4', 'HIMADVIPA', (.58, .075), (.22, .045), 0, 'polar continent: ice sheets, tundra, glaciers (largely unexplored)'),
-    ('C5', 'DAKSHINA', (.20, .80), (.11, .095), -.2, 'southern continent: grasslands, plateaus, ancient ruins'),
+    ('C1', 'AETHERIA', (.30, .36), (.165, .17), .25, 'home continent: great northern range, foothill valleys, lakes (Ashram proposed here)'),
+    ('C2', 'SOLMARA', (.62, .58), (.13, .17), -.35, 'equatorial / sub-tropical: desert interior, savanna, rainforest coast'),
+    ('C3', 'VEYLORA', (.86, .30), (.09, .15), .1, 'wet forest continent: enchanted forests, rivers, misty highlands'),
+    ('C4', 'NOXARA', (.58, .075), (.22, .045), 0, 'polar continent: ice sheets, tundra, glaciers (largely unexplored)'),
+    ('C5', 'DRAKMOR', (.20, .80), (.11, .095), -.2, 'southern continent: grasslands, plateaus, ancient ruins'),
 ]
 ISLANDS = [  # archipelagos (proposed): centre, spread, count, size
     ('A1', 'SAGARA ARCHIPELAGO', (.47, .44), (.05, .07), 16, 10),
@@ -275,6 +275,20 @@ def features(h, sea, B, acc, lakes, down, temp, moist, cid, dsea):
     fe['c1_hidden'] = [TO(p) for p in OF['hidden']]
     fe['c1_regions'] = [(c, n, TO(p) if p else None, st) for c, n, p, st in OF['regions']]
     fe['c1_city_codes'] = [f'C-{i + 1:02d}' for i in range(len(OF['cities']))]
+    # GEM (Director revision 01): location NOT CONFIRMED → PROPOSAL: a hidden ancient region in the main world with a GEM chamber.
+    # Placed deep in Veylora's enchanted forest, far from every proposed settlement, in rugged hills.
+    gm = land & (cid == 3) & np.isin(B, [4, 3, 7]) & (h > 250) & (h < 2200)
+    allset = fe['cities'] + fe['towns'] + fe['villages']
+    sp = np.array(allset) if allset else np.zeros((1, 2))
+    cp = P(gm)
+    if cp:
+        cpa = np.array(cp)
+        dmin = np.min(np.hypot(cpa[:, None, 0] - sp[None, :, 0], cpa[:, None, 1] - sp[None, :, 1]), 1) * KM
+        ench = ndi.uniform_filter((B == 4).astype(np.float32), 15)
+        sc_ = np.minimum(dmin, 450) / 450 * 2 + np.array([ench[int(y), int(x)] for x, y in cp]) * 2 + np.array([h[int(y), int(x)] for x, y in cp]) / 2500
+        fe['gem'] = cp[int(np.argmax(sc_))]
+        fe['gem_isolation_km'] = float(dmin[int(np.argmax(sc_))])
+    fe['ruins'] = fe['ruins'] + ([(fe['gem'][0] + 4, fe['gem'][1] + 3)] if 'gem' in fe else [])
     # unexplored territories: polar continent interior + far east ocean margin + C5 south-west plateau
     une = (cid == 4) & land & (ny < .09)
     fe['unexplored_mask'] = une
@@ -452,8 +466,14 @@ def frame(img, title, sub, legend_w=0, extra_h=0, status='PROPOSAL — NOT LOCKE
     Wd, Hd = img.width + legend_w + 80, img.height + 250 + extra_h
     S = Image.new('RGBA', (Wd, Hd), (24, 20, 16, 255)); d = ImageDraw.Draw(S)
     d.rectangle((14, 14, Wd - 14, Hd - 14), outline=(190, 160, 100), width=4); d.rectangle((24, 24, Wd - 24, Hd - 24), outline=(110, 90, 60), width=2)
-    d.text((50, 44), title, font=F(wg.FS, 62), fill=(240, 226, 190))
-    d.text((52, 122), sub, font=F(wg.FR, 24), fill=(185, 175, 155))
+    ts = 62
+    while ts > 30 and d.textlength(title, font=F(wg.FS, ts)) > Wd - 100:
+        ts -= 2
+    ss = 24
+    while ss > 14 and d.textlength(sub, font=F(wg.FR, ss)) > Wd - 100:
+        ss -= 1
+    d.text((50, 44 + (62 - ts) * .6), title, font=F(wg.FS, ts), fill=(240, 226, 190))
+    d.text((52, 122), sub, font=F(wg.FR, ss), fill=(185, 175, 155))
     d.text((50, Hd - 34), status, font=F(wg.FB, 22), fill=(255, 190, 70), anchor='ld')
     S.alpha_composite(img.convert('RGBA'), (40, 180))
     return S, d
@@ -469,7 +489,7 @@ def legend_biomes(d, x, y, items=None):
 
 def legend_symbols(d, x, y):
     d.text((x, y), 'SYMBOLS (all PROPOSED)', font=F(wg.FB, 26), fill=(240, 226, 190)); y += 44
-    for kind, nm in (('ashram', 'Ashram — CONFIRMED location, position PROPOSED'), ('city', 'Major city site'), ('town', 'Town'),
+    for kind, nm in (('ashram', 'Ashram — CONFIRMED location, position PROPOSED'), ('gem', 'GEM hidden region — PROPOSAL'), ('city', 'Major city site'), ('town', 'Town'),
                      ('village', 'Village'), ('remote', 'Remote settlement'), ('ruin', 'Ancient ruins'), ('cave', 'Cave system entrance'),
                      ('fall', 'Waterfall'), ('unexp', 'Unexplored territory')):
         sym(d, kind, x + 18, y + 13, .9)
@@ -484,6 +504,12 @@ def sym(d, kind, x, y, s=1.0):
         d.rectangle((x - 6 * s, y - 6 * s, x + 6 * s, y + 6 * s), fill=(245, 236, 210), outline=(40, 30, 20), width=2)
     elif kind == 'remote':
         d.polygon([(x, y - 7 * s), (x - 7 * s, y + 6 * s), (x + 7 * s, y + 6 * s)], fill=(230, 220, 190), outline=(40, 30, 20))
+    elif kind in ('gem', 'gemregion'):
+        if kind == 'gemregion':
+            R_ = 38 * s
+            for a0 in range(0, 360, 18):
+                d.arc((x - R_, y - R_, x + R_, y + R_), a0, a0 + 9, fill=(120, 255, 200), width=3)
+        d.polygon([(x, y - 11 * s), (x + 8 * s, y), (x, y + 11 * s), (x - 8 * s, y)], fill=(90, 255, 200), outline=(10, 60, 50))
     elif kind == 'unexp':
         for k in range(-2, 3):
             d.line((x - 14 + k * 6, y + 10, x - 4 + k * 6, y - 10), fill=(220, 220, 235), width=2)
@@ -563,7 +589,7 @@ def render_all(h, B, acc, down, riv, lakes, temp, moist, cid, fe, une, sea):
     fd.text((x0, y + 90), 'Equator = middle of the map (proposal)', font=F(wg.FR, 19), fill=(185, 175, 155))
     fd.text((x0, y + 118), 'Separate dimensions are NOT on this map', font=F(wg.FR, 19), fill=(185, 175, 155))
     fd.text((x0, y + 146), '→ see MAP_H dimensions + MAP_I portals', font=F(wg.FR, 19), fill=(185, 175, 155))
-    fd.text((x0, y + 174), 'GEM location: position NOT CONFIRMED', font=F(wg.FB, 19), fill=(120, 255, 200))
+    fd.text((x0, y + 174), 'GEM: proposed hidden region (NOT CONFIRMED)', font=F(wg.FB, 19), fill=(120, 255, 200))
     full.convert('RGB').save(os.path.join(OUT, 'MAP_A_master_illustrated_v2.png'), optimize=True)
     # ================= technical map
     tc, _ = colour(h, B, S, flat=True)
@@ -662,6 +688,8 @@ def render_all(h, B, acc, down, riv, lakes, temp, moist, cid, fe, une, sea):
     continent_maps(base, h, B, acc, down, riv, fe)
     # ================= G. Ashram regional map
     fe['ashram_routes_detailed'] = ashram_map_detailed(fe)
+    gem_map(base, h, B, acc, down, riv, fe)
+    dimension_black_hole(); dimension_dark_world()
     # ================= H/I. dimensions + portals
     dimensions()
     portals()
@@ -677,6 +705,10 @@ def labels(d, fe, S, size, illustrated=True):
     for p in fe['cities']:
         boxes.append((p[0] * S - 16, p[1] * S - 16, p[0] * S + 16, p[1] * S + 16))
     a = fe['ashram']; sym(d, 'ashram', a[0] * S, a[1] * S, 1.3)
+    if 'gem' in fe:
+        gx_, gy_ = fe['gem'][0] * S, fe['gem'][1] * S
+        sym(d, 'gemregion', gx_, gy_, 1.0)
+        place(d, gx_ - 150, gy_ + 70, [('GEM — hidden ancient region', 18, {'color': (120, 255, 200)}), ('PROPOSAL · location NOT CONFIRMED', 14, {})], boxes, bnd)
     place(d, a[0] * S - 190, a[1] * S - 40, [('ASHRAM', 30, {'color': (255, 214, 90), 'serif': True}), ('CONFIRMED location · position PROPOSED', 15, {})], boxes, bnd)
     for k, (key, nm, c, rr, rot, desc) in enumerate(CONT):
         st = fe['continents'][key]; cx, cy = st['centre']
@@ -773,7 +805,7 @@ def ashram_map(base, h, B, acc, down, riv, lakes, fe):
     elev = int(h[int(ay), int(ax)])
     full, fd = frame(im, 'ASHRAM REGION — LOCATION PROPOSAL', f'≈ {2 * R * KM:.0f} x {2 * R * KM:.0f} km around the proposed site · contours 250 m · dashed red = PROPOSED access routes (least-effort paths)', 640)
     x = im.width + 70; y = 200
-    rows = [('Status', 'Ashram = CONFIRMED story location; this position = PROPOSAL'), ('Continent', 'C1 HIMAVANT (proposed name)'),
+    rows = [('Status', 'Ashram = CONFIRMED story location; this position = PROPOSAL'), ('Continent', 'C1 AETHERIA (proposed name)'),
             ('WCS position (est.)', f'({ax * KM:.0f}, {(H - ay) * KM:.0f}) km'), ('Elevation (est.)', f'{elev} m'),
             ('Setting', 'foothill valley south of the Mahagiri Range'), ('Water', 'lake + river system (flow from the range)'),
             ('Forest', 'temperate / conifer forest on slopes'), ('Matches', 'Ashram 3D concept v3 (valley, lake, snow range N)')]
@@ -863,17 +895,17 @@ def ashram_map_detailed(fe):
     px, py = (ax - x0 + .5) * Z, (ay - y0 + .5) * Z
     sym(d, 'ashram', px, py, 2.0)
     place(d, px, py - 70, [('ASHRAM', 36, {'serif': True, 'color': (255, 214, 90)}), ('proposed position (NOT locked)', 17, {})], boxes, (0, 0, im.width, im.height))
-    place(d, im.width * .5, 50, [(f'Nearest snow peaks: ≈ {rdist} km {rdir} (estimate) · Great Northern Range R-03 further NE', 22, {'serif': True, 'color': (250, 235, 215)})], boxes, (0, 0, im.width, im.height))
+    place(d, im.width * .5, 95, [(f'Nearest snow peaks: ≈ {rdist} km {rdir} (estimate) · Great Northern Range R-03 further NE', 22, {'serif': True, 'color': (250, 235, 215)})], boxes, (0, 0, im.width, im.height))
     scalebar(d, 30, im.height - 60, Z / OLD_KM * KM, km=100)
     elev = int(oh[int(ay), int(ax)])
     wx, wy = TO((ax, ay))
     full, fd = frame(im, 'ASHRAM REGION — LOCATION PROPOSAL', f'≈ {(x1 - x0) * OLD_KM:.0f} x {(y1 - y0) * OLD_KM:.0f} km around the proposed site (detailed C1 data, 3 km cells) · '
                      'contours 200 m · dashed red = PROPOSED access routes (least-effort paths)', 660)
     x = im.width + 70; y = 200
-    rows = [('Status', 'Ashram = CONFIRMED story location; this position = PROPOSAL'), ('Continent', 'C1 HIMAVANT (proposed name) — region R-01 Ashram Valley'),
+    rows = [('Status', 'Ashram = CONFIRMED story location; this position = PROPOSAL'), ('Continent', 'C1 AETHERIA (proposed name) — region R-01 Ashram Valley'),
             ('World position (est.)', f'({wx * KM:.0f}, {(H - wy) * KM:.0f}) km in the main-world grid'), ('Elevation (est.)', f'{elev} m'),
-            ('Setting', f'foothill valley on a lake shore; local hills around it; main snow range ≈ {rdist} km {rdir} (estimate)'), ('Water', 'lake + rivers draining the range (all flow downhill to the sea)'),
-            ('Forest', 'forest + grassland valley floor, conifer slopes'), ('Matches', 'Ashram 3D concept v3 (valley + lake). NOTE: the 3D concept shows snow peaks close behind — on this map the big range is further away; to be aligned after map approval'),
+            ('Setting (revision 01)', f'large green valley (grassland floor) ringed by forests; snowy range ≈ {rdist} km {rdir}, beyond forests and foothills — visible on clear days (horizon for 5 000 m peaks ≈ 300+ km)'), ('Water', 'several rivers cross the valley (fed by the snowy range); lakes further south-west and south-east'),
+            ('Forest', 'dense forest belt between the valley and the mountains'), ('3D concept', 'v3 shows a green valley + distant snow peaks; its backdrop will be re-fitted to this terrain after approval'),
             ('Surrounding settlements', 'proposed villages / city site shown — no names, people or politics invented')]
     for k, v in rows:
         fd.text((x, y), k, font=F(wg.FB, 21), fill=(240, 226, 190))
@@ -915,7 +947,7 @@ def dimensions():
     panels = [('MAIN WORLD', 'physical world · see atlas maps A–G', None, (60, 160, 230)),
               ('BLACK HOLE TRAINING AREA', 'CONFIRMED location · PROPOSED: separate dimension, floating training platforms around a black hole', 'blackhole', (255, 170, 80)),
               ("SAITHAN'S DARK WORLD", 'CONFIRMED location · PROPOSED: separate dimension, ash plains, obsidian spires, corrupted portal', 'dark', (200, 80, 255)),
-              ('GEM LOCATION', 'CONFIRMED location · whether it is a dimension or on the main world = NOT CONFIRMED', 'gem', (90, 255, 200))]
+              ('GEM LOCATION', 'CONFIRMED location · exact place NOT CONFIRMED · PROPOSAL: hidden ancient region on the MAIN WORLD (Veylora) with a GEM chamber — see MAP_J', 'gem', (90, 255, 200))]
     pw = (Wd - 100) // 4
     for k, (t, s, kind, col) in enumerate(panels):
         x0 = 40 + k * (pw + 7); y0 = 240
@@ -959,34 +991,174 @@ def dimensions():
 
 
 def portals():
-    """I. portal connection diagram — only confirmed links solid; everything else = unknown (dashed '?')."""
-    Wd, Hd = 2400, 1500
+    """I. portal network — CONFIRMED vs HYPOTHETICAL routes (Director revision 01). Nothing here is story canon."""
+    Wd, Hd = 2600, 1600
     im = Image.new('RGB', (Wd, Hd), (14, 15, 22)); d = ImageDraw.Draw(im)
-    d.text((40, 36), 'PORTAL CONNECTION DIAGRAM', font=F(wg.FS, 60), fill=(240, 230, 210))
-    d.text((40, 112), 'Solid line = CONFIRMED connection · dashed + “?” = possible link, NOT CONFIRMED · no portal rules or distances invented',
-           font=F(wg.FR, 24), fill=(180, 180, 195))
-    nodes = {'MAIN WORLD\n(incl. ASHRAM)': ((Wd * .5, 430), (60, 160, 230)), 'BLACK HOLE\nTRAINING AREA': ((Wd * .2, 1000), (255, 170, 80)),
-             "SAITHAN'S\nDARK WORLD": ((Wd * .8, 1000), (200, 80, 255)), 'GEM LOCATION\n(type unknown)': ((Wd * .5, 1180), (90, 255, 200))}
-    keys = list(nodes)
-    for i in range(len(keys)):
-        for j in range(i + 1, len(keys)):
-            (x0, y0), _ = nodes[keys[i]]; (x1, y1), _ = nodes[keys[j]]
-            L = math.hypot(x1 - x0, y1 - y0); n = int(L / 28)
-            for k in range(0, n, 2):
-                t0, t1 = k / n, min(1, (k + 1) / n)
-                d.line((x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0, x0 + (x1 - x0) * t1, y0 + (y1 - y0) * t1), fill=(150, 150, 170), width=4)
-            d.ellipse(((x0 + x1) / 2 - 26, (y0 + y1) / 2 - 26, (x0 + x1) / 2 + 26, (y0 + y1) / 2 + 26), fill=(40, 40, 55), outline=(200, 200, 220), width=2)
-            d.text(((x0 + x1) / 2, (y0 + y1) / 2), '?', font=F(wg.FB, 30), fill=(255, 220, 120), anchor='mm')
-    for nm, ((x, y), col) in nodes.items():
+    d.text((40, 36), 'PORTAL NETWORK — PROPOSED CONNECTION DIAGRAM', font=F(wg.FS, 58), fill=(240, 230, 210))
+    d.text((40, 110), 'CONFIRMED by the story: magical portals exist. The network itself is NOT established → every route below is HYPOTHETICAL until '
+                      'the Director confirms it. No portal rules, costs or distances invented.', font=F(wg.FR, 22), fill=(180, 180, 195))
+    N = {'ASHRAM': ((Wd * .30, 520), (255, 214, 90), 'Aetheria · main world'),
+         'OTHER MAIN-WORLD\nPLACES': ((Wd * .62, 420), (60, 160, 230), 'any region of the main world'),
+         'GEM HIDDEN\nREGION': ((Wd * .78, 760), (90, 255, 200), 'proposal · Veylora · main world'),
+         'BLACK HOLE\nTRAINING AREA': ((Wd * .16, 1080), (255, 170, 80), 'separate dimension (proposal)'),
+         "SAITHAN'S\nDARK WORLD": ((Wd * .52, 1150), (200, 80, 255), 'separate dimension (proposal)')}
+    H_ = [('H1', 'ASHRAM', 'BLACK HOLE\nTRAINING AREA', 'Ashram = training place; training area named “training” → a route is plausible'),
+          ('H2', 'OTHER MAIN-WORLD\nPLACES', "SAITHAN'S\nDARK WORLD", 'Saithan has the corrupted-portal power (approved sheet)'),
+          ('H3', 'ASHRAM', 'OTHER MAIN-WORLD\nPLACES', 'Hero 1, Pratyush, Ramarat have portal power → travel inside the main world'),
+          ('H4', 'OTHER MAIN-WORLD\nPLACES', 'GEM HIDDEN\nREGION', 'only if the story says the GEM can be reached by portal'),
+          ('H5', 'ASHRAM', "SAITHAN'S\nDARK WORLD", 'unknown — listed only so the Director can rule it in or out')]
+    for code, a, b, why in H_:
+        (x0, y0), _, _ = N[a]; (x1, y1), _, _ = N[b]
+        L = math.hypot(x1 - x0, y1 - y0); n = int(L / 26)
+        for k in range(0, n, 2):
+            t0, t1 = k / n, min(1, (k + 1) / n)
+            d.line((x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0, x0 + (x1 - x0) * t1, y0 + (y1 - y0) * t1), fill=(160, 160, 185), width=5)
+        mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+        d.rounded_rectangle((mx - 46, my - 26, mx + 46, my + 26), 12, fill=(40, 40, 58), outline=(255, 210, 120), width=2)
+        d.text((mx, my), code + ' ?', font=F(wg.FB, 24), fill=(255, 220, 130), anchor='mm')
+    for nm, ((x, y), col, sub) in N.items():
         d.ellipse((x - 150, y - 150, x + 150, y + 150), fill=(20, 22, 32), outline=col, width=8)
-        for r_ in (120, 95):
-            d.ellipse((x - r_, y - r_, x + r_, y + r_), outline=tuple(int(c * .5) for c in col), width=2)
-        d.multiline_text((x, y), nm, font=F(wg.FB, 26), fill=col, anchor='mm', align='center')
-    y = 1340
-    d.text((40, y), 'CONFIRMED portal users (approved character sheets): Hero 1, Pratyush, Saithan (corrupted portal), Ramarat. '
-                    'Which locations their portals connect = NOT CONFIRMED.', font=F(wg.FR, 22), fill=(225, 225, 235))
-    d.text((40, y + 40), 'Director: tell us which links exist in the story → they become solid lines.', font=F(wg.FB, 22), fill=(255, 190, 70))
+        d.ellipse((x - 118, y - 118, x + 118, y + 118), outline=tuple(int(c * .45) for c in col), width=2)
+        d.multiline_text((x, y - 10), nm, font=F(wg.FB, 22 if len(nm) > 18 else 26), fill=col, anchor='mm', align='center')
+        d.text((x, y + 70), sub, font=F(wg.FR, 17), fill=(190, 190, 205), anchor='mm')
+    x, y = 1880, 960
+    d.text((x, y), 'LEGEND', font=F(wg.FB, 26), fill=(240, 230, 210)); y += 44
+    d.line((x, y + 12, x + 80, y + 12), fill=(120, 255, 140), width=6); d.text((x + 100, y), 'CONFIRMED route (none yet)', font=F(wg.FR, 21), fill=(225, 225, 235)); y += 40
+    for k in range(0, 80, 20):
+        d.line((x + k, y + 12, x + k + 10, y + 12), fill=(160, 160, 185), width=5)
+    d.text((x + 100, y), 'HYPOTHETICAL route (proposal)', font=F(wg.FR, 21), fill=(225, 225, 235)); y += 56
+    for code, a, b, why in H_:
+        d.text((x, y), code, font=F(wg.FB, 20), fill=(255, 220, 130))
+        words, line, n = why.split(), '', 0
+        for w_ in words:
+            if len(line) + len(w_) > 40:
+                d.text((x + 56, y + n * 24), line, font=F(wg.FR, 18), fill=(210, 210, 222)); n += 1; line = ''
+            line += w_ + ' '
+        d.text((x + 56, y + n * 24), line, font=F(wg.FR, 18), fill=(210, 210, 222)); y += 24 * (n + 1) + 12
+    d.text((40, Hd - 80), 'CONFIRMED portal users (approved character sheets): Hero 1 · Pratyush · Saithan (corrupted portal) · Ramarat.', font=F(wg.FR, 22), fill=(225, 225, 235))
+    d.text((40, Hd - 44), 'Director: mark which H-routes exist in the story → they become solid CONFIRMED lines.', font=F(wg.FB, 22), fill=(255, 190, 70))
     im.save(os.path.join(OUT, 'MAP_I_portal_connections_v2.png'), optimize=True)
+
+
+def gem_map(base, h, B, acc, down, riv, fe):
+    """J. GEM hidden ancient region (PROPOSAL) + GEM chamber plan."""
+    if 'gem' not in fe:
+        return
+    gx, gy = fe['gem']; R = 40; Z = 10
+    x0, y0 = int(max(0, gx - R)), int(max(0, gy - R)); x1, y1 = int(min(W, gx + R)), int(min(H, gy + R))
+    crop = base.crop((x0 * 2, y0 * 2, x1 * 2, y1 * 2)).resize(((x1 - x0) * Z, (y1 - y0) * Z), Image.LANCZOS).filter(ImageFilter.GaussianBlur(2))
+    d = ImageDraw.Draw(crop)
+    rivers(d, acc, down, riv | ((acc > 40) & (h > 0)), Z, crop=(x0, y0, x1 - 1, y1 - 1), scale=Z, wmul=.5)
+    forest_glyphs_local(d, ndi.zoom(B[y0:y1, x0:x1], Z, order=0), 30)
+    px, py = (gx - x0 + .5) * Z, (gy - y0 + .5) * Z
+    for r_, a_ in ((170, 255), (120, 180)):
+        for a0 in range(0, 360, 10):
+            d.arc((px - r_, py - r_, px + r_, py + r_), a0, a0 + 5, fill=(120, 255, 200, a_), width=4)
+    sym(d, 'gem', px, py, 2.2)
+    sym(d, 'ruin', px + 4 * Z, py + 3 * Z, 1.6)
+    boxes = []
+    place(d, px, py - 200, [('HIDDEN ANCIENT REGION (proposal)', 26, {'serif': True, 'color': (150, 255, 215)}), ('GEM chamber inside — exact location NOT CONFIRMED', 17, {})], boxes, (0, 0, crop.width, crop.height))
+    scalebar(d, 30, crop.height - 60, Z, km=100)
+    # chamber plan (schematic, not to world scale)
+    P_ = Image.new('RGBA', (760, 760), (12, 16, 18, 255)); pd = ImageDraw.Draw(P_)
+    pd.text((380, 26), 'GEM CHAMBER — PLAN (PROPOSAL)', font=F(wg.FB, 26), fill=(150, 255, 215), anchor='ma')
+    pd.rectangle((350, 640, 410, 740), fill=(70, 66, 60)); pd.text((420, 700), 'hidden entrance in a cliff (proposal)', font=F(wg.FR, 16), fill=(210, 210, 210))
+    pd.rectangle((355, 470, 405, 640), fill=(60, 56, 52)); pd.text((420, 560), 'descending passage', font=F(wg.FR, 16), fill=(210, 210, 210))
+    pd.rectangle((250, 380, 510, 470), fill=(80, 74, 66), outline=(150, 140, 120), width=3); pd.text((380, 425), 'antechamber', font=F(wg.FR, 18), fill=(235, 235, 235), anchor='mm')
+    pd.ellipse((180, 90, 580, 390), fill=(40, 52, 54), outline=(120, 255, 200), width=4)
+    for k in range(8):
+        a = k * math.pi / 4; pd.ellipse((380 + 170 * math.cos(a) - 10, 240 + 125 * math.sin(a) - 10, 380 + 170 * math.cos(a) + 10, 240 + 125 * math.sin(a) + 10), fill=(110, 100, 90))
+    pd.ellipse((340, 205, 420, 275), fill=(90, 84, 76)); pd.polygon([(380, 215), (398, 240), (380, 265), (362, 240)], fill=(90, 255, 200))
+    pd.text((380, 300), 'central chamber · pedestal · GEM', font=F(wg.FR, 17), fill=(235, 235, 235), anchor='mm')
+    pd.text((380, 130), 'light shaft from above (proposal)', font=F(wg.FR, 15), fill=(200, 230, 220), anchor='mm')
+    pd.text((20, 742), 'Schematic only · no story events, guardians or rules invented', font=F(wg.FR, 14), fill=(160, 170, 170), anchor='ld')
+    full, fd = frame(crop, 'GEM — HIDDEN ANCIENT REGION (PROPOSAL)', f'Veylora (proposed name), deep enchanted forest · ≥ {int(fe.get("gem_isolation_km", 0))} km from any proposed settlement · '
+                     'location + chamber = PROPOSAL, NOT CONFIRMED', 820, extra_h=60)
+    full.alpha_composite(P_, (crop.width + 70, 200))
+    gw = (gx * KM, (H - gy) * KM)
+    fd.text((crop.width + 70, 990), f'World position (est.): ({gw[0]:.0f}, {gw[1]:.0f}) km', font=F(wg.FR, 20), fill=(225, 220, 210))
+    fd.text((crop.width + 70, 1022), f'Elevation (est.): {int(h[int(gy), int(gx)])} m · enchanted forest, ancient ruins nearby', font=F(wg.FR, 20), fill=(225, 220, 210))
+    full.convert('RGB').save(os.path.join(OUT, 'MAP_J_gem_hidden_region_v2.png'), optimize=True)
+
+
+def dimension_black_hole():
+    """H1. Black Hole Training Area — proposed dimension layout (own space, own scale, no shared coordinates)."""
+    S_ = 1800; im = Image.new('RGBA', (S_ + 700, S_ + 200), (6, 6, 12, 255)); d = ImageDraw.Draw(im)
+    rng = np.random.default_rng(21)
+    for _ in range(2500):
+        x, y = rng.uniform(0, S_), rng.uniform(150, S_ + 150); r = rng.uniform(.4, 2); d.ellipse((x - r, y - r, x + r, y + r), fill=(230, 230, 255, int(rng.uniform(60, 255))))
+    cx, cy = S_ / 2, S_ / 2 + 150
+    ic = wg.dimension_icon('blackhole', 700); im.alpha_composite(ic, (int(cx - 350), int(cy - 350)))
+    zones = [(560, 'INNER RING — closest platforms (proposal)', 5, (255, 140, 60)), (700, 'TRAINING RINGS — platform chain (proposal)', 9, (255, 190, 110)),
+             (830, 'OUTER RING — arrival / meditation platforms (proposal)', 6, (255, 225, 170))]
+    for r_, lab, n, col in zones:
+        for a0 in range(0, 360, 6):
+            d.arc((cx - r_, cy - r_ * .55, cx + r_, cy + r_ * .55), a0, a0 + 3, fill=col + (150,), width=2)
+        for k in range(n):
+            a = 2 * math.pi * k / n + r_ / 300
+            px, py = cx + r_ * math.cos(a), cy + r_ * .55 * math.sin(a)
+            w = 34 + (r_ - 500) / 12
+            d.ellipse((px - w, py - w * .35, px + w, py + w * .35), fill=(108, 100, 92), outline=col, width=3)
+            d.ellipse((px - w * .9, py - w * .2, px + w * .9, py + w * .45), fill=(70, 64, 58))
+    for k in range(260):
+        a = rng.uniform(0, 2 * math.pi); r_ = rng.uniform(420, 880); px, py = cx + r_ * math.cos(a), cy + r_ * .55 * math.sin(a)
+        s_ = rng.uniform(2, 7); d.polygon([(px, py - s_), (px + s_, py), (px, py + s_), (px - s_ * .8, py)], fill=(120, 110, 100))
+    d.text((40, 30), 'BLACK HOLE TRAINING AREA — PROPOSED DIMENSION LAYOUT', font=F(wg.FS, 52), fill=(255, 200, 140))
+    d.text((40, 100), 'Separate dimension (PROPOSAL) · own space and scale · no shared coordinates with the main world · '
+                      'no physical / dimensional rules invented', font=F(wg.FR, 22), fill=(190, 185, 180))
+    x, y = S_ + 40, 220
+    d.text((x, y), 'PROPOSED ELEMENTS', font=F(wg.FB, 28), fill=(255, 200, 140)); y += 50
+    for t in ('Central black hole + glowing accretion disk', '(the only light source → strong orange rim light)', '',
+              'Inner ring: a few large platforms closest', 'to the disk (most dramatic shots)', '',
+              'Training rings: chain of platforms around', 'the hole (space for power training + VFX)', '',
+              'Outer ring: arrival + meditation platforms', '(calm wide shots)', '', 'Debris field: floating rocks between rings', '',
+              'Visual palette: see COLOUR_BIBLE (void #05060C,', 'accretion #FF9A3C / #FFF2D0, lensing #4A6BFF)', '',
+              'NOT CONFIRMED: how characters get here,', 'who trains here, any rules of the place.'):
+        d.text((x, y), t, font=F(wg.FR, 21), fill=(225, 220, 215)); y += 30
+    for r_, lab, n, col in zones:
+        d.text((cx + r_ * .72, cy - r_ * .55 * .72 - 14), lab, font=F(wg.FB, 18), fill=col)
+    im.convert('RGB').save(os.path.join(OUT, 'MAP_H1_black_hole_training_dimension_v2.png'), optimize=True)
+
+
+def dimension_dark_world():
+    """H2. Saithan's Dark World — proposed dimension layout map (own space)."""
+    Wd, Hd = 1800, 1300
+    yy, xx = np.mgrid[0:Hd, 0:Wd].astype(np.float32)
+    hgt = wg.fbm((Hd, Wd), 5, 6, .55, 61)
+    rid = np.clip(1 - np.abs(wg.fbm((Hd, Wd), 9, 6, .5, 62)) * 2.2, 0, 1)
+    base = np.stack([30 + 25 * hgt, 24 + 18 * hgt, 34 + 26 * hgt], -1)
+    base += (rid[..., None] ** 3) * np.array([110, 30, 50])                          # glowing fissures (blood-stone)
+    v = np.clip(1 - np.abs(wg.fbm((Hd, Wd), 3, 4, .5, 63)) * 6, 0, 1)
+    base = base * (1 - v[..., None] * .7) + v[..., None] * np.array([150, 40, 50]) * .7  # red rivers of corruption
+    sh = wg.shade(hgt * 900, 1.5)
+    img = np.clip(base * (.55 + .6 * sh[..., None]), 0, 255).astype(np.uint8)
+    im = Image.fromarray(img).convert('RGBA'); d = ImageDraw.Draw(im)
+    rng = np.random.default_rng(64)
+    for (fx, fy, n) in ((.22, .3, 110), (.72, .25, 90), (.33, .76, 80), (.82, .7, 70)):
+        for _ in range(n):
+            x = fx * Wd + rng.normal(0, 90); y = fy * Hd + rng.normal(0, 70); hh = rng.uniform(14, 40)
+            d.polygon([(x - 5, y), (x, y - hh), (x + 5, y)], fill=(18, 12, 24), outline=(170, 70, 240))
+    cx, cy = Wd * .52, Hd * .5
+    for r_ in range(90, 20, -12):
+        d.ellipse((cx - r_, cy - r_, cx + r_, cy + r_), outline=(255, 42, 42), width=3)
+    zones = [((.22, .3), 'OBSIDIAN SPIRE FIELD'), ((.72, .25), 'SPIRE CLIFFS'), ((.33, .76), 'ASH PLAINS'), ((.82, .7), 'SHATTERED HIGHLANDS'),
+             ((.52, .5), 'CORRUPTED PORTAL SITE'), ((.6, .88), 'CORRUPTION RIVERS')]
+    for (fx, fy), nm in zones:
+        wg.label(d, fx * Wd, fy * Hd - 60, nm + ' (proposal)', 22, color=(240, 200, 255))
+    full = Image.new('RGBA', (Wd + 640, Hd + 220), (12, 8, 16, 255)); fd = ImageDraw.Draw(full)
+    full.alpha_composite(im, (30, 180))
+    fd.text((40, 30), "SAITHAN'S DARK WORLD — PROPOSED DIMENSION LAYOUT", font=F(wg.FS, 52), fill=(220, 150, 255))
+    fd.text((40, 100), 'Separate dimension (PROPOSAL) · own space and scale · visually separate from the Black Hole Training Area · '
+                       'no rules or connections invented', font=F(wg.FR, 22), fill=(190, 180, 200))
+    x, y = Wd + 70, 200
+    fd.text((x, y), 'PROPOSED ELEMENTS', font=F(wg.FB, 28), fill=(220, 150, 255)); y += 50
+    for t in ('Ash plains + obsidian spire fields', 'Blood-stone fissures that glow red', 'Rivers of red corruption (VFX: emissive + fog)',
+              'Corrupted portal site — matches Saithan’s', 'approved corrupted-portal power (red rim,', 'black core, reverse swirl)', '',
+              'Light: low red key #FF4A3A, violet fill', '#3A1A5A, dense fog #2A1630 (COLOUR_BIBLE)', '',
+              'Contrast with Black Hole Training Area:', 'ground-based, red/violet, foggy, oppressive', '(vs. floating platforms, orange/blue, vacuum)', '',
+              'NOT CONFIRMED: who lives here, what the', 'place is for, how anyone reaches it.'):
+        fd.text((x, y), t, font=F(wg.FR, 21), fill=(225, 215, 230)); y += 30
+    full.convert('RGB').save(os.path.join(OUT, 'MAP_H2_saithan_dark_world_dimension_v2.png'), optimize=True)
 
 
 if __name__ == '__main__':
