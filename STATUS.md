@@ -1,6 +1,9 @@
 # STATUS — last updated 2026-11-21 (session 3: TASK 04 CLOSED, waiting for TASK 05 brief)
 
 ## Session 3 (21 Nov)
+- **TASK 05 milestone 1 — Director feedback (21 Nov):** shots 1 (mountain wide), 2 (forest establishing), 6 (valley aerial),
+  7 (ground meadow), 7b (forest floor) **APPROVED**. Changes: (a) waterfall → **wide cascade** + better water physics,
+  (b) snowy peaks → better. After these → **milestone 2** (rest of the world). "Baaki sab approve hai."
 - **Director rule:** final MP4 **FHD se zyada (4K UHD target)**, zoom par blur nahi — CLAUDE.md mein 'FINAL OUTPUT RESOLUTION RULE'. Abhi 1280×720 = sirf previews.
 - Branch restore + `setup_session.sh`. Director decisions: **Hero 1 = Shiv**; **K-01 robe clipping → cloth simulation** at scene stage.
 
