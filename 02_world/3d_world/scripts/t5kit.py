@@ -255,13 +255,12 @@ def img_float(name, arr, path):
     px = np.repeat(np.ascontiguousarray(arr[::-1], np.float32).reshape(-1, 1), 4, 1); px[:, 3] = 1
     im.pixels.foreach_set(px.ravel())
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    # raw save (NOT save_render: that applies the scene view transform → data would be altered)
-    im.filepath_raw = path; im.file_format = 'OPEN_EXR'
-    try:
-        im.use_half_precision = False
-    except Exception:
-        pass
-    im.save()
+    # float EXR via save_render with Standard view: linear float data is written unchanged (round-trip verified, err 0)
+    sc = bpy.context.scene; vt = sc.view_settings.view_transform; sc.view_settings.view_transform = 'Standard'
+    s = sc.render.image_settings
+    s.file_format = 'OPEN_EXR'; s.color_depth = '32'; s.exr_codec = 'ZIP'; s.color_mode = 'BW'
+    im.save_render(path, scene=sc)
+    sc.view_settings.view_transform = vt
     bpy.data.images.remove(im)
     im = bpy.data.images.load(path); im.name = name; im.colorspace_settings.name = 'Non-Color'
     im.alpha_mode = 'NONE'
@@ -338,8 +337,7 @@ def heightfield_group():
     zsep = b.node('FunctionNodeSeparateColor'); b.link(hz.outputs['Color'], zsep.inputs['Color'])
     cx = b.math('MULTIPLY', b.math('ADD', G('Min X'), G('Max X')), .5); cy = b.math('MULTIPLY', b.math('ADD', G('Min Y'), G('Max Y')), .5)
     off = b.node('ShaderNodeCombineXYZ'); b.link(cx, off.inputs['X']); b.link(cy, off.inputs['Y']); b.link(zsep.outputs[0], off.inputs['Z'])
-    sp = b.node('GeometryNodeSetPosition'); b.link(grid.outputs['Mesh'], sp.inputs['Geometry']); b.link(off.outputs[0], sp.inputs['Offset'])
-    geo = sp.outputs['Geometry']
+    geo = grid.outputs['Mesh']        # masks are stored BEFORE the grid is moved (their uv uses the centred grid position)
     # masks → named float attributes (shader + scatter read them)
     VAL = {}
 
@@ -360,7 +358,9 @@ def heightfield_group():
             geo = store(an, cs.outputs[i])
     # helper masks for scattering: m_one (everywhere) and m_bare (path, Ashram pad, water / wet banks → no plants)
     geo = store('m_one', 1.0)
-    geo = store('m_bare', b.math('MAXIMUM', b.math('MAXIMUM', VAL['m_path'], VAL['m_pad']), b.maprange(VAL['m_wet'], .35, .65)))
+    geo = store('m_bare', b.math('MAXIMUM', b.math('MAXIMUM', VAL['m_path'], VAL['m_pad']), b.maprange(VAL['m_wet'], .8, .97)))
+    sp = b.node('GeometryNodeSetPosition'); b.link(geo, sp.inputs['Geometry']); b.link(off.outputs[0], sp.inputs['Offset'])
+    geo = sp.outputs['Geometry']
     # holes (finer nested LODs live there): delete faces whose centre is inside a hole rectangle
     pos2 = b.node('GeometryNodeInputPosition')
     sels = []

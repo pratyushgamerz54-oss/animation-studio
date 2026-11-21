@@ -165,7 +165,7 @@ def terrain_material():
     base, _ = hblend(base, dry, b.math('ADD', A['m_dry'], b.math('MULTIPLY', b.maprange(meso, .62, .8), .5)))
     # --- groves / forest floor (needles + leaves under trees); far away → canopy colour (trees not instanced there)
     ff = L_('forest_floor', 3.0)
-    ff[0] = recolor(ff[0], .45, .72)                                  # conifer needle litter, not autumn leaves
+    ff[0] = recolor(ff[0], .55, .5)                                  # conifer needle litter, not autumn leaves
     fmask = b.math('MAXIMUM', A['m_forest'], b.math('MULTIPLY', A['m_grove'], .45))
     base, _ = hblend(base, ff, fmask)
     canopy = [b.mixc(b.noise(v, 1 / 35.0, 5, .65), lin('#1E3318'), lin('#2F4A22')), .85, base[2], .5]

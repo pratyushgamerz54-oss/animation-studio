@@ -104,8 +104,8 @@ cam('CAM_T5_02_FOREST_ESTABLISHING', (x, y, gz + 45), (-350, 25700, ground(-350,
 # 3 river + waterfall — looking upstream at the featured fall in the NW01 gorge (WF, 1.5 m terrain)
 f = PREP['featured_waterfalls'][0]
 d = np.array([f['out_x'] - f['x'], f['out_y'] - f['y']]); d /= np.linalg.norm(d); side = np.array([-d[1], d[0]])
-p = np.array([f['out_x'], f['out_y']]) + d * 95 + side * 22
-cz = max(ground(*p), f['z_bottom']) + 7
+p = np.array([f['out_x'], f['out_y']]) + d * 170 + side * 45
+cz = max(ground(*p), f['z_bottom']) + 22
 cam('CAM_T5_03_RIVER_WATERFALL', (p[0], p[1], cz), (f['lip_x'], f['lip_y'], f['z_top'] - .45 * (f['z_top'] - f['z_bottom'])), 26,
     f'River + waterfall — featured fall ({f["z_top"] - f["z_bottom"]:.0f} m drop, largest of the network in NW01) and its plunge pool', 3000, .25)
 # 4 snowy mountain — highest summit of NW01, from the south-south-east, side-lit by the afternoon sun
@@ -124,8 +124,8 @@ rp = R[j]; rdir = R[min(j + 6, len(R) - 1), :2] - R[max(j - 6, 0), :2]; rdir /= 
 if rdir[1] < 0:
     rdir = -rdir                                                       # look upstream/north along the river
 rs = np.array([rdir[1], -rdir[0]])                                     # right-hand side of the look direction
-cp = rp[:2] + rs * (rp[3] * .7 + 14) - rdir * 10
-tg = rp[:2] + rdir * 160 + rs * 4
+cp = rp[:2] + rs * (rp[3] * .7 + 60) - rdir * 20
+tg = rp[:2] + rdir * 260 + rs * 25
 cam('CAM_T5_07_GROUND_LEVEL', (cp[0], cp[1], ground(*cp) + 1.6), (tg[0], tg[1], ground(*tg) + 2.5), 28,
     'Ground level (1.6 m eye) — river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon', 60000, .2, 64)
 # 8 forest floor — inside the forest hero tile among the trees
@@ -162,16 +162,33 @@ ct = sc.node_tree; ct.nodes.clear(); b = tk.NB(ct)
 rl = b.node('CompositorNodeRLayers')
 env_s = next((s for s in rl.outputs if s.name in ('Env', 'Environment')), None)
 hz = b.node('CompositorNodeValue'); hz.name = 'HAZE_STRENGTH'; hz.outputs[0].default_value = .45
-one_minus = b.node('CompositorNodeMath', operation='SUBTRACT'); one_minus.inputs[0].default_value = 1.0
-b.link(rl.outputs['Mist'], one_minus.inputs[1])
-sq = b.node('CompositorNodeMath', operation='MULTIPLY'); b.link(one_minus.outputs[0], sq.inputs[0]); b.link(one_minus.outputs[0], sq.inputs[1])
-inv = b.node('CompositorNodeMath', operation='SUBTRACT'); inv.inputs[0].default_value = 1.0; b.link(sq.outputs[0], inv.inputs[1])
-fac = b.node('CompositorNodeMath', operation='MULTIPLY', use_clamp=True); b.link(inv.outputs[0], fac.inputs[0]); b.link(hz.outputs[0], fac.inputs[1])
-mix = b.node('CompositorNodeMixRGB', blend_type='MIX'); b.link(fac.outputs[0], mix.inputs[0]); b.link(rl.outputs['Image'], mix.inputs[1])
-mix.inputs[2].default_value = HAZE_COL + (1.0,)
-# keep the original alpha so the sky shows through
-sa = b.node('CompositorNodeSetAlpha'); b.link(mix.outputs[0], sa.inputs['Image']); b.link(rl.outputs['Alpha'], sa.inputs['Alpha'])
-ao = b.node('CompositorNodeAlphaOver')
+# aerial perspective on the PREMULTIPLIED render: recover the surface mist at anti-aliased edges
+# m_t = (mist − (1 − α)) / α  → no bright outline along silhouettes against the sky
+def M(op, a_, b2=None, clamp=False):
+    n = b.node('CompositorNodeMath', operation=op, use_clamp=clamp)
+    for i, v in enumerate((a_, b2)):
+        if v is None:
+            continue
+        if isinstance(v, (int, float)):
+            n.inputs[i].default_value = v
+        else:
+            b.link(v, n.inputs[i])
+    return n.outputs[0]
+alpha = rl.outputs['Alpha']
+mt = M('DIVIDE', M('ADD', M('SUBTRACT', rl.outputs['Mist'], 1.0), alpha), M('MAXIMUM', alpha, .001))
+mt = M('MINIMUM', M('MAXIMUM', mt, 0.0), 1.0)
+om = M('SUBTRACT', 1.0, mt)
+f_ = M('MULTIPLY', M('SUBTRACT', 1.0, M('MULTIPLY', om, om)), hz.outputs[0], clamp=True)
+hzc = b.node('CompositorNodeMixRGB', blend_type='MULTIPLY'); hzc.inputs[0].default_value = 1.0
+hzc.inputs[1].default_value = HAZE_COL + (1.0,); b.link(alpha, hzc.inputs[2])
+mix = b.node('CompositorNodeMixRGB', blend_type='MIX'); b.link(f_, mix.inputs[0]); b.link(rl.outputs['Image'], mix.inputs[1])
+b.link(hzc.outputs[0], mix.inputs[2])
+sa = b.node('CompositorNodeSetAlpha'); b.link(mix.outputs[0], sa.inputs['Image']); b.link(alpha, sa.inputs['Alpha'])
+try:
+    sa.mode = 'REPLACE_ALPHA'
+except Exception:
+    pass
+ao = b.node('CompositorNodeAlphaOver'); ao.use_premultiply = False
 b.link(env_s, ao.inputs[1]); b.link(sa.outputs[0], ao.inputs[2])
 gl = b.node('CompositorNodeGlare', glare_type='FOG_GLOW', quality='MEDIUM'); gl.threshold = 1.2; gl.size = 7
 try:
