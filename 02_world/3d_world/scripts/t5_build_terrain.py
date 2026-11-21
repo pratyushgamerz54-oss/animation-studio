@@ -194,6 +194,9 @@ elif COMP == 'mountain':
     S('SC_WF_LARGE_ROCKS', WF, 'LIB_ROCKS_LARGE', Density=.0003, Viewport_Density=.3, Mask='m_cliff', Mask_Min=.05, Mask_Max=.4,
       Slope_Max=80.0, Cluster_Scale=50.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=2.2, Align_To_Normal=.9, Random_Tilt=20.0,
       Sink=.35, Seed=65, Cull_Distance=900.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_WF_CLIFF_CLADDING', WF, 'LIB_ROCKS_LARGE', Density=.006, Viewport_Density=.2, Mask='m_cliff', Mask_Min=.45, Mask_Max=.8,
+      Slope_Min=50.0, Slope_Max=90.0, Cluster_Scale=20.0, Cluster_Amount=.2, Scale_Min=1.6, Scale_Max=3.6, Align_To_Normal=1.0,
+      Random_Tilt=25.0, Sink=.45, Seed=69, Cull_Distance=900.0, Cull_Angle=60.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_WF_STREAM_BOULDERS', WF, 'LIB_ROCKS_MEDIUM', Density=.05, Viewport_Density=.1, Mask='m_wet', Mask_Min=.6, Mask_Max=1.0,
       Slope_Max=70.0, Scale_Min=.5, Scale_Max=1.4, Align_To_Normal=.8, Random_Tilt=20.0, Sink=.35, Seed=66, Cull_Distance=400.0,
       Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)

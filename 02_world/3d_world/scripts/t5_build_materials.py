@@ -207,6 +207,8 @@ def terrain_material():
     sn = L_('snow_02', 4.0, at=True)
     snf = L_('snow_field_aerial', 90.0, at=True)
     sn = lerp_layer(far, sn, snf)
+    snproc = [b.mixc(b.maprange(b.noise(v, 1 / 40.0, 5, .6), .3, .7), lin('#D9E2EC'), lin('#F4F7FA')), .55, sn[2], .5]
+    sn = lerp_layer(b.maprange(dist, 2500, 6000), sn, snproc)          # far snow: procedural (no texture moiré)
     snowmask = b.math('MULTIPLY', A['m_snow'], b.maprange(b.math('ADD', nz, b.math('MULTIPLY', meso, .12)), .70, .84))
     base, sfac = hblend(base, sn, snowmask, .25)
     # glacier ice in the high, gentle, wet valley floors: blue-white with stretched crevasse bands
