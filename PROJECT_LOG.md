@@ -84,3 +84,4 @@
 18. **21 Nov — Session 2 handoff:** `HANDOFF.md` poora naya (sab kaam + kya dobara nahi banana + Task 05 plan), `setup_session.sh`
     (ek command setup: bpy 5.3 + bpy 4.5 + Mesa + Poly Haven + baseline check). Next session: TASK 05 brief se shuru.
 19. **21 Nov — Session 3:** restore. Director: **Hero 1 ka naam = Shiv** (config/docs updated; folder + object ids `hero1`/`HERO1` same, sheet PNGs abhi 'HERO 1' print karti hain). **K-01 robe clipping → cloth simulation** scene stage par (Ramarat, Soul, Saithan, Yayaki). Next: TASK 05 brief.
+20. **21 Nov — TASK 05 milestone 1 (in progress):** detailed terrain v002 (Ashram Valley 2 m/10 m/40 m/400 m LODs, northern forest belt 2 m + Poly Haven trees, mountain NW01 30 m + erosion, waterfall gorge 1.5 m), PBR library (20 materials), nature library (101 assets), GN heightfield + scatter systems, water (rivers, lake, waterfall), master + 7 cameras. Director rule: final MP4 4K, no blur. Details: HANDOFF §6.

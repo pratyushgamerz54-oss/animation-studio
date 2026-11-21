@@ -1,4 +1,4 @@
-# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 2 end)
+# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 3, TASK 05 in progress)
 
 > **Nayi session: sabse pehle YE file padho**, phir `STATUS.md`, `PROJECT_LOG.md`, `CLAUDE.md`. Director ko Hinglish mein short
 > summary do aur **seedha agle task (TASK 05) se kaam shuru karo**. ⚠️ Jo bana hai use **DOBARA MAT BANAO** — sab git mein hai (§7).
@@ -129,11 +129,38 @@ Known limits → Task 05: lake stair-step shores (world scale), LOD2 far mountai
 
 ---
 
-## 6. NEXT — TASK 05: Detailed Terrain & Landscape Production (brief aane wala hai)
-Director ne bola: Poly Haven textures, detailed terrain, realistic vegetation, mountains, rivers, environmental detailing.
-Plan (brief se confirm karna): v002 files on top of v001 → Ashram Valley first (high-res near terrain, slope/height-blended Poly Haven PBR,
-real tree/shrub/rock scatter with LOD + instancing, river banks + water, HDRI) → detailed snowy range ≈101 km NW (same place) → world-scale polish.
-Port `02_world/_shared/phkit.py` (Poly Haven loader) to 4.5 and test; keep texture paths relative; QC no missing textures. Koi geography change / story location invent nahi.
+## 6. TASK 05 — Detailed Terrain & Landscape Production (🟨 IN PROGRESS — milestone 1, session 3)
+Brief: Director ka TASK 05 (main world terrain, mountain system, forest, rivers/water, desert, PBR materials, natural details,
+procedural systems, 7 cinematic tests, optimisation). **FIRST MILESTONE = Ashram Valley + surroundings + first mountain + first
+forest region → previews → Director approval → phir baaki world.** Blender 4.5, v001 frozen, sab naye **v002** files.
+
+**Kya bana (sab git mein):**
+| File | Kya hai |
+|---|---|
+| `scripts/t5_field.py` | TASK 04 height function VERBATIM copy (verify: v001 heights exact, err 3e-5 m) |
+| `scripts/t5_noise.py`, `t5_erosion.py` | isotropic gradient noise (no square artefacts) · numba droplet hydraulic + thermal erosion |
+| `scripts/t5_prep.py` | tiles → `08_ASHRAM_VALLEY/data_v002/*.npz` (gitignored, **2 min se dobara banta hai**) + `prep_v002.json` |
+| tiles | VH ±1.2 km @2 m (Ashram) · FH 3×3 km @2 m (northern forest belt edge, x −1520..1480, y 24..27 km) · L0 ±6 km @10 m · L1 ±32 km @40 m · MT NW01 60×60 km @30 m (x −116..−56, y 44..104 km) · WF 900 m @1.5 m (waterfall gorge, 86 m fall) · L2 ±160 km @400 m |
+| `11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend` (`t5_build_materials.py`) | 20 PBR materials (Poly Haven 2K) + MAT_T5_TERRAIN (mask/slope/height/distance blend), water, waterfall, mist, ice |
+| `14_NATURE_LIBRARY/T5_NATURE_LIBRARY_TREES/GROUND_v002.blend` (`t5_build_library.py`) | 101 assets: fir/pine/broadleaf (LOD1/LOD2 + far proxies), saplings, ferns, shrubs, grass, flowers, logs, roots, stumps, rocks S/M/L |
+| `scripts/t5kit.py` | NG_T5_HEIGHTFIELD (EXR heightfield → real mesh, LOD holes, skirts, 14 mask attributes) · NG_T5_SCATTER (mask/slope/altitude/cluster, camera culling, near/mid/far LOD) |
+| `08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v002.blend` · `04_FORESTS/FOREST_NORTH_BELT_v002.blend` · `03_MOUNTAINS/MOUNTAIN_NW01_v002.blend` · `05_RIVERS_AND_LAKES/WATER_v002.blend` (`t5_build_terrain.py -- valley/forest/mountain/water`) | components; heightfields in `<folder>/heightfields_v002/*.exr/png` |
+| `00_MASTER_WORLD/T5_LANDSCAPE_master_v002.blend` (`t5_build_master.py`) | links all components, HDRI + sun (az 215°, el 31°), 7 cameras CAM_T5_01..08 (desert = milestone 2), compositor aerial haze |
+| `scripts/t5_render.py`, `t5_contact_sheet.py`, `t5_qc.py` | renders (12_RENDER/T5/cycles), sheet, automated QC |
+
+**Rebuild order (nayi session):** `python3 t5_prep.py` → (BPY45) `t5_build_materials.py` → `t5_build_library.py` (T5_LIB=trees / ground)
+→ `t5_build_terrain.py -- valley|forest|mountain|water` → `t5_build_master.py` → `t5_render.py` → `t5_contact_sheet.py` → `t5_qc.py`.
+Sirf renders chahiye to prep + master hi kaafi (master camera placement npz padhta hai). Test renders: `t5_render.py -- --res 640x360 --samples 16 --out <scratch>`.
+
+**Bugs already fixed (dobara mat karna):** masks PNG ko `save_render` se mat likho (AgX transform) → raw `image.save()`; EXR = save_render
+Standard view, ZIP, BW (round-trip exact) · GN masks Set Position se PEHLE store karo (warna offset tiles FH/MT/WF par masks 0) ·
+hero tiles ke kinare parent grid lines par (FH x −1520..1480 on 40 m; WF snapped to MT 30 m grid) · erosion zyada = pahaad pighle → passes
+(4,1.5,2,.3,.2)+(1,1,3,.3,.3) + gaussian 1.0 on deltas · grass scans brown → luminance re-colour to green · test-render log repo ke bahar.
+
+**Status / next:** test renders → sudhaar → final previews 1280×720 (approval ke liye) → QC (4.5 + 5.3) → docs (`T05_README.md`,
+`MATERIAL_LIBRARY.md`, QC report) → Director approval → **milestone 2** (baaki world: desert R-04, enchanted forest R-02, baaki ranges,
+islands, coasts, cave entrances, lakes shore detail).
+**Director rule (21 Nov):** final MP4 FHD se zyada (4K), zoom par blur nahi — CLAUDE.md "FINAL OUTPUT RESOLUTION RULE".
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
