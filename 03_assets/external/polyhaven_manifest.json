@@ -37,7 +37,13 @@
   "shrub_04": "polyhaven/models/shrub_04/shrub_04_1k.blend",
   "grass_bermuda_01": "polyhaven/models/grass_bermuda_01/grass_bermuda_01_1k.blend",
   "nettle_plant": "polyhaven/models/nettle_plant/nettle_plant_1k.blend",
-  "dandelion_01": "polyhaven/models/dandelion_01/dandelion_01_1k.blend"
+  "dandelion_01": "polyhaven/models/dandelion_01/dandelion_01_1k.blend",
+  "celandine_01": "polyhaven/models/celandine_01/celandine_01_1k.blend",
+  "periwinkle_plant": "polyhaven/models/periwinkle_plant/periwinkle_plant_1k.blend",
+  "shrub_sorrel_01": "polyhaven/models/shrub_sorrel_01/shrub_sorrel_01_1k.blend",
+  "weed_plant_02": "polyhaven/models/weed_plant_02/weed_plant_02_1k.blend",
+  "tree_stump_02": "polyhaven/models/tree_stump_02/tree_stump_02_1k.blend",
+  "single_root": "polyhaven/models/single_root/single_root_1k.blend"
  },
  "textures": {
   "clay_roof_tiles_02": {
@@ -277,6 +283,118 @@
    "rough": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_rough_2k.jpg",
    "ao": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_ao_2k.jpg",
    "disp": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_disp_2k.jpg"
+  },
+  "bark_brown_01": {
+   "diff": "polyhaven/textures/bark_brown_01/bark_brown_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/bark_brown_01/bark_brown_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/bark_brown_01/bark_brown_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/bark_brown_01/bark_brown_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/bark_brown_01/bark_brown_01_disp_2k.jpg"
+  },
+  "bark_brown_02": {
+   "diff": "polyhaven/textures/bark_brown_02/bark_brown_02_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/bark_brown_02/bark_brown_02_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/bark_brown_02/bark_brown_02_rough_2k.jpg",
+   "ao": "polyhaven/textures/bark_brown_02/bark_brown_02_ao_2k.jpg",
+   "disp": "polyhaven/textures/bark_brown_02/bark_brown_02_disp_2k.jpg"
+  },
+  "pine_bark": {
+   "diff": "polyhaven/textures/pine_bark/pine_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/pine_bark/pine_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/pine_bark/pine_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/pine_bark/pine_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/pine_bark/pine_bark_disp_2k.jpg"
+  },
+  "knotted_pine_bark": {
+   "diff": "polyhaven/textures/knotted_pine_bark/knotted_pine_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/knotted_pine_bark/knotted_pine_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/knotted_pine_bark/knotted_pine_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/knotted_pine_bark/knotted_pine_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/knotted_pine_bark/knotted_pine_bark_disp_2k.jpg"
+  },
+  "japanese_cedar_bark": {
+   "diff": "polyhaven/textures/japanese_cedar_bark/japanese_cedar_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/japanese_cedar_bark/japanese_cedar_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/japanese_cedar_bark/japanese_cedar_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/japanese_cedar_bark/japanese_cedar_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/japanese_cedar_bark/japanese_cedar_bark_disp_2k.jpg"
+  },
+  "metasequoia_bark": {
+   "diff": "polyhaven/textures/metasequoia_bark/metasequoia_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/metasequoia_bark/metasequoia_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/metasequoia_bark/metasequoia_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/metasequoia_bark/metasequoia_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/metasequoia_bark/metasequoia_bark_disp_2k.jpg"
+  },
+  "bark_willow": {
+   "diff": "polyhaven/textures/bark_willow/bark_willow_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/bark_willow/bark_willow_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/bark_willow/bark_willow_rough_2k.jpg",
+   "ao": "polyhaven/textures/bark_willow/bark_willow_ao_2k.jpg",
+   "disp": "polyhaven/textures/bark_willow/bark_willow_disp_2k.jpg"
+  },
+  "bark_platanus": {
+   "diff": "polyhaven/textures/bark_platanus/bark_platanus_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/bark_platanus/bark_platanus_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/bark_platanus/bark_platanus_rough_2k.jpg",
+   "ao": "polyhaven/textures/bark_platanus/bark_platanus_ao_2k.jpg",
+   "disp": "polyhaven/textures/bark_platanus/bark_platanus_disp_2k.jpg"
+  },
+  "japanese_hackberry_bark": {
+   "diff": "polyhaven/textures/japanese_hackberry_bark/japanese_hackberry_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/japanese_hackberry_bark/japanese_hackberry_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/japanese_hackberry_bark/japanese_hackberry_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/japanese_hackberry_bark/japanese_hackberry_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/japanese_hackberry_bark/japanese_hackberry_bark_disp_2k.jpg"
+  },
+  "japanese_zelkova_bark": {
+   "diff": "polyhaven/textures/japanese_zelkova_bark/japanese_zelkova_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/japanese_zelkova_bark/japanese_zelkova_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/japanese_zelkova_bark/japanese_zelkova_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/japanese_zelkova_bark/japanese_zelkova_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/japanese_zelkova_bark/japanese_zelkova_bark_disp_2k.jpg"
+  },
+  "jolcham_oak_bark_01": {
+   "diff": "polyhaven/textures/jolcham_oak_bark_01/jolcham_oak_bark_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/jolcham_oak_bark_01/jolcham_oak_bark_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/jolcham_oak_bark_01/jolcham_oak_bark_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/jolcham_oak_bark_01/jolcham_oak_bark_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/jolcham_oak_bark_01/jolcham_oak_bark_01_disp_2k.jpg"
+  },
+  "sakura_bark": {
+   "diff": "polyhaven/textures/sakura_bark/sakura_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/sakura_bark/sakura_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/sakura_bark/sakura_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/sakura_bark/sakura_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/sakura_bark/sakura_bark_disp_2k.jpg"
+  },
+  "eucalyptus_bark": {
+   "diff": "polyhaven/textures/eucalyptus_bark/eucalyptus_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/eucalyptus_bark/eucalyptus_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/eucalyptus_bark/eucalyptus_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/eucalyptus_bark/eucalyptus_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/eucalyptus_bark/eucalyptus_bark_disp_2k.jpg"
+  },
+  "tree_bark_03": {
+   "diff": "polyhaven/textures/tree_bark_03/tree_bark_03_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/tree_bark_03/tree_bark_03_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/tree_bark_03/tree_bark_03_rough_2k.jpg",
+   "ao": "polyhaven/textures/tree_bark_03/tree_bark_03_ao_2k.jpg",
+   "disp": "polyhaven/textures/tree_bark_03/tree_bark_03_disp_2k.jpg"
+  },
+  "chinese_cedar_bark": {
+   "diff": "polyhaven/textures/chinese_cedar_bark/chinese_cedar_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/chinese_cedar_bark/chinese_cedar_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/chinese_cedar_bark/chinese_cedar_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/chinese_cedar_bark/chinese_cedar_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/chinese_cedar_bark/chinese_cedar_bark_disp_2k.jpg"
+  },
+  "trident_maple_bark": {
+   "diff": "polyhaven/textures/trident_maple_bark/trident_maple_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/trident_maple_bark/trident_maple_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/trident_maple_bark/trident_maple_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/trident_maple_bark/trident_maple_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/trident_maple_bark/trident_maple_bark_disp_2k.jpg"
   }
  },
  "hdris": {
