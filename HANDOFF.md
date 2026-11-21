@@ -157,9 +157,21 @@ Standard view, ZIP, BW (round-trip exact) · GN masks Set Position se PEHLE stor
 hero tiles ke kinare parent grid lines par (FH x −1520..1480 on 40 m; WF snapped to MT 30 m grid) · erosion zyada = pahaad pighle → passes
 (4,1.5,2,.3,.2)+(1,1,3,.3,.3) + gaussian 1.0 on deltas · grass scans brown → luminance re-colour to green · test-render log repo ke bahar.
 
-**Status / next:** test renders → sudhaar → final previews 1280×720 (approval ke liye) → QC (4.5 + 5.3) → docs (`T05_README.md`,
-`MATERIAL_LIBRARY.md`, QC report) → Director approval → **milestone 2** (baaki world: desert R-04, enchanted forest R-02, baaki ranges,
-islands, coasts, cave entrances, lakes shore detail).
+**Milestone 1 = DONE + reviewed (21 Nov):** shots 1, 2, 6, 7, 7b APPROVED; waterfall → wide 6-tier cascade (ballistic curtains,
+GN spray particles, mist, rock cladding) + sharper peaks/glaciers DONE (Director said "baaki sab approve"). QC 56/56 (`T05_QC_REPORT.md`).
+
+**MILESTONE 2 (in progress) — rest of the world, region sites with their own local frame:**
+| Step | Status | Files |
+|---|---|---|
+| R04 Western Desert (dunes, mesas, canyons/wadis, playas, pavement) + shot 5 | ✅ built, final previews rendering | `scripts/t5_region_prep.py R04` → `06_DESERTS/data_v002/`; `t5_build_terrain.py -- desert` → `06_DESERTS/DESERT_R04_v002.blend`; `t5_build_region_master.py -- R04` → `00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend`; render: `t5_render.py -- --master T5_REGION_R04_DESERT_master_v002.blend` |
+| R05 Forbidden Region (crater ~90 km, dark ground, crater lake; volcanic look ONLY if approved → not) | ⏳ next | add to REGIONS in t5_region_prep.py (cell 276.48, 483.84; biome 9 + lake 10) |
+| R02 Enchanted Forest (visually distinct: old-growth giant trees, moss, teal, ground mist) | ⏳ | cell (672, 505), biome 4 |
+| R03 Great Northern Range core | ⏳ | cell (626, 138) |
+| Main-world v002 polish (coasts, islands, lake shores without stair-steps, cave entrances) | ⏳ | world-scale (1 BU = 1 km) |
+| QC + docs + STATUS/HANDOFF + push, then notify Director | ⏳ | |
+Region frame: origin = site centre (C1 cell), metres; `region_<key>.json` stores the Ashram-local offset. Desert mask slots: m_dry = sand,
+m_pad = playa, m_gravel = pavement, m_grove = wadi shrubs (MAT_T5_TERRAIN_DESERT). Director: 4K stills NOT needed now (stopped on request).
+A scheduled check-in (send_later, 21 Nov 17:47 UTC) resumes the work if a usage limit stopped the session; notify the Director when TASK 05 is complete.
 **Director rule (21 Nov):** final MP4 FHD se zyada (4K), zoom par blur nahi — CLAUDE.md "FINAL OUTPUT RESOLUTION RULE".
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
