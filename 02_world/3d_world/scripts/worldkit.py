@@ -34,7 +34,19 @@ def backup(path):
         print('BACKUP', dst, flush=True)
 
 
+def protected(path):
+    """TASK 04 approved baseline (TASK04_BASELINE_MANIFEST.json) must never be overwritten (Director approval condition 1/5)."""
+    man = P('TASK04_BASELINE_MANIFEST.json')
+    if not os.path.exists(man) or os.environ.get('ALLOW_BASELINE_OVERWRITE') == '1':
+        return False
+    rel = os.path.relpath(os.path.abspath(path), ROOT)
+    return rel in json.load(open(man))['files']
+
+
 def save(path):
+    if protected(path):
+        raise RuntimeError(f'REFUSED: {path} is part of the approved TASK 04 baseline — save a new version (v002+) instead '
+                           '(override only with ALLOW_BASELINE_OVERWRITE=1 and Director permission)')
     os.makedirs(os.path.dirname(path), exist_ok=True)
     backup(path)
     bpy.context.preferences.filepaths.save_version = 0          # no .blend1 duplicates (13_BACKUPS holds the backups)

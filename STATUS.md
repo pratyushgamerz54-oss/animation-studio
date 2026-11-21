@@ -1,4 +1,4 @@
-# STATUS — last updated 2026-11-21 (TASK 04 milestone 1 done)
+# STATUS — last updated 2026-11-21 (TASK 04 CLOSED, ready for TASK 05)
 
 ## Abhi kahan hain
 - **Stage 1 Characters: ✅ DONE + APPROVED** (saare 7: v002 design, v003 production, v004 Rigify; QC 0 FAIL).
@@ -12,7 +12,11 @@
   skirt ke aar-paar nikalta hai** (trousers chhupane par bhi skin dikhti hai) = known issue K-01. Fix: scene stage par cloth sim
   (waist pinned, body collision) ya skirt-follow bones ka strong knee influence. Normal/walk/stand poses mein dikhta nahi.
 
-## TASK 04 — 3D WORLD BLOCKOUT (milestone 1 ✅, Director review ka intezaar)
+## TASK 04 — ✅ CLOSED (Director: APPROVED FOR DETAILED ENVIRONMENT PRODUCTION, 21 Nov)
+- Approval = sirf current blockout layout. Map rev 01 = PROPOSAL hi. GEM = UNCONFIRMED. v001 baseline frozen
+  (`02_world/3d_world/TASK04_BASELINE_MANIFEST.json`, save-guard in worldkit). Closeout: `02_world/3d_world/TASK04_CLOSEOUT.md`.
+- NEXT: TASK 05 Detailed Terrain & Landscape (Poly Haven textures, detailed terrain, vegetation, mountains, rivers) — v002 files.
+### Task 04 details
 - Folder `02_world/3d_world/` (00_MASTER_WORLD … 13_BACKUPS), Blender **4.5.16 LTS** se bana + 4.5 aur 5.3 dono mein QC **70/70 PASS**.
 - Master `00_MASTER_WORLD/WORLD_master_v001.blend` saare components ko LINK karta hai; scenes MAIN_WORLD, ASHRAM_VALLEY, DIM_BLACK_HOLE_TRAINING, DIM_SAITHAN_DARK_WORLD.
 - Main world: 1 BU = 1 km, relief ×20; 44 terrain pieces (ek hi height grid se, 0 gaps), 423 rivers (0 uphill), 26 lakes, ocean, islands, markers.
@@ -30,7 +34,7 @@
 3. Story / script document
 4. Director ke PC par Blender version (4.5 ya 5.x?) — .blend files 5.3 se bani hain
 5. Ramarat K-01 clipping: abhi quick fix (skirt bones) ya scene stage par cloth sim?
-6. TASK 04 milestone 1 review: world blockout + Ashram Valley terrain theek hai? Detailed environment modelling shuru karein?
+6. TASK 05 brief (Detailed Terrain & Landscape Production) bhejna hai.
 7. Baaki prompts (17 tak) ek-ek karke bhejne hain.
 
 ## Approval ke baad next

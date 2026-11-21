@@ -78,3 +78,6 @@
     map v2 rev 01 (Blender 4.5.16 LTS), regions by direction + theme, rivers/lakes/ocean/islands/underground/ruined zones, Ashram Valley
     true-scale LOD terrain (snow range ≈101 km NW), Black Hole + Dark World dimension blockouts, 38 preview images, QC 70/70 (4.5 + 5.3).
     Sab PROPOSAL — Director review ka intezaar.
+17. **21 Nov — TASK 04 CLOSED.** Director ne blockout layout ko APPROVED FOR DETAILED ENVIRONMENT PRODUCTION kiya (conditions: layout
+    preserve, map rev 01 = proposal, GEM unconfirmed, dimensions preserve, files + backups safe). v001 baseline checksummed + save-guard;
+    saare 16 backups git mein. Closeout `02_world/3d_world/TASK04_CLOSEOUT.md`. Ab TASK 05 ki taiyaari.

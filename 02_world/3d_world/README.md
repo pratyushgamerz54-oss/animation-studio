@@ -1,7 +1,9 @@
 # TASK 04 — THE GRAND UNIVERSE · 3D WORLD BLOCKOUT (milestone 1)
 
-> **Status: PROPOSAL / BLOCKOUT — built from world map v2 revision 01, which is NOT LOCKED.**
-> Nothing here finalises geography, names or story. Change the map → run `scripts/run_all.sh` → every file is rebuilt.
+> **Status: ✅ TASK 04 CLOSED — blockout layout APPROVED FOR DETAILED ENVIRONMENT PRODUCTION (Director, 21 Nov 2026).**
+> World map v2 revision 01 itself stays a **PROPOSAL** (not canon); GEM location stays **unconfirmed**. v001 files = frozen baseline
+> (`TASK04_BASELINE_MANIFEST.json`, `TASK04_CLOSEOUT.md`) — later work goes into new v002+ files.
+> Nothing here finalises geography, names or story. The build scripts now refuse to overwrite the approved v001 baseline (set ALLOW_BASELINE_OVERWRITE=1 only with Director permission).
 > Built and tested with **Blender 4.5.16 LTS** (Python module), also opened/QC'd in Blender 5.3.
 
 ## What is in each folder

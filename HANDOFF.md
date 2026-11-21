@@ -122,7 +122,8 @@ full → deactivation) renders hain. **Final film mein inhe high-quality simulat
 
 ---
 
-### 4e. TASK 04 — 3D WORLD BLOCKOUT (`02_world/3d_world/`, milestone 1 done)
+### 4e. TASK 04 — 3D WORLD BLOCKOUT (`02_world/3d_world/`) — ✅ CLOSED, layout APPROVED (map rev 01 still proposal, GEM unconfirmed)
+v001 = frozen baseline (`TASK04_BASELINE_MANIFEST.json`; `worldkit.save` refuses overwrites) → Task 5 works in v002 files. Closeout: `TASK04_CLOSEOUT.md`.
 Blender **4.5** se bana (bpy 4.5 via `uv venv -p python3.11`, see CLAUDE.md). `00_MASTER_WORLD/WORLD_master_v001.blend` links all components.
 Rebuild: `BLENDER=<blender 4.5> 02_world/3d_world/scripts/run_all.sh`. Details: `02_world/3d_world/README.md`, `QC_REPORT.md`,
 `01_GEOGRAPHY/WORLD_SCALE.md`. Viewport renders need Mesa EGL (`EGL_PLATFORM=surfaceless`).

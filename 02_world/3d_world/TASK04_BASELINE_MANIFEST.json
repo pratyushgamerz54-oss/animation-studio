@@ -1,0 +1,111 @@
+{
+ "baseline": "TASK 04 milestone 1 \u2014 APPROVED FOR DETAILED ENVIRONMENT PRODUCTION (blockout layout only; map rev 01 stays PROPOSAL)",
+ "approved_by": "Director",
+ "date": "2026-11-21",
+ "git_commit": "a34c590",
+ "blender": "4.5.16 LTS",
+ "files": {
+  "00_MASTER_WORLD/WORLD_master_v001.blend": {
+   "sha256": "fcb176612387329358e86f87237d5a1cab6e60e98728d20a72f98130bcc64bd5",
+   "bytes": 107241
+  },
+  "01_GEOGRAPHY/WORLD_geography_v001.blend": {
+   "sha256": "d32b9bf4ee28594990a42c96854f34093a97468689cf549a6dfba7cba71b85be",
+   "bytes": 144958
+  },
+  "01_GEOGRAPHY/data/world_features.json": {
+   "sha256": "1e2e46a7476aec5cd1686e54149404ee04c4cc60d4cb84cac6bdd9e9fbe436cc",
+   "bytes": 21981
+  },
+  "01_GEOGRAPHY/data/world_prep.npz": {
+   "sha256": "85204d1443c3c4c6ab38ac4361c790fba7039c2705aac17fc1bb3860af2ee4ed",
+   "bytes": 3018426
+  },
+  "02_TERRAIN/WORLD_terrain_v001.blend": {
+   "sha256": "28d50d4efeb3389a7b4d8841fbb62b9923632562fab6b3b23dadef201ba76115",
+   "bytes": 6080816
+  },
+  "03_MOUNTAINS/WORLD_mountains_v001.blend": {
+   "sha256": "a09067349d07d8787cfcbd975500aef8cd25d552e1a1236f0d0c16e9e6d2997a",
+   "bytes": 1728713
+  },
+  "04_FORESTS/FOREST_proxies_v001.blend": {
+   "sha256": "c49546e6c6c313b91190230127c2faf0c7c1aa39959d54929c57cff4451e6884",
+   "bytes": 89099
+  },
+  "04_FORESTS/WORLD_forests_v001.blend": {
+   "sha256": "5fb7343d6f2b8961a9809a76864f3b22fe9db473cef8885272fee305807b0b9e",
+   "bytes": 5805426
+  },
+  "05_RIVERS_AND_LAKES/WORLD_water_v001.blend": {
+   "sha256": "c8b097e56c053cfa12a2f24f95e54ebd6ffc7e27341edfbedf1e12226706bc79",
+   "bytes": 2623688
+  },
+  "06_DESERTS/WORLD_deserts_v001.blend": {
+   "sha256": "088ad174adf36c258f62a2a002cafe5cfd8136306f1d8b032d39ae3d013ee44f",
+   "bytes": 896374
+  },
+  "07_ISLANDS/WORLD_islands_v001.blend": {
+   "sha256": "03e4439ab81881cdff0b89b82ab4e16d581ade0fd89bd3c7d3b3b16949f3a934",
+   "bytes": 854348
+  },
+  "08_ASHRAM_VALLEY/ASHRAM_VALLEY_terrain_v001.blend": {
+   "sha256": "22f4ca159d95b35f59b76c85866082f7a1f9099ca96b3f4debbd265a5aca5b17",
+   "bytes": 26430638
+  },
+  "08_ASHRAM_VALLEY/data/valley_features.json": {
+   "sha256": "a12ef6507157d63bcf2f36c1671e91ae61898c3d945558184b592d31ab41c1aa",
+   "bytes": 1074
+  },
+  "08_ASHRAM_VALLEY/data/valley_prep.npz": {
+   "sha256": "3d5a9b4cbea5f9e4d28f44f2009ec858fbb415fe7c29bb4e79c0a9b1c31c99f7",
+   "bytes": 4731106
+  },
+  "09_DIMENSIONS/DIM_black_hole_training_v001.blend": {
+   "sha256": "546e7a2eacc142354d9e15c2d56902b5a476bc4fa270ae62c32a27dc55177e00",
+   "bytes": 191824
+  },
+  "09_DIMENSIONS/DIM_saithan_dark_world_v001.blend": {
+   "sha256": "11a10d58bd2170ab093fea74ca676633e8054ad0f6f4a3ca09b2c7eade0b4cd6",
+   "bytes": 5081716
+  },
+  "09_DIMENSIONS/data/black_hole_layout.json": {
+   "sha256": "4a4ea77276cfbfb576dc08f195dbca60d8db508976582c45cad296f3a42b4bca",
+   "bytes": 34047
+  },
+  "09_DIMENSIONS/data/dark_world_layout.json": {
+   "sha256": "831c33c796bda422ab5d11bdb5767d5d1876329616cbcaad1616223da181cae0",
+   "bytes": 27479
+  },
+  "09_DIMENSIONS/data/dark_world_terrain.npz": {
+   "sha256": "9dc4aaa8a259b5604894e0e9ddcdce926b46a84366ac85400bcd9bcf4d3e8c6e",
+   "bytes": 714220
+  },
+  "10_CAMERAS/WORLD_cameras_v001.blend": {
+   "sha256": "3e7ca21c5c013c6ea72a03ce3335ce2f00f1e45397da40327ca81c82d1163ea6",
+   "bytes": 90252
+  },
+  "11_MATERIALS/WORLD_materials_v001.blend": {
+   "sha256": "b6b90f8f229bee75118052bc3a174ea530515b20e3d9c27af2a6bd95bc36637e",
+   "bytes": 139542
+  }
+ },
+ "backups": [
+  "ASHRAM_VALLEY_terrain_v001__backup_20261121_053332.blend",
+  "ASHRAM_VALLEY_terrain_v001__backup_20261121_055829.blend",
+  "DIM_black_hole_training_v001__backup_20261121_053335.blend",
+  "DIM_saithan_dark_world_v001__backup_20261121_053335.blend",
+  "FOREST_proxies_v001__backup_20261121_053329.blend",
+  "WORLD_cameras_v001__backup_20261121_053330.blend",
+  "WORLD_deserts_v001__backup_20261121_053330.blend",
+  "WORLD_forests_v001__backup_20261121_053330.blend",
+  "WORLD_geography_v001__backup_20261121_053330.blend",
+  "WORLD_islands_v001__backup_20261121_053330.blend",
+  "WORLD_master_v001__backup_20261121_053336.blend",
+  "WORLD_master_v001__backup_20261121_055831.blend",
+  "WORLD_materials_v001__backup_20261121_053329.blend",
+  "WORLD_mountains_v001__backup_20261121_053330.blend",
+  "WORLD_terrain_v001__backup_20261121_053330.blend",
+  "WORLD_water_v001__backup_20261121_053330.blend"
+ ]
+}
