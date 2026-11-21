@@ -115,11 +115,11 @@ if COMP == 'valley':
       Mask='m_forest', Mask_Min=.3, Mask_Max=.65, Avoid_Mask='m_bare', Slope_Max=38.0, Cluster_Scale=60.0, Cluster_Amount=.3,
       Scale_Min=.75, Scale_Max=1.35, Scale_By_Mask=.6, Random_Tilt=2.0, Seed=35, Cull_Distance=9000.0, Cull_Angle=50.0,
       Keep_Near=60.0, Near_to_Mid=180.0, Mid_to_Far=900.0)
-    S('SC_VH_RIVER_STONES', VH, cs, 'LIB_ROCKS_SMALL', Density=1.4, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.15, Mask_Max=.55,
-      Slope_Max=60.0, Cluster_Scale=3.0, Cluster_Amount=.5, Scale_Min=2.0, Scale_Max=6.0, Align_To_Normal=1.0, Random_Tilt=15.0,
+    S('SC_VH_RIVER_STONES', VH, cs, 'LIB_ROCKS_SMALL', Density=.8, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.15, Mask_Max=.55,
+      Slope_Max=60.0, Cluster_Scale=3.0, Cluster_Amount=.5, Scale_Min=1.2, Scale_Max=3.5, Align_To_Normal=1.0, Random_Tilt=15.0,
       Sink=.025, Seed=15, Cull_Distance=150.0, Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_VH_RIVERBED_STONES', VH, cs, 'LIB_ROCKS_SMALL', Density=.9, Viewport_Density=.05, Mask='m_wet', Mask_Min=.85, Mask_Max=1.0,
-      Slope_Max=60.0, Cluster_Scale=4.0, Cluster_Amount=.5, Scale_Min=3.0, Scale_Max=9.0, Align_To_Normal=1.0, Random_Tilt=20.0,
+      Slope_Max=60.0, Cluster_Scale=4.0, Cluster_Amount=.5, Scale_Min=1.5, Scale_Max=4.5, Align_To_Normal=1.0, Random_Tilt=20.0,
       Sink=.04, Seed=16, Cull_Distance=150.0, Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     for tname, T_, dens, seed in (('VH', VH, .0004, 17), ('L0', L0, .00025, 27)):
         S(f'SC_{tname}_BOULDERS', T_, cs, 'LIB_ROCKS_MEDIUM', Density=dens, Viewport_Density=.2, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
@@ -159,11 +159,11 @@ elif COMP == 'forest':
     S('SC_FH_MOSSY_ROCKS', 'LIB_ROCKS_MEDIUM', Density=.003, Viewport_Density=.3, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_bare', Slope_Max=50.0, Cluster_Scale=45.0, Cluster_Amount=.85, Scale_Min=.6, Scale_Max=1.8, Align_To_Normal=.7,
       Random_Tilt=12.0, Sink=.3, Seed=48, Cull_Distance=800.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-    S('SC_FH_RIVER_STONES', 'LIB_ROCKS_SMALL', Density=1.4, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.15, Mask_Max=.55,
-      Slope_Max=60.0, Cluster_Scale=3.0, Cluster_Amount=.5, Scale_Min=2.0, Scale_Max=6.0, Align_To_Normal=1.0, Random_Tilt=15.0,
+    S('SC_FH_RIVER_STONES', 'LIB_ROCKS_SMALL', Density=.8, Viewport_Density=.05, Mask='m_gravel', Mask_Min=.15, Mask_Max=.55,
+      Slope_Max=60.0, Cluster_Scale=3.0, Cluster_Amount=.5, Scale_Min=1.2, Scale_Max=3.5, Align_To_Normal=1.0, Random_Tilt=15.0,
       Sink=.025, Seed=49, Cull_Distance=150.0, Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_FH_RIVERBED_STONES', 'LIB_ROCKS_SMALL', Density=.9, Viewport_Density=.05, Mask='m_wet', Mask_Min=.85, Mask_Max=1.0,
-      Slope_Max=60.0, Scale_Min=3.0, Scale_Max=9.0, Align_To_Normal=1.0, Random_Tilt=20.0, Sink=.04, Seed=50, Cull_Distance=150.0,
+      Slope_Max=60.0, Scale_Min=1.5, Scale_Max=4.5, Align_To_Normal=1.0, Random_Tilt=20.0, Sink=.04, Seed=50, Cull_Distance=150.0,
       Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
 
 elif COMP == 'mountain':
@@ -194,7 +194,7 @@ elif COMP == 'mountain':
       Slope_Max=70.0, Scale_Min=.5, Scale_Max=1.4, Align_To_Normal=.8, Random_Tilt=20.0, Sink=.35, Seed=66, Cull_Distance=400.0,
       Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_WF_STREAM_STONES', WF, 'LIB_ROCKS_SMALL', Density=1.0, Viewport_Density=.05, Mask='m_wet', Mask_Min=.4, Mask_Max=1.0,
-      Slope_Max=70.0, Scale_Min=3.0, Scale_Max=10.0, Align_To_Normal=1.0, Random_Tilt=20.0, Sink=.04, Seed=67, Cull_Distance=150.0,
+      Slope_Max=70.0, Scale_Min=1.5, Scale_Max=5.0, Align_To_Normal=1.0, Random_Tilt=20.0, Sink=.04, Seed=67, Cull_Distance=150.0,
       Cull_Angle=55.0, Keep_Near=10.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_WF_ALPINE_GRASS', WF, 'LIB_GRASS', Density=3.0, Viewport_Density=.02, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_rock', Avoid_Mask_2='m_bare', Slope_Max=38.0, Cluster_Scale=4.0, Cluster_Amount=.6, Scale_Min=1.0, Scale_Max=2.0,
