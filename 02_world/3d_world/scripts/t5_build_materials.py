@@ -362,6 +362,67 @@ def forbidden_material():
 L['TERRAIN_FORBIDDEN'] = forbidden_material()
 
 
+def enchanted_material():
+    """MAT_T5_TERRAIN_ENCHANTED — old-growth Enchanted Forest floor: deep teal-green moss carpet (m_dry = moss amount),
+    needle / leaf litter, mossy rock, teal-tinted clearings (m_grove). Colour key from the World Bible (#2C6B5B)."""
+    m, b, bs, out = newmat('MAT_T5_TERRAIN_ENCHANTED')
+    v = coords(b)
+    A = {k: b.attr(k) for k in ('m_rock', 'm_wet', 'm_dry', 'm_grove', 'm_gravel', 'm_cliff', 'm_scree')}
+    cam = b.node('ShaderNodeCameraData'); dist = cam.outputs['View Distance']
+    geo = b.node('ShaderNodeNewGeometry'); ns = b.node('ShaderNodeSeparateXYZ'); b.link(geo.outputs['Normal'], ns.inputs[0]); nz = ns.outputs['Z']
+    macro = b.noise(v, 1 / 400.0, 4, .55); meso = b.noise(v, 1 / 12.0, 4, .6)
+
+    def L_(tex, scale, box=False, at=False, tint=None):
+        g = use_group(b, tex, v, scale, box, at, False, None, tint)
+        return [g.outputs['Color'], g.outputs['Roughness'], g.outputs['Normal'], g.outputs['Height']]
+
+    def lerp(f, a_, c_):
+        return [b.mixc(f, a_[0], c_[0]), b.mixf(f, a_[1], c_[1]), b.mixv(f, a_[2], c_[2]), b.mixf(f, a_[3], c_[3])]
+
+    def hb(base, lay, mask, k=.35):
+        val = b.math('ADD', b.math('MULTIPLY', mask, 1.3), b.math('MULTIPLY', b.math('SUBTRACT', lay[3], base[3]), k))
+        return lerp(b.maprange(b.math('SUBTRACT', val, .15), .4, .6), base, lay)
+
+    def hs(col, sat, val, hue=.5):
+        h = b.node('ShaderNodeHueSaturation'); h.inputs['Hue'].default_value = hue; h.inputs['Saturation'].default_value = sat
+        h.inputs['Value'].default_value = val; b.link(col, h.inputs['Color']); return h.outputs['Color']
+    base = L_('forest_floor', 3.0, at=True); base[0] = b.mixc(1.0, hs(base[0], .45, .38), lin('#9A8A70'), 'MULTIPLY')
+    moss = L_('leafy_grass', 1.8, at=True)
+    bw = b.node('ShaderNodeRGBToBW'); b.link(moss[0], bw.inputs[0])
+    rmp = b.node('ShaderNodeValToRGB'); b.link(b.math('MULTIPLY', bw.outputs[0], 1.7), rmp.inputs['Fac'])
+    el = rmp.color_ramp.elements; el[0].color = lin('#0F2A22'); el[1].position = .8; el[1].color = lin('#5E9A6E')
+    e2 = el.new(.4); e2.color = lin('#2C6B5B')
+    moss[0] = b.mixc(b.maprange(macro, .3, .7, .0, .35), rmp.outputs['Color'], lin('#6E8F3E'))
+    base = hb(base, moss, b.maprange(b.math('ADD', A['m_dry'], b.math('MULTIPLY', meso, .2)), .15, .7), .25)
+    gap = L_('leafy_grass', 2.4); gap[0] = hs(gap[0], .9, .6, .52)
+    base = hb(base, gap, b.math('MULTIPLY', A['m_grove'], .8))
+    bank = L_('mud_forest', 2.5, wet=None); base = hb(base, bank, b.math('MULTIPLY', A['m_wet'], .9))
+    st = L_('river_small_rocks', 1.6); base = hb(base, st, A['m_gravel'], .5)
+    rk = L_('mossy_rock', 4.0, box=True, at=True)
+    base = hb(base, rk, b.math('MAXIMUM', b.math('MAXIMUM', A['m_rock'], A['m_cliff']), b.maprange(nz, .78, .62)))
+    far = [b.mixc(b.maprange(macro, .35, .65), lin('#123026'), lin('#1F4A3A')), .9, base[2], .5]
+    base = lerp(b.maprange(dist, 1500, 5000), base, far)
+    b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
+    bs.inputs['Metallic'].default_value = 0.0
+    SPEC['MAT_T5_TERRAIN_ENCHANTED'] = dict(source='Poly Haven 2K forest_floor, leafy_grass (re-coloured to moss / teal), mud_forest, '
+                                            'river_small_rocks, mossy_rock + procedural far', maps='Base Color, Roughness, Normal GL, Displacement',
+                                            resolution='2K per layer', metallic=0.0, layers=['litter', 'moss carpet', 'teal clearings', 'bank mud', 'stream stones', 'mossy rock'])
+    return m
+
+
+L['TERRAIN_ENCHANTED'] = enchanted_material()
+
+# low-lying ground mist (volume box; density falls off with height above the box base, object space Z)
+m, b, bs, out = newmat('MAT_T5_GROUND_MIST')
+b.n.remove(bs)
+pv = b.node('ShaderNodeVolumePrincipled'); pv.inputs['Color'].default_value = lin('#CFE3DC'); pv.inputs['Anisotropy'].default_value = .5
+tco = b.node('ShaderNodeTexCoord'); oz = b.node('ShaderNodeSeparateXYZ'); b.link(tco.outputs['Generated'], oz.inputs[0])
+den = b.math('MULTIPLY', b.math('EXPONENT', b.math('MULTIPLY', oz.outputs['Z'], -7.0)), b.maprange(b.noise(tco.outputs['Object'], 1 / 60.0, 3, .5), .3, .7, .2, 1.0))
+b.link(b.math('MULTIPLY', den, .012), pv.inputs['Density']); b.link(pv.outputs[0], out.inputs['Volume'])
+SPEC['MAT_T5_GROUND_MIST'] = dict(source='procedural volume', maps='Principled Volume, density 0.012 × exp(−7·z_box) × noise', resolution='procedural')
+L['GROUND_MIST'] = m
+
+
 # =========================================================================== water, mist, haze, far trees
 def water(name, deep, shallow, rough=.02, wave=1.0):
     m, b, bs, out = newmat(name)

@@ -88,5 +88,25 @@
   ],
   "description": "Desert aerial \u2014 dune seas between mesas / buttes, dry wadis and playas (cracked ground)",
   "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_09_FORBIDDEN_RIM": {
+  "seconds": 123.0,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forbidden Region (R05) \u2014 the blasted crater rim: ash ground, fissures, dead trees, the dark crater lake beyond",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_09B_FORBIDDEN_AERIAL": {
+  "seconds": 83.5,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forbidden Region aerial \u2014 ejecta ridges on the blasted plain, the crater rim and the crater lake",
+  "blender": "4.5.16 LTS"
  }
 }

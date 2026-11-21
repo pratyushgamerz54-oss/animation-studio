@@ -13,7 +13,9 @@ RK = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'R04'
 CFG = {'R04': dict(file='06_DESERTS/DESERT_R04_v002.blend', coll='T5_DESERT_R04', data='06_DESERTS/data_v002',
                    out='T5_REGION_R04_DESERT_master_v002.blend', sun=(232.0, 12.0), tiles=('DH', 'DN', 'DF')),
        'R05': dict(file='06_DESERTS/FORBIDDEN_R05_v002.blend', coll='T5_FORBIDDEN_R05', data='06_DESERTS/data_v002',
-                   out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 18.0), tiles=('XH', 'XN', 'XF'))}[RK]
+                   out='T5_REGION_R05_FORBIDDEN_master_v002.blend', sun=(250.0, 18.0), tiles=('XH', 'XN', 'XF')),
+       'R02': dict(file='04_FORESTS/ENCHANTED_FOREST_R02_v002.blend', coll='T5_ENCHANTED_R02', data='04_FORESTS/data_v002',
+                   out='T5_REGION_R02_ENCHANTED_master_v002.blend', sun=(240.0, 34.0), tiles=('EH', 'EN', 'EF'))}[RK]
 DD = wk.P(*CFG['data'].split('/')); RJ = json.load(open(os.path.join(DD, f'region_{RK}.json')))
 wk.new_file()
 sc = bpy.context.scene; sc.name = f'T5_REGION_{RK}'
@@ -82,6 +84,13 @@ if RK == 'R05':
     cx2, cy2 = 5000.0, -9000.0
     cam('CAM_T5_09B_FORBIDDEN_AERIAL', (cx2, cy2, ground(cx2, cy2) + 900), (-6000, 30000, lev), 26,
         'Forbidden Region aerial — ejecta ridges on the blasted plain, the crater rim and the crater lake', 200000, .18)
+if RK == 'R02':
+    cx, cy = 200.0, -300.0
+    cam('CAM_T5_10_ENCHANTED_FLOOR', (cx, cy, ground(cx, cy) + 1.6), (cx - 80, cy + 110, ground(cx - 80, cy + 110) + 6), 22,
+        'Enchanted Forest (R02) — inside the old-growth: giant trunks, moss carpet, ferns, fallen giants, low mist', 6000, .15, 64)
+    cx2, cy2 = 1300.0, -2600.0
+    cam('CAM_T5_10B_ENCHANTED_CANOPY', (cx2, cy2, ground(cx2, cy2) + 140), (-1500, 4000, ground(-1500, 4000) + 30), 28,
+        'Enchanted Forest canopy — giant old-growth over rolling hills, deep teal-green', 60000, .3)
 sc.camera = C[0]
 wk.setup_cycles(sc, (1280, 720), 48)
 cy_ = sc.cycles

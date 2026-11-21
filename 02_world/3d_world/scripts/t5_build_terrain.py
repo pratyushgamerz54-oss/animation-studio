@@ -27,7 +27,8 @@ OUTS = {'valley': ('08_ASHRAM_VALLEY', 'ASHRAM_VALLEY_terrain_v002.blend', 'T5_V
         'mountain': ('03_MOUNTAINS', 'MOUNTAIN_NW01_v002.blend', 'T5_MOUNTAIN_NW'),
         'water': ('05_RIVERS_AND_LAKES', 'WATER_v002.blend', 'T5_WATER'),
         'desert': ('06_DESERTS', 'DESERT_R04_v002.blend', 'T5_DESERT_R04'),
-        'crater': ('06_DESERTS', 'FORBIDDEN_R05_v002.blend', 'T5_FORBIDDEN_R05')}
+        'crater': ('06_DESERTS', 'FORBIDDEN_R05_v002.blend', 'T5_FORBIDDEN_R05'),
+        'enchanted': ('04_FORESTS', 'ENCHANTED_FOREST_R02_v002.blend', 'T5_ENCHANTED_R02')}
 FOLDER, FNAME, TOP = OUTS[COMP]
 
 wk.new_file()
@@ -265,6 +266,44 @@ elif COMP in ('desert', 'crater'):
         k = np.arange(len(r) - 1) * 2 + n0; fs.append(np.stack([k, k + 1, k + 3, k + 2], 1)); vs.append(vv); n0 += len(vv)
     if vs:
         o = wk.mesh_from_arrays('T5_DESERT_RIVERS', np.vstack(vs), np.vstack(fs), cw, MAT['MAT_T5_WATER_RIVER']); wk.set_float_attr(o, 'foam', np.zeros(n0))
+
+elif COMP == 'enchanted':
+    DD = wk.P('04_FORESTS', 'data_v002'); RJ = json.load(open(os.path.join(DD, 'region_R02.json')))
+    TT = {k: dict(x0=-v['half'], x1=v['half'], y0=-v['half'], y1=v['half'], sp=v['sp']) for k, v in RJ['tiles'].items()}
+    sc['frame'] = RJ['frame']; sc['region'] = 'R02 Enchanted Forest (map revision 01 = PROPOSAL)'
+    ct = C('T5_ENCHANTED_TERRAIN'); cs = C('T5_ENCHANTED_SCATTER'); cv = C('T5_ENCHANTED_ATMOSPHERE')
+    MATE = 'MAT_T5_TERRAIN_ENCHANTED'
+    EFo = tile('EF', ct, 100, .6, DD, TT['EF'], [TT['EN']], MATE)
+    ENo = tile('EN', ct, 12, .3, DD, TT['EN'], [TT['EH']], MATE)
+    EHo = tile('EH', ct, 3, .25, DD, TT['EH'], [], MATE)
+
+    def S(name, T_, near=None, mid=None, far=None, **p):
+        q = {k.replace('_', ' ').replace('Near to Mid', 'LOD Near→Mid').replace('Mid to Far', 'LOD Mid→Far'): v for k, v in p.items()}
+        return scatter(name, T_, cs, near, mid, far, **q)
+    # giant old-growth trees (same CC0 species, much older/larger: ×1.7–2.8) — what makes this forest distinct
+    for tn, T_, dens, cull, sd in (('EH', EHo, .012, 5000.0, 81), ('EN', ENo, .006, 9000.0, 82), ('EF', EFo, .004, 20000.0, 83)):
+        S(f'SC_{tn}_ANCIENT_TREES', T_, 'LIB_TREES_NEAR', 'LIB_TREES_MID', 'LIB_TREES_FAR', Density=dens, Viewport_Density=.05,
+          Mask='m_forest', Mask_Min=.3, Mask_Max=.7, Avoid_Mask='m_bare', Slope_Max=40.0, Cluster_Scale=50.0, Cluster_Amount=.3,
+          Scale_Min=1.7, Scale_Max=2.8, Scale_By_Mask=.4, Random_Tilt=3.0, Seed=sd, Cull_Distance=cull, Cull_Angle=55.0,
+          Keep_Near=60.0, Near_to_Mid=180.0, Mid_to_Far=1200.0)
+    S('SC_EH_UNDERSTORY_TREES', EHo, 'LIB_SAPLINGS', Density=.01, Viewport_Density=.1, Mask='m_forest', Mask_Min=.2, Mask_Max=.6,
+      Slope_Max=40.0, Cluster_Scale=25.0, Cluster_Amount=.5, Scale_Min=.6, Scale_Max=1.3, Seed=84, Cull_Distance=900.0, Cull_Angle=55.0,
+      Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_EH_FERNS', EHo, 'LIB_UNDERSTORY', Density=.9, Viewport_Density=.02, Mask='m_dry', Mask_Min=.1, Mask_Max=.6,
+      Avoid_Mask='m_bare', Slope_Max=45.0, Cluster_Scale=6.0, Cluster_Amount=.7, Scale_Min=1.0, Scale_Max=2.4, Align_To_Normal=.4,
+      Seed=85, Cull_Distance=140.0, Cull_Angle=55.0, Keep_Near=6.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_EH_MOSSY_ROCKS', EHo, 'LIB_ROCKS_MEDIUM', Density=.012, Viewport_Density=.2, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+      Avoid_Mask='m_bare', Slope_Max=50.0, Cluster_Scale=35.0, Cluster_Amount=.8, Scale_Min=.6, Scale_Max=2.4, Align_To_Normal=.7,
+      Random_Tilt=12.0, Sink=.3, Seed=86, Cull_Distance=700.0, Cull_Angle=55.0, Keep_Near=15.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_EH_FALLEN_GIANTS', EHo, 'LIB_LOGS', Density=.006, Viewport_Density=.3, Mask='m_forest', Mask_Min=.3, Mask_Max=.7,
+      Avoid_Mask='m_bare', Slope_Max=30.0, Cluster_Scale=40.0, Cluster_Amount=.4, Scale_Min=1.4, Scale_Max=2.6, Align_To_Normal=1.0,
+      Random_Tilt=3.0, Sink=.15, Seed=87, Cull_Distance=600.0, Cull_Angle=55.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    S('SC_EH_ROOTS_DEBRIS', EHo, 'LIB_FOREST_DEBRIS', Density=.05, Viewport_Density=.1, Mask='m_forest', Mask_Min=.3, Mask_Max=.7,
+      Avoid_Mask='m_bare', Slope_Max=40.0, Cluster_Scale=10.0, Cluster_Amount=.5, Scale_Min=1.0, Scale_Max=2.2, Align_To_Normal=.9,
+      Random_Tilt=4.0, Sink=.04, Seed=88, Cull_Distance=180.0, Cull_Angle=55.0, Keep_Near=8.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
+    D_ = np.load(os.path.join(DD, 'EH.npz')); zmin = float(D_['z'].min())
+    mist = wk.box('T5_ENCHANTED_GROUND_MIST', (3000, 3000, 40), (0, 0, zmin + 20), cv, MAT['MAT_T5_GROUND_MIST'])
+    mist.display_type = 'BOUNDS'; wk.add_props(mist, status=STATUS, note='low-lying forest mist (volume, height falloff)')
 
 elif COMP == 'water':
     W = np.load(os.path.join(DATA, 'water.npz')); RIV, RIVO = W['RIV'].astype(np.float64), W['RIVO']

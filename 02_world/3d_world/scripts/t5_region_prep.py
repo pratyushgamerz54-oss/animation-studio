@@ -32,7 +32,12 @@ REGIONS = {
                        'XH': dict(half=1500, sp=2.0, parent='XN', band=150)},
                 wind_deg=280.0, kind='crater'),
 }
-KIND_FILES = {'desert': ('DF', 'DN', 'DH'), 'crater': ('XF', 'XN', 'XH')}
+REGIONS['R02'] = dict(name='Enchanted Forest', folder='04_FORESTS', cell=(672.0, 505.0),
+                      tiles={'EF': dict(half=40000, sp=200.0, parent=None, band=5000),
+                             'EN': dict(half=6000, sp=10.0, parent='EF', band=600),
+                             'EH': dict(half=1500, sp=2.0, parent='EN', band=150)},
+                      wind_deg=280.0, kind='enchanted')
+KIND_FILES = {'desert': ('DF', 'DN', 'DH'), 'crater': ('XF', 'XN', 'XH'), 'enchanted': ('EF', 'EN', 'EH')}
 
 
 def frame(reg):
@@ -91,7 +96,7 @@ def drainage(reg, half):
         z = P.height_t5(pts[:, 0] + OX, pts[:, 1] + OY)
         z = np.minimum.accumulate(np.maximum(z, 0))
         w = np.clip(8 + 10 * np.sqrt(acc / 40.0), 10, 160)
-        wet = (acc > 150).astype(float)                               # large channels keep water; the rest = dry wadis (proposal)
+        wet = (acc > (150 if reg.get('kind') != 'enchanted' else 12)).astype(float)   # desert: big channels wet, rest dry wadis (proposal); forest: streams
         out.append(np.column_stack([pts, z, w, wet]))
     return out
 
@@ -165,9 +170,13 @@ def build(rkey, tkey):
         fiss = sstep(.0, .06, np.abs(N.fbm(AX_, AY_, 900, 3, 243) + .3 * vor)) - 1                # 0 off-crack, −1 in a crack
         d = ej + rim * 90 + fiss * 6 * P.bl(sp, 40) + N.fbm(AX_, AY_, 220, 3, 244) * 6 * P.bl(sp, 220)
         sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
+    if reg.get('kind') == 'enchanted':
+        d = (N.fbm(AX_, AY_, 1800, 4, 260) * 25 + N.fbm(AX_, AY_, 300, 3, 261) * 5 * P.bl(sp, 300)
+             + N.fbm(AX_, AY_, 40, 3, 262) * .9 * P.bl(sp, 40) + N.fbm(AX_, AY_, 9, 2, 263) * .25 * P.bl(sp, 9))   # hummocks, root mounds
+        sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
     ze = z0 + d
     flow = np.zeros_like(ze); scree = np.zeros_like(ze)
-    if sp >= 15:                                                       # gullies on the mesa walls, talus aprons below
+    if sp >= 15 and reg.get('kind') != 'enchanted':                    # gullies on the mesa walls, talus aprons below
         H, fl = E.hydraulic(ze / sp, .8 * ze.size, 41, 2, erode=.3, deposit=.25, capacity=4.0)
         ze = ze + ndi.gaussian_filter(H * sp - ze, 1.0) * (1 - sandsea); flow = fl
         H2, dep = E.thermal(ze / sp, math.tan(math.radians(55)), 15, .25)
@@ -231,6 +240,22 @@ def build(rkey, tkey):
         pave = sstep(.1, .45, N.fbm(X + OX, Y + OY, 300, 3, 252)) * (1 - rock) * (1 - lakeinside)       # → RUBBLE
         veg = sstep(.25, .55, N.fbm(X + OX, Y + OY, 900, 3, 253)) * (1 - lakeinside) * sstep(25, 12, slope)  # → dead trees
         wet = np.maximum(wet, lakeinside)
+    if reg.get('kind') == 'enchanted':                                 # old-growth forest everywhere (map biome 4), small natural gaps
+        forest = (1 - sstep(.3, .45, N.fbm(X + OX, Y + OY, 350, 3, 270))) * (1 - wet) * sstep(40, 30, slope)
+        moss = sstep(-.2, .3, N.fbm(X + OX, Y + OY, 60, 3, 271))
+        U_ = lambda a: np.clip(np.round(a * 255), 0, 255).astype(np.uint8)
+        Zs = np.zeros_like(ze)
+        grav = np.where(np.isfinite(wet), sstep(.05, .4, wet) * (1 - sstep(.6, .95, wet)), 0)
+        MA = np.stack([U_(forest), U_(rock), U_(Zs), U_(wet)], -1)
+        MB = np.stack([U_(moss), U_(Zs), U_(1 - forest), U_(sc)], -1)          # dry→MOSS amount, grove→natural gaps
+        MC = np.stack([U_(grav), U_(Zs), U_(lf), U_(cliff)], -1)
+        np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', f'{tkey}.npz'), z=ze.astype(np.float32), MA=MA, MB=MB, MC=MC,
+                            rect=np.array([-half, half, -half, half, sp]))
+        st = dict(region=rkey, tile=tkey, shape=[n, n], spacing_m=sp, half_m=half, z_min=float(ze.min()), z_max=float(ze.max()),
+                  cover={'forest': float((forest > .5).mean()), 'wet': float((wet > .5).mean())}, drainage_lines=len(RV),
+                  seconds=round(time.time() - t0, 1))
+        print(json.dumps(st), flush=True)
+        return st, RV
     U = lambda a: np.clip(np.round(a * 255), 0, 255).astype(np.uint8)
     Z = np.zeros_like(ze)
     MA = np.stack([U(Z), U(rock), U(Z), U(np.maximum(wet, sea))], -1)            # forest, rock, snow, wet
