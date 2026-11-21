@@ -345,6 +345,23 @@ elif COMP == 'range':
         nm_ = nt_.nodes.new('ShaderNodeNormalMap'); nt_.links.new(mp_.outputs[0], tn.inputs['Vector'])
         nt_.links.new(tn.outputs['Color'], nm_.inputs['Color']); nt_.links.new(nm_.outputs[0], bsd.inputs['Normal'])
     bsd.inputs['Roughness'].default_value = .85
+    # weathering: cavity darkening (AO) + moss / lichen on up-facing surfaces, damp streaks near the ground
+    if img:
+        aon = nt_.nodes.new('ShaderNodeAmbientOcclusion'); aon.inputs['Distance'].default_value = 1.5; aon.samples = 8
+        mul = nt_.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'; mul.inputs['Factor'].default_value = .85
+        nt_.links.new(ti.outputs['Color'], mul.inputs['A']); nt_.links.new(aon.outputs['Color'], mul.inputs['B'])
+        gnn = nt_.nodes.new('ShaderNodeNewGeometry'); sxyz = nt_.nodes.new('ShaderNodeSeparateXYZ'); nt_.links.new(gnn.outputs['Normal'], sxyz.inputs[0])
+        nz_ = nt_.nodes.new('ShaderNodeMapRange'); nz_.inputs['From Min'].default_value = .55; nz_.inputs['From Max'].default_value = .85
+        nt_.links.new(sxyz.outputs['Z'], nz_.inputs['Value'])
+        mn = nt_.nodes.new('ShaderNodeTexNoise'); mn.inputs['Scale'].default_value = .6; mn.inputs['Detail'].default_value = 8
+        nt_.links.new(tc_.outputs['Object'], mn.inputs['Vector'])
+        mr = nt_.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = .45; mr.inputs['From Max'].default_value = .6
+        nt_.links.new(mn.outputs['Fac'], mr.inputs['Value'])
+        mm_ = nt_.nodes.new('ShaderNodeMath'); mm_.operation = 'MULTIPLY'; mm_.use_clamp = True
+        nt_.links.new(nz_.outputs['Result'], mm_.inputs[0]); nt_.links.new(mr.outputs['Result'], mm_.inputs[1])
+        moss = nt_.nodes.new('ShaderNodeMix'); moss.data_type = 'RGBA'; moss.inputs['B'].default_value = (.06, .085, .025, 1)
+        nt_.links.new(mm_.outputs[0], moss.inputs['Factor']); nt_.links.new(mul.outputs['Result'], moss.inputs['A'])
+        nt_.links.new(moss.outputs['Result'], bsd.inputs['Base Color'])
     rock.data.materials.clear(); rock.data.materials.append(cm)
 
     # ---- photo-scanned rock kitbash around the mouth (Poly Haven CC0 scans: real texture, real shape) → not a 'placed blob'
@@ -378,12 +395,12 @@ elif COMP == 'range':
       Cluster_Scale=80.0, Cluster_Amount=.4, Scale_Min=.7, Scale_Max=1.3, Scale_By_Mask=.6, Seed=91, Cull_Distance=14000.0,
       Cull_Angle=50.0, Keep_Near=60.0, Near_to_Mid=200.0, Mid_to_Far=900.0)
     S('SC_CV_CONIFERS', CVo, 'LIB_TREES_NEAR', 'LIB_TREES_MID', 'LIB_TREES_FAR', Density=.03, Viewport_Density=.05, Mask='m_forest',
-      Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_bare', Slope_Max=40.0, Cluster_Scale=35.0, Cluster_Amount=.35, Scale_Min=.7, Scale_Max=1.3,
+      Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_bare', Avoid_Mask_2='m_grove', Slope_Max=40.0, Cluster_Scale=35.0, Cluster_Amount=.35, Scale_Min=.7, Scale_Max=1.3,
       Seed=93, Cull_Distance=2000.0, Cull_Angle=55.0, Keep_Near=40.0, Near_to_Mid=120.0, Mid_to_Far=700.0)
-    S('SC_CV_UNDERSTORY', CVo, 'LIB_UNDERSTORY', Density=.2, Viewport_Density=.03, Mask='m_forest', Mask_Min=.1, Mask_Max=.5,
+    S('SC_CV_UNDERSTORY', CVo, 'LIB_UNDERSTORY', Density=.2, Viewport_Density=.03, Mask='m_forest', Mask_Min=.1, Mask_Max=.5, Avoid_Mask='m_grove', Avoid_Strength=.8,
       Slope_Max=45.0, Cluster_Scale=8.0, Cluster_Amount=.7, Scale_Min=.8, Scale_Max=1.6, Align_To_Normal=.4, Seed=94, Cull_Distance=150.0,
       Cull_Angle=55.0, Keep_Near=6.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-    S('SC_CV_CLEARING_GRASS', CVo, 'LIB_GRASS', Density=10.0, Viewport_Density=.01, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
+    S('SC_CV_CLEARING_GRASS', CVo, 'LIB_GRASS', Density=16.0, Viewport_Density=.01, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,
       Avoid_Mask='m_forest', Avoid_Strength=.7, Avoid_Mask_2='m_scree', Slope_Max=40.0, Cluster_Scale=4.0, Cluster_Amount=.5, Scale_Min=1.4, Scale_Max=2.8,
       Align_To_Normal=.6, Random_Tilt=8.0, Seed=96, Cull_Distance=70.0, Cull_Angle=50.0, Keep_Near=4.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
     S('SC_CV_CLEARING_PLANTS', CVo, 'LIB_UNDERSTORY', Density=.25, Viewport_Density=.05, Mask='m_one', Mask_Min=0.0, Mask_Max=.5,

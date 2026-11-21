@@ -464,11 +464,16 @@ def build(name):
         forest = forest * sstep(.15, .5, forest + ns) * (1 - .9 * sstep(.38, .5, fbm(X, Y, 260, 3, 132)))
     clear = sstep(650, 1100, np.hypot(X, Y + 40))
     forest = forest * clear * (1 - wet) * (1 - pw)
+    if name == 'CV':                                                    # trampled soil + litter at the mouth, dry patchy grass in the clearing
+        litter = (1 - sstep(25, 55, dcv + N.fbm(X, Y, 12, 3, 255) * 12)) * (1 - CAVE_TUN)
+        dry = np.maximum(dry, sstep(-.15, .35, N.fbm(X, Y, 25, 3, 256)) * (1 - sstep(70, 95, dcv)) * (1 - litter))
     if name == 'CV':
-        forest = forest * sstep(60, 85, dcv)                            # clearing around the cave mouth
+        forest = np.maximum(forest * sstep(60, 85, dcv), litter)        # clearing around the mouth; litter = forest-floor layer
         scree = np.maximum(scree, CAVE_TUN * 5.0)                       # stony floor (scree mask) inside the cave
     gn = fbm(X, Y, 1800, 4, 40) + fbm(X, Y, 400, 2, 41) * .35
     grove = sstep(.18, .42, gn) * (1 - forest) * (1 - rock) * (1 - snow) * (1 - dry) * clear * (1 - wet) * (1 - pw) * (1 - sstep(2400, 2900, z))
+    if name == 'CV':
+        grove = np.maximum(grove, np.clip(litter * 2.2, 0, 1))       # dark forest-floor litter (needles, soil) around the mouth
     padc = sstep(.93, .995, pw)
     # snow: more in gullies / couloirs and on gentle ground, less on cliffs (accumulation)
     lf = np.log1p(flow) / max(np.log1p(flow).max(), 1e-9) if flow.max() > 0 else flow
