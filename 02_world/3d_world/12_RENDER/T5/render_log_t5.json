@@ -50,7 +50,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_07_GROUND_LEVEL": {
-  "seconds": 286.4,
+  "seconds": 269.1,
   "samples": 64,
   "res": [
    1280,
@@ -60,7 +60,7 @@
   "blender": "4.5.16 LTS"
  },
  "CAM_T5_08_FOREST_FLOOR": {
-  "seconds": 602.2,
+  "seconds": 570.1,
   "samples": 64,
   "res": [
    1280,
