@@ -1,4 +1,7 @@
-# STATUS — last updated 2026-11-21 (TASK 04 CLOSED, ready for TASK 05)
+# STATUS — last updated 2026-11-21 (session 3: TASK 04 CLOSED, waiting for TASK 05 brief)
+
+## Session 3 (21 Nov)
+- Branch restore + `setup_session.sh`. Director decisions: **Hero 1 = Shiv**; **K-01 robe clipping → cloth simulation** at scene stage.
 
 ## Abhi kahan hain
 - **Stage 1 Characters: ✅ DONE + APPROVED** (saare 7: v002 design, v003 production, v004 Rigify; QC 0 FAIL).
@@ -28,12 +31,12 @@
 - NEXT (approval ke baad): detailed environment modelling (Ashram Phase 4 terrain detail, mountains close-up), lake shoreline smoothing.
 
 ## Director se PENDING (jawab chahiye)
-1. Hero 1 ka naam · Soul ka weapon story mein hai?
+1. ~~Hero 1 ka naam~~ = **Shiv** ✅ (21 Nov) · Soul ka weapon story mein hai?
 2. World map revision 01 approve? (continent naam assignment, Ashram jagah + snow distance, H1/H2 dimensions ka look,
    GEM hidden region + chamber, kaunse portal routes H1–H5 sach mein hain, story kaunse regions use karti hai)
 3. Story / script document
-4. Director ke PC par Blender version (4.5 ya 5.x?) — .blend files 5.3 se bani hain
-5. Ramarat K-01 clipping: abhi quick fix (skirt bones) ya scene stage par cloth sim?
+4. ~~Director PC Blender version~~ = 4.5 ✅ (HANDOFF)
+5. ~~Ramarat K-01~~ → ✅ Director: **cloth simulation** (scene stage, saare long-robe characters).
 6. TASK 05 brief (Detailed Terrain & Landscape Production) bhejna hai.
 7. Baaki prompts (17 tak) ek-ek karke bhejne hain.
 

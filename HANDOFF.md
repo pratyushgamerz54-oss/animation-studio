@@ -48,7 +48,7 @@ brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit
 
 | Character | Role | Powers (confirmed) | Notes |
 |---|---|---|---|
-| Hero 1 (naam PENDING) | Main hero | Fire, Magical Portal | references ka combination |
+| **Shiv** (Hero 1, naam 21 Nov) | Main hero | Fire, Magical Portal | references ka combination |
 | Pratyush | Hero 2 | Super Speed, Portal, Lightning | armoured speed suit (original colours) |
 | Saithan | Main villain | Dark Magic, Invisibility, Speed, Fire, (corrupted) Portal, Lightning | borrowed power = apni zindagi ki keemat → **A+B+C** (fracture veins + ash drain + core siphon) |
 | Soul | Sub-villain 1 | Lightning (crimson) | weapon story mein? PENDING |
@@ -63,7 +63,7 @@ Rig: fingers, IK/FK + poles, real jaw bone, face controls (expressions, 10 phone
 Scripts `01_characters/_shared/`: `charkit`, `charbuild`, `vfxkit`, `sheet_render`, `sheet_compose`, `production`, `rigify_build`, `sheet_doc`,
 `qc_contact`; batch `render_all.sh`, `production_all.sh`. **Dobara mat chalao** jab tak Director koi change na maange.
 Known: K-01 long robes (Ramarat/Soul/Saithan/Yayaki) action poses mein legs ke aar-paar — **Ramarat ka "safed daag" = ghutna skirt ke
-aar-paar (session 2 mein diagnose, material bug NAHI)** → scene stage par cloth sim (Director se poochna: quick fix ya cloth sim).
+aar-paar (session 2 mein diagnose, material bug NAHI)** → **Director decision (21 Nov): CLOTH SIMULATION** scene stage par (saare 4 long-robe characters).
 
 ## 3. VFX LIBRARY (`01_characters/_shared/vfxkit.py`) — reference quality
 lightning · magical portal + corrupted portal · speed trails · fire · dark magic · laser (hand + eye) · teleport · invisibility ·
@@ -140,10 +140,10 @@ Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 
 (all v001 files, renders, QC, backups). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
-1. Hero 1 ka naam · Soul ka weapon story mein hai?
+1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
 2. World map revision 01 ka **canon** approval (abhi sirf blockout layout approved) · GEM location (unconfirmed) · kaunse portal routes sach hain.
 3. Story / script document.
-4. Ramarat K-01 clipping: quick fix ya scene-stage cloth sim (recommendation: cloth sim).
+4. ~~Ramarat K-01~~ → **cloth sim** at scene stage ✅ (21 Nov).
 5. TASK 05 brief (aur aage ke prompts ek-ek karke).
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)

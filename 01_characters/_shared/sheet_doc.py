@@ -42,7 +42,7 @@ def main(folder):
     pages = sorted(os.path.basename(p) for p in glob.glob(os.path.join(D, 'design', f"{C['id']}_sheet_*.png")))
     L = [f"# {C['name'].upper()} — {C['role']} — Design Sheet v1 (APPROVED 20 Nov)", '',
          '> **Status: design APPROVED by the Director (20 Nov).** Confirmed: ' +
-         f"name ({'PENDING — using HERO 1' if C['id'] == 'HERO1' else C['name']}), role, powers "
+         f"name ({C['name']}), role, powers "
          f"({', '.join(C['powers']) or 'NOT CONFIRMED — no power VFX made'}), the reference and the full design.", '',
          '## Sheet pages (renders of the real Blender model)', '']
     L += [f'- `{p}`' for p in pages] or ['- (not rendered yet)']

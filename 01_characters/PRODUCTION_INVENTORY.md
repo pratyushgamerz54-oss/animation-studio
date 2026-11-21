@@ -13,7 +13,7 @@ Batch scripts: `_shared/render_all.sh`, `_shared/production_all.sh`.
 
 | # | Role | Name | Confirmed powers | Config | Design sheet | 3D model v002 | Production v003 (UV, bake, IK/FK, face ctrl, export, QC) |
 |---|------|------|------------------|---|---|---|---|
-| 1 | Hero 1 | **[PENDING]** | Fire, Magical Portal | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 1 | Hero 1 | **Shiv** ✅ (21 Nov) | Fire, Magical Portal | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
 | 2 | Hero 2 | **Pratyush** | Super Speed, Magical Portal, Lightning | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
 | 3 | Main Villain | **Saithan** | Dark Magic, Invisibility, Super Speed, Fire, Magical Portal, Lightning | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
 | 4 | Sub-villain 1 | **Soul** | Lightning (confirmed 20 Nov) | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
@@ -90,7 +90,7 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
 
 | ID | Item | Status |
 |---|---|---|
-| U-01 | Hero 1 ka naam | PENDING |
+| U-01 | Hero 1 ka naam | ✅ RESOLVED (21 Nov): **Shiv** (files/ids `hero1`/`HERO1` unchanged) |
 | U-02 | Soul ki power | ✅ RESOLVED: Lightning (crimson-red look proposed) |
 | U-03 | Ramarat ki powers | ✅ RESOLVED: every power of heroes AND villains, unlimited (golden-white look proposed) |
 | U-04 | Kisi bhi character ka appearance (umar, kad, skin tone, hair, costume) diya nahi gaya hai → sab designs **PROPOSALS** hain jab tak Director approve na kare | PENDING |
@@ -111,7 +111,7 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
 ## 7. QC findings after production v003 (20 Nov)
 - All 7: UV ✅, baked textures (1K main / 512 small) ✅, IK follow 0.02–0.03 mm ✅, 0 unweighted verts ✅, all-quad body/head ✅,
   19 mouth keys incl. 10 phonemes ✅, GLB + FBX export + re-import ✅. Contact sheets: `<name>/qc/<NAME>_qc_tests.png`.
-- KNOWN ISSUE K-01: long robes/skirts (Ramarat, Soul, Saithan, Yayaki) are skinned to the legs → in RUN / JUMP / LAND / deform
+- KNOWN ISSUE K-01 — **Director decision 21 Nov: fix with CLOTH SIMULATION at scene stage** (waist/belt pinned, body collision, per shot; Ramarat, Soul, Saithan, Yayaki): long robes/skirts (Ramarat, Soul, Saithan, Yayaki) are skinned to the legs → in RUN / JUMP / LAND / deform
   poses they bend like a stiff tube. Fix planned at scene stage: cloth simulation (pinned at waist) or extra skirt bones.
   (21 Nov: Ramarat ke robe par 'safed daag' = isi ka hissa — raised knee (trousers/skin) skirt ke aar-paar; material bug nahi.)
 - K-02: Soul robe front panels leave a small gap between the legs (front view). K-03: Saithan powers page — eye row touches footer.

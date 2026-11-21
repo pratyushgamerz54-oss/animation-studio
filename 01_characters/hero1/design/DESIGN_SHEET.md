@@ -1,6 +1,6 @@
-# HERO 1 — Hero 1 / main hero (name pending) — Design Sheet v1 (APPROVED 20 Nov)
+# SHIV (Hero 1) — main hero — Design Sheet v1 (APPROVED 20 Nov)
 
-> **Status: design APPROVED by the Director (20 Nov).** Confirmed: name (PENDING — using HERO 1), role, powers (Fire Manipulation, Magical Portal), the reference and the full design.
+> **Status: design APPROVED by the Director (20 Nov).** Confirmed: name **Shiv** (Director 21 Nov; sheet PNGs still print 'HERO 1'), role, powers (Fire Manipulation, Magical Portal), the reference and the full design.
 
 ## Sheet pages (renders of the real Blender model)
 
