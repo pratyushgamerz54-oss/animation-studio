@@ -1,4 +1,4 @@
-# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 3, TASK 05 in progress)
+# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 3 end — TASK 05 APPROVED + CLOSED)
 
 > **Nayi session: sabse pehle YE file padho**, phir `STATUS.md`, `PROJECT_LOG.md`, `CLAUDE.md`. Director ko Hinglish mein short
 > summary do aur **seedha agle task (TASK 05) se kaam shuru karo**. ⚠️ Jo bana hai use **DOBARA MAT BANAO** — sab git mein hai (§7).
@@ -26,7 +26,7 @@
 ```
 Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-a129fdfc-g3v4k0).
 Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad).
-Jo bana hai dobara mat banana. Mujhe short Hinglish summary do, phir TASK 05 (Detailed Terrain & Landscape Production) ka
+Jo bana hai dobara mat banana. TASK 05 approve + close ho chuka hai. Mujhe short Hinglish summary do, phir agla TASK (06) ka
 brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit + push aur STATUS.md update.
 ```
 
@@ -129,7 +129,7 @@ Known limits → Task 05: lake stair-step shores (world scale), LOD2 far mountai
 
 ---
 
-## 6. TASK 05 — Detailed Terrain & Landscape Production (🟨 IN PROGRESS — milestone 1, session 3)
+## 6. TASK 05 — Detailed Terrain & Landscape Production ✅ APPROVED + CLOSED (21 Nov, session 3)
 Brief: Director ka TASK 05 (main world terrain, mountain system, forest, rivers/water, desert, PBR materials, natural details,
 procedural systems, 7 cinematic tests, optimisation). **FIRST MILESTONE = Ashram Valley + surroundings + first mountain + first
 forest region → previews → Director approval → phir baaki world.** Blender 4.5, v001 frozen, sab naye **v002** files.
@@ -176,14 +176,16 @@ A scheduled check-in (send_later, 21 Nov 17:47 UTC) resumes the work if a usage 
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
-(all v001 files, renders, QC, backups). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
+(all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,
+forbidden crater R05, enchanted forest R02, Great Northern Range R03 + cave, main world v002, material + nature libraries, masters,
+heightfields, data_v002 npz, renders, QC). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
 1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
 2. World map revision 01 ka **canon** approval (abhi sirf blockout layout approved) · GEM location (unconfirmed) · kaunse portal routes sach hain.
 3. Story / script document.
 4. ~~Ramarat K-01~~ → **cloth sim** at scene stage ✅ (21 Nov).
-5. TASK 05 brief (aur aage ke prompts ek-ek karke).
+5. ~~TASK 05~~ ✅ closed. **Next: TASK 06 brief** (aur aage ke prompts ek-ek karke, ≈17 total).
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)
 - Background waiter: `pgrep -f` mat use karo — log marker (ALLDONE) grep karo. Long renders: background + log + marker.
@@ -204,3 +206,10 @@ Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 
 - **Session 2 (21 Nov):** restore + summary; Ramarat spot diagnosed (K-01); **TASK 04** 3D world blockout (Blender 4.5) — main world,
   regions, water, islands, underground/ruins, Ashram Valley LOD terrain, 2 dimension blockouts, 38 previews, QC 70/70 (4.5 + 5.3);
   Director approved blockout → closeout, baseline frozen, backups committed; `setup_session.sh`; this handoff.
+- **Session 3 (21 Nov):** restore; Director decisions: Hero 1 = **Shiv**, robe clipping → **cloth sim** at scene stage, final MP4 **4K**
+  (CLAUDE.md rule). **TASK 05** detailed terrain: milestone 1 (Ashram Valley 2 m–400 m LODs, northern forest belt with real Poly Haven
+  trees, NW01 mountains + 6-tier wide cascade with ballistic spray, PBR library 25 materials, nature library 101 assets, GN heightfield +
+  scatter systems, QC 56/56) → Director approved; milestone 2 (desert R04, forbidden crater R05, enchanted forest R02, Great Northern
+  Range R03 + cave entrance, main world v002, QC 45/45) → Director fixes (crater wall + black lake, cave realism, dunes) → **"Badhiya hai",
+  TASK 05 CLOSED**. 4K stills: Director said not needed now. Final film = re-render everything 4K on the Director's GPU PC (Stage 4/5).
+
