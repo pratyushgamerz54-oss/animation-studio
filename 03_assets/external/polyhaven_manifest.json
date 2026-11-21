@@ -14,7 +14,30 @@
   "rock_moss_set_02": "polyhaven/models/rock_moss_set_02/rock_moss_set_02_1k.blend",
   "boulder_01": "polyhaven/models/boulder_01/boulder_01_1k.blend",
   "moss_01": "polyhaven/models/moss_01/moss_01_1k.blend",
-  "mountainside": "polyhaven/models/mountainside/mountainside_1k.blend"
+  "mountainside": "polyhaven/models/mountainside/mountainside_1k.blend",
+  "pine_tree_01": "polyhaven/models/pine_tree_01/pine_tree_01_1k.blend",
+  "pine_sapling_small": "polyhaven/models/pine_sapling_small/pine_sapling_small_1k.blend",
+  "fir_sapling": "polyhaven/models/fir_sapling/fir_sapling_1k.blend",
+  "dead_tree_trunk": "polyhaven/models/dead_tree_trunk/dead_tree_trunk_1k.blend",
+  "dead_tree_trunk_02": "polyhaven/models/dead_tree_trunk_02/dead_tree_trunk_02_1k.blend",
+  "tree_stump_01": "polyhaven/models/tree_stump_01/tree_stump_01_1k.blend",
+  "root_cluster_01": "polyhaven/models/root_cluster_01/root_cluster_01_1k.blend",
+  "root_cluster_02": "polyhaven/models/root_cluster_02/root_cluster_02_1k.blend",
+  "pine_roots": "polyhaven/models/pine_roots/pine_roots_1k.blend",
+  "rock_07": "polyhaven/models/rock_07/rock_07_1k.blend",
+  "rock_09": "polyhaven/models/rock_09/rock_09_1k.blend",
+  "rock_face_01": "polyhaven/models/rock_face_01/rock_face_01_1k.blend",
+  "rock_face_02": "polyhaven/models/rock_face_02/rock_face_02_1k.blend",
+  "stone_01": "polyhaven/models/stone_01/stone_01_1k.blend",
+  "namaqualand_boulder_02": "polyhaven/models/namaqualand_boulder_02/namaqualand_boulder_02_1k.blend",
+  "namaqualand_boulder_03": "polyhaven/models/namaqualand_boulder_03/namaqualand_boulder_03_1k.blend",
+  "coast_rocks_01": "polyhaven/models/coast_rocks_01/coast_rocks_01_1k.blend",
+  "dry_branches_medium_01": "polyhaven/models/dry_branches_medium_01/dry_branches_medium_01_1k.blend",
+  "bark_debris_01": "polyhaven/models/bark_debris_01/bark_debris_01_1k.blend",
+  "shrub_04": "polyhaven/models/shrub_04/shrub_04_1k.blend",
+  "grass_bermuda_01": "polyhaven/models/grass_bermuda_01/grass_bermuda_01_1k.blend",
+  "nettle_plant": "polyhaven/models/nettle_plant/nettle_plant_1k.blend",
+  "dandelion_01": "polyhaven/models/dandelion_01/dandelion_01_1k.blend"
  },
  "textures": {
   "clay_roof_tiles_02": {
@@ -128,6 +151,132 @@
    "rough": "polyhaven/textures/worn_mossy_plasterwall/worn_mossy_plasterwall_rough_2k.jpg",
    "ao": "polyhaven/textures/worn_mossy_plasterwall/worn_mossy_plasterwall_ao_2k.jpg",
    "disp": "polyhaven/textures/worn_mossy_plasterwall/worn_mossy_plasterwall_disp_2k.jpg"
+  },
+  "leafy_grass": {
+   "diff": "polyhaven/textures/leafy_grass/leafy_grass_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/leafy_grass/leafy_grass_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/leafy_grass/leafy_grass_rough_2k.jpg",
+   "ao": "polyhaven/textures/leafy_grass/leafy_grass_ao_2k.jpg",
+   "disp": "polyhaven/textures/leafy_grass/leafy_grass_disp_2k.jpg"
+  },
+  "grass_ground": {
+   "diff": "polyhaven/textures/grass_ground/grass_ground_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/grass_ground/grass_ground_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/grass_ground/grass_ground_rough_2k.jpg",
+   "ao": "polyhaven/textures/grass_ground/grass_ground_ao_2k.jpg",
+   "disp": "polyhaven/textures/grass_ground/grass_ground_disp_2k.jpg"
+  },
+  "forest_floor": {
+   "diff": "polyhaven/textures/forest_floor/forest_floor_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/forest_floor/forest_floor_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/forest_floor/forest_floor_rough_2k.jpg",
+   "ao": "polyhaven/textures/forest_floor/forest_floor_ao_2k.jpg",
+   "disp": "polyhaven/textures/forest_floor/forest_floor_disp_2k.jpg"
+  },
+  "mud_forest": {
+   "diff": "polyhaven/textures/mud_forest/mud_forest_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/mud_forest/mud_forest_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/mud_forest/mud_forest_rough_2k.jpg",
+   "ao": "polyhaven/textures/mud_forest/mud_forest_ao_2k.jpg",
+   "disp": "polyhaven/textures/mud_forest/mud_forest_disp_2k.jpg"
+  },
+  "brown_mud": {
+   "diff": "polyhaven/textures/brown_mud/brown_mud_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/brown_mud/brown_mud_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/brown_mud/brown_mud_rough_2k.jpg",
+   "ao": "polyhaven/textures/brown_mud/brown_mud_ao_2k.jpg",
+   "disp": "polyhaven/textures/brown_mud/brown_mud_disp_2k.jpg"
+  },
+  "rocky_gravel": {
+   "diff": "polyhaven/textures/rocky_gravel/rocky_gravel_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/rocky_gravel/rocky_gravel_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/rocky_gravel/rocky_gravel_rough_2k.jpg",
+   "ao": "polyhaven/textures/rocky_gravel/rocky_gravel_ao_2k.jpg",
+   "disp": "polyhaven/textures/rocky_gravel/rocky_gravel_disp_2k.jpg"
+  },
+  "gravel_ground_01": {
+   "diff": "polyhaven/textures/gravel_ground_01/gravel_ground_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/gravel_ground_01/gravel_ground_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/gravel_ground_01/gravel_ground_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/gravel_ground_01/gravel_ground_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/gravel_ground_01/gravel_ground_01_disp_2k.jpg"
+  },
+  "coast_sand_01": {
+   "diff": "polyhaven/textures/coast_sand_01/coast_sand_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/coast_sand_01/coast_sand_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/coast_sand_01/coast_sand_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/coast_sand_01/coast_sand_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/coast_sand_01/coast_sand_01_disp_2k.jpg"
+  },
+  "sand_01": {
+   "diff": "polyhaven/textures/sand_01/sand_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/sand_01/sand_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/sand_01/sand_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/sand_01/sand_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/sand_01/sand_01_disp_2k.jpg"
+  },
+  "dark_rock": {
+   "diff": "polyhaven/textures/dark_rock/dark_rock_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/dark_rock/dark_rock_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/dark_rock/dark_rock_rough_2k.jpg",
+   "ao": "polyhaven/textures/dark_rock/dark_rock_ao_2k.jpg",
+   "disp": "polyhaven/textures/dark_rock/dark_rock_disp_2k.jpg"
+  },
+  "rock_ground": {
+   "diff": "polyhaven/textures/rock_ground/rock_ground_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/rock_ground/rock_ground_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/rock_ground/rock_ground_rough_2k.jpg",
+   "ao": "polyhaven/textures/rock_ground/rock_ground_ao_2k.jpg",
+   "disp": "polyhaven/textures/rock_ground/rock_ground_disp_2k.jpg"
+  },
+  "mossy_rock": {
+   "diff": "polyhaven/textures/mossy_rock/mossy_rock_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/mossy_rock/mossy_rock_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/mossy_rock/mossy_rock_rough_2k.jpg",
+   "ao": "polyhaven/textures/mossy_rock/mossy_rock_ao_2k.jpg",
+   "disp": "polyhaven/textures/mossy_rock/mossy_rock_disp_2k.jpg"
+  },
+  "river_small_rocks": {
+   "diff": "polyhaven/textures/river_small_rocks/river_small_rocks_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/river_small_rocks/river_small_rocks_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/river_small_rocks/river_small_rocks_rough_2k.jpg",
+   "ao": "polyhaven/textures/river_small_rocks/river_small_rocks_ao_2k.jpg",
+   "disp": "polyhaven/textures/river_small_rocks/river_small_rocks_disp_2k.jpg"
+  },
+  "snow_field_aerial": {
+   "diff": "polyhaven/textures/snow_field_aerial/snow_field_aerial_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/snow_field_aerial/snow_field_aerial_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/snow_field_aerial/snow_field_aerial_rough_2k.jpg",
+   "ao": "polyhaven/textures/snow_field_aerial/snow_field_aerial_ao_2k.jpg",
+   "disp": "polyhaven/textures/snow_field_aerial/snow_field_aerial_disp_2k.jpg"
+  },
+  "snow_04": {
+   "diff": "polyhaven/textures/snow_04/snow_04_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/snow_04/snow_04_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/snow_04/snow_04_rough_2k.jpg",
+   "ao": "polyhaven/textures/snow_04/snow_04_ao_2k.jpg",
+   "disp": "polyhaven/textures/snow_04/snow_04_disp_2k.jpg"
+  },
+  "dry_ground_01": {
+   "diff": "polyhaven/textures/dry_ground_01/dry_ground_01_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/dry_ground_01/dry_ground_01_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/dry_ground_01/dry_ground_01_rough_2k.jpg",
+   "ao": "polyhaven/textures/dry_ground_01/dry_ground_01_ao_2k.jpg",
+   "disp": "polyhaven/textures/dry_ground_01/dry_ground_01_disp_2k.jpg"
+  },
+  "mud_cracked_dry_03": {
+   "diff": "polyhaven/textures/mud_cracked_dry_03/mud_cracked_dry_03_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/mud_cracked_dry_03/mud_cracked_dry_03_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/mud_cracked_dry_03/mud_cracked_dry_03_rough_2k.jpg",
+   "ao": "polyhaven/textures/mud_cracked_dry_03/mud_cracked_dry_03_ao_2k.jpg",
+   "disp": "polyhaven/textures/mud_cracked_dry_03/mud_cracked_dry_03_disp_2k.jpg"
+  },
+  "aerial_ground_rock": {
+   "diff": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_rough_2k.jpg",
+   "ao": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_ao_2k.jpg",
+   "disp": "polyhaven/textures/aerial_ground_rock/aerial_ground_rock_disp_2k.jpg"
   }
  },
  "hdris": {

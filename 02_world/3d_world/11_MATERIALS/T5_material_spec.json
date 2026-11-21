@@ -1,0 +1,188 @@
+{
+ "MAT_T5_GRASS": {
+  "source": "Poly Haven leafy_grass (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 2.2,
+  "texel_density_px_per_m": 930.9,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "lush valley grass (tinted greener)"
+ },
+ "MAT_T5_GRASS_DRY": {
+  "source": "Poly Haven sparse_grass (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 3.0,
+  "texel_density_px_per_m": 682.7,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "dry / sparse grass patches"
+ },
+ "MAT_T5_SOIL": {
+  "source": "Poly Haven dry_ground_01 (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 2.5,
+  "texel_density_px_per_m": 819.2,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "compacted earth: paths, Ashram pad"
+ },
+ "MAT_T5_FOREST_FLOOR": {
+  "source": "Poly Haven forest_floor (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 3.0,
+  "texel_density_px_per_m": 682.7,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "needles, leaves, twigs"
+ },
+ "MAT_T5_MUD": {
+  "source": "Poly Haven mud_forest (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 2.5,
+  "texel_density_px_per_m": 819.2,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "river-bank mud"
+ },
+ "MAT_T5_GRAVEL": {
+  "source": "Poly Haven rocky_gravel (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 2.0,
+  "texel_density_px_per_m": 1024.0,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "gravel / scree fines"
+ },
+ "MAT_T5_ROCK": {
+  "source": "Poly Haven rock_ground (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 4.0,
+  "texel_density_px_per_m": 512.0,
+  "projection": "box/triplanar",
+  "metallic": 0.0,
+  "note": "rocky ground, outcrops"
+ },
+ "MAT_T5_CLIFF": {
+  "source": "Poly Haven cliff_side (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 12.0,
+  "texel_density_px_per_m": 170.7,
+  "projection": "box/triplanar",
+  "metallic": 0.0,
+  "note": "cliff faces (triplanar)"
+ },
+ "MAT_T5_SCREE": {
+  "source": "Poly Haven gravel_ground_01 (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 3.0,
+  "texel_density_px_per_m": 682.7,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "talus aprons below cliffs"
+ },
+ "MAT_T5_SNOW": {
+  "source": "Poly Haven snow_02 (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 4.0,
+  "texel_density_px_per_m": 512.0,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "fresh snow"
+ },
+ "MAT_T5_SAND": {
+  "source": "Poly Haven coast_sand_01 (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 3.0,
+  "texel_density_px_per_m": 682.7,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "lake / river sand"
+ },
+ "MAT_T5_WET_STONE": {
+  "source": "Poly Haven river_small_rocks (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 1.6,
+  "texel_density_px_per_m": 1280.0,
+  "projection": "top-down (object XY)",
+  "metallic": 0.0,
+  "note": "river-bed stones, wet (Wet input = 0..1)"
+ },
+ "MAT_T5_ROCK_DARK": {
+  "source": "Poly Haven dark_rock (CC0)",
+  "maps": "Base Color, Roughness, Normal GL, Displacement, AO",
+  "resolution": "2048 x 2048 (2K)",
+  "tile_m": 5.0,
+  "texel_density_px_per_m": 409.6,
+  "projection": "box/triplanar",
+  "metallic": 0.0,
+  "note": "dark high-mountain rock"
+ },
+ "MAT_T5_ICE": {
+  "source": "procedural (voronoi cracks + noise)",
+  "maps": "Base Color, Roughness 0.12, Subsurface, bump normal",
+  "resolution": "procedural (resolution-independent)",
+  "metallic": 0.0
+ },
+ "MAT_T5_TERRAIN": {
+  "source": "blend of 15 Poly Haven 2K scans + procedural ice/canopy",
+  "maps": "per layer: Base Color, Roughness, Normal GL, Displacement (height blend)",
+  "resolution": "2K per layer; near/far scale switch 150\u2013900 m",
+  "metallic": 0.0,
+  "layers": [
+   "grass \u00d72 + aerial grass",
+   "dry grass",
+   "forest floor",
+   "far canopy",
+   "compacted soil",
+   "mud",
+   "gravel / river bed (wet)",
+   "lake sand",
+   "scree",
+   "rock",
+   "cliff",
+   "snow + aerial snow",
+   "ice"
+  ],
+  "drivers": "mask attributes from NG_T5_HEIGHTFIELD + geometry slope + altitude + camera distance"
+ },
+ "MAT_T5_WATER_RIVER": {
+  "source": "procedural",
+  "maps": "transmission IOR 1.333, animated ripple bump, foam (attribute \"foam\" \u00d7 noise)",
+  "resolution": "procedural",
+  "metallic": 0.0
+ },
+ "MAT_T5_WATER_LAKE": {
+  "source": "procedural",
+  "maps": "transmission IOR 1.333, animated ripple bump, foam (attribute \"foam\" \u00d7 noise)",
+  "resolution": "procedural",
+  "metallic": 0.0
+ },
+ "MAT_T5_WATERFALL": {
+  "source": "procedural",
+  "maps": "animated falling streaks (noise stretched in Z), subsurface white water, alpha mix",
+  "resolution": "procedural",
+  "metallic": 0.0
+ },
+ "MAT_T5_MIST": {
+  "source": "procedural volume",
+  "maps": "Principled Volume, density 1.2 (mist)",
+  "resolution": "procedural"
+ },
+ "MAT_T5_HAZE": {
+  "source": "procedural volume",
+  "maps": "Principled Volume, density 1.6e-05 (haze)",
+  "resolution": "procedural"
+ }
+}

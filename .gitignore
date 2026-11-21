@@ -4,3 +4,6 @@ __pycache__/
 
 # Poly Haven CC0 downloads (re-fetch with 03_assets/external/polyhaven_fetch.py)
 03_assets/external/polyhaven/
+
+# TASK 05 intermediate terrain data (deterministic, re-create with 02_world/3d_world/scripts/t5_prep.py)
+02_world/3d_world/08_ASHRAM_VALLEY/data_v002/*.npz

@@ -19,10 +19,19 @@ def req(url):
     return urllib.request.Request(url, headers=UA)
 
 MODELS = ['fir_tree_01', 'fir_sapling_medium', 'tree_small_02', 'shrub_01', 'shrub_02', 'shrub_03', 'grass_medium_01',
-          'grass_medium_02', 'fern_02', 'rock_moss_set_01', 'rock_moss_set_02', 'boulder_01', 'moss_01', 'mountainside']
+          'grass_medium_02', 'fern_02', 'rock_moss_set_01', 'rock_moss_set_02', 'boulder_01', 'moss_01', 'mountainside',
+          # TASK 05 terrain production (trees, debris, rocks)
+          'pine_tree_01', 'pine_sapling_small', 'fir_sapling', 'dead_tree_trunk', 'dead_tree_trunk_02', 'tree_stump_01',
+          'root_cluster_01', 'root_cluster_02', 'pine_roots', 'rock_07', 'rock_09', 'rock_face_01', 'rock_face_02', 'stone_01',
+          'namaqualand_boulder_02', 'namaqualand_boulder_03', 'coast_rocks_01', 'dry_branches_medium_01', 'bark_debris_01',
+          'shrub_04', 'grass_bermuda_01', 'nettle_plant', 'dandelion_01']
 TEXTURES = ['clay_roof_tiles_02', 'plastered_stone_wall', 'rustic_stone_wall', 'cobblestone_floor_04', 'mossy_cobblestone',
             'dark_wooden_planks', 'medieval_wood', 'forest_ground_04', 'grass_path_2', 'aerial_grass_rock', 'aerial_rocks_02',
-            'snow_02', 'brown_mud_leaves_01', 'sparse_grass', 'cliff_side', 'worn_mossy_plasterwall']
+            'snow_02', 'brown_mud_leaves_01', 'sparse_grass', 'cliff_side', 'worn_mossy_plasterwall',
+            # TASK 05 terrain PBR library
+            'leafy_grass', 'grass_ground', 'forest_floor', 'mud_forest', 'brown_mud', 'rocky_gravel', 'gravel_ground_01',
+            'coast_sand_01', 'sand_01', 'dark_rock', 'rock_ground', 'mossy_rock', 'river_small_rocks', 'snow_field_aerial',
+            'snow_04', 'dry_ground_01', 'mud_cracked_dry_03', 'aerial_ground_rock']
 HDRIS = [('kloofendal_48d_partly_cloudy_puresky', '4k'), ('qwantani_dusk_2_puresky', '4k'), ('qwantani_night_puresky', '4k')]
 MODEL_RES, TEX_RES = '1k', '2k'
 TEX_MAPS = {'Diffuse': 'diff', 'nor_gl': 'nor_gl', 'Rough': 'rough', 'AO': 'ao', 'Displacement': 'disp'}
