@@ -95,13 +95,13 @@ def dunes(X, Y, wind_deg, sp):
     th = math.radians(wind_deg + 180)                                  # direction the wind blows TO
     ux, uy = math.sin(th), math.cos(th)
     out = np.zeros_like(X)
-    for lam, amp, seed in ((900.0, 48.0, 190), (260.0, 8.0, 191), (60.0, 1.4, 192)):
+    for lam, amp, seed in ((900.0, 62.0, 190), (280.0, 15.0, 191), (60.0, 1.4, 192)):
         if lam < 3 * sp:
             continue
         wx, wy = N.warp(X, Y, lam * 2.5, lam * .25, seed)
         ph = (wx * ux + wy * uy) / lam + N.fbm(X, Y, lam * 4, 2, seed + 5) * .35
         f = ph - np.floor(ph)
-        prof = np.where(f < .78, f / .78, (1 - f) / .22)               # rise 78 %, slip face 22 %
+        prof = np.where(f < .88, f / .88, (1 - f) / .12)               # long stoss slope, steep (~30°) slip face
         prof = prof ** 1.4                                             # sharper crests
         out += (prof - .4) * amp * (.55 + .45 * N.fbm(X, Y, lam * 3, 2, seed + 9))
     return out
@@ -109,14 +109,16 @@ def dunes(X, Y, wind_deg, sp):
 
 def mesas(X, Y, z0, sp):
     """rock tablelands / buttes / inselbergs: terraced, flat-topped, steep walls (strata)."""
-    n_ = N.fbm(X, Y, 2600, 4, 200) + N.fbm(X, Y, 700, 3, 201) * .22
-    m = sstep(.30, .34, n_)                                            # sharp plateau rims (steep walls), buttes + tablelands
+    n_ = N.fbm(X, Y, 2600, 4, 200) + N.fbm(X, Y, 700, 3, 201) * .22 + N.fbm(X, Y, 90, 3, 203) * .025 + N.fbm(X, Y, 25, 2, 204) * .008
+    m = sstep(.30, .335, n_)                                           # rugged plateau rims (steep walls), buttes + tablelands
     top = 230 + N.fbm(X, Y, 3000, 2, 202) * 90
     h = m * top
     st = 24.0
     t = h / st; fr = t - np.floor(t)
-    h = (np.floor(t) + sstep(.8, 1.0, fr)) * st                        # terraces (ledges every ~18 m)
-    return h, m
+    ht = (np.floor(t) + sstep(.75, 1.0, fr)) * st                      # strata ledges …
+    h = h + (ht - h) * (.35 + .3 * N.fbm(X, Y, 400, 2, 205))           # … only partly expressed (no staircase)
+    apron = (sstep(.22, .30, n_) - m).clip(0, 1) * top * .28           # talus / pediment apron below the walls
+    return h + apron, m
 
 
 def build(rkey, tkey):

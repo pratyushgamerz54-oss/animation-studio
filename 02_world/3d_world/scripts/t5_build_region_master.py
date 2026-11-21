@@ -11,7 +11,7 @@ import t5kit as tk
 
 RK = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'R04'
 CFG = {'R04': dict(file='06_DESERTS/DESERT_R04_v002.blend', coll='T5_DESERT_R04', data='06_DESERTS/data_v002',
-                   out='T5_REGION_R04_DESERT_master_v002.blend', sun=(228.0, 16.0), tiles=('DH', 'DN', 'DF'))}[RK]
+                   out='T5_REGION_R04_DESERT_master_v002.blend', sun=(232.0, 12.0), tiles=('DH', 'DN', 'DF'))}[RK]
 DD = wk.P(*CFG['data'].split('/')); RJ = json.load(open(os.path.join(DD, f'region_{RK}.json')))
 wk.new_file()
 sc = bpy.context.scene; sc.name = f'T5_REGION_{RK}'
@@ -68,8 +68,8 @@ if RK == 'R04':
     cx, cy = float(np.clip(cx, -h + 60, h - 60)), float(np.clip(cy, -h + 60, h - 60))
     cam('CAM_T5_05_DESERT', (cx, cy, ground(cx, cy) + 55), (bx, by, bz - 90), 35,
         'Desert landscape — R04 Western Desert: wind-shaped dune field, sandstone butte with strata, desert pavement', 60000, .3)
-    cx2, cy2 = 7000.0, -6500.0
-    cam('CAM_T5_05B_DESERT_MESAS_AERIAL', (cx2, cy2, ground(cx2, cy2) + 380), (-2500, 3000, ground(-2500, 3000) + 60), 32,
+    cx2, cy2 = 1500.0, -10500.0
+    cam('CAM_T5_05B_DESERT_MESAS_AERIAL', (cx2, cy2, ground(cx2, cy2) + 260), (0, 6000, ground(0, 6000) + 40), 30,
         'Desert aerial — dune seas between mesas / buttes, dry wadis and playas (cracked ground)', 120000, .35)
     sc['butte'] = [bx, by, bz]
 sc.camera = C[0]

@@ -223,7 +223,7 @@ elif COMP == 'desert':
         S(f'SC_{tn}_TALUS_BOULDERS', T_, 'LIB_ROCKS_MEDIUM', Density=.004 if tn == 'DH' else .0015, Viewport_Density=.2, Mask='m_scree',
           Mask_Min=.1, Mask_Max=.5, Slope_Max=50.0, Cluster_Scale=40.0, Cluster_Amount=.5, Scale_Min=.8, Scale_Max=3.0, Align_To_Normal=.7,
           Random_Tilt=20.0, Sink=.3, Seed=sd, Cull_Distance=4000.0, Cull_Angle=55.0, Keep_Near=20.0, Near_to_Mid=1e5, Mid_to_Far=1e5)
-        S(f'SC_{tn}_CLIFF_BLOCKS', T_, 'LIB_ROCKS_LARGE', Density=.0008 if tn == 'DH' else .0003, Viewport_Density=.3, Mask='m_cliff',
+        S(f'SC_{tn}_CLIFF_BLOCKS', T_, 'LIB_ROCKS_LARGE', Density=.0002 if tn == 'DH' else .0001, Viewport_Density=.3, Mask='m_cliff',
           Mask_Min=.2, Mask_Max=.6, Slope_Min=25.0, Slope_Max=90.0, Cluster_Scale=60.0, Cluster_Amount=.4, Scale_Min=1.2, Scale_Max=3.5,
           Align_To_Normal=.8, Random_Tilt=25.0, Sink=.4, Seed=sd + 10, Cull_Distance=5000.0, Cull_Angle=55.0, Keep_Near=30.0,
           Near_to_Mid=1e5, Mid_to_Far=1e5)
