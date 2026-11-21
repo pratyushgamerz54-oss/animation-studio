@@ -1,7 +1,7 @@
 {
  "blender": "4.5.16 LTS",
- "time": "2026-11-21 11:24",
- "passed": 43,
+ "time": "2026-11-21 11:29",
+ "passed": 55,
  "total": 56,
  "checks": [
   {
@@ -16,11 +16,8 @@
   },
   {
    "check": "PBR channels (Base Color / Roughness / Normal, Metallic 0) on every terrain material",
-   "result": "FAIL",
-   "detail": [
-    "MAT_T5_TRUNK_FAR:['Base Color']",
-    "MAT_T5_WATERFALL:['Base Color', 'Normal']"
-   ]
+   "result": "PASS",
+   "detail": "all OK"
   },
   {
    "check": "texture resolution = 2K (2048\u00b2) for all Poly Haven maps",
@@ -103,69 +100,69 @@
    "detail": "262 images, missing []"
   },
   {
-   "check": "terrain VH: real mesh evaluates (viewport grid 301\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
+   "check": "terrain VH: real mesh evaluates (viewport grid 301\u00b2, z within data range incl. skirt, 14 mask attributes)",
+   "result": "PASS",
    "detail": "91801 verts, z 704.6 max (data 704.6), attrs 14"
   },
   {
-   "check": "terrain L0: real mesh evaluates (viewport grid 361\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
-   "detail": "127008 verts, z 755.4 max (data 755.4), attrs 14"
+   "check": "terrain L0: real mesh evaluates (viewport grid 361\u00b2, z within data range incl. skirt, 14 mask attributes)",
+   "result": "PASS",
+   "detail": "127008 verts, z 755.3 max (data 755.4), attrs 14"
   },
   {
-   "check": "terrain L1: real mesh evaluates (viewport grid 401\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
-   "detail": "157136 verts, z 922.5 max (data 923.2), attrs 14"
+   "check": "terrain L1: real mesh evaluates (viewport grid 401\u00b2, z within data range incl. skirt, 14 mask attributes)",
+   "result": "PASS",
+   "detail": "157136 verts, z 922.4 max (data 923.2), attrs 14"
   },
   {
-   "check": "terrain L2: real mesh evaluates (viewport grid 481\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
+   "check": "terrain L2: real mesh evaluates (viewport grid 481\u00b2, z within data range incl. skirt, 14 mask attributes)",
+   "result": "PASS",
    "detail": "217079 verts, z 6417.6 max (data 6514.4), attrs 14"
   },
   {
-   "check": "terrain FH: real mesh evaluates (viewport grid 376\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
+   "check": "terrain FH: real mesh evaluates (viewport grid 376\u00b2, z within data range incl. skirt, 14 mask attributes)",
+   "result": "PASS",
    "detail": "142876 verts, z 858.7 max (data 858.7), attrs 14"
   },
   {
-   "check": "terrain MT: real mesh evaluates (viewport grid 401\u00b2, z within data range, 14 mask attributes)",
-   "result": "FAIL",
-   "detail": "162400 verts, z 6088.4 max (data 6107.9), attrs 14"
-  },
-  {
-   "check": "terrain WF: real mesh evaluates (viewport grid 211\u00b2, z within data range, 14 mask attributes)",
+   "check": "terrain MT: real mesh evaluates (viewport grid 401\u00b2, z within data range incl. skirt, 14 mask attributes)",
    "result": "PASS",
-   "detail": "45361 verts, z 3741.6 max (data 3741.6), attrs 14"
+   "detail": "162400 verts, z 6088.4 max (data 6088.4), attrs 14"
   },
   {
-   "check": "LOD seam VH\u2194L0: crack covered by skirts",
+   "check": "terrain WF: real mesh evaluates (viewport grid 211\u00b2, z within data range incl. skirt, 14 mask attributes)",
    "result": "PASS",
-   "detail": "max gap 0.70 m (skirt 3 m), mean 0.005 m"
+   "detail": "45361 verts, z 3740.0 max (data 3740.0), attrs 14"
   },
   {
-   "check": "LOD seam L0\u2194L1: crack covered by skirts",
+   "check": "LOD seam VH\u2194L0: border matches the parent surface (crack < skirt)",
    "result": "PASS",
-   "detail": "max gap 8.80 m (skirt 12 m), mean 0.071 m"
+   "detail": "max gap 0.00 m (skirt 3 m), mean 0.000 m"
   },
   {
-   "check": "LOD seam FH\u2194L1: crack covered by skirts",
+   "check": "LOD seam L0\u2194L1: border matches the parent surface (crack < skirt)",
    "result": "PASS",
-   "detail": "max gap 2.25 m (skirt 3 m), mean 0.077 m"
+   "detail": "max gap 0.00 m (skirt 12 m), mean 0.000 m"
   },
   {
-   "check": "LOD seam L1\u2194L2: crack covered by skirts",
-   "result": "FAIL",
-   "detail": "max gap 71.41 m (skirt 40 m), mean 1.431 m"
+   "check": "LOD seam FH\u2194L1: border matches the parent surface (crack < skirt)",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 3 m), mean 0.000 m"
   },
   {
-   "check": "LOD seam MT\u2194L2: crack covered by skirts",
-   "result": "FAIL",
-   "detail": "max gap 253.93 m (skirt 60 m), mean 19.697 m"
+   "check": "LOD seam L1\u2194L2: border matches the parent surface (crack < skirt)",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 40 m), mean 0.000 m"
   },
   {
-   "check": "LOD seam WF\u2194MT: crack covered by skirts",
-   "result": "FAIL",
-   "detail": "max gap 32.67 m (skirt 4 m), mean 1.628 m"
+   "check": "LOD seam MT\u2194L2: border matches the parent surface (crack < skirt)",
+   "result": "PASS",
+   "detail": "max gap 12.19 m (skirt 60 m), mean 0.055 m"
+  },
+  {
+   "check": "LOD seam WF\u2194MT: border matches the parent surface (crack < skirt)",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 4 m), mean 0.000 m"
   },
   {
    "check": "approved v001 heights reproduced (valley, before detail)",
@@ -215,8 +212,8 @@
    "result": "PASS",
    "detail": {
     "SC_L1_GROVES": 23,
-    "SC_L1_FOREST_BELTS": 16821,
-    "SC_FH_TREES": 10226,
+    "SC_L1_FOREST_BELTS": 16837,
+    "SC_FH_TREES": 10225,
     "SC_FH_SAPLINGS": 186,
     "SC_FH_GROVES": 81,
     "SC_FH_UNDERSTORY": 116,
@@ -284,17 +281,17 @@
   {
    "check": "SC_VH_MEADOW_GRASS_FAR: plants / trees not on paths, Ashram pad or water",
    "result": "FAIL",
-   "detail": "17.46% of 441 sampled"
+   "detail": "2.49% of 441 sampled"
   },
   {
    "check": "SC_VH_MEADOW_GRASS: plants / trees not on paths, Ashram pad or water",
-   "result": "FAIL",
-   "detail": "11.57% of 553 sampled"
+   "result": "PASS",
+   "detail": "0.00% of 553 sampled"
   },
   {
    "check": "SC_VH_WILDFLOWERS: plants / trees not on paths, Ashram pad or water",
-   "result": "FAIL",
-   "detail": "11.11% of 36 sampled"
+   "result": "PASS",
+   "detail": "0.00% of 36 sampled"
   },
   {
    "check": "SC_VH_GROVES: plants / trees not on paths, Ashram pad or water",
@@ -304,12 +301,12 @@
   {
    "check": "SC_L0_GROVES: plants / trees not on paths, Ashram pad or water",
    "result": "PASS",
-   "detail": "0.15% of 3999 sampled"
+   "detail": "0.08% of 3999 sampled"
   },
   {
    "check": "SC_L1_GROVES: plants / trees not on paths, Ashram pad or water",
    "result": "PASS",
-   "detail": "0.56% of 714 sampled"
+   "detail": "0.42% of 714 sampled"
   },
   {
    "check": "TASK 04 v001 baseline files unchanged",
