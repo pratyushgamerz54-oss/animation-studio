@@ -88,3 +88,4 @@
 21. **21 Nov — TASK 05 milestone 1 review:** Director approved shots 1, 2, 6, 7, 7b; asked for a wide cascade waterfall with better physics + better snowy peaks, then milestone 2.
 22. **21 Nov — TASK 05 COMPLETE:** milestone 2 — R04 desert (+ shot 5), R05 forbidden crater, R02 enchanted forest, R03 Great Northern Range core + cave entrance (scanned-rock kitbash), main-world v002 (smooth lake shores, coasts, islands). QC M2 45/45 (M1 56/56). Awaiting Director review + next TASK.
 23. **21 Nov — Director feedback on milestone 2 applied:** R05 crater (rugged inner wall + talus, black lake filling the basin, no puddles, ejecta blocks, darker ash), cave (forest-floor litter, AO + moss on scanned rock), R04 dunes (megadunes, knife-edge crests, warmer aspect-coloured sand, low sun). QC M2 45/45.
+24. **21 Nov — TASK 05 APPROVED + CLOSED** (Director: "Badhiya hai"). Waiting for the next TASK prompt.

@@ -160,7 +160,7 @@ hero tiles ke kinare parent grid lines par (FH x −1520..1480 on 40 m; WF snapp
 **Milestone 1 = DONE + reviewed (21 Nov):** shots 1, 2, 6, 7, 7b APPROVED; waterfall → wide 6-tier cascade (ballistic curtains,
 GN spray particles, mist, rock cladding) + sharper peaks/glaciers DONE (Director said "baaki sab approve"). QC 56/56 (`T05_QC_REPORT.md`).
 
-**MILESTONE 2 ✅ DONE (21 Nov) — rest of the world, region sites with their own local frame:**
+**MILESTONE 2 ✅ DONE + APPROVED (21 Nov, TASK 05 CLOSED) — rest of the world, region sites with their own local frame:**
 | Step | Status | Files |
 |---|---|---|
 | R04 Western Desert (dunes, mesas, canyons/wadis, playas, pavement) + shot 5 | ✅ done | `scripts/t5_region_prep.py R04` → `06_DESERTS/data_v002/`; `t5_build_terrain.py -- desert` → `06_DESERTS/DESERT_R04_v002.blend`; `t5_build_region_master.py -- R04` → `00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend`; render: `t5_render.py -- --master T5_REGION_R04_DESERT_master_v002.blend` |

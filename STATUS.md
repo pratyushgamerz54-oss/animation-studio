@@ -1,7 +1,7 @@
 # STATUS — last updated 2026-11-21 (session 3: TASK 04 CLOSED, waiting for TASK 05 brief)
 
 ## Session 3 (21 Nov)
-- **NOW: TASK 05 COMPLETE (21 Nov)** — milestone 1 approved (QC 56/56) + milestone 2 built (QC 45/45): R04 desert, R05 forbidden crater, R02 enchanted forest, R03 Great Northern Range + cave entrance, main world v002. Previews: `02_world/3d_world/12_RENDER/T5/T5_SHEET_01_CINEMATIC_TESTS.png`, `T5_SHEET_02_MILESTONE2.png`. **Awaiting Director review of milestone 2 + next TASK prompt.**
+- **NOW: TASK 05 COMPLETE (21 Nov)** — milestone 1 approved (QC 56/56) + milestone 2 built (QC 45/45): R04 desert, R05 forbidden crater, R02 enchanted forest, R03 Great Northern Range + cave entrance, main world v002. Previews: `02_world/3d_world/12_RENDER/T5/T5_SHEET_01_CINEMATIC_TESTS.png`, `T5_SHEET_02_MILESTONE2.png`. **Director: milestone 2 + crater/cave/dune fixes APPROVED ("Badhiya hai", 21 Nov) → TASK 05 CLOSED. Next: TASK 06 prompt.**
 - **TASK 05 milestone 1 — Director feedback (21 Nov):** shots 1 (mountain wide), 2 (forest establishing), 6 (valley aerial),
   7 (ground meadow), 7b (forest floor) **APPROVED**. Changes: (a) waterfall → **wide cascade** + better water physics,
   (b) snowy peaks → better. After these → **milestone 2** (rest of the world). "Baaki sab approve hai."
