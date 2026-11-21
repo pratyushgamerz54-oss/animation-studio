@@ -139,7 +139,7 @@ forest region → previews → Director approval → phir baaki world.** Blender
 |---|---|
 | `scripts/t5_field.py` | TASK 04 height function VERBATIM copy (verify: v001 heights exact, err 3e-5 m) |
 | `scripts/t5_noise.py`, `t5_erosion.py` | isotropic gradient noise (no square artefacts) · numba droplet hydraulic + thermal erosion |
-| `scripts/t5_prep.py` | tiles → `08_ASHRAM_VALLEY/data_v002/*.npz` (gitignored, **2 min se dobara banta hai**) + `prep_v002.json` |
+| `scripts/t5_prep.py` | tiles → `08_ASHRAM_VALLEY/data_v002/*.npz` (ab git mein bhi; `t5_prep.py` se 2 min mein dobara banta hai) + `prep_v002.json` |
 | tiles | VH ±1.2 km @2 m (Ashram) · FH 3×3 km @2 m (northern forest belt edge, x −1520..1480, y 24..27 km) · L0 ±6 km @10 m · L1 ±32 km @40 m · MT NW01 60×60 km @30 m (x −116..−56, y 44..104 km) · WF 900 m @1.5 m (waterfall gorge, 86 m fall) · L2 ±160 km @400 m |
 | `11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend` (`t5_build_materials.py`) | 20 PBR materials (Poly Haven 2K) + MAT_T5_TERRAIN (mask/slope/height/distance blend), water, waterfall, mist, ice |
 | `14_NATURE_LIBRARY/T5_NATURE_LIBRARY_TREES/GROUND_v002.blend` (`t5_build_library.py`) | 101 assets: fir/pine/broadleaf (LOD1/LOD2 + far proxies), saplings, ferns, shrubs, grass, flowers, logs, roots, stumps, rocks S/M/L |
