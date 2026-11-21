@@ -24,13 +24,17 @@ sys.path.insert(0, os.path.join(HERE, '..', '..', '01_characters', '_shared'))
 sys.path.insert(0, HERE)
 import charkit as ck
 import envkit as ek
+import phkit as ph
 from ashram_blockout import C, mesh_box, mesh_cyl, obj, inst, roof_mesh, fbm2, ROOT
 
 args = [a for a in sys.argv[1:] if not a.startswith('-')]
 SAMPLES = int(args[0]) if args else 24
 RENDER = '--no-render' not in sys.argv
 ONLY = sys.argv[sys.argv.index('--only') + 1].split(',') if '--only' in sys.argv else None
-OUTR = os.path.join(ROOT, '09_RENDER', 'concept_v2'); os.makedirs(OUTR, exist_ok=True)
+USE_PH = ph.available() and '--no-ph' not in sys.argv          # real CC0 photo assets (Poly Haven) when downloaded
+VER = 'v003' if USE_PH else 'v002'
+GOLDEN = '--golden' in sys.argv
+OUTR = os.path.join(ROOT, '09_RENDER', 'concept_v3' if USE_PH else 'concept_v2'); os.makedirs(OUTR, exist_ok=True)
 R = random.Random(5)
 
 
@@ -54,7 +58,31 @@ def materials():
     pm = bpy.data.materials['MAT_ENV_PATH_EARTH']; nt = pm.node_tree
     nt.links.new(ek.N(pm).ramp(ek.N(pm).noise(ek.N(pm).coord('Object'), 1.5, 8), [(.3, '#6E5A40'), (.7, '#A08460')]),
                  nt.nodes['Principled BSDF'].inputs['Base Color'])
+    if USE_PH:
+        M.update({'stone': ph.pbr('MAT_PH_RUSTIC_STONE', 'rustic_stone_wall', 1.6), 'plaster': ph.pbr('MAT_PH_PLASTERED_STONE', 'plastered_stone_wall', 2.6),
+                  'flags': ph.pbr('MAT_PH_MOSSY_COBBLE', 'mossy_cobblestone', 2.4, proj='XY', tint='#B8B0A0'),
+                  'timber': ph.pbr('MAT_PH_MEDIEVAL_WOOD', 'medieval_wood', 1.0), 'timber_dark': ph.pbr('MAT_PH_DARK_WOOD', 'dark_wooden_planks', 1.0),
+                  'tile': ph.pbr('MAT_PH_CLAY_ROOF_TILES', 'clay_roof_tiles_02', 2.2, proj='UV', bump=.5),
+                  'path': ph.pbr('MAT_PH_GRASS_PATH', 'grass_path_2', 3.0, proj='XY'),
+                  'terrain': ph.terrain('MAT_PH_TERRAIN_VALLEY', ground=('sparse_grass', 'forest_ground_04'), g_size=3.5, snow_z=(1150, 1350), r_size=40, green=('#A8D080', 1.7, 1.05, .56)),
+                  'far': ph.terrain('MAT_PH_TERRAIN_FAR', ground=('aerial_grass_rock', 'aerial_grass_rock'), rock='aerial_rocks_02', snow='snow_02',
+                                    g_size=90, r_size=120, s_size=40, snow_z=(2200, 2600), steep=(.72, .55))})
     return M
+
+
+def roof_uvs(size=1.0):
+    """planar UV per roof face: U along the eave (horizontal), V down the slope → tiles run the right way."""
+    Z = Vector((0, 0, 1))
+    for me in bpy.data.meshes:
+        if '_ROOF' not in me.name or 'DRUM' in me.name:
+            continue
+        uv = me.uv_layers.get('UVMap') or me.uv_layers.new(name='UVMap')
+        for p in me.polygons:
+            n = p.normal; t = n.cross(Z)
+            t = t.normalized() if t.length > 1e-4 else Vector((1, 0, 0)); b = n.cross(t)
+            for li in p.loop_indices:
+                v = me.vertices[me.loops[li].vertex_index].co
+                uv.data[li].uv = (v.dot(t) / size, v.dot(b) / size)
 
 
 # ======================================================================= detailed modules
@@ -408,13 +436,39 @@ def landscape(M, A):
             mk(lc)
         lc.hide_render = True; lc.hide_viewport = True
         libs[key] = lc
-    ek.scatter(ter, 'VEG_SCATTER_CONIFER', libs['conifer'], .0032, group='veg_conifer', seed=3, scale=(.7, 1.25))
-    ek.scatter(ter, 'VEG_SCATTER_BROADLEAF', libs['broadleaf'], .0018, group='veg_broadleaf', seed=4, scale=(.8, 1.3))
-    ek.scatter(ter, 'VEG_SCATTER_GRASS', libs['grass'], 3.0, group='veg_grass', seed=5, scale=(.7, 1.3))
+    if USE_PH:
+        PL = C('ASHRAM/03_TERRAIN/VEGETATION/LIB_POLYHAVEN'); PL.hide_render = True; PL.hide_viewport = True
+        libs = {'conifer': ph.append('fir_tree_01', 'fir_tree_01_LOD1', PL), 'sapling': ph.append('fir_sapling_medium', 'fir_sapling_medium_LOD1', PL),
+                'broadleaf': ph.append('tree_small_02', 'tree_small_02_LOD1', PL), 'grass': ph.append('grass_medium_01', 'grass_medium_01_LOD1', PL),
+                'grass2': ph.append('grass_medium_02', 'grass_medium_02_static', PL), 'shrub': ph.append('shrub_02', 'shrub_02_LOD1', PL),
+                'shrub_s': ph.append('shrub_03', 'shrub_03_LOD1', PL), 'rock': ph.append('rock_moss_set_01', 'rock_moss_set_01', PL),
+                'boulder': ph.append('boulder_01', 'boulder_01_LOD1', PL)}
+        for c in libs.values():
+            c.hide_render = False
+        ek.scatter(ter, 'VEG_SCATTER_SAPLING', libs['sapling'], .0016, group='veg_conifer', seed=13, scale=(.6, 1.1))
+        ek.scatter(ter, 'VEG_SCATTER_GRASS_B', libs['grass2'], 2.5, group='veg_grass', seed=15, scale=(.8, 1.6))
+        ek.scatter(ter, 'VEG_SCATTER_SHRUB', libs['shrub'], .02, group='veg_broadleaf', seed=16, scale=(.7, 1.3))
+        ek.scatter(ter, 'VEG_SCATTER_SHRUB_S', libs['shrub_s'], .15, group='veg_grass', seed=17, scale=(.8, 1.5))
+        ek.scatter(ter, 'VEG_SCATTER_BOULDER', libs['boulder'], .0006, group='veg_rock', seed=18, scale=(.6, 2.2))
+    ek.scatter(ter, 'VEG_SCATTER_CONIFER', libs['conifer'], .0055 if USE_PH else .0032, group='veg_conifer', seed=3, scale=(.7, 1.25))
+    ek.scatter(ter, 'VEG_SCATTER_BROADLEAF', libs['broadleaf'], .0018, group='veg_broadleaf', seed=4, scale=(1.6, 2.6) if USE_PH else (.8, 1.3))
+    ek.scatter(ter, 'VEG_SCATTER_GRASS', libs['grass'], 9.0 if USE_PH else 3.0, group='veg_grass', seed=5, scale=(1.0, 2.2) if USE_PH else (.7, 1.3))
     ek.scatter(ter, 'VEG_SCATTER_ROCK', libs['rock'], .0012, group='veg_rock', seed=6, scale=(.5, 1.6))
     # hero trees: sacred courtyard tree + a few inside the compound
     sacred = ek.make_broadleaf('PROP_SACRED_TREE', C('ASHRAM/04_PROPS'), M, seed=77, height=17, spread=1.25, leaves=7000)
     sacred.location = (0, 4, .6)
+    if USE_PH:
+        trees = [o for o in libs['conifer'].objects] + [o for o in libs['broadleaf'].objects]
+        sacred.hide_render = True; sacred.hide_viewport = True
+        st = bpy.data.objects.new('PROP_SACRED_TREE_PH', libs['broadleaf'].objects[0].data); C('ASHRAM/04_PROPS').objects.link(st)
+        st.location = (0, 4, .6); st.scale = (3.4, 3.4, 3.4)
+        for k, p in enumerate([(-52, 50), (52, 50), (-52, -40), (52, -40), (-22, -48), (22, -48), (30, -112), (-30, -112), (78, -70), (46, -88),
+                               (-70, 20), (70, 30), (-75, -60), (90, -40)]):
+            src = trees[k % len(trees)]
+            t = bpy.data.objects.new(f'VEG_HERO_TREE_{k:02d}', src.data); V.objects.link(t)
+            t.location = (p[0], p[1], 0); t.rotation_euler = (0, 0, R.uniform(0, 6.28))
+            s_ = R.uniform(.85, 1.1) if src in libs['conifer'].objects.values() else R.uniform(1.8, 2.4); t.scale = (s_,) * 3
+        return ter
     for k, p in enumerate([(-52, 50), (52, 50), (-52, -40), (52, -40), (-22, -48), (22, -48), (30, -112), (-30, -112), (78, -70), (46, -88)]):
         t = ek.make_broadleaf(f'VEG_HERO_TREE_{k:02d}', V, M, seed=50 + k, height=R.uniform(8, 12)) if k % 3 else \
             ek.make_conifer(f'VEG_HERO_TREE_{k:02d}', V, M, seed=60 + k, height=R.uniform(14, 19))
@@ -433,7 +487,7 @@ def atmosphere(night=False):
     mi = obj('ATMOS_LAKE_MIST', mesh_box('ATMOS_MIST', 1100, 520, 22), A, (200, -360, -5),
              mat=ek.mat_volume('MAT_ATMOS_MIST', '#E8EEF4', .0012, noise_scale=.006))
     mi.visible_shadow = False
-    if not night:
+    if not night and not USE_PH:
         bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 4000, 4200)); cl = bpy.context.object
         cl.name = 'ATMOS_CLOUD_LAYER'; cl.scale = (60000, 60000, 1); ck.link(cl, A); cl.data.materials.append(ek.mat_clouds())
         cl.visible_shadow = False
@@ -452,7 +506,23 @@ def lighting(night=False):
     bg = nt.nodes['Background']
     sd = bpy.data.lights.new('LIGHT_SUN' if not night else 'LIGHT_MOON', 'SUN'); so = bpy.data.objects.new(sd.name, sd); L.objects.link(so)
     lan = bpy.data.materials['MAT_ENV_LANTERN_GLOW'].node_tree.nodes['Principled BSDF']
-    if not night:
+    if USE_PH:
+        hid = 'qwantani_night_puresky' if night else ('qwantani_dusk_2_puresky' if GOLDEN else 'kloofendal_48d_partly_cloudy_puresky')
+        img = ph.hdri_world(hid, .35 if night else 1.35)
+        az0, el0 = ph.hdri_sun_dir(img)
+        d0 = Vector((-math.cos(az0), math.sin(az0), 0))            # Blender equirect: u-angle = atan2(y, -x)
+        el = max(math.radians(9), min(math.radians(34), el0)) if not night else math.radians(40)
+        to_sun = Vector((-.82, -.22, 0)).normalized()
+        rot = math.atan2(d0.y, d0.x) - math.atan2(to_sun.y, to_sun.x)
+        wd.node_tree.nodes['Mapping'].inputs['Rotation'].default_value = (0, 0, rot)
+        to_sun = Vector((to_sun.x * math.cos(el), to_sun.y * math.cos(el), math.sin(el)))
+        so.rotation_euler = (-to_sun).to_track_quat('-Z', 'Y').to_euler()
+        if not night:
+            sd.energy = 3.2 if GOLDEN else 4.0; sd.angle = math.radians(.6); sd.color = ck.hexlin('#FFC890' if GOLDEN else '#FFF1DE')[:3]; lan.inputs['Emission Strength'].default_value = 0
+            print('HDRI sun elev', round(math.degrees(el0), 1), '-> used', round(math.degrees(el), 1), flush=True)
+    if USE_PH and not night:
+        pass
+    elif not night:
         el, az = math.radians(24), math.radians(235)      # golden hour, sun from the south-west
         sky = nt.nodes.new('ShaderNodeTexSky')
         try:
@@ -469,7 +539,8 @@ def lighting(night=False):
             pass
         lan.inputs['Emission Strength'].default_value = 0
     else:
-        bg.inputs[0].default_value = ck.hexlin('#0B1324'); bg.inputs[1].default_value = .6
+        if not USE_PH:
+            bg.inputs[0].default_value = ck.hexlin('#0B1324'); bg.inputs[1].default_value = .6
         sd.energy = .3; sd.color = ck.hexlin('#9DB8FF')[:3]; so.rotation_euler = (math.radians(50), 0, math.radians(-40))
         lan.inputs['Emission Strength'].default_value = 30
         for o in [o for o in bpy.data.objects if o.name.startswith('PROP_LANTERN_')]:
@@ -512,7 +583,7 @@ def main():
     sc = bpy.context.scene
     sc.unit_settings.system = 'METRIC'
     M = materials(); A = modules(M)
-    site(A, M); landscape(M, A)
+    site(A, M); landscape(M, A); roof_uvs(1.0)
     org = bpy.data.objects.new('ASHRAM_ORIGIN', None); C('ASHRAM/00_REFERENCE').objects.link(org)
     f = os.path.join(HERE, '..', 'map', 'data', 'features.json')
     if os.path.exists(f):
@@ -527,8 +598,8 @@ def main():
         pass
     cy = sc.cycles; cy.transparent_max_bounces = 64; cy.max_bounces = 8; cy.volume_bounces = 1; cy.volume_step_rate = 4.0
     cy.use_denoising = True
-    out = os.path.join(ROOT, '01_BLOCKOUT', 'ASHRAM_concept_v002.blend')
-    bpy.ops.wm.save_as_mainfile(filepath=out)
+    out = os.path.join(ROOT, '01_BLOCKOUT', f'ASHRAM_concept_{VER}.blend')
+    bpy.ops.wm.save_as_mainfile(filepath=out, relative_remap=True)
     print('SAVED', out, len(bpy.data.objects), 'objects', flush=True)
     if not RENDER:
         return
@@ -536,7 +607,8 @@ def main():
         if ONLY and cam.name not in ONLY:
             continue
         sc.render.resolution_x, sc.render.resolution_y = res
-        ck.render_to(os.path.join(OUTR, f'{cam.name}_golden.png'), cam)
+        ck.render_to(os.path.join(OUTR, f'{cam.name}_{"golden" if GOLDEN or not USE_PH else "day"}.png'), cam)
+        print('RENDERED', cam.name, flush=True)
     lighting(True)
     for cam, res, cap in cams:
         if cam.name in ('CAM_01_WIDE_ESTABLISHING', 'CAM_03_COURTYARD', 'CAM_02_FRONT_GATE') and (not ONLY or cam.name in ONLY):

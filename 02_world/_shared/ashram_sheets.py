@@ -14,8 +14,10 @@ sys.path.insert(0, HERE)
 import worldgen as wg
 
 V2 = 'v1' not in sys.argv
-A = os.path.join(HERE, '..', 'ashram'); R = os.path.join(A, '09_RENDER', 'concept_v2' if V2 else 'concept_v1'); O = os.path.join(A, '00_REFERENCE')
-VER = 'v2' if V2 else 'v1'; DAY = 'golden' if V2 else 'day'
+VER = 'v1' if not V2 else ('v2' if 'v2' in sys.argv else 'v3')
+A = os.path.join(HERE, '..', 'ashram'); R = os.path.join(A, '09_RENDER', {'v1': 'concept_v1', 'v2': 'concept_v2', 'v3': 'concept_v3'}[VER])
+O = os.path.join(A, '00_REFERENCE')
+DAY = {'v1': 'day', 'v2': 'golden', 'v3': 'day'}[VER]
 F = lambda p, s: ImageFont.truetype(p, s)
 BG = (16, 18, 24); INK = (240, 230, 205); DIM = (170, 170, 180); GOLD = (255, 214, 90)
 
@@ -46,11 +48,13 @@ def concept():
     th = int(tw * 9 / 16)
     H = 140 + big.height + 60 + 3 * (th + 60) + 40
     S = Image.new('RGB', (W, H), BG); d = ImageDraw.Draw(S)
-    head(d, W, f'ASHRAM — ENVIRONMENT CONCEPT {VER}', 'Renders of the real 3D scene (ASHRAM_concept_v002.blend) · direction: “Himalayan foothill gurukul” · golden hour · '
+    head(d, W, f'ASHRAM — ENVIRONMENT CONCEPT {VER}', f'Renders of the real 3D scene (ASHRAM_concept_{"v003" if VER == "v3" else "v002"}.blend) · Poly Haven CC0 photo textures + trees · direction: “Himalayan foothill gurukul” · '
          'same model in every view · red cylinders = 1.75 m scale figures')
     S.paste(big, (40, 140)); d.text((56, 152), VIEWS[0][1], font=F(wg.FB, 28), fill=(255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0))
     y0 = 140 + big.height + 40
     for k, (n, cap) in enumerate(VIEWS[1:]):
+        if n == 'CAM_09_BIRDSEYE_ORTHO':
+            continue
         x = 40 + (k % 3) * (tw + 30); y = y0 + (k // 3) * (th + 60)
         S.paste(img(n + f'_{DAY}.png', tw), (x, y)); d.text((x, y + th + 8), cap, font=F(wg.FB, 22), fill=INK)
     S.save(os.path.join(O, f'ASHRAM_concept_sheet_{VER}.png'), optimize=True)
@@ -108,7 +112,7 @@ def lighting():
     tw = 1180; th = int(tw * 9 / 16)
     W = 40 + 2 * (tw + 30) + 10
     S = Image.new('RGB', (W, 140 + 3 * (th + 60) + 20), BG); d = ImageDraw.Draw(S)
-    head(d, W, f'ASHRAM — LIGHTING TEST {VER}', 'Golden hour: low west sun + physical sky + haze + lake mist · Night: moon + lanterns + window glow · story time of day = NOT CONFIRMED')
+    head(d, W, f'ASHRAM — LIGHTING TEST {VER}', 'Day: HDRI sky (partly cloudy) + west sun + haze + lake mist · Night: night HDRI + moon + lanterns + window glow · story time of day = NOT CONFIRMED')
     for k, (n, cap) in enumerate(pairs):
         for j, tod in enumerate((DAY, 'night')):
             x = 40 + j * (tw + 30); y = 140 + k * (th + 60)
@@ -133,5 +137,27 @@ def materials():
     S.save(os.path.join(O, f'ASHRAM_materials_sheet_{VER}.png'), optimize=True)
 
 
+def materials_ph():
+    PH = os.path.join(HERE, '..', '..', '03_assets', 'external', 'polyhaven', 'textures')
+    sw = [('Plinths, gate, ghat', 'rustic_stone_wall'), ('Walls (lime-plastered stone)', 'plastered_stone_wall'),
+          ('Courtyard / floors', 'mossy_cobblestone'), ('Pillars, doors, beams', 'medieval_wood'), ('Brackets, frames', 'dark_wooden_planks'),
+          ('Roofs (clay tiles)', 'clay_roof_tiles_02'), ('Paths', 'grass_path_2'), ('Meadow (tinted green)', 'sparse_grass'),
+          ('Forest floor', 'forest_ground_04'), ('Slopes', 'aerial_grass_rock'), ('Cliffs / rock', 'aerial_rocks_02'), ('Snow', 'snow_02')]
+    W = 2400; th = 260
+    S = Image.new('RGB', (W, 140 + ((len(sw) - 1) // 4 + 1) * (th + 90) + 30), BG); d = ImageDraw.Draw(S)
+    head(d, W, f'ASHRAM — MATERIAL LIBRARY {VER}', 'Photo-scanned PBR sets (Poly Haven, CC0): BaseColor + Roughness + Normal + AO + Height, 2K · '
+         'mapped by object / box projection, roofs by slope-aligned UVs')
+    for k, (use, tid) in enumerate(sw):
+        x = 40 + (k % 4) * 590; y = 150 + (k // 4) * (th + 90)
+        p = os.path.join(PH, tid, f'{tid}_diff_2k.jpg')
+        if os.path.exists(p):
+            im = Image.open(p).convert('RGB').resize((th, th)); S.paste(im, (x, y))
+        d.text((x + th + 16, y + 10), use, font=F(wg.FB, 22), fill=INK)
+        d.text((x + th + 16, y + 44), tid, font=F(wg.FR, 19), fill=DIM)
+        d.text((x + th + 16, y + 72), 'BaseColor · Rough · Normal', font=F(wg.FR, 16), fill=DIM)
+        d.text((x + th + 16, y + 94), 'AO · Height (2K)', font=F(wg.FR, 16), fill=DIM)
+    S.save(os.path.join(O, f'ASHRAM_materials_sheet_{VER}.png'), optimize=True)
+
+
 if __name__ == '__main__':
-    concept(); layout(); lighting(); materials(); print('wrote ashram sheets')
+    concept(); layout(); lighting(); (materials_ph if VER == 'v3' else materials)(); print('wrote ashram sheets')

@@ -14,6 +14,11 @@
 - Colour bible + location comparison: `02_world/bible/` (`_shared/world_bible_sheets.py`).
 - Ashram concept blockout (PROPOSAL): `02_world/ashram/` (`_shared/ashram_blockout.py`, `_shared/ashram_sheets.py`),
   doc `02_world/ashram/ASHRAM_CONCEPT.md`. ⏳ renders chal rahe (scratchpad ashram.log), phir `ashram_sheets.py`.
+- 21 Nov: Director ne v1 Ashram ko "bekar" kaha (sahi tha — sirf blockout). → v2 procedural look-dev → **v3 with Poly Haven CC0 assets**
+  (Director ne network permission di: environment "animation-studio", hosts api.polyhaven.com + dl.polyhaven.org).
+  Assets: `python3 03_assets/external/polyhaven_fetch.py` (git mein NAHI, >1 GB; har nayi session mein dobara chalao).
+  Scene `02_world/ashram/01_BLOCKOUT/ASHRAM_concept_v003.blend`, script `_shared/ashram_concept_v2.py` (+ `phkit.py`, `envkit.py`).
+  ⏳ renders scratchpad ashram3.log → phir `python3 02_world/_shared/ashram_sheets.py` (v3 sheets).
 - **Detailed modelling SHURU NAHI karni jab tak Director map + Ashram direction approve na kare.**
 - Story/script document repo mein NAHI hai → Director se maangna hai. Blender version (4.5?) Director ke PC par — poochna hai.
 

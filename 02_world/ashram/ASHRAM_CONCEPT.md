@@ -1,4 +1,11 @@
-# ASHRAM — Concept Development v1 (PROPOSAL — awaiting Director approval)
+# ASHRAM — Concept Development v3 (PROPOSAL — awaiting Director approval)
+
+> **Versions:** v1 = grey blockout (layout only — Director: “bekar”, rightly) → v2 = procedural look-dev (code-built trees,
+> grass, materials) → **v3 = real photo-scanned CC0 assets (Poly Haven): fir trees, saplings, broadleaf trees, grass, shrubs,
+> mossy rocks, boulders, stone / plaster / cobble / wood / clay-tile / ground / snow textures, HDRI skies.**
+> Scene: `01_BLOCKOUT/ASHRAM_concept_v003.blend` · script `../_shared/ashram_concept_v2.py` (v003 when the assets exist) ·
+> sheets `00_REFERENCE/ASHRAM_*_v3.png` · renders `09_RENDER/concept_v3/`.
+> Assets are re-downloaded by `03_assets/external/polyhaven_fetch.py` (not in git, >1 GB).
 
 > Detailed final construction (Phase 4) starts **only after approval** of this direction.
 > CONFIRMED: the Ashram is a production location associated with the **Headmaster (Ramarat), students and training**.
@@ -36,7 +43,8 @@ Remove / add any zone — nothing here is canon.
 
 | Item | File | Status |
 |---|---|---|
-| Real 3D blockout scene (real metres) | `01_BLOCKOUT/ASHRAM_blockout_v001.blend` | ✅ created, opens, renders |
+| Real 3D blockout scene (real metres) | `01_BLOCKOUT/ASHRAM_blockout_v001.blend` | ✅ v1 (layout only) |
+| Look-dev scene with real CC0 assets | `01_BLOCKOUT/ASHRAM_concept_v003.blend` | ✅ v3 — carved pillars + bracket capitals, moulded plinths, lattice windows, double doors with brass rings, clay-tile roofs (UV-aligned tiles, eave tiles, rafters), prayer flags, lamp pillars, pots, benches; 4 km valley + 30 km snow range; geometry-node scattered forests / grass / shrubs / rocks; HDRI day + night, haze + lake mist |
 | Rebuild script | `../_shared/ashram_blockout.py` | ✅ |
 | Modular kit (13 assets, linked duplicates) | collection `ASHRAM/02_ARCHITECTURE/MODULES` | ✅ blockout level |
 | Terrain: 3 km detail tile + far LOD mountain ring (to 14 km) + lake | `ASHRAM/03_TERRAIN` | ✅ blockout level |
