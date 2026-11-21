@@ -1,39 +1,24 @@
-# STATUS — last updated 2026-11-20 19:15
+# STATUS — last updated 2026-11-21 (new session)
 
-## Ab kya chal raha hai (21 Nov)
-### A. Characters (background batch)
-- Director ne SAARE designs APPROVE kiye (20 Nov). Max laser = haath + aankh; Saithan life-cost = A + B + C.
-- Fixes code mein ho gaye (skirt follow-rig, jaw bone, Rigify v004, Soul robe, Max eye laser, Saithan A+B+C page, footer).
-- ⏳ Full batch: `render_all.sh` (7 chars) → `production_all.sh` (production + rigify + docs). Logs: scratchpad all4.log / prod2.log.
-  Session restart ho to dono commands dobara chalao.
-### B. STAGE 2 — World (Director TASK 01, 21 Nov) — FIRST MILESTONE
-- Bible draft: `02_world/WORLD_BIBLE.md` (story analysis CONFIRMED/PROPOSED/NOT CONFIRMED, geography, lore questions,
-  architecture, colour bible, PBR, lighting, asset list, naming, approval checklist).
-- Master map + regional + elevation maps: `02_world/map/` (script `_shared/worldgen.py`, seed 7). **NOT LOCKED.**
-- Aerial 3D refs: `02_world/map/aerial/` + `02_world/blend/WORLD_overview_v001.blend` (`_shared/world_terrain.py`).
-- Colour bible + location comparison: `02_world/bible/` (`_shared/world_bible_sheets.py`).
-- Ashram concept blockout (PROPOSAL): `02_world/ashram/` (`_shared/ashram_blockout.py`, `_shared/ashram_sheets.py`),
-  doc `02_world/ashram/ASHRAM_CONCEPT.md`. ⏳ renders chal rahe (scratchpad ashram.log), phir `ashram_sheets.py`.
-- 21 Nov: Director ne v1 Ashram ko "bekar" kaha (sahi tha — sirf blockout). → v2 procedural look-dev → **v3 with Poly Haven CC0 assets**
-  (Director ne network permission di: environment "animation-studio", hosts api.polyhaven.com + dl.polyhaven.org).
-  Assets: `python3 03_assets/external/polyhaven_fetch.py` (git mein NAHI, >1 GB; har nayi session mein dobara chalao).
-  Scene `02_world/ashram/01_BLOCKOUT/ASHRAM_concept_v003.blend`, script `_shared/ashram_concept_v2.py` (+ `phkit.py`, `envkit.py`).
-  ⏳ renders scratchpad ashram3.log → phir `python3 02_world/_shared/ashram_sheets.py` (v3 sheets).
-- **Detailed modelling SHURU NAHI karni jab tak Director map + Ashram direction approve na kare.**
-- Story/script document repo mein NAHI hai → Director se maangna hai. Blender version (4.5?) Director ke PC par — poochna hai.
+## Abhi kahan hain
+- **Stage 1 Characters: ✅ DONE + APPROVED** (saare 7: v002 design, v003 production, v004 Rigify; QC 0 FAIL).
+- **Stage 2 World: proposals ready, Director approval ka INTEZAAR** (map_v2 revision 01, WORLD_BIBLE, Ashram v3).
+- Koi background render/batch nahi chal raha. Scene animation shuru NAHI.
+- Detailed modelling (Ashram Phase 4, Black Hole area, GEM, Dark World) **approval ke baad hi**.
 
-### C. TASK 02 — Grand world map (21 Nov)
-- Director: "dono ko ek me jod ke continue karo" → v1 continent = home continent C1 HIMAVANT (3 km/cell) inside the main world v2
-  (12 000 x 6 000 km, 5 continents + 3 archipelagos). Maps A–I + GEOGRAPHY.md in `02_world/map_v2/` (`_shared/worldgen2.py`).
-- REVISION 01 applied (names Aetheria/Solmara/Veylora/Noxara/Drakmor, Ashram green valley, distant snow, H1/H2 dimension maps,
-  GEM hidden region + chamber MAP_J, portal diagram confirmed vs hypothetical). NOT LOCKED — awaiting approval.
-- Characters: production + Rigify for all 7 DONE (QC 0 FAIL, Rigify pass). Ashram v3 renders + sheets DONE.
+## Is session mein (21 Nov)
+- Branch `ccr-a129fdfc-g3v4k0` checkout, setup: bpy 5.3 + scipy, Poly Haven assets fetch (859 MB, gitignored) ✅.
+- Ramarat "robe par safed daag" diagnose kiya: ye **material bug nahi**, DEFORM/JUMP/LAND poses mein **ghutna (trousers + skin)
+  skirt ke aar-paar nikalta hai** (trousers chhupane par bhi skin dikhti hai) = known issue K-01. Fix: scene stage par cloth sim
+  (waist pinned, body collision) ya skirt-follow bones ka strong knee influence. Normal/walk/stand poses mein dikhta nahi.
 
-## Director decisions (confirmed)
-- Pipeline: characters → world → assets → scenes → lip-sync → final. Abhi CHARACTER stage. Scene animation shuru NAHI.
-- Soul = Lightning (crimson). Ramarat = har power (heroes + villains), unlimited (golden-white).
-- Final production mein saare VFX high quality (CLAUDE.md rule).
+## Director se PENDING (jawab chahiye)
+1. Hero 1 ka naam · Soul ka weapon story mein hai?
+2. World map revision 01 approve? (continent naam assignment, Ashram jagah + snow distance, H1/H2 dimensions ka look,
+   GEM hidden region + chamber, kaunse portal routes H1–H5 sach mein hain, story kaunse regions use karti hai)
+3. Story / script document
+4. Director ke PC par Blender version (4.5 ya 5.x?) — .blend files 5.3 se bani hain
+5. Ramarat K-01 clipping: abhi quick fix (skirt bones) ya scene stage par cloth sim?
 
-## Director se pending
-- Hero 1 ka naam · Pratyush/sab designs ka approval · Saithan life-cost visual (A/B/C) · Soul ka weapon story mein hai?
-- Max ka laser kahan se nikalta hai (abhi proposal: palms).
+## Approval ke baad next
+Ashram terrain ko Aetheria R-01 map par fit → Phase 4 detailed Ashram → Phase 5 Black Hole Training Area → Phase 6 GEM → Phase 7 Saithan's Dark World.

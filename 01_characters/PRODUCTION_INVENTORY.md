@@ -113,5 +113,6 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
   19 mouth keys incl. 10 phonemes ✅, GLB + FBX export + re-import ✅. Contact sheets: `<name>/qc/<NAME>_qc_tests.png`.
 - KNOWN ISSUE K-01: long robes/skirts (Ramarat, Soul, Saithan, Yayaki) are skinned to the legs → in RUN / JUMP / LAND / deform
   poses they bend like a stiff tube. Fix planned at scene stage: cloth simulation (pinned at waist) or extra skirt bones.
+  (21 Nov: Ramarat ke robe par 'safed daag' = isi ka hissa — raised knee (trousers/skin) skirt ke aar-paar; material bug nahi.)
 - K-02: Soul robe front panels leave a small gap between the legs (front view). K-03: Saithan powers page — eye row touches footer.
 - K-04: Jaw bone does not move (mouth shape keys only). Rig is custom (not Rigify) but has IK/FK, poles, switches, fingers, face controls.

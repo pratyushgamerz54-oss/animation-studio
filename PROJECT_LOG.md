@@ -70,3 +70,6 @@
 - Rules: `CLAUDE.md` · Abhi ka status: `STATUS.md` · Characters ka status: `01_characters/PRODUCTION_INVENTORY.md`
 - Har character: `01_characters/<name>/` → `<name>_config.py`, `blend/`, `design/` (sheets + DESIGN_SHEET.md),
   `qc/QC_REPORT.md`, `textures/`, `uv/`, `export/`, `reference/`
+
+15. **21 Nov (nayi session):** setup restore (bpy 5.3, scipy, Poly Haven fetch). Ramarat robe "safed daag" diagnose = knee clipping
+    through skirt (K-01), material nahi. Sab Stage 2 kaam Director approval par ruka hai.
