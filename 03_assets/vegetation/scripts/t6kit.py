@@ -874,11 +874,11 @@ def wind_group():
       · foot fixed (wind_trunk = 0 at the ground); calm (Strength 0) = completely still."""
     name = 'NG_T6_WIND'
     old = bpy.data.node_groups.get(name)
-    if old is not None and old.get('t6_wind_version') == 2:
+    if old is not None and old.get('t6_wind_version') == 3:
         return old
     if old is not None:
         old.name = name + '_v1_old'
-    ng = bpy.data.node_groups.new(name, 'GeometryNodeTree'); ng['t6_wind_version'] = 2
+    ng = bpy.data.node_groups.new(name, 'GeometryNodeTree'); ng['t6_wind_version'] = 3
     S = lambda n, io, t, d=None, lo=None, hi=None: _sock(ng, n, io, t, d, lo, hi)
     S('Geometry', 'INPUT', 'NodeSocketGeometry'); S('Geometry', 'OUTPUT', 'NodeSocketGeometry')
     S('Wind Control', 'INPUT', 'NodeSocketObject')
@@ -889,6 +889,7 @@ def wind_group():
     S('Leaf Flutter (m)', 'INPUT', 'NodeSocketFloat', .03, 0, 1)
     S('Natural Freq (Hz)', 'INPUT', 'NodeSocketFloat', .3, .02, 10); S('Damping', 'INPUT', 'NodeSocketFloat', .15, 0, 1)
     S('Gust Size (m)', 'INPUT', 'NodeSocketFloat', 45.0, 1, 1000)
+    S('Bend Offset (m)', 'INPUT', 'NodeSocketFloat', .5, .005, 10)       # small for grass blades (they arc strongly), ~0.5 m for trees
     g = _GN(ng); gi = g.N('NodeGroupInput'); go = g.N('NodeGroupOutput')
     selfo = g.N('GeometryNodeSelfObject'); so = g.N('GeometryNodeObjectInfo'); so.transform_space = 'ORIGINAL'
     g.L(selfo.outputs[0], so.inputs['Object'])
@@ -922,9 +923,9 @@ def wind_group():
     # length-preserving bend: horizontal displacement d at height h drops by d² / 2h (arc instead of shear)
     D = g.V('ADD', D_t, g.V('MULTIPLY', D_b, (1, 1, .35)))
     sep = g.N('ShaderNodeSeparateXYZ'); g.L(P, sep.inputs[0])
-    h = g.M('ADD', g.M('MAXIMUM', sep.outputs['Z'], 0.0), .5)
+    h = g.M('ADD', g.M('MAXIMUM', sep.outputs['Z'], 0.0), gi.outputs['Bend Offset (m)'])
     dl = g.V('LENGTH', g.V('MULTIPLY', D, (1, 1, 0)))
-    drop = g.M('DIVIDE', g.M('MULTIPLY', dl, dl), g.M('MULTIPLY', h, 2.0))
+    drop = g.M('MINIMUM', g.M('DIVIDE', g.M('MULTIPLY', dl, dl), g.M('MULTIPLY', h, 2.0)), g.M('MULTIPLY', g.M('MAXIMUM', sep.outputs['Z'], 0.0), .9))   # never below its base
     D = g.V('SUBTRACT', D, g.V('SCALE', (0, 0, 1), scale=drop))
     # leaf / blade flutter: ∝ sqrt(q), high frequency
     fl = g.M('MULTIPLY', g.M('MULTIPLY', g.A('wind_leaf'), gi.outputs['Leaf Flutter (m)']),
