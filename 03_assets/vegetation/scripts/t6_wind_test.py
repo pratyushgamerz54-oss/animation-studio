@@ -82,5 +82,6 @@ sc.render.resolution_x, sc.render.resolution_y = 960, 540; sc.view_settings.view
 sc.render.filepath = os.path.join(OUT, 'f_'); sc.render.image_settings.file_format = 'PNG'
 if os.environ.get('SAVE'):
     bpy.ops.wm.save_as_mainfile(filepath=os.environ['SAVE'], compress=True)
+sc.frame_start = int(os.environ.get('FSTART', 1))      # resume support (frames already rendered are kept)
 bpy.ops.render.render(animation=True, scene=sc.name)
 print('WIND_FRAMES_DONE')
