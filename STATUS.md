@@ -1,4 +1,12 @@
-# STATUS — last updated 2026-11-22 (session 4: TASK 06 M1 done + Decision Sheet 01 + realism / wind v3; finishing renders)
+# STATUS — last updated 2026-11-22 (session 5: TASK 06 MILESTONE 2 full production — in progress)
+
+## Session 5 (22 Nov)
+- **NOW:** TASK 06 milestone 2 (Director: "jitne bhi task bache hai … un sab ko pura karo" + realism v3 list). Background chains:
+  `t6_finish_pending.sh` (M1 sheets re-render, realism v3 + camera look) and `t6_m2_pending.sh` (M2 libraries → sheets → impostors →
+  LODs / variants → QC). Resume after a restart: HANDOFF §6c (3 commands). Populated files: `02_world/ecosystem/populated/`.
+- Built so far: 84 hero assets in 10 regional libraries (7 new: Green Plains, Crystal Lakes, Golden Desert, Forbidden Lands, Ancient City
+  sites, Hidden Underground, Natural Details), palm / succulent / ivy / water-lily / natural-detail generators, 14 new atlases,
+  NG_T6_ECOSYSTEM scatter, populated R-04 + R-05 files (R-01 / R-02 / R-03 wait for the AV library rebuild). TASK 05 files untouched.
 
 ## Session 4 (21–22 Nov)
 - **NOW (22 Nov):** wind v3 clip + leaf realism v2 re-render running. If the session ended before they finished → run

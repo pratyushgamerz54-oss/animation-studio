@@ -396,7 +396,7 @@ ATLASES.update({
                     vein='#7FA860', twig='#5E7A3A', aged='#9A9A45', leaf=G(shape='lance', skew=.7, serr=.28, teeth=18, veins=8, rough=.40)),
     'pl_acacia':  G(layout='pinnate', n=24, len=.07, wratio=.38, spread=72, size_m=.30, top='#5A7A3A', edge='#7A9A54', vein='#6A8A44',
                     twig='#5A4A3A', aged='#8A8A50', leaf=G(shape='elliptic', pw=.6, veins=0, veinvis=0, rib=.004, rough=.45)),
-    'ct_mango':   G(layout='rosette', n=10, len=.38, wratio=.22, fan=260, size_m=.55, top='#24502A', edge='#3E6A34', vein='#8AA070',
+    'ct_mango':   G(layout='alternate', n=11, len=.30, wratio=.22, spread=34, petiole=.05, size_m=.55, top='#24502A', edge='#3E6A34', vein='#8AA070',
                     twig='#5A4A3A', aged='#8A4A34', leaf=G(shape='lance', skew=.75, pw=.85, veins=14, slant=.28, rough=.30)),   # aged = copper new leaves
     # R-08 Crystal Lakes
     'lk_willow':  G(layout='alternate', n=14, len=.22, wratio=.14, spread=30, petiole=.03, size_m=.45, top='#5E8A52', edge='#A9BFA0',
@@ -408,6 +408,13 @@ ATLASES.update({
     # R-04 Golden Desert
     'ds_khejri':  G(layout='pinnate', n=16, len=.065, wratio=.35, spread=70, size_m=.28, top='#6E7E4E', edge='#8E9A6A', vein='#7E8A5A',
                     twig='#6A5A4A', aged='#9A8A55', leaf=G(shape='elliptic', pw=.6, veins=0, veinvis=0, rib=.004, rough=.50)),
+    # natural details: single fallen leaves (litter / floating) — old = last year's decomposing leaves, fresh = spring windfall
+    'nd_litter_old':   G(layout='single', n=1, len=1, wratio=.55, size_m=.12, top='#6E4C2E', edge='#8E6C44', vein='#B4945E', twig='#5A4030',
+                         aged='#3E2C1E', leaf=G(shape='elliptic', pw=.6, veins=8, slant=.2, rough=.65, serr=.06, teeth=20)),
+    'nd_litter_fresh': G(layout='single', n=1, len=1, wratio=.6, size_m=.11, top='#4E6A30', edge='#6E8A3E', vein='#A8B878', twig='#5A5030',
+                         aged='#9A8A40', leaf=G(shape='obovate', pw=.7, veins=7, slant=.22, rough=.45)),
+    'ds_calotropis': G(layout='opposite', n=4, len=.30, wratio=.6, spread=55, petiole=.04, size_m=.42, top='#7E907A', edge='#A4B49C',
+                       vein='#D4DCCC', twig='#9AA08A', aged='#B0A86A', leaf=G(shape='obovate', pw=.75, veins=7, slant=.25, rough=.55)),   # waxy grey-green, pale veins
     # R-03 Mountain Kingdom additions
     'mk_fir':     G(layout='needle_flat', n=36, nlen=.045, nw=.009, nang=70, side=7, spread=55, len=.40, wratio=.3, size_m=.50,
                     top='#18342A', edge='#2E4A3C', vein='#1A3028', twig='#5A4434', aged='#4A5A3A', leaf=G(shape='lance')),

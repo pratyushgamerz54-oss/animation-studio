@@ -43,7 +43,7 @@ def build_palm(S, seed=0, collection=None, mats=None):
     trunk = Branch(pts, rad, 0, rng.random(), 0.0, kind='trunk')
     St = dict(S); St['trunk'] = dict(flare=P.get('flare', .25), flare_h=P.get('flare_h', .03), lobes=0, nodes=P.get('ring', .12))
     G = Geo()
-    K.tube(G, trunk, 16, S['bark'].get('tile', 1.0), St, H, rng)
+    K.tube(G, trunk, P.get('tsides', 16), S['bark'].get('tile', 1.0), St, H, rng)     # tsides / lsegs: LOD
     top = pts[-1]; nf = P['fronds']; wt_top = 1.0
     golden = math.radians(137.5)
     for f in range(nf + P.get('dead', 0)):
@@ -86,7 +86,7 @@ def build_palm(S, seed=0, collection=None, mats=None):
                 dirv = (side * sgn * .85 + d * .45 + up_l * P.get('v_angle', .3)).normalized()
                 attrs = dict(wind_trunk=wt_top, wind_branch=.9 * t ** 1.3 + .15, wind_phase=ph, leaf_rand=rng.random(), grad=0.0)
                 leaflet(G, p, dirv, d, plen, P['pinna_w'] * rng.uniform(.85, 1.15), P.get('pinna_droop', .3) * (2.2 if dead else 1),
-                        4, mi_r, attrs, rng)
+                        P.get('lsegs', 4), mi_r, attrs, rng)
     top_z = max(float(v[:, 2].max()) for v in G.V); f = 1.0
     if top_z > Htot * 1.10 or top_z < Htot * .90:                  # keep within ±10 % of the design height (as build_tree)
         f = Htot / top_z; G.V = [v * f for v in G.V]; top = top * f

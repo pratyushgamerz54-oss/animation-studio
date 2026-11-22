@@ -243,6 +243,23 @@ water rules, density / ha, near = realized + v3 wind, far = instance tilt; Ashra
 (d) natural details (leaf litter per species, fallen branches, giant log, ivy, floating leaves) · (e) populated cinematic previews per
 region · (f) scatter-level QC + closeout. Wildlife: ONLY after the Director's selection.
 
+### 6c. TASK 06 · MILESTONE 2 (full production) — session 5, 22 Nov — Director: "jitne bhi task bache hai … un sab ko pura karo"
+Built (code in `03_assets/vegetation/scripts/`, summary in `02_world/ecosystem/ECOSYSTEM_BIBLE.md` §13):
+| What | Where |
+|---|---|
+| Realism v3 everywhere (+ v3.1: moss shader with shoots / fuzz, dead grass thatch lies ON the ground) + natural camera look | `t6kit.py` (`realism`, `mat_moss`, `camera_look`), `t6_plants.py` (`blade(floor=…)`) |
+| 7 new hero libraries + MK / EF additions — **84 assets total** (29 trees, 7 shrubs, 42 plants, 6 natural details) | `library/T6_VEG_{GREEN_PLAINS,CRYSTAL_LAKES,GOLDEN_DESERT,FORBIDDEN_LANDS,ANCIENT_CITY_SITES,HIDDEN_UNDERGROUND,NATURAL_DETAILS}_v001.blend`; `t6_species_m2.py`, `t6_plants_m2.py`, `t6_details.py`, `t6kit_m2.py` (palms), `t6_regions.py` (region table) |
+| Wind-free scatter copies `<asset>_SC` in every library (wind applied once, in the scatter) | `t6_build_library.py` (`make_scatter_copies`) |
+| Variants (seeds 1, 2) + LOD1 / LOD2 + LOD3 impostors | `t6_build_lods.py`, `t6_render_impostors.py` → `library/T6_VEG_<R>_VARIANTS_v001.blend`, `_LODS_v001.blend`, `textures/impostors/` |
+| **NG_T6_ECOSYSTEM** (TASK 05 scatter logic + Poisson spacing for trees, random for ground layers, inclusion / exclusion zone, 4 LOD bands, near realized per-vertex wind with per-instance phase, far instance tilt) | `t6_ecosystem.py` |
+| Populated region files (open approved T5 region master → SAVE AS new file; T5 vegetation scatters excluded in the view layer, rocks / far forest kept; T6 layers on the hero tile; PROPOSED Peepal chabutra + garden beds in the Ashram) | `t6_populate.py` → `02_world/ecosystem/populated/T6_POP_R0{1..5}_*_v001.blend` |
+| Previews + scatter QC | `t6_render_populated.py` → `02_world/ecosystem/renders/populated/`; `t6_pop_qc.py` |
+
+**⚠️ IN PROGRESS (session 5) → resume with these commands (idempotent, skip what is done):**
+1. `SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_finish_pending.sh` — realism-v3 re-render of the milestone-1 sheets (AV / EF / MK) + QC (marker `textures/leaves/.leaf_realism_v2`, sub-steps `textures/leaves/.v3_steps/`).
+2. `SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_m2_pending.sh` — milestone-2 libraries → sheet renders → AV rebuild (v3.1 + SC) → AV plants → compose (all regions, contact M1 + M2) → impostors → LODs / variants → QC (markers `03_assets/vegetation/.m2_steps/`).
+3. After both: `for R in AV EF MK DS FB; do BPY45 t6_populate.py -- $R; done` → `RES=1280x720 SPP=32 BPY45 t6_render_populated.py -- <R>` → `BPY45 t6_pop_qc.py` → `python3 t6_qc.py --report` → docs → commit + push → send the Director the contact sheet M2 + populated previews.
+
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
 (all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,
@@ -257,7 +274,9 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43
 5. ~~TASK 05~~ ✅ closed. TASK 06 milestone 1 ✅ ("baaki theek hai"); Decision Sheet 01 ✅ applied.
 6. **Wildlife selection** (`02_world/ecosystem/WILDLIFE_SELECTION_SHEET.md`) — select / reject per animal.
 7. Sky Realms map position (candidates in `WORLD_BIBLE.md`) + story role · Ashram: exact Peepal spot + garden position (PROPOSED in the landscaping plan) · Ashram layout v3 approval.
-8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after leaf realism v2.
+8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after realism v3.
+9. Milestone 2 review (session 5): contact sheet `03_assets/vegetation/sheets/T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/populated/`,
+   PROPOSED Ashram Peepal chabutra (9 × 9 m, courtyard centre) + garden beds (south lawn) in `T6_POP_R01_ASHRAM_VALLEY_v001.blend`.
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)
 - Background waiter: `pgrep -f` mat use karo — log marker (ALLDONE) grep karo. Long renders: background + log + marker.

@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); VEG = os.path.abspath(os.path
 QCD = os.path.join(VEG, 'qc'); os.makedirs(QCD, exist_ok=True)
 NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
          'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
-         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND', 'ND': 'NATURAL_DETAILS'}   # = t6_regions.NAMES
 _built = [r for r, nm in NAMES.items() if r in ('AV', 'EF', 'MK') or os.path.exists(os.path.join(VEG, 'library', f'T6_VEG_{nm}_v001.blend'))]
 REGS = os.environ.get('T6_QC_REGIONS', ' '.join(_built)).split()      # default: milestone 1 + every milestone-2 library built so far
                                                                       # (final TASK 06 QC: T6_QC_REGIONS="AV EF MK PL LK DS FB CT CV")

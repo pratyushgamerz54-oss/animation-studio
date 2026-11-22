@@ -22,11 +22,12 @@ BADGE = {'SPECIES-INSPIRED': ((46, 110, 64), 'SPECIES-INSPIRED (real plant refer
          'FANTASY (APPROVED R-02)': ((196, 110, 24), 'FANTASY — approved for R-02 (subtle glow)')}
 NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
          'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
-         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES (kept here: no bpy import in python3)
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND', 'ND': 'NATURAL_DETAILS'}   # = t6_regions.NAMES (no bpy import in python3)
 TITLE = {'AV': 'R-01 ASHRAM VALLEY', 'EF': 'R-02 ENCHANTED FOREST', 'MK': 'R-03 MOUNTAIN KINGDOM (Great Northern Range)',
          'PL': 'R-06 GREEN PLAINS (Southern Grasslands)', 'LK': 'R-08 CRYSTAL LAKES (Lake District)', 'DS': 'R-04 GOLDEN DESERT (Western Desert)',
-         'FB': 'R-05 FORBIDDEN LANDS (crater)', 'CT': 'C-01 / C-02 / C-03 ANCIENT CITY SURROUNDINGS', 'CV': 'CV-01…05 HIDDEN UNDERGROUND (caves)'}
-M2 = ('PL', 'LK', 'DS', 'FB', 'CT', 'CV')
+         'FB': 'R-05 FORBIDDEN LANDS (crater)', 'CT': 'C-01 / C-02 / C-03 ANCIENT CITY SURROUNDINGS', 'CV': 'CV-01…05 HIDDEN UNDERGROUND (caves)',
+         'ND': 'NATURAL DETAILS (all regions)'}
+M2 = ('PL', 'LK', 'DS', 'FB', 'CT', 'CV', 'ND')
 MSTONE = lambda reg: 'TASK 06 milestone 2 (v001)' if reg in M2 else 'TASK 06 milestone 1 concept (v001)'
 IDENT = {
     'AV': ['SEASON: SPRING (approved). Warm-temperate Himalayan-foothill valley (~700–900 m): meadows, groves, forest ring (approved valley layout).',
@@ -67,6 +68,10 @@ IDENT = {
            'entrance twilight zone: pale cave moss (+ ferns / moss from the region outside); deeper: pale fungi on wet rock and rotting roots;',
            'shallow caves under forests: root curtains hanging from the ceiling. NO glow in caves (Decision 01 approved subtle glow for R-02 only;',
            'bioluminescent cave fungi = a PROPOSAL that needs approval). No cave creatures (wildlife selection PENDING).'],
+    'ND': ['Natural details for every region (brief: fallen leaves, fallen branches, giant logs, ivy, floating leaves). Real-world rules:',
+           'everything lies ON the ground / water (gravity) — leaves overlap and curl, fresh windfall on top of last year\'s decomposing layer (SPRING);',
+           'branches rest on their stubs, splintered ends show pale inner wood (separate material); the giant log lies along the ground, moss on the',
+           'upper side, bracket fungi in the shade, upturned root plate with real soil; floating leaves drift to the lee side of still water.'],
 }
 
 

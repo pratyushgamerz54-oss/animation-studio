@@ -196,9 +196,9 @@
   "pivot": "bottom-centre"
  },
  "ct_mango": {
-  "size_m": 0.55,
-  "zoom": 1.0,
-  "layout": "rosette",
+  "size_m": 0.688,
+  "zoom": 1.25,
+  "layout": "alternate",
   "tiles": 4,
   "pivot": "bottom-centre"
  },
@@ -227,6 +227,27 @@
   "size_m": 0.28,
   "zoom": 1.0,
   "layout": "pinnate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "nd_litter_old": {
+  "size_m": 0.12,
+  "zoom": 1.0,
+  "layout": "single",
+  "tiles": 4,
+  "pivot": "centre"
+ },
+ "nd_litter_fresh": {
+  "size_m": 0.11,
+  "zoom": 1.0,
+  "layout": "single",
+  "tiles": 4,
+  "pivot": "centre"
+ },
+ "ds_calotropis": {
+  "size_m": 0.525,
+  "zoom": 1.25,
+  "layout": "opposite",
   "tiles": 4,
   "pivot": "bottom-centre"
  },

@@ -1,6 +1,6 @@
 """TASK 06 · render the reference views for the vegetation sheets (Blender 4.5, Cycles CPU).
 
-    BPY45 t6_render_sheets.py -- AV|EF|MK|PL|LK|DS|FB|CT|CV [asset names…]   (env SPP=32, ONLY=views|lineup|closeups)
+    BPY45 t6_render_sheets.py -- AV|EF|MK|PL|LK|DS|FB|CT|CV [asset names…]   (env SPP=32, ONLY=lineup|closeups|plants, SKIP_FRESH=1)
 
 Per tree / shrub:  front · side · back (orthographic, calm wind, shadow-catcher ground, 1.75 m scale figure in the front view)
                    leaf close-up (perspective) · trunk-foot close-up (roots meeting a real forest-floor ground)
@@ -19,12 +19,12 @@ args = sys.argv[sys.argv.index('--') + 1:]
 REG = args[0]; SEL = set(args[1:])
 NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
          'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
-         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND', 'ND': 'NATURAL_DETAILS'}   # = t6_regions.NAMES
 # trunk-foot close-up ground per region (real Poly Haven scan the tree actually grows in): texture, metres per tile, tint
 BASE_GROUND = {'PL': ('sparse_grass', 3.0, '#FFFFFF'), 'LK': ('brown_mud_leaves_01', 2.5, '#FFFFFF'), 'DS': ('dry_ground_01', 3.0, '#FFFFFF'),
                'FB': ('mud_cracked_dry_03', 3.0, '#6A6560'), 'CT': ('grass_path_2', 3.0, '#FFFFFF'), 'CV': ('rock_ground', 2.5, '#FFFFFF')}
-LIBF = os.path.join(K.VEG, 'library', f'T6_VEG_{NAMES[REG]}_v001.blend')
-OUTD = os.path.join(K.VEG, 'renders', REG); os.makedirs(OUTD, exist_ok=True)
+LIBF = os.path.join(os.environ.get('T6_LIB_DIR') or os.path.join(K.VEG, 'library'), f'T6_VEG_{NAMES[REG]}_v001.blend')
+OUTD = os.path.join(os.environ.get('T6_RENDER_DIR') or os.path.join(K.VEG, 'renders'), REG); os.makedirs(OUTD, exist_ok=True)   # test runs → scratch
 SPP = int(os.environ.get('SPP', 32)); ONLY = os.environ.get('ONLY', '')
 FRESH = os.environ.get('SKIP_FRESH', '') == '1'     # resume after an interrupted run: skip assets whose renders are newer than the library
 LIB_T = os.path.getmtime(LIBF)
@@ -172,17 +172,36 @@ def tree_closeups(o, name, V, L, C):
     return res
 
 
+WALL = []
+
+
+def wall_for(o):
+    """climbers (ivy curtain) are shown on a real stone wall behind them (plane y = +2 cm, rustic stone scan)."""
+    if not WALL:
+        me = bpy.data.meshes.new('T6_WALL'); me.from_pydata([(-3, .02, -.05), (3, .02, -.05), (3, .02, 4.5), (-3, .02, 4.5)], [], [(0, 1, 2, 3)])
+        me.uv_layers.new(name='UVMap'); w = bpy.data.objects.new('T6_WALL', me); sc.collection.objects.link(w)
+        mt = ground_mat('MAT_T6_WALL', 'rustic_stone_wall', 2.0); me.materials.append(mt)
+        # the scan is mapped by object position X/Y → rotate the mapping onto the wall plane (X/Z)
+        nt_ = mt.node_tree; geo = [n for n in nt_.nodes if n.type == 'NEW_GEOMETRY'][0]
+        sep = nt_.nodes.new('ShaderNodeSeparateXYZ'); com = nt_.nodes.new('ShaderNodeCombineXYZ')
+        nt_.links.new(geo.outputs['Position'], sep.inputs[0]); nt_.links.new(sep.outputs['X'], com.inputs['X']); nt_.links.new(sep.outputs['Z'], com.inputs['Y'])
+        vm = [n for n in nt_.nodes if n.type == 'VECT_MATH'][0]; nt_.links.new(com.outputs[0], vm.inputs[0])
+        WALL.append(w)
+    return WALL
+
+
 def plant_views(o, name):
+    extra = wall_for(o) if 'Climber' in INV.get(name, {}).get('category', '') else []
     V, L, C = bounds(o); mn, mx = V.min(0), V.max(0); H = max(mx[2], .03); Wd = max(mx[0] - mn[0], mx[1] - mn[1], .05)
     size = max(H, Wd * .7)
     tgt = Vector(((mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2, H * .4)); d = size * 2.1 + .05
     look(cam, (tgt.x + d * .55, tgt.y - d, tgt.z + d * .45), tgt, 50)
-    show([o, soil]); render(os.path.join(OUTD, f'{name}_hero.png'), 700, 700)
+    show([o, soil] + extra); render(os.path.join(OUTD, f'{name}_hero.png'), 700, 700)
     # detail: the top 25 % (flower heads / blade tips / caps)
     top = V[V[:, 2] > mx[2] - .25 * H]; c = top.mean(0) if len(top) else np.array(tgt)
     dd = max(size * .8, .14)
     look(cam, (c[0] + dd * .4, c[1] - dd, c[2] + dd * .35), tuple(c), 60)
-    show([o, soil]); render(os.path.join(OUTD, f'{name}_detail.png'), 700, 700)
+    show([o, soil] + extra); render(os.path.join(OUTD, f'{name}_detail.png'), 700, 700)
     return dict(hero=True, detail=True, height_m=float(H), spread_m=float(Wd))
 
 
@@ -224,6 +243,8 @@ for name, v in INV.items():
         continue
     if ONLY == 'lineup':
         break
+    if ONLY == 'plants' and v['kind'] != 'plant':
+        continue
     views = ('front', 'side', 'back', 'base') if v['kind'] in ('tree', 'shrub') else ('hero', 'detail')
     if fresh([os.path.join(OUTD, f'{name}_{k}.png') for k in views]) and name in VIEWS:
         print('FRESH (skip)', name, flush=True); continue
@@ -239,8 +260,8 @@ for name, v in INV.items():
     VIEWS[name] = ov
     sc.collection.objects.unlink(o)
     json.dump(VIEWS, open(VJ, 'w'), indent=1)
-if ONLY in ('', 'lineup') and not SEL:   # (closeups mode never re-renders the lineups)
-    for k in ('trees', 'plants'):
+if ONLY in ('', 'lineup', 'plants') and not SEL:   # (closeups mode never re-renders the lineups; plants mode only the plant lineup)
+    for k in (('plants',) if ONLY == 'plants' else ('trees', 'plants')):
         if not fresh([os.path.join(OUTD, f'LINEUP_{k.upper()}.png')]):
             lineup(k)
 json.dump(VIEWS, open(VJ, 'w'), indent=1)

@@ -52,6 +52,25 @@ def tag(o, D, kind, st):
                           atlas=(D.get('leaves') or {}).get('atlas') if kind != 'plant' else None, collection=f"T6_{D['name']}")
 
 
+def make_scatter_copies(objs, root_name):
+    """<asset>_SC: same mesh, NO wind modifier — used by NG_T6_ECOSYSTEM (wind applied once per instance there). The asset's wind
+    amplitudes are copied as t6_wind_* properties. Collections T6_<asset>_SC live under <root>_SCATTER (fake user, not in the scene)."""
+    sroot = bpy.data.collections.new(root_name + '_SCATTER'); sroot.use_fake_user = True
+    for o in objs:
+        so = bpy.data.objects.new(o.name + '_SC', o.data)
+        for k in o.keys():
+            if k.startswith('t6_'):
+                so[k] = o[k]
+        md = o.modifiers.get('T6_WIND')
+        if md:
+            ids = {it.name: it.identifier for it in md.node_group.interface.items_tree if getattr(it, 'in_out', '') == 'INPUT'}
+            for nm_, key in (('Trunk Sway (m)', 'trunk'), ('Branch Sway (m)', 'branch'), ('Leaf Flutter (m)', 'leaf'),
+                             ('Natural Freq (Hz)', 'fn'), ('Flexibility', 'flex'), ('Damping', 'damping')):
+                so[f't6_wind_{key}'] = float(md[ids[nm_]])
+        c = bpy.data.collections.new(f'T6_{o.name}_SC'); sroot.children.link(c); c.objects.link(so)
+    return sroot
+
+
 for D in [t for t in RG.TREES if t['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['TREES'])
     o, st = RG.build_woody(D, 0, c)
@@ -76,6 +95,7 @@ for D in [p for p in RG.PLANTS if p['name'].startswith(REG + '_')]:
         K.add_wind(o, trunk=0.0, branch=.30 if D['kind'] != 'vine' else .5, leaf=.03 if D['kind'] != 'lotus' else .012)
     tag(o, D, 'plant', st); print('PLANT', D['name'], st, flush=True)
 
+make_scatter_copies([bpy.data.objects[n] for n in INV], f'T6_LIB_{NAMES[REG]}')
 # ---------------------------------------------------------------- browse scene: instances in a row, sorted by height
 lu = bpy.data.scenes.new('T6_LINEUP'); lu.unit_settings.system = 'METRIC'
 x = 0.0

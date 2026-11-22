@@ -1,4 +1,4 @@
-# THE GRAND UNIVERSE — ECOSYSTEM & VEGETATION BIBLE · v2 (TASK 06 · Decision Sheet 01 applied, 22 Nov)
+# THE GRAND UNIVERSE — ECOSYSTEM & VEGETATION BIBLE · v3 (TASK 06 · Decision Sheet 01 applied · milestone 2, 22 Nov)
 
 > **Decision Sheet 01 (Director, 22 Nov) is applied in this version** — record of every decision + where it was applied:
 > `02_world/ecosystem/DECISION_SHEET_01.md`. Status words: **APPROVED** (Director decision) · **PROPOSED** (needs approval) ·
@@ -15,6 +15,13 @@
 > Rules kept: approved geographical layouts are preserved (no terrain was changed) · no story events invented · no intelligent
 > species, monsters or story characters added · every vegetation asset is a **real 3D model** (no illustrations) · Blender 4.5 LTS.
 
+> **Milestone 2 (22 Nov, session 5) — full production of the remaining TASK 06 scope** (Director: "jitne bhi task bache hai … un sab
+> ko pura karo"): realism v3 on every asset + natural camera look · all remaining regions (R-06, R-08, R-04, R-05, C-sites, caves) ·
+> Mountain Kingdom silver fir + blue pine · natural details · 3 variants + LOD1 / LOD2 / impostor LOD3 per species · the
+> **NG_T6_ECOSYSTEM** scatter system · populated region files on the approved TASK 05 terrain (TASK 05 untouched) · previews · QC.
+> Summary of what was built: §13. Still PENDING with the Director: wildlife selection, Sky Realms map position, exact Peepal /
+> garden spots (PROPOSED in the populated Ashram file).
+
 Deliverables of milestone 1 (all in git):
 
 | # | Deliverable | Where | Status |
@@ -26,7 +33,7 @@ Deliverables of milestone 1 (all in git):
 | 5 | Wildlife proposal | §7 + `02_world/ecosystem/WILDLIFE_PROPOSAL.png` | 🟨 proposal (no models yet) |
 | 6 | Real Blender vegetation assets (42) | `03_assets/vegetation/library/T6_VEG_<REGION>_v001.blend` | ✅ built, QC |
 | 7 | PBR material library (16 scanned barks + 25 generated leaf / needle / flower atlases) | `03_assets/vegetation/textures/`, materials inside the libraries | ✅ built |
-| 8 | Procedural scattering | plan §9 (re-uses TASK 05 `NG_T5_SCATTER`) | ⬜ milestone 2 |
+| 8 | Procedural scattering | `NG_T6_ECOSYSTEM` (§9) + populated region files (§13) | ✅ milestone 2 |
 | 9 | Wind animation setup | `NG_T6_WIND` + `T6_WIND_CONTROL` in every library, test clip | ✅ built |
 | 10 | Preview renders | `03_assets/vegetation/renders/`, contact sheet `sheets/T6_SHEET_M1.png` | ✅ |
 | 11 | Technical QC report | `03_assets/vegetation/qc/T06_QC_REPORT.md` — 337/337 (Blender 4.5), 337/337 (5.3), 25/25 textures | ✅ |
@@ -98,17 +105,23 @@ The TASK 06 brief uses new names for some regions. They are mapped to the region
 | Pine trees | Chir Pine — *Pinus roxburghii* (SI), 25 cm needles | R-01 dry slopes | 27 m | ✅ |
 | Mountain trees | Himalayan Spruce — *Picea smithiana* (SI) | R-03 M1 | 31 m | ✅ |
 | | Wind-bent Pine (krummholz) — *Pinus wallichiana* form (SI) | R-03 M2 | 6 m | ✅ |
-| | Silver fir *Abies pindrow*, blue pine *P. wallichiana* (full form) | R-03 M1 | | ⬜ |
-| Tropical trees | coconut / areca palm, banyan, mangrove (coasts, Sagara / Agni archipelagos) | islands, coasts | | ⬜ |
-| Dry-region trees | acacia / khejri (*Prosopis cineraria*), date palm at oases, quiver-tree-like aloe (Poly Haven scans) | R-04 | | ⬜ |
+| | West Himalayan silver fir — *Abies pindrow* (SI) | R-03 M1 top | 37 m | ✅ M2 |
+| | Blue pine — *Pinus wallichiana* full form (SI) | R-03 M1 clearings | 31 m | ✅ M2 |
+| Tropical / lowland trees | Coconut palm — *Cocos nucifera* (SI, palm generator: curved trunk, drooping fronds, nut clusters) | C-sites coast | 16 m | ✅ M2 |
+| | Banyan — *Ficus benghalensis* (SI), 26 aerial prop roots | R-06 + C-site groves | 21 m / 40 × 45 m | ✅ M2 |
+| | Neem — *Azadirachta indica* (SI) | R-06 + C-site avenues | 16 m | ✅ M2 |
+| | Mango — *Mangifera indica* (SI), copper new spring leaves | C-sites + R-06 villages | 15 m | ✅ M2 |
+| | areca palm, mangrove (islands / coasts — no hero terrain yet) | islands, coasts | | ⬜ later (islands task) |
+| Waterside trees | White willow — *Salix alba* (SI, natural, NOT the R-02 Veil Willow) · Himalayan alder — *Alnus nepalensis* (SI) | R-08 shores | 18 m · 20 m | ✅ M2 |
+| Dry-region trees | Khejri — *Prosopis cineraria* (SI) · Umbrella thorn acacia — *Vachellia tortilis* (SI) · Date palm — *Phoenix dactylifera* (SI, oases only, dead-frond skirt) | R-04 (+ R-06 dry edge) | 8 m · 9 m · 14 m | ✅ M2 |
 | Dead trees | Dead Snag (SI) with bracket fungi | R-02 / R-03 / R-05 | 19 m | ✅ |
-| | charred / ash-white dead trees (crater) | R-05 | | ⬜ (TASK 05 has proxies) |
+| | Charred dead tree (SI) — black cracked bark, ash-grey patches, leafless | R-05 rim | 12 m | ✅ M2 |
 | Rare fantasy trees | **Veil Willow** (PF) — silver-teal curtains to the ground | R-02 pools | 18 m | ✅ approved R-02 |
 | | **Spiral-root Tree** (PF) — trunk on a cage of stilt roots, spiral bark | R-02 wet hollows | 23 m | ✅ approved R-02 |
 | | **Lantern Tree** (PF) — umbrella of fan leaves + hanging pale seed-pods (subtle glow, night only) | R-02 glades | 15 m | ✅ approved R-02 |
 
-Shrubs built: Himalayan Barberry (R-01), Tulsi (R-01, cultivated in the Ashram — PROPOSED placement), Dwarf Juniper (R-03 M3),
-Dwarf Rhododendron (R-03 M3). TASK 05 Poly Haven trees (fir, pine, broadleaf scans) stay in use for mid / far forest mass.
+Shrubs built: Himalayan Barberry (R-01), Tulsi (R-01, Ashram garden ONLY — APPROVED), Dwarf Juniper (R-03 M3),
+Dwarf Rhododendron (R-03 M3) · milestone 2: wild ber bush (R-06 / R-04 edge), aak *Calotropis procera* (R-04), dead thorn shrub (R-05 / R-04). TASK 05 Poly Haven trees (fir, pine, broadleaf scans) stay in use for mid / far forest mass.
 
 ## 4. Region-specific ecosystems (brief §4)
 
@@ -142,29 +155,29 @@ M3 juniper mats, dwarf rhododendron, tussock grass, gentian, edelweiss, blue pop
 M4 rock + lichen + snow. **Spring: red Burans in the lower montane belt (M1)** (APPROVED season direction). **No fantasy species.** "Kingdom" (settlements / ruler) is NOT CONFIRMED — vegetation only.
 * Palette: `#1F3F33` spruce · `#E9E4DA` birch bark · `#3E5E4E` juniper · `#2E5ED8` gentian · `#5A9AE0` blue poppy · `#A9AE8E` lichen.
 
-### 4.4 ANCIENT CITY SURROUNDINGS (C-01, C-02, C-03) — concept, milestone 2+
+### 4.4 ANCIENT CITY SURROUNDINGS (C-01, C-02, C-03) — ✅ built (milestone 2): mango, coconut palm, ivy curtain, ruin moss, crack grass (+ banyan / neem / peepal / reeds from R-06 / R-01 / R-08)
 Mapping APPROVED. The three sites are **separate archaeological sites** — their history, inhabitants and relationship are NOT CONFIRMED.
 River plains near the coast: sacred groves (banyan, peepal), avenue trees (neem, mango), overgrown ruins (strangler figs on
 walls, ivy, moss, grass in cracks), river reeds. Whether the cities are inhabited / ruined = NOT CONFIRMED → both looks proposed.
 
-### 4.5 GREEN PLAINS (R-06 Southern Grasslands) — concept
+### 4.5 GREEN PLAINS (R-06 Southern Grasslands) — ✅ built (milestone 2): banyan, neem, umbrella acacia, ber bush, tall grass, doob grass, wild mustard, globe thistle, white clover
 Tall + short grass mosaic, wildflower drifts, scattered lone trees (acacia-like, banyan, neem), shrub islands on low hills,
 river galleries of willow / poplar. Density: trees 0–5 / ha; grass everywhere except paths, rock and water.
 
-### 4.6 CRYSTAL LAKES (R-08 Lake District) — concept
+### 4.6 CRYSTAL LAKES (R-08 Lake District) — ✅ built (milestone 2): white willow, alder, white water-lily, sedge, reed (spring, no plumes), wet-rock moss
 Clear lakes between forests: water-lily + lotus bays, reed belts, sedges, willows and alders on shores, moss on wet rocks,
 mixed broadleaf-conifer forest behind. "Crystal" = clear water (no crystals invented; a crystal-plant idea needs approval).
 
-### 4.7 GOLDEN DESERT (R-04) — concept
+### 4.7 GOLDEN DESERT (R-04) — ✅ built (milestone 2): khejri, date palm, aak (Calotropis), candelabra euphorbia, sewan grass (+ acacia, ber, dead thorn) · populated file on DESERT_R04_v002
 Sparse: dune crests bare; interdune hollows — grass tufts, saltbush; wadis — acacia / khejri trees, oleander; playas bare;
 oases — date palms, reeds (only where TASK 05 wadi / playa masks allow). Poly Haven Namaqualand scans (quiver tree, succulents,
 dry shrubs) available for the dry palette. Density ≤ 1 tree / ha outside wadis.
 
-### 4.8 FORBIDDEN LANDS (R-05) — concept
+### 4.8 FORBIDDEN LANDS (R-05) — ✅ built (milestone 2): charred dead tree, dead thorn shrub, grey crust lichen, hardy rim grass · populated file on FORBIDDEN_R05_v002
 Almost dead: charred / ash-white snags, grey lichen, thorny dead shrubs, a few hardy grasses on the outer rim only; the crater
 floor and lake shore lifeless (approved TASK 05 look: dark ash, black lake, no lava, no glow). Why the land is dead = NOT CONFIRMED.
 
-### 4.9 HIDDEN UNDERGROUND (CV caves) — concept
+### 4.9 HIDDEN UNDERGROUND (CV caves) — ✅ built (milestone 2): pale cave-mouth moss, pale cave fungi (NO glow), root curtain
 Moss + ferns only in the daylight zone of entrances; deeper: fungi on wet rock, root curtains from the surface, pale cave moss.
 Bioluminescent fungi = PROPOSED option only (Decision 01 approved subtle glow for R-02, not for caves).
 
@@ -175,20 +188,20 @@ connection with the main world. Vegetation proposal: the same spring flora as th
 island altitude), moss + ferns + small trees on island rims, waterfall spray zones with moss; no new species yet.
 **NOT established:** travel routes, inhabitants, kingdoms, political systems, story events, map position (PENDING).
 
-## 5. Plant & flower library (brief §3) — milestone 1
+## 5. Plant & flower library (brief §3) — milestone 1 + milestone 2
 
 | Category | Built (✅) | Planned (⬜) |
 |---|---|---|
-| Grass | meadow grass, dry path-edge grass, kans grass (plumes), alpine tussock | short lawn (Ashram), desert tufts, sedges |
+| Grass | meadow grass, dry path-edge grass, kans grass (plumes = autumn) + SPRING kans, alpine tussock · M2: tall plains grass, doob (lawn), sewan desert grass, hardy rim grass, crack grass, sedge, spring reed | — |
 | Small plants / herbs | tulsi (cultivated) | nettle, sorrel, celandine (Poly Haven scans available) |
-| Wildflowers | buttercup, drumstick primula, wild daisy, marigold (cultivated) | lavender-blue iris, wild rose, lupin |
-| Bushes | barberry, tulsi, juniper, dwarf rhododendron | oleander, saltbush, wild raspberry |
+| Wildflowers | buttercup, drumstick primula, wild daisy, marigold (cultivated) · M2: wild mustard (spring yellow), globe thistle, white clover | iris, wild rose, lupin |
+| Bushes | barberry, tulsi, juniper, dwarf rhododendron · M2: ber, aak (Calotropis), dead thorn shrub | oleander, saltbush |
 | Ferns | valley sword fern, giant forest fern | maidenhair (wet rocks), tree fern (R-02 option) |
-| Vines / roots | hanging liana; tree roots are part of every tree (buttress / surface / stilt / aerial) | ivy (ruins), strangler fig |
-| Moss | cushion moss, moss carpet, alpine cushion plant; moss + lichen layers in every bark material | wall moss for ruins |
-| Mushrooms | brown woodland mushrooms, bracket fungi (on the dead snag), Glowcap (PF) | |
-| Aquatic | sacred lotus, reed-mace / cattail | water-lily, duckweed, submerged weed |
-| Desert plants | — | succulents, cacti-like euphorbia, dry thorn shrubs (milestone 2, R-04) |
+| Vines / roots | hanging liana; tree roots on every tree · M2: ivy curtain on walls, ground ivy, root curtain (caves), banyan prop roots | strangler fig |
+| Moss | cushion moss, moss carpet, alpine cushion plant; moss + lichen in every bark · M2: ruin moss, wet-rock moss, pale cave moss, grey crust lichen, glow moss (PF, R-02) — moss shader v3.1 (shoots + fuzz) | — |
+| Mushrooms | brown woodland mushrooms, bracket fungi (dead snag, giant log), Glowcap (PF) · M2: pale cave fungi (no glow) | |
+| Aquatic | sacred lotus, reed-mace / cattail · M2: white water-lily (flowers at the surface, petioles to the lake bed), sedge, spring reed, floating leaves | duckweed, submerged weed |
+| Desert plants | M2: candelabra euphorbia (ribbed, spines, blunt tips), aak, sewan grass, dead thorn shrub | saltbush |
 | Mountain vegetation | tussock, gentian, edelweiss, blue poppy, cushion plant, juniper, dwarf rhododendron | lichen boulders (TASK 05 rocks + lichen shader) |
 
 Scale + colour reference: every plant sheet shows a 10 cm ground grid; every tree sheet a height ruler + 1.75 m figure;
@@ -198,8 +211,10 @@ every asset has its palette (HEX) on its sheet and as `t6_palette` custom proper
 Already in the TASK 05 nature library (`02_world/3d_world/14_NATURE_LIBRARY/`, Poly Haven CC0): fallen logs (2), stumps, root
 clusters, pine roots, bark debris, dry branches, mossy rocks, boulders, rock faces, grass clusters, dandelion, nettle.
 TASK 06 adds: moss cushions / carpet, mushrooms, hanging liana, beard-moss strands (on trees), bracket fungi, lotus + reeds.
-**Planned (milestone 2):** leaf-litter decals (per species, from the leaf atlases), fallen branches of each species, broken
-giant log (Giant Elder), floating leaves / petals, ivy on rocks.
+**Built in milestone 2 (`T6_VEG_NATURAL_DETAILS_v001.blend`, `t6_details.py`):** leaf litter (last year's decomposing leaves +
+fresh spring windfall on top, twigs), needle litter + cones, fallen branches (splintered ends with pale inner wood = own material),
+giant uprooted log (moss on top, bracket fungi, splintered break, root plate with real soil), ground ivy carpet, floating leaves
+(drift to the lee side). Every piece lies ON the ground / water (gravity) — QC checks it.
 
 ## 7. Wildlife proposal (brief §5) — PROPOSAL ONLY, selection PENDING
 **Decision 01 §5:** selection NOT finalized. Selection sheet (60 animals = this complete list, nothing added):
@@ -239,15 +254,28 @@ particle flocks, **only after approval** of this list (Q5).
 * **Wind-ready:** attributes `wind_trunk`, `wind_branch`, `wind_leaf`, `wind_phase`, `leaf_rand` on every asset (§10).
 * **Library:** one `.blend` per region, each species in its own collection at the origin (instancing / scatter ready), metadata
   as custom properties (`t6_label`, `t6_latin`, `t6_height_m`, `t6_canopy_x_m`, `t6_palette`, …), `T6_LINEUP` browse scene.
-* **Variants:** generator is seeded — any number of variants per species (`build_tree(spec, seed)`); milestone 1 stores 1 hero
-  variant per species (file size); milestone 2: 3–5 variants per species + LODs.
+* **Variants + LODs (milestone 2):** 3 variants per species (seed 0 hero + `T6_VEG_<R>_VARIANTS_v001.blend` seeds 1, 2; giants
+  stored at LOD1 density) · `T6_VEG_<R>_LODS_v001.blend`: LOD1 (½ ring sides, 40 % cards × 1.5 size, same skeleton), LOD2 (⅓ sides,
+  18 % cards × 2.2, finest twigs dropped), LOD3 impostor (2 crossed cards with the front / side alpha renders, `textures/impostors/`);
+  plants LOD1 (≈ 40 % blades / stems). Distance bands in the scatter: 0–70 m LOD0 · –260 m LOD1 · –1.2 km LOD2 · beyond LOD3.
+* **Realism v3 / v3.1 (Director 22 Nov):** natural (less saturated) foliage with per-card variation, ~5 % drying leaves, faint dust,
+  thatch at grass bases lying ON the ground, irregular crinkled matte petals, matte stems, irregular roots with soil, moss with
+  shoots + fuzz (no CG cells); render look = natural camera (AgX Base Contrast + gentle S-curve), not Medium High Contrast.
 
-## 9. Procedural vegetation system (brief §8) — plan for milestone 2
-Re-use the approved TASK 05 geometry-nodes systems (`NG_T5_HEIGHTFIELD` masks + `NG_T5_SCATTER`: mask / slope / altitude /
-cluster / avoid masks / camera culling / near-mid-far LOD) and add a **`NG_T6_ECOSYSTEM`** layer on top:
-per-region recipe (species mix + weights, density per hectare, cluster size, min spacing / Poisson radius), slope + altitude
-bands (§2), water-distance rule (aquatic + shore plants), canopy-shade rule (ferns / moss under trees, grass in the open),
-random scale / rotation / tilt-to-slope, variant + season pick. All values stay editable modifier inputs (no baked placement).
+## 9. Procedural vegetation system (brief §8) — ✅ built (milestone 2): `NG_T6_ECOSYSTEM`
+`03_assets/vegetation/scripts/t6_ecosystem.py`. One scatter object = one layer (one species: hero + 2 variants + LODs), built on
+the approved TASK 05 logic (`NG_T5_HEIGHTFIELD` mask attributes m_forest / m_grove / m_dry / m_wet / m_path / m_gravel / m_scree /
+m_rock / m_snow / m_bare …, slope, altitude, clusters, camera-cone culling, stable points in animation) plus:
+* density per m² (recipes in ha: trees 15–120 / ha, grass 1.5–5 / m²), **Poisson spacing** for trees / shrubs (no intersecting
+  canopies), random distribution for the dense ground layers (only culled, masked faces produce points);
+* two avoid masks (water, bare rock, paths) + an **exclusion / inclusion zone** (e.g. Ashram: wild trees outside 65 m, lawn
+  inside), slope + altitude bands, canopy-shade rule via masks (ferns / moss / litter under trees, grass + flowers in the open);
+* random scale / yaw / tilt, partial alignment to the slope (plants, litter), sink by size (trunks never float);
+* **4 LOD bands** (hero + variants → LOD1 → LOD2 → impostor) by camera distance;
+* **wind (REAL-WORLD MOTION RULE):** instances inside 'Realize Distance' are realized and bent per vertex by `NG_T6_WIND`
+  with a per-instance random phase (no two plants in sync); all others tilt with `NG_T6_WIND_INSTANCES` (advected gusts,
+  natural frequency ≈ 4 / H, per-instance phase). One `T6_WIND_CONTROL` per file drives every layer.
+Instances use the libraries' wind-free `<asset>_SC` copies (same mesh) → wind is applied exactly once.
 
 ## 10. Wind & environment animation (brief §9) — built
 * `T6_WIND_CONTROL` (empty, one per file): **arrow = wind direction**, custom properties **strength** (0 calm · 1 breeze · 3 strong
@@ -261,8 +289,9 @@ random scale / rotation / tilt-to-slope, variant + season pick. All values stay 
 ## 11. Ecosystem consistency (brief §10) — checks (see QC report)
 Vegetation ↔ region / altitude table (§2, §4) · tree heights vs. real species and vs. the 1.75 m figure · lowest point of every
 asset below z = 0 (no floating) and roots buried · aquatic plants flagged `water=True` (z = 0 = water surface) for the scatter
-water rule · believable densities (§2.5) · labels on every asset. Scatter-level checks (density per ha, water distance) come
-with milestone 2 when the assets are placed on the terrains.
+water rule · believable densities (§2.5) · labels on every asset. Scatter-level checks (milestone 2, `t6_pop_qc.py`): nothing floating
+(instance bases on the evaluated terrain), Decision 01 rules (ONE Peepal, Tulsi + Marigold only in the garden beds, R-02 fantasy
+share 20–30 %, no glow outside R-02), wind moves the realized near plants, TASK 05 files untouched, file sizes.
 
 ## 12. Director decisions (Decision Sheet 01, 22 Nov) — status
 | # | Question | Decision | Status |
@@ -273,3 +302,22 @@ with milestone 2 when the assets are placed on the terrains.
 | 4 | Ashram Peepal / Tulsi / Marigold | one landmark Peepal near the main courtyard + sitting area; Tulsi + Marigold only in the Ashram garden | **APPROVED** · exact spots PROPOSED |
 | 5 | Wildlife | not finalized — selection sheet prepared | **PENDING** (Director selection) |
 | 6 | Season | Spring = proposed primary season, consistent across connected scenes | **APPROVED** |
+
+## 13. MILESTONE 2 — what was built (22 Nov, session 5)
+| Item | Where | Status |
+|---|---|---|
+| Hero libraries for 10 regions — **84 assets**: 29 trees, 7 shrubs, 42 plants, 6 natural details | `03_assets/vegetation/library/T6_VEG_<R>_v001.blend` (AV EF MK PL LK DS FB CT CV ND) | ✅ |
+| New generators: palm (date / coconut, real leaflet geometry + dead-frond skirt), succulent (ribbed candelabra), ivy on walls, water-lily, natural details | `t6kit_m2.py`, `t6_plants_m2.py`, `t6_details.py` | ✅ |
+| 14 new atlases (banyan, neem, acacia, mango, willow, alder, water-lily pad, khejri, aak, silver fir, blue pine, ivy, 2 litter) | `03_assets/vegetation/textures/leaves/` | ✅ |
+| Variants (3 per species) + LOD1 / LOD2 / LOD3 impostors | `T6_VEG_<R>_VARIANTS_v001.blend`, `T6_VEG_<R>_LODS_v001.blend`, `textures/impostors/` | ✅ |
+| Sheets for every region + contact sheet M2 | `03_assets/vegetation/sheets/<R>/`, `sheets/T6_SHEET_M2.png` | ✅ |
+| Ecosystem scatter `NG_T6_ECOSYSTEM` | `t6_ecosystem.py` | ✅ |
+| Populated region files (TASK 05 v002 terrain linked, never written): R-01 Ashram Valley (+ ONE Peepal on a PROPOSED chabutra, PROPOSED garden beds with Tulsi + Marigold), R-02 Enchanted Forest (~75 / 25 natural / fantasy), R-03 Mountain Kingdom (M1 forest at the cave entrance), R-04 Golden Desert, R-05 Forbidden Lands | `02_world/ecosystem/populated/T6_POP_R0x_*_v001.blend` (`t6_populate.py`) | ✅ |
+| Cinematic previews (T6 eye-level cameras + the approved TASK 05 shot cameras) | `02_world/ecosystem/renders/populated/` | ✅ preview res (4K on the Director's GPU PC) |
+| QC: libraries (4.5 + 5.3 + textures) + populated scatter QC | `03_assets/vegetation/qc/T06_QC_REPORT.md` | ✅ |
+
+**Not placed (honest limits):** R-06 / R-08 / C-sites / caves have no TASK 05 hero terrain tile yet (only the coarse world terrain) →
+their species are built + sheeted and the recipes are ready; placement happens when those regions get their hero terrain.
+Sky Realms (PROPOSED, map position PENDING) re-uses the main-world spring flora (no new species, Decision 01 §2).
+Wildlife = selection PENDING (no models). Hanging liana / root curtain / ivy curtain need a branch / ceiling / wall to hang on →
+placed per shot, not scattered.

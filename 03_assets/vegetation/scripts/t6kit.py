@@ -274,18 +274,30 @@ def mat_simple(name, base, rough=.5, sss=0.0, var_col=None, var_scale=6.0, emiss
 
 
 def mat_moss(name, c1='#3F5E22', c2='#7E9A3A', dry='#8A8A55'):
-    """moss cushion / carpet: fine noise bump + 3-tone colour, very rough, a little subsurface."""
+    """moss cushion / carpet (realism v3.1): thousands of tiny shoots — distorted fine Voronoi (rounded shoot tips, no regular
+    cells) + very fine fuzz noise in the bump; dark gaps between shoots, lighter tips, dry / brown patches; fuzzy sheen, matte."""
     m, nt, b = new_mat(name)
     out = b.n('ShaderNodeOutputMaterial'); bsdf = b.n('ShaderNodeBsdfPrincipled')
-    geo = b.n('ShaderNodeNewGeometry')
-    n1 = b.noise(geo.outputs['Position'], 9, 6, .65); n2 = b.noise(geo.outputs['Position'], 60, 3, .5)
+    geo = b.n('ShaderNodeNewGeometry'); P = geo.outputs['Position']
+    n1 = b.noise(P, 9, 6, .65); n2 = b.noise(P, 60, 3, .5)
+    warp = b.noise(P, 40, 3, .6)                                       # breaks the Voronoi regularity
+    pw = b.n('ShaderNodeVectorMath', operation='ADD'); b.l(P, pw.inputs[0])
+    wv = b.n('ShaderNodeVectorMath', operation='SCALE'); b.l(warp.outputs['Color'], wv.inputs[0]); wv.inputs['Scale'].default_value = .006
+    b.l(wv.outputs[0], pw.inputs[1])
+    vn = b.n('ShaderNodeTexVoronoi', feature='SMOOTH_F1'); vn.inputs['Scale'].default_value = 420; b.l(pw.outputs[0], vn.inputs['Vector'])
+    fuzz = b.noise(P, 1400, 2, .5)
+    shoot = b.math('SUBTRACT', 1.0, b.math('MULTIPLY', vn.outputs['Distance'], 1.6))         # 1 at a shoot tip → 0 in the gap
+    gap = b.ramp(shoot, [(0.0, (.25, .25, .25, 1)), (.55, (1, 1, 1, 1))])
     col = b.mix(n1.outputs['Fac'], hexc(c1), hexc(c2)); col = b.mix(b.math('MULTIPLY', n2.outputs['Fac'], .45), col, hexc(dry))
+    tip = b.mix(b.math('MULTIPLY', b.math('POWER', shoot, 3.0), .35), col, hexc(c2))           # lighter young tips
+    col = b.mix(1.0, tip, gap, 'MULTIPLY')
     b.l(col, bsdf.inputs['Base Color'])
-    bsdf.inputs['Roughness'].default_value = .95; bsdf.inputs['Subsurface Weight'].default_value = .15
-    bsdf.inputs['Subsurface Radius'].default_value = (.05, .08, .02); bsdf.inputs['Sheen Weight'].default_value = .1
-    vn = b.n('ShaderNodeTexVoronoi'); vn.inputs['Scale'].default_value = 140; b.l(geo.outputs['Position'], vn.inputs['Vector'])
-    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = .7; bp.inputs['Distance'].default_value = .004
-    b.l(vn.outputs['Distance'], bp.inputs['Height']); b.l(bp.outputs['Normal'], bsdf.inputs['Normal'])
+    bsdf.inputs['Roughness'].default_value = .92; bsdf.inputs['Specular IOR Level'].default_value = .25
+    bsdf.inputs['Subsurface Weight'].default_value = .15
+    bsdf.inputs['Subsurface Radius'].default_value = (.05, .08, .02); bsdf.inputs['Sheen Weight'].default_value = .35
+    hgt = b.math('ADD', b.math('MULTIPLY', shoot, .7), b.math('MULTIPLY', fuzz.outputs['Fac'], .3))
+    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = .85; bp.inputs['Distance'].default_value = .003
+    b.l(hgt, bp.inputs['Height']); b.l(bp.outputs['Normal'], bsdf.inputs['Normal'])
     b.l(bsdf.outputs[0], out.inputs['Surface'])
     m.diffuse_color = hexc(c1)
     return m

@@ -35,20 +35,21 @@ def succulent(G, rng, P):
     crests (slot 1). Real succulents are irregular: arm length, lean and rib depth vary."""
     ribs = P.get('ribs', 5); k = ribs * 4
     def column(base, d, L, r, ph):
-        pts, dd = PL.curve_pts(base, d, L, max(6, int(L / .06)), P.get('upturn', 2.2), rng, .015)
+        pts, dd = PL.curve_pts(base, d, L, max(10, int(L / .03)), P.get('upturn', 2.2), rng, .008)   # fine rings → round tip
         n = len(pts); T = [(pts[min(i + 1, n - 1)] - pts[max(i - 1, 0)]).normalized() for i in range(n)]
         nv = perp(T[0]); rings = []; amp = P.get('rib_amp', .16) * rng.uniform(.8, 1.2); tw = rng.uniform(0, 2 * np.pi)
         for i in range(n):
             nv = (nv - T[i] * nv.dot(T[i])).normalized(); bv = T[i].cross(nv); t = i / (n - 1)
             rr = r * (1 - .25 * t ** 3) * (1 + .05 * math.sin(t * 17 + ph * 6))          # slight constrictions (growth segments)
-            if t > .96:
-                rr *= max(.15, (1 - t) / .04)                                           # rounded tip
+            tip_len = min(.9, rr * 1.2 / max(L, .01))                                    # last ~1.2 radii of the stem = dome
+            if t > 1 - tip_len:
+                rr *= math.sqrt(max(.0, 1 - ((t - (1 - tip_len)) / tip_len) ** 2)) * .97 + .03 * (t < 1)   # blunt rounded tip (no spike)
             ang = np.linspace(0, 2 * np.pi, k, endpoint=False) + tw
             prof = 1 + amp * np.cos(ribs * ang)
             ring = [pts[i] + (nv * math.cos(a) + bv * math.sin(a)) * rr * prof[j] for j, a in enumerate(ang)]
             wb = .02 * (max(pts[i].z, 0) / max(P['h'], .1)) ** 1.5
             rings.append(G.add_verts(ring, wind_trunk=0.0, wind_branch=wb, wind_leaf=0.0, wind_phase=ph, leaf_rand=ph, grad=t))
-            if i % 2 == 0 and .05 < t < .95:                                            # spine pairs on every rib crest
+            if i % 4 == 0 and .05 < t < .93:                                            # spine pairs on every rib crest
                 for rj in range(ribs):
                     a = tw + 2 * np.pi * rj / ribs; out = (nv * math.cos(a) + bv * math.sin(a))
                     q = pts[i] + out * rr * (1 + amp)
@@ -75,7 +76,7 @@ def succulent(G, rng, P):
 def wall_card(G, p, axis, size, mi, rng, wphase, wb):
     """atlas card lying ON the wall (normal −Y, a small outward tilt), pivot = bottom centre."""
     axis = Vector((axis.x, 0, axis.z)).normalized(); out = Vector((0, -1, 0))
-    side = axis.cross(out).normalized(); tilt = rng.uniform(.15, .45)
+    side = axis.cross(out).normalized(); tilt = rng.uniform(.08, .28)     # leaves lie close to the wall (5–10 cm stand-off)
     up_ax = (axis * math.cos(tilt) + out * math.sin(tilt)).normalized()
     var = int(rng.integers(4)); u0, v0 = K.tile_uv(var); fold = .18; hw = size / 2
     lb = p - side * hw * math.cos(fold) + out * hw * math.sin(fold); rb = p + side * hw * math.cos(fold) + out * hw * math.sin(fold)
@@ -99,7 +100,10 @@ def ivy(G, rng, P):
         for i in range(2, len(pts) - 1):                         # side shoots hanging / spreading + leaf cards
             if rng.random() < P.get('density', .8):
                 for _ in range(P.get('per', 2)):
-                    ax = Vector((rng.normal(0, 1), 0, rng.uniform(-1.0, .4))).normalized()
+                    ax = Vector((rng.normal(0, 1), 0, rng.uniform(-1.0, .4)))
+                    if pts[i].z < size * 1.2:                    # near the ground: shoots spread sideways / up, never into the soil
+                        ax = Vector((rng.normal(0, .35), 0, 1.0))   # mostly upward (a sideways card would dip its edge into the soil)
+                    ax = ax.normalized()
                     wall_card(G, pts[i], ax, size * rng.uniform(.75, 1.2), 1, rng, ph, .01 + .02 * rng.random())
         for _ in range(P.get('hang', 0) // max(P['stems'], 1)):  # loose trailing shoots off the top / ledges sway a little more
             q = pts[int(len(pts) * rng.uniform(.6, 1.0)) - 1]; tp = [q]
@@ -192,12 +196,6 @@ PLANTS = [
          category='Moss', kind='moss', seed=8141, P=dict(n=14, radius=.3, r=.12, flat=.3, sporophytes=40),
          mats=[('moss', ('#24401E', '#466A2A', '#5A6A3A')), ('simple', '#7A5A2A')], palette=['#24401E', '#466A2A', '#5A6A3A']),
     # ------------------------------------------------------------------ R-04 GOLDEN DESERT
-    dict(name='DS_S01_CALOTROPIS', common='Aak / Sodom apple', latin='Calotropis procera', label=SI, region='R-04 (desert edge, wadis)',
-         category='Desert shrub', kind='herb', seed=4101, habitat='sandy desert edge, roadsides and wadis; big waxy grey-green leaves, lavender-white star flowers',
-         P=dict(h=1.5, stems=8, spread=22, basal=0, stem_leaves=12, leaf_l=.15, leaf_w=.085, leaf_shape='oval', leaf_rough=.08, stem_r=.012, stem_grav=.02,
-                flower=dict(type='radial', n=5, L=.013, W=.009, cup=.25, shape='oval', centre=.004, centre_h=.005)),
-         mats=[('herbleaf', '#8A9A7A'), ('petal', '#D8C8E0'), ('simple', '#8A5A8A')], wind=dict(branch=.12, leaf=.02),
-         palette=['#8A9A7A', '#B0BCA4', '#D8C8E0', '#8A5A8A']),
     dict(name='DS_G01_SEWAN_GRASS', common='Sewan desert grass', latin='Lasiurus sindicus', label=SI, region='R-04 (interdune hollows)',
          category='Grass', kind='grass', seed=4102, habitat='interdune hollows and sandy flats; tough blue-green tussocks with much dead straw',
          P=dict(blades=150, radius=.16, h=.62, w=.0045, bend=1.2, spread=30, splay=.5, segs=6, dry=.5, thatch=.5, curl=.25),
@@ -205,13 +203,13 @@ PLANTS = [
          palette=['#7A8A5A', '#AAB084', '#D8C49A']),
     dict(name='DS_S02_EUPHORBIA', common='Leafless candelabra spurge', latin='Euphorbia caducifolia', label=SI, region='R-04 (rocky slopes)',
          category='Succulent', kind='succulent', seed=4103, habitat='rocky slopes and stony desert; leafless ribbed green stems with paired spines (cactus-like, NOT a cactus)',
-         P=dict(h=1.7, r=.035, arms=9, ribs=5, rib_amp=.17, spine=.007, trunk=.3, upturn=2.4, base_shoots=4),
-         mats=[('succulent', '#56704A'), ('simple', '#4A3A2A')], wind=dict(branch=.01, leaf=.0),
+         P=dict(h=1.7, r=.033, arms=14, ribs=5, rib_amp=.22, spine=.007, trunk=.28, upturn=3.0, base_shoots=6),
+         mats=[('succulent', '#5A7050'), ('simple', '#4A3A2A')], wind=dict(branch=.01, leaf=.0),
          palette=['#56704A', '#7A8A5A', '#4A3A2A']),
     # ------------------------------------------------------------------ R-05 FORBIDDEN LANDS
     dict(name='FB_M01_ASH_LICHEN', common='Grey crust lichen', latin='Lecanora / Xanthoparmelia-like crust', label=SI, region='R-05 (rim rocks)',
          category='Lichen', kind='moss', seed=5141, habitat='rocks of the crater rim; flat grey crusts — almost the only life (approved dead look)',
-         P=dict(n=12, radius=.25, r=.09, flat=.08, sporophytes=0),
+         P=dict(n=22, radius=.25, r=.05, flat=.34, sporophytes=0),          # crust: 1–8 mm proud of the rock
          mats=[('moss', ('#6E7268', '#A4A898', '#8A8670')), ('simple', '#5A5A52')], palette=['#6E7268', '#A4A898', '#8A8670']),
     dict(name='FB_G01_HARDY_GRASS', common='Hardy rim grass', latin='Aristida (three-awn) / Cenchrus — sparse', label=SI, region='R-05 (outer rim only)',
          category='Grass', kind='grass', seed=5102, habitat='only on the OUTER rim of the crater; thin, mostly dry, very sparse (crater floor + lake shore stay lifeless)',
@@ -263,7 +261,7 @@ def plant_mats(D):
         if kind == 'succulent':
             out.append(K.mat_simple(nm, v, rough=.5, var_col='#7E8A62', var_scale=5.0, coat=.08, spec=.35))
         else:
-            out += PL.plant_mats(dict(name=D['name'], mats=[(kind, v)]))
+            out += PL.plant_mats(dict(name=f"{D['name']}_TMP{i}", mats=[(kind, v)]))     # unique temp name (new_mat replaces same-name mats)
             out[-1].name = nm
     return out
 

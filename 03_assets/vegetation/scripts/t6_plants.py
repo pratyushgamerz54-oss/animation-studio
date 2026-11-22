@@ -15,8 +15,9 @@ SI, PF = 'SPECIES-INSPIRED', 'FANTASY (APPROVED R-02)'
 
 
 # ====================================================================== primitives
-def blade(G, base, d, h, w, bend, segs, mi, rng, wphase, twist=0.0, curl=0.0, tipw=.05, grad0=0.0):
-    """grass / reed / leaf blade: strip of quads, width profile, bends with gravity. grad 0 root → 1 tip."""
+def blade(G, base, d, h, w, bend, segs, mi, rng, wphase, twist=0.0, curl=0.0, tipw=.05, grad0=0.0, floor=None):
+    """grass / reed / leaf blade: strip of quads, width profile, bends with gravity. grad 0 root → 1 tip.
+    floor: a drooping blade (dead thatch, long leaves) that reaches the ground LIES ON IT and runs along it — never into the soil."""
     d = Vector(d).normalized(); side = perp(d)
     side = Vector((side.x, side.y, 0)).normalized() if abs(d.z) > .3 else side
     p = Vector(base); rows = []; ds = h / segs
@@ -31,6 +32,12 @@ def blade(G, base, d, h, w, bend, segs, mi, rng, wphase, twist=0.0, curl=0.0, ti
         rows.append(G.add_verts([a, p, b_], wind_trunk=0.0, wind_branch=t ** 1.5 * h * .6, wind_leaf=t ** 2, wind_phase=wphase,
                                 leaf_rand=wphase, grad=g))
         d = (d + Vector((0, 0, -bend)) * (1.0 / segs)).normalized()
+        if floor is not None and (p + d * ds).z < floor and i < segs:
+            hz = Vector((d.x, d.y, 0.0))
+            d = hz.normalized() if hz.length > 1e-4 else perp(d)          # touches the ground → continues flat along it
+            d = Vector((d.x, d.y, 0.0)).normalized()
+            if p.z < floor:
+                p = Vector((p.x, p.y, floor))
         p = p + d * ds
     for i in range(segs):
         r0, r1 = rows[i], rows[i + 1]; v0, v1 = i / segs, (i + 1) / segs
@@ -150,7 +157,7 @@ def grass_tuft(G, rng, P):
         r = P['radius'] * 1.1 * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi)
         base = Vector((math.cos(a) * r, math.sin(a) * r, -.005)); d = rand_dir(rng, 70)
         blade(G, base, d, P['h'] * rng.uniform(.25, .6), P['w'] * rng.uniform(.7, 1.1), 2.2 * rng.uniform(.7, 1.3), max(3, P.get('segs', 5) - 1),
-              1, rng, rng.random(), twist=rng.normal(0, 1.2), curl=.35)
+              1, rng, rng.random(), twist=rng.normal(0, 1.2), curl=.35, floor=.003)
     for i in range(P['blades']):
         r = P['radius'] * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi)
         base = Vector((math.cos(a) * r, math.sin(a) * r, -.01))
@@ -158,7 +165,7 @@ def grass_tuft(G, rng, P):
         h = P['h'] * rng.uniform(.55, 1.1)
         mi = 0 if rng.random() > P.get('dry', 0) else 1
         blade(G, base, d, h, P['w'] * rng.uniform(.6, 1.35), P['bend'] * rng.uniform(.55, 1.5), P.get('segs', 5), mi, rng, rng.random(),
-              twist=rng.normal(0, .8), curl=P.get('curl', .15) * rng.uniform(.5, 1.6))
+              twist=rng.normal(0, .8), curl=P.get('curl', .15) * rng.uniform(.5, 1.6), floor=.004)
     for i in range(P.get('plumes', 0)):          # flowering stalks with plume cards (kans grass)
         a = rng.uniform(0, 2 * np.pi); r = P['radius'] * .5 * math.sqrt(rng.random())
         base = Vector((math.cos(a) * r, math.sin(a) * r, 0)); d = rand_dir(rng, 12)
