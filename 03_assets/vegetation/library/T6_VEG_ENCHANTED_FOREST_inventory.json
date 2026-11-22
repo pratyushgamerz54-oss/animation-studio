@@ -323,12 +323,12 @@
    "#D8E6DA"
   ],
   "stats": {
-   "height_m": 0.124,
-   "spread_x_m": 0.195,
-   "spread_y_m": 0.283,
-   "tris": 2728,
-   "verts": 1760,
-   "lowest_z": -0.007
+   "height_m": 0.116,
+   "spread_x_m": 0.277,
+   "spread_y_m": 0.186,
+   "tris": 4268,
+   "verts": 2772,
+   "lowest_z": -0.006
   },
   "bark": null,
   "atlas": null,

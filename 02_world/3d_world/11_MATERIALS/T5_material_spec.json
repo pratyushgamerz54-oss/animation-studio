@@ -131,7 +131,7 @@
  },
  "MAT_T5_ICE": {
   "source": "procedural (voronoi cracks + noise)",
-  "maps": "Base Color, Roughness 0.12, Subsurface, bump normal",
+  "maps": "Base Color, Roughness 0.3 (weathered), Subsurface, bump normal",
   "resolution": "procedural (resolution-independent)",
   "metallic": 0.0
  },

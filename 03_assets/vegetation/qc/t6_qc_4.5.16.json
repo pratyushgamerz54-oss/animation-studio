@@ -9,7 +9,7 @@
   {
    "check": "AV: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "33.0 MB"
+   "detail": "33.4 MB"
   },
   {
    "check": "AV: opens in Blender 4.5.16 LTS, no missing images",
@@ -414,7 +414,7 @@
   {
    "check": "AV_MU01_BROWN_MUSHROOMS: valid mesh, UVs",
    "ok": true,
-   "detail": "1,736 tris, 1,120 verts"
+   "detail": "2,716 tris, 1,764 verts"
   },
   {
    "check": "AV_MU01_BROWN_MUSHROOMS: wind attributes",
@@ -859,7 +859,7 @@
   {
    "check": "EF: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "52.8 MB"
+   "detail": "53.0 MB"
   },
   {
    "check": "EF: opens in Blender 4.5.16 LTS, no missing images",
@@ -949,7 +949,7 @@
   {
    "check": "EF_MU01_GLOWCAP: valid mesh, UVs",
    "ok": true,
-   "detail": "2,728 tris, 1,760 verts"
+   "detail": "4,268 tris, 2,772 verts"
   },
   {
    "check": "EF_MU01_GLOWCAP: wind attributes",
@@ -969,7 +969,7 @@
   {
    "check": "EF_MU01_GLOWCAP: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.007 m"
+   "detail": "lowest z -0.006 m"
   },
   {
    "check": "EF_MU01_GLOWCAP: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
@@ -1444,7 +1444,7 @@
   {
    "check": "MK: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "10.0 MB"
+   "detail": "10.1 MB"
   },
   {
    "check": "MK: opens in Blender 4.5.16 LTS, no missing images",

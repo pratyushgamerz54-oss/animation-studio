@@ -231,7 +231,9 @@ def pbr_group(tex, box=False, antitile=False, ao=False):
     wet = b.out(gi, 'Wet')
     col = b.mixc(b.math('MULTIPLY', wet, .55), col, (0, 0, 0, 1))             # wet surfaces are darker
     rough = tx(m['rough'], vec, True).outputs['Color'] if 'rough' in m else 0.8
-    rough = b.mixf(wet, rough, .07)                                           # … and glossy
+    if not isinstance(rough, float):                                          # realism pass (Director 22 Nov): dry ground never
+        rough = b.math('MAXIMUM', rough, .45)                                 # polished — floor 0.45, scan detail kept above it
+    rough = b.mixf(wet, rough, .22)                                           # … wet = darker + satin (not mirror-like)
     nmap = b.node('ShaderNodeNormalMap')
     b.link(b.out(gi, 'Normal Strength'), nmap.inputs['Strength'])
     if 'nor_gl' in m:

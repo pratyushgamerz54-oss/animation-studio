@@ -65,6 +65,7 @@ def simple_pbr(name, tex, scale, box=False, tint=None, wet=0.0, antitile=True, a
     g = use_group(b, tex, coords(b), scale, box, antitile, ao, wet, tint)
     b.link(g.outputs['Color'], bs.inputs['Base Color']); b.link(g.outputs['Roughness'], bs.inputs['Roughness'])
     b.link(g.outputs['Normal'], bs.inputs['Normal']); bs.inputs['Metallic'].default_value = 0.0
+    bs.inputs['Specular IOR Level'].default_value = .3                         # realism pass: natural ground, no sheen
     dp = b.node('ShaderNodeDisplacement'); dp.inputs['Scale'].default_value = .04 * scale; dp.inputs['Midlevel'].default_value = .5
     b.link(g.outputs['Height'], dp.inputs['Height']); b.link(dp.outputs[0], out.inputs['Displacement'])
     disp_both(m)
@@ -100,12 +101,12 @@ crack = b.maprange(vor.outputs['Distance'], 0.0, .04, 1.0, 0.0)
 n1 = b.noise(v, .08, 6, .6)
 col = b.mixc(b.math('MULTIPLY', n1, .6), lin('#BFD8E8'), lin('#86B4D0'))
 col = b.mixc(b.math('MULTIPLY', crack, .5), col, lin('#F2F8FC'))
-b.link(col, bs.inputs['Base Color']); bs.inputs['Roughness'].default_value = .12
+b.link(col, bs.inputs['Base Color']); bs.inputs['Roughness'].default_value = .3     # weathered glacier ice (realism pass)
 bs.inputs['Subsurface Weight'].default_value = .4; bs.inputs['Subsurface Radius'].default_value = (.6, .9, 1.4)
-bs.inputs['Coat Weight'].default_value = .3
+bs.inputs['Coat Weight'].default_value = .08
 bp = b.node('ShaderNodeBump'); bp.inputs['Strength'].default_value = .35
 b.link(b.math('ADD', crack, b.math('MULTIPLY', n1, .3)), bp.inputs['Height']); b.link(bp.outputs[0], bs.inputs['Normal'])
-SPEC['MAT_T5_ICE'] = dict(source='procedural (voronoi cracks + noise)', maps='Base Color, Roughness 0.12, Subsurface, bump normal',
+SPEC['MAT_T5_ICE'] = dict(source='procedural (voronoi cracks + noise)', maps='Base Color, Roughness 0.3 (weathered), Subsurface, bump normal',
                           resolution='procedural (resolution-independent)', metallic=0.0)
 L['ICE'] = m
 
@@ -217,12 +218,12 @@ def terrain_material():
     crev = b.math('MULTIPLY', b.maprange(cv.outputs['Distance'], 0.0, .05, 1.0, 0.0), b.maprange(dist, 3000, 800))   # fades far away
     icecol = b.mixc(b.math('MULTIPLY', meso, .6), lin('#A9CBE0'), lin('#7FAACB'))
     icecol = b.mixc(b.math('MULTIPLY', crev, .7), icecol, lin('#2E4A63'))
-    ice = [icecol, .12, base[2], .6]
+    ice = [icecol, .3, base[2], .6]
     icef = b.math('MULTIPLY', b.math('MULTIPLY', A['m_snow'], b.maprange(A['m_flow'], .25, .55)), b.maprange(zpos, 3900, 4400))
     icef = b.math('MULTIPLY', icef, b.maprange(nz, .86, .95))
     base = lerp_layer(icef, base, ice)
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
-    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .4
+    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .3   # realism pass (was .4)
     SPEC['MAT_T5_TERRAIN'] = dict(source='blend of 15 Poly Haven 2K scans + procedural ice/canopy',
                                   maps='per layer: Base Color, Roughness, Normal GL, Displacement (height blend)',
                                   resolution='2K per layer; near/far scale switch 150–900 m', metallic=0.0,
@@ -314,7 +315,7 @@ def desert_material():
     # wadi shrub litter / darker damp sand in channels
     base[0] = b.mixc(b.math('MULTIPLY', A['m_grove'], .35), base[0], lin('#8A7A5A'))
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
-    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .35
+    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .28  # realism pass (was .35)
     SPEC['MAT_T5_TERRAIN_DESERT'] = dict(source='Poly Haven 2K: dry_ground_01, gravel_ground_01, sand_01, coast_sand_01, mud_cracked_dry_03, '
                                          'rocky_gravel, rock_ground, cliff_side (biplanar strata) + procedural far sand / far cliff / ripples',
                                          maps='Base Color, Roughness, Normal GL, Displacement (height blend)', resolution='2K per layer',
@@ -366,7 +367,7 @@ def forbidden_material():
     far = [b.mixc(b.maprange(macro, .35, .65), lin('#1C1819'), lin('#332C2F')), .9, base[2], .5]
     base = lerp(b.maprange(dist, 1500, 6000), base, far)
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
-    bs.inputs['Metallic'].default_value = 0.0
+    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .3   # realism pass (was default .5)
     SPEC['MAT_T5_TERRAIN_FORBIDDEN'] = dict(source='Poly Haven 2K dry_ground_01, rocky_gravel, mud_cracked_dry_03, gravel_ground_01, dark_rock '
                                             '(darkened / desaturated) + procedural far', maps='Base Color, Roughness, Normal GL, Displacement',
                                             resolution='2K per layer', metallic=0.0, layers=['ash ground', 'rubble', 'fissures', 'scree', 'dark rock'])
@@ -418,7 +419,7 @@ def enchanted_material():
     far = [b.mixc(b.maprange(macro, .35, .65), lin('#123026'), lin('#1F4A3A')), .9, base[2], .5]
     base = lerp(b.maprange(dist, 1500, 5000), base, far)
     b.link(base[0], bs.inputs['Base Color']); b.link(base[1], bs.inputs['Roughness']); b.link(base[2], bs.inputs['Normal'])
-    bs.inputs['Metallic'].default_value = 0.0
+    bs.inputs['Metallic'].default_value = 0.0; bs.inputs['Specular IOR Level'].default_value = .3   # realism pass (was default .5)
     SPEC['MAT_T5_TERRAIN_ENCHANTED'] = dict(source='Poly Haven 2K forest_floor, leafy_grass (re-coloured to moss / teal), mud_forest, '
                                             'river_small_rocks, mossy_rock + procedural far', maps='Base Color, Roughness, Normal GL, Displacement',
                                             resolution='2K per layer', metallic=0.0, layers=['litter', 'moss carpet', 'teal clearings', 'bank mud', 'stream stones', 'mossy rock'])
