@@ -1,0 +1,115 @@
+{
+ "FB_T01_CHARRED_SNAG": {
+  "common": "Charred dead tree",
+  "latin": "burnt standing dead tree (any species)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-05 (outer rim + slopes)",
+  "category": "Dead tree",
+  "habitat": "outer rim and slopes of the crater; blackened, cracked, ash-grey where the char flaked off; no leaves. WHY the land is dead = NOT CONFIRMED",
+  "altitude": "any",
+  "kind": "tree",
+  "palette": [
+   "#2A2624",
+   "#3A3532",
+   "#8A8680",
+   "#B8B4AC"
+  ],
+  "stats": {
+   "height_m": 12.29,
+   "canopy_x_m": 4.29,
+   "canopy_y_m": 5.21,
+   "trunk_d_m": 1.0,
+   "branches": 91,
+   "leaf_cards": 0,
+   "tris": 6256,
+   "verts": 3688,
+   "lowest_z": -0.4,
+   "height_scale": 1.0
+  },
+  "bark": "bark_brown_02",
+  "atlas": null,
+  "collection": "T6_FB_T01_CHARRED_SNAG"
+ },
+ "FB_S01_DEAD_THORN_SHRUB": {
+  "common": "Dead thorn shrub",
+  "latin": "dead thorny scrub (Ziziphus / Acacia-like, leafless)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-05 (outer rim) + R-04",
+  "category": "Dead shrub",
+  "habitat": "outer rim of the crater and the harshest desert flats; leafless, sun-bleached grey twigs",
+  "altitude": "any",
+  "kind": "shrub",
+  "palette": [
+   "#8A8680",
+   "#B8B4AC",
+   "#5A544E"
+  ],
+  "stats": {
+   "height_m": 1.43,
+   "canopy_x_m": 2.04,
+   "canopy_y_m": 2.18,
+   "trunk_d_m": 0.4,
+   "branches": 51,
+   "leaf_cards": 0,
+   "tris": 1798,
+   "verts": 1092,
+   "lowest_z": -0.21,
+   "height_scale": 1.264
+  },
+  "bark": "bark_brown_01",
+  "atlas": null,
+  "collection": "T6_FB_S01_DEAD_THORN_SHRUB"
+ },
+ "FB_M01_ASH_LICHEN": {
+  "common": "Grey crust lichen",
+  "latin": "Lecanora / Xanthoparmelia-like crust",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-05 (rim rocks)",
+  "category": "Lichen",
+  "habitat": "rocks of the crater rim; flat grey crusts \u2014 almost the only life (approved dead look)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6E7268",
+   "#A4A898",
+   "#8A8670"
+  ],
+  "stats": {
+   "height_m": 0.011,
+   "spread_x_m": 0.511,
+   "spread_y_m": 0.474,
+   "tris": 3080,
+   "verts": 1848,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_FB_M01_ASH_LICHEN"
+ },
+ "FB_G01_HARDY_GRASS": {
+  "common": "Hardy rim grass",
+  "latin": "Aristida (three-awn) / Cenchrus \u2014 sparse",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-05 (outer rim only)",
+  "category": "Grass",
+  "habitat": "only on the OUTER rim of the crater; thin, mostly dry, very sparse (crater floor + lake shore stay lifeless)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6E704A",
+   "#948A6A",
+   "#C0B49A"
+  ],
+  "stats": {
+   "height_m": 0.311,
+   "spread_x_m": 0.664,
+   "spread_y_m": 0.68,
+   "tris": 1580,
+   "verts": 1440,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_FB_G01_HARDY_GRASS"
+ }
+}

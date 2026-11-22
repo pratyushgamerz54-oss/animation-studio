@@ -1,0 +1,162 @@
+{
+ "ND_L01_LEAF_LITTER_BROADLEAF": {
+  "common": "Leaf litter (broadleaf, spring)",
+  "latin": "last year's oak / beech / peepal leaves decomposing + a few fresh",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 / R-02 / R-08 / C-sites (under broadleaf trees)",
+  "category": "Natural detail",
+  "habitat": "under broadleaf trees and in hollows; scatter as overlapping patches; SPRING = mostly old brown leaves + a few fresh green ones",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6A4A2E",
+   "#8A6A42",
+   "#B0905A",
+   "#5E7A3A"
+  ],
+  "stats": {
+   "height_m": 0.032,
+   "spread_x_m": 1.931,
+   "spread_y_m": 1.811,
+   "tris": 3760,
+   "verts": 4020,
+   "lowest_z": -0.003
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_L01_LEAF_LITTER_BROADLEAF"
+ },
+ "ND_L02_NEEDLE_LITTER": {
+  "common": "Needle litter + cones",
+  "latin": "Pinus / Cedrus / Picea needle mat",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01 (chir pine, deodar) / R-03 (spruce, fir)",
+  "category": "Natural detail",
+  "habitat": "under conifers: a springy rust-brown mat of fallen needles with cones",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6A4A2A",
+   "#8E6A40",
+   "#A88A5E",
+   "#4A3422"
+  ],
+  "stats": {
+   "height_m": 0.095,
+   "spread_x_m": 1.714,
+   "spread_y_m": 1.799,
+   "tris": 41464,
+   "verts": 65321,
+   "lowest_z": -0.002
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_L02_NEEDLE_LITTER"
+ },
+ "ND_B01_FALLEN_BRANCHES": {
+  "common": "Fallen branches",
+  "latin": "dead wood (any broadleaf)",
+  "label": "SPECIES-INSPIRED",
+  "region": "all forested regions",
+  "category": "Natural detail",
+  "habitat": "forest floor: storm-broken limbs, splintered ends (pale inner wood), side twigs; partly sunk into litter",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#5A4A3A",
+   "#B89A6A",
+   "#8A6A44"
+  ],
+  "stats": {
+   "height_m": 0.361,
+   "spread_x_m": 3.293,
+   "spread_y_m": 5.724,
+   "tris": 1312,
+   "verts": 788,
+   "lowest_z": -0.029
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_B01_FALLEN_BRANCHES"
+ },
+ "ND_B02_GIANT_LOG": {
+  "common": "Giant fallen log (uprooted)",
+  "latin": "fallen old-growth trunk (R-02 Giant Elder / Moss Oak size)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02 (also R-01 forest ring, R-03 M1)",
+  "category": "Natural detail",
+  "habitat": "old forest floor: an uprooted giant lying along the ground; moss + ferns on the top, bracket fungi, splintered break, root plate with soil",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#5A5048",
+   "#4E6A3A",
+   "#B89A6A",
+   "#B8925A",
+   "#5A4430"
+  ],
+  "stats": {
+   "height_m": 3.135,
+   "spread_x_m": 18.748,
+   "spread_y_m": 5.875,
+   "tris": 6000,
+   "verts": 3549,
+   "lowest_z": -0.102
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_B02_GIANT_LOG"
+ },
+ "ND_I01_GROUND_IVY": {
+  "common": "Ground ivy carpet",
+  "latin": "Hedera nepalensis (creeping)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-02 / C-sites / R-01 shady banks",
+  "category": "Natural detail",
+  "habitat": "shady forest floor, ruins and banks; creeping runners with leaves held just above the ground",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#1E3A22",
+   "#2E4A2A",
+   "#9AB08A"
+  ],
+  "stats": {
+   "height_m": 0.132,
+   "spread_x_m": 2.244,
+   "spread_y_m": 2.294,
+   "tris": 2704,
+   "verts": 2437,
+   "lowest_z": 0.0
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_I01_GROUND_IVY"
+ },
+ "ND_W01_FLOATING_LEAVES": {
+  "common": "Floating leaves (water surface)",
+  "latin": "fallen leaves on still water",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 lake bays / R-01 Ashram pond / R-02 pools",
+  "category": "Natural detail (water surface z = 0)",
+  "habitat": "still water near shore trees; drifts pile up on the lee side; place at the water level",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6A4A2E",
+   "#8A6A42",
+   "#5E7A3A"
+  ],
+  "stats": {
+   "height_m": 0.024,
+   "spread_x_m": 2.439,
+   "spread_y_m": 2.519,
+   "tris": 720,
+   "verts": 810,
+   "lowest_z": 0.0
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_ND_W01_FLOATING_LEAVES"
+ }
+}

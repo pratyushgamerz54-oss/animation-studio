@@ -1,0 +1,171 @@
+{
+ "LK_T01_WHITE_WILLOW": {
+  "common": "White willow (lake shore)",
+  "latin": "Salix alba",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (also R-06 river galleries)",
+  "category": "Waterside tree",
+  "habitat": "lake shores, river galleries of the plains; leans over the water, silvery narrow leaves (natural \u2014 not the R-02 fantasy Veil Willow)",
+  "altitude": "0\u20132 500 m",
+  "kind": "tree",
+  "palette": [
+   "#5E8A52",
+   "#A9BFA0",
+   "#C8D8C0",
+   "#6A665A",
+   "#4A6A3A"
+  ],
+  "stats": {
+   "height_m": 17.91,
+   "canopy_x_m": 23.97,
+   "canopy_y_m": 24.82,
+   "trunk_d_m": 1.27,
+   "branches": 4607,
+   "leaf_cards": 14465,
+   "tris": 288540,
+   "verts": 222262,
+   "lowest_z": -0.55,
+   "height_scale": 1.0
+  },
+  "bark": "bark_willow",
+  "atlas": "lk_willow",
+  "collection": "T6_LK_T01_WHITE_WILLOW"
+ },
+ "LK_T02_ALDER": {
+  "common": "Himalayan alder",
+  "latin": "Alnus nepalensis",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (also R-01 streams)",
+  "category": "Waterside tree",
+  "habitat": "wet lake shores, stream banks and landslide scars; straight trunk, open oval crown",
+  "altitude": "500\u20132 800 m",
+  "kind": "tree",
+  "palette": [
+   "#2F5A2E",
+   "#4E7A3E",
+   "#8AA878",
+   "#8A8A82",
+   "#5A5A54"
+  ],
+  "stats": {
+   "height_m": 20.39,
+   "canopy_x_m": 10.55,
+   "canopy_y_m": 11.0,
+   "trunk_d_m": 0.79,
+   "branches": 3436,
+   "leaf_cards": 6587,
+   "tris": 133524,
+   "verts": 108106,
+   "lowest_z": -0.33,
+   "height_scale": 0.886
+  },
+  "bark": "bark_platanus",
+  "atlas": "lk_alder",
+  "collection": "T6_LK_T02_ALDER"
+ },
+ "LK_AQ01_WATER_LILY": {
+  "common": "White water-lily",
+  "latin": "Nymphaea alba / N. tetragona",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (still bays)",
+  "category": "Aquatic plant",
+  "habitat": "still, clear bays of the lakes (0.5\u20132 m deep); pads float, flowers open AT the surface",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2F5A2A",
+   "#4E6A2E",
+   "#F4F0E6",
+   "#E8C43A"
+  ],
+  "stats": {
+   "height_m": 0.067,
+   "spread_x_m": 1.911,
+   "spread_y_m": 2.088,
+   "tris": 4240,
+   "verts": 3406,
+   "lowest_z": -0.903
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_LK_AQ01_WATER_LILY"
+ },
+ "LK_AQ02_SEDGE": {
+  "common": "Lake-shore sedge",
+  "latin": "Carex (tussock sedge)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (shore + wet meadows)",
+  "category": "Aquatic plant",
+  "habitat": "wet shore belt and boggy meadows around the lakes; stiff arching blades, dense tussocks",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2E4422",
+   "#5A7A3A",
+   "#94A266"
+  ],
+  "stats": {
+   "height_m": 0.634,
+   "spread_x_m": 1.332,
+   "spread_y_m": 1.275,
+   "tris": 5260,
+   "verts": 4632,
+   "lowest_z": -0.012
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_LK_AQ02_SEDGE"
+ },
+ "LK_AQ03_REED_SPRING": {
+  "common": "Common reed \u2014 SPRING (green, no plumes)",
+  "latin": "Phragmites australis",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (reed belts) + R-06 rivers",
+  "category": "Aquatic plant",
+  "habitat": "reed belts in shallow water + river margins; SPRING look (Decision 01 \u00a76) \u2014 the feathery plumes appear only late summer / autumn",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3A4E24",
+   "#62843A",
+   "#A0AE6A"
+  ],
+  "stats": {
+   "height_m": 2.282,
+   "spread_x_m": 3.523,
+   "spread_y_m": 3.059,
+   "tris": 3636,
+   "verts": 3078,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_LK_AQ03_REED_SPRING"
+ },
+ "LK_M01_WET_ROCK_MOSS": {
+  "common": "Wet-rock moss",
+  "latin": "Fontinalis / Hygrohypnum-like",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-08 (splash zone, wet rocks)",
+  "category": "Moss",
+  "habitat": "",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#24401E",
+   "#466A2A",
+   "#5A6A3A"
+  ],
+  "stats": {
+   "height_m": 0.054,
+   "spread_x_m": 0.605,
+   "spread_y_m": 0.73,
+   "tris": 3480,
+   "verts": 2256,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_LK_M01_WET_ROCK_MOSS"
+ }
+}

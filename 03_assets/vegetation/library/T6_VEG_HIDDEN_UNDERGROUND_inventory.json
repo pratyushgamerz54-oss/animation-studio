@@ -1,0 +1,80 @@
+{
+ "CV_M01_PALE_CAVE_MOSS": {
+  "common": "Pale cave-mouth moss",
+  "latin": "Schistostega / Fissidens-like (low-light moss)",
+  "label": "SPECIES-INSPIRED",
+  "region": "CV-01\u202605 (entrance twilight zone)",
+  "category": "Moss",
+  "habitat": "only in the twilight zone of cave entrances (some daylight); pale yellow-green, thin",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#5A6A3A",
+   "#8A9A5A",
+   "#9A9A7A"
+  ],
+  "stats": {
+   "height_m": 0.045,
+   "spread_x_m": 0.597,
+   "spread_y_m": 0.51,
+   "tris": 2820,
+   "verts": 1818,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CV_M01_PALE_CAVE_MOSS"
+ },
+ "CV_MU01_CAVE_FUNGI": {
+  "common": "Pale cave fungi",
+  "latin": "Mycena / Coprinellus-like (no glow)",
+  "label": "SPECIES-INSPIRED",
+  "region": "CV-01\u202605 (wet rock, rotting roots)",
+  "category": "Mushroom",
+  "habitat": "wet rock + rotting roots deeper in the caves; thin pale stems, small caps. NO bioluminescence (proposal only)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#D8D2C4",
+   "#B8AA94",
+   "#8A7A66"
+  ],
+  "stats": {
+   "height_m": 0.081,
+   "spread_x_m": 0.163,
+   "spread_y_m": 0.181,
+   "tris": 6208,
+   "verts": 4032,
+   "lowest_z": -0.006
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CV_MU01_CAVE_FUNGI"
+ },
+ "CV_V01_ROOT_CURTAIN": {
+  "common": "Root curtain (from the surface)",
+  "latin": "tree roots hanging through the cave ceiling",
+  "label": "SPECIES-INSPIRED",
+  "region": "CV-01\u202605 (shallow caves under forests)",
+  "category": "Roots (hanging)",
+  "habitat": "shallow caves below forests: fine roots hang from the ceiling; attach the top at the ceiling (z_top)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#5A4A3A",
+   "#7A6A54",
+   "#3A3028"
+  ],
+  "stats": {
+   "height_m": 3.6,
+   "spread_x_m": 2.975,
+   "spread_y_m": 1.045,
+   "tris": 5280,
+   "verts": 2750,
+   "lowest_z": 0.057
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CV_V01_ROOT_CURTAIN"
+ }
+}

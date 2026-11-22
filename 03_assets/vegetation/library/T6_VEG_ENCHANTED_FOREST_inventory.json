@@ -17,14 +17,14 @@
    "#6A4A3E"
   ],
   "stats": {
-   "height_m": 66.9,
-   "canopy_x_m": 53.9,
-   "canopy_y_m": 52.2,
+   "height_m": 66.79,
+   "canopy_x_m": 54.01,
+   "canopy_y_m": 52.57,
    "trunk_d_m": 9.12,
    "branches": 8229,
-   "leaf_cards": 25132,
-   "tris": 503266,
-   "verts": 388302,
+   "leaf_cards": 25305,
+   "tris": 503958,
+   "verts": 389340,
    "lowest_z": -1.06,
    "height_scale": 1.0
   },
@@ -50,15 +50,15 @@
   ],
   "stats": {
    "height_m": 34.6,
-   "canopy_x_m": 18.85,
-   "canopy_y_m": 18.62,
-   "trunk_d_m": 1.39,
+   "canopy_x_m": 18.9,
+   "canopy_y_m": 18.78,
+   "trunk_d_m": 1.4,
    "branches": 4785,
-   "leaf_cards": 16902,
-   "tris": 250800,
-   "verts": 213529,
+   "leaf_cards": 17054,
+   "tris": 251408,
+   "verts": 214441,
    "lowest_z": -0.35,
-   "height_scale": 0.834
+   "height_scale": 0.836
   },
   "bark": "japanese_zelkova_bark",
   "atlas": "ef_beech",
@@ -81,14 +81,14 @@
    "#5A5048"
   ],
   "stats": {
-   "height_m": 24.29,
-   "canopy_x_m": 30.89,
-   "canopy_y_m": 34.34,
+   "height_m": 24.27,
+   "canopy_x_m": 30.99,
+   "canopy_y_m": 34.27,
    "trunk_d_m": 3.89,
    "branches": 4370,
-   "leaf_cards": 11480,
-   "tris": 225404,
-   "verts": 178097,
+   "leaf_cards": 11409,
+   "tris": 225120,
+   "verts": 177671,
    "lowest_z": -0.83,
    "height_scale": 1.0
   },
@@ -178,15 +178,15 @@
   ],
   "stats": {
    "height_m": 22.85,
-   "canopy_x_m": 15.86,
-   "canopy_y_m": 17.48,
-   "trunk_d_m": 1.37,
+   "canopy_x_m": 15.83,
+   "canopy_y_m": 17.33,
+   "trunk_d_m": 1.36,
    "branches": 4434,
-   "leaf_cards": 11672,
-   "tris": 223324,
-   "verts": 177599,
-   "lowest_z": -2.34,
-   "height_scale": 0.862
+   "leaf_cards": 11635,
+   "tris": 223176,
+   "verts": 177377,
+   "lowest_z": -2.33,
+   "height_scale": 0.858
   },
   "bark": "bark_platanus",
   "atlas": "ef_spiral",
@@ -272,8 +272,8 @@
   ],
   "stats": {
    "height_m": 1.404,
-   "spread_x_m": 2.329,
-   "spread_y_m": 2.724,
+   "spread_x_m": 2.967,
+   "spread_y_m": 2.564,
    "tris": 19328,
    "verts": 16656,
    "lowest_z": -0.01
@@ -314,7 +314,7 @@
   "label": "FANTASY (APPROVED R-02)",
   "region": "R-02",
   "category": "Rare fantasy fungus",
-  "habitat": "",
+  "habitat": "R-02 only (approved fantasy variety, Decision 01 \u00a73): rotting wood in deep shade; SUBTLE glow (emission 0.5), visible at dusk / night",
   "altitude": "",
   "kind": "plant",
   "palette": [
@@ -359,5 +359,31 @@
   "bark": null,
   "atlas": null,
   "collection": "T6_EF_V01_HANGING_VINE"
+ },
+ "EF_M02_GLOW_MOSS": {
+  "common": "Glow moss (dusk)",
+  "latin": "fictional (moss with faintly glowing spore capsules)",
+  "label": "FANTASY (APPROVED R-02)",
+  "region": "R-02",
+  "category": "Rare fantasy moss",
+  "habitat": "R-02 only (approved fantasy variety, Decision 01 \u00a73): on old roots and logs in the deepest shade; capsules glow faintly at dusk / night (emission 0.15)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#24483A",
+   "#3E6A4E",
+   "#8FE6D2"
+  ],
+  "stats": {
+   "height_m": 0.058,
+   "spread_x_m": 0.82,
+   "spread_y_m": 0.914,
+   "tris": 8600,
+   "verts": 5832,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_EF_M02_GLOW_MOSS"
  }
 }

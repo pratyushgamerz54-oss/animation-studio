@@ -1,0 +1,92 @@
+{
+ "ND_L01_LEAF_LITTER_BROADLEAF_LOD1": {
+  "hero": "ND_L01_LEAF_LITTER_BROADLEAF",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.033,
+   "spread_x_m": 1.931,
+   "spread_y_m": 1.74,
+   "tris": 1744,
+   "verts": 1752,
+   "lowest_z": -0.003
+  },
+  "collection": "T6_ND_L01_LEAF_LITTER_BROADLEAF_LOD1"
+ },
+ "ND_L02_NEEDLE_LITTER_LOD1": {
+  "hero": "ND_L02_NEEDLE_LITTER",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.088,
+   "spread_x_m": 1.701,
+   "spread_y_m": 1.799,
+   "tris": 19864,
+   "verts": 29321,
+   "lowest_z": -0.002
+  },
+  "collection": "T6_ND_L02_NEEDLE_LITTER_LOD1"
+ },
+ "ND_B01_FALLEN_BRANCHES_LOD1": {
+  "hero": "ND_B01_FALLEN_BRANCHES",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.361,
+   "spread_x_m": 3.293,
+   "spread_y_m": 5.724,
+   "tris": 656,
+   "verts": 394,
+   "lowest_z": -0.029
+  },
+  "collection": "T6_ND_B01_FALLEN_BRANCHES_LOD1"
+ },
+ "ND_B02_GIANT_LOG_LOD1": {
+  "hero": "ND_B02_GIANT_LOG",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 3.135,
+   "spread_x_m": 18.748,
+   "spread_y_m": 5.875,
+   "tris": 6000,
+   "verts": 3549,
+   "lowest_z": -0.102
+  },
+  "collection": "T6_ND_B02_GIANT_LOG_LOD1"
+ },
+ "ND_I01_GROUND_IVY_LOD1": {
+  "hero": "ND_I01_GROUND_IVY",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.132,
+   "spread_x_m": 2.244,
+   "spread_y_m": 2.294,
+   "tris": 2704,
+   "verts": 2437,
+   "lowest_z": 0.0
+  },
+  "collection": "T6_ND_I01_GROUND_IVY_LOD1"
+ },
+ "ND_W01_FLOATING_LEAVES_LOD1": {
+  "hero": "ND_W01_FLOATING_LEAVES",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.019,
+   "spread_x_m": 2.439,
+   "spread_y_m": 2.453,
+   "tris": 288,
+   "verts": 324,
+   "lowest_z": 0.0
+  },
+  "collection": "T6_ND_W01_FLOATING_LEAVES_LOD1"
+ }
+}

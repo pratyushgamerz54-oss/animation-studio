@@ -17,13 +17,13 @@
   ],
   "stats": {
    "height_m": 31.32,
-   "canopy_x_m": 16.96,
-   "canopy_y_m": 16.4,
+   "canopy_x_m": 16.93,
+   "canopy_y_m": 16.47,
    "trunk_d_m": 1.44,
    "branches": 6616,
-   "leaf_cards": 13143,
-   "tris": 225678,
-   "verts": 188336,
+   "leaf_cards": 13150,
+   "tris": 225706,
+   "verts": 188378,
    "lowest_z": -0.41,
    "height_scale": 1.0
   },
@@ -80,20 +80,84 @@
    "#8A7A6A"
   ],
   "stats": {
-   "height_m": 6.12,
-   "canopy_x_m": 7.11,
-   "canopy_y_m": 7.63,
-   "trunk_d_m": 0.78,
+   "height_m": 5.67,
+   "canopy_x_m": 6.16,
+   "canopy_y_m": 6.8,
+   "trunk_d_m": 0.69,
    "branches": 321,
-   "leaf_cards": 659,
-   "tris": 21942,
-   "verts": 15328,
-   "lowest_z": -0.4,
-   "height_scale": 1.0
+   "leaf_cards": 678,
+   "tris": 22018,
+   "verts": 15442,
+   "lowest_z": -0.35,
+   "height_scale": 0.885
   },
   "bark": "knotted_pine_bark",
   "atlas": "mk_krumm",
   "collection": "T6_MK_T03_KRUMMHOLZ_PINE"
+ },
+ "MK_T04_SILVER_FIR": {
+  "common": "West Himalayan silver fir",
+  "latin": "Abies pindrow",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-03",
+  "category": "Mountain tree",
+  "habitat": "upper montane belt (zone M1 top, 2 400\u20133 300 m) with spruce; narrow dark columnar crown, flat glossy-dark needles in two rows",
+  "altitude": "2 400\u20133 300 m",
+  "kind": "tree",
+  "palette": [
+   "#18342A",
+   "#2E4A3C",
+   "#5A4434",
+   "#8C8A86",
+   "#A9AE8E"
+  ],
+  "stats": {
+   "height_m": 37.36,
+   "canopy_x_m": 14.12,
+   "canopy_y_m": 13.4,
+   "trunk_d_m": 1.54,
+   "branches": 7385,
+   "leaf_cards": 15672,
+   "tris": 256348,
+   "verts": 216552,
+   "lowest_z": -0.41,
+   "height_scale": 1.0
+  },
+  "bark": "chinese_cedar_bark",
+  "atlas": "mk_fir",
+  "collection": "T6_MK_T04_SILVER_FIR"
+ },
+ "MK_T05_BLUE_PINE": {
+  "common": "Blue pine (full form)",
+  "latin": "Pinus wallichiana",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-03 (also R-01 upper slopes)",
+  "category": "Mountain tree",
+  "habitat": "zone M1 clearings, old landslides, sunny slopes 1 800\u20133 300 m; soft drooping blue-green needles in fives, long hanging cones",
+  "altitude": "1 800\u20133 300 m",
+  "kind": "tree",
+  "palette": [
+   "#4E6E6A",
+   "#7E9A92",
+   "#3E5A56",
+   "#6A5040",
+   "#9A8A7A"
+  ],
+  "stats": {
+   "height_m": 31.42,
+   "canopy_x_m": 15.48,
+   "canopy_y_m": 16.7,
+   "trunk_d_m": 1.11,
+   "branches": 3198,
+   "leaf_cards": 9518,
+   "tris": 126070,
+   "verts": 112360,
+   "lowest_z": -0.42,
+   "height_scale": 1.0
+  },
+  "bark": "knotted_pine_bark",
+  "atlas": "mk_bluepine",
+  "collection": "T6_MK_T05_BLUE_PINE"
  },
  "MK_S01_JUNIPER": {
   "common": "Dwarf Juniper",
@@ -172,12 +236,12 @@
    "#CFC29A"
   ],
   "stats": {
-   "height_m": 0.323,
-   "spread_x_m": 0.894,
-   "spread_y_m": 0.866,
-   "tris": 4000,
-   "verts": 3600,
-   "lowest_z": -0.172
+   "height_m": 0.351,
+   "spread_x_m": 0.987,
+   "spread_y_m": 0.939,
+   "tris": 5280,
+   "verts": 4800,
+   "lowest_z": -0.011
   },
   "bark": null,
   "atlas": null,
@@ -198,9 +262,9 @@
    "#3E5E2E"
   ],
   "stats": {
-   "height_m": 0.121,
-   "spread_x_m": 0.094,
-   "spread_y_m": 0.124,
+   "height_m": 0.107,
+   "spread_x_m": 0.098,
+   "spread_y_m": 0.081,
    "tris": 1300,
    "verts": 980,
    "lowest_z": -0.001
@@ -224,12 +288,12 @@
    "#D8CC9A"
   ],
   "stats": {
-   "height_m": 0.143,
-   "spread_x_m": 0.079,
-   "spread_y_m": 0.102,
+   "height_m": 0.144,
+   "spread_x_m": 0.1,
+   "spread_y_m": 0.08,
    "tris": 1632,
    "verts": 1296,
-   "lowest_z": -0.001
+   "lowest_z": -0.0
   },
   "bark": null,
   "atlas": null,
@@ -251,12 +315,12 @@
    "#5A7A4A"
   ],
   "stats": {
-   "height_m": 0.802,
-   "spread_x_m": 0.246,
-   "spread_y_m": 0.258,
+   "height_m": 0.751,
+   "spread_x_m": 0.233,
+   "spread_y_m": 0.296,
    "tris": 752,
    "verts": 561,
-   "lowest_z": -0.001
+   "lowest_z": -0.0
   },
   "bark": null,
   "atlas": null,

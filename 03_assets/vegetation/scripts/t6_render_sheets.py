@@ -209,6 +209,8 @@ def lineup(kind):
     """height-comparison lineup of every tree + shrub (front ortho) or every plant (perspective)."""
     names = [n for n, v in INV.items() if (v['kind'] in ('tree', 'shrub')) == (kind == 'trees') and 'hanging' not in v['category']]
     names.sort(key=lambda n: -INV[n]['stats']['height_m'])
+    if not names:                       # e.g. caves / natural details have no trees → no tree lineup
+        return
     objs = []; x = 0.0
     for n in names:
         o = bpy.data.objects[n]; st = INV[n]['stats']; w = max(st.get('canopy_x_m', st.get('spread_x_m', .3)), .3)

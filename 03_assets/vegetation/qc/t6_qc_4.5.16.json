@@ -9,7 +9,7 @@
   {
    "check": "AV: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "33.5 MB"
+   "detail": "33.7 MB"
   },
   {
    "check": "AV: opens in Blender 4.5.16 LTS, no missing images",
@@ -23,6 +23,11 @@
   },
   {
    "check": "AV: T6_WIND_CONTROL present with strength/gust/speed/flutter",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "AV: wind-free scatter copies <asset>_SC (same mesh) for NG_T6_ECOSYSTEM",
    "ok": true,
    "detail": ""
   },
@@ -54,7 +59,7 @@
   {
    "check": "AV_AQ01_LOTUS: aquatic plant sits at the water surface (z = 0) with stems below",
    "ok": true,
-   "detail": "lowest -0.60 m, top 0.99 m"
+   "detail": "lowest -0.60 m, top 1.14 m"
   },
   {
    "check": "AV_AQ01_LOTUS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
@@ -159,7 +164,7 @@
   {
    "check": "AV_F02_PRIMULA: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.000 m"
+   "detail": "lowest z -0.005 m"
   },
   {
    "check": "AV_F02_PRIMULA: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
@@ -279,7 +284,7 @@
   {
    "check": "AV_G01_MEADOW_GRASS: valid mesh, UVs",
    "ok": true,
-   "detail": "5,200 tris, 4,680 verts"
+   "detail": "6,448 tris, 5,850 verts"
   },
   {
    "check": "AV_G01_MEADOW_GRASS: wind attributes",
@@ -334,7 +339,7 @@
   {
    "check": "AV_G02_KANS_GRASS: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.011 m"
+   "detail": "lowest z -0.012 m"
   },
   {
    "check": "AV_G02_KANS_GRASS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
@@ -349,7 +354,7 @@
   {
    "check": "AV_G02B_KANS_GRASS_SPRING: valid mesh, UVs",
    "ok": true,
-   "detail": "3,920 tris, 3,360 verts"
+   "detail": "4,760 tris, 4,095 verts"
   },
   {
    "check": "AV_G02B_KANS_GRASS_SPRING: wind attributes",
@@ -384,7 +389,7 @@
   {
    "check": "AV_G03_DRY_PATH_GRASS: valid mesh, UVs",
    "ok": true,
-   "detail": "2,600 tris, 2,340 verts"
+   "detail": "3,320 tris, 3,015 verts"
   },
   {
    "check": "AV_G03_DRY_PATH_GRASS: wind attributes",
@@ -579,7 +584,7 @@
   {
    "check": "AV_T01_PEEPAL: valid mesh, UVs",
    "ok": true,
-   "detail": "422,738 tris, 327,262 verts"
+   "detail": "422,926 tris, 327,544 verts"
   },
   {
    "check": "AV_T01_PEEPAL: wind attributes",
@@ -599,7 +604,7 @@
   {
    "check": "AV_T01_PEEPAL: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "23.72 m vs design 22.0 m"
+   "detail": "23.75 m vs design 22.0 m"
   },
   {
    "check": "AV_T01_PEEPAL: grounded (trunk foot / roots below ground level)",
@@ -629,7 +634,7 @@
   {
    "check": "AV_T02_DEODAR: valid mesh, UVs",
    "ok": true,
-   "detail": "310,460 tris, 268,360 verts"
+   "detail": "309,744 tris, 267,286 verts"
   },
   {
    "check": "AV_T02_DEODAR: wind attributes",
@@ -649,12 +654,12 @@
   {
    "check": "AV_T02_DEODAR: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "34.94 m vs design 34.0 m"
+   "detail": "34.86 m vs design 34.0 m"
   },
   {
    "check": "AV_T02_DEODAR: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.43 m, 305 verts at the foot"
+   "detail": "lowest z -0.43 m, 307 verts at the foot"
   },
   {
    "check": "AV_T02_DEODAR: no limbs through the ground",
@@ -729,7 +734,7 @@
   {
    "check": "AV_T04_BANJ_OAK: valid mesh, UVs",
    "ok": true,
-   "detail": "223,300 tris, 172,224 verts"
+   "detail": "223,068 tris, 171,876 verts"
   },
   {
    "check": "AV_T04_BANJ_OAK: wind attributes",
@@ -879,12 +884,12 @@
   {
    "check": "AV_T02_DEODAR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.833 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.832 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "AV_AQ01_LOTUS: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.032 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.027 m \u00b7 foot \u0394 0.001 m"
   },
   {
    "check": "EF: library file exists",
@@ -894,7 +899,7 @@
   {
    "check": "EF: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "53.0 MB"
+   "detail": "53.3 MB"
   },
   {
    "check": "EF: opens in Blender 4.5.16 LTS, no missing images",
@@ -912,9 +917,14 @@
    "detail": ""
   },
   {
+   "check": "EF: wind-free scatter copies <asset>_SC (same mesh) for NG_T6_ECOSYSTEM",
+   "ok": true,
+   "detail": ""
+  },
+  {
    "check": "EF: assets in library",
    "ok": true,
-   "detail": "12 assets"
+   "detail": "13 assets"
   },
   {
    "check": "EF_FE01_GIANT_FERN: valid mesh, UVs",
@@ -982,6 +992,41 @@
    "detail": "max emission 0.00"
   },
   {
+   "check": "EF_M02_GLOW_MOSS: valid mesh, UVs",
+   "ok": true,
+   "detail": "8,600 tris, 5,832 verts"
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_EF_M02_GLOW_MOSS_0, MAT_T6_EF_M02_GLOW_MOSS_1"
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: fantasy asset restricted to R-02 (Decision 01)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.020 m"
+  },
+  {
+   "check": "EF_M02_GLOW_MOSS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.15"
+  },
+  {
    "check": "EF_MU01_GLOWCAP: valid mesh, UVs",
    "ok": true,
    "detail": "4,268 tris, 2,772 verts"
@@ -1002,6 +1047,11 @@
    "detail": "slots used [0, 1, 2]"
   },
   {
+   "check": "EF_MU01_GLOWCAP: fantasy asset restricted to R-02 (Decision 01)",
+   "ok": false,
+   "detail": ""
+  },
+  {
    "check": "EF_MU01_GLOWCAP: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.006 m"
@@ -1014,7 +1064,7 @@
   {
    "check": "EF_T01_GIANT_ELDER: valid mesh, UVs",
    "ok": true,
-   "detail": "503,266 tris, 388,302 verts"
+   "detail": "503,958 tris, 389,340 verts"
   },
   {
    "check": "EF_T01_GIANT_ELDER: wind attributes",
@@ -1034,12 +1084,12 @@
   {
    "check": "EF_T01_GIANT_ELDER: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "66.90 m vs design 62.0 m"
+   "detail": "66.79 m vs design 62.0 m"
   },
   {
    "check": "EF_T01_GIANT_ELDER: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -1.06 m, 499 verts at the foot"
+   "detail": "lowest z -1.06 m, 504 verts at the foot"
   },
   {
    "check": "EF_T01_GIANT_ELDER: no limbs through the ground",
@@ -1064,7 +1114,7 @@
   {
    "check": "EF_T02_TEAL_BEECH: valid mesh, UVs",
    "ok": true,
-   "detail": "250,800 tris, 213,529 verts"
+   "detail": "251,408 tris, 214,441 verts"
   },
   {
    "check": "EF_T02_TEAL_BEECH: wind attributes",
@@ -1089,7 +1139,7 @@
   {
    "check": "EF_T02_TEAL_BEECH: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.35 m, 346 verts at the foot"
+   "detail": "lowest z -0.35 m, 342 verts at the foot"
   },
   {
    "check": "EF_T02_TEAL_BEECH: no limbs through the ground",
@@ -1114,7 +1164,7 @@
   {
    "check": "EF_T03_MOSS_OAK: valid mesh, UVs",
    "ok": true,
-   "detail": "225,404 tris, 178,097 verts"
+   "detail": "225,120 tris, 177,671 verts"
   },
   {
    "check": "EF_T03_MOSS_OAK: wind attributes",
@@ -1134,12 +1184,12 @@
   {
    "check": "EF_T03_MOSS_OAK: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "24.29 m vs design 23.0 m"
+   "detail": "24.27 m vs design 23.0 m"
   },
   {
    "check": "EF_T03_MOSS_OAK: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.83 m, 246 verts at the foot"
+   "detail": "lowest z -0.83 m, 248 verts at the foot"
   },
   {
    "check": "EF_T03_MOSS_OAK: no limbs through the ground",
@@ -1269,7 +1319,7 @@
   {
    "check": "EF_T06_SPIRAL_ROOT: valid mesh, UVs",
    "ok": true,
-   "detail": "223,324 tris, 177,599 verts"
+   "detail": "223,176 tris, 177,377 verts"
   },
   {
    "check": "EF_T06_SPIRAL_ROOT: wind attributes",
@@ -1294,7 +1344,7 @@
   {
    "check": "EF_T06_SPIRAL_ROOT: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -2.34 m, 494 verts at the foot"
+   "detail": "lowest z -2.33 m, 495 verts at the foot"
   },
   {
    "check": "EF_T06_SPIRAL_ROOT: no limbs through the ground",
@@ -1404,7 +1454,7 @@
   {
    "check": "EF_T08_DEAD_SNAG: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.50 m, 244 verts at the foot"
+   "detail": "lowest z -0.50 m, 242 verts at the foot"
   },
   {
    "check": "EF_T08_DEAD_SNAG: no limbs through the ground",
@@ -1464,12 +1514,12 @@
   {
    "check": "EF_T01_GIANT_ELDER: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.940 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.939 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF_FE01_GIANT_FERN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.042 m \u00b7 foot \u0394 0.007 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.042 m \u00b7 foot \u0394 0.002 m"
   },
   {
    "check": "MK: library file exists",
@@ -1479,12 +1529,12 @@
   {
    "check": "MK: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "10.1 MB"
+   "detail": "21.4 MB"
   },
   {
    "check": "MK: opens in Blender 4.5.16 LTS, no missing images",
    "ok": true,
-   "detail": "35 images, missing []"
+   "detail": "46 images, missing []"
   },
   {
    "check": "MK: image paths relative (portable to the Director PC)",
@@ -1497,9 +1547,14 @@
    "detail": ""
   },
   {
+   "check": "MK: wind-free scatter copies <asset>_SC (same mesh) for NG_T6_ECOSYSTEM",
+   "ok": true,
+   "detail": ""
+  },
+  {
    "check": "MK: assets in library",
    "ok": true,
-   "detail": "10 assets"
+   "detail": "12 assets"
   },
   {
    "check": "MK_F01_GENTIAN: valid mesh, UVs",
@@ -1532,6 +1587,11 @@
    "detail": "max emission 0.00"
   },
   {
+   "check": "MK_F01_GENTIAN: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_F01_GENTIAN: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1559,10 +1619,15 @@
   {
    "check": "MK_F02_EDELWEISS: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.001 m"
+   "detail": "lowest z -0.000 m"
   },
   {
    "check": "MK_F02_EDELWEISS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1594,10 +1659,15 @@
   {
    "check": "MK_F03_BLUE_POPPY: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.001 m"
+   "detail": "lowest z -0.000 m"
   },
   {
    "check": "MK_F03_BLUE_POPPY: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_F03_BLUE_POPPY: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1609,7 +1679,7 @@
   {
    "check": "MK_G01_ALPINE_TUSSOCK: valid mesh, UVs",
    "ok": true,
-   "detail": "4,000 tris, 3,600 verts"
+   "detail": "5,280 tris, 4,800 verts"
   },
   {
    "check": "MK_G01_ALPINE_TUSSOCK: wind attributes",
@@ -1629,10 +1699,15 @@
   {
    "check": "MK_G01_ALPINE_TUSSOCK: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.172 m"
+   "detail": "lowest z -0.011 m"
   },
   {
    "check": "MK_G01_ALPINE_TUSSOCK: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_G01_ALPINE_TUSSOCK: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1668,6 +1743,11 @@
   },
   {
    "check": "MK_M01_ALPINE_CUSHION: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1713,6 +1793,11 @@
   },
   {
    "check": "MK_S01_JUNIPER: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_S01_JUNIPER: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1767,6 +1852,11 @@
    "detail": "max emission 0.00"
   },
   {
+   "check": "MK_S02_DWARF_RHODODENDRON: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_S02_DWARF_RHODODENDRON: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1774,7 +1864,7 @@
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: valid mesh, UVs",
    "ok": true,
-   "detail": "225,678 tris, 188,336 verts"
+   "detail": "225,706 tris, 188,378 verts"
   },
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: wind attributes",
@@ -1799,7 +1889,7 @@
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.41 m, 309 verts at the foot"
+   "detail": "lowest z -0.41 m, 308 verts at the foot"
   },
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: no limbs through the ground",
@@ -1813,6 +1903,11 @@
   },
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: no glow outside R-02",
    "ok": true,
    "detail": "max emission 0.00"
   },
@@ -1867,6 +1962,11 @@
    "detail": "max emission 0.00"
   },
   {
+   "check": "MK_T02_HIMALAYAN_BIRCH: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_T02_HIMALAYAN_BIRCH: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1874,7 +1974,7 @@
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: valid mesh, UVs",
    "ok": true,
-   "detail": "21,942 tris, 15,328 verts"
+   "detail": "22,018 tris, 15,442 verts"
   },
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: wind attributes",
@@ -1894,12 +1994,12 @@
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "6.12 m vs design 5.5 m"
+   "detail": "5.67 m vs design 5.5 m"
   },
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.40 m, 272 verts at the foot"
+   "detail": "lowest z -0.35 m, 281 verts at the foot"
   },
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: no limbs through the ground",
@@ -1917,14 +2017,129 @@
    "detail": "max emission 0.00"
   },
   {
+   "check": "MK_T03_KRUMMHOLZ_PINE: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_T03_KRUMMHOLZ_PINE: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
   },
   {
-   "check": "MK_T01_HIMALAYAN_SPRUCE: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "check": "MK_T04_SILVER_FIR: valid mesh, UVs",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.819 m \u00b7 foot \u0394 0.000 m"
+   "detail": "256,348 tris, 216,552 verts"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_T04_SILVER_FIR_BARK, MAT_T6_MK_T04_SILVER_FIR_LEAF, MAT_T6_MK_T04_SILVER_FIR_BARK"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "37.36 m vs design 36.0 m"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.41 m, 287 verts at the foot"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: valid mesh, UVs",
+   "ok": true,
+   "detail": "126,070 tris, 112,360 verts"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: PBR materials (3 slots)",
+   "ok": true,
+   "detail": "MAT_T6_MK_T05_BLUE_PINE_BARK, MAT_T6_MK_T05_BLUE_PINE_LEAF, MAT_T6_MK_T05_BLUE_PINE_BARK"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: height within \u00b115 % of the design height",
+   "ok": true,
+   "detail": "31.42 m vs design 30.0 m"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: grounded (trunk foot / roots below ground level)",
+   "ok": true,
+   "detail": "lowest z -0.42 m, 305 verts at the foot"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: no limbs through the ground",
+   "ok": true,
+   "detail": "0 verts far + under ground"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: label set (SPECIES-INSPIRED)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: no glow outside R-02",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "MK_T05_BLUE_PINE: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "MK_T04_SILVER_FIR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.832 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "MK_F01_GENTIAN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",

@@ -50,17 +50,22 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
     chk(f'{fn}: Tulsi + Marigold only in the Ashram garden beds (Decision 01 §4)', not bad, f'outside: {bad}')
     if 'ASHRAM' in fn:
         pe = [o for o in sc.objects if 'PEEPAL' in o.name and o.instance_type == 'COLLECTION']
+        tu = [o for o in sc.objects if o.instance_type == 'COLLECTION' and o.instance_collection and 'TULSI' in o.instance_collection.name]
+        chk(f'{fn}: Tulsi = 6 plants, all inside the PROPOSED garden beds (x ±6…28, y −30…−52)',
+            len(tu) == 6 and all(6 <= abs(o.location.x) <= 28 and -52 <= o.location.y <= -30 for o in tu), f'{len(tu)} Tulsi instances')
         pl = [o for o in layers if 'PEEPAL' in o.get('t6_layer', '')]
         chk(f'{fn}: exactly ONE Peepal (landmark, courtyard)', len(pe) == 1 and not pl, f'{len(pe)} instance(s), {len(pl)} Peepal scatter layers')
     if not fn.startswith('T6_POP_R02'):
         fant = [o.name for o in layers if 'FANTASY' in o.get('t6_label', '')]
         chk(f'{fn}: no fantasy / glowing species outside R-02', not fant, str(fant))
-    # count instances with open culling (in memory only)
+    # count instances with open culling over the WHOLE tile (in memory only): woody at full density, ground layers at 1 %
     cam = sc.camera
     for o in layers:
         md = o.modifiers['T6_ECOSYSTEM']; I = ids(md)
-        md[I['Viewport Density']] = 1.0 if o.get('t6_kind') in ('tree', 'shrub') else .2
-        md[I['Cull Angle']] = 180.0; md[I['Cull Distance']] = 1500.0; md[I['Realize Distance']] = 0.0
+        md[I['Viewport Density']] = 1.0 if o.get('t6_kind') in ('tree', 'shrub', 'detail') else .01
+        md[I['Cull Angle']] = 180.0; md[I['Cull Distance']] = 1e6; md[I['Keep Near']] = 1e6; md[I['Realize Distance']] = 0.0
+        o.update_tag()
+    bpy.context.view_layer.update()
     dg = bpy.context.evaluated_depsgraph_get()
     counts = {o.name: 0 for o in layers}; bases = {o.name: [] for o in layers}
     for inst in dg.object_instances:
@@ -69,8 +74,8 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
             if len(bases[n]) < 400:
                 bases[n].append(tuple(inst.matrix_world.translation))
     empty = [n for n, c in counts.items() if c == 0]
-    chk(f'{fn}: instances generated (open culling, 1.5 km)', sum(counts.values()) > 0 and len(empty) <= len(layers) // 3,
-        f'{sum(counts.values()):,} instances; empty layers {empty[:6]}')
+    chk(f'{fn}: every layer generates instances (whole tile, open culling)', not empty,
+        f'{sum(counts.values()):,} instances (ground layers sampled at 1 %); empty {empty[:6]}')
     # nothing floating: instance base vs terrain surface (vertical ray down / up)
     terr = {md[ids(md)['Terrain']] for md in (o.modifiers['T6_ECOSYSTEM'] for o in layers)}
     dz_all = []
@@ -88,11 +93,19 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
         tree_layers = [o for o in layers if o.get('t6_kind') == 'tree']
         nf = sum(counts[o.name] for o in tree_layers if 'FANTASY' in o.get('t6_label', '')); nt = sum(counts[o.name] for o in tree_layers)
         share = nf / max(nt, 1)
-        chk(f'{fn}: R-02 fantasy share of trees 20–30 % (Decision 01 §3)', .18 <= share <= .32, f'{nf} fantasy / {nt} trees = {share:.0%}')
-    # wind: realized near plants move between two frames at strength 2
-    o = next((o for o in layers if o.get('t6_kind') == 'plant'), None)
-    if o is not None and cam is not None:
-        md = o.modifiers['T6_ECOSYSTEM']; I = ids(md); md[I['Realize Distance']] = 25.0; md[I['Cull Distance']] = 30.0
+        chk(f'{fn}: R-02 fantasy share of trees 20–30 % (Decision 01 §3)', .20 <= share <= .30, f'{nf} fantasy / {nt} trees = {share:.0%} (whole tile)')
+    # wind: realized near plants move between two frames at strength 2 — the camera is moved next to real instances of the
+    # densest plant layer (in memory), its realize distance opened to 25 m
+    main_t = layers[0].modifiers['T6_ECOSYSTEM'][ids(layers[0].modifiers['T6_ECOSYSTEM'])['Terrain']] if layers else None
+    pl = sorted([o for o in layers if o.get('t6_kind') == 'plant' and bases[o.name]],
+                key=lambda o: (o.modifiers['T6_ECOSYSTEM'][ids(o.modifiers['T6_ECOSYSTEM'])['Terrain']] != main_t, -counts[o.name]))
+    if pl and cam is not None:
+        o = pl[0]; p0 = bases[o.name][0]
+        cam.location = (p0[0] + 4, p0[1] - 4, p0[2] + 1.6)
+        for x in layers:
+            if x is not o:
+                x.modifiers['T6_ECOSYSTEM'].show_viewport = False
+        md = o.modifiers['T6_ECOSYSTEM']; I = ids(md); md[I['Realize Distance']] = 25.0; md[I['Cull Distance']] = 30.0; md[I['Viewport Density']] = 1.0
         c = ctrl[0]
         def ev(fr):
             sc.frame_set(fr); c['strength'] = 2.0; c.update_tag(); o.update_tag(); bpy.context.view_layer.update()

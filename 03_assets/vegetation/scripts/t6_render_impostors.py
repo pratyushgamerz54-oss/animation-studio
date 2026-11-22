@@ -5,7 +5,7 @@
 For every tree / shrub of the hero library: orthographic FRONT (camera on −Y) and SIDE (camera on +X) renders with alpha,
 uniform white sky light (no sun → the texture is ≈ albedo × ambient occlusion, so the scene's own sun lights the card),
 'Standard' view transform (texture values = colours, not a tone-mapped picture), calm wind, exact metric framing.
-Out: 03_assets/vegetation/textures/impostors/<asset>_front.png / _side.png (1024 px tall) + impostors.json (metres of each image edge).
+Out: 03_assets/vegetation/textures/impostors/<asset>_front.png / _side.png (512 px tall) + impostors.json (metres of each image edge).
 """
 import os, sys, json, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,7 +18,7 @@ args = sys.argv[sys.argv.index('--') + 1:]; REG = args[0]; SEL = set(args[1:])
 LIBF = os.path.join(os.environ.get('T6_LIB_DIR') or os.path.join(K.VEG, 'library'), f'T6_VEG_{RG.NAMES[REG]}_v001.blend')
 OUT = os.path.join(K.VEG, 'textures', 'impostors'); os.makedirs(OUT, exist_ok=True)
 MJ = os.path.join(OUT, 'impostors.json'); META = json.load(open(MJ)) if os.path.exists(MJ) else {}
-PX = int(os.environ.get('PX', 1024)); SPP = int(os.environ.get('SPP', 16))
+PX = int(os.environ.get('PX', 512)); SPP = int(os.environ.get('SPP', 16))   # 512 px: LOD3 is used beyond ~1 km (repo size)
 bpy.ops.wm.open_mainfile(filepath=LIBF)
 bpy.data.objects['T6_WIND_CONTROL']['strength'] = 0.0
 INV = json.load(open(LIBF[:-6].replace('_v001', '') + '_inventory.json'))

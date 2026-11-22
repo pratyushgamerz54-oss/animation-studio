@@ -62,8 +62,16 @@ def litter(G, rng, P):
 def needles(G, rng, P):
     """needle litter: thousands of thin needle strips (slot 0, brown → grey) in a mat + cones (slot 1, lathe of scales)."""
     R = P['radius']
+    # duff: decomposed needles under the fresh ones — irregular flat patch (slot 2), the mat reads as a continuous rust-brown layer
+    k_ = 40; ang = np.linspace(0, 2 * np.pi, k_, endpoint=False); ph = rng.uniform(0, 6.3, 3)
+    rim = [Vector((math.cos(t) * R * 1.05 * (1 + .18 * math.sin(3 * t + ph[0]) + .1 * math.sin(7 * t + ph[1]) + .05 * rng.normal()),
+                   math.sin(t) * R * 1.05 * (1 + .18 * math.sin(3 * t + ph[0]) + .1 * math.sin(7 * t + ph[1]) + .05 * rng.normal()), .0004)) for t in ang]
+    i_r = G.add_verts(rim, grad=.5); i_c = G.add_verts([Vector((0, 0, .0012))], grad=.5)
+    for j in range(k_):
+        G.add_face((i_c, i_r + j, i_r + (j + 1) % k_), ((.5, .5), (.5 + .5 * math.cos(ang[j]), .5 + .5 * math.sin(ang[j])),
+                                                      (.5 + .5 * math.cos(ang[(j + 1) % k_]), .5 + .5 * math.sin(ang[(j + 1) % k_]))), 2)
     for k in range(P['n']):
-        r = R * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi); c = Vector((math.cos(a) * r, math.sin(a) * r, .0008 + .006 * rng.random() * (1 - r / R)))
+        r = R * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi); c = Vector((math.cos(a) * r, math.sin(a) * r, .0014 + .006 * rng.random() * (1 - r / R)))
         d = Vector((math.cos(rng.uniform(0, 6.3)), math.sin(rng.uniform(0, 6.3)), rng.normal(0, .05))).normalized()
         L = P['nlen'] * rng.uniform(.6, 1.15); w = P.get('nw', .0012); sd = Vector((-d.y, d.x, 0)).normalized()
         bend = rng.normal(0, .15)
@@ -71,13 +79,22 @@ def needles(G, rng, P):
         i0 = G.add_verts([c - sd * w / 2, c + sd * w / 2, p1 - sd * w / 2, p1 + sd * w / 2, p2], grad=rng.random(), leaf_rand=rng.random())
         G.add_face((i0, i0 + 1, i0 + 3, i0 + 2), ((0, 0), (1, 0), (1, .5), (0, .5)), 0)
         G.add_face((i0 + 2, i0 + 3, i0 + 4), ((0, .5), (1, .5), (.5, 1)), 0)
-    for k in range(P.get('cones', 0)):
-        a = rng.uniform(0, 2 * np.pi); r = R * .7 * math.sqrt(rng.random()); L = P['cone_l'] * rng.uniform(.8, 1.15); rr = L * .28
+    for k in range(P.get('cones', 0)):                           # opened cones: woody core + ~70 scales in a Fibonacci spiral (slot 1)
+        a = rng.uniform(0, 2 * np.pi); r = R * .7 * math.sqrt(rng.random()); L = P['cone_l'] * rng.uniform(.8, 1.15); rr = L * .2
         axis = Vector((math.cos(rng.uniform(0, 6.3)), math.sin(rng.uniform(0, 6.3)), 0.0)).normalized()
-        base = Vector((math.cos(a) * r, math.sin(a) * r, rr * 1.0)) - axis * L * .5     # cone rests on its scales
-        prof = [(rr * .25, 0)] + [(rr * (.55 + .45 * math.sin(math.pi * t)) * (1 + .18 * (i % 2)), L * t) for i, t in enumerate(np.linspace(.05, .95, 14))] + [(rr * .1, L)]
-        K.lathe(G, prof, base, axis, 12, 1, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=rng.random(), grad=.5),
-                wobble=.08, seed=int(rng.integers(1 << 30)))
+        base = Vector((math.cos(a) * r, math.sin(a) * r, rr * 1.35)) - axis * L * .5     # cone rests on its scales
+        attrs = dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=rng.random(), grad=.5)
+        K.lathe(G, [(rr * .2, 0), (rr * .55, L * .1), (rr * .6, L * .6), (rr * .3, L * .95), (rr * .05, L)], base, axis, 8, 1, attrs)
+        ref = perp(axis); ns = 70
+        for i in range(ns):
+            t = (i + .5) / ns; ang = i * 2.39996
+            prof = math.sin(math.pi * min(1, .08 + t)) ** .6
+            out = rot_about(ref, axis, ang)
+            q = base + axis * L * t + out * rr * .5 * prof
+            d = (out * (.9 if t > .15 else .6) - axis * .25).normalized()
+            PL.petal(G, q, d, axis, rr * 1.1 * (.45 + .55 * prof), rr * .9 * (.5 + .5 * prof), .35, 1, 0.0, .05, 'round', segs=3, rng=rng, grad=.5)
+    for i, V in enumerate(G.V):                                     # nothing below the ground
+        V[:, 2] = np.maximum(V[:, 2], -.002)
 
 
 def broken_end(G, c, axis, r, k, rng, mi_in, mi_bark, ring0=None):
@@ -140,15 +157,24 @@ def log(G, rng, P):
     # root plate: tilted soil disc with root stubs (the tree was uprooted — roots tore out a plate of earth)
     c = pts[0] - Vector((R * .2, 0, 0)); axis = Vector((-1, 0, .35)).normalized(); Rp = R * P.get('plate', 2.3)
     prof = [(Rp * .02, R * .55), (Rp * .5, R * .5), (Rp * .85, R * .35), (Rp, 0), (Rp * .9, -R * .45), (Rp * .4, -R * .6), (Rp * .02, -R * .6)]
-    K.lathe(G, prof, c, axis, 22, 3, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=.5, grad=0.0, soil_w=1.0),
-            wobble=.22, seed=int(rng.integers(1 << 30)))
-    for k in range(P.get('roots', 14)):
-        a = rng.uniform(0, 2 * np.pi); nv = perp(axis); bv = axis.cross(nv); out = nv * math.cos(a) + bv * math.sin(a)
-        q0 = c + out * Rp * rng.uniform(.3, .85) + axis * R * .5
-        dd = (axis * rng.uniform(.3, .9) + out * rng.uniform(.4, 1.0) + Vector((0, 0, rng.normal(0, .3)))).normalized()
-        rl = R * rng.uniform(.8, 2.2); rp = [q0 + dd * rl * u + Vector((0, 0, -.25 * rl * u * u)) for u in np.linspace(0, 1, 7)]
-        rb = Branch(rp, list(np.linspace(R * .12 * rng.uniform(.5, 1.2), R * .02, 7)), 0, rng.random(), 0.0, kind='root')
+    K.lathe(G, prof, c, axis, 28, 3, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=.5, grad=0.0, soil_w=1.0),
+            wobble=.38, seed=int(rng.integers(1 << 30)))            # torn earth: very irregular outline
+    nv = perp(axis); bv = axis.cross(nv)
+    for k in range(P.get('roots', 14)):                           # torn roots: radial from the plate RIM, sagging under gravity
+        a = 2 * np.pi * k / P.get('roots', 14) + rng.normal(0, .2); out = nv * math.cos(a) + bv * math.sin(a)
+        q0 = c + out * Rp * rng.uniform(.75, .95) + axis * R * rng.uniform(-.1, .3)
+        dd = (out + axis * rng.uniform(-.1, .25)).normalized()
+        rl = R * rng.uniform(.6, 1.8); r0 = R * .1 * rng.uniform(.5, 1.2)
+        rp = [q0 + dd * rl * u + Vector((0, 0, -.45 * rl * u * u)) + Vector(rng.normal(0, .04, 3)) * u for u in np.linspace(0, 1, 8)]
+        rb = Branch(rp, list(np.linspace(r0, r0 * .15, 8)), 0, rng.random(), 0.0, kind='root')
         K.tube(G, rb, 7, 1.0, S, 4.0, rng)
+    for k in range(P.get('stubs', 22)):                           # short broken root ends + fibres on the plate face (soil side)
+        a = rng.uniform(0, 2 * np.pi); out = nv * math.cos(a) + bv * math.sin(a)
+        q0 = c + out * Rp * math.sqrt(rng.random()) * .85 + axis * R * .5
+        dd = (axis * rng.uniform(.6, 1.0) + out * rng.uniform(-.4, .6)).normalized(); rl = R * rng.uniform(.1, .45)
+        rp = [q0 + dd * rl * u + Vector((0, 0, -.2 * rl * u)) for u in np.linspace(0, 1, 4)]
+        rb = Branch(rp, list(np.linspace(R * .035, R * .008, 4)), 0, rng.random(), 0.0, kind='root')
+        K.tube(G, rb, 5, 1.0, S, 4.0, rng)
     # pull everything that dipped under the ground plane up to −2 cm max (except the buried bottom of the log + plate)
     for i, V in enumerate(G.V):
         V[:, 2] = np.maximum(V[:, 2], -R * .12)
@@ -199,8 +225,9 @@ DETAILS = [
          palette=['#6A4A2E', '#8A6A42', '#B0905A', '#5E7A3A']),
     dict(name='ND_L02_NEEDLE_LITTER', common='Needle litter + cones', latin='Pinus / Cedrus / Picea needle mat', label=SI,
          region='R-01 (chir pine, deodar) / R-03 (spruce, fir)', category='Natural detail', kind='needles', seed=9902,
-         habitat='under conifers: a springy rust-brown mat of fallen needles with cones', P=dict(n=5200, radius=.7, nlen=.11, nw=.0013, cones=6, cone_l=.13),
-         mats=[('grass', [(0, '#6A4A2A'), (.5, '#8E6A40'), (1, '#A88A5E')]), ('simple_var', ('#7A5A3A', '#4A3422'))], wind=dict(branch=0.0, leaf=0.0),
+         habitat='under conifers: a springy rust-brown mat of fallen needles with cones', P=dict(n=12000, radius=.7, nlen=.11, nw=.0019, cones=6, cone_l=.13),
+         mats=[('grass', [(0, '#6A4A2A'), (.5, '#8E6A40'), (1, '#A88A5E')]), ('simple_var', ('#7A5A3A', '#4A3422')), ('simple_var', ('#5A4028', '#3A2A1C'))],
+         wind=dict(branch=0.0, leaf=0.0),
          palette=['#6A4A2A', '#8E6A40', '#A88A5E', '#4A3422']),
     dict(name='ND_B01_FALLEN_BRANCHES', common='Fallen branches', latin='dead wood (any broadleaf)', label=SI, region='all forested regions',
          category='Natural detail', kind='branches', seed=9903, habitat='forest floor: storm-broken limbs, splintered ends (pale inner wood), side twigs; partly sunk into litter',
@@ -209,8 +236,8 @@ DETAILS = [
     dict(name='ND_B02_GIANT_LOG', common='Giant fallen log (uprooted)', latin='fallen old-growth trunk (R-02 Giant Elder / Moss Oak size)', label=SI,
          region='R-02 (also R-01 forest ring, R-03 M1)', category='Natural detail', kind='log', seed=9904,
          habitat='old forest floor: an uprooted giant lying along the ground; moss + ferns on the top, bracket fungi, splintered break, root plate with soil',
-         P=dict(len=16.0, r=.85, fungi=12, fungus=.2, plate=2.4, roots=16),
-         mats=[('bark', 'bark_willow'), ('simple_var', ('#B89A6A', '#7A5A3A')), ('simple_var', ('#B8925A', '#6E4A2A')), ('soil', 'brown_mud')],
+         P=dict(len=16.0, r=.85, fungi=12, fungus=.2, plate=2.4, roots=26, stubs=26),
+         mats=[('mossbark', 'bark_willow'), ('simple_var', ('#B89A6A', '#7A5A3A')), ('simple_var', ('#B8925A', '#6E4A2A')), ('soil', 'brown_mud')],
          wind=dict(branch=0.0, leaf=0.0), palette=['#5A5048', '#4E6A3A', '#B89A6A', '#B8925A', '#5A4430']),
     dict(name='ND_I01_GROUND_IVY', common='Ground ivy carpet', latin='Hedera nepalensis (creeping)', label=SI, region='R-02 / C-sites / R-01 shady banks',
          category='Natural detail', kind='ivy_ground', seed=9905, habitat='shady forest floor, ruins and banks; creeping runners with leaves held just above the ground',
@@ -229,6 +256,8 @@ def plant_mats(D):
         nm = f"MAT_T6_{D['name']}_{i}"
         if kind == 'soil':
             out.append(K.mat_ground(nm, v, 1.2, '#B0A090'))           # real scanned soil (already non-polished)
+        elif kind == 'mossbark':                                       # fallen giant: thick moss on the upper side (up-facing + moss_w)
+            out.append(K.mat_bark(nm, v, '#9A9488', moss=.85, moss_col='#4A6A30', lichen=.3))
         else:
             out += PL.plant_mats(dict(name=f"{D['name']}_TMP{i}", mats=[(kind, v)])); out[-1].name = nm
     return out

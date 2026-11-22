@@ -1,0 +1,92 @@
+{
+ "CV_M01_PALE_CAVE_MOSS_V1": {
+  "hero": "CV_M01_PALE_CAVE_MOSS",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.045,
+   "spread_x_m": 0.535,
+   "spread_y_m": 0.523,
+   "tris": 2820,
+   "verts": 1818,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_CV_M01_PALE_CAVE_MOSS_V1"
+ },
+ "CV_M01_PALE_CAVE_MOSS_V2": {
+  "hero": "CV_M01_PALE_CAVE_MOSS",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.045,
+   "spread_x_m": 0.553,
+   "spread_y_m": 0.502,
+   "tris": 2820,
+   "verts": 1818,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_CV_M01_PALE_CAVE_MOSS_V2"
+ },
+ "CV_MU01_CAVE_FUNGI_V1": {
+  "hero": "CV_MU01_CAVE_FUNGI",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.081,
+   "spread_x_m": 0.116,
+   "spread_y_m": 0.168,
+   "tris": 6208,
+   "verts": 4032,
+   "lowest_z": -0.006
+  },
+  "collection": "T6_CV_MU01_CAVE_FUNGI_V1"
+ },
+ "CV_MU01_CAVE_FUNGI_V2": {
+  "hero": "CV_MU01_CAVE_FUNGI",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.087,
+   "spread_x_m": 0.172,
+   "spread_y_m": 0.182,
+   "tris": 6208,
+   "verts": 4032,
+   "lowest_z": -0.006
+  },
+  "collection": "T6_CV_MU01_CAVE_FUNGI_V2"
+ },
+ "CV_V01_ROOT_CURTAIN_V1": {
+  "hero": "CV_V01_ROOT_CURTAIN",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 3.6,
+   "spread_x_m": 2.456,
+   "spread_y_m": 1.056,
+   "tris": 5280,
+   "verts": 2750,
+   "lowest_z": 0.099
+  },
+  "collection": "T6_CV_V01_ROOT_CURTAIN_V1"
+ },
+ "CV_V01_ROOT_CURTAIN_V2": {
+  "hero": "CV_V01_ROOT_CURTAIN",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 3.6,
+   "spread_x_m": 2.624,
+   "spread_y_m": 0.729,
+   "tris": 5280,
+   "verts": 2750,
+   "lowest_z": 0.035
+  },
+  "collection": "T6_CV_V01_ROOT_CURTAIN_V2"
+ }
+}

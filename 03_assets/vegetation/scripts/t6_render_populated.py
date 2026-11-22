@@ -34,4 +34,6 @@ for cn in cams:
     sc.render.filepath = os.path.join(OUT, f"{os.path.basename(f)[:-6]}__{cn}.png")
     t = time.time(); bpy.ops.render.render(write_still=True)
     print('RENDER', os.path.basename(sc.render.filepath), round(time.time() - t), 's', flush=True)
+import resource
+print('PEAK_RSS_GB', round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6, 2))
 print('T6_POP_RENDER_DONE', os.path.basename(f))

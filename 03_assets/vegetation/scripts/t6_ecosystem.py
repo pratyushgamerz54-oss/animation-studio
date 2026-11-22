@@ -26,9 +26,9 @@ NAME = 'NG_T6_ECOSYSTEM'
 
 
 def ecosystem_group():
-    if NAME in bpy.data.node_groups and bpy.data.node_groups[NAME].get('t6_eco_version') == 3:
+    if NAME in bpy.data.node_groups and bpy.data.node_groups[NAME].get('t6_eco_version') == 6:
         return bpy.data.node_groups[NAME]
-    ng = new_tree(NAME, 'GeometryNodeTree'); ng['t6_eco_version'] = 3
+    ng = new_tree(NAME, 'GeometryNodeTree'); ng['t6_eco_version'] = 6
     sock_new(ng, 'Geometry', 'OUTPUT', 'NodeSocketGeometry'); sock_new(ng, 'Geometry', 'INPUT', 'NodeSocketGeometry')
     sock_new(ng, 'Terrain', 'INPUT', 'NodeSocketObject')
     for k in ('Near', 'Mid', 'Far', 'Horizon'):
@@ -44,6 +44,7 @@ def ecosystem_group():
     F('Scale Min', .85, 0, 100); F('Scale Max', 1.15, 0, 100); F('Align To Normal', 0.0, 0, 1); F('Random Tilt', 0.0, 0, 90)
     F('Sink', 0.0, -10, 10); sock_new(ng, 'Seed', 'INPUT', 'NodeSocketInt', 0)
     F('Cull Distance', 3000.0, 0, 1e6); F('Cull Angle', 60.0, 0, 180); F('Keep Near', 40.0, 0, 1e5)
+    F('Camera Clearance (m)', 0.0, 0, 1000)      # no instance closer than this (horizontal) to the active camera — still previews; 0 for moving shots
     F('LOD0→1', 60.0, 0, 1e6); F('LOD1→2', 250.0, 0, 1e6); F('LOD2→3', 1200.0, 0, 1e6)
     # wind
     sock_new(ng, 'Wind Control', 'INPUT', 'NodeSocketObject')
@@ -65,7 +66,8 @@ def ecosystem_group():
     av2 = b.math('SUBTRACT', 1.0, b.math('MULTIPLY', named(G('Avoid Mask 2')), G('Avoid Strength 2')), clamp=True)
     nrm = b.node('GeometryNodeInputNormal'); nz = b.node('ShaderNodeSeparateXYZ'); b.link(nrm.outputs[0], nz.inputs[0])
     slope = b.math('DEGREES', b.math('ARCCOSINE', nz.outputs['Z']))
-    sl_ok = b.math('MULTIPLY', b.math('GREATER_THAN', slope, G('Slope Min')), b.math('LESS_THAN', slope, G('Slope Max')))
+    # slope ≥ min (not >): perfectly flat surfaces (building pads, garden beds, water) have slope exactly 0°
+    sl_ok = b.math('MULTIPLY', b.math('GREATER_THAN', slope, b.math('SUBTRACT', G('Slope Min'), .01)), b.math('LESS_THAN', slope, G('Slope Max')))
     pos = b.node('GeometryNodeInputPosition'); pz = b.node('ShaderNodeSeparateXYZ'); b.link(pos.outputs[0], pz.inputs[0])
     al_ok = b.math('MULTIPLY', b.math('GREATER_THAN', pz.outputs['Z'], G('Altitude Min')), b.math('LESS_THAN', pz.outputs['Z'], G('Altitude Max')))
     nt = b.node('ShaderNodeTexNoise'); nt.inputs['Detail'].default_value = 3
@@ -85,6 +87,8 @@ def ecosystem_group():
     in_cone = b.math('GREATER_THAN', cosang, b.math('COSINE', b.math('RADIANS', G('Cull Angle'))))
     keep = b.math('MAXIMUM', in_cone, b.math('LESS_THAN', dist, G('Keep Near')))
     keep = b.math('MULTIPLY', keep, b.math('LESS_THAN', dist, G('Cull Distance')))
+    relxy = b.vmath('MULTIPLY', rel, (1, 1, 0))
+    keep = b.math('MULTIPLY', keep, b.math('GREATER_THAN', b.vmath('LENGTH', relxy), G('Camera Clearance (m)')))
     isv = b.node('GeometryNodeIsViewport')
     dsw = b.node('GeometryNodeSwitch', input_type='FLOAT'); b.link(isv.outputs[0], b.sock(dsw, 'Switch'))
     b.link(G('Density'), b.sock(dsw, 'False', typ='VALUE'))
@@ -94,10 +98,15 @@ def ecosystem_group():
         dens = b.math('MULTIPLY', dens, f)
     # Min Distance > 0 → Poisson disk (trees / shrubs never intersect); 0 → random (dense ground layers: only the culled,
     # masked faces produce points — a Poisson pass over a whole 2–9 km² tile would create tens of millions of candidates)
+    # keep only the faces that can receive points (masked + culled) → Poisson candidates are generated only there
+    # (a Poisson pass over a whole 64 km tile would create ~10 M candidates and run out of memory)
+    keep_f = b.node('GeometryNodeSeparateGeometry', domain='FACE'); b.link(terr, keep_f.inputs['Geometry'])
+    b.link(b.math('GREATER_THAN', dens, 0.0), keep_f.inputs['Selection'])
+    terr_k = keep_f.outputs['Selection']
     branches = []
     for method in ('RANDOM', 'POISSON'):
         dp = b.node('GeometryNodeDistributePointsOnFaces', distribute_method=method)
-        b.link(terr, dp.inputs['Mesh']); b.link(G('Seed'), dp.inputs['Seed'])
+        b.link(terr_k, dp.inputs['Mesh']); b.link(G('Seed'), dp.inputs['Seed'])
         if method == 'RANDOM':
             b.link(dens, dp.inputs['Density'])
         else:

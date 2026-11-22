@@ -17,14 +17,14 @@
    "#5E5A52"
   ],
   "stats": {
-   "height_m": 23.72,
-   "canopy_x_m": 28.27,
-   "canopy_y_m": 33.69,
+   "height_m": 23.75,
+   "canopy_x_m": 28.1,
+   "canopy_y_m": 33.65,
    "trunk_d_m": 3.04,
    "branches": 7003,
-   "leaf_cards": 21298,
-   "tris": 422738,
-   "verts": 327262,
+   "leaf_cards": 21345,
+   "tris": 422926,
+   "verts": 327544,
    "lowest_z": -0.62,
    "height_scale": 1.0
   },
@@ -49,14 +49,14 @@
    "#6A5E54"
   ],
   "stats": {
-   "height_m": 34.94,
-   "canopy_x_m": 23.9,
-   "canopy_y_m": 23.42,
+   "height_m": 34.86,
+   "canopy_x_m": 23.85,
+   "canopy_y_m": 23.48,
    "trunk_d_m": 1.76,
    "branches": 9203,
-   "leaf_cards": 20477,
-   "tris": 310460,
-   "verts": 268360,
+   "leaf_cards": 20298,
+   "tris": 309744,
+   "verts": 267286,
    "lowest_z": -0.43,
    "height_scale": 1.0
   },
@@ -114,15 +114,15 @@
   ],
   "stats": {
    "height_m": 17.45,
-   "canopy_x_m": 21.75,
-   "canopy_y_m": 18.6,
+   "canopy_x_m": 21.86,
+   "canopy_y_m": 18.85,
    "trunk_d_m": 1.09,
    "branches": 4771,
-   "leaf_cards": 10019,
-   "tris": 223300,
-   "verts": 172224,
+   "leaf_cards": 9961,
+   "tris": 223068,
+   "verts": 171876,
    "lowest_z": -0.37,
-   "height_scale": 0.9
+   "height_scale": 0.906
   },
   "bark": "jolcham_oak_bark_01",
   "atlas": "av_banj",
@@ -270,11 +270,11 @@
    "#D1BE7E"
   ],
   "stats": {
-   "height_m": 0.351,
-   "spread_x_m": 0.901,
-   "spread_y_m": 0.812,
-   "tris": 5200,
-   "verts": 4680,
+   "height_m": 0.356,
+   "spread_x_m": 0.765,
+   "spread_y_m": 0.849,
+   "tris": 6448,
+   "verts": 5850,
    "lowest_z": -0.011
   },
   "bark": null,
@@ -297,12 +297,12 @@
    "#D8CCB4"
   ],
   "stats": {
-   "height_m": 2.838,
-   "spread_x_m": 3.131,
-   "spread_y_m": 3.329,
+   "height_m": 2.83,
+   "spread_x_m": 3.442,
+   "spread_y_m": 3.485,
    "tris": 4312,
    "verts": 3468,
-   "lowest_z": -0.011
+   "lowest_z": -0.012
   },
   "bark": null,
   "atlas": null,
@@ -323,11 +323,11 @@
    "#9AB25A"
   ],
   "stats": {
-   "height_m": 1.774,
-   "spread_x_m": 2.859,
-   "spread_y_m": 3.041,
-   "tris": 3920,
-   "verts": 3360,
+   "height_m": 1.761,
+   "spread_x_m": 3.455,
+   "spread_y_m": 3.311,
+   "tris": 4760,
+   "verts": 4095,
    "lowest_z": -0.011
   },
   "bark": null,
@@ -349,11 +349,11 @@
    "#D8C08A"
   ],
   "stats": {
-   "height_m": 0.445,
-   "spread_x_m": 1.018,
-   "spread_y_m": 0.983,
-   "tris": 2600,
-   "verts": 2340,
+   "height_m": 0.482,
+   "spread_x_m": 0.948,
+   "spread_y_m": 1.022,
+   "tris": 3320,
+   "verts": 3015,
    "lowest_z": -0.011
   },
   "bark": null,
@@ -375,9 +375,9 @@
    "#3E6A2A"
   ],
   "stats": {
-   "height_m": 0.323,
-   "spread_x_m": 0.176,
-   "spread_y_m": 0.133,
+   "height_m": 0.294,
+   "spread_x_m": 0.183,
+   "spread_y_m": 0.158,
    "tris": 1000,
    "verts": 748,
    "lowest_z": -0.001
@@ -401,12 +401,12 @@
    "#4E7A34"
   ],
   "stats": {
-   "height_m": 0.228,
-   "spread_x_m": 0.206,
-   "spread_y_m": 0.209,
+   "height_m": 0.207,
+   "spread_x_m": 0.186,
+   "spread_y_m": 0.231,
    "tris": 8660,
    "verts": 7107,
-   "lowest_z": -0.0
+   "lowest_z": -0.005
   },
   "bark": null,
   "atlas": null,
@@ -427,9 +427,9 @@
    "#4A7230"
   ],
   "stats": {
-   "height_m": 0.148,
-   "spread_x_m": 0.094,
-   "spread_y_m": 0.09,
+   "height_m": 0.161,
+   "spread_x_m": 0.083,
+   "spread_y_m": 0.104,
    "tris": 2280,
    "verts": 1901,
    "lowest_z": -0.001
@@ -453,9 +453,9 @@
    "#3A6228"
   ],
   "stats": {
-   "height_m": 0.491,
-   "spread_x_m": 0.361,
-   "spread_y_m": 0.306,
+   "height_m": 0.528,
+   "spread_x_m": 0.399,
+   "spread_y_m": 0.314,
    "tris": 8064,
    "verts": 7191,
    "lowest_z": -0.002
@@ -479,9 +479,9 @@
    "#7FB060"
   ],
   "stats": {
-   "height_m": 0.656,
-   "spread_x_m": 1.372,
-   "spread_y_m": 1.361,
+   "height_m": 0.802,
+   "spread_x_m": 1.324,
+   "spread_y_m": 1.363,
    "tris": 12240,
    "verts": 10440,
    "lowest_z": -0.01
@@ -506,7 +506,7 @@
    "#E8C84A"
   ],
   "stats": {
-   "height_m": 0.991,
+   "height_m": 1.141,
    "spread_x_m": 2.485,
    "spread_y_m": 2.231,
    "tris": 2244,

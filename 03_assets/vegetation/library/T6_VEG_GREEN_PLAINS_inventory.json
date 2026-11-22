@@ -1,0 +1,261 @@
+{
+ "PL_T01_BANYAN": {
+  "common": "Banyan (lone grassland giant)",
+  "latin": "Ficus benghalensis",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (also C-sites sacred groves)",
+  "category": "Ancient tree",
+  "habitat": "lone giants on the plains, village commons and sacred groves near the C-sites; aerial prop roots become new trunks",
+  "altitude": "0\u20131 200 m",
+  "kind": "tree",
+  "palette": [
+   "#2F5A2A",
+   "#4E7A3A",
+   "#A8B88A",
+   "#9A8A45",
+   "#8C8A80",
+   "#5E5A52"
+  ],
+  "stats": {
+   "height_m": 21.4,
+   "canopy_x_m": 40.02,
+   "canopy_y_m": 45.29,
+   "trunk_d_m": 2.58,
+   "branches": 11991,
+   "leaf_cards": 31700,
+   "tris": 713372,
+   "verts": 536370,
+   "lowest_z": -0.55,
+   "height_scale": 0.835
+  },
+  "bark": "japanese_camphor_bark",
+  "atlas": "pl_banyan",
+  "collection": "T6_PL_T01_BANYAN"
+ },
+ "PL_T02_NEEM": {
+  "common": "Neem",
+  "latin": "Azadirachta indica",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (also C-sites avenues)",
+  "category": "Broadleaf tree",
+  "habitat": "scattered over the plains, field edges, village + avenue tree near the C-sites; evergreen, dense round crown",
+  "altitude": "0\u20131 500 m",
+  "kind": "tree",
+  "palette": [
+   "#3E7A34",
+   "#5E9A44",
+   "#7FA860",
+   "#6A5A48",
+   "#4A3E34"
+  ],
+  "stats": {
+   "height_m": 17.27,
+   "canopy_x_m": 14.3,
+   "canopy_y_m": 22.31,
+   "trunk_d_m": 0.99,
+   "branches": 4937,
+   "leaf_cards": 14184,
+   "tris": 245900,
+   "verts": 200888,
+   "lowest_z": -0.39,
+   "height_scale": 1.0
+  },
+  "bark": "bark_brown_02",
+  "atlas": "pl_neem",
+  "collection": "T6_PL_T02_NEEM"
+ },
+ "PL_T03_UMBRELLA_ACACIA": {
+  "common": "Umbrella thorn acacia",
+  "latin": "Vachellia tortilis (Acacia tortilis)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (dry edge) + R-04 wadis",
+  "category": "Dry-region tree",
+  "habitat": "dry edge of the plains towards the desert and the desert wadis; flat umbrella crown of feathery leaves, thorny",
+  "altitude": "0\u20131 500 m",
+  "kind": "tree",
+  "palette": [
+   "#5A7A3A",
+   "#7A9A54",
+   "#5A4A3A",
+   "#3A322A",
+   "#C8B07A"
+  ],
+  "stats": {
+   "height_m": 9.46,
+   "canopy_x_m": 20.89,
+   "canopy_y_m": 16.24,
+   "trunk_d_m": 0.72,
+   "branches": 8576,
+   "leaf_cards": 7738,
+   "tris": 275386,
+   "verts": 204434,
+   "lowest_z": -0.35,
+   "height_scale": 1.0
+  },
+  "bark": "bark_brown_01",
+  "atlas": "pl_acacia",
+  "collection": "T6_PL_T03_UMBRELLA_ACACIA"
+ },
+ "PL_S01_BER_BUSH": {
+  "common": "Wild ber (jujube) bush",
+  "latin": "Ziziphus nummularia / Z. mauritiana (shrub form)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (shrub islands on low hills) + R-04 edge",
+  "category": "Bush",
+  "habitat": "shrub islands on the low hills of the plains and the desert edge; thorny, small round leaves",
+  "altitude": "0\u20131 500 m",
+  "kind": "shrub",
+  "palette": [
+   "#4A6A34",
+   "#7A8A4A",
+   "#8A6A50",
+   "#C8A850"
+  ],
+  "stats": {
+   "height_m": 2.15,
+   "canopy_x_m": 3.01,
+   "canopy_y_m": 3.38,
+   "trunk_d_m": 0.5,
+   "branches": 93,
+   "leaf_cards": 701,
+   "tris": 6388,
+   "verts": 6372,
+   "lowest_z": -0.17,
+   "height_scale": 1.0
+  },
+  "bark": "bark_brown_01",
+  "atlas": "av_berberis",
+  "collection": "T6_PL_S01_BER_BUSH"
+ },
+ "PL_G01_TALL_GRASS": {
+  "common": "Tall plains grass (spring)",
+  "latin": "Themeda triandra / Sehima (tall grass mosaic)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06",
+  "category": "Grass",
+  "habitat": "tall-grass patches of the plains (knee to waist height); spring = green, last year's straw at the base",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#34501F",
+   "#62883A",
+   "#A4B060",
+   "#CDB980"
+  ],
+  "stats": {
+   "height_m": 1.0,
+   "spread_x_m": 1.841,
+   "spread_y_m": 2.058,
+   "tris": 7840,
+   "verts": 6750,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_PL_G01_TALL_GRASS"
+ },
+ "PL_G02_DOOB_GRASS": {
+  "common": "Doob / Bermuda grass (short sward)",
+  "latin": "Cynodon dactylon",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (also R-01 paths)",
+  "category": "Grass",
+  "habitat": "short grazed sward between the tall patches, along paths and riverbanks",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#2E4A1E",
+   "#557E30",
+   "#8AA450"
+  ],
+  "stats": {
+   "height_m": 0.106,
+   "spread_x_m": 0.459,
+   "spread_y_m": 0.463,
+   "tris": 6272,
+   "verts": 5952,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_PL_G02_DOOB_GRASS"
+ },
+ "PL_F01_WILD_MUSTARD": {
+  "common": "Wild mustard (spring yellow drifts)",
+  "latin": "Sinapis arvensis / Brassica juncea (wild)",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06",
+  "category": "Wildflower",
+  "habitat": "SPRING key colour of the plains: yellow drifts along field edges + fallow ground",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#E8C41E",
+   "#B89A1A",
+   "#4E7034"
+  ],
+  "stats": {
+   "height_m": 0.744,
+   "spread_x_m": 0.345,
+   "spread_y_m": 0.45,
+   "tris": 3460,
+   "verts": 2624,
+   "lowest_z": -0.001
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_PL_F01_WILD_MUSTARD"
+ },
+ "PL_F02_GLOBE_THISTLE": {
+  "common": "Globe thistle",
+  "latin": "Echinops cornigerus / E. echinatus",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (dry hills, rocky patches)",
+  "category": "Wildflower",
+  "habitat": "dry stony hillocks of the plains; spiny grey-green leaves, steel-blue globe heads",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#6A78B0",
+   "#8A90A8",
+   "#6E7E62"
+  ],
+  "stats": {
+   "height_m": 0.566,
+   "spread_x_m": 0.255,
+   "spread_y_m": 0.254,
+   "tris": 39852,
+   "verts": 32698,
+   "lowest_z": -0.001
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_PL_F02_GLOBE_THISTLE"
+ },
+ "PL_F03_WHITE_CLOVER": {
+  "common": "White clover",
+  "latin": "Trifolium repens",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-06 (also R-01 meadows)",
+  "category": "Wildflower",
+  "habitat": "moist sward, path edges and river meadows; low trefoil leaves + white-pink ball heads (spring)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#F2ECE2",
+   "#D8B8B0",
+   "#3E6A2E"
+  ],
+  "stats": {
+   "height_m": 0.112,
+   "spread_x_m": 0.135,
+   "spread_y_m": 0.105,
+   "tris": 29320,
+   "verts": 23982,
+   "lowest_z": -0.0
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_PL_F03_WHITE_CLOVER"
+ }
+}

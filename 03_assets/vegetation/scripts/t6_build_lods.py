@@ -4,7 +4,7 @@
 
 Writes two files next to the hero library T6_VEG_<REGION>_v001.blend:
   T6_VEG_<REGION>_VARIANTS_v001.blend   seeds 1 + 2 of every species (seed 0 = the hero asset) → 3 variants per species.
-                                        Trees with a heavy hero (> 250 k tris) get their variants at LOD1 density (same shape
+                                        Trees with a heavy hero (> 150 k tris) get their variants at LOD1 density (same shape
                                         rules, fewer leaf cards / ring sides) so the file stays < 95 MB.
   T6_VEG_<REGION>_LODS_v001.blend       per species (seed 0, same skeleton as the hero):
                                         LOD1  (≈ 40–150 m)  half the ring sides, 40 % leaf cards × 1.5 size (same silhouette)
@@ -161,7 +161,7 @@ for what in WHAT:
     K.wind_control(); K.wind_instances_group(); INV = {}
     if what == 'variants':
         for D, kind in woody:
-            heavy = hero_inv.get(D['name'], {}).get('stats', {}).get('tris', 0) > 250_000
+            heavy = hero_inv.get(D['name'], {}).get('stats', {}).get('tris', 0) > 150_000      # keeps every VARIANTS file < 95 MB
             for seed in (1, 2):
                 c = coll(f"T6_{D['name']}_V{seed}", root)
                 S = lod_spec(D, 1) if heavy else D

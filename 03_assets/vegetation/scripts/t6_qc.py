@@ -42,7 +42,10 @@ def run_blender():
         chk(f'{reg}: image paths relative (portable to the Director PC)', rel, '')
         ctrl = bpy.data.objects.get('T6_WIND_CONTROL')
         chk(f'{reg}: T6_WIND_CONTROL present with strength/gust/speed/flutter', ctrl is not None and all(k in ctrl for k in ('strength', 'gust', 'speed', 'flutter')))
-        assets = [o for o in bpy.data.objects if o.get('t6_kind')]
+        assets = [o for o in bpy.data.objects if o.get('t6_kind') and not o.name.endswith('_SC')]
+        sc_ok = all(bpy.data.objects.get(o.name + '_SC') is not None and bpy.data.objects[o.name + '_SC'].data == o.data and
+                    not bpy.data.objects[o.name + '_SC'].modifiers for o in assets)
+        chk(f'{reg}: wind-free scatter copies <asset>_SC (same mesh) for NG_T6_ECOSYSTEM', sc_ok)
         chk(f'{reg}: assets in library', len(assets) > 0, f'{len(assets)} assets')
         scn = bpy.data.scenes['T6_LIBRARY']
         for o in assets:
@@ -144,7 +147,7 @@ def report():
     T = []; run_textures(T)
     if T:
         rows.append(dict(version='textures (python3 + Pillow)', results=T))
-    L = ['# TASK 06 · Technical QC report — milestone 1 (vegetation libraries v001)', '',
+    L = ['# TASK 06 · Technical QC report — milestones 1 + 2 (vegetation libraries v001, all regions + populated files)', '',
          'Automated by `03_assets/vegetation/scripts/t6_qc.py` (geometry, UVs, materials, textures, wind, ground contact, labels).', '']
     for J in rows:
         n = len(J['results']); p = sum(r['ok'] for r in J['results'])

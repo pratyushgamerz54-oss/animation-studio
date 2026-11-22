@@ -1,0 +1,469 @@
+{
+ "EF_T01_GIANT_ELDER_LOD1": {
+  "hero": "EF_T01_GIANT_ELDER",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 66.45,
+   "canopy_x_m": 55.32,
+   "canopy_y_m": 53.49,
+   "trunk_d_m": 9.12,
+   "branches": 8229,
+   "leaf_cards": 10174,
+   "tris": 321024,
+   "verts": 227020,
+   "lowest_z": -1.01,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T01_GIANT_ELDER_LOD1"
+ },
+ "EF_T01_GIANT_ELDER_LOD2": {
+  "hero": "EF_T01_GIANT_ELDER",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 66.22,
+   "canopy_x_m": 52.53,
+   "canopy_y_m": 53.45,
+   "trunk_d_m": 9.12,
+   "branches": 891,
+   "leaf_cards": 899,
+   "tris": 48178,
+   "verts": 30514,
+   "lowest_z": -1.01,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T01_GIANT_ELDER_LOD2"
+ },
+ "EF_T01_GIANT_ELDER_LOD3": {
+  "hero": "EF_T01_GIANT_ELDER",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 67.465
+  },
+  "collection": "T6_EF_T01_GIANT_ELDER_LOD3"
+ },
+ "EF_T02_TEAL_BEECH_LOD1": {
+  "hero": "EF_T02_TEAL_BEECH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 34.6,
+   "canopy_x_m": 19.39,
+   "canopy_y_m": 19.1,
+   "trunk_d_m": 1.39,
+   "branches": 4785,
+   "leaf_cards": 6778,
+   "tris": 152652,
+   "verts": 117924,
+   "lowest_z": -0.35,
+   "height_scale": 0.832
+  },
+  "collection": "T6_EF_T02_TEAL_BEECH_LOD1"
+ },
+ "EF_T02_TEAL_BEECH_LOD2": {
+  "hero": "EF_T02_TEAL_BEECH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 34.6,
+   "canopy_x_m": 17.82,
+   "canopy_y_m": 18.05,
+   "trunk_d_m": 1.41,
+   "branches": 577,
+   "leaf_cards": 623,
+   "tris": 25168,
+   "verts": 16846,
+   "lowest_z": -0.35,
+   "height_scale": 0.844
+  },
+  "collection": "T6_EF_T02_TEAL_BEECH_LOD2"
+ },
+ "EF_T02_TEAL_BEECH_LOD3": {
+  "hero": "EF_T02_TEAL_BEECH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 34.957
+  },
+  "collection": "T6_EF_T02_TEAL_BEECH_LOD3"
+ },
+ "EF_T03_MOSS_OAK_LOD1": {
+  "hero": "EF_T03_MOSS_OAK",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 24.61,
+   "canopy_x_m": 31.66,
+   "canopy_y_m": 35.22,
+   "trunk_d_m": 3.89,
+   "branches": 4370,
+   "leaf_cards": 4589,
+   "tris": 141816,
+   "verts": 103084,
+   "lowest_z": -0.78,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T03_MOSS_OAK_LOD1"
+ },
+ "EF_T03_MOSS_OAK_LOD2": {
+  "hero": "EF_T03_MOSS_OAK",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 24.69,
+   "canopy_x_m": 31.4,
+   "canopy_y_m": 33.52,
+   "trunk_d_m": 3.89,
+   "branches": 536,
+   "leaf_cards": 582,
+   "tris": 25590,
+   "verts": 16848,
+   "lowest_z": -0.76,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T03_MOSS_OAK_LOD2"
+ },
+ "EF_T03_MOSS_OAK_LOD3": {
+  "hero": "EF_T03_MOSS_OAK",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 24.513
+  },
+  "collection": "T6_EF_T03_MOSS_OAK_LOD3"
+ },
+ "EF_T04_YEW_LOD1": {
+  "hero": "EF_T04_YEW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 8.69,
+   "canopy_x_m": 12.41,
+   "canopy_y_m": 12.59,
+   "trunk_d_m": 1.21,
+   "branches": 4564,
+   "leaf_cards": 2960,
+   "tris": 106712,
+   "verts": 78981,
+   "lowest_z": -0.32,
+   "height_scale": 0.851
+  },
+  "collection": "T6_EF_T04_YEW_LOD1"
+ },
+ "EF_T04_YEW_LOD2": {
+  "hero": "EF_T04_YEW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 8.69,
+   "canopy_x_m": 12.02,
+   "canopy_y_m": 11.98,
+   "trunk_d_m": 1.14,
+   "branches": 822,
+   "leaf_cards": 322,
+   "tris": 27508,
+   "verts": 17523,
+   "lowest_z": -0.31,
+   "height_scale": 0.802
+  },
+  "collection": "T6_EF_T04_YEW_LOD2"
+ },
+ "EF_T04_YEW_LOD3": {
+  "hero": "EF_T04_YEW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 8.777
+  },
+  "collection": "T6_EF_T04_YEW_LOD3"
+ },
+ "EF_T05_VEIL_WILLOW_LOD1": {
+  "hero": "EF_T05_VEIL_WILLOW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 18.39,
+   "canopy_x_m": 24.23,
+   "canopy_y_m": 20.13,
+   "trunk_d_m": 1.45,
+   "branches": 5080,
+   "leaf_cards": 11734,
+   "tris": 259276,
+   "verts": 191942,
+   "lowest_z": -0.45,
+   "height_scale": 0.872
+  },
+  "collection": "T6_EF_T05_VEIL_WILLOW_LOD1"
+ },
+ "EF_T05_VEIL_WILLOW_LOD2": {
+  "hero": "EF_T05_VEIL_WILLOW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 18.39,
+   "canopy_x_m": 23.49,
+   "canopy_y_m": 19.2,
+   "trunk_d_m": 1.49,
+   "branches": 766,
+   "leaf_cards": 520,
+   "tris": 57004,
+   "verts": 32900,
+   "lowest_z": -1.24,
+   "height_scale": 0.892
+  },
+  "collection": "T6_EF_T05_VEIL_WILLOW_LOD2"
+ },
+ "EF_T05_VEIL_WILLOW_LOD3": {
+  "hero": "EF_T05_VEIL_WILLOW",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 18.576
+  },
+  "collection": "T6_EF_T05_VEIL_WILLOW_LOD3"
+ },
+ "EF_T06_SPIRAL_ROOT_LOD1": {
+  "hero": "EF_T06_SPIRAL_ROOT",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 22.85,
+   "canopy_x_m": 16.18,
+   "canopy_y_m": 17.84,
+   "trunk_d_m": 1.34,
+   "branches": 4434,
+   "leaf_cards": 4679,
+   "tris": 138420,
+   "verts": 101405,
+   "lowest_z": -2.3,
+   "height_scale": 0.846
+  },
+  "collection": "T6_EF_T06_SPIRAL_ROOT_LOD1"
+ },
+ "EF_T06_SPIRAL_ROOT_LOD2": {
+  "hero": "EF_T06_SPIRAL_ROOT",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 22.85,
+   "canopy_x_m": 15.85,
+   "canopy_y_m": 17.54,
+   "trunk_d_m": 1.35,
+   "branches": 607,
+   "leaf_cards": 463,
+   "tris": 27488,
+   "verts": 17488,
+   "lowest_z": -1.38,
+   "height_scale": 0.854
+  },
+  "collection": "T6_EF_T06_SPIRAL_ROOT_LOD2"
+ },
+ "EF_T06_SPIRAL_ROOT_LOD3": {
+  "hero": "EF_T06_SPIRAL_ROOT",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 23.083
+  },
+  "collection": "T6_EF_T06_SPIRAL_ROOT_LOD3"
+ },
+ "EF_T07_LANTERN_TREE_LOD1": {
+  "hero": "EF_T07_LANTERN_TREE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 15.11,
+   "canopy_x_m": 18.25,
+   "canopy_y_m": 16.23,
+   "trunk_d_m": 0.92,
+   "branches": 4289,
+   "leaf_cards": 1613,
+   "tris": 103164,
+   "verts": 71919,
+   "lowest_z": -0.29,
+   "height_scale": 0.79
+  },
+  "collection": "T6_EF_T07_LANTERN_TREE_LOD1"
+ },
+ "EF_T07_LANTERN_TREE_LOD2": {
+  "hero": "EF_T07_LANTERN_TREE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 15.11,
+   "canopy_x_m": 19.33,
+   "canopy_y_m": 16.92,
+   "trunk_d_m": 0.95,
+   "branches": 767,
+   "leaf_cards": 214,
+   "tris": 29218,
+   "verts": 18246,
+   "lowest_z": -0.3,
+   "height_scale": 0.82
+  },
+  "collection": "T6_EF_T07_LANTERN_TREE_LOD2"
+ },
+ "EF_T07_LANTERN_TREE_LOD3": {
+  "hero": "EF_T07_LANTERN_TREE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 15.263
+  },
+  "collection": "T6_EF_T07_LANTERN_TREE_LOD3"
+ },
+ "EF_T08_DEAD_SNAG_LOD1": {
+  "hero": "EF_T08_DEAD_SNAG",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 18.74,
+   "canopy_x_m": 7.28,
+   "canopy_y_m": 7.52,
+   "trunk_d_m": 1.98,
+   "branches": 147,
+   "leaf_cards": 0,
+   "tris": 5968,
+   "verts": 3616,
+   "lowest_z": -0.5,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T08_DEAD_SNAG_LOD1"
+ },
+ "EF_T08_DEAD_SNAG_LOD2": {
+  "hero": "EF_T08_DEAD_SNAG",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 18.74,
+   "canopy_x_m": 7.28,
+   "canopy_y_m": 7.52,
+   "trunk_d_m": 1.98,
+   "branches": 147,
+   "leaf_cards": 0,
+   "tris": 5476,
+   "verts": 3339,
+   "lowest_z": -0.49,
+   "height_scale": 1.0
+  },
+  "collection": "T6_EF_T08_DEAD_SNAG_LOD2"
+ },
+ "EF_T08_DEAD_SNAG_LOD3": {
+  "hero": "EF_T08_DEAD_SNAG",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 18.926
+  },
+  "collection": "T6_EF_T08_DEAD_SNAG_LOD3"
+ },
+ "EF_FE01_GIANT_FERN_LOD1": {
+  "hero": "EF_FE01_GIANT_FERN",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 1.579,
+   "spread_x_m": 1.796,
+   "spread_y_m": 1.594,
+   "tris": 4176,
+   "verts": 3468,
+   "lowest_z": -0.01
+  },
+  "collection": "T6_EF_FE01_GIANT_FERN_LOD1"
+ },
+ "EF_M01_MOSS_CARPET_LOD1": {
+  "hero": "EF_M01_MOSS_CARPET",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.067,
+   "spread_x_m": 1.151,
+   "spread_y_m": 1.491,
+   "tris": 3224,
+   "verts": 2136,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_EF_M01_MOSS_CARPET_LOD1"
+ },
+ "EF_MU01_GLOWCAP_LOD1": {
+  "hero": "EF_MU01_GLOWCAP",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.103,
+   "spread_x_m": 0.234,
+   "spread_y_m": 0.077,
+   "tris": 1552,
+   "verts": 1008,
+   "lowest_z": -0.006
+  },
+  "collection": "T6_EF_MU01_GLOWCAP_LOD1"
+ },
+ "EF_V01_HANGING_VINE_LOD1": {
+  "hero": "EF_V01_HANGING_VINE",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 9.0,
+   "spread_x_m": 1.824,
+   "spread_y_m": 1.151,
+   "tris": 1360,
+   "verts": 1570,
+   "lowest_z": 2.146
+  },
+  "collection": "T6_EF_V01_HANGING_VINE_LOD1"
+ },
+ "EF_M02_GLOW_MOSS_LOD1": {
+  "hero": "EF_M02_GLOW_MOSS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.058,
+   "spread_x_m": 0.82,
+   "spread_y_m": 0.887,
+   "tris": 3412,
+   "verts": 2316,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_EF_M02_GLOW_MOSS_LOD1"
+ }
+}

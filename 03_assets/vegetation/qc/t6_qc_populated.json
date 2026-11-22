@@ -1,0 +1,265 @@
+{
+ "version": "populated files (Blender 4.5.16 LTS)",
+ "results": [
+  {
+   "check": "TASK 05 approved files untouched (git: no change under 02_world/3d_world)",
+   "ok": true,
+   "detail": "clean"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: file < 95 MB (everything linked)",
+   "ok": true,
+   "detail": "0.27 MB"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: opens, no missing images / libraries",
+   "ok": true,
+   "detail": "10 libraries, missing images []"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: ecosystem layers",
+   "ok": true,
+   "detail": "24 layers"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: one local T6_WIND_CONTROL drives every layer",
+   "ok": true,
+   "detail": "1 control(s)"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: every layer has a terrain + band collections",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: Tulsi + Marigold only in the Ashram garden beds (Decision 01 \u00a74)",
+   "ok": true,
+   "detail": "outside: []"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: exactly ONE Peepal (landmark, courtyard)",
+   "ok": true,
+   "detail": "1 instance(s), 0 Peepal scatter layers"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: no fantasy / glowing species outside R-02",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: every layer generates instances (whole tile, open culling)",
+   "ok": false,
+   "detail": "218,229 instances (ground layers sampled at 1 %); empty ['ECO_AV_S02_TULSI_D_E_PROPOSED', 'ECO_AV_T02_DEODAR', 'ECO_AV_T03_CHIR_PINE', 'ECO_PL_G02_DOOB_GRASS']"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: nothing floating \u2014 instance bases on the terrain surface (|\u0394z| < 0.35 m)",
+   "ok": true,
+   "detail": "933 samples, median 0.011 m, max 0.05 m, 100.0% OK"
+  },
+  {
+   "check": "T6_POP_R01_ASHRAM_VALLEY_v001.blend: wind bends the realized near plants (ECO_AV_G01_MEADOW_GRASS)",
+   "ok": true,
+   "detail": "8,020,350 verts, max \u0394 0.090 m in 0.5 s"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: file < 95 MB (everything linked)",
+   "ok": true,
+   "detail": "0.24 MB"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: opens, no missing images / libraries",
+   "ok": true,
+   "detail": "7 libraries, missing images []"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: ecosystem layers",
+   "ok": true,
+   "detail": "17 layers"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: one local T6_WIND_CONTROL drives every layer",
+   "ok": true,
+   "detail": "1 control(s)"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: every layer has a terrain + band collections",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: Tulsi + Marigold only in the Ashram garden beds (Decision 01 \u00a74)",
+   "ok": true,
+   "detail": "outside: []"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: every layer generates instances (whole tile, open culling)",
+   "ok": true,
+   "detail": "328,589 instances (ground layers sampled at 1 %); empty []"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: nothing floating \u2014 instance bases on the terrain surface (|\u0394z| < 0.35 m)",
+   "ok": true,
+   "detail": "1020 samples, median 0.012 m, max 0.05 m, 100.0% OK"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: R-02 fantasy share of trees 20\u201330 % (Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "18493 fantasy / 89564 trees = 21% (whole tile)"
+  },
+  {
+   "check": "T6_POP_R02_ENCHANTED_FOREST_v001.blend: wind bends the realized near plants (ECO_EF_FE01_GIANT_FERN)",
+   "ok": true,
+   "detail": "6,029,472 verts, max \u0394 0.179 m in 0.5 s"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: file < 95 MB (everything linked)",
+   "ok": true,
+   "detail": "0.22 MB"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: opens, no missing images / libraries",
+   "ok": true,
+   "detail": "7 libraries, missing images []"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: ecosystem layers",
+   "ok": true,
+   "detail": "12 layers"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: one local T6_WIND_CONTROL drives every layer",
+   "ok": true,
+   "detail": "1 control(s)"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: every layer has a terrain + band collections",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: Tulsi + Marigold only in the Ashram garden beds (Decision 01 \u00a74)",
+   "ok": true,
+   "detail": "outside: []"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: no fantasy / glowing species outside R-02",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: every layer generates instances (whole tile, open culling)",
+   "ok": true,
+   "detail": "89,425 instances (ground layers sampled at 1 %); empty []"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: nothing floating \u2014 instance bases on the terrain surface (|\u0394z| < 0.35 m)",
+   "ok": true,
+   "detail": "714 samples, median 0.013 m, max 0.05 m, 100.0% OK"
+  },
+  {
+   "check": "T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend: wind bends the realized near plants (ECO_AV_G01_MEADOW_GRASS)",
+   "ok": true,
+   "detail": "1,146,600 verts, max \u0394 0.087 m in 0.5 s"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: file < 95 MB (everything linked)",
+   "ok": true,
+   "detail": "0.21 MB"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: opens, no missing images / libraries",
+   "ok": true,
+   "detail": "8 libraries, missing images []"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: ecosystem layers",
+   "ok": true,
+   "detail": "11 layers"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: one local T6_WIND_CONTROL drives every layer",
+   "ok": true,
+   "detail": "1 control(s)"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: every layer has a terrain + band collections",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: Tulsi + Marigold only in the Ashram garden beds (Decision 01 \u00a74)",
+   "ok": true,
+   "detail": "outside: []"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: no fantasy / glowing species outside R-02",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: every layer generates instances (whole tile, open culling)",
+   "ok": true,
+   "detail": "54,049 instances (ground layers sampled at 1 %); empty []"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: nothing floating \u2014 instance bases on the terrain surface (|\u0394z| < 0.35 m)",
+   "ok": true,
+   "detail": "536 samples, median 0.031 m, max 0.05 m, 100.0% OK"
+  },
+  {
+   "check": "T6_POP_R04_GOLDEN_DESERT_v001.blend: wind bends the realized near plants (ECO_DS_G01_SEWAN_GRASS_WADI)",
+   "ok": false,
+   "detail": "0 verts, max \u0394 0.000 m in 0.5 s"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: file < 95 MB (everything linked)",
+   "ok": true,
+   "detail": "0.19 MB"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: opens, no missing images / libraries",
+   "ok": true,
+   "detail": "6 libraries, missing images []"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: ecosystem layers",
+   "ok": true,
+   "detail": "4 layers"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: one local T6_WIND_CONTROL drives every layer",
+   "ok": true,
+   "detail": "1 control(s)"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: every layer has a terrain + band collections",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: Tulsi + Marigold only in the Ashram garden beds (Decision 01 \u00a74)",
+   "ok": true,
+   "detail": "outside: []"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: no fantasy / glowing species outside R-02",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: every layer generates instances (whole tile, open culling)",
+   "ok": true,
+   "detail": "1,621 instances (ground layers sampled at 1 %); empty []"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: nothing floating \u2014 instance bases on the terrain surface (|\u0394z| < 0.35 m)",
+   "ok": true,
+   "detail": "240 samples, median 0.018 m, max 0.05 m, 100.0% OK"
+  },
+  {
+   "check": "T6_POP_R05_FORBIDDEN_LANDS_v001.blend: wind bends the realized near plants (ECO_FB_G01_HARDY_GRASS)",
+   "ok": true,
+   "detail": "31,680 verts, max \u0394 0.054 m in 0.5 s"
+  }
+ ]
+}

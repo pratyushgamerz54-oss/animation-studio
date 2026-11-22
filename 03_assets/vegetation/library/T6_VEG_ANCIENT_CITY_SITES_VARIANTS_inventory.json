@@ -1,0 +1,168 @@
+{
+ "CT_T01_MANGO_V1": {
+  "hero": "CT_T01_MANGO",
+  "kind": "tree",
+  "seed": 1,
+  "lod": 1,
+  "stats": {
+   "height_m": 15.79,
+   "canopy_x_m": 18.01,
+   "canopy_y_m": 23.75,
+   "trunk_d_m": 1.07,
+   "branches": 7306,
+   "leaf_cards": 5999,
+   "tris": 215190,
+   "verts": 153711,
+   "lowest_z": -0.3,
+   "height_scale": 0.808
+  },
+  "collection": "T6_CT_T01_MANGO_V1"
+ },
+ "CT_T01_MANGO_V2": {
+  "hero": "CT_T01_MANGO",
+  "kind": "tree",
+  "seed": 2,
+  "lod": 1,
+  "stats": {
+   "height_m": 16.06,
+   "canopy_x_m": 20.19,
+   "canopy_y_m": 19.51,
+   "trunk_d_m": 1.06,
+   "branches": 7235,
+   "leaf_cards": 5969,
+   "tris": 213282,
+   "verts": 152424,
+   "lowest_z": -0.3,
+   "height_scale": 0.852
+  },
+  "collection": "T6_CT_T01_MANGO_V2"
+ },
+ "CT_T02_COCONUT_PALM_V1": {
+  "hero": "CT_T02_COCONUT_PALM",
+  "kind": "tree",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 15.38,
+   "canopy_x_m": 7.69,
+   "canopy_y_m": 7.59,
+   "trunk_d_m": 0.58,
+   "branches": 27,
+   "leaf_cards": 0,
+   "tris": 69400,
+   "verts": 62532,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "collection": "T6_CT_T02_COCONUT_PALM_V1"
+ },
+ "CT_T02_COCONUT_PALM_V2": {
+  "hero": "CT_T02_COCONUT_PALM",
+  "kind": "tree",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 15.27,
+   "canopy_x_m": 8.31,
+   "canopy_y_m": 8.04,
+   "trunk_d_m": 0.58,
+   "branches": 27,
+   "leaf_cards": 0,
+   "tris": 69176,
+   "verts": 62322,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "collection": "T6_CT_T02_COCONUT_PALM_V2"
+ },
+ "CT_V01_IVY_CURTAIN_V1": {
+  "hero": "CT_V01_IVY_CURTAIN",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 3.185,
+   "spread_x_m": 2.865,
+   "spread_y_m": 0.2,
+   "tris": 4308,
+   "verts": 3777,
+   "lowest_z": -0.033
+  },
+  "collection": "T6_CT_V01_IVY_CURTAIN_V1"
+ },
+ "CT_V01_IVY_CURTAIN_V2": {
+  "hero": "CT_V01_IVY_CURTAIN",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 3.243,
+   "spread_x_m": 2.881,
+   "spread_y_m": 0.199,
+   "tris": 3824,
+   "verts": 3311,
+   "lowest_z": -0.034
+  },
+  "collection": "T6_CT_V01_IVY_CURTAIN_V2"
+ },
+ "CT_M01_RUIN_MOSS_V1": {
+  "hero": "CT_M01_RUIN_MOSS",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.05,
+   "spread_x_m": 0.51,
+   "spread_y_m": 0.43,
+   "tris": 3680,
+   "verts": 2460,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_CT_M01_RUIN_MOSS_V1"
+ },
+ "CT_M01_RUIN_MOSS_V2": {
+  "hero": "CT_M01_RUIN_MOSS",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.05,
+   "spread_x_m": 0.442,
+   "spread_y_m": 0.47,
+   "tris": 3680,
+   "verts": 2460,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_CT_M01_RUIN_MOSS_V2"
+ },
+ "CT_G01_CRACK_GRASS_V1": {
+  "hero": "CT_G01_CRACK_GRASS",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.125,
+   "spread_x_m": 0.361,
+   "spread_y_m": 0.365,
+   "tris": 1176,
+   "verts": 1116,
+   "lowest_z": -0.01
+  },
+  "collection": "T6_CT_G01_CRACK_GRASS_V1"
+ },
+ "CT_G01_CRACK_GRASS_V2": {
+  "hero": "CT_G01_CRACK_GRASS",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.154,
+   "spread_x_m": 0.326,
+   "spread_y_m": 0.332,
+   "tris": 1176,
+   "verts": 1116,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_CT_G01_CRACK_GRASS_V2"
+ }
+}
