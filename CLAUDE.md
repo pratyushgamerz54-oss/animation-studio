@@ -63,7 +63,7 @@ Abhi ke 1280×720 renders sirf approval previews hain. Final shots ke liye:
 - Trees/rocks: close-up mein LOD0 (abhi near = LOD1/LOD2).
 - QC: har final frame 100% zoom par check (blur / noise / tiling / aliasing).
 
-## ⚠️ REAL-WORLD REALISM RULE — TEXTURES + MOTION (Director, 22 Nov)
+## ⚠️ REAL-WORLD REALISM RULE — TEXTURES + MOTION + PHYSICS / DESTRUCTION (Director, 22 Nov)
 **Textures:** har surface asli duniya jaisa dikhe — polished / plastic / CG-clean nahi. Scanned PBR (Poly Haven) jahan ho sake;
 procedural ho to: natural roughness (dry ground ≥ 0.45, leaves 0.45–0.7), kam specular (≈ 0.25–0.3), rang mein mottling, daag,
 dirt in crevices (AO), micro-bump, wear; perfect geometric shapes se bacho (organic wobble). Pani / geeli surface hi glossy.
@@ -73,6 +73,14 @@ flexible parts root par stiff aur tip par lachile (arc bend, no rigid "lakdi" ro
 per-element phase variation (sab sync mein nahi), wind / gravity / collision consistent across the shot. Creatures: real gait
 cycles (reference footage / mocap-like timing), no floaty or linear motion. Cameras: real lens + rig behaviour (no impossible moves
 unless the shot asks). Har animated preview frame-by-frame check karo; doubt ho to simulation (cloth / softbody / rigid / fluid) use karo.
+**Physics + destruction:** har physics / destruction real-world jaisa — real scale (1 BU = 1 m) aur gravity 9.81 m/s², sahi mass /
+density, friction, bounce; material ke hisaab se tootna: patthar / concrete = bade-chhote irregular chunks (Voronoi / Cell Fracture,
+inner faces ka alag material), lakdi = splinters + resha (fibres) ke saath, kaanch = tez dhaar wale shards, mitti = dheele dhele + dhool,
+dhaatu = mudna / pichakna (tootna kam); rigid-body sim (constraints / breakable joints, sahi collision shapes), dust + smoke
+(Mantaflow), chhota debris + particles, impact par roshni / dhool / awaaz ka timing; pehle bade tukde, phir chhote; koi bhi cheez hawa
+mein ruki ya bina wazan ke nahi; energy ke hisaab se speed (chhoti takkar = kam tootna). Destruction shots: pehle sim preview, frame-by-frame
+check, phir final high-res sim (Director ke GPU PC par).
+
 
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
 0. **SABSE PEHLE** `HANDOFF.md` padho aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
