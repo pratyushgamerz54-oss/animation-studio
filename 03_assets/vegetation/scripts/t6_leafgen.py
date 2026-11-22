@@ -147,6 +147,10 @@ class Tile:
         lat_s = np.clip(1 - dl / .04, 0, 1) ** 1.5 * np.clip(1 - q ** 2, 0, 1) * (uu > .05) * (P.get('veinvis', 1) > 0)
         a = (.42 * mid_s + .26 * lat_s)[..., None]
         c = c * (1 - a) + vein * a
+        # realism v3: ~10 % of leaves start drying — browning from the tip / margin inwards
+        if self.rng.random() < .05:                                   # Spring: only a few leaves drying
+            ab = np.clip(.55 * q ** 2.5 + .5 * uu ** 4 + .1 * nz, 0, .8)[..., None]
+            c = c * (1 - ab) + np.array(srgb2lin(np.array([.42, .32, .14])), np.float32) * ab
         # natural variation inside the blade: lighter along the midrib, darker margin, a few small blemish spots
         c = c * (1 + .07 * (1 - q[..., None]) ** 4) * (1 - .09 * q[..., None] ** 6)
         rng = self.rng
@@ -402,6 +406,8 @@ def build(name):
             break
     A['zoom'] = z
     for var, T in enumerate(tiles):
+        lum = (T.C * np.array([.2126, .7152, .0722], np.float32)).sum(-1, keepdims=True)
+        T.C = T.C * .90 + lum * .10                                   # realism v3: natural (less saturated) foliage greens
         col = lin2srgb(T.C); a = T.A
         # height → normal (OpenGL: +Y up). Blur the height a little so the normal map is smooth.
         Hs = gaussian_filter(T.H, 1.2 * SS)

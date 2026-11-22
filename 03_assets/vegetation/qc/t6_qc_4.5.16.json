@@ -9,7 +9,7 @@
   {
    "check": "AV: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "33.4 MB"
+   "detail": "33.5 MB"
   },
   {
    "check": "AV: opens in Blender 4.5.16 LTS, no missing images",
@@ -29,7 +29,7 @@
   {
    "check": "AV: assets in library",
    "ok": true,
-   "detail": "20 assets"
+   "detail": "21 assets"
   },
   {
    "check": "AV_AQ01_LOTUS: valid mesh, UVs",
@@ -343,6 +343,41 @@
   },
   {
    "check": "AV_G02_KANS_GRASS: wind modifier + drivers valid",
+   "ok": true,
+   "detail": "4 drivers"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: valid mesh, UVs",
+   "ok": true,
+   "detail": "3,920 tris, 3,360 verts"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: wind attributes",
+   "ok": true,
+   "detail": "wind_trunk,wind_branch,wind_leaf,wind_phase,leaf_rand"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: PBR materials (2 slots)",
+   "ok": true,
+   "detail": "MAT_T6_AV_G02B_KANS_GRASS_SPRING_0, MAT_T6_AV_G02B_KANS_GRASS_SPRING_1"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: every face has a valid material slot",
+   "ok": true,
+   "detail": "slots used [0, 1]"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: plant base on the ground (no floating)",
+   "ok": true,
+   "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
+   "check": "AV_G02B_KANS_GRASS_SPRING: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
   },

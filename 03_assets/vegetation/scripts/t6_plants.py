@@ -68,6 +68,9 @@ def petal(G, base, out, up, L, W, cup, mi, wphase, h_ref, shape='oval', segs=4, 
     """petal / small leaf as real geometry: fan of rows along `out`, width profile by shape, cupped towards `up`."""
     out = Vector(out).normalized(); up = Vector(up).normalized(); side = out.cross(up).normalized(); up = side.cross(out).normalized()
     rows = []
+    if rng is not None:                      # realism v3: natural petals / leaves are never identical
+        L *= rng.uniform(.86, 1.12); W *= rng.uniform(.85, 1.12); cup += rng.normal(0, .06); droop += abs(rng.normal(0, .06))
+        rough_edge = max(rough_edge, .07)
     for i in range(segs + 1):
         t = i / segs
         if shape == 'oval':
@@ -86,6 +89,8 @@ def petal(G, base, out, up, L, W, cup, mi, wphase, h_ref, shape='oval', segs=4, 
         if rough_edge and rng is not None:
             w *= 1 + rng.uniform(-rough_edge, rough_edge)
         c = base + out * L * t + up * (cup * L * t * t - droop * L * t ** 3)
+        if rng is not None:
+            c = c + side * (rng.normal(0, .025) * L * t)              # slight lateral wave along the blade
         pts = [c - side * w + up * cup * w * .6, c, c + side * w + up * cup * w * .6]
         rows.append(G.add_verts(pts, wind_trunk=0.0, wind_branch=(max(c.z, 0) / max(h_ref, .01)) * h_ref * .5, wind_leaf=t,
                                 wind_phase=wphase, leaf_rand=wphase, grad=grad * t))
@@ -141,14 +146,19 @@ def rand_dir(rng, spread_deg, up=UP):
 
 # ====================================================================== plant builders
 def grass_tuft(G, rng, P):
+    for i in range(int(P['blades'] * P.get('thatch', 0.0))):     # realism v3: dead thatch at the base (every real tuft has it)
+        r = P['radius'] * 1.1 * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi)
+        base = Vector((math.cos(a) * r, math.sin(a) * r, -.005)); d = rand_dir(rng, 70)
+        blade(G, base, d, P['h'] * rng.uniform(.25, .6), P['w'] * rng.uniform(.7, 1.1), 2.2 * rng.uniform(.7, 1.3), max(3, P.get('segs', 5) - 1),
+              1, rng, rng.random(), twist=rng.normal(0, 1.2), curl=.35)
     for i in range(P['blades']):
         r = P['radius'] * math.sqrt(rng.random()); a = rng.uniform(0, 2 * np.pi)
         base = Vector((math.cos(a) * r, math.sin(a) * r, -.01))
         d = rand_dir(rng, P['spread']) + Vector((math.cos(a), math.sin(a), 0)) * P.get('splay', .2) * r / max(P['radius'], 1e-3)
         h = P['h'] * rng.uniform(.55, 1.1)
         mi = 0 if rng.random() > P.get('dry', 0) else 1
-        blade(G, base, d, h, P['w'] * rng.uniform(.7, 1.2), P['bend'] * rng.uniform(.6, 1.4), P.get('segs', 5), mi, rng, rng.random(),
-              twist=rng.normal(0, .6), curl=P.get('curl', .15))
+        blade(G, base, d, h, P['w'] * rng.uniform(.6, 1.35), P['bend'] * rng.uniform(.55, 1.5), P.get('segs', 5), mi, rng, rng.random(),
+              twist=rng.normal(0, .8), curl=P.get('curl', .15) * rng.uniform(.5, 1.6))
     for i in range(P.get('plumes', 0)):          # flowering stalks with plume cards (kans grass)
         a = rng.uniform(0, 2 * np.pi); r = P['radius'] * .5 * math.sqrt(rng.random())
         base = Vector((math.cos(a) * r, math.sin(a) * r, 0)); d = rand_dir(rng, 12)
@@ -172,7 +182,7 @@ def herb(G, rng, P):
         for j in range(P.get('stem_leaves', 0)):
             q = pts[2 + j % (len(pts) - 4)]; a = rng.uniform(0, 2 * np.pi)
             petal(G, q, Vector((math.cos(a), math.sin(a), .5)), UP, P['leaf_l'] * .6, P['leaf_w'] * .6, .1, 0, rng.random(), H,
-                  P.get('leaf_shape', 'oval'), segs=3, droop=.2)
+                  P.get('leaf_shape', 'oval'), segs=3, droop=.2, rng=rng)
         top = pts[-1]; F = P['flower']
         if F['type'] == 'radial':
             flower(G, top, (dd + UP).normalized(), F['n'], F['L'], F['W'], F['cup'], 1, 2, rng.random(), H, F.get('shape', 'oval'),
@@ -191,7 +201,7 @@ def herb(G, rng, P):
                     a = 2 * np.pi * k / n + ly * .4
                     out = Vector((math.cos(a), math.sin(a), .2 + ly * .45)).normalized()
                     petal(G, top + UP * .004 * ly, out, UP, F['L'] * (1 - .12 * ly), F['W'], .3, 1, rng.random(), H, 'obovate', rng=rng,
-                          rough_edge=.15)
+                          rough_edge=.2)
             dome(G, top, F['L'] * .3, F['L'] * .25, 8, 2, rng.random())
         elif F['type'] == 'trumpet':            # gentian: upright trumpet + 5 lobes
             ax = (dd + UP * 2).normalized(); L = F['L']
@@ -362,7 +372,7 @@ GRASS_G = [(0, '#2E4A1E'), (.55, '#5E8A34'), (1, '#A9B862')]
 PLANTS = [
     # ------------------------------------------------------------------ R-01 ASHRAM VALLEY
     dict(name='AV_G01_MEADOW_GRASS', common='Valley meadow grass', latin='Poa / Festuca mix', label=SI, region='R-01', category='Grass',
-         kind='grass', seed=101, P=dict(blades=260, radius=.16, h=.34, w=.006, bend=.9, spread=28, splay=.4, dry=.12),
+         kind='grass', seed=101, P=dict(blades=260, radius=.16, h=.34, w=.006, bend=.9, spread=28, splay=.4, dry=.22, thatch=.3),
          mats=[('grass', GRASS_G), ('grass', [(0, '#4A4A22'), (.5, '#9A8A4A'), (1, '#D1BE7E')])], palette=['#2E4A1E', '#5E8A34', '#A9B862', '#D1BE7E']),
     dict(name='AV_G02_KANS_GRASS', common='Kans grass (tall, plumed)', latin='Saccharum spontaneum', label=SI, region='R-01', category='Grass',
          kind='grass', seed=102, P=dict(blades=120, radius=.35, h=1.9, w=.012, bend=1.3, spread=16, splay=.3, segs=7, plumes=14, plume_size=.55),
@@ -371,11 +381,11 @@ PLANTS = [
     dict(name='AV_G02B_KANS_GRASS_SPRING', common='Kans grass — SPRING (green clump, no plumes)', latin='Saccharum spontaneum',
          label=SI, region='R-01', category='Grass', kind='grass', seed=102,
          habitat='river bars + moist valley floor; SPRING look (Decision Sheet 01 §6) — plumes appear only in autumn',
-         P=dict(blades=140, radius=.35, h=1.7, w=.012, bend=1.3, spread=16, splay=.3, segs=7, plumes=0, plume_size=.55, dry=.08),
+         P=dict(blades=140, radius=.35, h=1.7, w=.012, bend=1.3, spread=16, splay=.3, segs=7, plumes=0, plume_size=.55, dry=.12, thatch=.25),
          mats=[('grass', [(0, '#34501F'), (.6, '#5E8A34'), (1, '#9AB25A')]), ('grass', [(0, '#4A4A22'), (.5, '#8A8A4A'), (1, '#B8B070')])],
          palette=['#34501F', '#5E8A34', '#9AB25A']),
     dict(name='AV_G03_DRY_PATH_GRASS', common='Dry path-edge grass', latin='Heteropogon contortus (spear grass)', label=SI, region='R-01',
-         category='Grass', kind='grass', seed=103, P=dict(blades=130, radius=.12, h=.45, w=.005, bend=1.1, spread=30, splay=.5, dry=.6),
+         category='Grass', kind='grass', seed=103, P=dict(blades=130, radius=.12, h=.45, w=.005, bend=1.1, spread=30, splay=.5, dry=.6, thatch=.35),
          mats=[('grass', [(0, '#3A4A22'), (.5, '#7A8A3A'), (1, '#B8A860')]), ('grass', [(0, '#5A4A2A'), (.5, '#A88A4A'), (1, '#D8C08A')])],
          palette=['#7A8A3A', '#A88A4A', '#D8C08A']),
     dict(name='AV_F01_BUTTERCUP', common='Himalayan buttercup', latin='Ranunculus hirtellus', label=SI, region='R-01', category='Wildflower',
@@ -428,7 +438,7 @@ PLANTS = [
          mats=[('bark', 'bark_willow'), ('leaf', 'ef_beech')], palette=['#5A5048', '#2F6A4A', '#4A8A60']),
     # ------------------------------------------------------------------ R-03 MOUNTAIN KINGDOM
     dict(name='MK_G01_ALPINE_TUSSOCK', common='Alpine tussock grass', latin='Festuca / Kobresia tussock', label=SI, region='R-03',
-         category='Mountain grass', kind='grass', seed=301, P=dict(blades=200, radius=.13, h=.38, w=.004, bend=1.4, spread=35, splay=.6, dry=.45, curl=.3),
+         category='Mountain grass', kind='grass', seed=301, P=dict(blades=200, radius=.13, h=.38, w=.004, bend=1.4, spread=35, splay=.6, dry=.45, curl=.3, thatch=.4),
          mats=[('grass', [(0, '#3A4A2A'), (.5, '#6E7E44'), (1, '#A8A46A')]), ('grass', [(0, '#5A5236'), (.5, '#9A8A5A'), (1, '#CFC29A')])],
          palette=['#6E7E44', '#A8A46A', '#CFC29A']),
     dict(name='MK_F01_GENTIAN', common='Himalayan gentian', latin='Gentiana ornata', label=SI, region='R-03', category='Alpine flower',
@@ -467,7 +477,7 @@ def plant_mats(D):
         elif kind == 'petal':
             out.append(K.mat_petal(nm, v))
         elif kind == 'herbleaf':
-            out.append(K.mat_herbleaf(nm, v))
+            out.append(K.mat_herbleaf(nm, v, rough=.62))
         elif kind == 'woolly':
             out.append(K.mat_simple(nm, v, rough=.9, sheen=1.0))
         elif kind == 'moss':

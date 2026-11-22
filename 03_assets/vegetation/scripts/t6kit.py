@@ -22,7 +22,7 @@ from mathutils import Vector, Matrix, Quaternion
 HERE = os.path.dirname(os.path.abspath(__file__))
 VEG = os.path.abspath(os.path.join(HERE, '..'))                       # 03_assets/vegetation
 PH = os.path.abspath(os.path.join(VEG, '..', 'external', 'polyhaven'))
-LEAVES = os.path.join(VEG, 'textures', 'leaves')
+LEAVES = os.environ.get('T6_LEAF_DIR') or os.path.join(VEG, 'textures', 'leaves')
 ATLAS_META = json.load(open(os.path.join(LEAVES, 'atlases.json'))) if os.path.exists(os.path.join(LEAVES, 'atlases.json')) else {}
 UP = Vector((0, 0, 1))
 
@@ -164,6 +164,12 @@ def mat_bark(name, tex, tint='#FFFFFF', moss=0.0, moss_col='#4E6B2C', lichen=0.0
             col = b.mix(lf.outputs['Result'], col, lc)
         col = b.mix(fac.outputs['Result'], col, mc)
         rough = b.mix(fac.outputs['Result'], rough, (.95, .95, .95, 1))
+    # realism v3: soil + dust on the trunk foot and surface roots (they come out of the ground — never clean)
+    geo_s = b.n('ShaderNodeNewGeometry'); ns = b.noise(geo_s.outputs['Position'], 6.0, 5, .65)
+    soilf = b.math('MULTIPLY', b.attr('soil_w'), b.math('ADD', .35, b.math('MULTIPLY', ns.outputs['Fac'], .9)), True)
+    col = b.mix(b.math('MULTIPLY', soilf, .75), col, hexc('#4A3C2E'))
+    if isinstance(rough, bpy.types.NodeSocket):
+        rough = b.mix(soilf, rough, (.92, .92, .92, 1))
     b.l(col, bsdf.inputs['Base Color'])
     if isinstance(rough, bpy.types.NodeSocket):
         b.l(rough, bsdf.inputs['Roughness'])
@@ -183,7 +189,7 @@ def mat_bark(name, tex, tint='#FFFFFF', moss=0.0, moss_col='#4E6B2C', lichen=0.0
     return m
 
 
-def mat_leaf(name, atlas, hue_var=.04, val_var=.12, transl=.35, tint='#FFFFFF', backlit='#FFFFFF', emission=None):
+def mat_leaf(name, atlas, hue_var=.05, val_var=.24, transl=.35, tint='#FFFFFF', backlit='#FFFFFF', emission=None):
     """leaf / needle cards: atlas colour (alpha cut-out) + normal + roughness; translucency; per-card colour jitter."""
     m, nt, b = new_mat(name)
     out = b.n('ShaderNodeOutputMaterial'); bsdf = b.n('ShaderNodeBsdfPrincipled')
@@ -288,7 +294,7 @@ def mat_moss(name, c1='#3F5E22', c2='#7E9A3A', dry='#8A8A55'):
 # ====================================================================== geometry accumulator
 class Geo:
     """numpy-friendly mesh accumulator: verts, faces (any n-gon), per-corner UVs, material index, POINT attributes."""
-    ATTRS = ('wind_trunk', 'wind_branch', 'wind_leaf', 'wind_phase', 'leaf_rand', 'moss_w', 'grad')
+    ATTRS = ('wind_trunk', 'wind_branch', 'wind_leaf', 'wind_phase', 'leaf_rand', 'moss_w', 'grad', 'soil_w')
 
     def __init__(self):
         self.V = []; self.F = []; self.UV = []; self.MI = []; self.A = {k: [] for k in self.ATTRS}; self.NRM = []   # NRM per corner (None = auto)
@@ -640,6 +646,9 @@ def tube(G, b, k, tile, S, H, rng):
         if lobes:
             lob = lobe_amp * np.maximum(0, np.cos(lobes * ang + phase_l)) ** 2.5 * math.exp(-max(z, 0) / max(fh * 1.6, 1e-3))
         bumps = 1 + .035 * np.sin(ang * 3 + i * .7) * (b.kind == 'trunk')
+        if b.kind in ('root', 'aerial'):          # realism v3: roots are never perfect pipes — irregular, knobbly, slightly flattened
+            bumps = (1 + .11 * np.sin(ang * 2 + i * .9 + phase_l) + .06 * np.sin(ang * 5 + i * 1.7 + 2 * phase_l)
+                     + .05 * rng.normal(0, 1, k))
         for j in range(k):
             dirv = nv * math.cos(ang[j]) + bv * math.sin(ang[j])
             pts.append(p + dirv * rf * (1 + lob[j]) * bumps[j])
@@ -655,7 +664,8 @@ def tube(G, b, k, tile, S, H, rng):
         if b.kind == 'root':
             wt = 0.0
         moss = max(0.0, 1 - max(z, 0) / (.12 * H)) if b.kind in ('trunk', 'root') else (.3 if b.level == 1 else 0.0)
-        i0 = G.add_verts(pts, wind_trunk=min(wt, 1.2) ** 1.5, wind_branch=wb, wind_phase=b.phase, moss_w=moss)
+        soil = float(np.clip(1 - max(z, 0) / .45, 0, 1)) if b.kind in ('trunk', 'root') else 0.0
+        i0 = G.add_verts(pts, wind_trunk=min(wt, 1.2) ** 1.5, wind_branch=wb, wind_phase=b.phase, moss_w=moss, soil_w=soil)
         ring_idx.append(i0)
     vrep = tile
     for i in range(n - 1):
@@ -1038,8 +1048,14 @@ def mat_petal(name, base, rough=.4, transl=.35, sss=.25):
     st = b.n('ShaderNodeTexWave'); st.wave_type = 'BANDS'; st.bands_direction = 'X'; st.inputs['Scale'].default_value = 6
     st.inputs['Distortion'].default_value = 2; b.l(uv, st.inputs['Vector'])
     col = b.mix(b.math('MULTIPLY', st.outputs['Fac'], .32), col, dark)
-    b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = rough
+    b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = max(rough, .55)
     bsdf.inputs['Subsurface Weight'].default_value = sss; bsdf.inputs['Sheen Weight'].default_value = .3
+    geo_p = b.n('ShaderNodeNewGeometry'); cr = b.noise(geo_p.outputs['Position'], 140.0, 5, .7)      # realism v3: crinkles
+    wv_ = b.n('ShaderNodeTexWave'); wv_.wave_type = 'BANDS'; wv_.bands_direction = 'X'; wv_.inputs['Scale'].default_value = 14
+    wv_.inputs['Distortion'].default_value = 4; b.l(uv, wv_.inputs['Vector'])
+    bp_ = b.n('ShaderNodeBump'); bp_.inputs['Strength'].default_value = .45; bp_.inputs['Distance'].default_value = .0008
+    b.l(b.math('ADD', b.math('MULTIPLY', cr.outputs['Fac'], .6), b.math('MULTIPLY', wv_.outputs['Fac'], .4)), bp_.inputs['Height'])
+    b.l(bp_.outputs['Normal'], bsdf.inputs['Normal'])
     tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color'])
     mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])
     b.l(mx.outputs[0], out.inputs['Surface']); m.diffuse_color = c
@@ -1095,7 +1111,11 @@ def realism(m, kind='surface'):
     hsv = b.n('ShaderNodeHueSaturation'); b.l(mott, hsv.inputs['Value'])
     oi = b.n('ShaderNodeObjectInfo')
     b.l(b.math('ADD', .5, b.math('MULTIPLY', b.math('SUBTRACT', oi.outputs['Random'], .5), .03)), hsv.inputs['Hue'])
-    b.l(b.math('ADD', .92, b.math('MULTIPLY', oi.outputs['Random'], .12)), hsv.inputs['Saturation'])
+    sat0 = {'leaf': .88, 'blade': .86, 'petal': .90, 'surface': .86, 'fungus': .88, 'gloss': .92}[kind]   # realism v3: natural, not candy (Spring = fresh)
+    satv = b.math('ADD', sat0, b.math('MULTIPLY', oi.outputs['Random'], .10))
+    if kind in ('leaf', 'blade'):
+        satv = b.math('MULTIPLY', satv, b.math('ADD', .86, b.math('MULTIPLY', b.attr('leaf_rand'), .26)))
+    b.l(satv, hsv.inputs['Saturation'])
     if isinstance(c, bpy.types.NodeSocket):
         b.l(c, hsv.inputs['Color'])
     else:
@@ -1107,6 +1127,11 @@ def realism(m, kind='surface'):
         sp.inputs['From Min'].default_value = .08; sp.inputs['From Max'].default_value = .02
         blem_col = (0.16, 0.12, 0.05, 1) if kind != 'fungus' else (0.55, 0.48, 0.36, 1)
         col = b.mix(b.math('MULTIPLY', sp.outputs['Result'], P['blem']), col, blem_col)
+    if kind == 'leaf':          # realism v3: ~12 % older / drying leaves (yellow-olive to brown) + faint dust film
+        dry = b.math('MULTIPLY', b.math('MAXIMUM', b.math('SUBTRACT', b.attr('leaf_rand'), .95), 0.0), 6.0, True)   # ~5 % (Spring)
+        dryc = b.mix(n1, (0.30, 0.25, 0.07, 1), (0.22, 0.13, 0.05, 1))
+        col = b.mix(dry, col, dryc)
+        col = b.mix(b.math('ADD', .015, b.math('MULTIPLY', n2, .035)), col, (0.30, 0.28, 0.22, 1))
     if kind == 'blade':
         uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]
         wv = b.n('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'X'; wv.inputs['Scale'].default_value = 9
@@ -1133,9 +1158,11 @@ def realism(m, kind='surface'):
             b.l(dirt.outputs['Result'], cc.inputs[i])
         b.l(cc.outputs[0], mulc.inputs[7]); col = mulc.outputs[2]
     b.l(col, bs.inputs['Base Color'])
-    for tl in [n for n in nt.nodes if n.type == 'BSDF_TRANSLUCENT']:          # translucency follows the new colour
-        if not tl.inputs['Color'].is_linked or tl.inputs['Color'].links[0].from_node.type != 'MIX':
-            pass
+    for tl in [n for n in nt.nodes if n.type == 'BSDF_TRANSLUCENT']:          # realism v3: translucency from the final colour,
+        warm = b.mix(1.0, col, (1.0, .95, .55, 1), 'MULTIPLY')                    # warmer + dimmer
+        b.l(b.mix(1.0, warm, (.8, .8, .8, 1), 'MULTIPLY'), tl.inputs['Color'])
+    for mx_ in [n for n in nt.nodes if n.type == 'MIX_SHADER' and n.inputs[0].default_value < .99 and not n.inputs[0].is_linked]:
+        mx_.inputs[0].default_value = min(mx_.inputs[0].default_value, .24)
     # ---- micro bump (after the existing normal map / bump)
     nrm = src(bs.inputs['Normal'])
     bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = P['bump']; bp.inputs['Distance'].default_value = .0015
