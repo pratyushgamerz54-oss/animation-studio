@@ -112,11 +112,12 @@ REGIONS = {
     'MK': dict(master='00_MASTER_WORLD/T5_REGION_R03_RANGE_master_v002.blend', out='T6_POP_R03_MOUNTAIN_KINGDOM_v001.blend', terrain='T5_TERRAIN_CV',
                replace={'T5_RANGE_SCATTER': ['SC_CV_STONES', 'SC_CV_ROCKFALL', 'SC_R3N_TALUS_BOULDERS', 'SC_R3N_CONIFERS']},
                layers=[   # zone M1 (~2 000 m, cave-entrance tile): spruce + silver fir forest, blue pine in clearings, Burans, birch in gullies
-                   L('MK_T01_HIMALAYAN_SPRUCE', Density=.012, Min_Distance=7.0, Mask='m_forest', Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_bare', Avoid_Mask_2='m_grove'),
-                   L('MK_T04_SILVER_FIR', Density=.006, Min_Distance=7.0, Mask='m_forest', Mask_Min=.35, Mask_Max=.7, Avoid_Mask='m_bare'),
+                   L('MK_T01_HIMALAYAN_SPRUCE', Density=.006, Min_Distance=8.0, Mask='m_forest', Mask_Min=.25, Mask_Max=.6, Avoid_Mask='m_bare', Avoid_Mask_2='m_grove',
+                     **{'Camera Clearance (m)': 18.0}),
+                   L('MK_T04_SILVER_FIR', Density=.003, Min_Distance=8.0, Mask='m_forest', Mask_Min=.35, Mask_Max=.7, Avoid_Mask='m_bare', **{'Camera Clearance (m)': 18.0}),
                    L('MK_T05_BLUE_PINE', Density=.002, Min_Distance=10.0, Mask='m_one', Mask_Min=0.0, Mask_Max=.5, Avoid_Mask='m_forest', Avoid_Strength=.7,
-                     Avoid_Mask_2='m_scree'),
-                   L('AV_T05_RHODODENDRON', Density=.004, Min_Distance=5.0, Mask='m_forest', Mask_Min=.1, Mask_Max=.4),
+                     Avoid_Mask_2='m_scree', **{'Camera Clearance (m)': 14.0}),
+                   L('AV_T05_RHODODENDRON', Density=.004, Min_Distance=5.0, Mask='m_forest', Mask_Min=.1, Mask_Max=.4, **{'Camera Clearance (m)': 8.0}),
                    L('MK_T02_HIMALAYAN_BIRCH', Density=.002, Min_Distance=6.0, Mask='m_flow', Mask_Min=.75, Mask_Max=1.0, note='gullies / stream lines'),
                    L('MK_G01_ALPINE_TUSSOCK', Density=3.0, Min_Distance=.3, Mask='m_one', Mask_Min=0.0, Mask_Max=.5, Avoid_Mask='m_forest', Avoid_Mask_2='m_scree'),
                    L('AV_G01_MEADOW_GRASS', Density=3.0, Min_Distance=.25, Mask='m_one', Mask_Min=0.0, Mask_Max=.5, Avoid_Mask='m_forest', Avoid_Strength=.8),
@@ -263,16 +264,19 @@ def make_cam(spec, V, A, terrain, P):
         # target = the centre of the densest patch of the vegetation mask near (cx, cy) — a mask is resolution-independent,
         # scatter points are not (the terrain is coarser in the viewport than in the render)
         m = A.get(spec.get('target_mask', 'm_one')); bs = 20.0
-        sel = ((V[:, 0] - cx) ** 2 + (V[:, 1] - cy) ** 2 < 700 ** 2)
-        if m is None or not sel.any():
+        if m is None:
             t = (cx, cy)
-        else:
-            gx = np.floor((V[sel, 0] - cx + 700) / bs).astype(int); gy = np.floor((V[sel, 1] - cy + 700) / bs).astype(int); n_ = int(1400 / bs) + 1
-            Hm = np.zeros((n_, n_)); tm = spec.get('tmin', .3); np.add.at(Hm, (gx, gy), np.clip((m[sel] - tm) / max(1 - tm, .1) * 1.6, 0, 1) * (1 - A.get('m_dry', np.zeros_like(m))[sel] * .8))
+        else:                       # grid over the WHOLE tile; densest mask patch, gently preferring patches near (cx, cy)
+            gx0, gy0 = V[:, 0].min(), V[:, 1].min()
+            gx = np.floor((V[:, 0] - gx0) / bs).astype(int); gy = np.floor((V[:, 1] - gy0) / bs).astype(int)
+            Hm = np.zeros((gx.max() + 1, gy.max() + 1)); tm = spec.get('tmin', .3)
+            np.add.at(Hm, (gx, gy), np.clip((m - tm) / max(1 - tm, .1) * 1.6, 0, 1) * (1 - A.get('m_dry', np.zeros_like(m)) * .8))
             Hs = sum(np.roll(np.roll(Hm, i, 0), j, 1) for i in (-1, 0, 1) for j in (-1, 0, 1))           # 60 m box sum
-            yy, xx = np.mgrid[0:n_, 0:n_]; Hs = Hs - .002 * np.hypot(yy - n_ / 2, xx - n_ / 2) * Hs.max()   # prefer near (cx, cy)
-            i, j = np.unravel_index(np.argmax(Hs), Hs.shape)
-            t = (cx - 700 + (i + .5) * bs, cy - 700 + (j + .5) * bs)
+            ii, jj = np.mgrid[0:Hs.shape[0], 0:Hs.shape[1]]
+            dist = np.hypot(gx0 + (ii + .5) * bs - cx, gy0 + (jj + .5) * bs - cy)
+            score = Hs - .0006 * dist * max(Hs.max(), 1e-6)
+            i, j = np.unravel_index(np.argmax(score), score.shape)
+            t = (gx0 + (i + .5) * bs, gy0 + (j + .5) * bs)
         best = None
         x0, y0, x1, y1 = V[:, 0].min() + 25, V[:, 1].min() + 25, V[:, 0].max() - 25, V[:, 1].max() - 25
         for back in (spec['back'], spec['back'] * 1.5, spec['back'] * .7):
@@ -293,7 +297,11 @@ def make_cam(spec, V, A, terrain, P):
             if best:
                 break
         p = best[1] if best else (t[0] - spec['back'], t[1])
-    pz = ground_z(V, *p) + spec.get('h', 1.7); tz = ground_z(V, *t) + spec.get('th', 3.0)
+    # eye height above the HIGHEST ground within 15 m: the background evaluation is at viewport resolution, rugged terrain (crater rim,
+    # talus) is metres higher in the render-resolution mesh → never put the lens under the real surface
+    d2c = (V[:, 0] - p[0]) ** 2 + (V[:, 1] - p[1]) ** 2; near_v = V[d2c < 15 ** 2]
+    zmax = float(near_v[:, 2].max()) if len(near_v) else ground_z(V, *p)
+    pz = max(ground_z(V, *p), zmax) + spec.get('h', 1.7); tz = ground_z(V, *t) + spec.get('th', 3.0)
     cam.location = (p[0], p[1], pz)
     cam.rotation_euler = (Vector((t[0], t[1], tz)) - Vector(cam.location)).to_track_quat('-Z', 'Y').to_euler()
     return cam

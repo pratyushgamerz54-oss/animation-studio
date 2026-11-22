@@ -1,12 +1,15 @@
-# STATUS — last updated 2026-11-22 (session 5: TASK 06 MILESTONE 2 full production — in progress)
+# STATUS — last updated 2026-11-22 (session 5: TASK 06 MILESTONE 2 DONE — Director review)
 
 ## Session 5 (22 Nov)
-- **NOW:** TASK 06 milestone 2 (Director: "jitne bhi task bache hai … un sab ko pura karo" + realism v3 list). Background chains:
-  `t6_finish_pending.sh` (M1 sheets re-render, realism v3 + camera look) and `t6_m2_pending.sh` (M2 libraries → sheets → impostors →
-  LODs / variants → QC). Resume after a restart: HANDOFF §6c (3 commands). Populated files: `02_world/ecosystem/populated/`.
-- Built so far: 84 hero assets in 10 regional libraries (7 new: Green Plains, Crystal Lakes, Golden Desert, Forbidden Lands, Ancient City
-  sites, Hidden Underground, Natural Details), palm / succulent / ivy / water-lily / natural-detail generators, 14 new atlases,
-  NG_T6_ECOSYSTEM scatter, populated R-04 + R-05 files (R-01 / R-02 / R-03 wait for the AV library rebuild). TASK 05 files untouched.
+- **NOW: TASK 06 MILESTONE 2 DONE → Director review.** (Director: "jitne bhi task bache hai … un sab ko pura karo" + realism v3 list.)
+  - Realism v3 on every asset + natural camera look; M1 sheets re-rendered (`sheets/T6_SHEET_M1.png`).
+  - 10 regional hero libraries — **84 assets** (29 trees, 7 shrubs, 42 plants, 6 natural details); 7 new regions (Green Plains, Crystal
+    Lakes, Golden Desert, Forbidden Lands, Ancient City sites, Hidden Underground, Natural Details) + MK silver fir / blue pine + EF glow moss
+    (`sheets/T6_SHEET_M2.png`); variants (3 / species) + LOD1 / LOD2 / impostor LOD3 for every region.
+  - **NG_T6_ECOSYSTEM** scatter + populated files R-01…R-05 on the approved TASK 05 masters (TASK 05 untouched) + previews
+    (`02_world/ecosystem/renders/T6_POPULATED_PREVIEWS.png`) + scatter QC; QC **904/904** (4.5) · **904/904** (5.3) · 39/39 textures · **58/58** populated → `03_assets/vegetation/qc/T06_QC_REPORT.md`.
+  - Director questions: storage plan (repo 4.3 GB), wildlife selection, Sky Realms map position, exact Peepal / garden spots (PROPOSED).
+  - Resume / rebuild: HANDOFF §6c (scripts are resumable). Branch `ccr-c375d59d-2qaoyn`.
 
 ## Session 4 (21–22 Nov)
 - **NOW (22 Nov):** wind v3 clip + leaf realism v2 re-render running. If the session ended before they finished → run

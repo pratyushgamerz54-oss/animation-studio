@@ -65,7 +65,8 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
     cam = sc.camera
     for o in layers:
         md = o.modifiers['T6_ECOSYSTEM']; I = ids(md)
-        md[I['Viewport Density']] = 1.0 if o.get('t6_kind') in ('tree', 'shrub', 'detail') else .01
+        dense = o.get('t6_kind') == 'plant' and md[I['Density']] >= .03         # only dense ground layers are sampled (1 %)
+        md[I['Viewport Density']] = .01 if dense else 1.0
         md[I['Cull Angle']] = 180.0; md[I['Cull Distance']] = 1e6; md[I['Keep Near']] = 1e6; md[I['Realize Distance']] = 0.0
         o.update_tag()
     bpy.context.view_layer.update()
@@ -78,7 +79,7 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
                 bases[n].append(tuple(inst.matrix_world.translation))
     empty = [n for n, c in counts.items() if c == 0]
     chk(f'{fn}: every layer generates instances (whole tile, open culling)', not empty,
-        f'{sum(counts.values()):,} instances (ground layers sampled at 1 %); empty {empty[:6]}')
+        f'{sum(counts.values()):,} instances (ground layers ≥ 0.03 / m² sampled at 1 %); empty {empty[:6]}')
     # nothing floating: instance base vs terrain surface (vertical ray down / up)
     terr = {md[ids(md)['Terrain']] for md in (o.modifiers['T6_ECOSYSTEM'] for o in layers)}
     dz_all = []
@@ -100,7 +101,8 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
     # wind: realized near plants move between two frames at strength 2 — the camera is moved next to real instances of the
     # densest plant layer (in memory), its realize distance opened to 25 m
     main_t = layers[0].modifiers['T6_ECOSYSTEM'][ids(layers[0].modifiers['T6_ECOSYSTEM'])['Terrain']] if layers else None
-    pl = sorted([o for o in layers if o.get('t6_kind') == 'plant' and bases[o.name]],
+    windy = lambda o: float((bpy.data.objects.get(o.get('t6_layer', '') + '_SC') or {}).get('t6_wind_branch', 0)) > 0   # moss / lichen / fungi don't sway
+    pl = sorted([o for o in layers if o.get('t6_kind') == 'plant' and bases[o.name] and windy(o)],
                 key=lambda o: (o.modifiers['T6_ECOSYSTEM'][ids(o.modifiers['T6_ECOSYSTEM'])['Terrain']] != main_t, -counts[o.name]))
     if pl and cam is not None:
         o = pl[0]; p0 = bases[o.name][0]

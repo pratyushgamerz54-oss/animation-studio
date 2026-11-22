@@ -36,7 +36,7 @@ Deliverables of milestone 1 (all in git):
 | 8 | Procedural scattering | `NG_T6_ECOSYSTEM` (§9) + populated region files (§13) | ✅ milestone 2 |
 | 9 | Wind animation setup | `NG_T6_WIND` + `T6_WIND_CONTROL` in every library, test clip | ✅ built |
 | 10 | Preview renders | `03_assets/vegetation/renders/`, contact sheet `sheets/T6_SHEET_M1.png` | ✅ |
-| 11 | Technical QC report | `03_assets/vegetation/qc/T06_QC_REPORT.md` — 337/337 (Blender 4.5), 337/337 (5.3), 25/25 textures | ✅ |
+| 11 | Technical QC report | `03_assets/vegetation/qc/T06_QC_REPORT.md` — milestone 2: 904/904 (Blender 4.5), 904/904 (5.3), 39/39 textures, 58/58 populated | ✅ |
 
 ---
 
@@ -313,8 +313,8 @@ share 20–30 %, no glow outside R-02), wind moves the realized near plants, TAS
 | Sheets for every region + contact sheet M2 | `03_assets/vegetation/sheets/<R>/`, `sheets/T6_SHEET_M2.png` | ✅ |
 | Ecosystem scatter `NG_T6_ECOSYSTEM` | `t6_ecosystem.py` | ✅ |
 | Populated region files (TASK 05 v002 terrain linked, never written): R-01 Ashram Valley (+ ONE Peepal on a PROPOSED chabutra, PROPOSED garden beds with Tulsi + Marigold), R-02 Enchanted Forest (~75 / 25 natural / fantasy), R-03 Mountain Kingdom (M1 forest at the cave entrance), R-04 Golden Desert, R-05 Forbidden Lands | `02_world/ecosystem/populated/T6_POP_R0x_*_v001.blend` (`t6_populate.py`) | ✅ |
-| Cinematic previews (T6 eye-level cameras + the approved TASK 05 shot cameras) | `02_world/ecosystem/renders/populated/` | ✅ preview res (4K on the Director's GPU PC) |
-| QC: libraries (4.5 + 5.3 + textures) + populated scatter QC | `03_assets/vegetation/qc/T06_QC_REPORT.md` | ✅ |
+| Cinematic previews — 14 shots (T6 eye-level cameras + the approved TASK 05 shot cameras), sheet `T6_POPULATED_PREVIEWS.png` | `02_world/ecosystem/renders/` | ✅ 1280×720 preview (4K on the Director's GPU PC) |
+| QC: libraries **904/904** (Blender 4.5) + **904/904** (5.3) + textures **39/39** + populated scatter **58/58** | `03_assets/vegetation/qc/T06_QC_REPORT.md` | ✅ |
 
 **Not placed (honest limits):** R-06 / R-08 / C-sites / caves have no TASK 05 hero terrain tile yet (only the coarse world terrain) →
 their species are built + sheeted and the recipes are ready; placement happens when those regions get their hero terrain.

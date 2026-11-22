@@ -8,7 +8,7 @@ D = os.path.join(ROOT, '02_world', 'ecosystem', 'renders', 'populated')
 REG = [('T6_POP_R01_ASHRAM_VALLEY', 'R-01 ASHRAM VALLEY — meadow, Banj oak + Burans groves, deodar ring, ONE Peepal on a PROPOSED chabutra, PROPOSED garden (Tulsi + Marigold)'),
        ('T6_POP_R02_ENCHANTED_FOREST', 'R-02 ENCHANTED FOREST — ~75 % natural (Giant Elder, Teal Beech, Moss Oak, Yew, snags) / ~25 % approved fantasy, ferns, moss, logs'),
        ('T6_POP_R03_MOUNTAIN_KINGDOM', 'R-03 MOUNTAIN KINGDOM (zone M1, cave entrance) — spruce + silver fir forest, blue pine, Burans, birch, tussock clearings'),
-       ('T6_POP_R04_GOLDEN_DESERT', 'R-04 GOLDEN DESERT — bare dunes; wadis: khejri, acacia, aak, ber, sewan grass; rocky slopes: euphorbia; oases: date palms'),
+       ('T6_POP_R04_GOLDEN_DESERT', 'R-04 GOLDEN DESERT — bare dunes; interdune gravel: sewan grass, aak, thorn shrubs; wadis: khejri, acacia, ber; rocks: euphorbia (no oasis water in TASK 05 → no date palms placed)'),
        ('T6_POP_R05_FORBIDDEN_LANDS', 'R-05 FORBIDDEN LANDS — outer rim only: charred dead trees, dead thorn shrubs, grey lichen, sparse hardy grass')]
 W = 2600; tw = (W - 120) // 2; th = int(tw * 9 / 16)
 rows = [(k, t, sorted(glob.glob(os.path.join(D, f'{k}_v001__*.png')))) for k, t in REG]

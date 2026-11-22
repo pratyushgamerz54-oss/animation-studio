@@ -29,15 +29,16 @@ def blade(G, base, d, h, w, bend, segs, mi, rng, wphase, twist=0.0, curl=0.0, ti
         nrm = d.cross(s_).normalized()
         a = p - s_ * ww / 2 + nrm * curl * ww; b_ = p + s_ * ww / 2 + nrm * curl * ww
         g = grad0 + (1 - grad0) * t
-        rows.append(G.add_verts([a, p, b_], wind_trunk=0.0, wind_branch=t ** 1.5 * h * .6, wind_leaf=t ** 2, wind_phase=wphase,
+        on_ground = floor is not None and p.z <= floor + .002 and i > 0         # resting on the ground: friction holds it (no waving)
+        gw = .05 if on_ground else 1.0
+        rows.append(G.add_verts([a, p, b_], wind_trunk=0.0, wind_branch=t ** 1.5 * h * .6 * gw, wind_leaf=t ** 2 * gw, wind_phase=wphase,
                                 leaf_rand=wphase, grad=g))
         d = (d + Vector((0, 0, -bend)) * (1.0 / segs)).normalized()
         if floor is not None and (p + d * ds).z < floor and i < segs:
             hz = Vector((d.x, d.y, 0.0))
             d = hz.normalized() if hz.length > 1e-4 else perp(d)          # touches the ground → continues flat along it
             d = Vector((d.x, d.y, 0.0)).normalized()
-            if p.z < floor:
-                p = Vector((p.x, p.y, floor))
+            p = Vector((p.x, p.y, floor))                                    # snap onto the ground: the rest of the blade LIES on it
         p = p + d * ds
     for i in range(segs):
         r0, r1 = rows[i], rows[i + 1]; v0, v1 = i / segs, (i + 1) / segs

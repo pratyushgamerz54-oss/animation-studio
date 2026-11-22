@@ -255,16 +255,22 @@ Built (code in `03_assets/vegetation/scripts/`, summary in `02_world/ecosystem/E
 | Populated region files (open approved T5 region master → SAVE AS new file; T5 vegetation scatters excluded in the view layer, rocks / far forest kept; T6 layers on the hero tile; PROPOSED Peepal chabutra + garden beds in the Ashram) | `t6_populate.py` → `02_world/ecosystem/populated/T6_POP_R0{1..5}_*_v001.blend` |
 | Previews + scatter QC | `t6_render_populated.py` → `02_world/ecosystem/renders/populated/`; `t6_pop_qc.py` |
 
-**⚠️ IN PROGRESS (session 5) → resume with these commands (idempotent, skip what is done):**
-1. `SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_finish_pending.sh` — realism-v3 re-render of the milestone-1 sheets (AV / EF / MK) + QC (marker `textures/leaves/.leaf_realism_v2`, sub-steps `textures/leaves/.v3_steps/`).
-2. `SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_m2_pending.sh` — milestone-2 libraries → sheet renders → AV rebuild (v3.1 + SC) → AV plants → compose (all regions, contact M1 + M2) → impostors → LODs / variants → QC (markers `03_assets/vegetation/.m2_steps/`).
-3. After both: `for R in AV EF MK DS FB; do BPY45 t6_populate.py -- $R; done` → `RES=1280x720 SPP=32 BPY45 t6_render_populated.py -- <R>` → `BPY45 t6_pop_qc.py` → `python3 t6_qc.py --report` → docs → commit + push → send the Director the contact sheet M2 + populated previews.
+**Status at the end of session 5: MILESTONE 2 DONE** — awaiting Director review. Resumable scripts (all idempotent, step markers in
+`03_assets/vegetation/.m2_steps/`): `t6_finish_pending.sh` (M1 realism re-render) · `t6_m2_pending.sh` (M2 libraries → sheets → impostors
+→ LODs → QC) · `t6_final_previews.sh` (populate → previews → QC → sheets). Results: contact sheets `03_assets/vegetation/sheets/T6_SHEET_M1.png`
++ `T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/T6_POPULATED_PREVIEWS.png` (+ single PNGs in `renders/populated/`),
+QC `03_assets/vegetation/qc/T06_QC_REPORT.md` — 904/904 (Blender 4.5) · 904/904 (5.3) · 39/39 textures · 58/58 populated.
+Known limits (honest): R-06 / R-08 / C-sites / caves have no TASK 05 hero terrain → species + recipes ready, not placed; TASK 05 desert has
+no oasis water → no date palms placed; Ashram valley masks have no m_dry / m_forest near the Ashram → chir pine on low-flow ridges, deodar on
+grove cores (L0) + forest belts (L1); populated previews use camera clearance (no trees within 7–18 m of the lens; set 0 for moving shots);
+dead-grass "ground friction" wind fix is built into DS + CT, the other grass libraries get it on their next rebuild (they pass QC already).
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
 (all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,
 forbidden crater R05, enchanted forest R02, Great Northern Range R03 + cave, main world v002, material + nature libraries, masters,
-heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43 assets), leaf atlases, sheets, renders, wind clips, Ecosystem Bible + Decision Sheet 01 docs** (§6b) · **TASK 05 realism re-renders** (`12_RENDER/T5/cycles_realism/`). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
+heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43 assets), leaf atlases, sheets, renders, wind clips, Ecosystem Bible + Decision Sheet 01 docs** (§6b) · **TASK 05 realism re-renders** (`12_RENDER/T5/cycles_realism/`) · **TASK 06 milestone 2** (§6c: 10 hero libraries, VARIANTS + LODS files,
+impostors, 39 atlases, sheets, populated files R-01…R-05, previews, QC). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
 1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
@@ -275,6 +281,8 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43
 6. **Wildlife selection** (`02_world/ecosystem/WILDLIFE_SELECTION_SHEET.md`) — select / reject per animal.
 7. Sky Realms map position (candidates in `WORLD_BIBLE.md`) + story role · Ashram: exact Peepal spot + garden position (PROPOSED in the landscaping plan) · Ashram layout v3 approval.
 8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after realism v3.
+10. **Repo storage plan** (`.git` ≈ 4.3 GB after milestone 2, GitHub warns on files > 50 MB): Git LFS for `.blend` / renders, GitHub
+    Releases for big binaries, or external storage? (SAVE RULE 5 — Director decision needed before the next big binary milestone.)
 9. Milestone 2 review (session 5): contact sheet `03_assets/vegetation/sheets/T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/populated/`,
    PROPOSED Ashram Peepal chabutra (9 × 9 m, courtyard centre) + garden beds (south lawn) in `T6_POP_R01_ASHRAM_VALLEY_v001.blend`.
 
