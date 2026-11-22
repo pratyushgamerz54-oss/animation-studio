@@ -797,14 +797,82 @@ def wind_control():
     return o
 
 
+class _GN:
+    """tiny geometry-nodes builder (math helpers)."""
+    def __init__(self, ng):
+        self.ng = ng; self.nodes = ng.nodes; self.L = ng.links.new; self.k = 0
+    def N(self, kind, **kw):
+        nd = self.nodes.new(kind); self.k += 1; nd.location = ((self.k % 40) * 180, -(self.k // 40) * 220)
+        for a, v in kw.items():
+            setattr(nd, a, v)
+        return nd
+    def _in(self, sock, v):
+        if isinstance(v, bpy.types.NodeSocket):
+            self.L(v, sock)
+        else:
+            sock.default_value = v
+    def M(self, op, a, b=None, c=None):
+        nd = self.N('ShaderNodeMath', operation=op)
+        for i, v in enumerate((a, b, c)):
+            if v is not None:
+                self._in(nd.inputs[i], v)
+        return nd.outputs[0]
+    def V(self, op, a, b=None, scale=None):
+        nd = self.N('ShaderNodeVectorMath', operation=op)
+        for i, v in enumerate((a, b)):
+            if v is not None:
+                self._in(nd.inputs[i], v)
+        if scale is not None:
+            self._in(nd.inputs['Scale'], scale)
+        return nd.outputs['Value'] if op in ('DOT_PRODUCT', 'LENGTH', 'DISTANCE') else nd.outputs['Vector']
+    def A(self, name):
+        nd = self.N('GeometryNodeInputNamedAttribute', data_type='FLOAT'); nd.inputs['Name'].default_value = name
+        return nd.outputs['Attribute']
+    def noise(self, vec, w, scale, dims='4D', detail=2.0):
+        nd = self.N('ShaderNodeTexNoise'); nd.noise_dimensions = dims
+        nd.inputs['Scale'].default_value = scale; nd.inputs['Detail'].default_value = detail
+        if vec is not None and dims != '1D':
+            self._in(nd.inputs['Vector'], vec)
+        if w is not None and dims in ('1D', '4D'):
+            self._in(nd.inputs['W'], w)
+        return nd
+
+
+def _wind_field(g, gi, pos_world, t):
+    """shared physics of the wind field at a world position:
+    wind dir W (control +Z, flattened) · speed U = 4·Strength m/s · gust fronts ADVECTED along W at ~0.8·U (4D noise of
+    position and t − s/c) · dynamic pressure q = (U·G / 10 m/s)²  → returns (W, Wp crosswind, q, G, U)."""
+    oi = g.N('GeometryNodeObjectInfo'); oi.transform_space = 'ORIGINAL'; g.L(gi.outputs['Wind Control'], oi.inputs['Object'])
+    rot = g.N('FunctionNodeRotateVector'); rot.inputs['Vector'].default_value = (0, 0, 1); g.L(oi.outputs['Rotation'], rot.inputs['Rotation'])
+    W = g.V('NORMALIZE', g.V('MULTIPLY', rot.outputs['Vector'], (1, 1, 0)))
+    Wp = g.V('NORMALIZE', g.V('CROSS_PRODUCT', W, (0, 0, 1)))
+    U = g.M('MULTIPLY', gi.outputs['Strength'], 4.0)
+    c = g.M('MAXIMUM', g.M('MULTIPLY', U, .8), 1.0)
+    s = g.V('DOT_PRODUCT', pos_world, W)
+    tau = g.M('SUBTRACT', t, g.M('DIVIDE', s, c))                               # retarded time: gust fronts travel downwind
+    gn = g.noise(g.V('SCALE', pos_world, scale=g.M('DIVIDE', 1.0, gi.outputs['Gust Size (m)'])), g.M('MULTIPLY', tau, .35), 1.0, '4D', 1.0)
+    G = g.M('MAXIMUM', g.M('ADD', 1.0, g.M('MULTIPLY', g.M('SUBTRACT', gn.outputs['Fac'], .5), g.M('MULTIPLY', gi.outputs['Gust'], 2.4))), .05)
+    UG = g.M('MULTIPLY', U, G)
+    q = g.M('MULTIPLY', g.M('POWER', g.M('DIVIDE', UG, 10.0), 2.0), 1.0)      # drag ∝ v²
+    return W, Wp, q, G, U, tau
+
+
 def wind_group():
-    """NG_T6_WIND: deforms a vegetation mesh using its wind_* attributes.
-    offset = W·S·g(t)·(A_t·wind_trunk·sin(ω_t t + φ) + A_b·wind_branch·sin(ω_b t + 2πφ_b) ) + flutter·wind_leaf·noise(P, t)
-    W = wind direction (from T6_WIND_CONTROL's +Z axis), S = strength, g(t) = 1 + gust·noise(t)."""
+    """NG_T6_WIND v2 — physically-based vegetation wind (deformer). Per vertex, using the wind_* attributes:
+      · drag force ∝ (wind speed × gust)²  (Strength 1 = 4 m/s breeze, 2.5 = 10 m/s, 6 = 24 m/s storm)
+      · gust fronts advected downwind (trees / grass get hit one after another), 4D-noise turbulence
+      · trunk: mean lean + oscillation at the plant's NATURAL FREQUENCY (≈ 4 / height Hz), response LAGS the gust (inertia),
+        crosswind wobble (vortex shedding, 30 %), length-preserving arc bend (points drop as they bend: Δz = −d² / 2h)
+      · branches: higher frequency (≈ 3.5 × fn), per-branch phase, local turbulence, also length-preserving
+      · leaves / blades / petals: flutter ∝ √q at high frequency
+      · foot fixed (wind_trunk = 0 at the ground); calm (Strength 0) = completely still."""
     name = 'NG_T6_WIND'
-    if name in bpy.data.node_groups:
-        return bpy.data.node_groups[name]
-    ng = bpy.data.node_groups.new(name, 'GeometryNodeTree')
+    old = bpy.data.node_groups.get(name)
+    if old is not None and old.get('t6_wind_version') == 2:
+        return old
+    if old is not None:
+        old.name = name + '_v1_old'
+    ng = bpy.data.node_groups.new(name, 'GeometryNodeTree'); ng['t6_wind_version'] = 2
     S = lambda n, io, t, d=None, lo=None, hi=None: _sock(ng, n, io, t, d, lo, hi)
     S('Geometry', 'INPUT', 'NodeSocketGeometry'); S('Geometry', 'OUTPUT', 'NodeSocketGeometry')
     S('Wind Control', 'INPUT', 'NodeSocketObject')
@@ -813,77 +881,87 @@ def wind_group():
     S('Flexibility', 'INPUT', 'NodeSocketFloat', 1.0, 0, 10)
     S('Trunk Sway (m)', 'INPUT', 'NodeSocketFloat', .15, 0, 10); S('Branch Sway (m)', 'INPUT', 'NodeSocketFloat', .12, 0, 5)
     S('Leaf Flutter (m)', 'INPUT', 'NodeSocketFloat', .03, 0, 1)
-    nt = ng; nodes = nt.nodes; L = nt.links.new
-    gi = nodes.new('NodeGroupInput'); go = nodes.new('NodeGroupOutput')
-    def N(kind, **kw):
-        nd = nodes.new(kind)
-        for k, v in kw.items():
-            setattr(nd, k, v)
-        return nd
-    def M(op, a, b=None, c=None):
-        nd = N('ShaderNodeMath', operation=op)
-        for i, v in enumerate((a, b, c)):
-            if v is None:
-                continue
-            if isinstance(v, bpy.types.NodeSocket):
-                L(v, nd.inputs[i])
-            else:
-                nd.inputs[i].default_value = v
-        return nd.outputs[0]
-    def VM(op, a, b=None, scale=None):
-        nd = N('ShaderNodeVectorMath', operation=op)
-        for i, v in enumerate((a, b)):
-            if v is None:
-                continue
-            if isinstance(v, bpy.types.NodeSocket):
-                L(v, nd.inputs[i])
-            else:
-                nd.inputs[i].default_value = v
-        if scale is not None:
-            if isinstance(scale, bpy.types.NodeSocket):
-                L(scale, nd.inputs['Scale'])
-            else:
-                nd.inputs['Scale'].default_value = scale
-        return nd.outputs['Vector'] if op != 'DOT_PRODUCT' else nd.outputs['Value']
-    def A(name):
-        nd = N('GeometryNodeInputNamedAttribute', data_type='FLOAT'); nd.inputs['Name'].default_value = name
-        return nd.outputs['Attribute']
-    oi = N('GeometryNodeObjectInfo'); oi.transform_space = 'ORIGINAL'; L(gi.outputs['Wind Control'], oi.inputs['Object'])
-    # direction = control's local +Z rotated to world (rotate vector by the object's rotation), flattened to XY
-    rot = N('FunctionNodeRotateVector'); rot.inputs['Vector'].default_value = (0, 0, 1)
-    L(oi.outputs['Rotation'], rot.inputs['Rotation'])
-    flat = VM('MULTIPLY', rot.outputs['Vector'], (1, 1, .15)); wdir = VM('NORMALIZE', flat)
-    tm = N('GeometryNodeInputSceneTime')
-    t = M('MULTIPLY', tm.outputs['Seconds'], gi.outputs['Speed'])
-    # gust: slow 1D noise over time
-    gn = N('ShaderNodeTexNoise'); gn.noise_dimensions = '1D'; gn.inputs['Scale'].default_value = .25
-    L(t, gn.inputs['W'])
-    gust = M('ADD', 1.0, M('MULTIPLY', M('SUBTRACT', gn.outputs['Fac'], .5), M('MULTIPLY', gi.outputs['Gust'], 2.0)))
-    S_ = M('MULTIPLY', M('MULTIPLY', gi.outputs['Strength'], gust), gi.outputs['Flexibility'])
-    pos = N('GeometryNodeInputPosition').outputs[0]
-    # per-plant phase from object position (instances get different phases)
-    sx = N('ShaderNodeSeparateXYZ'); L(oi.outputs['Location'], sx.inputs[0]) if False else None
-    ph = A('wind_phase')
-    # trunk: 0.3 Hz sway + small 2nd harmonic, mean bend downwind (lean) + oscillation
-    st = M('SINE', M('ADD', M('MULTIPLY', t, 1.9), M('MULTIPLY', ph, .5)))
-    trunk = M('MULTIPLY', M('MULTIPLY', A('wind_trunk'), gi.outputs['Trunk Sway (m)']), M('ADD', .6, M('MULTIPLY', st, .4)))
-    sb = M('SINE', M('ADD', M('MULTIPLY', t, 4.3), M('MULTIPLY', ph, 6.283)))
-    branch = M('MULTIPLY', M('MULTIPLY', A('wind_branch'), gi.outputs['Branch Sway (m)']), M('ADD', .35, M('MULTIPLY', sb, .65)))
-    amp = M('MULTIPLY', M('ADD', trunk, branch), S_)
-    off1 = VM('SCALE', wdir, scale=amp)
-    # small vertical bob for branches (perpendicular motion)
-    bob = M('MULTIPLY', M('MULTIPLY', M('MULTIPLY', A('wind_branch'), gi.outputs['Branch Sway (m)']), M('SINE', M('ADD', M('MULTIPLY', t, 3.1), M('MULTIPLY', ph, 9.0)))), M('MULTIPLY', S_, .35))
-    off2 = VM('SCALE', (0, 0, 1), scale=bob)
-    # leaf flutter: 3D noise in space-time
-    comb = N('ShaderNodeCombineXYZ'); L(M('MULTIPLY', t, 7.0), comb.inputs['Z'])
-    pv = VM('ADD', VM('SCALE', pos, scale=3.0), comb.outputs[0])
-    fn = N('ShaderNodeTexNoise'); fn.noise_dimensions = '3D'; fn.inputs['Scale'].default_value = 1.0; L(pv, fn.inputs['Vector'])
-    fv = VM('SUBTRACT', fn.outputs['Color'], (.5, .5, .5))
-    fl = M('MULTIPLY', M('MULTIPLY', A('wind_leaf'), gi.outputs['Leaf Flutter (m)']), M('MULTIPLY', gi.outputs['Flutter'], M('MINIMUM', S_, 4.0)))   # calm = still
-    off3 = VM('SCALE', fv, scale=M('MULTIPLY', fl, 2.0))
-    off = VM('ADD', VM('ADD', off1, off2), off3)
-    sp = N('GeometryNodeSetPosition'); L(gi.outputs['Geometry'], sp.inputs['Geometry']); L(off, sp.inputs['Offset'])
-    L(sp.outputs[0], go.inputs['Geometry'])
+    S('Natural Freq (Hz)', 'INPUT', 'NodeSocketFloat', .3, .02, 10); S('Damping', 'INPUT', 'NodeSocketFloat', .15, 0, 1)
+    S('Gust Size (m)', 'INPUT', 'NodeSocketFloat', 45.0, 1, 1000)
+    g = _GN(ng); gi = g.N('NodeGroupInput'); go = g.N('NodeGroupOutput')
+    selfo = g.N('GeometryNodeSelfObject'); so = g.N('GeometryNodeObjectInfo'); so.transform_space = 'ORIGINAL'
+    g.L(selfo.outputs[0], so.inputs['Object'])
+    P = g.N('GeometryNodeInputPosition').outputs[0]
+    Pw = g.V('ADD', P, so.outputs['Location'])                                  # world position → each plant feels its own gusts
+    t = g.M('MULTIPLY', g.N('GeometryNodeInputSceneTime').outputs['Seconds'], gi.outputs['Speed'])
+    fn = gi.outputs['Natural Freq (Hz)']; ph = g.A('wind_phase')
+    TWO_PI = 6.283185
+    # trunk: gust felt with a lag (inertia) of ≈ (0.25 + damping) / fn seconds
+    lag = g.M('DIVIDE', g.M('ADD', .25, gi.outputs['Damping']), fn)
+    W, Wp, q, G, U, tau = _wind_field(g, gi, Pw, g.M('SUBTRACT', t, lag))
+    flex = gi.outputs['Flexibility']
+    turb = g.M('ADD', .25, g.M('MULTIPLY', gi.outputs['Gust'], .5))
+    wt = g.A('wind_trunk')
+    A_t = g.M('MULTIPLY', g.M('MULTIPLY', g.M('MULTIPLY', wt, gi.outputs['Trunk Sway (m)']), q), flex)
+    osc_t = g.M('SINE', g.M('ADD', g.M('MULTIPLY', t, g.M('MULTIPLY', fn, TWO_PI)), g.M('MULTIPLY', ph, .6)))
+    osc_c = g.M('SINE', g.M('ADD', g.M('MULTIPLY', t, g.M('MULTIPLY', fn, TWO_PI * 1.31)), 1.7))
+    along_t = g.M('MULTIPLY', A_t, g.M('ADD', .7, g.M('MULTIPLY', osc_t, turb)))   # mean lean + resonance
+    cross_t = g.M('MULTIPLY', A_t, g.M('MULTIPLY', osc_c, g.M('MULTIPLY', turb, .3)))
+    D_t = g.V('ADD', g.V('SCALE', W, scale=along_t), g.V('SCALE', Wp, scale=cross_t))
+    # branches: faster, per-branch phase, local turbulence (no lag — light)
+    W2, Wp2, q2, G2, U2, tau2 = _wind_field(g, gi, Pw, t)
+    fb = g.M('MULTIPLY', fn, 3.5)
+    wb = g.A('wind_branch')
+    A_b = g.M('MULTIPLY', g.M('MULTIPLY', g.M('MULTIPLY', wb, gi.outputs['Branch Sway (m)']), q2), flex)
+    osc_b = g.M('SINE', g.M('ADD', g.M('MULTIPLY', t, g.M('MULTIPLY', fb, TWO_PI)), g.M('MULTIPLY', ph, TWO_PI)))
+    tn = g.noise(g.V('SCALE', Pw, scale=.35), g.M('MULTIPLY', tau2, 1.3), 1.0, '4D', 2.0)
+    tv = g.V('SUBTRACT', tn.outputs['Color'], (.5, .5, .5))
+    D_b = g.V('ADD', g.V('SCALE', W2, scale=g.M('MULTIPLY', A_b, g.M('ADD', .55, g.M('MULTIPLY', osc_b, .45)))),
+              g.V('SCALE', tv, scale=g.M('MULTIPLY', A_b, 1.2)))
+    # length-preserving bend: horizontal displacement d at height h drops by d² / 2h (arc instead of shear)
+    D = g.V('ADD', D_t, g.V('MULTIPLY', D_b, (1, 1, .35)))
+    sep = g.N('ShaderNodeSeparateXYZ'); g.L(P, sep.inputs[0])
+    h = g.M('ADD', g.M('MAXIMUM', sep.outputs['Z'], 0.0), .5)
+    dl = g.V('LENGTH', g.V('MULTIPLY', D, (1, 1, 0)))
+    drop = g.M('DIVIDE', g.M('MULTIPLY', dl, dl), g.M('MULTIPLY', h, 2.0))
+    D = g.V('SUBTRACT', D, g.V('SCALE', (0, 0, 1), scale=drop))
+    # leaf / blade flutter: ∝ sqrt(q), high frequency
+    fl = g.M('MULTIPLY', g.M('MULTIPLY', g.A('wind_leaf'), gi.outputs['Leaf Flutter (m)']),
+             g.M('MULTIPLY', gi.outputs['Flutter'], g.M('SQRT', q2)))
+    fnz = g.noise(g.V('SCALE', Pw, scale=4.0), g.M('MULTIPLY', t, g.M('ADD', 3.0, g.M('MULTIPLY', U2, .4))), 1.0, '4D', 1.0)
+    D = g.V('ADD', D, g.V('SCALE', g.V('SUBTRACT', fnz.outputs['Color'], (.5, .5, .5)), scale=g.M('MULTIPLY', fl, 2.2)))
+    sp = g.N('GeometryNodeSetPosition'); g.L(gi.outputs['Geometry'], sp.inputs['Geometry']); g.L(D, sp.inputs['Offset'])
+    g.L(sp.outputs[0], go.inputs['Geometry'])
+    return ng
+
+
+def wind_instances_group():
+    """NG_T6_WIND_INSTANCES — wind for SCATTERED instances (grass fields, flowers, far trees) inside a scatter node tree:
+    every instance tilts about its own base downwind by θ = atan(d / h) (same advected gust field + drag ∝ v², natural-frequency
+    sway with a per-instance phase). Inputs: Instances, Wind Control, Strength, Gust, Speed, Plant Height (m), Sway (m), Natural Freq."""
+    name = 'NG_T6_WIND_INSTANCES'
+    if name in bpy.data.node_groups:
+        return bpy.data.node_groups[name]
+    ng = bpy.data.node_groups.new(name, 'GeometryNodeTree'); ng.use_fake_user = True   # kept in the library for scatters
+    S = lambda n, io, t, d=None, lo=None, hi=None: _sock(ng, n, io, t, d, lo, hi)
+    S('Instances', 'INPUT', 'NodeSocketGeometry'); S('Instances', 'OUTPUT', 'NodeSocketGeometry')
+    S('Wind Control', 'INPUT', 'NodeSocketObject')
+    S('Strength', 'INPUT', 'NodeSocketFloat', 1.0, 0, 20); S('Gust', 'INPUT', 'NodeSocketFloat', .5, 0, 5)
+    S('Speed', 'INPUT', 'NodeSocketFloat', 1.0, 0, 10); S('Plant Height (m)', 'INPUT', 'NodeSocketFloat', .4, .01, 100)
+    S('Sway (m)', 'INPUT', 'NodeSocketFloat', .06, 0, 10); S('Natural Freq (Hz)', 'INPUT', 'NodeSocketFloat', 1.2, .02, 10)
+    S('Gust Size (m)', 'INPUT', 'NodeSocketFloat', 25.0, 1, 1000)
+    g = _GN(ng); gi = g.N('NodeGroupInput'); go = g.N('NodeGroupOutput')
+    selfo = g.N('GeometryNodeSelfObject'); so = g.N('GeometryNodeObjectInfo'); so.transform_space = 'ORIGINAL'
+    g.L(selfo.outputs[0], so.inputs['Object'])
+    P = g.V('ADD', g.N('GeometryNodeInputPosition').outputs[0], so.outputs['Location'])
+    t = g.M('MULTIPLY', g.N('GeometryNodeInputSceneTime').outputs['Seconds'], gi.outputs['Speed'])
+    W, Wp, q, G, U, tau = _wind_field(g, gi, P, t)
+    idx = g.N('GeometryNodeInputIndex').outputs[0]
+    rnd = g.N('FunctionNodeRandomValue', data_type='FLOAT'); g.L(idx, rnd.inputs['ID'])
+    osc = g.M('SINE', g.M('ADD', g.M('MULTIPLY', t, g.M('MULTIPLY', gi.outputs['Natural Freq (Hz)'], 6.283)), g.M('MULTIPLY', rnd.outputs[1], 6.283)))
+    d = g.M('MULTIPLY', g.M('MULTIPLY', gi.outputs['Sway (m)'], q), g.M('ADD', .75, g.M('MULTIPLY', osc, .35)))
+    theta = g.M('ARCTANGENT', g.M('DIVIDE', d, gi.outputs['Plant Height (m)']))
+    axis = g.V('CROSS_PRODUCT', (0, 0, 1), W)                                    # tilt the top downwind
+    rq = g.N('FunctionNodeAxisAngleToRotation'); g.L(axis, rq.inputs['Axis']); g.L(theta, rq.inputs['Angle'])
+    ri = g.N('GeometryNodeRotateInstances'); g.L(gi.outputs['Instances'], ri.inputs['Instances']); g.L(rq.outputs[0], ri.inputs['Rotation'])
+    ri.inputs['Local Space'].default_value = False
+    pos_i = g.N('GeometryNodeInputPosition').outputs[0]; g.L(pos_i, ri.inputs['Pivot Point'])
+    g.L(ri.outputs[0], go.inputs['Instances'])
     return ng
 
 
@@ -898,7 +976,7 @@ def _sock(ng, name, io, typ, d=None, lo=None, hi=None):
     return s
 
 
-def add_wind(o, trunk=.15, branch=.12, leaf=.03, flex=1.0):
+def add_wind(o, trunk=.15, branch=.12, leaf=.03, flex=1.0, fn=None, damping=.15, gust_size=45.0):
     """wind modifier on a vegetation object. Strength / gust / speed / flutter are DRIVEN by T6_WIND_CONTROL's custom
     properties (single-property drivers: no Python expressions → work without 'auto-run scripts')."""
     ctrl = wind_control(); ng = wind_group()
@@ -907,6 +985,10 @@ def add_wind(o, trunk=.15, branch=.12, leaf=.03, flex=1.0):
     md[ids['Wind Control']] = ctrl
     md[ids['Trunk Sway (m)']] = trunk; md[ids['Branch Sway (m)']] = branch; md[ids['Leaf Flutter (m)']] = leaf
     md[ids['Flexibility']] = flex
+    if fn is None:                               # natural sway frequency ≈ 4 / height (tall trees slow, grass fast)
+        H = max(float(o.get('t6_height_m', 1.0)), .05)
+        fn = min(max(4.0 / H, .15), 2.5)
+    md[ids['Natural Freq (Hz)']] = fn; md[ids['Damping']] = damping; md[ids['Gust Size (m)']] = gust_size
     for sock, prop in (('Strength', 'strength'), ('Gust', 'gust'), ('Speed', 'speed'), ('Flutter', 'flutter')):
         fc = o.driver_add(f'modifiers["T6_WIND"]["{ids[sock]}"]'); dr = fc.driver; dr.type = 'AVERAGE'
         v = dr.variables.new(); v.type = 'SINGLE_PROP'; v.targets[0].id_type = 'OBJECT'; v.targets[0].id = ctrl

@@ -57,6 +57,11 @@
    "detail": "lowest -0.60 m, top 0.99 m"
   },
   {
+   "check": "AV_AQ01_LOTUS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_AQ01_LOTUS: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -85,6 +90,11 @@
    "check": "AV_AQ02_CATTAIL: aquatic plant sits at the water surface (z = 0) with stems below",
    "ok": true,
    "detail": "lowest -0.15 m, top 2.02 m"
+  },
+  {
+   "check": "AV_AQ02_CATTAIL: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_AQ02_CATTAIL: wind modifier + drivers valid",
@@ -117,6 +127,11 @@
    "detail": "lowest z -0.001 m"
   },
   {
+   "check": "AV_F01_BUTTERCUP: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_F01_BUTTERCUP: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -145,6 +160,11 @@
    "check": "AV_F02_PRIMULA: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.000 m"
+  },
+  {
+   "check": "AV_F02_PRIMULA: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_F02_PRIMULA: wind modifier + drivers valid",
@@ -177,6 +197,11 @@
    "detail": "lowest z -0.001 m"
   },
   {
+   "check": "AV_F03_WILD_DAISY: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_F03_WILD_DAISY: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -205,6 +230,11 @@
    "check": "AV_F04_MARIGOLD: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.002 m"
+  },
+  {
+   "check": "AV_F04_MARIGOLD: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_F04_MARIGOLD: wind modifier + drivers valid",
@@ -237,6 +267,11 @@
    "detail": "lowest z -0.010 m"
   },
   {
+   "check": "AV_FE01_SWORD_FERN: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_FE01_SWORD_FERN: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -265,6 +300,11 @@
    "check": "AV_G01_MEADOW_GRASS: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G01_MEADOW_GRASS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_G01_MEADOW_GRASS: wind modifier + drivers valid",
@@ -297,6 +337,11 @@
    "detail": "lowest z -0.011 m"
   },
   {
+   "check": "AV_G02_KANS_GRASS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_G02_KANS_GRASS: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -325,6 +370,11 @@
    "check": "AV_G03_DRY_PATH_GRASS: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.011 m"
+  },
+  {
+   "check": "AV_G03_DRY_PATH_GRASS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_G03_DRY_PATH_GRASS: wind modifier + drivers valid",
@@ -357,6 +407,11 @@
    "detail": "lowest z -0.020 m"
   },
   {
+   "check": "AV_M01_MOSS_CUSHION: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_MU01_BROWN_MUSHROOMS: valid mesh, UVs",
    "ok": true,
    "detail": "1,736 tris, 1,120 verts"
@@ -380,6 +435,11 @@
    "check": "AV_MU01_BROWN_MUSHROOMS: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.007 m"
+  },
+  {
+   "check": "AV_MU01_BROWN_MUSHROOMS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_S01_BERBERIS: valid mesh, UVs",
@@ -420,6 +480,11 @@
    "check": "AV_S01_BERBERIS: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "AV_S01_BERBERIS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_S01_BERBERIS: wind modifier + drivers valid",
@@ -467,6 +532,11 @@
    "detail": ""
   },
   {
+   "check": "AV_S02_TULSI: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_S02_TULSI: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -510,6 +580,11 @@
    "check": "AV_T01_PEEPAL: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "AV_T01_PEEPAL: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_T01_PEEPAL: wind modifier + drivers valid",
@@ -557,6 +632,11 @@
    "detail": ""
   },
   {
+   "check": "AV_T02_DEODAR: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_T02_DEODAR: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -600,6 +680,11 @@
    "check": "AV_T03_CHIR_PINE: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "AV_T03_CHIR_PINE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_T03_CHIR_PINE: wind modifier + drivers valid",
@@ -647,6 +732,11 @@
    "detail": ""
   },
   {
+   "check": "AV_T04_BANJ_OAK: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_T04_BANJ_OAK: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -692,6 +782,11 @@
    "detail": ""
   },
   {
+   "check": "AV_T05_RHODODENDRON: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "AV_T05_RHODODENDRON: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -735,6 +830,11 @@
    "check": "AV_T06_BAMBOO_CLUMP: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "AV_T06_BAMBOO_CLUMP: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "AV_T06_BAMBOO_CLUMP: wind modifier + drivers valid",
@@ -807,6 +907,11 @@
    "detail": "lowest z -0.010 m"
   },
   {
+   "check": "EF_FE01_GIANT_FERN: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "EF_FE01_GIANT_FERN: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -837,6 +942,11 @@
    "detail": "lowest z -0.020 m"
   },
   {
+   "check": "EF_M01_MOSS_CARPET: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "EF_MU01_GLOWCAP: valid mesh, UVs",
    "ok": true,
    "detail": "2,728 tris, 1,760 verts"
@@ -860,6 +970,11 @@
    "check": "EF_MU01_GLOWCAP: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.007 m"
+  },
+  {
+   "check": "EF_MU01_GLOWCAP: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.50"
   },
   {
    "check": "EF_T01_GIANT_ELDER: valid mesh, UVs",
@@ -900,6 +1015,11 @@
    "check": "EF_T01_GIANT_ELDER: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "EF_T01_GIANT_ELDER: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "EF_T01_GIANT_ELDER: wind modifier + drivers valid",
@@ -947,6 +1067,11 @@
    "detail": ""
   },
   {
+   "check": "EF_T02_TEAL_BEECH: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "EF_T02_TEAL_BEECH: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -990,6 +1115,11 @@
    "check": "EF_T03_MOSS_OAK: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "EF_T03_MOSS_OAK: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "EF_T03_MOSS_OAK: wind modifier + drivers valid",
@@ -1037,6 +1167,11 @@
    "detail": ""
   },
   {
+   "check": "EF_T04_YEW: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "EF_T04_YEW: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1077,14 +1212,19 @@
    "detail": "0 verts far + under ground"
   },
   {
-   "check": "EF_T05_VEIL_WILLOW: label set (PROPOSED FANTASY)",
+   "check": "EF_T05_VEIL_WILLOW: label set (FANTASY (APPROVED R-02))",
    "ok": true,
    "detail": ""
   },
   {
-   "check": "EF_T05_VEIL_WILLOW: fantasy asset marked as proposal in its habitat text",
+   "check": "EF_T05_VEIL_WILLOW: fantasy asset restricted to R-02 (Decision 01)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "EF_T05_VEIL_WILLOW: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "EF_T05_VEIL_WILLOW: wind modifier + drivers valid",
@@ -1127,14 +1267,19 @@
    "detail": "0 verts far + under ground"
   },
   {
-   "check": "EF_T06_SPIRAL_ROOT: label set (PROPOSED FANTASY)",
+   "check": "EF_T06_SPIRAL_ROOT: label set (FANTASY (APPROVED R-02))",
    "ok": true,
    "detail": ""
   },
   {
-   "check": "EF_T06_SPIRAL_ROOT: fantasy asset marked as proposal in its habitat text",
+   "check": "EF_T06_SPIRAL_ROOT: fantasy asset restricted to R-02 (Decision 01)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "EF_T06_SPIRAL_ROOT: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "EF_T06_SPIRAL_ROOT: wind modifier + drivers valid",
@@ -1177,14 +1322,19 @@
    "detail": "0 verts far + under ground"
   },
   {
-   "check": "EF_T07_LANTERN_TREE: label set (PROPOSED FANTASY)",
+   "check": "EF_T07_LANTERN_TREE: label set (FANTASY (APPROVED R-02))",
    "ok": true,
    "detail": ""
   },
   {
-   "check": "EF_T07_LANTERN_TREE: fantasy asset marked as proposal in its habitat text",
+   "check": "EF_T07_LANTERN_TREE: fantasy asset restricted to R-02 (Decision 01)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "EF_T07_LANTERN_TREE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.60"
   },
   {
    "check": "EF_T07_LANTERN_TREE: wind modifier + drivers valid",
@@ -1232,6 +1382,11 @@
    "detail": ""
   },
   {
+   "check": "EF_T08_DEAD_SNAG: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "EF_T08_DEAD_SNAG: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1260,6 +1415,11 @@
    "check": "EF_V01_HANGING_VINE: hanging plant attaches at its top (hangs from a branch, z_top = 9.0 m)",
    "ok": true,
    "detail": "z 0.45\u20139.00 m"
+  },
+  {
+   "check": "EF_V01_HANGING_VINE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "EF_V01_HANGING_VINE: wind modifier + drivers valid",
@@ -1332,6 +1492,11 @@
    "detail": "lowest z -0.001 m"
   },
   {
+   "check": "MK_F01_GENTIAN: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_F01_GENTIAN: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1360,6 +1525,11 @@
    "check": "MK_F02_EDELWEISS: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.001 m"
+  },
+  {
+   "check": "MK_F02_EDELWEISS: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "MK_F02_EDELWEISS: wind modifier + drivers valid",
@@ -1392,6 +1562,11 @@
    "detail": "lowest z -0.001 m"
   },
   {
+   "check": "MK_F03_BLUE_POPPY: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_F03_BLUE_POPPY: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1422,6 +1597,11 @@
    "detail": "lowest z -0.172 m"
   },
   {
+   "check": "MK_G01_ALPINE_TUSSOCK: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_G01_ALPINE_TUSSOCK: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1450,6 +1630,11 @@
    "check": "MK_M01_ALPINE_CUSHION: plant base on the ground (no floating)",
    "ok": true,
    "detail": "lowest z -0.020 m"
+  },
+  {
+   "check": "MK_M01_ALPINE_CUSHION: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "MK_S01_JUNIPER: valid mesh, UVs",
@@ -1490,6 +1675,11 @@
    "check": "MK_S01_JUNIPER: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "MK_S01_JUNIPER: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "MK_S01_JUNIPER: wind modifier + drivers valid",
@@ -1537,6 +1727,11 @@
    "detail": ""
   },
   {
+   "check": "MK_S02_DWARF_RHODODENDRON: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_S02_DWARF_RHODODENDRON: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1580,6 +1775,11 @@
    "check": "MK_T01_HIMALAYAN_SPRUCE: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "MK_T01_HIMALAYAN_SPRUCE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: wind modifier + drivers valid",
@@ -1627,6 +1827,11 @@
    "detail": ""
   },
   {
+   "check": "MK_T02_HIMALAYAN_BIRCH: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
+  },
+  {
    "check": "MK_T02_HIMALAYAN_BIRCH: wind modifier + drivers valid",
    "ok": true,
    "detail": "4 drivers"
@@ -1670,6 +1875,11 @@
    "check": "MK_T03_KRUMMHOLZ_PINE: label set (SPECIES-INSPIRED)",
    "ok": true,
    "detail": ""
+  },
+  {
+   "check": "MK_T03_KRUMMHOLZ_PINE: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
+   "ok": true,
+   "detail": "max emission 0.00"
   },
   {
    "check": "MK_T03_KRUMMHOLZ_PINE: wind modifier + drivers valid",

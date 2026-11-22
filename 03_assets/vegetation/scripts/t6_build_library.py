@@ -38,7 +38,7 @@ def coll(name, parent):
 
 root = coll(f'T6_LIB_{NAMES[REG]}', sc.collection)
 groups = {k: coll(f'T6_{NAMES[REG]}_{k}', root) for k in ('TREES', 'SHRUBS', 'PLANTS')}
-K.wind_control()
+K.wind_control(); K.wind_instances_group()           # instance-wind group ships with every library (for scatters)
 INV = {}
 META_KEYS = ('common', 'latin', 'label', 'region', 'category', 'habitat', 'altitude')
 
@@ -57,18 +57,18 @@ for D in [t for t in SP.TREES if t['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['TREES'])
     o, st = K.build_tree(D, 0, c, ML.species_mats(D))
     H = st['height_m']
-    K.add_wind(o, trunk=.0055 * H, branch=.10 + .004 * H, leaf=.03, flex=1.0 if D['category'] != 'Dead tree' else .4)
+    K.add_wind(o, trunk=.02 * H, branch=.22 + .006 * H, leaf=.05, flex=1.0 if D['category'] != 'Dead tree' else .35)   # amplitudes @ 10 m/s
     tag(o, D, 'tree', st); print('TREE', D['name'], st, flush=True)
 for D in [t for t in SP.SHRUBS if t['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['SHRUBS'])
     o, st = K.build_tree(D, 0, c, ML.species_mats(D))
-    K.add_wind(o, trunk=.02, branch=.08, leaf=.02)
+    K.add_wind(o, trunk=.04, branch=.12, leaf=.03)
     tag(o, D, 'shrub', st); print('SHRUB', D['name'], st, flush=True)
 for D in [p for p in PL.PLANTS if p['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['PLANTS'])
     o, st = PL.build_plant(D, 0, c)
     if D['kind'] not in ('moss', 'mushrooms'):
-        K.add_wind(o, trunk=0.0, branch=.22 if D['kind'] != 'vine' else .35, leaf=.02 if D['kind'] != 'lotus' else .01)
+        K.add_wind(o, trunk=0.0, branch=.30 if D['kind'] != 'vine' else .5, leaf=.03 if D['kind'] != 'lotus' else .012)
     tag(o, D, 'plant', st); print('PLANT', D['name'], st, flush=True)
 
 # ---------------------------------------------------------------- browse scene: instances in a row, sorted by height
