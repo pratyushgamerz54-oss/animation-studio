@@ -46,7 +46,7 @@ near_sel = g.M('MULTIPLY', inside('X', NEAR['xmin'], NEAR['xmax']), inside('Y', 
 near_parts = []
 #              collection                 dens  h     tilt  fnI  branch  leaf  fn(blade)
 for cn, dens, h, sway, fn, bs_, lf, fnb in (('T6_AV_G01_MEADOW_GRASS', 3.2, .35, .07, 1.6, .38, .02, .55),
-                                            ('T6_AV_G02_KANS_GRASS', .025, 2.2, .35, .7, .30, .03, .30),
+                                            ('T6_AV_G02B_KANS_GRASS_SPRING', .03, 1.7, .30, .7, .30, .03, .30),
                                             ('T6_AV_F01_BUTTERCUP', .6, .32, .05, 1.8, .30, .015, .60),
                                             ('T6_AV_FE01_SWORD_FERN', .05, .6, .06, 1.2, .25, .02, .45),
                                             ('T6_AV_F03_WILD_DAISY', .5, .15, .03, 2.2, .30, .01, .70)):
@@ -98,7 +98,7 @@ cam = bpy.data.objects.new('CAM', bpy.data.cameras.new('CAM')); sc.collection.ob
 cam.location = (0, -16, 2.4); cam.rotation_euler = (math.radians(88), 0, 0)
 if os.environ.get('CAM') == 'close':                 # low close-up into the meadow (blade bending check)
     cam.location = (0, -13.5, .55); cam.rotation_euler = (math.radians(84), 0, 0); cam.data.lens = 35
-FR = int(os.environ.get('FRAMES', 168)); sc.frame_start, sc.frame_end = 1, FR; sc.render.fps = 24
+FR = int(os.environ.get('FRAMES', 144)); sc.frame_start, sc.frame_end = 1, FR; sc.render.fps = 24
 for f, st, gu in ((1, 0.0, .3), (24, 0.0, .3), (60, 1.2, .5), (110, 3.0, .9), (FR, 2.2, .8)):
     ctrl['strength'] = st; ctrl['gust'] = gu; ctrl.keyframe_insert('["strength"]', frame=f); ctrl.keyframe_insert('["gust"]', frame=f)
 sc.render.engine = 'CYCLES'; sc.cycles.samples = int(os.environ.get('SPP', 8)); sc.cycles.use_denoising = True
