@@ -19,7 +19,7 @@
    Ye karta hai: Blender 5.3 module (`pip install bpy scipy`) · **Blender 4.5.16 LTS** module in `$SCRATCH/bpy45`
    (`uv venv -p /usr/bin/python3.11` + `bpy>=4.5,<4.6`) · Mesa EGL (Workbench viewport renders) · Poly Haven fetch · Task 04 baseline
    checksum check. Uske baad: `BPY45=$SCRATCH/bpy45/bin/python`, viewport renders ke liye `EGL_PLATFORM=surfaceless`.
-4. Director ke PC par files: GitHub → branch → *Download ZIP* ya `git clone -b ccr-a129fdfc-g3v4k0 https://github.com/pratyushgamerz54-oss/animation-studio.git`.
+4. Director ke PC par files: GitHub → branch → *Download ZIP* ya `git clone -b ccr-c375d59d-2qaoyn https://github.com/pratyushgamerz54-oss/animation-studio.git`.
    **Director ka PC = Blender 4.5** (Task 04 se saari world files 4.5 se banti hain; character/Ashram v3 files 5.3 ki hain).
 
 ### PROMPT (nayi session mein paste karo)
