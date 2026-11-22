@@ -11,7 +11,7 @@
 **Sab kuch GitHub par:** repo `pratyushgamerz54-oss/animation-studio`, branch **`ccr-c375d59d-2qaoyn`** (session 4+; same history as `ccr-a129fdfc-g3v4k0`) (characters, VFX, sheets,
 .blend files, exports, world maps, Ashram, 3D world, renders, backups, scripts, docs). Sirf Poly Haven assets git mein nahi (≈860 MB).
 
-1. Session kholte waqt repo `pratyushgamerz54-oss/animation-studio` + environment **`animation-studio`** chuno (Poly Haven network).
+1. Session kholte waqt **dono repos** `pratyushgamerz54-oss/animation-studio` + `pratyushgamerz54-oss/animation-studio-scenes` + environment **`animation-studio`** chuno (Poly Haven network).
 2. Branch: `git fetch origin ccr-c375d59d-2qaoyn && git checkout ccr-c375d59d-2qaoyn` (agar session doosri branch par khule).
 3. Setup — **ek command** (idempotent, kuch rebuild nahi karta):
    ```bash
@@ -23,23 +23,26 @@
 4. Director ke PC par files: GitHub → branch → *Download ZIP* ya `git clone -b ccr-c375d59d-2qaoyn https://github.com/pratyushgamerz54-oss/animation-studio.git`.
    **Director ka PC = Blender 4.5** (Task 04 se saari world files 4.5 se banti hain; character/Ashram v3 files 5.3 ki hain).
 
-### PROMPT (nayi session mein paste karo)
+### PROMPT (nayi session mein paste karo) — session start karte waqt DONO repos chuno
 ```
-Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-c375d59d-2qaoyn).
-Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md aur 02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md padho.
-Setup: bash setup_session.sh (SCRATCH = scratchpad). Phir adhoora render poora karo: SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_finish_pending.sh
-(wind v3 clip + leaf realism v2 re-render; jo ho chuka hai woh skip hota hai), commit + push. Jo bana hai dobara mat banana.
-CLAUDE.md ka REAL-WORLD REALISM RULE (textures + motion + physics/destruction) hamesha follow karna.
-Mujhe short Hinglish summary do, phir TASK 06 full production (HANDOFF §6b "Next") ya mera agla feedback — usi se kaam shuru karna.
-Har bade kaam ke baad commit + push aur STATUS.md update.
-```
-Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-c375d59d-2qaoyn).
-Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad).
-Jo bana hai dobara mat banana. TASK 06 milestone 1 (vegetation concepts) review ke liye ready hai. Mujhe short Hinglish summary do, phir mera feedback / agla
-brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit + push aur STATUS.md update.
+Hum animation-studio project par kaam kar rahe hain: repo pratyushgamerz54-oss/animation-studio (branch ccr-c375d59d-2qaoyn) +
+repo pratyushgamerz54-oss/animation-studio-scenes (branch ccr-c375d59d-2qaoyn) — dono side by side.
+Dono branches checkout karo; animation-studio ke HANDOFF.md (§0b do-repo setup, §6c TASK 06), STATUS.md, PROJECT_LOG.md, CLAUDE.md aur
+02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad). Jo bana hai dobara mat banana.
+TASK 06 milestone 2 DONE (QC 904/904 · 58/58) — mera review / agla TASK brief main bhejta hoon, usi se kaam shuru karna.
+CLAUDE.md ke saare rules (REAL-WORLD REALISM, SAVE RULE, do repos) follow karna. Mujhe short Hinglish summary do.
 ```
 
 ---
+
+### 0b. TWO REPOSITORIES (Director, 22 Nov — repo size ≈ 4.4 GB)
+| Repo | What | Branch used by Claude |
+|---|---|---|
+| `pratyushgamerz54-oss/animation-studio` (main) | stages 1–3: characters, world, terrain, asset libraries (TASK 06 vegetation…) + ALL rules / handoff / logs | session branch (e.g. `ccr-c375d59d-2qaoyn`) |
+| `pratyushgamerz54-oss/animation-studio-scenes` | stage 4 `04_scenes/` + stage 5 `05_post/` (set up 22 Nov; README, CLAUDE.md, structure) | `ccr-c375d59d-2qaoyn` (GitHub default `main` still holds only the initial README) |
+New session: start it with BOTH repos selected (cloud: `/home/user/animation-studio` + `/home/user/animation-studio-scenes`). Scene files
+LINK assets from the main repo (relative paths) — nothing copied. Autosave (`.claude/hooks/autosave.sh`) commits + pushes both. Final 4K
+masters → Director's PC / Drive (not git).
 
 ## 1. Project + Director rules (`CLAUDE.md` mein bhi)
 - **10-minute 3D superhero film, Part 1.** Director = user. Claude = 3D artist + VFX team + world builder (Blender `bpy`, CPU only, no GPU).
@@ -281,8 +284,8 @@ impostors, 39 atlases, sheets, populated files R-01…R-05, previews, QC). Sirf 
 6. **Wildlife selection** (`02_world/ecosystem/WILDLIFE_SELECTION_SHEET.md`) — select / reject per animal.
 7. Sky Realms map position (candidates in `WORLD_BIBLE.md`) + story role · Ashram: exact Peepal spot + garden position (PROPOSED in the landscaping plan) · Ashram layout v3 approval.
 8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after realism v3.
-10. **Repo storage plan** (`.git` ≈ 4.3 GB after milestone 2, GitHub warns on files > 50 MB): Git LFS for `.blend` / renders, GitHub
-    Releases for big binaries, or external storage? (SAVE RULE 5 — Director decision needed before the next big binary milestone.)
+10. ~~Repo storage plan~~ → **DECIDED (22 Nov): new repo per stage** — Director created `animation-studio-scenes` (Stage 4 + 5); main repo
+    stays the asset library (§0b). Director: clone both repos side by side on the PC as a backup copy when at the PC.
 9. Milestone 2 review (session 5): contact sheet `03_assets/vegetation/sheets/T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/populated/`,
    PROPOSED Ashram Peepal chabutra (9 × 9 m, courtyard centre) + garden beds (south lawn) in `T6_POP_R01_ASHRAM_VALLEY_v001.blend`.
 

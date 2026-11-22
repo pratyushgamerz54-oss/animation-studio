@@ -92,14 +92,18 @@ check, phir final high-res sim (Director ke GPU PC par).
    tests ke liye. Lambe renders: resume-able script (frame-wise `FSTART`) + `*_finish_pending.sh` + HANDOFF "IN PROGRESS" section.
 4. **Har milestone par:** `HANDOFF.md` (§0 prompt, §6x status, §7 do-not-rebuild, §8 pending, §10 history), `STATUS.md`,
    `PROJECT_LOG.md` update + push. Approved files kabhi overwrite nahi — backup (`13_BACKUPS/` ya `_backups/`) aur naya version.
-5. **Repo size (22 Nov: `.git` ≈ 3 GB):** bade binaries (.blend > 20 MB) ko iteration ke dauran baar-baar commit mat karo — scratchpad
-   mein iterate, milestone par ek baar repo mein; har file < 95 MB (GitHub limit 100 MB); repo 4 GB ke paas ho to Director se
-   LFS / release / external storage ka plan poochho.
+5. **Repo size + TWO REPOS (Director decision 22 Nov):** main `animation-studio` reached ≈ 4.4 GB → Director created
+   **`animation-studio-scenes`** (= Stage 4 `04_scenes/` + Stage 5 `05_post/`). Main repo = characters / world / asset library
+   (stages 1–3), never moved or copied. Both repos are checked out SIDE BY SIDE (`/home/user/animation-studio` +
+   `/home/user/animation-studio-scenes`; on the PC in one parent folder); scene files LINK assets with relative paths
+   (`//../../animation-studio/...`). Autosave pushes BOTH repos. Big binaries only at milestones (iterate in scratchpad), every
+   file < 95 MB, files > 50 MB = warning; final 4K renders / MP4 masters NOT in git (Director's PC / Drive). Next storage step when
+   a repo nears ~5 GB: another repo per stage (no LFS / no history rewrite without the Director).
 6. **Git mein jaan-boojh kar nahi (setup se dobara bante hain):** Poly Haven downloads (`polyhaven_fetch.py`), Blender 4.5 module
    (`$SCRATCH/bpy45`), scratchpad temp files — `bash setup_session.sh` sab wapas laata hai.
 
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
-0. **SABSE PEHLE** `HANDOFF.md` padho (+ Director ke verbatim inputs `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`) aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
+0. **Session mein DONO repos chahiye:** `animation-studio` + `animation-studio-scenes` (side by side). **SABSE PEHLE** `HANDOFF.md` padho (+ Director ke verbatim inputs `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`) aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
    Phir wahin se kaam shuru karo jahan ruka tha. Har bada kaam hone par `PROJECT_LOG.md` mein entry jodo.
 1. `pip install bpy scipy` (Blender 5.3 Python module). **TASK 04 world files need Blender 4.5:**
