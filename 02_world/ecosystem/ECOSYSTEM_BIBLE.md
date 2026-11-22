@@ -25,7 +25,7 @@ Deliverables of milestone 1 (all in git):
 | 8 | Procedural scattering | plan §9 (re-uses TASK 05 `NG_T5_SCATTER`) | ⬜ milestone 2 |
 | 9 | Wind animation setup | `NG_T6_WIND` + `T6_WIND_CONTROL` in every library, test clip | ✅ built |
 | 10 | Preview renders | `03_assets/vegetation/renders/`, contact sheet `sheets/T6_SHEET_M1.png` | ✅ |
-| 11 | Technical QC report | `03_assets/vegetation/qc/T06_QC_REPORT.md` | ✅ |
+| 11 | Technical QC report | `03_assets/vegetation/qc/T06_QC_REPORT.md` — 337/337 (Blender 4.5), 337/337 (5.3), 25/25 textures | ✅ |
 
 ---
 

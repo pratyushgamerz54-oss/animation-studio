@@ -183,7 +183,7 @@ def plant_views(o, name):
 
 def lineup(kind):
     """height-comparison lineup of every tree + shrub (front ortho) or every plant (perspective)."""
-    names = [n for n, v in INV.items() if (v['kind'] in ('tree', 'shrub')) == (kind == 'trees')]
+    names = [n for n, v in INV.items() if (v['kind'] in ('tree', 'shrub')) == (kind == 'trees') and 'hanging' not in v['category']]
     names.sort(key=lambda n: -INV[n]['stats']['height_m'])
     objs = []; x = 0.0
     for n in names:

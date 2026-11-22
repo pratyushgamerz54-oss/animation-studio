@@ -1,12 +1,12 @@
-# STATUS — last updated 2026-11-21 (session 4: TASK 06 milestone 1 in progress)
+# STATUS — last updated 2026-11-21 (session 4: TASK 06 milestone 1 DONE, awaiting Director review)
 
 ## Session 4 (21 Nov)
 - Restore: branch `ccr-a129fdfc-g3v4k0` ka kaam working branch `ccr-c375d59d-2qaoyn` par (same history), `setup_session.sh` chalaya. Kuch rebuild nahi.
-- **TASK 06 (Ecosystem & Vegetation Bible) — MILESTONE 1 in progress:** Ashram Valley vegetation library, Enchanted Forest tree collection, Mountain Kingdom references.
-  - Built: procedural tree + plant generator (`03_assets/vegetation/scripts/t6kit.py`, `t6_plants.py`), 25 leaf atlases, 16 Poly Haven bark scans, wind GN system (`NG_T6_WIND` + `T6_WIND_CONTROL`).
-  - Libraries: `03_assets/vegetation/library/T6_VEG_{ASHRAM_VALLEY,ENCHANTED_FOREST,MOUNTAIN_KINGDOM}_v001.blend` (42 assets: 17 trees, 4 shrubs, 21 plants).
-  - Docs: `02_world/ecosystem/ECOSYSTEM_BIBLE.md`, `WILDLIFE_PROPOSAL.png`. Sheets/renders/QC/wind clip: running.
-  - NEXT: sheets + contact sheet + QC report → Director approval of concepts → full production (variants, LODs, scattering, other regions).
+- **TASK 06 (Ecosystem & Vegetation Bible) — MILESTONE 1 DONE → Director review ka intezaar (22 Nov).**
+  - Libraries: `03_assets/vegetation/library/T6_VEG_{ASHRAM_VALLEY,ENCHANTED_FOREST,MOUNTAIN_KINGDOM}_v001.blend` — 42 real 3D assets (17 trees, 4 shrubs, 21 plants), wind-ready.
+  - Sheets: `03_assets/vegetation/sheets/` (21 tree sheets, 3 plant libraries, 3 regional sheets, contact sheet `T6_SHEET_M1.png`), wind clip `renders/WIND_TEST.mp4`.
+  - Docs: `02_world/ecosystem/ECOSYSTEM_BIBLE.md` (6 questions §12), `WILDLIFE_PROPOSAL.png`. QC `03_assets/vegetation/qc/T06_QC_REPORT.md`: 337/337 (Blender 4.5) + 337/337 (5.3) + 25/25 textures.
+  - NEXT (approval ke baad): variants + LODs, NG_T6_ECOSYSTEM scatter on TASK 05 terrains, remaining regions, natural details, wildlife.
 
 ## Session 3 (21 Nov)
 - **NOW: TASK 05 COMPLETE (21 Nov)** — milestone 1 approved (QC 56/56) + milestone 2 built (QC 45/45): R04 desert, R05 forbidden crater, R02 enchanted forest, R03 Great Northern Range + cave entrance, main world v002. Previews: `02_world/3d_world/12_RENDER/T5/T5_SHEET_01_CINEMATIC_TESTS.png`, `T5_SHEET_02_MILESTONE2.png`. **Director: milestone 2 + crater/cave/dune fixes APPROVED ("Badhiya hai", 21 Nov) → TASK 05 CLOSED. Next: TASK 06 prompt.**

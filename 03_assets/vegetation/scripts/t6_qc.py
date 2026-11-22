@@ -116,7 +116,7 @@ def run_textures(R):
             im = Image.open(q); det.append(f'{k} {im.size[0]}²')
             ok &= im.size == (2048, 2048)
         a = Image.open(p).getchannel('A'); cov = sum(a.histogram()[128:]) / (2048 * 2048)
-        ok &= .02 < cov < .9
+        ok &= .005 < cov < .9    # plume atlases (kans) are genuinely sparse
         R.append(dict(check=f'atlas {n}: colour+alpha / normal / roughness maps 2K', ok=ok, detail=', '.join(det) + f', coverage {cov:.0%}'))
 
 

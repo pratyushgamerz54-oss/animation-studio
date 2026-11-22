@@ -449,12 +449,12 @@
   {
    "check": "AV_S02_TULSI: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "0.83 m vs design 0.75 m"
+   "detail": "0.73 m vs design 0.75 m"
   },
   {
    "check": "AV_S02_TULSI: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.16 m, 246 verts at the foot"
+   "detail": "lowest z -0.14 m, 254 verts at the foot"
   },
   {
    "check": "AV_S02_TULSI: no limbs through the ground",
@@ -584,12 +584,12 @@
   {
    "check": "AV_T03_CHIR_PINE: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "31.42 m vs design 28.0 m"
+   "detail": "27.33 m vs design 28.0 m"
   },
   {
    "check": "AV_T03_CHIR_PINE: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.43 m, 22 verts at the foot"
+   "detail": "lowest z -0.38 m, 22 verts at the foot"
   },
   {
    "check": "AV_T03_CHIR_PINE: no limbs through the ground",
@@ -629,12 +629,12 @@
   {
    "check": "AV_T04_BANJ_OAK: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "19.39 m vs design 17.0 m"
+   "detail": "17.45 m vs design 17.0 m"
   },
   {
    "check": "AV_T04_BANJ_OAK: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.41 m, 310 verts at the foot"
+   "detail": "lowest z -0.37 m, 313 verts at the foot"
   },
   {
    "check": "AV_T04_BANJ_OAK: no limbs through the ground",
@@ -674,12 +674,12 @@
   {
    "check": "AV_T05_RHODODENDRON: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "9.71 m vs design 8.5 m"
+   "detail": "8.19 m vs design 8.5 m"
   },
   {
    "check": "AV_T05_RHODODENDRON: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.32 m, 45 verts at the foot"
+   "detail": "lowest z -0.27 m, 45 verts at the foot"
   },
   {
    "check": "AV_T05_RHODODENDRON: no limbs through the ground",
@@ -743,13 +743,13 @@
   },
   {
    "check": "AV_T02_DEODAR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 4.9e-01 m \u00b7 moving \u0394max 0.510 m \u00b7 foot \u0394 0.000 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.020 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "AV_AQ01_LOTUS: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 9.3e-02 m \u00b7 moving \u0394max 0.084 m \u00b7 foot \u0394 0.015 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.168 m \u00b7 foot \u0394 0.001 m"
   },
   {
    "check": "EF: library file exists",
@@ -928,13 +928,13 @@
   },
   {
    "check": "EF_T02_TEAL_BEECH: height within \u00b115 % of the design height",
-   "ok": false,
-   "detail": "41.47 m vs design 34.0 m"
+   "ok": true,
+   "detail": "34.60 m vs design 34.0 m"
   },
   {
    "check": "EF_T02_TEAL_BEECH: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.42 m, 338 verts at the foot"
+   "detail": "lowest z -0.35 m, 346 verts at the foot"
   },
   {
    "check": "EF_T02_TEAL_BEECH: no limbs through the ground",
@@ -1019,12 +1019,12 @@
   {
    "check": "EF_T04_YEW: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "10.00 m vs design 9.0 m"
+   "detail": "8.69 m vs design 9.0 m"
   },
   {
    "check": "EF_T04_YEW: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.39 m, 55 verts at the foot"
+   "detail": "lowest z -0.34 m, 55 verts at the foot"
   },
   {
    "check": "EF_T04_YEW: no limbs through the ground",
@@ -1063,13 +1063,13 @@
   },
   {
    "check": "EF_T05_VEIL_WILLOW: height within \u00b115 % of the design height",
-   "ok": false,
-   "detail": "20.79 m vs design 18.0 m"
+   "ok": true,
+   "detail": "18.39 m vs design 18.0 m"
   },
   {
    "check": "EF_T05_VEIL_WILLOW: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.51 m, 44 verts at the foot"
+   "detail": "lowest z -0.46 m, 44 verts at the foot"
   },
   {
    "check": "EF_T05_VEIL_WILLOW: no limbs through the ground",
@@ -1114,12 +1114,12 @@
   {
    "check": "EF_T06_SPIRAL_ROOT: height within \u00b115 % of the design height",
    "ok": true,
-   "detail": "26.53 m vs design 24.0 m"
+   "detail": "22.85 m vs design 24.0 m"
   },
   {
    "check": "EF_T06_SPIRAL_ROOT: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -2.71 m, 390 verts at the foot"
+   "detail": "lowest z -2.34 m, 494 verts at the foot"
   },
   {
    "check": "EF_T06_SPIRAL_ROOT: no limbs through the ground",
@@ -1163,13 +1163,13 @@
   },
   {
    "check": "EF_T07_LANTERN_TREE: height within \u00b115 % of the design height",
-   "ok": false,
-   "detail": "18.94 m vs design 15.0 m"
+   "ok": true,
+   "detail": "15.11 m vs design 15.0 m"
   },
   {
    "check": "EF_T07_LANTERN_TREE: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.39 m, 26 verts at the foot"
+   "detail": "lowest z -0.31 m, 27 verts at the foot"
   },
   {
    "check": "EF_T07_LANTERN_TREE: no limbs through the ground",
@@ -1257,9 +1257,9 @@
    "detail": "slots used [0, 1]"
   },
   {
-   "check": "EF_V01_HANGING_VINE: plant base on the ground (no floating)",
-   "ok": false,
-   "detail": "lowest z 0.454 m"
+   "check": "EF_V01_HANGING_VINE: hanging plant attaches at its top (hangs from a branch, z_top = 9.0 m)",
+   "ok": true,
+   "detail": "z 0.45\u20139.00 m"
   },
   {
    "check": "EF_V01_HANGING_VINE: wind modifier + drivers valid",
@@ -1268,13 +1268,13 @@
   },
   {
    "check": "EF_T01_GIANT_ELDER: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 7.0e-01 m \u00b7 moving \u0394max 0.682 m \u00b7 foot \u0394 0.000 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.365 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF_FE01_GIANT_FERN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 9.7e-02 m \u00b7 moving \u0394max 0.113 m \u00b7 foot \u0394 0.004 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.225 m \u00b7 foot \u0394 0.009 m"
   },
   {
    "check": "MK: library file exists",
@@ -1608,13 +1608,13 @@
   },
   {
    "check": "MK_T02_HIMALAYAN_BIRCH: height within \u00b115 % of the design height",
-   "ok": false,
-   "detail": "13.99 m vs design 12.0 m"
+   "ok": true,
+   "detail": "11.59 m vs design 12.0 m"
   },
   {
    "check": "MK_T02_HIMALAYAN_BIRCH: grounded (trunk foot / roots below ground level)",
    "ok": true,
-   "detail": "lowest z -0.34 m, 32 verts at the foot"
+   "detail": "lowest z -0.28 m, 32 verts at the foot"
   },
   {
    "check": "MK_T02_HIMALAYAN_BIRCH: no limbs through the ground",
@@ -1678,13 +1678,13 @@
   },
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 4.6e-01 m \u00b7 moving \u0394max 0.490 m \u00b7 foot \u0394 0.220 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.980 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "MK_F01_GENTIAN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
-   "ok": false,
-   "detail": "calm \u0394 1.0e-02 m \u00b7 moving \u0394max 0.015 m \u00b7 foot \u0394 0.005 m"
+   "ok": true,
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.030 m \u00b7 foot \u0394 0.010 m"
   }
  ]
 }
