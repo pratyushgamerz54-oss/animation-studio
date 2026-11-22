@@ -6,7 +6,12 @@
 import os, sys, json, math
 HERE = os.path.dirname(os.path.abspath(__file__)); VEG = os.path.abspath(os.path.join(HERE, '..'))
 QCD = os.path.join(VEG, 'qc'); os.makedirs(QCD, exist_ok=True)
-NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM'}
+NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
+         'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES
+_built = [r for r, nm in NAMES.items() if r in ('AV', 'EF', 'MK') or os.path.exists(os.path.join(VEG, 'library', f'T6_VEG_{nm}_v001.blend'))]
+REGS = os.environ.get('T6_QC_REGIONS', ' '.join(_built)).split()      # default: milestone 1 + every milestone-2 library built so far
+                                                                      # (final TASK 06 QC: T6_QC_REGIONS="AV EF MK PL LK DS FB CT CV")
 WIND_ATTRS = ('wind_trunk', 'wind_branch', 'wind_leaf', 'wind_phase', 'leaf_rand')
 
 
@@ -14,16 +19,16 @@ def run_blender():
     sys.path.insert(0, HERE)
     import numpy as np
     import bpy
-    import t6_species as SP
-    import t6_plants as PL
-    design = {t['name']: t for t in SP.TREES + SP.SHRUBS}; pdesign = {p['name']: p for p in PL.PLANTS}
+    import t6_regions as RG
+    design = {t['name']: t for t in RG.TREES + RG.SHRUBS}; pdesign = {p['name']: p for p in RG.PLANTS}
     R = []
 
     def chk(name, ok, detail=''):
         R.append(dict(check=name, ok=bool(ok), detail=str(detail))); print(('PASS ' if ok else 'FAIL ') + name, detail, flush=True)
 
     ver = bpy.app.version_string
-    for reg, nm in NAMES.items():
+    for reg in REGS:
+        nm = NAMES[reg]
         f = os.path.join(VEG, 'library', f'T6_VEG_{nm}_v001.blend')
         chk(f'{reg}: library file exists', os.path.exists(f), os.path.relpath(f, VEG))
         if not os.path.exists(f):
@@ -67,8 +72,14 @@ def run_blender():
                 chk(f"{n}: label set ({o['t6_label']})", o['t6_label'] in ('SPECIES-INSPIRED', 'FANTASY (APPROVED R-02)'))
                 if o['t6_label'] == 'FANTASY (APPROVED R-02)':
                     chk(f'{n}: fantasy asset restricted to R-02 (Decision 01)', o['t6_region'].startswith('R-02') and 'R-02' in o['t6_habitat'])
+                if D.get('builder') == 'palm':
+                    fr = [m for m in mats if 'FROND' in m.name]
+                    chk(f'{n}: palm — trunk scan + frond / dead-frond materials, fronds attached to the crown', len(fr) >= 2 and
+                        np.abs(V[V[:, 2] > H * .8][:, :2]).max() < D['palm']['frond_len'] * 1.4 + H * .3, ', '.join(m.name for m in fr))
             else:
                 P = pdesign[n]
+                if o['t6_label'] == 'FANTASY (APPROVED R-02)':
+                    chk(f'{n}: fantasy asset restricted to R-02 (Decision 01)', o['t6_region'].startswith('R-02') and 'R-02' in o['t6_habitat'])
                 if P.get('hanging'):
                     chk(f'{n}: hanging plant attaches at its top (hangs from a branch, z_top = {H:.1f} m)', H > 2 and lo > 0, f'z {lo:.2f}–{H:.2f} m')
                 elif P.get('water'):
@@ -79,6 +90,8 @@ def run_blender():
             em = [m.node_tree.nodes['Principled BSDF'].inputs['Emission Strength'].default_value for m in mats
                   if m.node_tree and 'Principled BSDF' in m.node_tree.nodes]
             chk(f'{n}: glow subtle (emission ≤ 1.0, Decision 01 §3)', max(em + [0]) <= 1.0, f'max emission {max(em + [0]):.2f}')
+            if reg in ('CV', 'FB', 'DS', 'PL', 'LK', 'CT', 'MK'):      # glow approved for R-02 only (caves: proposal, crater: no glow)
+                chk(f'{n}: no glow outside R-02', max(em + [0]) == 0.0, f'max emission {max(em + [0]):.2f}')
             md = o.modifiers.get('T6_WIND')
             if md:
                 drv_ok = all(fc.driver.is_valid for fc in (o.animation_data.drivers if o.animation_data else []))

@@ -1,6 +1,6 @@
 """TASK 06 · compose the vegetation reference sheets from the renders (python3 + Pillow).
 
-    python3 t6_compose_sheets.py AV EF MK
+    python3 t6_compose_sheets.py AV EF MK            (milestone 2: PL LK DS FB CT CV)
 
 Out (03_assets/vegetation/sheets/):
   <REGION>/TREE_<asset>.png     per tree / shrub: front · side · back with height ruler + 1.75 m figure, leaf close-up,
@@ -20,8 +20,14 @@ BG, INK, SUB, LINE = (236, 234, 228), (28, 34, 30), (92, 98, 94), (170, 172, 166
 HEAD = (30, 44, 38)
 BADGE = {'SPECIES-INSPIRED': ((46, 110, 64), 'SPECIES-INSPIRED (real plant reference)'),
          'FANTASY (APPROVED R-02)': ((196, 110, 24), 'FANTASY — approved for R-02 (subtle glow)')}
-NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM'}
-TITLE = {'AV': 'R-01 ASHRAM VALLEY', 'EF': 'R-02 ENCHANTED FOREST', 'MK': 'R-03 MOUNTAIN KINGDOM (Great Northern Range)'}
+NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
+         'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES (kept here: no bpy import in python3)
+TITLE = {'AV': 'R-01 ASHRAM VALLEY', 'EF': 'R-02 ENCHANTED FOREST', 'MK': 'R-03 MOUNTAIN KINGDOM (Great Northern Range)',
+         'PL': 'R-06 GREEN PLAINS (Southern Grasslands)', 'LK': 'R-08 CRYSTAL LAKES (Lake District)', 'DS': 'R-04 GOLDEN DESERT (Western Desert)',
+         'FB': 'R-05 FORBIDDEN LANDS (crater)', 'CT': 'C-01 / C-02 / C-03 ANCIENT CITY SURROUNDINGS', 'CV': 'CV-01…05 HIDDEN UNDERGROUND (caves)'}
+M2 = ('PL', 'LK', 'DS', 'FB', 'CT', 'CV')
+MSTONE = lambda reg: 'TASK 06 milestone 2 (v001)' if reg in M2 else 'TASK 06 milestone 1 concept (v001)'
 IDENT = {
     'AV': ['SEASON: SPRING (approved). Warm-temperate Himalayan-foothill valley (~700–900 m): meadows, groves, forest ring (approved valley layout).',
            'APPROVED: ONE landmark Peepal in the Ashram main courtyard on a stone sitting platform · Tulsi + Marigold ONLY in the Ashram garden.',
@@ -36,7 +42,31 @@ IDENT = {
            'M1 montane forest 1 500–3 000 m — Himalayan spruce (dense, dark), Deodar low, RED BURANS in spring (R-01 Burans asset)',
            'M2 tree line 3 000–3 550 m (TASK 05 scatter limit) — Himalayan birch (white bark) + wind-bent pine (krummholz) on exposed ridges',
            'M3 alpine 3 550–4 500 m — juniper mats, dwarf rhododendron, tussock grass, gentian, edelweiss, blue poppy, cushion plants',
-           'M4 nival > 4 500 m — bare rock, lichen, snow. No fantasy species in the mountains.'],
+           'M4 nival > 4 500 m — bare rock, lichen, snow. No fantasy species in the mountains.',
+           'Milestone 2 adds: West Himalayan silver fir (M1 top, with spruce) + blue pine in full form (M1 clearings / sunny slopes).'],
+    'PL': ['"Green Plains" = R-06 Southern Grasslands (APPROVED mapping). SEASON: SPRING — fresh green sward, last year\'s straw at the base,',
+           'yellow wild-mustard drifts (spring key colour), white clover in moist sward, globe thistle on dry stony hillocks.',
+           'Tall + short grass mosaic everywhere except paths / rock / water. Lone trees 0–5 / ha: banyan giants (aerial prop roots), neem,',
+           'umbrella acacia on the dry edge towards the desert; ber bush islands on low hills; willow galleries along rivers (R-08 asset).'],
+    'LK': ['"Crystal Lakes" = R-08 Lake District (APPROVED mapping). "Crystal" = CLEAR WATER — no crystal plants invented (would need approval).',
+           'SEASON: SPRING. Shores: white willow leaning over the water, Himalayan alder on wet banks; reed belts (green, no plumes in spring),',
+           'sedge tussocks in the wet shore belt; white water-lily in still bays (pads float, flowers AT the surface, petioles visible in clear water);',
+           'moss on wet splash-zone rocks. Mixed broadleaf-conifer forest behind the shores uses the R-01 / R-03 trees (oak, deodar, spruce).'],
+    'DS': ['"Golden Desert" = R-04 Western Desert & Wastelands (TASK 05 DESERT_R04_v002). Sparse: dune crests BARE; ≤ 1 tree / ha outside wadis.',
+           'Wadis + desert edge: khejri, umbrella acacia (R-06 asset), aak (Calotropis); rocky slopes: leafless candelabra euphorbia.',
+           'Interdune hollows: sewan grass tussocks with much dead straw. Oases ONLY where the TASK 05 wadi / playa masks allow water:',
+           'date palms (skirt of dead fronds) + reeds. Whether the desert is inhabited (camels, oasis villages) = NOT CONFIRMED.'],
+    'FB': ['"Forbidden Lands" = R-05 crater (approved TASK 05 look: dark ash, black lake, NO lava, NO glow). WHY the land is dead = NOT CONFIRMED.',
+           'Almost lifeless: charred dead trees (black, cracked, ash-grey patches) and sun-bleached leafless thorn shrubs on the slopes,',
+           'grey crust lichen on rim rocks, a few thin hardy grass tufts on the OUTER rim only. Crater floor + lake shore: nothing grows.'],
+    'CT': ['C-01 / C-02 / C-03 = THREE SEPARATE archaeological sites (APPROVED mapping). Their history, inhabitants and relationship = NOT CONFIRMED;',
+           'inhabited vs ruined = NOT CONFIRMED → assets support both looks. River plains near the coast. SEASON: SPRING (mango with copper new leaves).',
+           'Sacred groves: banyan (R-06 asset) + peepal (R-01 asset, lone trees); avenues: neem (R-06) + mango; coastal plain: coconut palms;',
+           'overgrown stone: ivy curtains on walls, ruin moss on ledges + steps, grass in paving cracks; river reeds (R-08 asset).'],
+    'CV': ['CV-01…05 Hidden Underground (cave systems; TASK 05 has the R-03 entrance). Plants need light → vegetation only where it is possible:',
+           'entrance twilight zone: pale cave moss (+ ferns / moss from the region outside); deeper: pale fungi on wet rock and rotting roots;',
+           'shallow caves under forests: root curtains hanging from the ceiling. NO glow in caves (Decision 01 approved subtle glow for R-02 only;',
+           'bioluminescent cave fungi = a PROPOSAL that needs approval). No cave creatures (wildlife selection PENDING).'],
 }
 
 
@@ -120,7 +150,7 @@ def tree_sheet(reg, name, v, V, outd):
     W, Hh = 3300, 1900
     im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
     st = v['stats']; H = st['height_m']
-    header(d, W, f"{name}  ·  {v['common']}", v['latin'], v['label'], f"{TITLE[reg]}  ·  {v['category']}  ·  TASK 06 milestone 1 concept (v001)")
+    header(d, W, f"{name}  ·  {v['common']}", v['latin'], v['label'], f"{TITLE[reg]}  ·  {v['category']}  ·  {MSTONE(reg)}")
     rd = os.path.join(VEG, 'renders', reg)
     sc = 1060 / 840; x = 150; y0 = 190
     for i, view in enumerate(('front', 'side', 'back')):
@@ -157,6 +187,12 @@ def tree_sheet(reg, name, v, V, outd):
     if v.get('atlas'):
         im.paste(atlas_tile(v['atlas'], (sw, sw)), (X + sw + 20, yy)); im.paste(atlas_tile(v['atlas'], (sw, sw), 'nor'), (X + 2 * (sw + 20), yy))
         d.text((X + sw + 20, yy + sw + 4), f"{v['atlas']} · 4 var · 2K", fill=SUB, font=font_fit(d, f"{v['atlas']} · 4 var · 2K", sw, 14))
+    elif v.get('builder') == 'palm':
+        d.rectangle([X + sw + 20, yy, X + 2 * sw + 20, yy + sw], fill=(226, 228, 222), outline=LINE)
+        d.text((X + sw + 34, yy + 14), 'fronds = real geometry\n(rachis + V-folded leaflets,\ndead-frond skirt)\n— no atlas card', fill=INK, font=F(16))
+    elif not v.get('atlas'):
+        d.rectangle([X + sw + 20, yy, X + 2 * sw + 20, yy + sw], fill=(226, 228, 222), outline=LINE)
+        d.text((X + sw + 34, yy + 14), 'leafless\n(dead / burnt wood)', fill=INK, font=F(16))
     yy += sw + 36
     d.text((X, yy), 'COLOUR PALETTE', fill=INK, font=F(18, True)); palette(d, X, yy + 28, v['palette'][:7], 66); yy += 130
     d.text((X, yy), 'SPECIFICATION', fill=INK, font=F(18, True)); yy += 30
@@ -187,7 +223,7 @@ def plant_sheet(reg, inv, V, outd):
     cols = 2; cwid = 1600; ch = 560; W = cols * cwid + 60; Hh = 170 + ((len(names) + 1) // 2) * (ch + 20) + 40
     im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
     header(d, W, f'PLANT & FLOWER LIBRARY  ·  {TITLE[reg]}', 'grass · wildflowers · ferns · moss · fungi · aquatic · vines · alpine — real geometry, ground grid = 10 cm',
-           None, 'TASK 06 milestone 1 concept (v001)')
+           None, MSTONE(reg))
     rd = os.path.join(VEG, 'renders', reg)
     for i, n in enumerate(names):
         v = inv[n]; cx = 30 + (i % 2) * cwid; cy = 180 + (i // 2) * (ch + 20)
@@ -224,7 +260,7 @@ def region_sheet(reg, inv, V, outd):
     W, Hh = 3300, 3200
     im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
     header(d, W, f'REGIONAL VEGETATION SHEET  ·  {TITLE[reg]}', 'vegetation identity · height comparison · plant palette · Decision Sheet 01 applied (mapping APPROVED, season SPRING)',
-           None, 'TASK 06 milestone 1 concept (v001)')
+           None, MSTONE(reg))
     rd = os.path.join(VEG, 'renders', reg); y = 180
     for ln in IDENT[reg]:
         d.text((40, y), ln, fill=INK, font=F(22)); y += 32
@@ -259,7 +295,7 @@ def region_sheet(reg, inv, V, outd):
         d.text((165, y + 10), 'GROUND LAYER — grasses · flowers · ferns · moss · fungi · aquatic (perspective, 10 cm grid)', fill=INK, font=F(22, True))
         y += img.height + 30
     # species list with labels
-    d.text((40, y), 'SPECIES IN THIS REGION (milestone 1)', fill=INK, font=F(24, True)); y += 40
+    d.text((40, y), f"SPECIES IN THIS REGION ({'milestone 2' if reg in M2 else ('milestone 1 + milestone 2 additions' if reg in ('EF', 'MK') else 'milestone 1')})", fill=INK, font=F(24, True)); y += 40
     names = list(inv); colw = (W - 80) // 3
     for i, n in enumerate(names):
         v = inv[n]; cx = 40 + (i % 3) * colw; cy = y + (i // 3) * 30
@@ -275,16 +311,19 @@ def region_sheet(reg, inv, V, outd):
 if __name__ == '__main__':
     sys.path.insert(0, HERE)
     import importlib.util
-    spec = importlib.util.spec_from_file_location('sp', os.path.join(HERE, 't6_species.py')); SP = importlib.util.module_from_spec(spec); spec.loader.exec_module(SP)
-    TINT = {t['name']: t['bark'].get('tint', '#FFFFFF') for t in SP.TREES + SP.SHRUBS}
-    DESIGN = {t['name']: t['height'] for t in SP.TREES + SP.SHRUBS}
+    ALLW = []
+    for fn in ('t6_species.py', 't6_species_m2.py'):
+        spec = importlib.util.spec_from_file_location(fn[:-3], os.path.join(HERE, fn)); SP = importlib.util.module_from_spec(spec); spec.loader.exec_module(SP)
+        ALLW += SP.TREES + SP.SHRUBS
+    TINT = {t['name']: t['bark'].get('tint', '#FFFFFF') for t in ALLW}
+    DESIGN = {t['name']: t['height'] for t in ALLW}; BUILDER = {t['name']: t.get('builder') for t in ALLW}
     for reg in (sys.argv[1:] or ['AV', 'EF', 'MK']):
         inv = json.load(open(os.path.join(VEG, 'library', f'T6_VEG_{NAMES[reg]}_inventory.json')))
         vj = os.path.join(VEG, 'renders', reg, 'views.json'); V = json.load(open(vj)) if os.path.exists(vj) else {}
         outd = os.path.join(VEG, 'sheets', reg); os.makedirs(os.path.join(outd, 'thumbs'), exist_ok=True)
         for n, v in inv.items():
             if v['kind'] in ('tree', 'shrub'):
-                v['bark_tint'] = TINT.get(n, '#FFFFFF'); v['design_h'] = DESIGN.get(n, v['stats']['height_m'])
+                v['bark_tint'] = TINT.get(n, '#FFFFFF'); v['design_h'] = DESIGN.get(n, v['stats']['height_m']); v['builder'] = BUILDER.get(n)
                 tree_sheet(reg, n, v, V, outd); print('SHEET', n, flush=True)
         plant_sheet(reg, inv, V, outd); region_sheet(reg, inv, V, outd)
         print('REGION SHEETS', reg)

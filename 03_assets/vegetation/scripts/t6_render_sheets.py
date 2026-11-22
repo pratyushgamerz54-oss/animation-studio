@@ -1,6 +1,6 @@
 """TASK 06 · render the reference views for the vegetation sheets (Blender 4.5, Cycles CPU).
 
-    BPY45 t6_render_sheets.py -- AV|EF|MK [asset names…]   (env SPP=32, ONLY=views|lineup)
+    BPY45 t6_render_sheets.py -- AV|EF|MK|PL|LK|DS|FB|CT|CV [asset names…]   (env SPP=32, ONLY=views|lineup|closeups)
 
 Per tree / shrub:  front · side · back (orthographic, calm wind, shadow-catcher ground, 1.75 m scale figure in the front view)
                    leaf close-up (perspective) · trunk-foot close-up (roots meeting a real forest-floor ground)
@@ -17,10 +17,18 @@ import t6kit as K
 
 args = sys.argv[sys.argv.index('--') + 1:]
 REG = args[0]; SEL = set(args[1:])
-NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM'}
+NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM',
+         'PL': 'GREEN_PLAINS', 'LK': 'CRYSTAL_LAKES', 'DS': 'GOLDEN_DESERT', 'FB': 'FORBIDDEN_LANDS',
+         'CT': 'ANCIENT_CITY_SITES', 'CV': 'HIDDEN_UNDERGROUND'}          # = t6_regions.NAMES
+# trunk-foot close-up ground per region (real Poly Haven scan the tree actually grows in): texture, metres per tile, tint
+BASE_GROUND = {'PL': ('sparse_grass', 3.0, '#FFFFFF'), 'LK': ('brown_mud_leaves_01', 2.5, '#FFFFFF'), 'DS': ('dry_ground_01', 3.0, '#FFFFFF'),
+               'FB': ('mud_cracked_dry_03', 3.0, '#6A6560'), 'CT': ('grass_path_2', 3.0, '#FFFFFF'), 'CV': ('rock_ground', 2.5, '#FFFFFF')}
 LIBF = os.path.join(K.VEG, 'library', f'T6_VEG_{NAMES[REG]}_v001.blend')
 OUTD = os.path.join(K.VEG, 'renders', REG); os.makedirs(OUTD, exist_ok=True)
 SPP = int(os.environ.get('SPP', 32)); ONLY = os.environ.get('ONLY', '')
+FRESH = os.environ.get('SKIP_FRESH', '') == '1'     # resume after an interrupted run: skip assets whose renders are newer than the library
+LIB_T = os.path.getmtime(LIBF)
+fresh = lambda files: FRESH and all(os.path.exists(f) and os.path.getmtime(f) > LIB_T for f in files)
 bpy.ops.wm.open_mainfile(filepath=LIBF)
 ctrl = bpy.data.objects['T6_WIND_CONTROL']; ctrl['strength'] = 0.0            # calm for reference views
 INV = json.load(open(LIBF[:-6].replace('_v001', '') + '_inventory.json'))
@@ -30,11 +38,7 @@ VIEWS = json.load(open(VJ)) if os.path.exists(VJ) else {}
 sc = bpy.data.scenes.new('T6_SHEET')
 sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = SPP; sc.cycles.use_denoising = True
 sc.cycles.transparent_max_bounces = 64; sc.cycles.max_bounces = 6; sc.cycles.diffuse_bounces = 2
-sc.view_settings.view_transform = 'AgX'
-try:
-    sc.view_settings.look = 'AgX - Medium High Contrast'
-except Exception:
-    pass
+K.camera_look(sc)                     # natural camera look (Director 22 Nov)
 sc.render.film_transparent = True; sc.render.image_settings.file_format = 'PNG'; sc.render.image_settings.color_mode = 'RGBA'
 sc.frame_set(1)
 # ---------------------------------------------------------------- world + sun
@@ -78,7 +82,8 @@ def ground_mat(name, tex, scale, grid=None, tint='#FFFFFF'):
     return m
 
 
-forest_floor = plane('T6_GROUND_FOREST', 400, ground_mat('MAT_T6_GROUND_FOREST', 'forest_ground_04', 3.0))
+_bg = BASE_GROUND.get(REG, ('forest_ground_04', 3.0, '#FFFFFF'))
+forest_floor = plane('T6_GROUND_FOREST', 400, ground_mat('MAT_T6_GROUND_FOREST', _bg[0], _bg[1], tint=_bg[2]))
 soil = plane('T6_GROUND_GRID', 60, ground_mat('MAT_T6_GROUND_GRID', 'brown_mud', 1.5, grid=.1, tint='#C8BCA8'))
 
 
@@ -219,6 +224,9 @@ for name, v in INV.items():
         continue
     if ONLY == 'lineup':
         break
+    views = ('front', 'side', 'back', 'base') if v['kind'] in ('tree', 'shrub') else ('hero', 'detail')
+    if fresh([os.path.join(OUTD, f'{name}_{k}.png') for k in views]) and name in VIEWS:
+        print('FRESH (skip)', name, flush=True); continue
     o = bpy.data.objects[name]
     sc.collection.objects.link(o)
     if v['kind'] in ('tree', 'shrub') and ONLY == 'closeups':      # only the leaf close-up (texture detail); ortho views kept
@@ -232,6 +240,8 @@ for name, v in INV.items():
     sc.collection.objects.unlink(o)
     json.dump(VIEWS, open(VJ, 'w'), indent=1)
 if ONLY in ('', 'lineup') and not SEL:   # (closeups mode never re-renders the lineups)
-    lineup('trees'); lineup('plants')
+    for k in ('trees', 'plants'):
+        if not fresh([os.path.join(OUTD, f'LINEUP_{k.upper()}.png')]):
+            lineup(k)
 json.dump(VIEWS, open(VJ, 'w'), indent=1)
 print('T6_RENDER_DONE', REG)

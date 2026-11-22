@@ -387,6 +387,37 @@ ATLASES = {
                         flower=G(n=16, size=.06, spread=.12, col='#F2C4CF', centre='#E8D27A')),
 }
 
+# ---------------------------------------------------------------------- TASK 06 milestone 2 — remaining regions (Spring look)
+ATLASES.update({
+    # R-06 Green Plains / C-sites
+    'pl_banyan':  G(layout='alternate', n=7, len=.27, wratio=.55, spread=55, petiole=.12, size_m=.55, top='#2F5A2A', edge='#4E7A3A',
+                    vein='#A8B88A', twig='#6A5A48', aged='#9A8A45', leaf=G(shape='elliptic', pw=.55, veins=9, slant=.2, rough=.32)),
+    'pl_neem':    G(layout='opposite', n=8, len=.17, wratio=.28, spread=58, petiole=.04, size_m=.42, top='#3E7A34', edge='#5E9A44',
+                    vein='#7FA860', twig='#5E7A3A', aged='#9A9A45', leaf=G(shape='lance', skew=.7, serr=.28, teeth=18, veins=8, rough=.40)),
+    'pl_acacia':  G(layout='pinnate', n=24, len=.07, wratio=.38, spread=72, size_m=.30, top='#5A7A3A', edge='#7A9A54', vein='#6A8A44',
+                    twig='#5A4A3A', aged='#8A8A50', leaf=G(shape='elliptic', pw=.6, veins=0, veinvis=0, rib=.004, rough=.45)),
+    'ct_mango':   G(layout='rosette', n=10, len=.38, wratio=.22, fan=260, size_m=.55, top='#24502A', edge='#3E6A34', vein='#8AA070',
+                    twig='#5A4A3A', aged='#8A4A34', leaf=G(shape='lance', skew=.75, pw=.85, veins=14, slant=.28, rough=.30)),   # aged = copper new leaves
+    # R-08 Crystal Lakes
+    'lk_willow':  G(layout='alternate', n=14, len=.22, wratio=.14, spread=30, petiole=.03, size_m=.45, top='#5E8A52', edge='#A9BFA0',
+                    vein='#C8D8C0', twig='#7A6A4A', aged='#A8A45A', leaf=G(shape='lance', skew=.7, serr=.06, teeth=30, veins=0, veinvis=0, rough=.38)),
+    'lk_alder':   G(layout='alternate', n=8, len=.22, wratio=.62, spread=58, petiole=.12, size_m=.40, top='#2F5A2E', edge='#4E7A3E',
+                    vein='#8AA878', twig='#5A4A40', aged='#8A8A45', leaf=G(shape='elliptic', pw=.6, serr=.12, teeth=24, veins=9, slant=.3, rough=.40)),
+    'lk_lily':    G(layout='single', n=1, len=1, wratio=1, size_m=.50, top='#2F5A2A', edge='#4E6A2E', vein='#6E8A4A', twig='#4A5A2A',
+                    aged='#7A6A3A', leaf=G(shape='pad', notch=.22, veins=26, rough=.28)),
+    # R-04 Golden Desert
+    'ds_khejri':  G(layout='pinnate', n=16, len=.065, wratio=.35, spread=70, size_m=.28, top='#6E7E4E', edge='#8E9A6A', vein='#7E8A5A',
+                    twig='#6A5A4A', aged='#9A8A55', leaf=G(shape='elliptic', pw=.6, veins=0, veinvis=0, rib=.004, rough=.50)),
+    # R-03 Mountain Kingdom additions
+    'mk_fir':     G(layout='needle_flat', n=36, nlen=.045, nw=.009, nang=70, side=7, spread=55, len=.40, wratio=.3, size_m=.50,
+                    top='#18342A', edge='#2E4A3C', vein='#1A3028', twig='#5A4434', aged='#4A5A3A', leaf=G(shape='lance')),
+    'mk_bluepine': G(layout='needle_bundle', n=26, nlen=.26, nw=.005, ndroop=-.09, side=4, spread=40, len=.25, wratio=.3, size_m=.60,
+                     top='#4E6E6A', edge='#7E9A92', vein='#3E5A56', twig='#6A5040', aged='#8A9A6A', leaf=G(shape='lance')),
+    # C-sites ruins
+    'ct_ivy':     G(layout='alternate', n=6, len=.24, wratio=.86, spread=60, petiole=.30, size_m=.36, top='#1E3A22', edge='#2E4A2A',
+                    vein='#9AB08A', twig='#4A4A30', aged='#6A5A30', leaf=G(shape='heart', veins=6, slant=.15, rough=.30)),
+})
+
 
 def build(name):
     A = ATLASES[name]; rng = np.random.default_rng(abs(hash(name)) % (2 ** 31) if False else sum(map(ord, name)) * 7919)

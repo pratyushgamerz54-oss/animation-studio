@@ -395,6 +395,41 @@
    "rough": "polyhaven/textures/trident_maple_bark/trident_maple_bark_rough_2k.jpg",
    "ao": "polyhaven/textures/trident_maple_bark/trident_maple_bark_ao_2k.jpg",
    "disp": "polyhaven/textures/trident_maple_bark/trident_maple_bark_disp_2k.jpg"
+  },
+  "palm_bark": {
+   "diff": "polyhaven/textures/palm_bark/palm_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/palm_bark/palm_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/palm_bark/palm_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/palm_bark/palm_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/palm_bark/palm_bark_disp_2k.jpg"
+  },
+  "palm_tree_bark": {
+   "diff": "polyhaven/textures/palm_tree_bark/palm_tree_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/palm_tree_bark/palm_tree_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/palm_tree_bark/palm_tree_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/palm_tree_bark/palm_tree_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/palm_tree_bark/palm_tree_bark_disp_2k.jpg"
+  },
+  "bark_bluegum": {
+   "diff": "polyhaven/textures/bark_bluegum/bark_bluegum_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/bark_bluegum/bark_bluegum_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/bark_bluegum/bark_bluegum_rough_2k.jpg",
+   "ao": "polyhaven/textures/bark_bluegum/bark_bluegum_ao_2k.jpg",
+   "disp": "polyhaven/textures/bark_bluegum/bark_bluegum_disp_2k.jpg"
+  },
+  "japanese_camphor_bark": {
+   "diff": "polyhaven/textures/japanese_camphor_bark/japanese_camphor_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/japanese_camphor_bark/japanese_camphor_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/japanese_camphor_bark/japanese_camphor_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/japanese_camphor_bark/japanese_camphor_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/japanese_camphor_bark/japanese_camphor_bark_disp_2k.jpg"
+  },
+  "chinese_hackberry_bark": {
+   "diff": "polyhaven/textures/chinese_hackberry_bark/chinese_hackberry_bark_diff_2k.jpg",
+   "nor_gl": "polyhaven/textures/chinese_hackberry_bark/chinese_hackberry_bark_nor_gl_2k.jpg",
+   "rough": "polyhaven/textures/chinese_hackberry_bark/chinese_hackberry_bark_rough_2k.jpg",
+   "ao": "polyhaven/textures/chinese_hackberry_bark/chinese_hackberry_bark_ao_2k.jpg",
+   "disp": "polyhaven/textures/chinese_hackberry_bark/chinese_hackberry_bark_disp_2k.jpg"
   }
  },
  "hdris": {

@@ -173,5 +173,82 @@
   "layout": "rosette",
   "tiles": 4,
   "pivot": "bottom-centre"
+ },
+ "pl_banyan": {
+  "size_m": 0.688,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "pl_neem": {
+  "size_m": 0.47,
+  "zoom": 1.12,
+  "layout": "opposite",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "pl_acacia": {
+  "size_m": 0.3,
+  "zoom": 1.0,
+  "layout": "pinnate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ct_mango": {
+  "size_m": 0.55,
+  "zoom": 1.0,
+  "layout": "rosette",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "lk_willow": {
+  "size_m": 0.504,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "lk_alder": {
+  "size_m": 0.448,
+  "zoom": 1.12,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "lk_lily": {
+  "size_m": 0.5,
+  "zoom": 1.0,
+  "layout": "single",
+  "tiles": 4,
+  "pivot": "centre"
+ },
+ "ds_khejri": {
+  "size_m": 0.28,
+  "zoom": 1.0,
+  "layout": "pinnate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_fir": {
+  "size_m": 0.56,
+  "zoom": 1.12,
+  "layout": "needle_flat",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "mk_bluepine": {
+  "size_m": 0.75,
+  "zoom": 1.25,
+  "layout": "needle_bundle",
+  "tiles": 4,
+  "pivot": "bottom-centre"
+ },
+ "ct_ivy": {
+  "size_m": 0.45,
+  "zoom": 1.25,
+  "layout": "alternate",
+  "tiles": 4,
+  "pivot": "bottom-centre"
  }
 }

@@ -11,16 +11,19 @@ from mathutils import Vector
 import t6kit as K, t6_species as SP, t6_plants as PL, t6_matlib as ML
 
 OUT = os.environ.get('OUT', '/tmp/t6_prev'); os.makedirs(OUT, exist_ok=True)
-SPP = int(os.environ.get('SPP', 24)); LOOK = os.environ.get('LOOK', 'AgX - Base Contrast')
+SPP = int(os.environ.get('SPP', 24)); LOOK = os.environ.get('LOOK', 'camera')
 bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
 sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = SPP; sc.cycles.use_denoising = True
 sc.cycles.transparent_max_bounces = 64; sc.cycles.max_bounces = 6; sc.cycles.diffuse_bounces = 2
-sc.view_settings.view_transform = 'AgX'
-try:
-    sc.view_settings.look = LOOK
-except Exception:
-    pass
+if LOOK == 'camera':
+    K.camera_look(sc)
+else:
+    sc.view_settings.view_transform = 'AgX'
+    try:
+        sc.view_settings.look = LOOK
+    except Exception:
+        pass
 sc.render.film_transparent = False
 w = bpy.data.worlds.new('W'); sc.world = w; w.use_nodes = True; nt = w.node_tree
 env = nt.nodes.new('ShaderNodeTexEnvironment')

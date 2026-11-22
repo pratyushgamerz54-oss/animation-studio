@@ -1,6 +1,6 @@
 """TASK 06 · build a regional vegetation library .blend (Blender 4.5 LTS).
 
-    BPY45 t6_build_library.py -- AV|EF|MK
+    BPY45 t6_build_library.py -- AV|EF|MK|PL|LK|DS|FB|CT|CV      (region table: t6_regions.py)
 
 Output: 03_assets/vegetation/library/T6_VEG_<REGION>_v001.blend  +  T6_VEG_<REGION>_inventory.json
 Layout inside the file:
@@ -18,13 +18,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 import bpy
 import t6kit as K
-import t6_species as SP
-import t6_plants as PL
-import t6_matlib as ML
+import t6_regions as RG
 
 REG = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'AV'
-NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM'}
-LIB = os.path.join(K.VEG, 'library'); os.makedirs(LIB, exist_ok=True)
+NAMES = RG.NAMES
+LIB = os.environ.get('T6_LIB_DIR') or os.path.join(K.VEG, 'library'); os.makedirs(LIB, exist_ok=True)   # T6_LIB_DIR = scratch test builds
 OUT = os.path.join(LIB, f'T6_VEG_{NAMES[REG]}_v001.blend')
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -46,28 +44,35 @@ META_KEYS = ('common', 'latin', 'label', 'region', 'category', 'habitat', 'altit
 def tag(o, D, kind, st):
     for k in META_KEYS:
         o[f't6_{k}'] = str(D.get(k, ''))
-    o['t6_kind'] = kind; o['t6_palette'] = json.dumps(D.get('palette', [])); o['t6_version'] = 'v001 (TASK 06 milestone 1 concept)'
+    o['t6_kind'] = kind; o['t6_palette'] = json.dumps(D.get('palette', []))
+    o['t6_version'] = 'v001 (TASK 06 milestone 2)' if D['name'] in RG.M2_NAMES else 'v001 (TASK 06 milestone 1 concept)'
     o['t6_wind_ready'] = True
     INV[D['name']] = dict({k: D.get(k, '') for k in META_KEYS}, kind=kind, palette=D.get('palette', []), stats=st,
                           bark=D.get('bark', {}).get('tex') if kind != 'plant' else None,
                           atlas=(D.get('leaves') or {}).get('atlas') if kind != 'plant' else None, collection=f"T6_{D['name']}")
 
 
-for D in [t for t in SP.TREES if t['name'].startswith(REG + '_')]:
+for D in [t for t in RG.TREES if t['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['TREES'])
-    o, st = K.build_tree(D, 0, c, ML.species_mats(D))
-    H = st['height_m']
-    K.add_wind(o, trunk=.02 * H, branch=.22 + .006 * H, leaf=.05, flex=1.0 if D['category'] != 'Dead tree' else .35)   # amplitudes @ 10 m/s
+    o, st = RG.build_woody(D, 0, c)
+    H = st['height_m']; W = D.get('wind')
+    if W:                                    # palms: amplitudes per species (stiff trunk, long whippy fronds, fluttering leaflets)
+        K.add_wind(o, trunk=W['trunk'] * H, branch=W['branch'], leaf=W['leaf'], flex=1.0)
+    else:
+        K.add_wind(o, trunk=.02 * H, branch=.22 + .006 * H, leaf=.05, flex=1.0 if D['category'] != 'Dead tree' else .35)   # amplitudes @ 10 m/s
     tag(o, D, 'tree', st); print('TREE', D['name'], st, flush=True)
-for D in [t for t in SP.SHRUBS if t['name'].startswith(REG + '_')]:
+for D in [t for t in RG.SHRUBS if t['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['SHRUBS'])
-    o, st = K.build_tree(D, 0, c, ML.species_mats(D))
-    K.add_wind(o, trunk=.04, branch=.12, leaf=.03)
+    o, st = RG.build_woody(D, 0, c)
+    K.add_wind(o, trunk=.04, branch=.12 if not D['category'].startswith('Dead') else .05, leaf=.03)
     tag(o, D, 'shrub', st); print('SHRUB', D['name'], st, flush=True)
-for D in [p for p in PL.PLANTS if p['name'].startswith(REG + '_')]:
+for D in [p for p in RG.PLANTS if p['name'].startswith(REG + '_')]:
     c = coll(f"T6_{D['name']}", groups['PLANTS'])
-    o, st = PL.build_plant(D, 0, c)
-    if D['kind'] not in ('moss', 'mushrooms'):
+    o, st = RG.build_plant(D, 0, c)
+    W = D.get('wind')
+    if W and (W['branch'] > 0 or W['leaf'] > 0):
+        K.add_wind(o, trunk=0.0, branch=W['branch'], leaf=W['leaf'])
+    elif not W and D['kind'] not in ('moss', 'mushrooms'):
         K.add_wind(o, trunk=0.0, branch=.30 if D['kind'] != 'vine' else .5, leaf=.03 if D['kind'] != 'lotus' else .012)
     tag(o, D, 'plant', st); print('PLANT', D['name'], st, flush=True)
 

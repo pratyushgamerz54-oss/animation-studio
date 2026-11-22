@@ -1202,3 +1202,20 @@ def mat_ground(name, tex, scale=2.0, tint='#FFFFFF', tex2=None, mix_scale=.08):
     nm = b.n('ShaderNodeNormalMap'); b.l(nrm, nm.inputs['Color']); b.l(nm.outputs['Normal'], bs.inputs['Normal'])
     b.l(bs.outputs[0], out.inputs['Surface'])
     return m
+
+
+def camera_look(scene):
+    """Director (22 Nov): natural camera look — AgX 'Base Contrast' (no punchy look) + a gentle film-camera S-curve so the image is
+    neither candy-coloured nor washed out."""
+    vs = scene.view_settings; vs.view_transform = 'AgX'
+    try:
+        vs.look = 'AgX - Base Contrast'
+    except Exception:
+        pass
+    vs.use_curve_mapping = True
+    c = vs.curve_mapping.curves[3]            # combined curve
+    while len(c.points) > 2:
+        c.points.remove(c.points[1])
+    c.points[0].location = (0.0, 0.0); c.points[1].location = (1.0, 1.0)
+    c.points.new(.25, .215); c.points.new(.75, .785)
+    vs.curve_mapping.update()

@@ -37,7 +37,9 @@ TEXTURES = ['clay_roof_tiles_02', 'plastered_stone_wall', 'rustic_stone_wall', '
             # TASK 06 bark library (real scanned bark, CC0)
             'bark_brown_01', 'bark_brown_02', 'pine_bark', 'knotted_pine_bark', 'japanese_cedar_bark', 'metasequoia_bark',
             'bark_willow', 'bark_platanus', 'japanese_hackberry_bark', 'japanese_zelkova_bark', 'jolcham_oak_bark_01',
-            'sakura_bark', 'eucalyptus_bark', 'tree_bark_03', 'chinese_cedar_bark', 'trident_maple_bark']
+            'sakura_bark', 'eucalyptus_bark', 'tree_bark_03', 'chinese_cedar_bark', 'trident_maple_bark',
+            # TASK 06 milestone 2 (palms, desert, plains, lakes)
+            'palm_bark', 'palm_tree_bark', 'bark_bluegum', 'japanese_camphor_bark', 'chinese_hackberry_bark']
 HDRIS = [('kloofendal_48d_partly_cloudy_puresky', '4k'), ('qwantani_dusk_2_puresky', '4k'), ('qwantani_night_puresky', '4k')]
 MODEL_RES, TEX_RES = '1k', '2k'
 TEX_MAPS = {'Diffuse': 'diff', 'nor_gl': 'nor_gl', 'Rough': 'rough', 'AO': 'ao', 'Displacement': 'disp'}
