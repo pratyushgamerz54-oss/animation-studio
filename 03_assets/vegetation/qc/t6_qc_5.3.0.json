@@ -9,7 +9,7 @@
   {
    "check": "AV: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "33.0 MB"
+   "detail": "33.4 MB"
   },
   {
    "check": "AV: opens in Blender 5.3.0, no missing images",
@@ -414,7 +414,7 @@
   {
    "check": "AV_MU01_BROWN_MUSHROOMS: valid mesh, UVs",
    "ok": true,
-   "detail": "1,736 tris, 1,120 verts"
+   "detail": "2,716 tris, 1,764 verts"
   },
   {
    "check": "AV_MU01_BROWN_MUSHROOMS: wind attributes",
@@ -844,12 +844,12 @@
   {
    "check": "AV_T02_DEODAR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.020 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.833 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "AV_AQ01_LOTUS: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.168 m \u00b7 foot \u0394 0.001 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.032 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF: library file exists",
@@ -859,7 +859,7 @@
   {
    "check": "EF: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "52.8 MB"
+   "detail": "53.0 MB"
   },
   {
    "check": "EF: opens in Blender 5.3.0, no missing images",
@@ -949,7 +949,7 @@
   {
    "check": "EF_MU01_GLOWCAP: valid mesh, UVs",
    "ok": true,
-   "detail": "2,728 tris, 1,760 verts"
+   "detail": "4,268 tris, 2,772 verts"
   },
   {
    "check": "EF_MU01_GLOWCAP: wind attributes",
@@ -969,7 +969,7 @@
   {
    "check": "EF_MU01_GLOWCAP: plant base on the ground (no floating)",
    "ok": true,
-   "detail": "lowest z -0.007 m"
+   "detail": "lowest z -0.006 m"
   },
   {
    "check": "EF_MU01_GLOWCAP: glow subtle (emission \u2264 1.0, Decision 01 \u00a73)",
@@ -1429,12 +1429,12 @@
   {
    "check": "EF_T01_GIANT_ELDER: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.365 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.940 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF_FE01_GIANT_FERN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.225 m \u00b7 foot \u0394 0.009 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.042 m \u00b7 foot \u0394 0.007 m"
   },
   {
    "check": "MK: library file exists",
@@ -1444,7 +1444,7 @@
   {
    "check": "MK: file size < 100 MB (GitHub limit)",
    "ok": true,
-   "detail": "10.0 MB"
+   "detail": "10.1 MB"
   },
   {
    "check": "MK: opens in Blender 5.3.0, no missing images",
@@ -1889,12 +1889,12 @@
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.980 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.819 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "MK_F01_GENTIAN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.030 m \u00b7 foot \u0394 0.010 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.020 m \u00b7 foot \u0394 0.006 m"
   }
  ]
 }

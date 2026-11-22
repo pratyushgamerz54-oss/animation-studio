@@ -312,5 +312,11 @@
     "x": 128.99420166015625
    }
   ]
+ },
+ "AV_G02B_KANS_GRASS_SPRING": {
+  "hero": true,
+  "detail": true,
+  "height_m": 1.7705745697021484,
+  "spread_m": 3.0342170000076294
  }
 }

@@ -38,12 +38,12 @@ for f in FILES:
     if f.startswith('11_'):
         bad = []
         for m in bpy.data.materials:
-            if not m.name.startswith('MAT_T5_') or m.name in ('MAT_T5_MIST', 'MAT_T5_HAZE'):
+            if not m.name.startswith('MAT_T5_') or m.name in ('MAT_T5_MIST', 'MAT_T5_HAZE', 'MAT_T5_GROUND_MIST'):   # volumes (no BSDF by design)
                 continue
             bs = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
             if bs is None:
                 bad.append(m.name + ':no BSDF'); continue
-            procedural = m.name in ('MAT_T5_TRUNK_FAR', 'MAT_T5_FOAM', 'MAT_T5_WATERFALL')   # constant / procedural colour by design
+            procedural = m.name in ('MAT_T5_TRUNK_FAR', 'MAT_T5_FOAM', 'MAT_T5_WATERFALL', 'MAT_T5_WATER_DARK')   # constant / procedural colour by design (M2: black crater lake)
             need = ([] if procedural else ['Base Color', 'Normal']) + ['Roughness']
             miss_ = [k for k in need if not bs.inputs[k].is_linked and k != 'Roughness' or (k == 'Roughness' and not bs.inputs[k].is_linked and bs.inputs[k].default_value <= 0)]
             if bs.inputs['Metallic'].default_value != 0 or bs.inputs['Metallic'].is_linked:

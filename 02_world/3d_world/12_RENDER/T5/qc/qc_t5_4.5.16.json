@@ -1,18 +1,18 @@
 {
  "blender": "4.5.16 LTS",
- "time": "2026-11-21 12:28",
+ "time": "2026-11-22 04:29",
  "passed": 56,
  "total": 56,
  "checks": [
   {
    "check": "file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
    "result": "PASS",
-   "detail": "0.9 MB"
+   "detail": "1.1 MB"
   },
   {
    "check": "opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
    "result": "PASS",
-   "detail": "77 images, missing []"
+   "detail": "89 images, missing []"
   },
   {
    "check": "PBR channels (Base Color / Roughness / Normal, Metallic 0) on every terrain material",

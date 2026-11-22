@@ -308,6 +308,32 @@
   "atlas": null,
   "collection": "T6_AV_G02_KANS_GRASS"
  },
+ "AV_G02B_KANS_GRASS_SPRING": {
+  "common": "Kans grass \u2014 SPRING (green clump, no plumes)",
+  "latin": "Saccharum spontaneum",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-01",
+  "category": "Grass",
+  "habitat": "river bars + moist valley floor; SPRING look (Decision Sheet 01 \u00a76) \u2014 plumes appear only in autumn",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#34501F",
+   "#5E8A34",
+   "#9AB25A"
+  ],
+  "stats": {
+   "height_m": 1.774,
+   "spread_x_m": 2.859,
+   "spread_y_m": 3.041,
+   "tris": 3920,
+   "verts": 3360,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_AV_G02B_KANS_GRASS_SPRING"
+ },
  "AV_G03_DRY_PATH_GRASS": {
   "common": "Dry path-edge grass",
   "latin": "Heteropogon contortus (spear grass)",

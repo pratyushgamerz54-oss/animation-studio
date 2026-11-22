@@ -1,6 +1,6 @@
 {
  "blender": "4.5.16 LTS",
- "time": "2026-11-21 16:50",
+ "time": "2026-11-22 04:27",
  "passed": 45,
  "total": 45,
  "checks": [
@@ -162,7 +162,7 @@
   {
    "check": "file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
    "result": "PASS",
-   "detail": "1.0 MB"
+   "detail": "1.1 MB"
   },
   {
    "check": "opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
