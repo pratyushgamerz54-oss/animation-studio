@@ -4,7 +4,7 @@
 > `02_world/ecosystem/DECISION_SHEET_01.md`. Status words: **APPROVED** (Director decision) · **PROPOSED** (needs approval) ·
 > **PENDING** (waiting for the Director) · CONFIRMED / NOT CONFIRMED (story canon, unchanged).
 
-> **Status: DRAFT for Director approval.** Milestone 1 = concepts + first real 3D assets for **Ashram Valley**, the **Enchanted Forest
+> **Status: ✅ APPROVED (TASK 06 closed, 22 Nov — closeout `TASK06_CLOSEOUT.md`).** History: DRAFT for Director approval. Milestone 1 = concepts + first real 3D assets for **Ashram Valley**, the **Enchanted Forest
 > tree collection** and **Mountain Kingdom vegetation references**. Full asset production (more variants, LODs, scattering into the
 > terrains, other regions) starts **only after approval**.
 >

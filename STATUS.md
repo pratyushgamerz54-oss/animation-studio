@@ -1,7 +1,8 @@
-# STATUS — last updated 2026-11-22 (session 5: TASK 06 MILESTONE 2 DONE — Director review)
+# STATUS — last updated 2026-11-22 (session 5: TASK 06 APPROVED + CLOSED — waiting for TASK 07 brief)
 
 ## Session 5 (22 Nov)
-- **NOW: TASK 06 MILESTONE 2 DONE → Director review.** (Director: "jitne bhi task bache hai … un sab ko pura karo" + realism v3 list.)
+- **NOW: TASK 06 APPROVED + CLOSED (Director, 22 Nov) → waiting for the TASK 07 brief.** Full summary: `02_world/ecosystem/TASK06_CLOSEOUT.md`.
+- Milestone 2 (done): (Director: "jitne bhi task bache hai … un sab ko pura karo" + realism v3 list.)
   - Realism v3 on every asset + natural camera look; M1 sheets re-rendered (`sheets/T6_SHEET_M1.png`).
   - 10 regional hero libraries — **84 assets** (29 trees, 7 shrubs, 42 plants, 6 natural details); 7 new regions (Green Plains, Crystal
     Lakes, Golden Desert, Forbidden Lands, Ancient City sites, Hidden Underground, Natural Details) + MK silver fir / blue pine + EF glow moss
