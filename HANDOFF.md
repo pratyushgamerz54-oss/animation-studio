@@ -29,7 +29,7 @@ Hum animation-studio project par kaam kar rahe hain: repo pratyushgamerz54-oss/a
 repo pratyushgamerz54-oss/animation-studio-scenes (branch ccr-c375d59d-2qaoyn) — dono side by side.
 Dono branches checkout karo; animation-studio ke HANDOFF.md (§0b do-repo setup, §6c TASK 06), STATUS.md, PROJECT_LOG.md, CLAUDE.md aur
 02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad). Jo bana hai dobara mat banana.
-TASK 06 milestone 2 DONE (QC 904/904 · 58/58) — mera review / agla TASK brief main bhejta hoon, usi se kaam shuru karna.
+TASK 06 APPROVED + CLOSED (02_world/ecosystem/TASK06_CLOSEOUT.md padho). Mera agla TASK 07 brief main bhejta hoon — usi se kaam shuru karna.
 CLAUDE.md ke saare rules (REAL-WORLD REALISM, SAVE RULE, do repos) follow karna. Mujhe short Hinglish summary do.
 ```
 
@@ -246,7 +246,7 @@ water rules, density / ha, near = realized + v3 wind, far = instance tilt; Ashra
 (d) natural details (leaf litter per species, fallen branches, giant log, ivy, floating leaves) · (e) populated cinematic previews per
 region · (f) scatter-level QC + closeout. Wildlife: ONLY after the Director's selection.
 
-### 6c. TASK 06 · MILESTONE 2 (full production) — session 5, 22 Nov — Director: "jitne bhi task bache hai … un sab ko pura karo"
+### 6c. TASK 06 · MILESTONE 2 (full production) — session 5, 22 Nov — ✅ **TASK 06 APPROVED + CLOSED** (closeout: `02_world/ecosystem/TASK06_CLOSEOUT.md`)
 Built (code in `03_assets/vegetation/scripts/`, summary in `02_world/ecosystem/ECOSYSTEM_BIBLE.md` §13):
 | What | Where |
 |---|---|
@@ -258,7 +258,7 @@ Built (code in `03_assets/vegetation/scripts/`, summary in `02_world/ecosystem/E
 | Populated region files (open approved T5 region master → SAVE AS new file; T5 vegetation scatters excluded in the view layer, rocks / far forest kept; T6 layers on the hero tile; PROPOSED Peepal chabutra + garden beds in the Ashram) | `t6_populate.py` → `02_world/ecosystem/populated/T6_POP_R0{1..5}_*_v001.blend` |
 | Previews + scatter QC | `t6_render_populated.py` → `02_world/ecosystem/renders/populated/`; `t6_pop_qc.py` |
 
-**Status at the end of session 5: MILESTONE 2 DONE** — awaiting Director review. Resumable scripts (all idempotent, step markers in
+**Status at the end of session 5: TASK 06 APPROVED + CLOSED (22 Nov)** — full summary `02_world/ecosystem/TASK06_CLOSEOUT.md`; next = TASK 07 brief. Resumable scripts (all idempotent, step markers in
 `03_assets/vegetation/.m2_steps/`): `t6_finish_pending.sh` (M1 realism re-render) · `t6_m2_pending.sh` (M2 libraries → sheets → impostors
 → LODs → QC) · `t6_final_previews.sh` (populate → previews → QC → sheets). Results: contact sheets `03_assets/vegetation/sheets/T6_SHEET_M1.png`
 + `T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/T6_POPULATED_PREVIEWS.png` (+ single PNGs in `renders/populated/`),
@@ -286,7 +286,7 @@ impostors, 39 atlases, sheets, populated files R-01…R-05, previews, QC). Sirf 
 8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after realism v3.
 10. ~~Repo storage plan~~ → **DECIDED (22 Nov): new repo per stage** — Director created `animation-studio-scenes` (Stage 4 + 5); main repo
     stays the asset library (§0b). Director: clone both repos side by side on the PC as a backup copy when at the PC.
-9. Milestone 2 review (session 5): contact sheet `03_assets/vegetation/sheets/T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/populated/`,
+9. ~~Milestone 2 review~~ → TASK 06 APPROVED (22 Nov). Still open from it: contact sheet `03_assets/vegetation/sheets/T6_SHEET_M2.png`, populated previews `02_world/ecosystem/renders/populated/`,
    PROPOSED Ashram Peepal chabutra (9 × 9 m, courtyard centre) + garden beds (south lawn) in `T6_POP_R01_ASHRAM_VALLEY_v001.blend`.
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)
