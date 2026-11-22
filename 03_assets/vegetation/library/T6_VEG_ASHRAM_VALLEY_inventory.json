@@ -558,11 +558,11 @@
    "#E2D6BE"
   ],
   "stats": {
-   "height_m": 0.076,
-   "spread_x_m": 0.132,
-   "spread_y_m": 0.132,
-   "tris": 1736,
-   "verts": 1120,
+   "height_m": 0.088,
+   "spread_x_m": 0.139,
+   "spread_y_m": 0.152,
+   "tris": 2716,
+   "verts": 1764,
    "lowest_z": -0.007
   },
   "bark": null,

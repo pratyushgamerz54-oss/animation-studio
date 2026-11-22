@@ -316,13 +316,14 @@ def mushrooms(G, rng, P):
         base = Vector((math.cos(a) * r, math.sin(a) * r, -.005)); h = P['h'] * rng.uniform(.5, 1.2); cr = P['cap'] * rng.uniform(.6, 1.2)
         d = rand_dir(rng, 14)
         pts, dd = curve_pts(base, d, h, 5, .0, rng, .04)
-        stem(G, pts, cr * .22, cr * .18, 8, 0, rng.random(), .1)
+        stem(G, pts, cr * .22, cr * .17, 10, 0, rng.random(), .1)
         top = pts[-1]
         cap = [(cr * .2, -cr * .15), (cr * .95, -cr * .12), (cr * 1.0, -cr * .02), (cr * .85, cr * .25 * P.get('dome', 1)),
-               (cr * .5, cr * .45 * P.get('dome', 1)), (cr * .02, cr * .5 * P.get('dome', 1))]
-        K.lathe(G, cap, top, dd, 14, 1, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=rng.random(), grad=1.0))
+               (cr * .5, cr * .45 * P.get('dome', 1)), (cr * .001, cr * .5 * P.get('dome', 1))]
+        K.lathe(G, cap, top, dd, 24, 1, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=rng.random(), grad=1.0),
+                wobble=.09, seed=int(rng.integers(1 << 30)))
         gill = [(cr * .2, -cr * .14), (cr * .94, -cr * .13)]
-        K.lathe(G, gill, top - dd * .001, dd, 14, 2, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=.5, grad=0.0))
+        K.lathe(G, gill, top - dd * .001, dd, 24, 2, dict(wind_trunk=0.0, wind_branch=0.0, wind_leaf=0.0, wind_phase=0.0, leaf_rand=.5, grad=0.0))
 
 
 def vine(G, rng, P):

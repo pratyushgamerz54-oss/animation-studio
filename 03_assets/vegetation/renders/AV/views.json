@@ -202,8 +202,8 @@
  "AV_G01_MEADOW_GRASS": {
   "hero": true,
   "detail": true,
-  "height_m": 0.36659523844718933,
-  "spread_m": 0.8853602707386017
+  "height_m": 0.3536469340324402,
+  "spread_m": 0.9033987522125244
  },
  "AV_G02_KANS_GRASS": {
   "hero": true,
@@ -226,8 +226,8 @@
  "AV_F02_PRIMULA": {
   "hero": true,
   "detail": true,
-  "height_m": 0.23322263360023499,
-  "spread_m": 0.2159361019730568
+  "height_m": 0.2263634204864502,
+  "spread_m": 0.216217540204525
  },
  "AV_F03_WILD_DAISY": {
   "hero": true,
@@ -238,8 +238,8 @@
  "AV_F04_MARIGOLD": {
   "hero": true,
   "detail": true,
-  "height_m": 0.5099903345108032,
-  "spread_m": 0.3818131983280182
+  "height_m": 0.4928252100944519,
+  "spread_m": 0.3701419532299042
  },
  "AV_FE01_SWORD_FERN": {
   "hero": true,
@@ -268,8 +268,8 @@
  "AV_MU01_BROWN_MUSHROOMS": {
   "hero": true,
   "detail": true,
-  "height_m": 0.0756986141204834,
-  "spread_m": 0.13235076144337654
+  "height_m": 0.08828775584697723,
+  "spread_m": 0.15171866863965988
  },
  "LINEUP_TREES": {
   "ortho_scale": 136.04240000000001,

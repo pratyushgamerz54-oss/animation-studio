@@ -844,12 +844,12 @@
   {
    "check": "AV_T02_DEODAR: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.020 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.833 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "AV_AQ01_LOTUS: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.168 m \u00b7 foot \u0394 0.001 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.032 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF: library file exists",
@@ -1429,12 +1429,12 @@
   {
    "check": "EF_T01_GIANT_ELDER: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 1.365 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.940 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "EF_FE01_GIANT_FERN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.225 m \u00b7 foot \u0394 0.009 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.042 m \u00b7 foot \u0394 0.007 m"
   },
   {
    "check": "MK: library file exists",
@@ -1889,12 +1889,12 @@
   {
    "check": "MK_T01_HIMALAYAN_SPRUCE: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.980 m \u00b7 foot \u0394 0.000 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.819 m \u00b7 foot \u0394 0.000 m"
   },
   {
    "check": "MK_F01_GENTIAN: wind \u2014 calm = static, strength 2 = motion, foot stays fixed",
    "ok": true,
-   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.030 m \u00b7 foot \u0394 0.010 m"
+   "detail": "calm \u0394 0.0e+00 m \u00b7 moving \u0394max 0.020 m \u00b7 foot \u0394 0.006 m"
   }
  ]
 }

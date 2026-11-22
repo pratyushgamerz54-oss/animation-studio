@@ -33,7 +33,7 @@ for o in hero:
 # meadow scatter (geometry nodes) + instance wind
 me = bpy.data.meshes.new('MEADOW'); me.from_pydata([(-60, -40, 0), (60, -40, 0), (60, 60, 0), (-60, 60, 0)], [], [(0, 1, 2, 3)])
 meadow = bpy.data.objects.new('MEADOW', me); sc.collection.objects.link(meadow)
-me.materials.append(K.mat_simple('MAT_WT_SOIL', '#4E5A2E', rough=.95, var_col='#6E7038', var_scale=.25))
+me.materials.append(K.mat_ground('MAT_WT_GROUND', 'grass_ground', 2.5, tex2='forest_ground_04'))
 gn = bpy.data.node_groups.new('NG_WT_MEADOW', 'GeometryNodeTree')
 K._sock(gn, 'Geometry', 'INPUT', 'NodeSocketGeometry'); K._sock(gn, 'Geometry', 'OUTPUT', 'NodeSocketGeometry')
 g = K._GN(gn); gi = g.N('NodeGroupInput'); go = g.N('NodeGroupOutput')

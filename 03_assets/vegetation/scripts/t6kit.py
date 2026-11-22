@@ -222,7 +222,7 @@ def mat_leaf(name, atlas, hue_var=.04, val_var=.12, transl=.35, tint='#FFFFFF', 
     except Exception:
         m.blend_method = 'HASHED'
     m['t6_atlas'] = atlas
-    return m
+    return realism(m, 'leaf')
 
 
 def mat_simple(name, base, rough=.5, sss=0.0, var_col=None, var_scale=6.0, emission=None, em_strength=0.0, transl=0.0,
@@ -264,7 +264,7 @@ def mat_simple(name, base, rough=.5, sss=0.0, var_col=None, var_scale=6.0, emiss
         b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2]); shader = mx.outputs[0]
     b.l(shader, out.inputs['Surface'])
     m.diffuse_color = hexc(base)
-    return m
+    return realism(m, 'blade' if attr_grad else ('gloss' if rough < .25 else ('fungus' if var_scale >= 30 else 'surface')))
 
 
 def mat_moss(name, c1='#3F5E22', c2='#7E9A3A', dry='#8A8A55'):
@@ -737,12 +737,18 @@ def hang_card(G, p, size, rng, b, S, H, j):
     return 1
 
 
-def lathe(G, profile, base, axis, k, mi, attrs, u_scale=1.0):
-    """surface of revolution: profile = [(r, h)…] along axis from base. Returns nothing."""
+def lathe(G, profile, base, axis, k, mi, attrs, u_scale=1.0, wobble=0.0, seed=0):
+    """surface of revolution: profile = [(r, h)…] along axis from base. wobble > 0 = organic irregular outline (natural
+    objects are never perfectly round): radius × (1 + wobble·(low-frequency waves + noise)), slightly tilted rims."""
     axis = axis.normalized(); nv = perp(axis); bv = axis.cross(nv)
-    rings = []
-    for (r, h) in profile:
-        pts = [base + axis * h + (nv * math.cos(a) + bv * math.sin(a)) * r for a in np.linspace(0, 2 * np.pi, k, endpoint=False)]
+    rings = []; rs = np.random.default_rng(seed)
+    ph = rs.uniform(0, 2 * np.pi, 3); amp = rs.uniform(.4, 1.0, 3); jit = rs.normal(0, 1, (len(profile), k))
+    for ri, (r, h) in enumerate(profile):
+        ang = np.linspace(0, 2 * np.pi, k, endpoint=False)
+        f = 1 + wobble * (amp[0] * np.sin(2 * ang + ph[0]) * .5 + amp[1] * np.sin(3 * ang + ph[1]) * .35 + amp[2] * np.sin(5 * ang + ph[2]) * .2
+                          + .25 * jit[ri]) if wobble else np.ones(k)
+        tilt = wobble * .6 * r * np.sin(ang + ph[0]) if wobble else np.zeros(k)
+        pts = [base + axis * (h + tilt[j]) + (nv * math.cos(a) + bv * math.sin(a)) * r * f[j] for j, a in enumerate(ang)]
         rings.append(G.add_verts(pts, **attrs))
     for i in range(len(rings) - 1):
         a0, a1 = rings[i], rings[i + 1]
@@ -1018,7 +1024,7 @@ def mat_herbleaf(name, base, vein='#9AC070', rough=.45, transl=.35):
     tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color']); b.l(bp.outputs['Normal'], tl.inputs['Normal'])
     mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])
     b.l(mx.outputs[0], out.inputs['Surface']); m.diffuse_color = hexc(base)
-    return m
+    return realism(m, 'leaf')
 
 
 def mat_petal(name, base, rough=.4, transl=.35, sss=.25):
@@ -1030,10 +1036,141 @@ def mat_petal(name, base, rough=.4, transl=.35, sss=.25):
     uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]; sep = b.n('ShaderNodeSeparateXYZ'); b.l(uv, sep.inputs[0])
     st = b.n('ShaderNodeTexWave'); st.wave_type = 'BANDS'; st.bands_direction = 'X'; st.inputs['Scale'].default_value = 6
     st.inputs['Distortion'].default_value = 2; b.l(uv, st.inputs['Vector'])
-    col = b.mix(b.math('MULTIPLY', st.outputs['Fac'], .18), col, dark)
+    col = b.mix(b.math('MULTIPLY', st.outputs['Fac'], .32), col, dark)
     b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = rough
     bsdf.inputs['Subsurface Weight'].default_value = sss; bsdf.inputs['Sheen Weight'].default_value = .3
     tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color'])
     mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])
     b.l(mx.outputs[0], out.inputs['Surface']); m.diffuse_color = c
+    return realism(m, 'petal')
+
+
+# ====================================================================== REALISM PASS (Director 22 Nov: "texture asli, polish jaisa nahi")
+REAL = {   # roughness = r·scale + min (+ noise ± var) · spec = Specular IOR Level · mott = colour mottling · bump = micro-bump strength
+    'leaf':   dict(r_scale=.45, r_min=.40, r_var=.10, spec=.22, mott=.20, blem=.30, bump=.28, bump_scale=260.0, ao=.45),
+    'petal':  dict(r_scale=.40, r_min=.42, r_var=.08, spec=.25, mott=.16, blem=.0, bump=.18, bump_scale=400.0, ao=.55),
+    'surface': dict(r_scale=.55, r_min=.35, r_var=.12, spec=.26, mott=.20, blem=.0, bump=.35, bump_scale=140.0, ao=.5),
+    'fungus': dict(r_scale=.50, r_min=.42, r_var=.12, spec=.22, mott=.28, blem=.45, bump=.45, bump_scale=90.0, ao=.6),
+    'blade':  dict(r_scale=.50, r_min=.40, r_var=.10, spec=.22, mott=.18, blem=.15, bump=.18, bump_scale=300.0, ao=.4),
+    'gloss':  dict(r_scale=1.0, r_min=.08, r_var=.06, spec=.40, mott=.10, blem=.0, bump=.08, bump_scale=300.0, ao=.4),
+}
+
+
+def realism(m, kind='surface'):
+    """Natural, non-polished look for a material built by this kit: rougher + less specular, object-space colour mottling at two
+    scales, small blemishes / spots (leaves, fungi), lengthwise streaks on grass blades, per-object random tint, micro-bump
+    chained after the existing normal / bump. Idempotent per material (m['t6_realism'])."""
+    if m.get('t6_realism'):
+        return m
+    P = REAL[kind]; nt = m.node_tree; b = NB(nt)
+    bs = [n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED']
+    if not bs:
+        return m
+    bs = bs[0]
+    def src(inp):
+        if inp.is_linked:
+            s = inp.links[0].from_socket; nt.links.remove(inp.links[0]); return s
+        v = inp.default_value
+        return tuple(v) if hasattr(v, '__len__') else float(v)
+    geo = b.n('ShaderNodeNewGeometry'); pos = geo.outputs['Position']
+    n1 = b.noise(pos, 7.0, 3, .5).outputs['Fac']; n2 = b.noise(pos, 38.0, 4, .6).outputs['Fac']
+    # ---- roughness
+    r = src(bs.inputs['Roughness'])
+    if isinstance(r, float):
+        r = b.n('ShaderNodeValue'); r.outputs[0].default_value = bs.inputs['Roughness'].default_value; r = r.outputs[0]
+    elif isinstance(r, tuple):
+        r = r[0]
+    r2 = b.math('ADD', b.math('MULTIPLY', r, P['r_scale']), P['r_min'])
+    r2 = b.math('ADD', r2, b.math('MULTIPLY', b.math('SUBTRACT', n2, .5), P['r_var'] * 2), True)
+    b.l(r2, bs.inputs['Roughness'])
+    bs.inputs['Specular IOR Level'].default_value = P['spec']
+    if bs.inputs['Coat Weight'].default_value > 0:
+        bs.inputs['Coat Weight'].default_value *= .35; bs.inputs['Coat Roughness'].default_value = .35
+    # ---- colour: mottling (2 scales) + per-object random tint + blemishes + blade streaks
+    c = src(bs.inputs['Base Color'])
+    if isinstance(c, float):
+        c = (c, c, c, 1)
+    mott = b.math('ADD', 1.0 - P['mott'], b.math('MULTIPLY', b.math('ADD', b.math('MULTIPLY', n1, .6), b.math('MULTIPLY', n2, .4)), P['mott'] * 2))
+    hsv = b.n('ShaderNodeHueSaturation'); b.l(mott, hsv.inputs['Value'])
+    oi = b.n('ShaderNodeObjectInfo')
+    b.l(b.math('ADD', .5, b.math('MULTIPLY', b.math('SUBTRACT', oi.outputs['Random'], .5), .03)), hsv.inputs['Hue'])
+    b.l(b.math('ADD', .92, b.math('MULTIPLY', oi.outputs['Random'], .12)), hsv.inputs['Saturation'])
+    if isinstance(c, bpy.types.NodeSocket):
+        b.l(c, hsv.inputs['Color'])
+    else:
+        hsv.inputs['Color'].default_value = c
+    col = hsv.outputs['Color']
+    if P['blem']:
+        vo = b.n('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 55.0 if kind != 'fungus' else 140.0; b.l(pos, vo.inputs['Vector'])
+        sp = b.n('ShaderNodeMapRange'); b.l(vo.outputs['Distance'], sp.inputs['Value'])
+        sp.inputs['From Min'].default_value = .08; sp.inputs['From Max'].default_value = .02
+        blem_col = (0.16, 0.12, 0.05, 1) if kind != 'fungus' else (0.55, 0.48, 0.36, 1)
+        col = b.mix(b.math('MULTIPLY', sp.outputs['Result'], P['blem']), col, blem_col)
+    if kind == 'blade':
+        uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]
+        wv = b.n('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'X'; wv.inputs['Scale'].default_value = 9
+        wv.inputs['Distortion'].default_value = 3; b.l(uv, wv.inputs['Vector'])
+        col = b.mix(b.math('MULTIPLY', wv.outputs['Fac'], .18), col, (0.02, 0.03, 0.01, 1), 'MULTIPLY') if False else \
+            b.mix(b.math('MULTIPLY', wv.outputs['Fac'], .16), col, (0.0, 0.0, 0.0, 1))
+        rnd = b.attr('leaf_rand')
+        col = b.mix(b.math('MULTIPLY', rnd, .25), col, (0.42, 0.40, 0.18, 1))           # some blades older / yellower
+    if kind == 'fungus':        # cap: fibrous radial streaks (UV u = around) + darker centre (UV v → 1 = top centre)
+        uv = b.n('ShaderNodeUVMap', uv_map='UVMap').outputs[0]; sp_ = b.n('ShaderNodeSeparateXYZ'); b.l(uv, sp_.inputs[0])
+        wv = b.n('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'X'; wv.inputs['Scale'].default_value = 30
+        wv.inputs['Distortion'].default_value = 6; wv.inputs['Detail'].default_value = 4; b.l(uv, wv.inputs['Vector'])
+        col = b.mix(b.math('MULTIPLY', wv.outputs['Fac'], .3), col, (0.05, 0.03, 0.015, 1))
+        col = b.mix(b.math('MULTIPLY', b.math('POWER', sp_.outputs['Y'], 2.0), .45), col, (0.04, 0.025, 0.012, 1))
+    if P.get('ao'):             # dirt / shadowed albedo in crevices, folds and between leaves (Cycles AO node)
+        ao = b.n('ShaderNodeAmbientOcclusion'); ao.inputs['Distance'].default_value = .04; ao.samples = 8
+        b.l(col, ao.inputs['Color'])
+        dirt = b.n('ShaderNodeMapRange'); b.l(ao.outputs['AO'], dirt.inputs['Value'])
+        dirt.inputs['To Min'].default_value = 1 - P['ao']; dirt.inputs['To Max'].default_value = 1.0
+        col = b.mix(1.0, col, b.n('ShaderNodeCombineColor').outputs[0] if False else col, 'MIX')
+        mulc = b.n('ShaderNodeMix', data_type='RGBA', blend_type='MULTIPLY'); mulc.inputs[0].default_value = 1.0
+        b.l(col, mulc.inputs[6]); cc = b.n('ShaderNodeCombineColor')
+        for i in range(3):
+            b.l(dirt.outputs['Result'], cc.inputs[i])
+        b.l(cc.outputs[0], mulc.inputs[7]); col = mulc.outputs[2]
+    b.l(col, bs.inputs['Base Color'])
+    for tl in [n for n in nt.nodes if n.type == 'BSDF_TRANSLUCENT']:          # translucency follows the new colour
+        if not tl.inputs['Color'].is_linked or tl.inputs['Color'].links[0].from_node.type != 'MIX':
+            pass
+    # ---- micro bump (after the existing normal map / bump)
+    nrm = src(bs.inputs['Normal'])
+    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = P['bump']; bp.inputs['Distance'].default_value = .0015
+    nb = b.noise(pos, P['bump_scale'], 4, .65).outputs['Fac']; b.l(nb, bp.inputs['Height'])
+    if isinstance(nrm, bpy.types.NodeSocket):
+        b.l(nrm, bp.inputs['Normal'])
+    b.l(bp.outputs['Normal'], bs.inputs['Normal'])
+    for tl in [n for n in nt.nodes if n.type == 'BSDF_TRANSLUCENT']:
+        b.l(bp.outputs['Normal'], tl.inputs['Normal'])
+    m['t6_realism'] = kind
+    return m
+
+
+def mat_ground(name, tex, scale=2.0, tint='#FFFFFF', tex2=None, mix_scale=.08):
+    """real scanned ground (Poly Haven CC0, object-space tiled): diffuse·AO, roughness, normal; optional 2nd scan blended by
+    large-scale noise (breaks tiling, e.g. grass ground + soil patches)."""
+    m, nt, b = new_mat(name)
+    out = b.n('ShaderNodeOutputMaterial'); bs = b.n('ShaderNodeBsdfPrincipled')
+    geo = b.n('ShaderNodeNewGeometry')
+    def layer(t, sc):
+        M = bark_maps(t); vm = b.n('ShaderNodeVectorMath', operation='SCALE'); b.l(geo.outputs['Position'], vm.inputs[0])
+        vm.inputs['Scale'].default_value = 1 / sc; T = {}
+        for k, p in M.items():
+            n = b.n('ShaderNodeTexImage'); n.image = img(p, k != 'diff'); b.l(vm.outputs['Vector'], n.inputs['Vector']); T[k] = n
+        col = T['diff'].outputs['Color']
+        if 'ao' in T:
+            col = b.mix(.6, col, T['ao'].outputs['Color'], 'MULTIPLY')
+        return col, T['rough'].outputs['Color'], T['nor_gl'].outputs['Color']
+    c, r, nrm = layer(tex, scale)
+    if tex2:
+        c2, r2, n2 = layer(tex2, scale * .8)
+        f = b.n('ShaderNodeMapRange'); b.l(b.noise(geo.outputs['Position'], mix_scale, 4, .6).outputs['Fac'], f.inputs['Value'])
+        f.inputs['From Min'].default_value = .45; f.inputs['From Max'].default_value = .62
+        c = b.mix(f.outputs['Result'], c, c2); r = b.mix(f.outputs['Result'], r, r2); nrm = b.mix(f.outputs['Result'], nrm, n2)
+    c = b.mix(1.0, c, hexc(tint), 'MULTIPLY')
+    b.l(c, bs.inputs['Base Color']); b.l(r, bs.inputs['Roughness']); bs.inputs['Specular IOR Level'].default_value = .3
+    nm = b.n('ShaderNodeNormalMap'); b.l(nrm, nm.inputs['Color']); b.l(nm.outputs['Normal'], bs.inputs['Normal'])
+    b.l(bs.outputs[0], out.inputs['Surface'])
     return m
