@@ -45,6 +45,9 @@ for f in sorted(glob.glob(os.path.join(POP, 'T6_POP_*.blend'))):
     chk(f'{fn}: every layer has a terrain + band collections', ok_in)
     # Decision 01 rules
     names = [o.get('t6_layer', '') for o in layers]
+    band_objs = {ob for c in bpy.data.collections if c.name.startswith('ECO_') for ob in c.objects}
+    empty_m = [ob.name for ob in band_objs if ob.type == 'MESH' and any(m is None for m in ob.data.materials)]
+    chk(f'{fn}: every linked variant / LOD has its materials (no empty slots)', not empty_m, f'{len(band_objs)} objects; empty: {empty_m[:4]}')
     bad = [o.name for o in layers if o.get('t6_layer') in ('AV_S02_TULSI', 'AV_F04_MARIGOLD') and
            'GARDEN_BED' not in (o.modifiers['T6_ECOSYSTEM'][ids(o.modifiers['T6_ECOSYSTEM'])['Terrain']].name)]
     chk(f'{fn}: Tulsi + Marigold only in the Ashram garden beds (Decision 01 §4)', not bad, f'outside: {bad}')

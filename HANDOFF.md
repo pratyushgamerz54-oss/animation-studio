@@ -279,6 +279,9 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43
    PROPOSED Ashram Peepal chabutra (9 × 9 m, courtyard centre) + garden beds (south lawn) in `T6_POP_R01_ASHRAM_VALLEY_v001.blend`.
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)
+- (session 5) Scatter: slope `≥ min` (flat pads); cull faces before Poisson; realize ≤ 15 m (memory); viewport-res terrain in background
+  → aim cameras by masks; modifier ID-prop edits need `update_tag()`; exclude far T5 components in populated files (memory);
+  no stdlib-named scratch scripts (`inspect.py`); unique temp material names (`new_mat` replaces same-name).
 - Background waiter: `pgrep -f` mat use karo — log marker (ALLDONE) grep karo. Long renders: background + log + marker.
 - Alpha leaf cards: `cycles.transparent_max_bounces = 64`; join se pehle same UV layer naam.
 - `reset_pose` driven bones (jaw) ka rotation mode nahi badalna; driver test se pehle `arm.update_tag()`.
@@ -319,3 +322,7 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43
   Sheet 01** (mapping, Sky Realms, EF mix, Ashram Peepal / garden, wildlife pending, Spring) → all docs + verification 33/33; Director
   rules: **real textures, real motion, real physics / destruction** (CLAUDE.md); realism pass on vegetation + TASK 05 terrain materials
   (approved); wind v2 → v3 (per-blade bending near camera); spring kans; leaf realism v2 (finish with `t6_finish_pending.sh`).
+- **Session 5 (22 Nov):** restore; realism v3 on every asset + natural camera look (M1 sheets re-rendered, QC 428/429 → Glowcap habitat
+  fixed); **TASK 06 MILESTONE 2**: 7 new regional libraries + MK / EF additions (84 hero assets), palm / succulent / ivy / water-lily /
+  natural-detail generators, variants + LODs + impostors for 10 regions, **NG_T6_ECOSYSTEM** scatter, populated R-01…R-05 files on the
+  approved TASK 05 masters (save-as copies, T5 untouched) + previews + scatter QC; repo `.git` ≈ 4.0 GB → storage plan question to the Director.

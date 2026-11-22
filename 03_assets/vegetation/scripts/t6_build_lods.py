@@ -138,9 +138,19 @@ def make_scatter_copies(objs, root_name):
     return sroot
 
 
+def protect(o, tag):
+    """K.new_mat() deletes an existing material of the same name — so the materials of an object that is already built get a
+    unique suffix before the next variant / LOD of the same species is generated (otherwise its slots become empty → white)."""
+    for i, m in enumerate(o.data.materials):
+        if m is not None and not m.name.endswith(tag):
+            m.name = m.name + tag
+
+
 def save(path, inv):
     missing = [im.filepath for im in bpy.data.images if im.source == 'FILE' and not os.path.exists(bpy.path.abspath(im.filepath))]
     assert not missing, missing
+    empty = [o.name for o in bpy.data.objects if o.type == 'MESH' and any(m is None for m in o.data.materials)]
+    assert not empty, f'empty material slots: {empty[:5]}'
     if os.path.exists(path):
         bdir = os.path.join(LIB, '_backups'); os.makedirs(bdir, exist_ok=True)
         shutil.copy2(path, os.path.join(bdir, os.path.basename(path)[:-6] + '__backup_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.blend'))
@@ -165,14 +175,14 @@ for what in WHAT:
             for seed in (1, 2):
                 c = coll(f"T6_{D['name']}_V{seed}", root)
                 S = lod_spec(D, 1) if heavy else D
-                o, st = RG.build_woody(S, seed, c); o.name = f"{D['name']}_V{seed}"
+                o, st = RG.build_woody(S, seed, c); o.name = f"{D['name']}_V{seed}"; protect(o, f'_V{seed}')
                 o['t6_height_m'] = st['height_m']; wind(o, D, kind); tag(o, D, kind, 1 if heavy else 0, seed, LOD_RANGE[1 if heavy else 0])
                 INV[o.name] = dict(hero=D['name'], kind=kind, seed=seed, lod=1 if heavy else 0, stats=st, collection=c.name)
                 print('VARIANT', o.name, st['height_m'], st['tris'], flush=True)
         for D in plants:
             for seed in (1, 2):
                 c = coll(f"T6_{D['name']}_V{seed}", root)
-                o, st = RG.build_plant(D, seed, c); o.name = f"{D['name']}_V{seed}"
+                o, st = RG.build_plant(D, seed, c); o.name = f"{D['name']}_V{seed}"; protect(o, f'_V{seed}')
                 o['t6_height_m'] = st['height_m']; wind(o, D, 'plant'); tag(o, D, 'plant', 0, seed, PLANT_LOD_RANGE[0])
                 INV[o.name] = dict(hero=D['name'], kind='plant', seed=seed, lod=0, stats=st, collection=c.name)
         make_scatter_copies([bpy.data.objects[n] for n in INV], f'T6_LIB_{NM}_VARIANTS')
@@ -181,7 +191,7 @@ for what in WHAT:
         for D, kind in woody:
             for lod in (1, 2):
                 c = coll(f"T6_{D['name']}_LOD{lod}", root)
-                o, st = RG.build_woody(lod_spec(D, lod), 0, c); o.name = f"{D['name']}_LOD{lod}"
+                o, st = RG.build_woody(lod_spec(D, lod), 0, c); o.name = f"{D['name']}_LOD{lod}"; protect(o, f'_LOD{lod}')
                 o['t6_height_m'] = st['height_m']; wind(o, D, kind); tag(o, D, kind, lod, 0, LOD_RANGE[lod])
                 INV[o.name] = dict(hero=D['name'], kind=kind, seed=0, lod=lod, stats=st, collection=c.name)
                 print('LOD', o.name, st['tris'], flush=True)
@@ -192,7 +202,7 @@ for what in WHAT:
                 INV[o.name] = dict(hero=D['name'], kind=kind, seed=0, lod=3, stats=dict(tris=6, height_m=o['t6_height_m']), collection=c.name)
         for D in plants:
             c = coll(f"T6_{D['name']}_LOD1", root)
-            o, st = RG.build_plant(plant_lod(D), 0, c); o.name = f"{D['name']}_LOD1"
+            o, st = RG.build_plant(plant_lod(D), 0, c); o.name = f"{D['name']}_LOD1"; protect(o, '_LOD1')
             o['t6_height_m'] = st['height_m']; wind(o, D, 'plant'); tag(o, D, 'plant', 1, 0, PLANT_LOD_RANGE[1])
             INV[o.name] = dict(hero=D['name'], kind='plant', seed=0, lod=1, stats=st, collection=c.name)
         make_scatter_copies([bpy.data.objects[n] for n in INV], f'T6_LIB_{NM}_LODS')

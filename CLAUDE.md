@@ -137,3 +137,13 @@ check, phir final high-res sim (Director ke GPU PC par).
 - World-scale terrain: cut ONE height grid into pieces (shared border verts + global custom normals) → seamless; huge single
   world volumes are slow/opaque — bounded haze boxes; coarse LODs need the river channel ≥ 1 vertex row wide (else water hides).
 - Linked data cannot be edited in memory → control render visibility of linked overlays with view-layer collection exclude.
+- Scatter (NG_T6_ECOSYSTEM): slope test must be `≥ min` (flat building pads / garden beds have slope exactly 0°); cull + mask the
+  terrain FACES before a Poisson distribute (Poisson over a 64 km tile = ~10 M candidates → OOM); per-vertex wind realize ≤ 15 m for
+  trees (a realized 300 k-tri tree ≈ 100 MB) — dense forest previews otherwise exceed the 16 GB machine.
+- Background bpy evaluates the TASK 05 heightfields at VIEWPORT resolution → scatter points differ from the render; aim preview cameras
+  at mask patches (resolution-independent), not at evaluated instance positions. Editing modifier ID-properties needs `obj.update_tag()`
+  + `view_layer.update()` before the depsgraph re-evaluates.
+- Populated files = SAVE-AS copies of the T5 region masters (T5 never written); exclude far components (other regions) in the view layer
+  for memory (T5 landscape master with NW01 + forest north + 64 waterfalls ≈ 12 GB).
+- Never name a scratch script like a stdlib module (`inspect.py` → bpy crashes "InitGoogleLogging twice"). `K.new_mat(name)` deletes
+  an existing same-name material → temporary material names must be unique.

@@ -274,14 +274,20 @@ def make_cam(spec, V, A, terrain, P):
             i, j = np.unravel_index(np.argmax(Hs), Hs.shape)
             t = (cx - 700 + (i + .5) * bs, cy - 700 + (j + .5) * bs)
         best = None
+        x0, y0, x1, y1 = V[:, 0].min() + 25, V[:, 1].min() + 25, V[:, 0].max() - 25, V[:, 1].max() - 25
         for back in (spec['back'], spec['back'] * 1.5, spec['back'] * .7):
             for a in np.linspace(0, 2 * np.pi, 24, endpoint=False):
                 px, py = t[0] + math.cos(a) * back, t[1] + math.sin(a) * back
+                if not (x0 < px < x1 and y0 < py < y1):                 # stay on THIS tile (its heights are the ones we know)
+                    continue
+                jn = np.argmin((V[:, 0] - px) ** 2 + (V[:, 1] - py) ** 2)
+                if (V[jn, 0] - px) ** 2 + (V[jn, 1] - py) ** 2 > 60 ** 2:  # inside a nested-LOD hole of the tile → skip
+                    continue
                 j = np.argmin((V[:, 0] - px) ** 2 + (V[:, 1] - py) ** 2)
                 pz = ground_z(V, px, py) + spec.get('h', 1.7); tz = ground_z(V, *t) + spec.get('th', 3.0)
                 if not clear((px, py, pz), (t[0], t[1], tz)):
                     continue
-                score = sum(float(A[k][j]) for k in ('m_wet', 'm_bare', 'm_cliff', 'm_forest', 'm_grove') if k in A)
+                score = sum(float(A[k][j]) for k in ('m_forest', 'm_grove') if k in A) + 5 * sum(float(A[k][j]) for k in ('m_wet', 'm_bare', 'm_pad', 'm_cliff') if k in A)
                 if best is None or score < best[0]:
                     best = (score, (px, py))
             if best:

@@ -60,6 +60,7 @@ def run_blender():
             imgs_ok = all(nd.image is not None for m in mats for nd in m.node_tree.nodes if nd.type == 'TEX_IMAGE')
             pbr = any(nd.type == 'NORMAL_MAP' or nd.type == 'BUMP' for m in mats for nd in m.node_tree.nodes)
             chk(f'{n}: PBR materials ({len(mats)} slots)', len(mats) >= 1 and imgs_ok and (pbr or kind == 'plant'), ', '.join(m.name for m in mats)[:120])
+            chk(f'{n}: no empty material slot (renders white otherwise)', all(m is not None for m in me.materials))
             used = set(np.unique(np.array([p.material_index for p in me.polygons])).tolist())
             chk(f'{n}: every face has a valid material slot', max(used) < len(me.materials), f'slots used {sorted(used)}')
             V = np.empty(len(me.vertices) * 3); me.vertices.foreach_get('co', V); V = V.reshape(-1, 3)
