@@ -148,5 +148,120 @@
   },
   "leaf": true,
   "base": true
+ },
+ "EF_T07_LANTERN_TREE": {
+  "front": {
+   "ortho_scale": 29.420862930908207,
+   "zc": 8.029683911204339,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 28.55116799166127
+  },
+  "side": {
+   "ortho_scale": 24.25954640579224,
+   "zc": 8.029683911204339,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 34.62554435063306
+  },
+  "back": {
+   "ortho_scale": 27.558088256835944,
+   "zc": 8.029683911204339,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 30.48106937503668
+  },
+  "leaf": true,
+  "base": true
+ },
+ "EF_T08_DEAD_SNAG": {
+  "front": {
+   "ortho_scale": 21.081320714950564,
+   "zc": 9.894679856300355,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 39.84570091020361
+  },
+  "side": {
+   "ortho_scale": 21.081320714950564,
+   "zc": 9.894679856300355,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 39.84570091020361
+  },
+  "back": {
+   "ortho_scale": 21.081320714950564,
+   "zc": 9.894679856300355,
+   "rx": 600,
+   "ry": 840,
+   "px_per_m": 39.84570091020361
+  },
+  "base": true
+ },
+ "EF_FE01_GIANT_FERN": {
+  "hero": true,
+  "detail": true,
+  "height_m": 1.4471092224121094,
+  "spread_m": 2.7308528423309326
+ },
+ "EF_M01_MOSS_CARPET": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.06655988842248917,
+  "spread_m": 1.579444169998169
+ },
+ "EF_MU01_GLOWCAP": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.12384101003408432,
+  "spread_m": 0.2832043021917343
+ },
+ "EF_V01_HANGING_VINE": {
+  "hero": true,
+  "detail": true,
+  "height_m": 9.197122573852539,
+  "spread_m": 2.851874828338623
+ },
+ "LINEUP_TREES": {
+  "ortho_scale": 211.08490400000002,
+  "zc": 38.9784195,
+  "rx": 2400,
+  "ry": 900,
+  "px_per_m": 11.369832491668848,
+  "cx": 102.4684,
+  "items": [
+   {
+    "name": "EF_T01_GIANT_ELDER",
+    "x": 26.950000762939453
+   },
+   {
+    "name": "EF_T02_TEAL_BEECH",
+    "x": 68.63700103759766
+   },
+   {
+    "name": "EF_T03_MOSS_OAK",
+    "x": 96.01499938964844
+   },
+   {
+    "name": "EF_T06_SPIRAL_ROOT",
+    "x": 122.86119842529297
+   },
+   {
+    "name": "EF_T08_DEAD_SNAG",
+    "x": 136.6999969482422
+   },
+   {
+    "name": "EF_T05_VEIL_WILLOW",
+    "x": 153.9174041748047
+   },
+   {
+    "name": "EF_T07_LANTERN_TREE",
+    "x": 177.8466033935547
+   },
+   {
+    "name": "EF_T04_YEW",
+    "x": 195.38400268554688
+   }
+  ]
  }
 }

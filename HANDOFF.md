@@ -7,11 +7,11 @@
 
 ## 0. Nayi session mein restore (2 minute)
 
-**Sab kuch GitHub par:** repo `pratyushgamerz54-oss/animation-studio`, branch **`ccr-a129fdfc-g3v4k0`** (characters, VFX, sheets,
+**Sab kuch GitHub par:** repo `pratyushgamerz54-oss/animation-studio`, branch **`ccr-c375d59d-2qaoyn`** (session 4+; same history as `ccr-a129fdfc-g3v4k0`) (characters, VFX, sheets,
 .blend files, exports, world maps, Ashram, 3D world, renders, backups, scripts, docs). Sirf Poly Haven assets git mein nahi (≈860 MB).
 
 1. Session kholte waqt repo `pratyushgamerz54-oss/animation-studio` + environment **`animation-studio`** chuno (Poly Haven network).
-2. Branch: `git fetch origin ccr-a129fdfc-g3v4k0 && git checkout ccr-a129fdfc-g3v4k0` (agar session doosri branch par khule).
+2. Branch: `git fetch origin ccr-c375d59d-2qaoyn && git checkout ccr-c375d59d-2qaoyn` (agar session doosri branch par khule).
 3. Setup — **ek command** (idempotent, kuch rebuild nahi karta):
    ```bash
    SCRATCH=<scratchpad dir> bash setup_session.sh
@@ -24,9 +24,9 @@
 
 ### PROMPT (nayi session mein paste karo)
 ```
-Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-a129fdfc-g3v4k0).
+Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-c375d59d-2qaoyn).
 Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad).
-Jo bana hai dobara mat banana. TASK 05 approve + close ho chuka hai. Mujhe short Hinglish summary do, phir agla TASK (06) ka
+Jo bana hai dobara mat banana. TASK 06 milestone 1 (vegetation concepts) review ke liye ready hai. Mujhe short Hinglish summary do, phir mera feedback / agla
 brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit + push aur STATUS.md update.
 ```
 
@@ -174,11 +174,32 @@ m_pad = playa, m_gravel = pavement, m_grove = wadi shrubs (MAT_T5_TERRAIN_DESERT
 A scheduled check-in (send_later, 21 Nov 17:47 UTC) resumes the work if a usage limit stopped the session; notify the Director when TASK 05 is complete.
 **Director rule (21 Nov):** final MP4 FHD se zyada (4K), zoom par blur nahi — CLAUDE.md "FINAL OUTPUT RESOLUTION RULE".
 
+## 6b. TASK 06 — Ecosystem & Vegetation Bible · MILESTONE 1 (concepts) — session 4, 21–22 Nov
+Brief: complete ecosystem + vegetation system (trees, plants, regional ecosystems, wildlife proposal, real Blender assets, PBR,
+scattering, wind, QC). **FIRST MILESTONE = Ashram Valley vegetation library + Enchanted Forest tree collection + Mountain Kingdom
+vegetation references → present concepts for approval BEFORE full asset production.** Blender 4.5.
+| What | Where |
+|---|---|
+| Ecosystem Bible (region mapping, rules, all 10 regions, tree/plant libraries, wildlife, tech standard, questions) | `02_world/ecosystem/ECOSYSTEM_BIBLE.md` |
+| Wildlife proposal sheet | `02_world/ecosystem/WILDLIFE_PROPOSAL.png` |
+| Libraries (42 assets: 17 trees, 4 shrubs, 21 plants) | `03_assets/vegetation/library/T6_VEG_{ASHRAM_VALLEY,ENCHANTED_FOREST,MOUNTAIN_KINGDOM}_v001.blend` + inventories |
+| Generators / scripts | `03_assets/vegetation/scripts/` (`t6kit`, `t6_species`, `t6_plants`, `t6_leafgen`, `t6_build_library`, `t6_render_sheets`, `t6_compose_sheets`, `t6_contact_sheet`, `t6_qc`, `t6_wind_test`, `t6_wildlife_sheet`) — README there |
+| Sheets | `03_assets/vegetation/sheets/<AV|EF|MK>/TREE_*, PLANTS_*, REGION_*` + `sheets/T6_SHEET_M1.png` |
+| Wind | `NG_T6_WIND` + `T6_WIND_CONTROL` (strength/gust/speed/flutter, drivers) · clip `03_assets/vegetation/renders/WIND_TEST.mp4` |
+| QC | `03_assets/vegetation/qc/T06_QC_REPORT.md` |
+Region mapping (PROPOSED, Q to Director): Mountain Kingdom = R-03, Green Plains = R-06, Crystal Lakes = R-08, Ancient City = C-01…03,
+Hidden Underground = CV caves, Sky Realms = NOT on the map (nothing designed). Fantasy (PROPOSED): Veil Willow, Spiral-root, Lantern Tree, Glowcap.
+Lessons: Blender ortho cam → set `sensor_fit` explicitly; custom-prop changes need `obj.update_tag()` before frame_set; leaf atlases
+auto-fit (zoom) so sprays never touch tile edges; branches need a ground "floor" guard; height-normalise trees (±10 %);
+CPU Cycles ≈ 30 s per 600×840 tree view (transparent leaves, 64 transparent bounces).
+**Next (after approval):** 3–5 variants + LOD1/2 per species, NG_T6_ECOSYSTEM scatter on the TASK 05 terrains, remaining regions
+(R-04/05/06/08, cities, caves), natural details, wildlife (only approved list).
+
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
 (all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,
 forbidden crater R05, enchanted forest R02, Great Northern Range R03 + cave, main world v002, material + nature libraries, masters,
-heightfields, data_v002 npz, renders, QC). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
+heightfields, data_v002 npz, renders, QC) · **TASK 06 M1: vegetation libraries, atlases, sheets, bible** (§6b). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
 1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
