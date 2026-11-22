@@ -1,0 +1,306 @@
+[
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W01_ENTIRE_WORLD",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W01_ENTIRE_WORLD.png",
+  "seconds": 13.2,
+  "desc": "Entire main world \u2014 cinematic aerial"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C1_AETHERIA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W02_REGION_C1_AETHERIA.png",
+  "seconds": 21.6,
+  "desc": "Region \u2014 C1 AETHERIA (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C2_SOLMARA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W02_REGION_C2_SOLMARA.png",
+  "seconds": 22.7,
+  "desc": "Region \u2014 C2 SOLMARA (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C3_VEYLORA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W02_REGION_C3_VEYLORA.png",
+  "seconds": 19.5,
+  "desc": "Region \u2014 C3 VEYLORA (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C4_NOXARA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W02_REGION_C4_NOXARA.png",
+  "seconds": 16.5,
+  "desc": "Region \u2014 C4 NOXARA (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C5_DRAKMOR",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W02_REGION_C5_DRAKMOR.png",
+  "seconds": 23.9,
+  "desc": "Region \u2014 C5 DRAKMOR (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W03_MOUNTAINS_MAHAGIRI",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W03_MOUNTAINS_MAHAGIRI.png",
+  "seconds": 21.0,
+  "desc": "Mountain range \u2014 Mahagiri (C1, proposed name), low aerial"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W03_MOUNTAINS_SUNSTONE",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W03_MOUNTAINS_SUNSTONE.png",
+  "seconds": 20.9,
+  "desc": "Mountain range \u2014 Sunstone Ridge (C2)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W04_FORESTS_AETHERIA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W04_FORESTS_AETHERIA.png",
+  "seconds": 25.9,
+  "desc": "Forest zones \u2014 Aetheria enchanted forest + lake district"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W04_FORESTS_VEYLORA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W04_FORESTS_VEYLORA.png",
+  "seconds": 21.6,
+  "desc": "Forest zones \u2014 Veylora wet / enchanted forests"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W05_RIVERS_AETHERIA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W05_RIVERS_AETHERIA.png",
+  "seconds": 23.8,
+  "desc": "River systems \u2014 Aetheria lake district"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W05_RIVERS_SOLMARA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W05_RIVERS_SOLMARA.png",
+  "seconds": 24.9,
+  "desc": "River systems \u2014 Solmara east"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W06_DESERT_AETHERIA_WEST",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W06_DESERT_AETHERIA_WEST.png",
+  "seconds": 23.4,
+  "desc": "Desert + wasteland \u2014 Aetheria west (R-04, proposal)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W06_DESERT_SOLMARA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W06_DESERT_SOLMARA.png",
+  "seconds": 25.7,
+  "desc": "Desert \u2014 Solmara interior"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W07_ISLANDS_SAGARA",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W07_ISLANDS_SAGARA.png",
+  "seconds": 23.3,
+  "desc": "Islands \u2014 Sagara archipelago (A1)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W08_ASHRAM_VALLEY_REGION",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_W08_ASHRAM_VALLEY_REGION.png",
+  "seconds": 26.9,
+  "desc": "Ashram Valley \u2014 position in the main world (world scale)"
+ },
+ {
+  "scene": "DIM_BLACK_HOLE_TRAINING",
+  "camera": "CAM_D1_BH_OVERVIEW",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_D1_BH_OVERVIEW.png",
+  "seconds": 6.3,
+  "desc": "Overview \u2014 black hole + three platform rings (proposal)"
+ },
+ {
+  "scene": "DIM_BLACK_HOLE_TRAINING",
+  "camera": "CAM_D1_BH_TRAINING_RING",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_D1_BH_TRAINING_RING.png",
+  "seconds": 8.9,
+  "desc": "On the training ring \u2014 platforms toward the disk"
+ },
+ {
+  "scene": "DIM_SAITHAN_DARK_WORLD",
+  "camera": "CAM_D2_DW_OVERVIEW",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_D2_DW_OVERVIEW.png",
+  "seconds": 59.1,
+  "desc": "Overview \u2014 ash plains, spire fields, portal site (proposal)"
+ },
+ {
+  "scene": "DIM_SAITHAN_DARK_WORLD",
+  "camera": "CAM_D2_DW_SPIRE_FIELD",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_D2_DW_SPIRE_FIELD.png",
+  "seconds": 78.9,
+  "desc": "Obsidian spire field"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V01_VALLEY_ESTABLISHING",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V01_VALLEY_ESTABLISHING.png",
+  "seconds": 45.8,
+  "desc": "Ashram Valley establishing aerial (from the south-east, looking north-west)"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V02_TOWARD_SNOW_RANGE",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V02_TOWARD_SNOW_RANGE.png",
+  "seconds": 39.2,
+  "desc": "Low aerial from the Ashram toward the snowy range \u2248100 km NW"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V03_VALLEY_PLAN_TOP",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V03_VALLEY_PLAN_TOP.png",
+  "seconds": 52.9,
+  "desc": "Valley plan \u2014 LOD1 (60 \u00d7 60 km): forest ring, rivers, open valley floor"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V04_RIVER_AND_FOREST",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V04_RIVER_AND_FOREST.png",
+  "seconds": 44.5,
+  "desc": "River + forest edge near the Ashram"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V05_SNOW_RANGE_AERIAL",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V05_SNOW_RANGE_AERIAL.png",
+  "seconds": 37.0,
+  "desc": "Snowy range aerial (LOD2 far terrain)"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V06_GROUND_LEVEL",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V06_GROUND_LEVEL.png",
+  "seconds": 38.9,
+  "desc": "Ground level (1.7 m eye) at the Ashram pad, looking north-west"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V07_ASHRAM_PLACEMENT",
+  "mode": "cycles",
+  "file": "12_RENDER/cycles/cycles_CAM_V07_ASHRAM_PLACEMENT.png",
+  "seconds": 53.0,
+  "desc": "Ashram placement reference (pad, wall, training ground outlines)"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V00_LOD_LAYOUT_TOP",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_V00_LOD_LAYOUT_TOP.png",
+  "seconds": 13.2,
+  "desc": "Technical top view \u2014 LOD0/1/2 extents, rivers, snowy range NW"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V03_VALLEY_PLAN_TOP",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_V03_VALLEY_PLAN_TOP.png",
+  "seconds": 10.9,
+  "desc": "Valley plan \u2014 LOD1 (60 \u00d7 60 km): forest ring, rivers, open valley floor"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V01_VALLEY_ESTABLISHING",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_V01_VALLEY_ESTABLISHING.png",
+  "seconds": 125.6,
+  "desc": "Ashram Valley establishing aerial (from the south-east, looking north-west)"
+ },
+ {
+  "scene": "ASHRAM_VALLEY",
+  "camera": "CAM_V07_ASHRAM_PLACEMENT",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_V07_ASHRAM_PLACEMENT.png",
+  "seconds": 246.6,
+  "desc": "Ashram placement reference (pad, wall, training ground outlines)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W00_TOP_ORTHO",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_W00_TOP_ORTHO.png",
+  "seconds": 2.0,
+  "desc": "Technical top view of the whole main world (orthographic)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W01_ENTIRE_WORLD",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_W01_ENTIRE_WORLD.png",
+  "seconds": 1.6,
+  "desc": "Entire main world \u2014 cinematic aerial"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W02_REGION_C1_AETHERIA",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_W02_REGION_C1_AETHERIA.png",
+  "seconds": 1.2,
+  "desc": "Region \u2014 C1 AETHERIA (proposed name)"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W03_MOUNTAINS_MAHAGIRI",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_W03_MOUNTAINS_MAHAGIRI.png",
+  "seconds": 1.1,
+  "desc": "Mountain range \u2014 Mahagiri (C1, proposed name), low aerial"
+ },
+ {
+  "scene": "MAIN_WORLD",
+  "camera": "CAM_W08_ASHRAM_VALLEY_REGION",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_W08_ASHRAM_VALLEY_REGION.png",
+  "seconds": 0.9,
+  "desc": "Ashram Valley \u2014 position in the main world (world scale)"
+ },
+ {
+  "scene": "DIM_BLACK_HOLE_TRAINING",
+  "camera": "CAM_D1_BH_TOP",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_D1_BH_TOP.png",
+  "seconds": 0.4,
+  "desc": "Top layout check vs MAP_H1"
+ },
+ {
+  "scene": "DIM_SAITHAN_DARK_WORLD",
+  "camera": "CAM_D2_DW_TOP",
+  "mode": "viewport",
+  "file": "12_RENDER/viewport/viewport_CAM_D2_DW_TOP.png",
+  "seconds": 0.9,
+  "desc": "Top layout check vs MAP_H2"
+ }
+]

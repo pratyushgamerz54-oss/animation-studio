@@ -1,11 +1,11 @@
-"""HERO 1 — main hero — character config. NAME NOT CONFIRMED (U-01): use 'HERO 1'.
+"""HERO 1 — main hero — character config. NAME CONFIRMED (U-01, Director 21 Nov): SHIV. Folder/object ids stay 'hero1'/'HERO1'.
 CONFIRMED: role, powers Fire + Magical Portal. Director: build Hero 1 by combining elements of the
 reference set. Everything visual = PROPOSAL."""
 import math
 
 AX = lambda c: abs(c.x)
 CFG = {
-    'id': 'HERO1', 'name': 'Hero 1', 'role': 'Hero 1 / main hero (name pending)',
+    'id': 'HERO1', 'name': 'Shiv', 'role': 'Shiv (Hero 1) / main hero',
     'powers': ['Fire Manipulation', 'Magical Portal'],
     'power_rows': ['fire', 'portal'],
     'reference': 'combination of the Director reference set (no own reference)',

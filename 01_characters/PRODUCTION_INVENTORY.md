@@ -7,20 +7,22 @@ Status legend: ⬜ not started · 🟨 in progress / proposal · ✅ approved & 
 
 ## 1. Characters
 
-| # | Role | Name | Confirmed powers | Design sheet | 3D model | UV/Tex | Rig | Face rig | VFX |
-|---|------|------|------------------|---|---|---|---|---|---|
-| 1 | Hero 1 | **[PENDING]** | Fire, Magical Portal | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 2 | Hero 2 | **Pratyush** | Super Speed, Magical Portal, Lightning | 🟨 v1 rendered, awaiting approval | 🟨 v1 mesh | ⬜ | 🟨 pose rig | 🟨 shape keys | 🟨 refs |
-| 3 | Main Villain | **Saithan** | Dark Magic, Invisibility, Super Speed, Fire, Magical Portal, Lightning | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 4 | Sub-villain 1 | **Soul** | **[PENDING — do not invent]** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⛔ blocked |
-| 5 | Sub-villain 2 | **Max** | Laser | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 6 | Sub-villain 3 | **Yayaki** | Teleportation | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 7 | Headmaster | **Ramarat** | **[PENDING — do not invent]** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⛔ blocked |
+Pipeline (same for all): `_shared/build_char.py` → `_shared/sheet_render.py` → `_shared/sheet_compose.py` →
+`_shared/production.py` → `_shared/sheet_doc.py`. One config per character: `<folder>/<folder>_config.py`.
+Batch scripts: `_shared/render_all.sh`, `_shared/production_all.sh`.
 
-Production order (Director tasks): Task 01 Hero 1 · Task 02 Pratyush · Task 03 Saithan · Task 04 Soul · Task 05 Max · Task 06 Yayaki · Task 07 Ramarat.
-Pratyush ka design sheet pehle shuru ho chuka tha (Hero 1 ka naam/reference nahi tha), isliye wo pehle review ke liye ready hai.
-Pratyush first rakha gaya hai kyunki Hero 1 ka naam abhi confirm nahi hai.
+| # | Role | Name | Confirmed powers | Config | Design sheet | 3D model v002 | Production v003 (UV, bake, IK/FK, face ctrl, export, QC) |
+|---|------|------|------------------|---|---|---|---|
+| 1 | Hero 1 | **Shiv** ✅ (21 Nov) | Fire, Magical Portal | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 2 | Hero 2 | **Pratyush** | Super Speed, Magical Portal, Lightning | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 3 | Main Villain | **Saithan** | Dark Magic, Invisibility, Super Speed, Fire, Magical Portal, Lightning | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 4 | Sub-villain 1 | **Soul** | Lightning (confirmed 20 Nov) | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 5 | Sub-villain 2 | **Max** | Laser | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 6 | Sub-villain 3 | **Yayaki** | Teleportation | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
+| 7 | Headmaster | **Ramarat** | EVERY power (heroes + villains): Fire, Portal, Speed, Lightning, Dark Magic, Invisibility, Laser, Teleportation — unlimited (confirmed 20 Nov) | ✅ | 🟨 v1 done — awaiting approval | ✅ | ✅ v003 done, QC all PASS (approval pending) |
 
+Legend: ✅ done & tested · 🟨 in progress / awaiting approval · ⬜ not started. Each character's real status is in
+`<folder>/qc/QC_REPORT.md` once production has run.
 
 ## 1b. Director references (received)
 
@@ -55,8 +57,8 @@ Rule: references guide the design; final designs stay **original** (no copied lo
 | Saithan | Dark energy, Invisibility, Dark fire, Lightning, Corrupted portal, Dark aura |
 | Max | Laser beam, Laser impact, Laser charge-up |
 | Yayaki | Teleportation, Spatial distortion, Teleport arrival/departure |
-| Soul | ⛔ power confirm hone tak blocked |
-| Ramarat | ⛔ powers confirm hone tak blocked |
+| Soul | Crimson lightning, arcs, aura |
+| Ramarat | All 8 powers in golden-white |
 
 ## 3. Per-character deliverables (har character ke liye)
 
@@ -88,9 +90,9 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
 
 | ID | Item | Status |
 |---|---|---|
-| U-01 | Hero 1 ka naam | PENDING |
-| U-02 | Soul ki power | PENDING |
-| U-03 | Ramarat ki powers | PENDING |
+| U-01 | Hero 1 ka naam | ✅ RESOLVED (21 Nov): **Shiv** (files/ids `hero1`/`HERO1` unchanged) |
+| U-02 | Soul ki power | ✅ RESOLVED: Lightning (crimson-red look proposed) |
+| U-03 | Ramarat ki powers | ✅ RESOLVED: every power of heroes AND villains, unlimited (golden-white look proposed) |
 | U-04 | Kisi bhi character ka appearance (umar, kad, skin tone, hair, costume) diya nahi gaya hai → sab designs **PROPOSALS** hain jab tak Director approve na kare | PENDING |
 | U-05 | Duniya / setting (magic school? city? time period?) — headmaster se school-type setting lagti hai, par confirm nahi | PENDING |
 | U-06 | Har character ki portal ka rang/style (Hero 1, Pratyush, Saithan teeno ke paas portal hai) | PROPOSED in sheets |
@@ -105,3 +107,12 @@ Object names: `CHAR_<NAME>_<PART>` (e.g. `CHAR_PRATYUSH_HEAD`, `CHAR_PRATYUSH_RI
 - Models Python code se ban rahe hain (procedural modeling), haath se sculpt nahi. Stylized realism tak
   achha jaayega; photoreal skin/pores/hair-strand level close-ups ke liye extra sculpt pass chahiye hoga.
 - Design sheets 3D renders se banti hain (2D painting nahi).
+
+## 7. QC findings after production v003 (20 Nov)
+- All 7: UV ✅, baked textures (1K main / 512 small) ✅, IK follow 0.02–0.03 mm ✅, 0 unweighted verts ✅, all-quad body/head ✅,
+  19 mouth keys incl. 10 phonemes ✅, GLB + FBX export + re-import ✅. Contact sheets: `<name>/qc/<NAME>_qc_tests.png`.
+- KNOWN ISSUE K-01 — **Director decision 21 Nov: fix with CLOTH SIMULATION at scene stage** (waist/belt pinned, body collision, per shot; Ramarat, Soul, Saithan, Yayaki): long robes/skirts (Ramarat, Soul, Saithan, Yayaki) are skinned to the legs → in RUN / JUMP / LAND / deform
+  poses they bend like a stiff tube. Fix planned at scene stage: cloth simulation (pinned at waist) or extra skirt bones.
+  (21 Nov: Ramarat ke robe par 'safed daag' = isi ka hissa — raised knee (trousers/skin) skirt ke aar-paar; material bug nahi.)
+- K-02: Soul robe front panels leave a small gap between the legs (front view). K-03: Saithan powers page — eye row touches footer.
+- K-04: Jaw bone does not move (mouth shape keys only). Rig is custom (not Rigify) but has IK/FK, poles, switches, fingers, face controls.

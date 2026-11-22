@@ -1,0 +1,273 @@
+{
+ "PL_T01_BANYAN_LOD1": {
+  "hero": "PL_T01_BANYAN",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 21.4,
+   "canopy_x_m": 40.22,
+   "canopy_y_m": 44.85,
+   "trunk_d_m": 2.53,
+   "branches": 11991,
+   "leaf_cards": 12598,
+   "tris": 459472,
+   "verts": 317805,
+   "lowest_z": -0.52,
+   "height_scale": 0.82
+  },
+  "collection": "T6_PL_T01_BANYAN_LOD1"
+ },
+ "PL_T01_BANYAN_LOD2": {
+  "hero": "PL_T01_BANYAN",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 21.4,
+   "canopy_x_m": 39.93,
+   "canopy_y_m": 45.58,
+   "trunk_d_m": 2.59,
+   "branches": 1448,
+   "leaf_cards": 1216,
+   "tris": 74170,
+   "verts": 46467,
+   "lowest_z": -0.85,
+   "height_scale": 0.839
+  },
+  "collection": "T6_PL_T01_BANYAN_LOD2"
+ },
+ "PL_T01_BANYAN_LOD3": {
+  "hero": "PL_T01_BANYAN",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 21.608
+  },
+  "collection": "T6_PL_T01_BANYAN_LOD3"
+ },
+ "PL_T02_NEEM_LOD1": {
+  "hero": "PL_T02_NEEM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 15.86,
+   "canopy_x_m": 13.56,
+   "canopy_y_m": 20.47,
+   "trunk_d_m": 0.88,
+   "branches": 4937,
+   "leaf_cards": 5640,
+   "tris": 152150,
+   "verts": 113594,
+   "lowest_z": -0.34,
+   "height_scale": 0.89
+  },
+  "collection": "T6_PL_T02_NEEM_LOD1"
+ },
+ "PL_T02_NEEM_LOD2": {
+  "hero": "PL_T02_NEEM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 17.34,
+   "canopy_x_m": 14.93,
+   "canopy_y_m": 23.25,
+   "trunk_d_m": 0.99,
+   "branches": 597,
+   "leaf_cards": 574,
+   "tris": 25776,
+   "verts": 17021,
+   "lowest_z": -0.38,
+   "height_scale": 1.0
+  },
+  "collection": "T6_PL_T02_NEEM_LOD2"
+ },
+ "PL_T02_NEEM_LOD3": {
+  "hero": "PL_T02_NEEM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 17.449
+  },
+  "collection": "T6_PL_T02_NEEM_LOD3"
+ },
+ "PL_T03_UMBRELLA_ACACIA_LOD1": {
+  "hero": "PL_T03_UMBRELLA_ACACIA",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 8.64,
+   "canopy_x_m": 18.69,
+   "canopy_y_m": 14.44,
+   "trunk_d_m": 0.63,
+   "branches": 8576,
+   "leaf_cards": 3075,
+   "tris": 184368,
+   "verts": 130320,
+   "lowest_z": -0.3,
+   "height_scale": 0.868
+  },
+  "collection": "T6_PL_T03_UMBRELLA_ACACIA_LOD1"
+ },
+ "PL_T03_UMBRELLA_ACACIA_LOD2": {
+  "hero": "PL_T03_UMBRELLA_ACACIA",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 8.64,
+   "canopy_x_m": 19.3,
+   "canopy_y_m": 14.94,
+   "trunk_d_m": 0.64,
+   "branches": 1185,
+   "leaf_cards": 368,
+   "tris": 38876,
+   "verts": 24477,
+   "lowest_z": -0.31,
+   "height_scale": 0.883
+  },
+  "collection": "T6_PL_T03_UMBRELLA_ACACIA_LOD2"
+ },
+ "PL_T03_UMBRELLA_ACACIA_LOD3": {
+  "hero": "PL_T03_UMBRELLA_ACACIA",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 9.549
+  },
+  "collection": "T6_PL_T03_UMBRELLA_ACACIA_LOD3"
+ },
+ "PL_S01_BER_BUSH_LOD1": {
+  "hero": "PL_S01_BER_BUSH",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 2.24,
+   "canopy_x_m": 2.84,
+   "canopy_y_m": 3.27,
+   "trunk_d_m": 0.5,
+   "branches": 93,
+   "leaf_cards": 277,
+   "tris": 3560,
+   "verts": 3180,
+   "lowest_z": -0.16,
+   "height_scale": 0.899
+  },
+  "collection": "T6_PL_S01_BER_BUSH_LOD1"
+ },
+ "PL_S01_BER_BUSH_LOD2": {
+  "hero": "PL_S01_BER_BUSH",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 2.24,
+   "canopy_x_m": 3.16,
+   "canopy_y_m": 3.54,
+   "trunk_d_m": 0.5,
+   "branches": 93,
+   "leaf_cards": 121,
+   "tris": 2728,
+   "verts": 2127,
+   "lowest_z": -0.27,
+   "height_scale": 0.868
+  },
+  "collection": "T6_PL_S01_BER_BUSH_LOD2"
+ },
+ "PL_S01_BER_BUSH_LOD3": {
+  "hero": "PL_S01_BER_BUSH",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 2.177
+  },
+  "collection": "T6_PL_S01_BER_BUSH_LOD3"
+ },
+ "PL_G01_TALL_GRASS_LOD1": {
+  "hero": "PL_G01_TALL_GRASS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.962,
+   "spread_x_m": 1.84,
+   "spread_y_m": 1.745,
+   "tris": 3136,
+   "verts": 2700,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_PL_G01_TALL_GRASS_LOD1"
+ },
+ "PL_G02_DOOB_GRASS_LOD1": {
+  "hero": "PL_G02_DOOB_GRASS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.084,
+   "spread_x_m": 0.466,
+   "spread_y_m": 0.451,
+   "tris": 2504,
+   "verts": 2376,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_PL_G02_DOOB_GRASS_LOD1"
+ },
+ "PL_F01_WILD_MUSTARD_LOD1": {
+  "hero": "PL_F01_WILD_MUSTARD",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.73,
+   "spread_x_m": 0.342,
+   "spread_y_m": 0.491,
+   "tris": 1336,
+   "verts": 978,
+   "lowest_z": -0.001
+  },
+  "collection": "T6_PL_F01_WILD_MUSTARD_LOD1"
+ },
+ "PL_F02_GLOBE_THISTLE_LOD1": {
+  "hero": "PL_F02_GLOBE_THISTLE",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.598,
+   "spread_x_m": 0.224,
+   "spread_y_m": 0.25,
+   "tris": 8108,
+   "verts": 6632,
+   "lowest_z": -0.001
+  },
+  "collection": "T6_PL_F02_GLOBE_THISTLE_LOD1"
+ },
+ "PL_F03_WHITE_CLOVER_LOD1": {
+  "hero": "PL_F03_WHITE_CLOVER",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.104,
+   "spread_x_m": 0.042,
+   "spread_y_m": 0.064,
+   "tris": 3920,
+   "verts": 3188,
+   "lowest_z": -0.0
+  },
+  "collection": "T6_PL_F03_WHITE_CLOVER_LOD1"
+ }
+}

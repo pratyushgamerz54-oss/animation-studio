@@ -1,0 +1,216 @@
+{
+ "TREE_FIR_LOD1_A": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD1 (CC0)",
+  "dims_m": [
+   6.58,
+   6.47,
+   18.95
+  ],
+  "tris": 177444,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_GROVE_NEAR"
+  ]
+ },
+ "TREE_FIR_LOD1_B": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD1 (CC0)",
+  "dims_m": [
+   5.63,
+   6.08,
+   14.08
+  ],
+  "tris": 128464,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_GROVE_NEAR"
+  ]
+ },
+ "TREE_FIR_LOD1_C": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD1 (CC0)",
+  "dims_m": [
+   6.35,
+   6.01,
+   14.55
+  ],
+  "tris": 68879,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_GROVE_NEAR"
+  ]
+ },
+ "TREE_FIR_LOD2_A": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   6.58,
+   6.47,
+   18.96
+  ],
+  "tris": 70661,
+  "category": [
+   "LIB_TREES_MID",
+   "LIB_GROVE_MID"
+  ]
+ },
+ "TREE_FIR_LOD2_B": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   5.63,
+   6.08,
+   14.08
+  ],
+  "tris": 54927,
+  "category": [
+   "LIB_TREES_MID",
+   "LIB_GROVE_MID"
+  ]
+ },
+ "TREE_FIR_LOD2_C": {
+  "source": "Poly Haven fir_tree_01 / fir_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   6.35,
+   6.01,
+   14.55
+  ],
+  "tris": 31512,
+  "category": [
+   "LIB_TREES_MID",
+   "LIB_GROVE_MID"
+  ]
+ },
+ "TREE_PINE_LOD2_A": {
+  "source": "Poly Haven pine_tree_01 / pine_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   7.6,
+   8.3,
+   20.4
+  ],
+  "tris": 416451,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_TREES_MID"
+  ]
+ },
+ "TREE_PINE_LOD2_B": {
+  "source": "Poly Haven pine_tree_01 / pine_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   7.22,
+   7.62,
+   14.88
+  ],
+  "tris": 267343,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_TREES_MID"
+  ]
+ },
+ "TREE_PINE_LOD2_C": {
+  "source": "Poly Haven pine_tree_01 / pine_tree_01_LOD2 (CC0)",
+  "dims_m": [
+   7.62,
+   7.89,
+   17.55
+  ],
+  "tris": 347991,
+  "category": [
+   "LIB_TREES_NEAR",
+   "LIB_TREES_MID"
+  ]
+ },
+ "TREE_BROADLEAF_LOD1_A": {
+  "source": "Poly Haven tree_small_02 / tree_small_02_LOD1 (CC0)",
+  "dims_m": [
+   2.92,
+   4.29,
+   4.56
+  ],
+  "tris": 495533,
+  "category": [
+   "LIB_GROVE_NEAR",
+   "LIB_GROVE_MID"
+  ]
+ },
+ "TREE_FIR_YOUNG_LOD1_A": {
+  "source": "Poly Haven fir_sapling_medium / fir_sapling_medium_LOD1 (CC0)",
+  "dims_m": [
+   5.06,
+   5.32,
+   8.86
+  ],
+  "tris": 19016,
+  "category": [
+   "LIB_SAPLINGS"
+  ]
+ },
+ "TREE_FIR_YOUNG_LOD1_B": {
+  "source": "Poly Haven fir_sapling_medium / fir_sapling_medium_LOD1 (CC0)",
+  "dims_m": [
+   4.95,
+   5.43,
+   7.93
+  ],
+  "tris": 11886,
+  "category": [
+   "LIB_SAPLINGS"
+  ]
+ },
+ "TREE_FIR_YOUNG_LOD1_C": {
+  "source": "Poly Haven fir_sapling_medium / fir_sapling_medium_LOD1 (CC0)",
+  "dims_m": [
+   4.32,
+   4.05,
+   5.94
+  ],
+  "tris": 11074,
+  "category": [
+   "LIB_SAPLINGS"
+  ]
+ },
+ "TREE_FIR_PROXY_A": {
+  "source": "procedural far proxy",
+  "dims_m": [
+   5.8,
+   5.8,
+   14.5
+  ],
+  "tris": 60,
+  "category": [
+   "LIB_TREES_FAR"
+  ]
+ },
+ "TREE_FIR_PROXY_B": {
+  "source": "procedural far proxy",
+  "dims_m": [
+   4.8,
+   4.8,
+   12.0
+  ],
+  "tris": 51,
+  "category": [
+   "LIB_TREES_FAR"
+  ]
+ },
+ "TREE_PINE_PROXY": {
+  "source": "procedural far proxy",
+  "dims_m": [
+   7.2,
+   7.2,
+   17.0
+  ],
+  "tris": 42,
+  "category": [
+   "LIB_TREES_FAR"
+  ]
+ },
+ "TREE_BROADLEAF_PROXY": {
+  "source": "procedural far proxy",
+  "dims_m": [
+   3.6,
+   3.6,
+   4.6
+  ],
+  "tris": 86,
+  "category": [
+   "LIB_GROVE_FAR"
+  ]
+ }
+}

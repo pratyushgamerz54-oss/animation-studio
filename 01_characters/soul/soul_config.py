@@ -1,9 +1,9 @@
-"""SOUL — sub-villain 1. POWER NOT CONFIRMED (U-02): no power VFX are created.
+"""SOUL — sub-villain 1. CONFIRMED power (Director, 20 Nov): LIGHTNING.
 Reference weapon (curved blade) NOT added: not confirmed by the story (U-10). Visual = PROPOSAL."""
 AX = lambda c: abs(c.x)
 CFG = {
     'id': 'SOUL', 'name': 'Soul', 'role': 'Sub-villain 1',
-    'powers': [], 'power_rows': [],
+    'powers': ['Lightning'], 'power_rows': ['lightning'],
     'reference': 'reference/soul_ref_01.png',
     'ref_notes': 'Taken: tall gaunt pale-lavender figure, twin red horns, ornate black-gold high collar, bare sinewy '
                  'torso, ornate belt, long dark robe with red-brown hem, back cape, bare feet. NOT taken: the curved '
@@ -20,7 +20,7 @@ CFG = {
     'pal': {
         'skin': '#9C88A6', 'skin_tint': '#8A6A92', 'lip': '#6E4F68', 'lash': '#1A1018', 'brow': '#3A2A36',
         'eye': '#C23B2E', 'eye_dark': '#4A0E0A', 'sclera': '#E6DCD6', 'power_eye': '#FF4A3A',
-        'horn': '#8E1E1E', 'robe': '#16141A', 'hem': '#7A2A1E', 'gold': '#C9A24A', 'cape': '#2A0F12',
+        'horn': '#8E1E1E', 'power_glow': '#FF3B3B', 'power_core': '#FFE6E6', 'robe': '#16141A', 'hem': '#7A2A1E', 'gold': '#C9A24A', 'cape': '#2A0F12',
     },
     'hair': {'style': 'bald'},
     'horns': [{'root': (.30, -.20, .90), 'radius': .022, 'mat': 'horn',
@@ -40,8 +40,8 @@ CFG = {
          'open_front': True, 'dip': True},
         {'kind': 'trim', 'name': 'BELT', 'mat': 'gold', 'coll': 'ACCESSORIES', 'offset': .016, 'solid': .006, 'bevel': True,
          'keep': lambda c: .92 < c.z < 1.12 and AX(c) < .25, 'accent': lambda c, n: abs(c.z - 1.02) < .02 or c.z > 1.10},
-        {'kind': 'skirt', 'name': 'ROBE', 'mat': 'robe', 'z_top': 1.0, 'z_bottom': .02, 'flare': .30, 'open_front': .30,
-         'offset': .025, 'hem': .22, 'front_band': 0},
+        {'kind': 'skirt', 'name': 'ROBE', 'mat': 'robe', 'z_top': 1.0, 'z_bottom': .02, 'flare': .42, 'open_front': 0.0,
+         'offset': .055, 'hem': .22, 'front_band': 0},
         {'kind': 'trim', 'name': 'WRIST_BAND', 'mirror': True, 'mat': 'goldm', 'coll': 'ACCESSORIES', 'offset': .008,
          'solid': .004, 'keep': lambda c: .66 < c.x < .72},
         {'kind': 'cape', 'name': 'CAPE', 'mat': 'cape', 'side': 'back', 'z_top': 1.47, 'z_bottom': .06, 'width': .26,

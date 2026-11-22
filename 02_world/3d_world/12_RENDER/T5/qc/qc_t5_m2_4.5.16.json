@@ -1,0 +1,233 @@
+{
+ "blender": "4.5.16 LTS",
+ "time": "2026-11-22 04:27",
+ "passed": 45,
+ "total": 45,
+ "checks": [
+  {
+   "check": "file size < 100 MB: 06_DESERTS/DESERT_R04_v002.blend",
+   "result": "PASS",
+   "detail": "0.2 MB"
+  },
+  {
+   "check": "opens + no missing images: 06_DESERTS/DESERT_R04_v002.blend",
+   "result": "PASS",
+   "detail": "99 images, missing []"
+  },
+  {
+   "check": "06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DF evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "57024 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DN evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "130005 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "06_DESERTS/DESERT_R04_v002.blend: T5_TERRAIN_DH evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "142876 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "file size < 100 MB: 06_DESERTS/FORBIDDEN_R05_v002.blend",
+   "result": "PASS",
+   "detail": "2.4 MB"
+  },
+  {
+   "check": "opens + no missing images: 06_DESERTS/FORBIDDEN_R05_v002.blend",
+   "result": "PASS",
+   "detail": "94 images, missing []"
+  },
+  {
+   "check": "06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XF evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "83592 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XN evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "130005 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "06_DESERTS/FORBIDDEN_R05_v002.blend: T5_TERRAIN_XH evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "142876 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "file size < 100 MB: 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend",
+   "result": "PASS",
+   "detail": "0.2 MB"
+  },
+  {
+   "check": "opens + no missing images: 04_FORESTS/ENCHANTED_FOREST_R02_v002.blend",
+   "result": "PASS",
+   "detail": "155 images, missing []"
+  },
+  {
+   "check": "04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EF evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "57960 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EN evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "124200 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "04_FORESTS/ENCHANTED_FOREST_R02_v002.blend: T5_TERRAIN_EH evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "142876 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "file size < 100 MB: 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend",
+   "result": "PASS",
+   "detail": "0.3 MB"
+  },
+  {
+   "check": "opens + no missing images: 03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend",
+   "result": "PASS",
+   "detail": "205 images, missing []"
+  },
+  {
+   "check": "03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_R3F evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "86774 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_R3N evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "162401 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "03_MOUNTAINS/GREAT_NORTHERN_RANGE_R03_v002.blend: T5_TERRAIN_CV evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "59041 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "file size < 100 MB: 02_TERRAIN/WORLD_terrain_v002.blend",
+   "result": "PASS",
+   "detail": "0.8 MB"
+  },
+  {
+   "check": "opens + no missing images: 02_TERRAIN/WORLD_terrain_v002.blend",
+   "result": "PASS",
+   "detail": "3 images, missing []"
+  },
+  {
+   "check": "02_TERRAIN/WORLD_terrain_v002.blend: T5_WORLD_TERRAIN evaluates to a real mesh with mask attributes",
+   "result": "PASS",
+   "detail": "582112 viewport verts, 14 mask attributes"
+  },
+  {
+   "check": "file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend",
+   "result": "PASS",
+   "detail": "0.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 00_MASTER_WORLD/T5_REGION_R04_DESERT_master_v002.blend",
+   "result": "PASS",
+   "detail": "101 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R05_FORBIDDEN_master_v002.blend",
+   "result": "PASS",
+   "detail": "0.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 00_MASTER_WORLD/T5_REGION_R05_FORBIDDEN_master_v002.blend",
+   "result": "PASS",
+   "detail": "96 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R02_ENCHANTED_master_v002.blend",
+   "result": "PASS",
+   "detail": "0.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 00_MASTER_WORLD/T5_REGION_R02_ENCHANTED_master_v002.blend",
+   "result": "PASS",
+   "detail": "157 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 00_MASTER_WORLD/T5_REGION_R03_RANGE_master_v002.blend",
+   "result": "PASS",
+   "detail": "0.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 00_MASTER_WORLD/T5_REGION_R03_RANGE_master_v002.blend",
+   "result": "PASS",
+   "detail": "207 images, missing []"
+  },
+  {
+   "check": "file size < 100 MB: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
+   "result": "PASS",
+   "detail": "1.1 MB"
+  },
+  {
+   "check": "opens + no missing images: 11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend",
+   "result": "PASS",
+   "detail": "89 images, missing []"
+  },
+  {
+   "check": "LOD seam DN\u2194DF: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 20 m)"
+  },
+  {
+   "check": "LOD seam DH\u2194DN: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 3 m)"
+  },
+  {
+   "check": "R04: drainage lines never flow uphill",
+   "result": "PASS",
+   "detail": "max rise 0.0000 m over 8 lines"
+  },
+  {
+   "check": "LOD seam XN\u2194XF: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 20 m)"
+  },
+  {
+   "check": "LOD seam XH\u2194XN: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 3 m)"
+  },
+  {
+   "check": "R05: drainage lines never flow uphill",
+   "result": "PASS",
+   "detail": "max rise 0.0000 m over 9 lines"
+  },
+  {
+   "check": "LOD seam EN\u2194EF: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 12 m)"
+  },
+  {
+   "check": "LOD seam EH\u2194EN: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 3 m)"
+  },
+  {
+   "check": "R02: drainage lines never flow uphill",
+   "result": "PASS",
+   "detail": "max rise 0.0000 m over 2 lines"
+  },
+  {
+   "check": "LOD seam R3N\u2194R3F: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 9.67 m (skirt 60 m)"
+  },
+  {
+   "check": "LOD seam CV\u2194R3F: border matches the parent surface",
+   "result": "PASS",
+   "detail": "max gap 0.00 m (skirt 4 m)"
+  },
+  {
+   "check": "TASK 04 v001 baseline files unchanged",
+   "result": "PASS",
+   "detail": "21 files identical"
+  }
+ ]
+}

@@ -1,0 +1,316 @@
+"""TASK 05 · MILESTONE 2 — detailed REGION sites outside the Ashram window (python3 + numpy + scipy + numba, NOT Blender).
+
+Same approved map data (02_world/map/data, Aetheria C1 grid, 3 km cells) and the same TASK 04/05 height function
+(t5_prep.height_t5) — each region gets its own LOCAL frame (origin = site centre, metres) so float32 meshes stay precise.
+  region R04  Western Desert & Wastelands — dunes (wind-shaped), rock mesas, canyons along the map's drainage lines,
+              dry valleys / playas with cracked ground, desert pavement.
+Tiles per region: H (hero, ~2 m) · N (near, ~20 m) · F (far, ~300 m) — nested, border-blended onto the parent (seamless).
+Writes 06_DESERTS/data_v002/<tile>.npz + region_<key>.json.          Usage: python3 t5_region_prep.py R04
+"""
+import os, sys, json, math, time
+import numpy as np
+from scipy import ndimage as ndi
+from scipy.spatial import cKDTree
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+import t5_prep as P
+import t5_field as F
+import t5_noise as N
+import t5_erosion as E
+sstep = F.sstep
+ROOT = P.ROOT
+
+REGIONS = {
+    'R04': dict(name='Western Desert & Wastelands', folder='06_DESERTS', cell=(150.0, 498.0),
+                tiles={'DF': dict(half=60000, sp=300.0, parent=None, band=8000),
+                       'DN': dict(half=12000, sp=20.0, parent='DF', band=1500),
+                       'DH': dict(half=1500, sp=2.0, parent='DN', band=150)},
+                wind_deg=280.0, kind='desert'),        # prevailing wind FROM the west (slip faces face east) — proposal
+    'R05': dict(name='Forbidden Region (blasted crater, crater lake)', folder='06_DESERTS', cell=(276.48, 508.0),
+                crater_cell=(276.48, 483.84),
+                tiles={'XF': dict(half=96000, sp=400.0, parent=None, band=9000),
+                       'XN': dict(half=12000, sp=20.0, parent='XF', band=1500),
+                       'XH': dict(half=1500, sp=2.0, parent='XN', band=150)},
+                wind_deg=280.0, kind='crater'),
+}
+REGIONS['R02'] = dict(name='Enchanted Forest', folder='04_FORESTS', cell=(672.0, 505.0),
+                      tiles={'EF': dict(half=40000, sp=200.0, parent=None, band=5000),
+                             'EN': dict(half=6000, sp=10.0, parent='EF', band=600),
+                             'EH': dict(half=1500, sp=2.0, parent='EN', band=150)},
+                      wind_deg=280.0, kind='enchanted')
+KIND_FILES = {'desert': ('DF', 'DN', 'DH'), 'crater': ('XF', 'XN', 'XH'), 'enchanted': ('EF', 'EN', 'EH')}
+
+
+def frame(reg):
+    """region centre in the Ashram-local frame (metres)."""
+    cx, cy = F.to_local(np.array(reg['cell'][0]), np.array(reg['cell'][1]))
+    return float(cx), float(cy)
+
+
+# ------------------------------------------------------------------ drainage lines (the map's own flow network) in the window
+def drainage(reg, half):
+    import worldgen as wg
+    OX, OY = frame(reg)
+    down, _ = wg.flow(F.oF, F.osea)
+    c0, r0 = F.to_cell(OX - half, OY + half); c1, r1 = F.to_cell(OX + half, OY - half)
+    c0, c1, r0, r1 = int(c0) - 2, int(c1) + 3, int(r0) - 2, int(r1) + 3
+    win = np.zeros_like(F.osea); win[max(r0, 0):r1, max(c0, 0):c1] = True
+    riv = (~F.osea) & (F.oacc > 8) & ~F.ol & win                      # ≥ 8 cells = dry wadis too (desert)
+    rv = riv.ravel(); up = np.zeros(rv.size, bool)
+    for i in np.nonzero(rv)[0]:
+        j = down[i]
+        if j >= 0 and rv[j]:
+            up[j] = True
+    seen = np.zeros(rv.size, bool); out = []
+    for hd in sorted([i for i in np.nonzero(rv)[0] if not up[i]], key=lambda i: -F.oF.ravel()[i]):
+        p = []; i = hd
+        while True:
+            p.append(i)
+            if seen[i]:
+                break
+            seen[i] = True
+            j = down[i]
+            if j < 0 or j == i or not rv[j]:
+                if j >= 0 and j != i:
+                    p.append(j)
+                break
+            i = j
+        if len(p) < 3:
+            continue
+        rr, cc = np.divmod(np.array(p), F.OW)
+        x, y = F.to_local(cc, rr)
+        pts = np.stack([x - OX, y - OY], 1).astype(float)
+        for _ in range(3):                                            # chaikin smoothing
+            Q = [pts[0]]
+            for a, b in zip(pts[:-1], pts[1:]):
+                Q += [.75 * a + .25 * b, .25 * a + .75 * b]
+            Q.append(pts[-1]); pts = np.array(Q)
+        s = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(pts, axis=0).T))])
+        ss = np.arange(0, s[-1], 20.0)
+        pts = np.stack([np.interp(ss, s, pts[:, 0]), np.interp(ss, s, pts[:, 1])], 1)
+        k = len(pts)
+        mean = N.fbm(ss, np.full(k, len(out) * 3.7), 2500, 3, 180) * 380 + N.fbm(ss, np.full(k, len(out) * 1.3), 500, 2, 181) * 60
+        env = np.clip(ss / 2000, 0, 1) * np.clip((ss[-1] - ss) / 2000, 0, 1)
+        t = np.gradient(pts, axis=0); t /= np.maximum(np.linalg.norm(t, axis=1, keepdims=True), 1e-9)
+        pts = pts + np.stack([-t[:, 1], t[:, 0]], 1) * (mean * env)[:, None]
+        acc = np.interp(ss, np.linspace(0, ss[-1], len(p)), F.oacc.ravel()[p].astype(float))
+        z = P.height_t5(pts[:, 0] + OX, pts[:, 1] + OY)
+        z = np.minimum.accumulate(np.maximum(z, 0))
+        w = np.clip(8 + 10 * np.sqrt(acc / 40.0), 10, 160)
+        wet = (acc > (150 if reg.get('kind') != 'enchanted' else 12)).astype(float)   # desert: big channels wet, rest dry wadis (proposal); forest: streams
+        out.append(np.column_stack([pts, z, w, wet]))
+    return out
+
+
+# ------------------------------------------------------------------ desert shaping
+def dunes(X, Y, wind_deg, sp):
+    """asymmetric transverse dunes (gentle stoss, ~30° lee / slip face), crest lines curved by domain warping. metres."""
+    th = math.radians(wind_deg + 180)                                  # direction the wind blows TO
+    ux, uy = math.sin(th), math.cos(th)
+    out = np.zeros_like(X)
+    # megadune swell (2.6 km) carrying the transverse dunes; an oblique secondary set (+38°) gives linked / star-like crests
+    out += N.fbm(X, Y, 2600, 3, 189) * 55 * (1 if 2600 >= 3 * sp else 0)
+    for lam, amp, seed, rot in ((900.0, 70.0, 190, 0.0), (520.0, 26.0, 193, 38.0), (280.0, 14.0, 191, 0.0), (60.0, 1.4, 192, 0.0)):
+        if lam < 3 * sp:
+            continue
+        th2 = th + math.radians(rot); vx, vy = math.sin(th2), math.cos(th2)
+        wx, wy = N.warp(X, Y, lam * 2.5, lam * .25, seed)
+        ph = (wx * vx + wy * vy) / lam + N.fbm(X, Y, lam * 4, 2, seed + 5) * .35
+        f = ph - np.floor(ph)
+        stoss = (np.clip(f / .86, 0, 1)) ** 1.7                        # concave-up windward slope …
+        slip = np.clip((1 - f) / .14, 0, 1)                              # … knife-edge crest, straight ~32° slip face
+        prof = np.where(f < .86, stoss, slip)
+        out += (prof - .38) * amp * (.5 + .5 * N.fbm(X, Y, lam * 3, 2, seed + 9))
+    return out
+
+
+def mesas(X, Y, z0, sp):
+    """rock tablelands / buttes / inselbergs: terraced, flat-topped, steep walls (strata)."""
+    n_ = N.fbm(X, Y, 2600, 4, 200) + N.fbm(X, Y, 700, 3, 201) * .22 + N.fbm(X, Y, 90, 3, 203) * .025 + N.fbm(X, Y, 25, 2, 204) * .008
+    m = sstep(.30, .335, n_)                                           # rugged plateau rims (steep walls), buttes + tablelands
+    top = 230 + N.fbm(X, Y, 3000, 2, 202) * 90
+    h = m * top
+    st = 24.0
+    t = h / st; fr = t - np.floor(t)
+    ht = (np.floor(t) + sstep(.75, 1.0, fr)) * st                      # strata ledges …
+    h = h + (ht - h) * (.35 + .3 * N.fbm(X, Y, 400, 2, 205))           # … only partly expressed (no staircase)
+    apron = (sstep(.22, .30, n_) - m).clip(0, 1) * top * .28           # talus / pediment apron below the walls
+    return h + apron, m
+
+
+def build(rkey, tkey):
+    t0 = time.time(); reg = REGIONS[rkey]; t = reg['tiles'][tkey]; OX, OY = frame(reg)
+    sp, half = t['sp'], t['half']
+    n = int(round(2 * half / sp)) + 1
+    g = np.linspace(-half, half, n); X, Y = np.meshgrid(g, g[::-1])
+    AX_, AY_ = X + OX, Y + OY
+    z0 = P.height_t5(AX_.ravel(), AY_.ravel()).reshape(n, n)
+    c, r = F.to_cell(AX_, AY_)
+    wx = AX_ + N.fbm(AX_, AY_, 6000, 3, 30) * 2600; wy = AY_ + N.fbm(AX_, AY_, 6000, 3, 32) * 2600
+    cw, rw = F.to_cell(wx, wy)
+    bi = F.ob[np.clip(np.round(rw).astype(int), 0, F.OH - 1), np.clip(np.round(cw).astype(int), 0, F.OW - 1)]
+    DES = ndi.gaussian_filter((F.ob == 5).astype(float), .8); WAS = ndi.gaussian_filter((F.ob == 6).astype(float), .8)
+    des = sstep(.4, .6, ndi.map_coordinates(DES, [rw, cw], order=1, mode='nearest'))
+    was = sstep(.4, .6, ndi.map_coordinates(WAS, [rw, cw], order=1, mode='nearest'))
+    sea = z0 <= 0
+    # ---- detail: mesas (wasteland + scattered in the desert), dunes (desert sand seas), small relief
+    mh, mm = mesas(AX_, AY_, z0, sp)
+    mesa_amt = np.clip(was * .9 + des * .35, 0, 1) * (~sea)
+    dn = dunes(AX_, AY_, reg['wind_deg'], sp)
+    sandsea = des * sstep(-.05, .25, N.fbm(AX_, AY_, 9000, 3, 210)) * (1 - mm) * (~sea)
+    if reg.get('kind') == 'crater':
+        sandsea = sandsea * 0
+    d = mh * mesa_amt * (reg.get('kind') != 'crater') + dn * sandsea + N.fbm(AX_, AY_, 300, 3, 211) * 3 * (1 - sandsea) * P.bl(sp, 300)
+    if reg.get('kind') == 'crater':
+        # forbidden crater: no dunes; radial ejecta ridges outside the rim, slump terraces on the inner wall, fissures, rubble
+        ccx, ccy = F.to_local(np.array(reg['crater_cell'][0]), np.array(reg['crater_cell'][1]))
+        rx, ry = AX_ - float(ccx), AY_ - float(ccy); rad = np.hypot(rx, ry); ang = np.arctan2(ry, rx)
+        R0 = 75000.0
+        rim = np.exp(-((rad - R0) / 9000.0) ** 2)
+        ej = (N.ridged(ang * 9000.0, rad * .25, 2600, 4, 240) * 120 + N.ridged(ang * 30000.0, rad * .4, 600, 3, 241) * 25) \
+            * sstep(R0 * .9, R0, rad) * np.exp(-np.clip(rad - R0, 0, None) / 30000.0)
+        t_ = rad / 900.0; fr = t_ - np.floor(t_)
+        terr = (sstep(.7, 1.0, fr) - .5) * 26 * sstep(R0 * .55, R0 * .8, rad) * (1 - sstep(R0 * .95, R0 * 1.02, rad))
+        vor = N.fbm(AX_, AY_, 140, 2, 242)
+        fiss = sstep(.0, .06, np.abs(N.fbm(AX_, AY_, 900, 3, 243) + .3 * vor)) - 1                # 0 off-crack, −1 in a crack
+        # steep inner crater wall just inside the rim: ~240 m drop over ~3 km, cut by gullies and broken ledges
+        rj = (N.fbm(AX_, AY_, 2500, 3, 245) * 700 + N.fbm(AX_, AY_, 350, 3, 250) * 220
+              + N.ridged(ang * R0 / 140.0, rad / 1200.0, 1.0, 3, 251) * 260)                 # bays, buttresses, gullies along the wall
+        wall = -240 * sstep(R0 - 500, R0 - 3500, rad + rj)
+        gul = N.ridged(ang * R0 / 260.0, rad / 900.0, 1.0, 3, 246) * 35 * sstep(R0 - 4500, R0 - 1500, rad) * (1 - sstep(R0 - 600, R0, rad))
+        led = (N.fbm(AX_, AY_, 60, 3, 247) * 6 + N.ridged(AX_, AY_, 25, 3, 248) * 3) * sstep(R0 - 4000, R0 - 2000, rad) * (1 - sstep(R0 - 700, R0, rad))
+        d = ej + rim * 90 + wall + gul + led * P.bl(sp, 25) + fiss * 6 * P.bl(sp, 40) + N.fbm(AX_, AY_, 220, 3, 244) * 6 * P.bl(sp, 220)
+        sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
+        CRATER_IN = sstep(R0 - 900, R0 - 2600, rad + N.fbm(AX_, AY_, 2500, 3, 245) * 700)   # 1 inside the inner wall foot
+    if reg.get('kind') == 'enchanted':
+        d = (N.fbm(AX_, AY_, 1800, 4, 260) * 25 + N.fbm(AX_, AY_, 300, 3, 261) * 5 * P.bl(sp, 300)
+             + N.fbm(AX_, AY_, 40, 3, 262) * .9 * P.bl(sp, 40) + N.fbm(AX_, AY_, 9, 2, 263) * .25 * P.bl(sp, 9))   # hummocks, root mounds
+        sandsea = np.zeros_like(z0); mm = np.zeros_like(z0)
+    ze = z0 + d
+    flow = np.zeros_like(ze); scree = np.zeros_like(ze)
+    if sp >= 15 and reg.get('kind') == 'crater':                       # crater wall: rockfall talus aprons, broken cliff bands
+        H2, dep = E.thermal(ze / sp, math.tan(math.radians(52)), 20, .25)
+        ze = H2 * sp; scree = dep * sp
+        st_ = ze / 22.0; fr_ = st_ - np.floor(st_)
+        ze = ze + ((np.floor(st_) + sstep(.7, 1.0, fr_)) * 22.0 - ze) * .4 * sstep(30, 50, np.degrees(np.arctan(np.hypot(*np.gradient(ze, sp)))))
+    if sp >= 15 and reg.get('kind') not in ('enchanted', 'crater'):                    # gullies on the mesa walls, talus aprons below
+        H, fl = E.hydraulic(ze / sp, .8 * ze.size, 41, 2, erode=.3, deposit=.25, capacity=4.0)
+        ze = ze + ndi.gaussian_filter(H * sp - ze, 1.0) * (1 - sandsea); flow = fl
+        H2, dep = E.thermal(ze / sp, math.tan(math.radians(55)), 15, .25)
+        ze = H2 * sp; scree = dep * sp
+    # ---- drainage: canyons in the mesas, flat sandy wadi floors, water only in the big channels
+    RV = drainage(reg, half + 3000)
+    wet = np.zeros_like(ze); wadi = np.zeros_like(ze)
+    if RV:
+        R = np.concatenate(RV)
+        dd, jj = cKDTree(R[:, :2]).query(np.column_stack([X.ravel(), Y.ravel()]), distance_upper_bound=6000)
+        ok = np.isfinite(dd).reshape(n, n); jj = np.where(np.isfinite(dd), jj, 0).reshape(n, n); dd = np.where(np.isfinite(dd), dd, 1e9).reshape(n, n)
+        if sp <= 25:
+            dd = dd + N.fbm(X, Y, 80, 3, 220) * .25 * R[jj, 3]
+        w = R[jj, 3]; zr = R[jj, 2]; wt = R[jj, 4]
+        ri = np.maximum(w / 2, .75 * sp); bank = np.maximum(2.5 * w, 1.6 * sp)
+        floor = zr - .6 - 1.5 * wt
+        inner = ok & (dd < ri)
+        ze = np.where(inner, np.minimum(ze, floor + (dd / ri) ** 2 * .8), ze)
+        mid = ok & (dd >= ri) & (dd < ri + bank)
+        tb = np.clip((dd - ri) / bank, 0, 1) ** 2.4                    # steep canyon walls where the ground is high (mesas)
+        ze = np.where(mid & (ze > zr), zr + tb * (ze - zr), ze)
+        wet = np.where(ok, (1 - sstep(ri, ri + bank * .3, dd)) * wt, 0)
+        wadi = np.where(ok, 1 - sstep(ri * .8, ri + bank * .5, dd), 0) * (1 - wt)
+    # ---- map lake(s) at spill level (crater lake)
+    LAB_, NL_ = ndi.label(F.ol)
+    ids = np.unique(LAB_[np.clip(np.round(r).astype(int), 0, F.OH - 1), np.clip(np.round(c).astype(int), 0, F.OW - 1)])
+    lakeinside = np.zeros_like(ze)
+    for k_ in ids[ids > 0]:
+        cells = LAB_ == k_
+        level = float(np.median(F.oF[cells]))
+        mS = ndi.gaussian_filter(cells.astype(float), .7)
+        mk = ndi.map_coordinates(mS, [r, c], order=1, mode='constant')
+        ins = sstep(.35, .65, mk)
+        ze = np.where(ins > 0, np.minimum(ze, level - ins * 35 - .6), ze)
+        lakeinside = np.maximum(lakeinside, ins)
+        if reg.get('kind') == 'crater':
+            # the crater lake fills the whole basin up to the foot of the inner wall (black water against the cliffs) …
+            basin = np.maximum(ins, CRATER_IN * sstep(level + 12, level + 2, ze))   # only where the wall has already come down
+            ze = np.where(basin > 0, np.minimum(ze, level - basin * 40 - .8), ze)
+            ins = basin; lakeinside = np.maximum(lakeinside, basin)
+            # … and outside the crater no stray puddles: land below the level is lifted just above it
+            shelf = level + 1.2 + np.abs(N.fbm(AX_, AY_, 150, 3, 249)) * 2.5
+            ze = np.where((basin < .02) & (ze < shelf), shelf, ze)
+        reg.setdefault('lakes', {})[int(k_)] = level
+    # ---- seamless border onto the parent tile
+    if t['parent']:
+        pt = reg['tiles'][t['parent']]; zp = np.load(os.path.join(ROOT, reg['folder'], 'data_v002', f"{t['parent']}.npz"))['z'].astype(float)
+        np_ = zp.shape[0]
+        cc = (X + pt['half']) / pt['sp']; rr = (pt['half'] - Y) / pt['sp']
+        zpar = ndi.map_coordinates(zp, [rr.ravel(), cc.ravel()], order=1, mode='nearest').reshape(n, n)
+        e = half - np.maximum(np.abs(X), np.abs(Y))
+        wb = sstep(0, t['band'], e)
+        ze = ze * wb + zpar * (1 - wb)
+    # ---- masks (desert interpretation of the shared mask slots — see MAT_T5_TERRAIN_DESERT)
+    gy, gx = np.gradient(ndi.gaussian_filter(ze, max(6.0 / sp, .01)), sp); slope = np.degrees(np.arctan(np.hypot(gx, gy)))
+    cliff = sstep(40, 58, slope)
+    rock = np.maximum(sstep(26, 38, slope), cliff) * (1 - sandsea * .7)
+    sand = np.clip(sandsea * 1.2, 0, 1) * (1 - cliff) + wadi * .6
+    loc = ze - ndi.gaussian_filter(ze, 2000 / sp)                       # basins → playas with cracked mud
+    playa = sstep(-6, -14, loc) * sstep(2, .8, slope) * (1 - sandsea) * (~sea)
+    lf = np.log1p(flow) / max(np.log1p(flow).max(), 1e-9) if flow.max() > 0 else flow
+    sc = np.clip(scree / max(np.percentile(scree[scree > 0], 95) if (scree > 0).any() else 1, 1e-6), 0, 1)
+    pave = (1 - sand) * (1 - rock) * (1 - playa) * sstep(.0, .3, N.fbm(X + OX, Y + OY, 400, 2, 230) + .2)
+    veg = wadi * sstep(.2, .5, N.fbm(X + OX, Y + OY, 120, 2, 231)) * (1 - sandsea)   # sparse shrubs in the wadis
+    if reg.get('kind') == 'crater':                                    # forbidden: ash ground, fissures, ejecta rubble, dead trees
+        crack = sstep(.05, .012, np.abs(N.fbm(X + OX, Y + OY, 900, 3, 243) + .3 * N.fbm(X + OX, Y + OY, 140, 2, 242)))   # thin fissure bands
+        sand = sstep(.2, .6, N.fbm(X + OX, Y + OY, 2000, 3, 250) + .4) * (1 - rock) * (1 - lakeinside)      # → ASH
+        playa = np.clip(crack + sstep(1.5, .5, slope) * .3 * sstep(.3, .6, N.fbm(X + OX, Y + OY, 700, 2, 251)), 0, 1) * (1 - lakeinside)
+        pave = np.clip(sstep(.1, .45, N.fbm(X + OX, Y + OY, 300, 3, 252)) + sc, 0, 1) * (1 - rock) * (1 - lakeinside)   # → RUBBLE (+ talus)
+        veg = sstep(.25, .55, N.fbm(X + OX, Y + OY, 900, 3, 253)) * (1 - lakeinside) * sstep(25, 12, slope)  # → dead trees
+        wet = np.maximum(wet, lakeinside)
+    if reg.get('kind') == 'enchanted':                                 # old-growth forest everywhere (map biome 4), small natural gaps
+        forest = (1 - sstep(.3, .45, N.fbm(X + OX, Y + OY, 350, 3, 270))) * (1 - wet) * sstep(40, 30, slope)
+        moss = sstep(-.2, .3, N.fbm(X + OX, Y + OY, 60, 3, 271))
+        U_ = lambda a: np.clip(np.round(a * 255), 0, 255).astype(np.uint8)
+        Zs = np.zeros_like(ze)
+        grav = np.where(np.isfinite(wet), sstep(.05, .4, wet) * (1 - sstep(.6, .95, wet)), 0)
+        MA = np.stack([U_(forest), U_(rock), U_(Zs), U_(wet)], -1)
+        MB = np.stack([U_(moss), U_(Zs), U_(1 - forest), U_(sc)], -1)          # dry→MOSS amount, grove→natural gaps
+        MC = np.stack([U_(grav), U_(Zs), U_(lf), U_(cliff)], -1)
+        np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', f'{tkey}.npz'), z=ze.astype(np.float32), MA=MA, MB=MB, MC=MC,
+                            rect=np.array([-half, half, -half, half, sp]))
+        st = dict(region=rkey, tile=tkey, shape=[n, n], spacing_m=sp, half_m=half, z_min=float(ze.min()), z_max=float(ze.max()),
+                  cover={'forest': float((forest > .5).mean()), 'wet': float((wet > .5).mean())}, drainage_lines=len(RV),
+                  seconds=round(time.time() - t0, 1))
+        print(json.dumps(st), flush=True)
+        return st, RV
+    U = lambda a: np.clip(np.round(a * 255), 0, 255).astype(np.uint8)
+    Z = np.zeros_like(ze)
+    MA = np.stack([U(Z), U(rock), U(Z), U(np.maximum(wet, sea))], -1)            # forest, rock, snow, wet
+    MB = np.stack([U(sand), U(playa), U(veg), U(sc)], -1)                        # dry→SAND, pad→PLAYA (cracked), grove→shrubs, scree
+    MC = np.stack([U(pave), U(Z), U(lf), U(cliff)], -1)                          # gravel→PAVEMENT, path, flow, cliff
+    os.makedirs(os.path.join(ROOT, reg['folder'], 'data_v002'), exist_ok=True)
+    np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', f'{tkey}.npz'), z=ze.astype(np.float32), MA=MA, MB=MB, MC=MC,
+                        rect=np.array([-half, half, -half, half, sp]))
+    st = dict(region=rkey, tile=tkey, shape=[n, n], spacing_m=sp, half_m=half, z_min=float(ze.min()), z_max=float(ze.max()),
+              cover={k: float((v > .5).mean()) for k, v in (('sand', sand), ('rock', rock), ('playa', playa), ('cliff', cliff), ('wet', wet))},
+              drainage_lines=len(RV), seconds=round(time.time() - t0, 1))
+    print(json.dumps(st), flush=True)
+    return st, RV
+
+
+if __name__ == '__main__':
+    rk = sys.argv[1] if len(sys.argv) > 1 else 'R04'
+    reg = REGIONS[rk]; OX, OY = frame(reg)
+    stats = []; RVs = None
+    TK = KIND_FILES[reg.get('kind', 'desert')]
+    for tk_ in TK:
+        st, RV = build(rk, tk_)
+        stats.append(st)
+        if tk_ == TK[1]:
+            RVs = RV
+    W = [r.astype(np.float32) for r in RVs] or [np.zeros((0, 5), np.float32)]
+    np.savez_compressed(os.path.join(ROOT, reg['folder'], 'data_v002', f'water_{rk}.npz' if rk != 'R04' else 'water.npz'), RIV=np.concatenate(W), RIVO=np.cumsum([0] + [len(a) for a in W]))
+    meta = dict(region=rk, name=reg['name'], status='PROPOSAL — detailed terrain inside the approved map region (map rev 01 = proposal)',
+                frame=f'local metres; origin = site centre = C1 cell {reg["cell"]} = Ashram-local ({OX:.0f}, {OY:.0f}) m; +X east, +Y north',
+                origin_ashram_local_m=[OX, OY], lakes=reg.get('lakes', {}), kind=reg.get('kind'), tiles={k: dict(v) for k, v in reg['tiles'].items()}, stats=stats, wind_deg=reg['wind_deg'],
+                notes=['dunes / mesas / playas are procedural detail inside the map\'s desert + wasteland biomes',
+                       'drainage = the map\'s own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)'])
+    json.dump(meta, open(os.path.join(ROOT, reg['folder'], 'data_v002', f'region_{rk}.json'), 'w'), indent=1)
+    print('T5_REGION_PREP_DONE', rk)

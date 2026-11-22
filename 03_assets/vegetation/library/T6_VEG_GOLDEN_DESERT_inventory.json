@@ -1,0 +1,149 @@
+{
+ "DS_T01_KHEJRI": {
+  "common": "Khejri",
+  "latin": "Prosopis cineraria",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-04 (wadis, desert edge)",
+  "category": "Dry-region tree",
+  "habitat": "wadis and the desert edge; deep-rooted, thorny, feathery grey-green leaves, rough fissured bark",
+  "altitude": "0\u2013600 m",
+  "kind": "tree",
+  "palette": [
+   "#6E7E4E",
+   "#8E9A6A",
+   "#6A5A4A",
+   "#4A3E34",
+   "#D8C08A"
+  ],
+  "stats": {
+   "height_m": 8.28,
+   "canopy_x_m": 9.65,
+   "canopy_y_m": 8.54,
+   "trunk_d_m": 0.73,
+   "branches": 6577,
+   "leaf_cards": 14151,
+   "tris": 247022,
+   "verts": 207672,
+   "lowest_z": -0.31,
+   "height_scale": 0.846
+  },
+  "bark": "pine_bark",
+  "atlas": "ds_khejri",
+  "collection": "T6_DS_T01_KHEJRI"
+ },
+ "DS_T02_DATE_PALM": {
+  "common": "Date palm (oasis)",
+  "latin": "Phoenix dactylifera",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-04 (oases only)",
+  "category": "Palm",
+  "habitat": "oases only (where the TASK 05 wadi / playa masks allow water); stiff grey-green fronds, skirt of dead fronds, often in groups + suckers",
+  "altitude": "0\u2013600 m",
+  "kind": "tree",
+  "palette": [
+   "#7A8A62",
+   "#9AA27A",
+   "#8A7450",
+   "#B8A890",
+   "#6A5A40"
+  ],
+  "stats": {
+   "height_m": 13.83,
+   "canopy_x_m": 7.81,
+   "canopy_y_m": 8.11,
+   "trunk_d_m": 0.65,
+   "branches": 58,
+   "leaf_cards": 0,
+   "tris": 102320,
+   "verts": 92626,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "bark": "palm_tree_bark",
+  "atlas": null,
+  "collection": "T6_DS_T02_DATE_PALM"
+ },
+ "DS_S01_CALOTROPIS": {
+  "common": "Aak / Sodom apple",
+  "latin": "Calotropis procera",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-04 (desert edge, wadis)",
+  "category": "Desert shrub",
+  "habitat": "sandy desert edge, roadsides and wadis; big waxy grey-green leaves in opposite pairs on corky stems",
+  "altitude": "0\u20131 000 m",
+  "kind": "shrub",
+  "palette": [
+   "#7E907A",
+   "#A4B49C",
+   "#D4DCCC",
+   "#C8C0AE"
+  ],
+  "stats": {
+   "height_m": 1.76,
+   "canopy_x_m": 2.11,
+   "canopy_y_m": 2.1,
+   "trunk_d_m": 0.4,
+   "branches": 50,
+   "leaf_cards": 167,
+   "tris": 2910,
+   "verts": 2340,
+   "lowest_z": -0.13,
+   "height_scale": 0.778
+  },
+  "bark": "bark_brown_01",
+  "atlas": "ds_calotropis",
+  "collection": "T6_DS_S01_CALOTROPIS"
+ },
+ "DS_G01_SEWAN_GRASS": {
+  "common": "Sewan desert grass",
+  "latin": "Lasiurus sindicus",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-04 (interdune hollows)",
+  "category": "Grass",
+  "habitat": "interdune hollows and sandy flats; tough blue-green tussocks with much dead straw",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#7A8A5A",
+   "#AAB084",
+   "#D8C49A"
+  ],
+  "stats": {
+   "height_m": 0.658,
+   "spread_x_m": 1.372,
+   "spread_y_m": 1.353,
+   "tris": 5100,
+   "verts": 4500,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_DS_G01_SEWAN_GRASS"
+ },
+ "DS_S02_EUPHORBIA": {
+  "common": "Leafless candelabra spurge",
+  "latin": "Euphorbia caducifolia",
+  "label": "SPECIES-INSPIRED",
+  "region": "R-04 (rocky slopes)",
+  "category": "Succulent",
+  "habitat": "rocky slopes and stony desert; leafless ribbed green stems with paired spines (cactus-like, NOT a cactus)",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#56704A",
+   "#7A8A5A",
+   "#4A3A2A"
+  ],
+  "stats": {
+   "height_m": 1.636,
+   "spread_x_m": 1.175,
+   "spread_y_m": 1.327,
+   "tris": 31760,
+   "verts": 20400,
+   "lowest_z": -0.051
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_DS_S02_EUPHORBIA"
+ }
+}

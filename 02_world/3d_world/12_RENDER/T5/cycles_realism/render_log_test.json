@@ -1,0 +1,82 @@
+{
+ "CAM_T5_03_RIVER_WATERFALL": {
+  "seconds": 312.7,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "River + waterfall \u2014 wide cascade, 6 tiers, 376 m total drop (NW01 gorge), ballistic spray + mist",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_04_SNOWY_PEAKS": {
+  "seconds": 231.1,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Snowy mountain \u2014 highest summit of NW01 (5809 m) from the SSE, glaciers / couloirs / rock bands",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_07_GROUND_LEVEL": {
+  "seconds": 240.5,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Ground level (1.6 m eye) \u2014 river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_08_FOREST_FLOOR": {
+  "seconds": 552.2,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Ground level in the forest \u2014 forest floor, ferns, roots, fallen logs, mossy rocks, fir / pine trunks",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_05_DESERT": {
+  "seconds": 113.3,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Desert landscape \u2014 R04 Western Desert: wind-shaped dune field, sandstone butte with strata, desert pavement",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_09_FORBIDDEN_RIM": {
+  "seconds": 94.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forbidden Region (R05) \u2014 from the blasted rim: the steep inner crater wall falls to the black crater lake; ejecta blocks, fissures, ash",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_10_ENCHANTED_FLOOR": {
+  "seconds": 752.1,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Enchanted Forest (R02) \u2014 inside the old-growth: giant trunks, moss carpet, ferns, fallen giants, low mist",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_12_CAVE_ENTRANCE": {
+  "seconds": 315.8,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Cave entrance (map cave marker in the Great Northern Range foothills) \u2014 rock outcrop, arched mouth, forest clearing",
+  "blender": "4.5.16 LTS"
+ }
+}

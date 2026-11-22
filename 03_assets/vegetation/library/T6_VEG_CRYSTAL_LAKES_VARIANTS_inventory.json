@@ -1,0 +1,198 @@
+{
+ "LK_T01_WHITE_WILLOW_V1": {
+  "hero": "LK_T01_WHITE_WILLOW",
+  "kind": "tree",
+  "seed": 1,
+  "lod": 1,
+  "stats": {
+   "height_m": 15.07,
+   "canopy_x_m": 21.79,
+   "canopy_y_m": 14.19,
+   "trunk_d_m": 1.05,
+   "branches": 4495,
+   "leaf_cards": 5344,
+   "tris": 172360,
+   "verts": 121201,
+   "lowest_z": -0.54,
+   "height_scale": 0.866
+  },
+  "collection": "T6_LK_T01_WHITE_WILLOW_V1"
+ },
+ "LK_T01_WHITE_WILLOW_V2": {
+  "hero": "LK_T01_WHITE_WILLOW",
+  "kind": "tree",
+  "seed": 2,
+  "lod": 1,
+  "stats": {
+   "height_m": 15.73,
+   "canopy_x_m": 18.95,
+   "canopy_y_m": 14.43,
+   "trunk_d_m": 1.05,
+   "branches": 4939,
+   "leaf_cards": 6308,
+   "tris": 190934,
+   "verts": 135686,
+   "lowest_z": -0.42,
+   "height_scale": 0.812
+  },
+  "collection": "T6_LK_T01_WHITE_WILLOW_V2"
+ },
+ "LK_T02_ALDER_V1": {
+  "hero": "LK_T02_ALDER",
+  "kind": "tree",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 19.57,
+   "canopy_x_m": 12.0,
+   "canopy_y_m": 9.92,
+   "trunk_d_m": 0.79,
+   "branches": 3420,
+   "leaf_cards": 6463,
+   "tris": 132888,
+   "verts": 107240,
+   "lowest_z": -0.33,
+   "height_scale": 0.901
+  },
+  "collection": "T6_LK_T02_ALDER_V1"
+ },
+ "LK_T02_ALDER_V2": {
+  "hero": "LK_T02_ALDER",
+  "kind": "tree",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 20.18,
+   "canopy_x_m": 11.55,
+   "canopy_y_m": 11.99,
+   "trunk_d_m": 0.72,
+   "branches": 2989,
+   "leaf_cards": 6007,
+   "tris": 117916,
+   "verts": 96058,
+   "lowest_z": -0.33,
+   "height_scale": 0.89
+  },
+  "collection": "T6_LK_T02_ALDER_V2"
+ },
+ "LK_AQ01_WATER_LILY_V1": {
+  "hero": "LK_AQ01_WATER_LILY",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.066,
+   "spread_x_m": 1.907,
+   "spread_y_m": 2.172,
+   "tris": 4240,
+   "verts": 3406,
+   "lowest_z": -0.903
+  },
+  "collection": "T6_LK_AQ01_WATER_LILY_V1"
+ },
+ "LK_AQ01_WATER_LILY_V2": {
+  "hero": "LK_AQ01_WATER_LILY",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.067,
+   "spread_x_m": 1.975,
+   "spread_y_m": 2.01,
+   "tris": 4240,
+   "verts": 3406,
+   "lowest_z": -0.903
+  },
+  "collection": "T6_LK_AQ01_WATER_LILY_V2"
+ },
+ "LK_AQ02_SEDGE_V1": {
+  "hero": "LK_AQ02_SEDGE",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.626,
+   "spread_x_m": 1.241,
+   "spread_y_m": 1.48,
+   "tris": 5260,
+   "verts": 4632,
+   "lowest_z": -0.012
+  },
+  "collection": "T6_LK_AQ02_SEDGE_V1"
+ },
+ "LK_AQ02_SEDGE_V2": {
+  "hero": "LK_AQ02_SEDGE",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.656,
+   "spread_x_m": 1.276,
+   "spread_y_m": 1.487,
+   "tris": 5260,
+   "verts": 4632,
+   "lowest_z": -0.012
+  },
+  "collection": "T6_LK_AQ02_SEDGE_V2"
+ },
+ "LK_AQ03_REED_SPRING_V1": {
+  "hero": "LK_AQ03_REED_SPRING",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 2.349,
+   "spread_x_m": 3.414,
+   "spread_y_m": 4.036,
+   "tris": 3636,
+   "verts": 3078,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_LK_AQ03_REED_SPRING_V1"
+ },
+ "LK_AQ03_REED_SPRING_V2": {
+  "hero": "LK_AQ03_REED_SPRING",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 2.272,
+   "spread_x_m": 3.761,
+   "spread_y_m": 3.837,
+   "tris": 3636,
+   "verts": 3078,
+   "lowest_z": -0.012
+  },
+  "collection": "T6_LK_AQ03_REED_SPRING_V2"
+ },
+ "LK_M01_WET_ROCK_MOSS_V1": {
+  "hero": "LK_M01_WET_ROCK_MOSS",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.054,
+   "spread_x_m": 0.78,
+   "spread_y_m": 0.67,
+   "tris": 3480,
+   "verts": 2256,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_LK_M01_WET_ROCK_MOSS_V1"
+ },
+ "LK_M01_WET_ROCK_MOSS_V2": {
+  "hero": "LK_M01_WET_ROCK_MOSS",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.055,
+   "spread_x_m": 0.668,
+   "spread_y_m": 0.725,
+   "tris": 3480,
+   "verts": 2256,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_LK_M01_WET_ROCK_MOSS_V2"
+ }
+}

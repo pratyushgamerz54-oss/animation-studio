@@ -1,0 +1,138 @@
+{
+ "FB_T01_CHARRED_SNAG_V1": {
+  "hero": "FB_T01_CHARRED_SNAG",
+  "kind": "tree",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 12.79,
+   "canopy_x_m": 5.42,
+   "canopy_y_m": 3.92,
+   "trunk_d_m": 1.02,
+   "branches": 88,
+   "leaf_cards": 0,
+   "tris": 5800,
+   "verts": 3427,
+   "lowest_z": -0.4,
+   "height_scale": 1.0
+  },
+  "collection": "T6_FB_T01_CHARRED_SNAG_V1"
+ },
+ "FB_T01_CHARRED_SNAG_V2": {
+  "hero": "FB_T01_CHARRED_SNAG",
+  "kind": "tree",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 11.56,
+   "canopy_x_m": 5.75,
+   "canopy_y_m": 5.33,
+   "trunk_d_m": 1.05,
+   "branches": 92,
+   "leaf_cards": 0,
+   "tris": 6016,
+   "verts": 3558,
+   "lowest_z": -0.42,
+   "height_scale": 1.0
+  },
+  "collection": "T6_FB_T01_CHARRED_SNAG_V2"
+ },
+ "FB_S01_DEAD_THORN_SHRUB_V1": {
+  "hero": "FB_S01_DEAD_THORN_SHRUB",
+  "kind": "shrub",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 1.45,
+   "canopy_x_m": 2.63,
+   "canopy_y_m": 1.62,
+   "trunk_d_m": 0.4,
+   "branches": 103,
+   "leaf_cards": 0,
+   "tris": 2866,
+   "verts": 1788,
+   "lowest_z": -0.19,
+   "height_scale": 1.162
+  },
+  "collection": "T6_FB_S01_DEAD_THORN_SHRUB_V1"
+ },
+ "FB_S01_DEAD_THORN_SHRUB_V2": {
+  "hero": "FB_S01_DEAD_THORN_SHRUB",
+  "kind": "shrub",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 1.35,
+   "canopy_x_m": 1.33,
+   "canopy_y_m": 1.85,
+   "trunk_d_m": 0.4,
+   "branches": 96,
+   "leaf_cards": 0,
+   "tris": 2740,
+   "verts": 1704,
+   "lowest_z": -0.2,
+   "height_scale": 1.247
+  },
+  "collection": "T6_FB_S01_DEAD_THORN_SHRUB_V2"
+ },
+ "FB_M01_ASH_LICHEN_V1": {
+  "hero": "FB_M01_ASH_LICHEN",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.014,
+   "spread_x_m": 0.519,
+   "spread_y_m": 0.503,
+   "tris": 3080,
+   "verts": 1848,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_FB_M01_ASH_LICHEN_V1"
+ },
+ "FB_M01_ASH_LICHEN_V2": {
+  "hero": "FB_M01_ASH_LICHEN",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.012,
+   "spread_x_m": 0.547,
+   "spread_y_m": 0.511,
+   "tris": 3080,
+   "verts": 1848,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_FB_M01_ASH_LICHEN_V2"
+ },
+ "FB_G01_HARDY_GRASS_V1": {
+  "hero": "FB_G01_HARDY_GRASS",
+  "kind": "plant",
+  "seed": 1,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.263,
+   "spread_x_m": 0.764,
+   "spread_y_m": 0.641,
+   "tris": 1580,
+   "verts": 1440,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_FB_G01_HARDY_GRASS_V1"
+ },
+ "FB_G01_HARDY_GRASS_V2": {
+  "hero": "FB_G01_HARDY_GRASS",
+  "kind": "plant",
+  "seed": 2,
+  "lod": 0,
+  "stats": {
+   "height_m": 0.249,
+   "spread_x_m": 0.727,
+   "spread_y_m": 0.657,
+   "tris": 1580,
+   "verts": 1440,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_FB_G01_HARDY_GRASS_V2"
+ }
+}

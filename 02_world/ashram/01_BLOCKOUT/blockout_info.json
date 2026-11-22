@@ -1,0 +1,51 @@
+{
+ "stats": {
+  "objects": 18848,
+  "meshes": 66,
+  "trees": 18167,
+  "materials": 18,
+  "module_assets": 13
+ },
+ "cameras": [
+  [
+   "CAM_01_WIDE_ESTABLISHING",
+   "Wide establishing (from the lake side, south-west)"
+  ],
+  [
+   "CAM_02_FRONT",
+   "Front view (south axis, through the gate)"
+  ],
+  [
+   "CAM_03_BACK",
+   "Back view (from the north slope)"
+  ],
+  [
+   "CAM_04_SIDE_EAST",
+   "Side view (east)"
+  ],
+  [
+   "CAM_05_SIDE_WEST",
+   "Side view (west)"
+  ],
+  [
+   "CAM_06_GROUND_LEVEL",
+   "Ground level \u2014 character height (1.6 m) inside the gate"
+  ],
+  [
+   "CAM_07_ARCH_DETAIL",
+   "Architectural detail \u2014 main hall verandah, pillars, roof eaves"
+  ],
+  [
+   "CAM_08_TRAINING_GROUND",
+   "Training ground (open ring, south of the gate)"
+  ],
+  [
+   "CAM_09_PAVILION_LAKE",
+   "Meditation pavilion + lake ghat"
+  ],
+  [
+   "CAM_10_BIRDSEYE_ORTHO",
+   "Bird's-eye layout (orthographic, north up, 300 m frame)"
+  ]
+ ]
+}

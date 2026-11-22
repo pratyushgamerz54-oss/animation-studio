@@ -1,0 +1,102 @@
+{
+ "region": "R04",
+ "name": "Western Desert & Wastelands",
+ "status": "PROPOSAL \u2014 detailed terrain inside the approved map region (map rev 01 = proposal)",
+ "frame": "local metres; origin = site centre = C1 cell (150.0, 498.0) = Ashram-local (-1338000, -795000) m; +X east, +Y north",
+ "origin_ashram_local_m": [
+  -1338000.0,
+  -795000.0
+ ],
+ "lakes": {},
+ "kind": "desert",
+ "tiles": {
+  "DF": {
+   "half": 60000,
+   "sp": 300.0,
+   "parent": null,
+   "band": 8000
+  },
+  "DN": {
+   "half": 12000,
+   "sp": 20.0,
+   "parent": "DF",
+   "band": 1500
+  },
+  "DH": {
+   "half": 1500,
+   "sp": 2.0,
+   "parent": "DN",
+   "band": 150
+  }
+ },
+ "stats": [
+  {
+   "region": "R04",
+   "tile": "DF",
+   "shape": [
+    401,
+    401
+   ],
+   "spacing_m": 300.0,
+   "half_m": 60000,
+   "z_min": -57.36840052599436,
+   "z_max": 922.6849375587607,
+   "cover": {
+    "sand": 0.3255328014129265,
+    "rock": 0.00010572073556756488,
+    "playa": 0.054968563628335645,
+    "cliff": 0.0,
+    "wet": 0.008606911648559399
+   },
+   "drainage_lines": 75,
+   "seconds": 6.2
+  },
+  {
+   "region": "R04",
+   "tile": "DN",
+   "shape": [
+    1201,
+    1201
+   ],
+   "spacing_m": 20.0,
+   "half_m": 12000,
+   "z_min": 252.34200047191288,
+   "z_max": 883.5348155086216,
+   "cover": {
+    "sand": 0.42061118926012947,
+    "rock": 0.017687869046125175,
+    "playa": 0.08259353674879594,
+    "cliff": 0.005501937394663481,
+    "wet": 0.0
+   },
+   "drainage_lines": 8,
+   "seconds": 27.6
+  },
+  {
+   "region": "R04",
+   "tile": "DH",
+   "shape": [
+    1501,
+    1501
+   ],
+   "spacing_m": 2.0,
+   "half_m": 1500,
+   "z_min": 539.0772892904666,
+   "z_max": 719.7708959587308,
+   "cover": {
+    "sand": 0.8562663753811028,
+    "rock": 0.010543714805275274,
+    "playa": 0.0,
+    "cliff": 0.010363510713044513,
+    "wet": 0.0
+   },
+   "drainage_lines": 2,
+   "seconds": 43.7
+  }
+ ],
+ "wind_deg": 280.0,
+ "notes": [
+  "dunes / mesas / playas are procedural detail inside the map's desert + wasteland biomes",
+  "drainage = the map's own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)"
+ ]
+}

@@ -1,0 +1,131 @@
+{
+  "character": "SOUL",
+  "started": "2026-11-21 01:49",
+  "tests": {
+    "uv_present_all_meshes": true,
+    "textures_baked": 84,
+    "ik_rest_deviation": {
+      "arm_L": {
+        "pole_angle": 180,
+        "rest_deviation_mm": 1.198
+      },
+      "leg_L": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 2.992
+      },
+      "arm_R": {
+        "pole_angle": 0,
+        "rest_deviation_mm": 1.198
+      },
+      "leg_R": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 2.992
+      }
+    },
+    "ik_follow_error_mm": 0.02,
+    "skirt_rig": {
+      "bones": 36,
+      "constraints": 72,
+      "ok": true
+    },
+    "jaw_open_chin_drop_mm": 10.4,
+    "body_unweighted_verts": 0,
+    "non_manifold_edges_base_mesh": {
+      "CHAR_SOUL_BELT": 20,
+      "CHAR_SOUL_BROWS": 44,
+      "CHAR_SOUL_CAPE": 56,
+      "CHAR_SOUL_HIGH_COLLAR": 80,
+      "CHAR_SOUL_LID_LO_L": 64,
+      "CHAR_SOUL_LID_LO_R": 64,
+      "CHAR_SOUL_LID_UP_L": 64,
+      "CHAR_SOUL_LID_UP_R": 64,
+      "CHAR_SOUL_MOUTH": 120,
+      "CHAR_SOUL_ROBE": 96,
+      "CHAR_SOUL_WRIST_BAND_L": 16,
+      "CHAR_SOUL_WRIST_BAND_R": 16,
+      "CHAR_SOUL_YOKE": 46
+    },
+    "quad_ratio_body": 1.0,
+    "quad_ratio_head": 1.0,
+    "mouth_shape_keys": 19,
+    "phonemes_present": true,
+    "export": {
+      "glb_mb": 6.74,
+      "fbx_mb": 9.99
+    },
+    "glb_reimport": {
+      "objects": 23,
+      "armatures": 1,
+      "meshes": 22,
+      "bones": 100,
+      "shape_key_meshes": 2
+    }
+  },
+  "rig": {
+    "bones": 100,
+    "deform": 89,
+    "controls": [
+      "CTRL_COG",
+      "IK_hand_L",
+      "POLE_arm_L",
+      "IK_foot_L",
+      "POLE_leg_L",
+      "IK_hand_R",
+      "POLE_arm_R",
+      "IK_foot_R",
+      "POLE_leg_R",
+      "CTRL_EYES",
+      "root"
+    ],
+    "ik_fk_props": [
+      "ik_arm_L",
+      "ik_leg_L",
+      "ik_arm_R",
+      "ik_leg_R"
+    ]
+  },
+  "face_controls": [
+    "blink_L",
+    "blink_R",
+    "expr_angry",
+    "expr_confident",
+    "expr_evil",
+    "expr_fear",
+    "expr_frustrated",
+    "expr_furious",
+    "expr_serious",
+    "expr_shocked",
+    "expr_suspicious",
+    "jaw (bone)",
+    "lid_wide_L",
+    "lid_wide_R",
+    "ph_a",
+    "ph_e",
+    "ph_fv",
+    "ph_i",
+    "ph_l",
+    "ph_mbp",
+    "ph_o",
+    "ph_rest",
+    "ph_u",
+    "ph_w"
+  ],
+  "meshes": 21,
+  "polycount_render_estimate": 187808,
+  "measurements": {
+    "height_no_hair_m": 1.8726,
+    "height_total_m": 2.1114,
+    "head_height_m": 0.2132,
+    "heads_tall": 8.78,
+    "shoulder_width_m": 0.5637,
+    "chest_width_m": 0.3683,
+    "hip_width_m": 0.3319,
+    "leg_length_m": 0.9706,
+    "head_top_z": 1.8791,
+    "chin_z": 1.666,
+    "arm_length_m": 0.8014,
+    "hand_length_m": 0.2206,
+    "foot_length_m": 0.2374,
+    "mesh_sanity_fail": []
+  }
+}

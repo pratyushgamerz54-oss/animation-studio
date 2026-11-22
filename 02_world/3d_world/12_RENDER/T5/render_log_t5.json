@@ -1,0 +1,192 @@
+{
+ "CAM_T5_01_MOUNTAIN_WIDE": {
+  "seconds": 244.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Wide mountain landscape \u2014 the NW01 range (snowy range \u2248100 km NW of the Ashram) from a high shoulder south of the main summit",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_02_FOREST_ESTABLISHING": {
+  "seconds": 290.4,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forest establishing shot \u2014 edge of the northern forest belt where the river enters it (FH, 2 m terrain + real trees)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_03_RIVER_WATERFALL": {
+  "seconds": 332.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "River + waterfall \u2014 wide cascade, 6 tiers, 376 m total drop (NW01 gorge), ballistic spray + mist",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_04_SNOWY_PEAKS": {
+  "seconds": 228.9,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Snowy mountain \u2014 highest summit of NW01 (5809 m) from the SSE, glaciers / couloirs / rock bands",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_06_VALLEY_AERIAL": {
+  "seconds": 215.6,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Valley aerial \u2014 Ashram Valley from the SE: open green floor, groves, the rivers, the northern forest belt, the range on the horizon",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_07_GROUND_LEVEL": {
+  "seconds": 269.1,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Ground level (1.6 m eye) \u2014 river meadow beside the Ashram pad: grass, wild flowers, river stones, groves, range on the horizon",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_08_FOREST_FLOOR": {
+  "seconds": 570.1,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Ground level in the forest \u2014 forest floor, ferns, roots, fallen logs, mossy rocks, fir / pine trunks",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_05_DESERT": {
+  "seconds": 124.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Desert landscape \u2014 R04 Western Desert: wind-shaped dune field, sandstone butte with strata, desert pavement",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_05B_DESERT_MESAS_AERIAL": {
+  "seconds": 116.6,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Desert aerial \u2014 dune seas between mesas / buttes, dry wadis and playas (cracked ground)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_09_FORBIDDEN_RIM": {
+  "seconds": 105.9,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forbidden Region (R05) \u2014 from the blasted rim: the steep inner crater wall falls to the black crater lake; ejecta blocks, fissures, ash",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_09B_FORBIDDEN_AERIAL": {
+  "seconds": 108.7,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Forbidden Region \u2014 the ~150 m inner crater wall rising from the black crater lake, ejecta on the rim above",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_10_ENCHANTED_FLOOR": {
+  "seconds": 854.7,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Enchanted Forest (R02) \u2014 inside the old-growth: giant trunks, moss carpet, ferns, fallen giants, low mist",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_10B_ENCHANTED_CANOPY": {
+  "seconds": 199.2,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Enchanted Forest canopy \u2014 giant old-growth over rolling hills, deep teal-green",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_11_RANGE_PEAKS": {
+  "seconds": 232.4,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Great Northern Range (R03) core \u2014 highest summit (6171 m) and its glaciated neighbours from the SSE",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_11B_RANGE_PANORAMA": {
+  "seconds": 326.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Great Northern Range panorama \u2014 ridges, glaciers, forested lower valleys",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_12_CAVE_ENTRANCE": {
+  "seconds": 345.1,
+  "samples": 64,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Cave entrance (map cave marker in the Great Northern Range foothills) \u2014 rock outcrop, arched mouth, forest clearing",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W01_WORLD": {
+  "seconds": 37.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Main world v002 \u2014 all continents, oceans, lakes (relief \u00d720)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W02_AETHERIA": {
+  "seconds": 40.6,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Aetheria (home continent) v002 \u2014 smooth lake shores, coasts, ranges around the Ashram valley (relief \u00d720)",
+  "blender": "4.5.16 LTS"
+ },
+ "CAM_T5_W03_COAST_ISLANDS": {
+  "seconds": 36.8,
+  "samples": 48,
+  "res": [
+   1280,
+   720
+  ],
+  "description": "Western archipelago / coasts v002 \u2014 island outlines at 3.9 km (relief \u00d720)",
+  "blender": "4.5.16 LTS"
+ }
+}

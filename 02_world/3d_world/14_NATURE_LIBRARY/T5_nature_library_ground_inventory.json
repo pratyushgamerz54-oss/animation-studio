@@ -1,0 +1,1010 @@
+{
+ "PLANT_FERN_A": {
+  "source": "Poly Haven fern_02 / fern_02 (CC0)",
+  "dims_m": [
+   0.55,
+   0.61,
+   0.29
+  ],
+  "tris": 784,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_FERN_B": {
+  "source": "Poly Haven fern_02 / fern_02 (CC0)",
+  "dims_m": [
+   0.99,
+   0.89,
+   0.43
+  ],
+  "tris": 2384,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_FERN_C": {
+  "source": "Poly Haven fern_02 / fern_02 (CC0)",
+  "dims_m": [
+   0.87,
+   0.77,
+   0.35
+  ],
+  "tris": 2248,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_FERN_D": {
+  "source": "Poly Haven fern_02 / fern_02 (CC0)",
+  "dims_m": [
+   0.57,
+   0.59,
+   0.21
+  ],
+  "tris": 816,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB02_A": {
+  "source": "Poly Haven shrub_02 / shrub_02_LOD1 (CC0)",
+  "dims_m": [
+   1.07,
+   1.33,
+   1.37
+  ],
+  "tris": 4670,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB02_B": {
+  "source": "Poly Haven shrub_02 / shrub_02_LOD1 (CC0)",
+  "dims_m": [
+   0.9,
+   1.04,
+   1.22
+  ],
+  "tris": 3206,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB02_C": {
+  "source": "Poly Haven shrub_02 / shrub_02_LOD1 (CC0)",
+  "dims_m": [
+   1.44,
+   1.86,
+   1.07
+  ],
+  "tris": 5650,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB02_D": {
+  "source": "Poly Haven shrub_02 / shrub_02_LOD1 (CC0)",
+  "dims_m": [
+   0.88,
+   0.89,
+   1.0
+  ],
+  "tris": 3184,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB03_A": {
+  "source": "Poly Haven shrub_03 / shrub_03_LOD1 (CC0)",
+  "dims_m": [
+   0.2,
+   0.15,
+   0.4
+  ],
+  "tris": 1741,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB03_B": {
+  "source": "Poly Haven shrub_03 / shrub_03_LOD1 (CC0)",
+  "dims_m": [
+   0.18,
+   0.12,
+   0.35
+  ],
+  "tris": 1471,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB03_C": {
+  "source": "Poly Haven shrub_03 / shrub_03_LOD1 (CC0)",
+  "dims_m": [
+   0.1,
+   0.11,
+   0.3
+  ],
+  "tris": 1349,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB03_D": {
+  "source": "Poly Haven shrub_03 / shrub_03_LOD1 (CC0)",
+  "dims_m": [
+   0.11,
+   0.09,
+   0.26
+  ],
+  "tris": 1219,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB04_A": {
+  "source": "Poly Haven shrub_04 / shrub_04_LOD1 (CC0)",
+  "dims_m": [
+   0.14,
+   0.11,
+   0.2
+  ],
+  "tris": 1862,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB04_B": {
+  "source": "Poly Haven shrub_04 / shrub_04_LOD1 (CC0)",
+  "dims_m": [
+   0.14,
+   0.17,
+   0.21
+  ],
+  "tris": 3293,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB04_C": {
+  "source": "Poly Haven shrub_04 / shrub_04_LOD1 (CC0)",
+  "dims_m": [
+   0.16,
+   0.17,
+   0.28
+  ],
+  "tris": 3087,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "PLANT_SHRUB04_D": {
+  "source": "Poly Haven shrub_04 / shrub_04_LOD1 (CC0)",
+  "dims_m": [
+   0.22,
+   0.19,
+   0.27
+  ],
+  "tris": 5417,
+  "category": [
+   "LIB_UNDERSTORY"
+  ]
+ },
+ "GRASS_MED02_A": {
+  "source": "Poly Haven grass_medium_02 / grass_medium_02_static (CC0)",
+  "dims_m": [
+   0.12,
+   0.12,
+   0.16
+  ],
+  "tris": 714,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED02_B": {
+  "source": "Poly Haven grass_medium_02 / grass_medium_02_static (CC0)",
+  "dims_m": [
+   0.18,
+   0.2,
+   0.18
+  ],
+  "tris": 1760,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED02_C": {
+  "source": "Poly Haven grass_medium_02 / grass_medium_02_static (CC0)",
+  "dims_m": [
+   0.26,
+   0.25,
+   0.23
+  ],
+  "tris": 1215,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED02_D": {
+  "source": "Poly Haven grass_medium_02 / grass_medium_02_static (CC0)",
+  "dims_m": [
+   0.32,
+   0.36,
+   0.26
+  ],
+  "tris": 2489,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED02_E": {
+  "source": "Poly Haven grass_medium_02 / grass_medium_02_static (CC0)",
+  "dims_m": [
+   0.36,
+   0.43,
+   0.4
+  ],
+  "tris": 1664,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_A": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.33,
+   0.33,
+   0.14
+  ],
+  "tris": 2301,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_B": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.29,
+   0.29,
+   0.17
+  ],
+  "tris": 2447,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_C": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.29,
+   0.29,
+   0.14
+  ],
+  "tris": 2336,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_D": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.22,
+   0.22,
+   0.22
+  ],
+  "tris": 1309,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_E": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.19,
+   0.18,
+   0.18
+  ],
+  "tris": 662,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_F": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.2,
+   0.21,
+   0.13
+  ],
+  "tris": 655,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_G": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.18,
+   0.16,
+   0.14
+  ],
+  "tris": 661,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_H": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.17,
+   0.19,
+   0.1
+  ],
+  "tris": 403,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_I": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.16,
+   0.16,
+   0.32
+  ],
+  "tris": 163,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_J": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.15,
+   0.13,
+   0.29
+  ],
+  "tris": 215,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_K": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.15,
+   0.12,
+   0.23
+  ],
+  "tris": 219,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_L": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.07,
+   0.07,
+   0.11
+  ],
+  "tris": 59,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_M": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.02,
+   0.03,
+   0.06
+  ],
+  "tris": 20,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_N": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.02,
+   0.03,
+   0.08
+  ],
+  "tris": 30,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_O": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.04,
+   0.09,
+   0.05
+  ],
+  "tris": 26,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_P": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.09,
+   0.07,
+   0.05
+  ],
+  "tris": 44,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "GRASS_MED01_Q": {
+  "source": "Poly Haven grass_medium_01 / grass_medium_01_LOD1 (CC0)",
+  "dims_m": [
+   0.06,
+   0.07,
+   0.05
+  ],
+  "tris": 44,
+  "category": [
+   "LIB_GRASS"
+  ]
+ },
+ "PLANT_DANDELION_A": {
+  "source": "Poly Haven dandelion_01 / dandelion_01_LOD1 (CC0)",
+  "dims_m": [
+   0.22,
+   0.26,
+   0.16
+  ],
+  "tris": 1933,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_DANDELION_B": {
+  "source": "Poly Haven dandelion_01 / dandelion_01_LOD1 (CC0)",
+  "dims_m": [
+   0.2,
+   0.22,
+   0.11
+  ],
+  "tris": 1873,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_DANDELION_C": {
+  "source": "Poly Haven dandelion_01 / dandelion_01_LOD1 (CC0)",
+  "dims_m": [
+   0.17,
+   0.17,
+   0.1
+  ],
+  "tris": 998,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_DANDELION_D": {
+  "source": "Poly Haven dandelion_01 / dandelion_01_LOD1 (CC0)",
+  "dims_m": [
+   0.12,
+   0.14,
+   0.06
+  ],
+  "tris": 880,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_DANDELION_E": {
+  "source": "Poly Haven dandelion_01 / dandelion_01_LOD1 (CC0)",
+  "dims_m": [
+   0.21,
+   0.21,
+   0.05
+  ],
+  "tris": 520,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_A": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.08,
+   0.09,
+   0.13
+  ],
+  "tris": 1466,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_B": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.07,
+   0.07,
+   0.1
+  ],
+  "tris": 1408,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_C": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.07,
+   0.04,
+   0.06
+  ],
+  "tris": 890,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_D": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.06,
+   0.04,
+   0.02
+  ],
+  "tris": 272,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_E": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.1,
+   0.09,
+   0.22
+  ],
+  "tris": 1738,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "PLANT_NETTLE_F": {
+  "source": "Poly Haven nettle_plant / nettle_plant_LOD1 (CC0)",
+  "dims_m": [
+   0.08,
+   0.09,
+   0.19
+  ],
+  "tris": 2012,
+  "category": [
+   "LIB_FLOWERS"
+  ]
+ },
+ "LOG_FALLEN_A_A": {
+  "source": "Poly Haven dead_tree_trunk_02 / dead_tree_trunk_02_LOD1 (CC0)",
+  "dims_m": [
+   4.05,
+   1.06,
+   1.06
+  ],
+  "tris": 41564,
+  "category": [
+   "LIB_LOGS"
+  ]
+ },
+ "LOG_FALLEN_B_A": {
+  "source": "Poly Haven dead_tree_trunk / dead_tree_trunk (CC0)",
+  "dims_m": [
+   3.05,
+   0.28,
+   0.29
+  ],
+  "tris": 101802,
+  "category": [
+   "LIB_LOGS"
+  ]
+ },
+ "DEBRIS_STUMP_A": {
+  "source": "Poly Haven tree_stump_01 / tree_stump_01 (CC0)",
+  "dims_m": [
+   1.43,
+   1.59,
+   0.57
+  ],
+  "tris": 41046,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_ROOTS_A_A": {
+  "source": "Poly Haven root_cluster_01 / root_cluster_01 (CC0)",
+  "dims_m": [
+   4.12,
+   2.68,
+   1.51
+  ],
+  "tris": 225261,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_ROOTS_PINE_A": {
+  "source": "Poly Haven pine_roots / pine_roots (CC0)",
+  "dims_m": [
+   1.74,
+   0.83,
+   0.14
+  ],
+  "tris": 81625,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_ROOTS_PINE_B": {
+  "source": "Poly Haven pine_roots / pine_roots (CC0)",
+  "dims_m": [
+   1.63,
+   0.99,
+   0.15
+  ],
+  "tris": 81068,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BARK_A": {
+  "source": "Poly Haven bark_debris_01 / bark_debris_01_LOD2 (CC0)",
+  "dims_m": [
+   0.19,
+   0.4,
+   0.07
+  ],
+  "tris": 10736,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BARK_B": {
+  "source": "Poly Haven bark_debris_01 / bark_debris_01_LOD2 (CC0)",
+  "dims_m": [
+   0.2,
+   0.47,
+   0.09
+  ],
+  "tris": 10262,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BARK_C": {
+  "source": "Poly Haven bark_debris_01 / bark_debris_01_LOD2 (CC0)",
+  "dims_m": [
+   0.15,
+   0.57,
+   0.1
+  ],
+  "tris": 14714,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BARK_D": {
+  "source": "Poly Haven bark_debris_01 / bark_debris_01_LOD2 (CC0)",
+  "dims_m": [
+   0.14,
+   0.61,
+   0.11
+  ],
+  "tris": 12638,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BRANCHES_A": {
+  "source": "Poly Haven dry_branches_medium_01 / dry_branches_medium_01 (CC0)",
+  "dims_m": [
+   0.32,
+   1.3,
+   0.34
+  ],
+  "tris": 5933,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BRANCHES_B": {
+  "source": "Poly Haven dry_branches_medium_01 / dry_branches_medium_01 (CC0)",
+  "dims_m": [
+   0.15,
+   1.04,
+   0.14
+  ],
+  "tris": 5254,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "DEBRIS_BRANCHES_C": {
+  "source": "Poly Haven dry_branches_medium_01 / dry_branches_medium_01 (CC0)",
+  "dims_m": [
+   0.13,
+   0.78,
+   0.14
+  ],
+  "tris": 5616,
+  "category": [
+   "LIB_FOREST_DEBRIS"
+  ]
+ },
+ "ROCK_S_STONE_A": {
+  "source": "Poly Haven stone_01 / stone_01_LOD1 (CC0)",
+  "dims_m": [
+   0.15,
+   0.09,
+   0.07
+  ],
+  "tris": 13380,
+  "category": [
+   "LIB_ROCKS_SMALL"
+  ]
+ },
+ "ROCK_S_ROCK07_A": {
+  "source": "Poly Haven rock_07 / rock_07_LOD1 (CC0)",
+  "dims_m": [
+   0.17,
+   0.32,
+   0.14
+  ],
+  "tris": 7422,
+  "category": [
+   "LIB_ROCKS_SMALL"
+  ]
+ },
+ "ROCK_S_ROCK09_A": {
+  "source": "Poly Haven rock_09 / rock_09_LOD1 (CC0)",
+  "dims_m": [
+   0.07,
+   0.14,
+   0.03
+  ],
+  "tris": 6208,
+  "category": [
+   "LIB_ROCKS_SMALL"
+  ]
+ },
+ "ROCK_M_BOULDER01_A": {
+  "source": "Poly Haven boulder_01 / boulder_01_LOD1 (CC0)",
+  "dims_m": [
+   1.27,
+   1.83,
+   1.0
+  ],
+  "tris": 33060,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_A": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   2.24,
+   3.37,
+   1.47
+  ],
+  "tris": 11000,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_B": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   2.66,
+   3.26,
+   1.26
+  ],
+  "tris": 10996,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_C": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   2.11,
+   2.08,
+   1.1
+  ],
+  "tris": 5000,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_D": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   2.13,
+   1.96,
+   1.77
+  ],
+  "tris": 10589,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_E": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   1.82,
+   3.0,
+   1.21
+  ],
+  "tris": 16548,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS01_F": {
+  "source": "Poly Haven rock_moss_set_01 / rock_moss_set_01 (CC0)",
+  "dims_m": [
+   2.13,
+   2.76,
+   1.26
+  ],
+  "tris": 8994,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_A": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   1.69,
+   1.22,
+   0.74
+  ],
+  "tris": 9826,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_B": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   1.21,
+   0.98,
+   0.53
+  ],
+  "tris": 8000,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_C": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   1.63,
+   1.01,
+   0.61
+  ],
+  "tris": 7894,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_D": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   2.2,
+   1.55,
+   0.77
+  ],
+  "tris": 8000,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_E": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   1.95,
+   1.53,
+   1.31
+  ],
+  "tris": 8000,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_F": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   1.58,
+   1.44,
+   0.74
+  ],
+  "tris": 7999,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_MOSS02_G": {
+  "source": "Poly Haven rock_moss_set_02 / rock_moss_set_02 (CC0)",
+  "dims_m": [
+   2.09,
+   1.14,
+   1.26
+  ],
+  "tris": 7928,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_BOULDER02_A": {
+  "source": "Poly Haven namaqualand_boulder_02 / namaqualand_boulder_02_LOD1 (CC0)",
+  "dims_m": [
+   2.53,
+   1.23,
+   0.88
+  ],
+  "tris": 48982,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_M_BOULDER03_A": {
+  "source": "Poly Haven namaqualand_boulder_03 / namaqualand_boulder_03_LOD1 (CC0)",
+  "dims_m": [
+   2.41,
+   3.06,
+   1.47
+  ],
+  "tris": 32412,
+  "category": [
+   "LIB_ROCKS_MEDIUM"
+  ]
+ },
+ "ROCK_L_FACE01_A": {
+  "source": "Poly Haven rock_face_01 / rock_face_01 (CC0)",
+  "dims_m": [
+   7.11,
+   5.62,
+   4.98
+  ],
+  "tris": 20174,
+  "category": [
+   "LIB_ROCKS_LARGE"
+  ]
+ },
+ "ROCK_L_FACE02_A": {
+  "source": "Poly Haven rock_face_02 / rock_face_02 (CC0)",
+  "dims_m": [
+   4.87,
+   3.47,
+   4.73
+  ],
+  "tris": 29566,
+  "category": [
+   "LIB_ROCKS_LARGE"
+  ]
+ },
+ "ROCK_L_MOUNTAINSIDE_A": {
+  "source": "Poly Haven mountainside / mountainside_LOD2 (CC0)",
+  "dims_m": [
+   10.21,
+   5.25,
+   10.52
+  ],
+  "tris": 38366,
+  "category": [
+   "LIB_ROCKS_LARGE"
+  ]
+ }
+}

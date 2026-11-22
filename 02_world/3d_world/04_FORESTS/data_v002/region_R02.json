@@ -1,0 +1,93 @@
+{
+ "region": "R02",
+ "name": "Enchanted Forest",
+ "status": "PROPOSAL \u2014 detailed terrain inside the approved map region (map rev 01 = proposal)",
+ "frame": "local metres; origin = site centre = C1 cell (672.0, 505.0) = Ashram-local (228000, -816000) m; +X east, +Y north",
+ "origin_ashram_local_m": [
+  228000.0,
+  -816000.0
+ ],
+ "lakes": {},
+ "kind": "enchanted",
+ "tiles": {
+  "EF": {
+   "half": 40000,
+   "sp": 200.0,
+   "parent": null,
+   "band": 5000
+  },
+  "EN": {
+   "half": 6000,
+   "sp": 10.0,
+   "parent": "EF",
+   "band": 600
+  },
+  "EH": {
+   "half": 1500,
+   "sp": 2.0,
+   "parent": "EN",
+   "band": 150
+  }
+ },
+ "stats": [
+  {
+   "region": "R02",
+   "tile": "EF",
+   "shape": [
+    401,
+    401
+   ],
+   "spacing_m": 200.0,
+   "half_m": 40000,
+   "z_min": 328.2853233938101,
+   "z_max": 966.4658410542069,
+   "cover": {
+    "forest": 0.8704858800629349,
+    "wet": 0.03687788011268587
+   },
+   "drainage_lines": 42,
+   "seconds": 4.5
+  },
+  {
+   "region": "R02",
+   "tile": "EN",
+   "shape": [
+    1201,
+    1201
+   ],
+   "spacing_m": 10.0,
+   "half_m": 6000,
+   "z_min": 608.2545743892642,
+   "z_max": 779.1722412109375,
+   "cover": {
+    "forest": 0.9026463514653692,
+    "wet": 0.0
+   },
+   "drainage_lines": 2,
+   "seconds": 23.0
+  },
+  {
+   "region": "R02",
+   "tile": "EH",
+   "shape": [
+    1501,
+    1501
+   ],
+   "spacing_m": 2.0,
+   "half_m": 1500,
+   "z_min": 633.5155578472628,
+   "z_max": 681.9498158198295,
+   "cover": {
+    "forest": 0.8872526021959156,
+    "wet": 0.0
+   },
+   "drainage_lines": 1,
+   "seconds": 50.7
+  }
+ ],
+ "wind_deg": 280.0,
+ "notes": [
+  "dunes / mesas / playas are procedural detail inside the map's desert + wasteland biomes",
+  "drainage = the map's own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)"
+ ]
+}

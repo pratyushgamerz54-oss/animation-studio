@@ -1,0 +1,31 @@
+{
+  "generated_bones": 378,
+  "deform_bones": 61,
+  "unmapped_groups": [],
+  "face_drivers_retargeted": 60,
+  "skirt_follow_constraints": 0,
+  "rest_deviation_worst": [
+    [
+      0.01,
+      "CHAR_MAX_BOOT_R"
+    ],
+    [
+      0.01,
+      "CHAR_MAX_BOOT_L"
+    ],
+    [
+      0.0,
+      "CHAR_MAX_UNDERSUIT"
+    ],
+    [
+      0.0,
+      "CHAR_MAX_THIGH_R"
+    ]
+  ],
+  "rest_pose_max_deviation_mm": 0.005,
+  "ik_leg_follow_error_mm": 0.04,
+  "ik_leg_ankle_lift_mm": 214.8,
+  "fk_arm_moves_elbow_mm": 259.1,
+  "jaw_open_chin_drop_mm": 10.5,
+  "pass": true
+}

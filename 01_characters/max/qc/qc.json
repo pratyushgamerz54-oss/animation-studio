@@ -1,0 +1,136 @@
+{
+  "character": "MAX",
+  "started": "2026-11-21 01:51",
+  "tests": {
+    "uv_present_all_meshes": true,
+    "textures_baked": 124,
+    "ik_rest_deviation": {
+      "arm_L": {
+        "pole_angle": 180,
+        "rest_deviation_mm": 1.2
+      },
+      "leg_L": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 3.337
+      },
+      "arm_R": {
+        "pole_angle": 0,
+        "rest_deviation_mm": 1.2
+      },
+      "leg_R": {
+        "pole_angle": -90,
+        "rest_deviation_mm": 3.337
+      }
+    },
+    "ik_follow_error_mm": 0.03,
+    "jaw_open_chin_drop_mm": 10.5,
+    "body_unweighted_verts": 0,
+    "non_manifold_edges_base_mesh": {
+      "CHAR_MAX_ABS": 8,
+      "CHAR_MAX_BELT": 12,
+      "CHAR_MAX_BOOT_L": 10,
+      "CHAR_MAX_BOOT_R": 10,
+      "CHAR_MAX_BROWS": 44,
+      "CHAR_MAX_CHEST_PLATE": 32,
+      "CHAR_MAX_COLLAR": 24,
+      "CHAR_MAX_GAUNTLET_L": 16,
+      "CHAR_MAX_GAUNTLET_R": 16,
+      "CHAR_MAX_GLOVE_L": 8,
+      "CHAR_MAX_GLOVE_R": 8,
+      "CHAR_MAX_LID_LO_L": 64,
+      "CHAR_MAX_LID_LO_R": 64,
+      "CHAR_MAX_LID_UP_L": 64,
+      "CHAR_MAX_LID_UP_R": 64,
+      "CHAR_MAX_MOUTH": 120,
+      "CHAR_MAX_PAULDRON_L": 20,
+      "CHAR_MAX_PAULDRON_R": 20,
+      "CHAR_MAX_SHIN_L": 26,
+      "CHAR_MAX_SHIN_R": 26,
+      "CHAR_MAX_THIGH_L": 14,
+      "CHAR_MAX_THIGH_R": 14,
+      "CHAR_MAX_UNDERSUIT": 48
+    },
+    "quad_ratio_body": 1.0,
+    "quad_ratio_head": 1.0,
+    "mouth_shape_keys": 19,
+    "phonemes_present": true,
+    "export": {
+      "glb_mb": 10.11,
+      "fbx_mb": 13.95
+    },
+    "glb_reimport": {
+      "objects": 33,
+      "armatures": 1,
+      "meshes": 32,
+      "bones": 64,
+      "shape_key_meshes": 2
+    }
+  },
+  "rig": {
+    "bones": 64,
+    "deform": 53,
+    "controls": [
+      "CTRL_COG",
+      "IK_hand_L",
+      "POLE_arm_L",
+      "IK_foot_L",
+      "POLE_leg_L",
+      "IK_hand_R",
+      "POLE_arm_R",
+      "IK_foot_R",
+      "POLE_leg_R",
+      "CTRL_EYES",
+      "root"
+    ],
+    "ik_fk_props": [
+      "ik_arm_L",
+      "ik_leg_L",
+      "ik_arm_R",
+      "ik_leg_R"
+    ]
+  },
+  "face_controls": [
+    "blink_L",
+    "blink_R",
+    "expr_angry",
+    "expr_confident",
+    "expr_evil",
+    "expr_fear",
+    "expr_frustrated",
+    "expr_furious",
+    "expr_serious",
+    "expr_shocked",
+    "expr_suspicious",
+    "jaw (bone)",
+    "lid_wide_L",
+    "lid_wide_R",
+    "ph_a",
+    "ph_e",
+    "ph_fv",
+    "ph_i",
+    "ph_l",
+    "ph_mbp",
+    "ph_o",
+    "ph_rest",
+    "ph_u",
+    "ph_w"
+  ],
+  "meshes": 31,
+  "polycount_render_estimate": 188752,
+  "measurements": {
+    "height_no_hair_m": 1.852,
+    "height_total_m": 1.8521,
+    "head_height_m": 0.2103,
+    "heads_tall": 8.81,
+    "shoulder_width_m": 0.6225,
+    "chest_width_m": 0.3611,
+    "hip_width_m": 0.3382,
+    "leg_length_m": 0.9603,
+    "head_top_z": 1.8585,
+    "chin_z": 1.6482,
+    "arm_length_m": 0.793,
+    "hand_length_m": 0.2183,
+    "foot_length_m": 0.2381,
+    "mesh_sanity_fail": []
+  }
+}

@@ -1,0 +1,104 @@
+{
+ "region": "R05",
+ "name": "Forbidden Region (blasted crater, crater lake)",
+ "status": "PROPOSAL \u2014 detailed terrain inside the approved map region (map rev 01 = proposal)",
+ "frame": "local metres; origin = site centre = C1 cell (276.48, 508.0) = Ashram-local (-958560, -825000) m; +X east, +Y north",
+ "origin_ashram_local_m": [
+  -958560.0,
+  -825000.0
+ ],
+ "lakes": {
+  "8": 490.6181640625
+ },
+ "kind": "crater",
+ "tiles": {
+  "XF": {
+   "half": 96000,
+   "sp": 400.0,
+   "parent": null,
+   "band": 9000
+  },
+  "XN": {
+   "half": 12000,
+   "sp": 20.0,
+   "parent": "XF",
+   "band": 1500
+  },
+  "XH": {
+   "half": 1500,
+   "sp": 2.0,
+   "parent": "XN",
+   "band": 150
+  }
+ },
+ "stats": [
+  {
+   "region": "R05",
+   "tile": "XF",
+   "shape": [
+    481,
+    481
+   ],
+   "spacing_m": 400.0,
+   "half_m": 96000,
+   "z_min": -126.72075235626394,
+   "z_max": 1085.8442297826439,
+   "cover": {
+    "sand": 0.3160817942522724,
+    "rock": 0.0,
+    "playa": 0.05064812133419202,
+    "cliff": 0.0,
+    "wet": 0.37022229329921635
+   },
+   "drainage_lines": 164,
+   "seconds": 11.7
+  },
+  {
+   "region": "R05",
+   "tile": "XN",
+   "shape": [
+    1201,
+    1201
+   ],
+   "spacing_m": 20.0,
+   "half_m": 12000,
+   "z_min": 235.98802185058594,
+   "z_max": 700.2278692442408,
+   "cover": {
+    "sand": 0.24644672320665334,
+    "rock": 0.00454797244316941,
+    "playa": 0.03892260196713674,
+    "cliff": 0.0013408199245563473,
+    "wet": 0.5031076656214187
+   },
+   "drainage_lines": 9,
+   "seconds": 33.7
+  },
+  {
+   "region": "R05",
+   "tile": "XH",
+   "shape": [
+    1501,
+    1501
+   ],
+   "spacing_m": 2.0,
+   "half_m": 1500,
+   "z_min": 321.1465759277344,
+   "z_max": 657.6661636726642,
+   "cover": {
+    "sand": 0.502412559958917,
+    "rock": 0.06418905273455272,
+    "playa": 0.07789432849785685,
+    "cliff": 0.0015179753582000187,
+    "wet": 0.0
+   },
+   "drainage_lines": 2,
+   "seconds": 62.6
+  }
+ ],
+ "wind_deg": 280.0,
+ "notes": [
+  "dunes / mesas / playas are procedural detail inside the map's desert + wasteland biomes",
+  "drainage = the map's own flow network; channels with > 150 cells keep water, smaller ones are dry wadis (PROPOSAL)"
+ ]
+}

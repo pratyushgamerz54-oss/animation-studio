@@ -1,0 +1,179 @@
+{
+ "DS_T01_KHEJRI_LOD1": {
+  "hero": "DS_T01_KHEJRI",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 8.28,
+   "canopy_x_m": 9.79,
+   "canopy_y_m": 8.87,
+   "trunk_d_m": 0.72,
+   "branches": 6577,
+   "leaf_cards": 5643,
+   "tris": 156330,
+   "verts": 120584,
+   "lowest_z": -0.3,
+   "height_scale": 0.835
+  },
+  "collection": "T6_DS_T01_KHEJRI_LOD1"
+ },
+ "DS_T01_KHEJRI_LOD2": {
+  "hero": "DS_T01_KHEJRI",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 8.28,
+   "canopy_x_m": 9.97,
+   "canopy_y_m": 8.95,
+   "trunk_d_m": 0.72,
+   "branches": 1001,
+   "leaf_cards": 499,
+   "tris": 34140,
+   "verts": 22112,
+   "lowest_z": -0.3,
+   "height_scale": 0.841
+  },
+  "collection": "T6_DS_T01_KHEJRI_LOD2"
+ },
+ "DS_T01_KHEJRI_LOD3": {
+  "hero": "DS_T01_KHEJRI",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 8.365
+  },
+  "collection": "T6_DS_T01_KHEJRI_LOD3"
+ },
+ "DS_T02_DATE_PALM_LOD1": {
+  "hero": "DS_T02_DATE_PALM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 13.83,
+   "canopy_x_m": 7.82,
+   "canopy_y_m": 8.11,
+   "trunk_d_m": 0.65,
+   "branches": 58,
+   "leaf_cards": 0,
+   "tris": 54800,
+   "verts": 57100,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "collection": "T6_DS_T02_DATE_PALM_LOD1"
+ },
+ "DS_T02_DATE_PALM_LOD2": {
+  "hero": "DS_T02_DATE_PALM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 13.82,
+   "canopy_x_m": 7.82,
+   "canopy_y_m": 8.12,
+   "trunk_d_m": 0.65,
+   "branches": 58,
+   "leaf_cards": 0,
+   "tris": 30960,
+   "verts": 39296,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "collection": "T6_DS_T02_DATE_PALM_LOD2"
+ },
+ "DS_T02_DATE_PALM_LOD3": {
+  "hero": "DS_T02_DATE_PALM",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 13.97
+  },
+  "collection": "T6_DS_T02_DATE_PALM_LOD3"
+ },
+ "DS_S01_CALOTROPIS_LOD1": {
+  "hero": "DS_S01_CALOTROPIS",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 1.76,
+   "canopy_x_m": 2.36,
+   "canopy_y_m": 2.34,
+   "trunk_d_m": 0.4,
+   "branches": 50,
+   "leaf_cards": 71,
+   "tris": 1730,
+   "verts": 1308,
+   "lowest_z": -0.18,
+   "height_scale": 0.711
+  },
+  "collection": "T6_DS_S01_CALOTROPIS_LOD1"
+ },
+ "DS_S01_CALOTROPIS_LOD2": {
+  "hero": "DS_S01_CALOTROPIS",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 1.76,
+   "canopy_x_m": 2.35,
+   "canopy_y_m": 1.89,
+   "trunk_d_m": 0.4,
+   "branches": 50,
+   "leaf_cards": 33,
+   "tris": 1434,
+   "verts": 999,
+   "lowest_z": -0.1,
+   "height_scale": 0.594
+  },
+  "collection": "T6_DS_S01_CALOTROPIS_LOD2"
+ },
+ "DS_S01_CALOTROPIS_LOD3": {
+  "hero": "DS_S01_CALOTROPIS",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 1.777
+  },
+  "collection": "T6_DS_S01_CALOTROPIS_LOD3"
+ },
+ "DS_G01_SEWAN_GRASS_LOD1": {
+  "hero": "DS_G01_SEWAN_GRASS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.599,
+   "spread_x_m": 1.276,
+   "spread_y_m": 1.375,
+   "tris": 2040,
+   "verts": 1800,
+   "lowest_z": -0.011
+  },
+  "collection": "T6_DS_G01_SEWAN_GRASS_LOD1"
+ },
+ "DS_S02_EUPHORBIA_LOD1": {
+  "hero": "DS_S02_EUPHORBIA",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 1.633,
+   "spread_x_m": 1.119,
+   "spread_y_m": 1.361,
+   "tris": 13500,
+   "verts": 8680,
+   "lowest_z": -0.051
+  },
+  "collection": "T6_DS_S02_EUPHORBIA_LOD1"
+ }
+}

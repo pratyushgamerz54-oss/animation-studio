@@ -1,0 +1,420 @@
+{
+ "MK_T01_HIMALAYAN_SPRUCE_LOD1": {
+  "hero": "MK_T01_HIMALAYAN_SPRUCE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 31.32,
+   "canopy_x_m": 17.71,
+   "canopy_y_m": 17.58,
+   "trunk_d_m": 1.44,
+   "branches": 6616,
+   "leaf_cards": 5269,
+   "tris": 160930,
+   "verts": 121498,
+   "lowest_z": -1.04,
+   "height_scale": 1.0
+  },
+  "collection": "T6_MK_T01_HIMALAYAN_SPRUCE_LOD1"
+ },
+ "MK_T01_HIMALAYAN_SPRUCE_LOD2": {
+  "hero": "MK_T01_HIMALAYAN_SPRUCE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 33.55,
+   "canopy_x_m": 18.31,
+   "canopy_y_m": 17.85,
+   "trunk_d_m": 1.44,
+   "branches": 1372,
+   "leaf_cards": 414,
+   "tris": 45606,
+   "verts": 28609,
+   "lowest_z": -0.41,
+   "height_scale": 1.0
+  },
+  "collection": "T6_MK_T01_HIMALAYAN_SPRUCE_LOD2"
+ },
+ "MK_T01_HIMALAYAN_SPRUCE_LOD3": {
+  "hero": "MK_T01_HIMALAYAN_SPRUCE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 31.636
+  },
+  "collection": "T6_MK_T01_HIMALAYAN_SPRUCE_LOD3"
+ },
+ "MK_T02_HIMALAYAN_BIRCH_LOD1": {
+  "hero": "MK_T02_HIMALAYAN_BIRCH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 11.59,
+   "canopy_x_m": 7.48,
+   "canopy_y_m": 8.42,
+   "trunk_d_m": 0.49,
+   "branches": 2578,
+   "leaf_cards": 1722,
+   "tris": 60872,
+   "verts": 45112,
+   "lowest_z": -0.28,
+   "height_scale": 0.82
+  },
+  "collection": "T6_MK_T02_HIMALAYAN_BIRCH_LOD1"
+ },
+ "MK_T02_HIMALAYAN_BIRCH_LOD2": {
+  "hero": "MK_T02_HIMALAYAN_BIRCH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 11.59,
+   "canopy_x_m": 6.66,
+   "canopy_y_m": 8.33,
+   "trunk_d_m": 0.47,
+   "branches": 470,
+   "leaf_cards": 186,
+   "tris": 15896,
+   "verts": 10108,
+   "lowest_z": -0.26,
+   "height_scale": 0.792
+  },
+  "collection": "T6_MK_T02_HIMALAYAN_BIRCH_LOD2"
+ },
+ "MK_T02_HIMALAYAN_BIRCH_LOD3": {
+  "hero": "MK_T02_HIMALAYAN_BIRCH",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 11.71
+  },
+  "collection": "T6_MK_T02_HIMALAYAN_BIRCH_LOD3"
+ },
+ "MK_T03_KRUMMHOLZ_PINE_LOD1": {
+  "hero": "MK_T03_KRUMMHOLZ_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 5.67,
+   "canopy_x_m": 6.9,
+   "canopy_y_m": 7.23,
+   "trunk_d_m": 0.66,
+   "branches": 321,
+   "leaf_cards": 268,
+   "tris": 12534,
+   "verts": 8366,
+   "lowest_z": -0.32,
+   "height_scale": 0.851
+  },
+  "collection": "T6_MK_T03_KRUMMHOLZ_PINE_LOD1"
+ },
+ "MK_T03_KRUMMHOLZ_PINE_LOD2": {
+  "hero": "MK_T03_KRUMMHOLZ_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 5.67,
+   "canopy_x_m": 7.2,
+   "canopy_y_m": 7.22,
+   "trunk_d_m": 0.61,
+   "branches": 321,
+   "leaf_cards": 122,
+   "tris": 11378,
+   "verts": 7172,
+   "lowest_z": -0.31,
+   "height_scale": 0.775
+  },
+  "collection": "T6_MK_T03_KRUMMHOLZ_PINE_LOD2"
+ },
+ "MK_T03_KRUMMHOLZ_PINE_LOD3": {
+  "hero": "MK_T03_KRUMMHOLZ_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 5.733
+  },
+  "collection": "T6_MK_T03_KRUMMHOLZ_PINE_LOD3"
+ },
+ "MK_T04_SILVER_FIR_LOD1": {
+  "hero": "MK_T04_SILVER_FIR",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 38.09,
+   "canopy_x_m": 14.82,
+   "canopy_y_m": 14.99,
+   "trunk_d_m": 1.54,
+   "branches": 7385,
+   "leaf_cards": 6283,
+   "tris": 181240,
+   "verts": 138036,
+   "lowest_z": -0.41,
+   "height_scale": 1.0
+  },
+  "collection": "T6_MK_T04_SILVER_FIR_LOD1"
+ },
+ "MK_T04_SILVER_FIR_LOD2": {
+  "hero": "MK_T04_SILVER_FIR",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 39.49,
+   "canopy_x_m": 15.83,
+   "canopy_y_m": 15.86,
+   "trunk_d_m": 1.54,
+   "branches": 1561,
+   "leaf_cards": 534,
+   "tris": 51712,
+   "verts": 32709,
+   "lowest_z": -0.41,
+   "height_scale": 1.0
+  },
+  "collection": "T6_MK_T04_SILVER_FIR_LOD2"
+ },
+ "MK_T04_SILVER_FIR_LOD3": {
+  "hero": "MK_T04_SILVER_FIR",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 37.734
+  },
+  "collection": "T6_MK_T04_SILVER_FIR_LOD3"
+ },
+ "MK_T05_BLUE_PINE_LOD1": {
+  "hero": "MK_T05_BLUE_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 28.65,
+   "canopy_x_m": 15.3,
+   "canopy_y_m": 15.82,
+   "trunk_d_m": 1.0,
+   "branches": 3198,
+   "leaf_cards": 3827,
+   "tris": 84784,
+   "verts": 67386,
+   "lowest_z": -0.38,
+   "height_scale": 0.899
+  },
+  "collection": "T6_MK_T05_BLUE_PINE_LOD1"
+ },
+ "MK_T05_BLUE_PINE_LOD2": {
+  "hero": "MK_T05_BLUE_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 28.65,
+   "canopy_x_m": 14.86,
+   "canopy_y_m": 16.7,
+   "trunk_d_m": 0.99,
+   "branches": 697,
+   "leaf_cards": 394,
+   "tris": 24840,
+   "verts": 16121,
+   "lowest_z": -0.37,
+   "height_scale": 0.887
+  },
+  "collection": "T6_MK_T05_BLUE_PINE_LOD2"
+ },
+ "MK_T05_BLUE_PINE_LOD3": {
+  "hero": "MK_T05_BLUE_PINE",
+  "kind": "tree",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 31.74
+  },
+  "collection": "T6_MK_T05_BLUE_PINE_LOD3"
+ },
+ "MK_S01_JUNIPER_LOD1": {
+  "hero": "MK_S01_JUNIPER",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.86,
+   "canopy_x_m": 3.04,
+   "canopy_y_m": 2.69,
+   "trunk_d_m": 0.7,
+   "branches": 32,
+   "leaf_cards": 83,
+   "tris": 1370,
+   "verts": 1122,
+   "lowest_z": -0.45,
+   "height_scale": 0.873
+  },
+  "collection": "T6_MK_S01_JUNIPER_LOD1"
+ },
+ "MK_S01_JUNIPER_LOD2": {
+  "hero": "MK_S01_JUNIPER",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 0.86,
+   "canopy_x_m": 2.44,
+   "canopy_y_m": 2.5,
+   "trunk_d_m": 0.7,
+   "branches": 32,
+   "leaf_cards": 38,
+   "tris": 1046,
+   "verts": 771,
+   "lowest_z": -0.64,
+   "height_scale": 0.648
+  },
+  "collection": "T6_MK_S01_JUNIPER_LOD2"
+ },
+ "MK_S01_JUNIPER_LOD3": {
+  "hero": "MK_S01_JUNIPER",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 0.831
+  },
+  "collection": "T6_MK_S01_JUNIPER_LOD3"
+ },
+ "MK_S02_DWARF_RHODODENDRON_LOD1": {
+  "hero": "MK_S02_DWARF_RHODODENDRON",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.58,
+   "canopy_x_m": 1.31,
+   "canopy_y_m": 1.41,
+   "trunk_d_m": 0.36,
+   "branches": 14,
+   "leaf_cards": 66,
+   "tris": 840,
+   "verts": 736,
+   "lowest_z": -0.21,
+   "height_scale": 0.793
+  },
+  "collection": "T6_MK_S02_DWARF_RHODODENDRON_LOD1"
+ },
+ "MK_S02_DWARF_RHODODENDRON_LOD2": {
+  "hero": "MK_S02_DWARF_RHODODENDRON",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 2,
+  "stats": {
+   "height_m": 0.58,
+   "canopy_x_m": 1.26,
+   "canopy_y_m": 1.42,
+   "trunk_d_m": 0.36,
+   "branches": 14,
+   "leaf_cards": 28,
+   "tris": 568,
+   "verts": 438,
+   "lowest_z": -0.21,
+   "height_scale": 0.649
+  },
+  "collection": "T6_MK_S02_DWARF_RHODODENDRON_LOD2"
+ },
+ "MK_S02_DWARF_RHODODENDRON_LOD3": {
+  "hero": "MK_S02_DWARF_RHODODENDRON",
+  "kind": "shrub",
+  "seed": 0,
+  "lod": 3,
+  "stats": {
+   "tris": 6,
+   "height_m": 0.549
+  },
+  "collection": "T6_MK_S02_DWARF_RHODODENDRON_LOD3"
+ },
+ "MK_G01_ALPINE_TUSSOCK_LOD1": {
+  "hero": "MK_G01_ALPINE_TUSSOCK",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.372,
+   "spread_x_m": 0.898,
+   "spread_y_m": 0.764,
+   "tris": 2112,
+   "verts": 1920,
+   "lowest_z": -0.012
+  },
+  "collection": "T6_MK_G01_ALPINE_TUSSOCK_LOD1"
+ },
+ "MK_F01_GENTIAN_LOD1": {
+  "hero": "MK_F01_GENTIAN",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.115,
+   "spread_x_m": 0.095,
+   "spread_y_m": 0.078,
+   "tris": 520,
+   "verts": 392,
+   "lowest_z": -0.001
+  },
+  "collection": "T6_MK_F01_GENTIAN_LOD1"
+ },
+ "MK_F02_EDELWEISS_LOD1": {
+  "hero": "MK_F02_EDELWEISS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.134,
+   "spread_x_m": 0.09,
+   "spread_y_m": 0.061,
+   "tris": 796,
+   "verts": 630,
+   "lowest_z": -0.001
+  },
+  "collection": "T6_MK_F02_EDELWEISS_LOD1"
+ },
+ "MK_F03_BLUE_POPPY_LOD1": {
+  "hero": "MK_F03_BLUE_POPPY",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.689,
+   "spread_x_m": 0.217,
+   "spread_y_m": 0.294,
+   "tris": 264,
+   "verts": 199,
+   "lowest_z": -0.001
+  },
+  "collection": "T6_MK_F03_BLUE_POPPY_LOD1"
+ },
+ "MK_M01_ALPINE_CUSHION_LOD1": {
+  "hero": "MK_M01_ALPINE_CUSHION",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.103,
+   "spread_x_m": 0.489,
+   "spread_y_m": 0.388,
+   "tris": 1192,
+   "verts": 816,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_MK_M01_ALPINE_CUSHION_LOD1"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "CT_T01_MANGO": {
+  "common": "Mango (avenue / orchard tree)",
+  "latin": "Mangifera indica",
+  "label": "SPECIES-INSPIRED",
+  "region": "C-01 / C-02 / C-03 surroundings (also R-06 villages)",
+  "category": "Broadleaf tree",
+  "habitat": "avenues + old orchards around the three sites (whether the cities are inhabited = NOT CONFIRMED); dense dark dome, copper-red new spring leaves",
+  "altitude": "0\u20131 200 m",
+  "kind": "tree",
+  "palette": [
+   "#24502A",
+   "#3E6A34",
+   "#8A4A34",
+   "#5A4A3A",
+   "#3A322C"
+  ],
+  "stats": {
+   "height_m": 15.27,
+   "canopy_x_m": 19.4,
+   "canopy_y_m": 18.12,
+   "trunk_d_m": 1.17,
+   "branches": 6464,
+   "leaf_cards": 12839,
+   "tris": 298640,
+   "verts": 228428,
+   "lowest_z": -0.35,
+   "height_scale": 0.878
+  },
+  "bark": "japanese_zelkova_bark",
+  "atlas": "ct_mango",
+  "collection": "T6_CT_T01_MANGO"
+ },
+ "CT_T02_COCONUT_PALM": {
+  "common": "Coconut palm",
+  "latin": "Cocos nucifera",
+  "label": "SPECIES-INSPIRED",
+  "region": "C-sites (coastal river plains)",
+  "category": "Palm",
+  "habitat": "coastal river plains around the C-sites only (tropical, near sea level); curved leaning trunk, drooping fronds, nut clusters",
+  "altitude": "0\u2013300 m",
+  "kind": "tree",
+  "palette": [
+   "#6E8E40",
+   "#9AAA5A",
+   "#8A7450",
+   "#A8A090",
+   "#7A6A2A"
+  ],
+  "stats": {
+   "height_m": 16.06,
+   "canopy_x_m": 7.32,
+   "canopy_y_m": 7.61,
+   "trunk_d_m": 0.58,
+   "branches": 27,
+   "leaf_cards": 0,
+   "tris": 69432,
+   "verts": 62562,
+   "lowest_z": -0.36,
+   "height_scale": 1.0
+  },
+  "bark": "palm_bark",
+  "atlas": null,
+  "collection": "T6_CT_T02_COCONUT_PALM"
+ },
+ "CT_V01_IVY_CURTAIN": {
+  "common": "Ivy curtain on stone",
+  "latin": "Hedera nepalensis (Himalayan ivy)",
+  "label": "SPECIES-INSPIRED",
+  "region": "C-01 / C-02 / C-03 (walls)",
+  "category": "Climber",
+  "habitat": "walls, pillars and rock faces at the three sites (proposal for the overgrown look); place against a wall facing \u2212Y",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#1E3A22",
+   "#2E4A2A",
+   "#9AB08A",
+   "#4A4A30"
+  ],
+  "stats": {
+   "height_m": 2.758,
+   "spread_x_m": 2.632,
+   "spread_y_m": 0.204,
+   "tris": 4114,
+   "verts": 3616,
+   "lowest_z": -0.035
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CT_V01_IVY_CURTAIN"
+ },
+ "CT_M01_RUIN_MOSS": {
+  "common": "Ruin moss (ledges, steps)",
+  "latin": "Bryum / Tortula-like",
+  "label": "SPECIES-INSPIRED",
+  "region": "C-01 / C-02 / C-03",
+  "category": "Moss",
+  "habitat": "ledges, steps and joints of old masonry at the sites",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#3A5424",
+   "#6A8A38",
+   "#8A8A55"
+  ],
+  "stats": {
+   "height_m": 0.05,
+   "spread_x_m": 0.454,
+   "spread_y_m": 0.445,
+   "tris": 3680,
+   "verts": 2460,
+   "lowest_z": -0.02
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CT_M01_RUIN_MOSS"
+ },
+ "CT_G01_CRACK_GRASS": {
+  "common": "Grass in cracks",
+  "latin": "Poa annua / Eragrostis (pioneer grasses)",
+  "label": "SPECIES-INSPIRED",
+  "region": "C-01 / C-02 / C-03",
+  "category": "Grass",
+  "habitat": "cracks between paving stones and wall joints at the sites",
+  "altitude": "",
+  "kind": "plant",
+  "palette": [
+   "#34501F",
+   "#5E8A34",
+   "#9AB25A"
+  ],
+  "stats": {
+   "height_m": 0.135,
+   "spread_x_m": 0.369,
+   "spread_y_m": 0.332,
+   "tris": 1176,
+   "verts": 1116,
+   "lowest_z": -0.011
+  },
+  "bark": null,
+  "atlas": null,
+  "collection": "T6_CT_G01_CRACK_GRASS"
+ }
+}

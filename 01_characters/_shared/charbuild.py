@@ -834,7 +834,9 @@ class Char:
              ('spine_02', P('spine'), P('chest'), 'spine_01', True, 0),
              ('spine_03', P('chest'), P('chest_up'), 'spine_02', True, 0),
              ('neck', P('neck'), P('neck_top'), 'spine_03', False, 0),
-             ('head', P('neck_top'), top, 'neck', True, 0)]
+             ('head', P('neck_top'), top, 'neck', True, 0),
+             ('jaw', tuple(self.HEAD_C + Vector((0, .004 * self.hs, -.016 * self.hs))),
+              tuple(self.HEAD_C + Vector((0, -self.SY * .80, -self.SZB * .78))), 'head', False, 0)]
         for sd in ('L', 'R'):
             sx = 1 if sd == 'L' else -1
             sh = J[idx[f'shoulder_{sd}']]
@@ -867,7 +869,10 @@ class Char:
             kd.insert(v.co, i)
         kd.balance()
         names = [vg.name for vg in body.vertex_groups]
-        for o in list(self.cloth.values()):
+        self.build_skirt_rig()
+        order = sorted(self.cloth.values(), key=lambda o: 0 if o.get('weights') in ('skirt', 'cape') else 1)
+        names = names + list(self.skirt_bones)
+        for o in order:
             if o.get('bind_bone'):
                 ck.bone_parent(o, arm, o['bind_bone'])
                 continue
@@ -879,14 +884,154 @@ class Char:
                 copy_nearest_weights(o, tgt if tgt.vertex_groups else body, names, kd if not tgt.vertex_groups else None)
                 ck.bind_copy(o, arm)
                 continue
-            if o.get('weights') in ('skirt', 'cape') or not o.vertex_groups:
+            if o.get('weights') == 'skirt' and self.skirt_bones:
+                self.skirt_weights(o)
+            elif o.get('weights') in ('skirt', 'cape') or not o.vertex_groups:
                 mode = o.get('weights')
                 copy_nearest_weights(o, body, names, kd, mode=mode, s=self.s)
+                if mode == 'cape' and self.skirt_bones:
+                    self.skirt_weights(o, blend=True)
             ck.bind_copy(o, arm)
-        heads = [self.head] + list(self.F.values()) + self.hair + self.beard + self.horns + \
-            [self.objs['ear_L'], self.objs['ear_R']]
+        heads = list(self.F.values()) + self.hair + self.horns + [self.objs['ear_L'], self.objs['ear_R']]
         for o in heads:
             ck.bone_parent(o, arm, 'head')
+        # real jaw: the head mesh and the beard deform with head + jaw weights
+        for o in [self.head] + self.beard:
+            self.jaw_weights(o)
+            ck.bind_copy(o, arm)
+
+    # ------------------------------------------------------------- jaw
+    def jaw_weights(self, o):
+        """head / jaw vertex weights: chin + lower face below the mouth line, in front of the jaw hinge."""
+        hs, HC = self.hs, self.HEAD_C
+        mz, hy = -.064 * hs, .004 * hs
+        gh, gj = o.vertex_groups.new(name='head'), o.vertex_groups.new(name='jaw')
+        Mw = o.matrix_world
+        for v in o.data.vertices:
+            c = Mw @ v.co - HC
+            wz = ck.smoothstep(mz + .003 * hs, mz - .012 * hs, c.z)
+            wy = ck.smoothstep(hy + .016 * hs, hy - .022 * hs, c.y)
+            w = max(0., min(1., wz * wy))
+            if w > 0:
+                gj.add([v.index], w, 'REPLACE')
+            if w < 1:
+                gh.add([v.index], 1 - w, 'REPLACE')
+
+    # ------------------------------------------------------------- skirt rig
+    SKIRT_N = 12
+
+    def build_skirt_rig(self):
+        """Bone chains around long skirts / robes (12 x 3 bones). The top bone of every chain copies a share of the
+        thigh swing (front chains follow forward swings, back chains backward swings, each side its own leg) and
+        the lower bones drape back down, so robes no longer bend with the leg like a stiff tube."""
+        self.skirt_bones = []
+        sk = [o for o in self.cloth.values() if o.get('weights') == 'skirt']
+        caps = [o for o in self.cloth.values() if o.get('weights') == 'cape'
+                and min((o.matrix_world @ v.co).z for v in o.data.vertices) < .80 * self.s]
+        if not sk and not caps:
+            return
+        s, arm, N = self.s, self.arm, self.SKIRT_N
+        cy = .01 * s
+        pts = [o.matrix_world @ v.co for o in sk + caps for v in o.data.vertices]
+        ztop = min(1.0 * s, max(p.z for p in pts))
+        zbot = min(p.z for p in pts)
+        self.skirt_z = (ztop, zbot)
+        bvh = ck.bvh_of(self.body)
+        ck.reset_pose(arm)
+        bpy.context.view_layer.objects.active = arm
+        bpy.ops.object.mode_set(mode='EDIT')
+        eb = arm.data.edit_bones
+        for k in range(N):
+            a = -math.pi / 2 + 2 * math.pi * k / N
+            d = Vector((math.cos(a), math.sin(a), 0))
+            prev = None
+            for g in range(4):
+                z = ztop + (zbot - ztop) * g / 3
+                rs = [((p.x ** 2 + (p.y - cy) ** 2) ** .5) for p in pts if abs(p.z - z) < .06 * s and
+                      Vector((p.x, p.y - cy, 0)).normalized().dot(d) > .96]
+                if rs:
+                    r = sum(rs) / len(rs)
+                else:
+                    hit = bvh.ray_cast(Vector((0, cy, max(z, .55 * s))) + d * .6, -d, 1.0)
+                    r = ((hit[0] - Vector((0, cy, max(z, .55 * s)))).length if hit[0] else .17 * s) + (.03 + .06 * g / 3) * s
+                p = Vector((0, cy, z)) + d * r
+                if prev is not None:
+                    bn = f'skirt_{k:02d}_{g}'
+                    b = eb.new(bn); b.head, b.tail = prev, p
+                    b.parent = eb['pelvis'] if g == 1 else eb[f'skirt_{k:02d}_{g - 1}']
+                    b.use_connect = g > 1
+                    b.align_roll(eb['thigh_L' if d.x >= 0 else 'thigh_R'].z_axis)
+                    self.skirt_bones.append(bn)
+                prev = p
+        thigh_x = {sd: eb[f'thigh_{sd}'].x_axis.x for sd in ('L', 'R')}
+        bpy.ops.object.mode_set(mode='POSE')
+        lim = math.radians(130)
+        for k in range(N):
+            a = -math.pi / 2 + 2 * math.pi * k / N
+            dx, dy = math.cos(a), math.sin(a)
+            front = min(1., max(.15, .5 - .6 * dy))
+            back = min(1., max(.15, .5 + .6 * dy))
+            for sd, side in (('L', min(1., max(0., .5 + .9 * dx))), ('R', min(1., max(0., .5 - .9 * dx)))):
+                if side <= 0:
+                    continue
+                fs = 1 if thigh_x[sd] > 0 else -1          # sign of a FORWARD swing in the thigh's local X
+                fwd = (-lim, 0) if fs > 0 else (0, lim)
+                bwd = (0, lim) if fs > 0 else (-lim, 0)
+                for g, rng, w in ((1, fwd, side * front), (1, bwd, side * back),
+                                  (2, fwd, -.40 * side * front), (3, fwd, -.20 * side * front)):
+                    pb = arm.pose.bones[f'skirt_{k:02d}_{g}']
+                    c = pb.constraints.new('TRANSFORM')
+                    c.name = f'follow_thigh_{sd}'
+                    c.target, c.subtarget = arm, f'thigh_{sd}'
+                    c.target_space = c.owner_space = 'LOCAL'
+                    c.map_from = c.map_to = 'ROTATION'
+                    c.from_min_x_rot, c.from_max_x_rot = rng
+                    c.to_min_x_rot, c.to_max_x_rot = rng[0] * w, rng[1] * w
+                    c.map_to_x_from, c.map_to_y_from, c.map_to_z_from = 'X', 'Y', 'Z'
+                    c.mix_mode_rot = 'ADD'
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+    def skirt_weights(self, o, blend=False):
+        """Weights to the skirt chains by angle around the body and height down the skirt (+ pelvis at the waist).
+        blend=True (capes): only the part below the waist moves to the chains, scaled into the spine weights."""
+        N, (ztop, zbot) = self.SKIRT_N, self.skirt_z
+        cy = .01 * self.s
+        if not blend:
+            for vg in list(o.vertex_groups):
+                o.vertex_groups.remove(vg)
+        for n in ['pelvis'] + self.skirt_bones:
+            if n not in o.vertex_groups:
+                o.vertex_groups.new(name=n)
+        VG = o.vertex_groups
+        Mw = o.matrix_world
+        for v in o.data.vertices:
+            p = Mw @ v.co
+            t = min(1., max(0., (ztop - p.z) / max(1e-4, ztop - zbot)))
+            phi = math.atan2(p.y - cy, p.x)
+            f = ((phi + math.pi / 2) / (2 * math.pi) * N) % N
+            k0 = int(f) % N; k1 = (k0 + 1) % N; fa = f - int(f)
+            gseg = min(2., max(0., t * 3 - .5))
+            g0 = int(gseg); g1 = min(2, g0 + 1); ga = gseg - g0
+            top = max(0., 1 - t / .12)
+            share = 1.0
+            if blend:
+                share = ck.smoothstep(ztop + .02 * self.s, ztop - .12 * self.s, p.z)
+                if share <= 0:
+                    continue
+                for vg in VG:
+                    try:
+                        w0 = vg.weight(v.index)
+                    except RuntimeError:
+                        continue
+                    vg.add([v.index], w0 * (1 - share), 'REPLACE')
+            ws = {'pelvis': top * share}
+            for k, wa in ((k0, 1 - fa), (k1, fa)):
+                for g, wg in ((g0, 1 - ga), (g1, ga)):
+                    bn = f'skirt_{k:02d}_{g + 1}'
+                    ws[bn] = ws.get(bn, 0) + wa * wg * (1 - top) * share
+            for bn, w in ws.items():
+                if w > 1e-4:
+                    VG[bn].add([v.index], w, 'ADD' if blend and bn == 'pelvis' else 'REPLACE')
 
     def build(self, out_path):
         ck.reset()
@@ -970,12 +1115,31 @@ def set_expression(ch_or_face, nm):
         F[f'lid_lo_{sd}'].rotation_euler = (math.radians(e['lid_lo']), 0, 0)
         gx, gz = e.get('gaze', (0, 0))
         F[f'eye_{sd}'].rotation_euler = (math.radians(gz), 0, math.radians(gx))
+    set_jaw(F, jaw_deg(e['mouth']))
     return e
+
+
+JAW_K = 1.3   # jaw rotation (rad) per metre of lower-lip opening / 0.1 m hinge-to-chin
+
+
+def jaw_deg(key):
+    return math.degrees(MOUTH.get(key, {}).get('open_l', 0.0) / .100 * JAW_K)
+
+
+def set_jaw(F, deg):
+    arm = F['mouth'].parent
+    if arm is None or arm.type != 'ARMATURE' or 'jaw' not in arm.pose.bones:
+        return
+    pb = arm.pose.bones['jaw']
+    pb.rotation_mode = 'QUATERNION'; pb.rotation_quaternion = (1, 0, 0, 0)
+    ck.world_rot(arm, 'jaw', (1, 0, 0), deg)
+    bpy.context.view_layer.update()
 
 
 def set_phoneme(F, ph):
     for kb in F['mouth'].data.shape_keys.key_blocks[1:]:
         kb.value = 1.0 if kb.name == ph else 0.0
+    set_jaw(F, jaw_deg(ph))
 
 
 def set_pose(arm, name, s=1.0):

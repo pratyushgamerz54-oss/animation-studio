@@ -1,0 +1,47 @@
+{
+ "CV_M01_PALE_CAVE_MOSS_LOD1": {
+  "hero": "CV_M01_PALE_CAVE_MOSS",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.045,
+   "spread_x_m": 0.366,
+   "spread_y_m": 0.322,
+   "tris": 1156,
+   "verts": 744,
+   "lowest_z": -0.02
+  },
+  "collection": "T6_CV_M01_PALE_CAVE_MOSS_LOD1"
+ },
+ "CV_MU01_CAVE_FUNGI_LOD1": {
+  "hero": "CV_MU01_CAVE_FUNGI",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 0.078,
+   "spread_x_m": 0.153,
+   "spread_y_m": 0.181,
+   "tris": 2328,
+   "verts": 1512,
+   "lowest_z": -0.006
+  },
+  "collection": "T6_CV_MU01_CAVE_FUNGI_LOD1"
+ },
+ "CV_V01_ROOT_CURTAIN_LOD1": {
+  "hero": "CV_V01_ROOT_CURTAIN",
+  "kind": "plant",
+  "seed": 0,
+  "lod": 1,
+  "stats": {
+   "height_m": 3.6,
+   "spread_x_m": 1.875,
+   "spread_y_m": 0.682,
+   "tris": 2160,
+   "verts": 1125,
+   "lowest_z": 0.069
+  },
+  "collection": "T6_CV_V01_ROOT_CURTAIN_LOD1"
+ }
+}

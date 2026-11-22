@@ -1,0 +1,19 @@
+{
+ "component": "water",
+ "tiles": {},
+ "scatter": {},
+ "rivers": {
+  "verts": 433353,
+  "faces": 288728
+ },
+ "lake": {
+  "level_m": 735.7614135742188,
+  "faces": 7550
+ },
+ "cascade": {
+  "tiers": 6,
+  "total_drop_m": 375.5,
+  "spray_emitters": 253,
+  "spray_particles": 3542
+ }
+}
