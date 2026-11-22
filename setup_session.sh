@@ -28,5 +28,5 @@ m = json.load(open('02_world/3d_world/TASK04_BASELINE_MANIFEST.json'))
 bad = [f for f, v in m['files'].items() if hashlib.sha256(open(os.path.join('02_world/3d_world', f), 'rb').read()).hexdigest() != v['sha256']]
 print('  baseline files:', len(m['files']), '| changed:', bad or 'none')
 EOF
-echo "  TASK 06 pending renders (if any): SCRATCH=$SP bash 03_assets/vegetation/scripts/t6_finish_pending.sh"
+echo "  TASK 06: all DONE (milestone 2). Rebuild / resume only if needed (idempotent): SCRATCH=$SP bash 03_assets/vegetation/scripts/t6_finish_pending.sh · t6_m2_pending.sh · t6_final_previews.sh"
 echo "SETUP_DONE — use:  BPY45=$SP/bpy45/bin/python   (EGL_PLATFORM=surfaceless for Workbench renders)"
