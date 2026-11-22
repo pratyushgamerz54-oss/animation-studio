@@ -192,7 +192,8 @@ Hidden Underground = CV caves, Sky Realms = NOT on the map (nothing designed). F
 Lessons: Blender ortho cam → set `sensor_fit` explicitly; custom-prop changes need `obj.update_tag()` before frame_set; leaf atlases
 auto-fit (zoom) so sprays never touch tile edges; branches need a ground "floor" guard; height-normalise trees (±10 %);
 CPU Cycles ≈ 30 s per 600×840 tree view (transparent leaves, 64 transparent bounces).
-**Next (after approval):** 3–5 variants + LOD1/2 per species, NG_T6_ECOSYSTEM scatter on the TASK 05 terrains, remaining regions
+**Decision Sheet 01 (22 Nov) applied** → `02_world/ecosystem/DECISION_SHEET_01.md` (mapping, Sky Realms = proposed region not dimension, EF 70–80/20–30 + subtle glow ≤ 1.0, Peepal at Ashram courtyard, Tulsi/Marigold garden only, Spring, wildlife PENDING → `WILDLIFE_SELECTION_SHEET.md`). Fantasy label = `FANTASY (APPROVED R-02)`.
+**Next (after approval):** wind physics upgrade (Director asked), 3–5 variants + LOD1/2 per species, NG_T6_ECOSYSTEM scatter on the TASK 05 terrains, remaining regions
 (R-04/05/06/08, cities, caves), natural details, wildlife (only approved list).
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)

@@ -14,7 +14,7 @@ for reg, t, p in rows:
 im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
 d.rectangle([0, 0, W, 150], fill=HEAD)
 d.text((40, 22), 'TASK 06 · MILESTONE 1 — ECOSYSTEM VEGETATION CONCEPTS (real 3D assets, Blender 4.5)', fill=(240, 240, 232), font=F(42, True))
-d.text((40, 88), 'green dot = SPECIES-INSPIRED · orange dot = PROPOSED FANTASY (needs approval) · trees: front view (scale differs per tile — see sheets) · plants: hero view, 10 cm grid',
+d.text((40, 88), 'green dot = SPECIES-INSPIRED · orange dot = FANTASY (approved for R-02, Decision Sheet 01) · trees: front view (scale differs per tile — see sheets) · plants: hero view, 10 cm grid',
        fill=(196, 206, 198), font=F(22))
 y = 170
 for reg, trees, plants in rows:

@@ -19,24 +19,24 @@ F = lambda n, b=False, i=False: ImageFont.truetype('/usr/share/fonts/truetype/li
 BG, INK, SUB, LINE = (236, 234, 228), (28, 34, 30), (92, 98, 94), (170, 172, 166)
 HEAD = (30, 44, 38)
 BADGE = {'SPECIES-INSPIRED': ((46, 110, 64), 'SPECIES-INSPIRED (real plant reference)'),
-         'PROPOSED FANTASY': ((196, 110, 24), 'PROPOSED FANTASY — needs Director approval')}
+         'FANTASY (APPROVED R-02)': ((196, 110, 24), 'FANTASY — approved for R-02 (subtle glow)')}
 NAMES = {'AV': 'ASHRAM_VALLEY', 'EF': 'ENCHANTED_FOREST', 'MK': 'MOUNTAIN_KINGDOM'}
 TITLE = {'AV': 'R-01 ASHRAM VALLEY', 'EF': 'R-02 ENCHANTED FOREST', 'MK': 'R-03 MOUNTAIN KINGDOM (Great Northern Range)'}
 IDENT = {
-    'AV': ['Warm-temperate Himalayan-foothill valley (~700–900 m): open meadows, groves and a forest ring (approved valley layout).',
-           'Trees: ancient Peepal as a lone landmark, Banj-oak groves on moist slopes + stream banks, Rhododendron at forest edges,',
-           'Chir pine on dry sunny slopes, Deodar ring on the cooler upper slopes, Bamboo clumps in moist hollows.',
-           'Ground: meadow grass + wildflowers, tall kans grass on river bars, lotus + reed-mace only in still water (pond / slow river).',
-           'Cultivated (PROPOSED): tulsi + marigold only inside the Ashram courtyard / gardens. Mood: green, gentle, golden light.'],
-    'EF': ['Deep old-growth forest (~660 m), teal-green colour key (World Bible): three canopy layers — emergent Giant Elders (60 m+),',
-           'main canopy Teal Beech + Ancient Moss Oak (25–35 m), understorey Yew + giant ferns; moss carpets, hanging lianas + beard moss,',
-           'dead snags and fallen giants. Fantasy proposals (orange labels): Veil Willow, Spiral-root Tree, Lantern Tree, Glowcap fungi —',
-           'all OPTIONAL, used sparingly (≤ 5 % of trees) so the forest stays believable. No glow anywhere unless the Director approves.'],
-    'MK': ['Altitude zones on the Great Northern Range (true-scale terrain; TASK 05 scatter tree line = 3 550 m — kept):',
-           'M1 montane forest 1 500–3 000 m — Himalayan spruce (dense, dark, conical; Deodar on the lower flanks)',
-           'M2 tree line 3 000–3 550 m — Himalayan birch (white bark, twisted) + wind-bent pine (krummholz) on exposed ridges',
+    'AV': ['SEASON: SPRING (approved). Warm-temperate Himalayan-foothill valley (~700–900 m): meadows, groves, forest ring (approved valley layout).',
+           'APPROVED: ONE landmark Peepal in the Ashram main courtyard on a stone sitting platform · Tulsi + Marigold ONLY in the Ashram garden.',
+           'Groves: Banj oak on moist slopes + stream banks, red Burans (spring key colour) at forest edges, Chir pine on dry slopes, Deodar ring',
+           'on the cooler upper slopes, Bamboo in moist hollows. Ground: meadow grass + spring wildflowers; lotus + reed-mace only in still water;',
+           'kans grass = green clumps in spring (plumed asset shown below = autumn look, NOT the seasonal feature).'],
+    'EF': ['SEASON: SPRING. Deep old-growth forest (~660 m), teal-green colour key. APPROVED mix: ~70–80 % natural trees (Giant Elder in selected',
+           'areas, Teal Beech, Ancient Moss Oak, Yew, snags) + ~20–30 % approved fantasy varieties (orange: Veil Willow, Spiral-root Tree, Lantern Tree).',
+           'Unusual roots / twisted trunks on selected trees; moss carpets, giant ferns, lianas, beard moss.',
+           'Glow: SUBTLE and LIMITED — Lantern pods + Glowcap only (emission <= 1.0), visible at dusk / night, never every tree.'],
+    'MK': ['"Mountain Kingdom" = R-03 Great Northern Range (APPROVED mapping; settlements / rulers NOT CONFIRMED). SEASON: SPRING.',
+           'M1 montane forest 1 500–3 000 m — Himalayan spruce (dense, dark), Deodar low, RED BURANS in spring (R-01 Burans asset)',
+           'M2 tree line 3 000–3 550 m (TASK 05 scatter limit) — Himalayan birch (white bark) + wind-bent pine (krummholz) on exposed ridges',
            'M3 alpine 3 550–4 500 m — juniper mats, dwarf rhododendron, tussock grass, gentian, edelweiss, blue poppy, cushion plants',
-           'M4 nival > 4 500 m — bare rock, lichen, snow only. No fantasy species proposed for the mountains (realistic, harsh, sparse).'],
+           'M4 nival > 4 500 m — bare rock, lichen, snow. No fantasy species in the mountains.'],
 }
 
 
@@ -223,7 +223,7 @@ def plant_sheet(reg, inv, V, outd):
 def region_sheet(reg, inv, V, outd):
     W, Hh = 3300, 3200
     im = Image.new('RGB', (W, Hh), BG); d = ImageDraw.Draw(im)
-    header(d, W, f'REGIONAL VEGETATION SHEET  ·  {TITLE[reg]}', 'vegetation identity · height comparison · plant palette (map rev 01 = PROPOSAL; layout preserved)',
+    header(d, W, f'REGIONAL VEGETATION SHEET  ·  {TITLE[reg]}', 'vegetation identity · height comparison · plant palette · Decision Sheet 01 applied (mapping APPROVED, season SPRING)',
            None, 'TASK 06 milestone 1 concept (v001)')
     rd = os.path.join(VEG, 'renders', reg); y = 180
     for ln in IDENT[reg]:

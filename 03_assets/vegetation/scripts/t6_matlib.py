@@ -16,7 +16,7 @@ def species_mats(S):
     else:
         mats.append(K.mat_simple(f'MAT_T6_{nm}_NOLEAF', '#556B2F'))
     if S.get('pods'):
-        mats.append(K.mat_simple(f'MAT_T6_{nm}_POD', '#DDF2D0', rough=.35, sss=.4, emission='#BFF5DA', em_strength=2.5, transl=.3))
+        mats.append(K.mat_simple(f'MAT_T6_{nm}_POD', '#DDF2D0', rough=.35, sss=.4, emission='#BFF5DA', em_strength=.6, transl=.3))   # subtle glow (Decision 01 §3)
     elif S.get('fungi'):
         mats.append(K.mat_simple(f'MAT_T6_{nm}_FUNGUS', '#B8925A', rough=.8, var_col='#6E4A2A', var_scale=30))
     elif S.get('beards'):

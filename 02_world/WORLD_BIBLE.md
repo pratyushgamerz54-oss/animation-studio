@@ -1,4 +1,22 @@
-# MASTER ENVIRONMENT BIBLE — DRAFT v1 (21 Nov)
+# MASTER ENVIRONMENT BIBLE — DRAFT v1 (21 Nov) · Decision Sheet 01 applied (22 Nov)
+
+## ★ DECISION SHEET 01 (Director, 22 Nov) — applied · full record: `02_world/ecosystem/DECISION_SHEET_01.md`
+
+| Item | Decision | Status |
+|---|---|---|
+| Region mapping (Map Revision 01) | Mountain Kingdom = **R-03** Great Northern Range · Green Plains = **R-06** Southern Grasslands · Crystal Lakes = **R-08** Lake District · Ancient City = **C-01, C-02, C-03** (three **separate** archaeological sites — no shared city, history or inhabitants invented) | **APPROVED** for environment production |
+| Sky Realms | a **proposed region within the main world** — **not** a separate dimension. Direction: large floating islands of natural rock, selected islands with forests + waterfalls, ancient-looking structures, clouds + atmospheric depth between islands, some natural bridges / suspended land, strong visual link with the main world | design direction **APPROVED** · region **PROPOSED** · map position, travel routes, inhabitants, kingdoms, politics, story events **NOT established (PENDING)** |
+| Enchanted Forest | ≈ 70–80 % natural / 20–30 % fantasy trees, giant trees in selected areas, subtle limited glow at night | **APPROVED** (`ecosystem/ENCHANTED_FOREST_VEGETATION_REFERENCE.md`) |
+| Ashram planting | one landmark Peepal near the main courtyard + sitting area; Tulsi + Marigold only in the Ashram garden | **APPROVED** (`ashram/ASHRAM_LANDSCAPING_PLAN.md`) |
+| Wildlife | not finalized | **PENDING** (`ecosystem/WILDLIFE_SELECTION_SHEET.md`) |
+| Season | Spring = proposed primary season, consistent across connected scenes | **APPROVED** (`ecosystem/SEASON_REFERENCE_SPRING.md`) |
+
+Region IDs verified against Map Revision 01 data (`3d_world/01_GEOGRAPHY/data/world_features.json` → `c1_regions`; `map_v2/data/features.json` →
+`c1_regions`, `c1_city_codes`). World coordinates (km, origin = map centre; Ashram = (−2275, +1238)):
+R-03 (−2185.5, +1523.4) 3 538 m · R-06 (−3570.8, +320.0) 314 m · R-08 (−1851.0, +1151.6) 315 m ·
+C-01 (−1882.7, +647.1) · C-02 (−2851.2, −4.1) · C-03 (−3459.8, +290.0) — all on continent C1 AETHERIA. **No map geometry was changed.**
+Sky Realms map position: **PENDING** — candidate options (proposal only, not drawn): (a) above the southern flank of R-03, visible from the
+Ashram valley; (b) above R-08 Lake District; (c) over the sea west of C1. Director picks before any map update.
 
 > **Status: DRAFT — nothing here is locked.** The master map and every look are **PROPOSALS** until the Director approves them.
 > Labels used everywhere:
@@ -64,12 +82,12 @@ it is exactly reproducible; any change = a new map version).
 |---|---|---|---|---|
 | R-01 | **Ashram Valley** — CONFIRMED location, PROPOSED position | (474, 535) grid E6 | ~720 m | Foothill valley on a lake shore below the great range |
 | R-02 | Enchanted Forest | (672, 263) | ~660 m | Deep teal-green old forest; hidden glade H-01 |
-| R-03 | Great Northern Range | (626, 630) | 3 400 m (peaks 6 574) | Snow peaks, glaciers, caves, waterfalls, hidden plateau H-02 |
+| R-03 | Great Northern Range (= "Mountain Kingdom", APPROVED mapping) | (626, 630) | 3 400 m (peaks 6 574) | Snow peaks, glaciers, caves, waterfalls, hidden plateau H-02 |
 | R-04 | Western Desert & Wastelands | (137, 262) | ~200 m | Dunes, dry plateaus, ruins |
 | R-05 | Forbidden Region | (276, 284) | ~370 m | Blasted crater ~90 km wide, dark ground, crater lake |
-| R-06 | Southern Grasslands | (164, 229) | ~300 m | Open plains, villages |
+| R-06 | Southern Grasslands (= "Green Plains", APPROVED mapping) | (164, 229) | ~300 m | Open plains, villages |
 | R-07 | Eastern Spine (rename? relief is low) | (819, 346) | ~360 m | Forested eastern hills |
-| R-08 | Lake District | (738, 506) | ~330 m | Large lakes between forests |
+| R-08 | Lake District (= "Crystal Lakes", APPROVED mapping) | (738, 506) | ~330 m | Large lakes between forests |
 
 Other proposed features on the map: **C-01…C-03** ancient city sites (on large rivers near coasts), **14 villages**,
 **RU-01…RU-06** ancient ruins, **CV-01…CV-05** cave entrances (underground caves), **5 waterfalls** (largest river drops),
@@ -97,8 +115,8 @@ the continent ≈ 1 000 km across (travel times between places are NOT CONFIRMED
 9. Is Saithan’s Dark World a separate dimension, a corrupted part of this world, or underground?
 10. Which places do portals connect? Can anyone with portal power go anywhere?
 11. Historical events (wars, catastrophes — e.g. what made the Forbidden crater, if it exists)?
-12. Climate / seasons / weather in story scenes; day or night for each scene?
-13. Are ruins, ancient cities, villages part of the story or background only?
+12. Climate / seasons / weather in story scenes; day or night for each scene? → **Season: Spring APPROVED as the proposed primary season (Decision 01 §6)**; weather / day-night per scene still NOT CONFIRMED.
+13. Are ruins, ancient cities, villages part of the story or background only? → Ancient City = C-01, C-02, C-03 as separate archaeological sites (APPROVED mapping); story role NOT CONFIRMED.
 14. Destruction required by the story (which locations get damaged)?
 
 ## 4. Architectural language (PROPOSAL)

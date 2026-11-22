@@ -5,7 +5,7 @@
   "label": "SPECIES-INSPIRED",
   "region": "R-01",
   "category": "Ancient tree",
-  "habitat": "open valley floor, single ancient tree near the Ashram / village sites; never in dense forest",
+  "habitat": "APPROVED (Decision 01): ONE landmark Peepal in the Ashram main courtyard on a stone sitting platform; elsewhere only lone trees at village sites, never in dense forest",
   "altitude": "300\u20131 500 m",
   "kind": "tree",
   "palette": [
@@ -132,9 +132,9 @@
   "common": "Tree Rhododendron (Burans)",
   "latin": "Rhododendron arboreum",
   "label": "SPECIES-INSPIRED",
-  "region": "R-01",
+  "region": "R-01 + R-03 (M1)",
   "category": "Small tree (flowering)",
-  "habitat": "forest edges and oak groves on the valley slopes; crimson flowers in spring",
+  "habitat": "forest edges + oak groves of the valley slopes and the lower montane belt of the range (1 500\u20133 000 m); crimson flowers = SPRING key colour",
   "altitude": "1 200\u20133 000 m",
   "kind": "tree",
   "palette": [
@@ -229,7 +229,7 @@
   "label": "SPECIES-INSPIRED",
   "region": "R-01 (Ashram gardens, cultivated)",
   "category": "Small plant / herb bush",
-  "habitat": "PROPOSED: planted in the Ashram courtyard and gardens (cultivated, not wild)",
+  "habitat": "APPROVED (Decision 01): ONLY in the Ashram garden (cultivated) \u2014 never in forests, cities or other regions",
   "altitude": "cultivated",
   "kind": "shrub",
   "palette": [

@@ -131,10 +131,10 @@
  "EF_T05_VEIL_WILLOW": {
   "common": "Veil Willow",
   "latin": "fictional (weeping form loosely based on Salix babylonica)",
-  "label": "PROPOSED FANTASY",
+  "label": "FANTASY (APPROVED R-02)",
   "region": "R-02",
   "category": "Rare fantasy tree",
-  "habitat": "PROPOSAL: forest pools and slow streams; curtains of silver-teal leaves to the ground",
+  "habitat": "R-02 (approved fantasy variety): forest pools and slow streams; curtains of silver-teal leaves to the ground",
   "altitude": "\u2014",
   "kind": "tree",
   "palette": [
@@ -163,10 +163,10 @@
  "EF_T06_SPIRAL_ROOT": {
   "common": "Spiral-root Tree",
   "latin": "fictional (stilt roots like Rhizophora / Pandanus, twisted trunk)",
-  "label": "PROPOSED FANTASY",
+  "label": "FANTASY (APPROVED R-02)",
   "region": "R-02",
   "category": "Rare fantasy tree",
-  "habitat": "PROPOSAL: wet hollows of the Enchanted Forest; trunk raised on a cage of stilt roots, spiral bark, silver-blue round leaves",
+  "habitat": "R-02 (approved fantasy variety): wet hollows of the Enchanted Forest; trunk raised on a cage of stilt roots, spiral bark, silver-blue round leaves",
   "altitude": "\u2014",
   "kind": "tree",
   "palette": [
@@ -195,10 +195,10 @@
  "EF_T07_LANTERN_TREE": {
   "common": "Lantern Tree",
   "latin": "fictional",
-  "label": "PROPOSED FANTASY",
+  "label": "FANTASY (APPROVED R-02)",
   "region": "R-02",
   "category": "Rare fantasy tree",
-  "habitat": "PROPOSAL: glades of the Enchanted Forest; umbrella crown of fan leaves with hanging pale seed-pods that glow faintly at dusk",
+  "habitat": "R-02 (approved fantasy variety): glades; umbrella crown of fan leaves, hanging pale seed-pods with a SUBTLE glow visible only at dusk / night",
   "altitude": "\u2014",
   "kind": "tree",
   "palette": [
@@ -311,7 +311,7 @@
  "EF_MU01_GLOWCAP": {
   "common": "Glowcap mushrooms",
   "latin": "fictional (bioluminescent fungi exist, e.g. Mycena \u2014 look is a proposal)",
-  "label": "PROPOSED FANTASY",
+  "label": "FANTASY (APPROVED R-02)",
   "region": "R-02",
   "category": "Rare fantasy fungus",
   "habitat": "",

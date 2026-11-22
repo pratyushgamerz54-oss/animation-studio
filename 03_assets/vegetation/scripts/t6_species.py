@@ -1,16 +1,16 @@
 """TASK 06 · species catalogue (milestone 1: Ashram Valley, Enchanted Forest, Mountain Kingdom).
 
 label:  'SPECIES-INSPIRED'  = modelled on a real species (botanical name given) — natural, believable
-        'PROPOSED FANTASY'  = fictional plant, PROPOSAL only, needs Director approval before production use
+        'FANTASY (APPROVED R-02)' = fictional plant, approved for the Enchanted Forest only (Decision Sheet 01 §3: 20–30 %, subtle glow)
 Heights are the design (hero) height; variants vary ±7 %. Region codes follow the approved map rev 01 (PROPOSAL):
 R-01 Ashram Valley · R-02 Enchanted Forest · R-03 Great Northern Range (= "Mountain Kingdom" in the TASK 06 brief).
 """
-SI, PF = 'SPECIES-INSPIRED', 'PROPOSED FANTASY'
+SI, PF = 'SPECIES-INSPIRED', 'FANTASY (APPROVED R-02)'   # Decision Sheet 01 §3: fantasy varieties approved for R-02 (20–30 %), subtle glow
 
 TREES = [
     # ================================================================== R-01 ASHRAM VALLEY (≈ 700–900 m, warm-temperate foothills)
     dict(name='AV_T01_PEEPAL', common='Ancient Peepal', latin='Ficus religiosa', label=SI, region='R-01', category='Ancient tree',
-         habitat='open valley floor, single ancient tree near the Ashram / village sites; never in dense forest', altitude='300–1 500 m',
+         habitat='APPROVED (Decision 01): ONE landmark Peepal in the Ashram main courtyard on a stone sitting platform; elsewhere only lone trees at village sites, never in dense forest', altitude='300–1 500 m',
          seed=11, height=22.0, crown_base=.22, shape='spreading', flex=[0, .30, .55, .85, 1.0], sides=[28, 12, 7, 4, 3],
          trunk=dict(radius=1.05, flare=.55, flare_h=.07, lobes=7, lobe_amp=.35, segs=26, wander=4, lean=3, sink=.5,
                     split=dict(h=.24, n=4, angle=40, len=.72, grav=-.12), split_r=.86, taper=.16),
@@ -55,8 +55,8 @@ TREES = [
          leaves=dict(atlas='av_banj', levels=[-1, -2], per_m=8, start=.25, angle=50, droop=-.1, scale=1.5, tip=True),
          bark=dict(tex='jolcham_oak_bark_01', tile=.9, tint='#A8A49A', moss=.25),
          leaf=dict(tint='#FFFFFF', transl=.3), palette=['#2F5A2E', '#7F9A72', '#8FA884', '#6E6A60', '#4A463E']),
-    dict(name='AV_T05_RHODODENDRON', common='Tree Rhododendron (Burans)', latin='Rhododendron arboreum', label=SI, region='R-01',
-         category='Small tree (flowering)', habitat='forest edges and oak groves on the valley slopes; crimson flowers in spring',
+    dict(name='AV_T05_RHODODENDRON', common='Tree Rhododendron (Burans)', latin='Rhododendron arboreum', label=SI, region='R-01 + R-03 (M1)',
+         category='Small tree (flowering)', habitat='forest edges + oak groves of the valley slopes and the lower montane belt of the range (1 500–3 000 m); crimson flowers = SPRING key colour',
          altitude='1 200–3 000 m', seed=15, height=8.5, crown_base=.3, shape='spherical', flex=[0, .3, .55, .85, 1.0], sides=[16, 8, 5, 4],
          trunk=dict(radius=.22, flare=.25, flare_h=.06, lobes=3, lobe_amp=.15, segs=18, wander=4, lean=6, sink=.3,
                     split=dict(h=.28, n=3, angle=34, len=.9, grav=0), split_r=.8, taper=.2),
@@ -125,7 +125,7 @@ TREES = [
          bark=dict(tex='tree_bark_03', tile=.7, tint='#B07A60', moss=.35, moss_col='#3E6A3A'),
          leaf=dict(tint='#FFFFFF', transl=.15), palette=['#17382C', '#2C5240', '#8A4A34', '#5A3A2A', '#3E6A3A']),
     dict(name='EF_T05_VEIL_WILLOW', common='Veil Willow', latin='fictional (weeping form loosely based on Salix babylonica)', label=PF,
-         region='R-02', category='Rare fantasy tree', habitat='PROPOSAL: forest pools and slow streams; curtains of silver-teal leaves to the ground',
+         region='R-02', category='Rare fantasy tree', habitat='R-02 (approved fantasy variety): forest pools and slow streams; curtains of silver-teal leaves to the ground',
          altitude='—', seed=25, height=18.0, crown_base=.32, shape='spherical', flex=[0, .3, .6, 1.0, 1.2], sides=[22, 10, 6, 4, 3],
          trunk=dict(radius=.62, flare=.4, flare_h=.05, lobes=5, lobe_amp=.2, segs=22, wander=6, lean=5, sink=.4,
                     split=dict(h=.30, n=4, angle=34, len=.85, grav=0), split_r=.8, taper=.16),
@@ -137,7 +137,7 @@ TREES = [
          leaf=dict(tint='#FFFFFF', transl=.45), palette=['#4F8F86', '#A6C9C0', '#C8E0D8', '#6A6A5E', '#3E6A44']),
     dict(name='EF_T06_SPIRAL_ROOT', common='Spiral-root Tree', latin='fictional (stilt roots like Rhizophora / Pandanus, twisted trunk)',
          label=PF, region='R-02', category='Rare fantasy tree',
-         habitat='PROPOSAL: wet hollows of the Enchanted Forest; trunk raised on a cage of stilt roots, spiral bark, silver-blue round leaves',
+         habitat='R-02 (approved fantasy variety): wet hollows of the Enchanted Forest; trunk raised on a cage of stilt roots, spiral bark, silver-blue round leaves',
          altitude='—', seed=26, height=24.0, crown_base=.45, shape='spherical', flex=[0, .3, .55, .85, 1.0], sides=[22, 10, 6, 4],
          trunk=dict(radius=.75, flare=.0, flare_h=.04, lobes=0, segs=30, wander=4, lean=3, twist=9.0, sink=.0,
                     split=dict(h=.5, n=3, angle=30, len=.9, grav=0), split_r=.8, taper=.15),
@@ -149,7 +149,7 @@ TREES = [
          bark=dict(tex='bark_platanus', tile=1.1, tint='#C0C4C4', moss=.3, moss_col='#3E6A4A', lichen=.3),
          leaf=dict(tint='#FFFFFF', transl=.35), palette=['#5C8C9A', '#A9C4CC', '#D0E2E6', '#B8BAB4', '#6A6A70']),
     dict(name='EF_T07_LANTERN_TREE', common='Lantern Tree', latin='fictional', label=PF, region='R-02', category='Rare fantasy tree',
-         habitat='PROPOSAL: glades of the Enchanted Forest; umbrella crown of fan leaves with hanging pale seed-pods that glow faintly at dusk',
+         habitat='R-02 (approved fantasy variety): glades; umbrella crown of fan leaves, hanging pale seed-pods with a SUBTLE glow visible only at dusk / night',
          altitude='—', seed=27, height=15.0, crown_base=.45, shape='umbrella', flex=[0, .3, .55, .85, 1.0], sides=[18, 9, 5, 4],
          trunk=dict(radius=.38, flare=.45, flare_h=.06, lobes=4, lobe_amp=.25, segs=22, wander=6, lean=4, twist=2.0, sink=.3,
                     split=dict(h=.48, n=5, angle=48, len=.75, grav=-.1), split_r=.75, taper=.18),
@@ -217,7 +217,7 @@ SHRUBS = [
          bark=dict(tex='bark_brown_01', tile=.3, tint='#A07A5A'), leaf=dict(tint='#FFFFFF', transl=.3),
          palette=['#3C6A2E', '#5E8A3C', '#E8C23A', '#8A5A3A']),
     dict(name='AV_S02_TULSI', common='Holy Basil (Tulsi)', latin='Ocimum tenuiflorum', label=SI, region='R-01 (Ashram gardens, cultivated)',
-         category='Small plant / herb bush', habitat='PROPOSED: planted in the Ashram courtyard and gardens (cultivated, not wild)',
+         category='Small plant / herb bush', habitat='APPROVED (Decision 01): ONLY in the Ashram garden (cultivated) — never in forests, cities or other regions',
          altitude='cultivated', seed=42, height=.75, crown_base=.05, shape='spherical', flex=[0, .5, .8, 1.0], sides=[6, 4, 3],
          trunk=dict(radius=.012, taper=.5, segs=8, wander=6, clump=dict(n=6, radius=.05, lean=10, splay=25, hmin=.7)),
          levels=[dict(count=10, down=45, down_var=12, len=.35, rabs=.004, segs=4, grav=.2, wander=12, end=1.0)],

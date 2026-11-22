@@ -64,9 +64,9 @@ def run_blender():
                 # nothing except roots under the ground far from the trunk
                 far = V[(V[:, 2] < -.15) & (np.hypot(V[:, 0], V[:, 1]) > D['height'] * .45 + 8)]
                 chk(f'{n}: no limbs through the ground', len(far) == 0, f'{len(far)} verts far + under ground')
-                chk(f"{n}: label set ({o['t6_label']})", o['t6_label'] in ('SPECIES-INSPIRED', 'PROPOSED FANTASY'))
-                if o['t6_label'] == 'PROPOSED FANTASY':
-                    chk(f'{n}: fantasy asset marked as proposal in its habitat text', 'PROPOSAL' in o['t6_habitat'])
+                chk(f"{n}: label set ({o['t6_label']})", o['t6_label'] in ('SPECIES-INSPIRED', 'FANTASY (APPROVED R-02)'))
+                if o['t6_label'] == 'FANTASY (APPROVED R-02)':
+                    chk(f'{n}: fantasy asset restricted to R-02 (Decision 01)', o['t6_region'].startswith('R-02') and 'R-02' in o['t6_habitat'])
             else:
                 P = pdesign[n]
                 if P.get('hanging'):
@@ -76,6 +76,9 @@ def run_blender():
                 else:
                     near0 = V[V[:, 2] < .01]
                     chk(f'{n}: plant base on the ground (no floating)', lo <= .001 and len(near0) > 3, f'lowest z {lo:.3f} m')
+            em = [m.node_tree.nodes['Principled BSDF'].inputs['Emission Strength'].default_value for m in mats
+                  if m.node_tree and 'Principled BSDF' in m.node_tree.nodes]
+            chk(f'{n}: glow subtle (emission ≤ 1.0, Decision 01 §3)', max(em + [0]) <= 1.0, f'max emission {max(em + [0]):.2f}')
             md = o.modifiers.get('T6_WIND')
             if md:
                 drv_ok = all(fc.driver.is_valid for fc in (o.animation_data.drivers if o.animation_data else []))

@@ -89,6 +89,24 @@ its detailed map so the two maps match.
 | Coastlines continuous | ✅ 43 land masses (5 continents + islands), closed coastlines |
 | Matches approved environment concepts | ⚠️ C1 = detailed v1 map (match ✅); Ashram 3D backdrop vs map distance to the snow range — to align after approval |
 
+## ★ DECISION SHEET 01 (Director, 22 Nov) — applied · full record: `02_world/ecosystem/DECISION_SHEET_01.md`
+
+| Item | Decision | Status |
+|---|---|---|
+| Region mapping (Map Revision 01) | Mountain Kingdom = **R-03** Great Northern Range · Green Plains = **R-06** Southern Grasslands · Crystal Lakes = **R-08** Lake District · Ancient City = **C-01, C-02, C-03** (three **separate** archaeological sites — no shared city, history or inhabitants invented) | **APPROVED** for environment production |
+| Sky Realms | a **proposed region within the main world** — **not** a separate dimension. Direction: large floating islands of natural rock, selected islands with forests + waterfalls, ancient-looking structures, clouds + atmospheric depth between islands, some natural bridges / suspended land, strong visual link with the main world | design direction **APPROVED** · region **PROPOSED** · map position, travel routes, inhabitants, kingdoms, politics, story events **NOT established (PENDING)** |
+| Enchanted Forest | ≈ 70–80 % natural / 20–30 % fantasy trees, giant trees in selected areas, subtle limited glow at night | **APPROVED** (`ecosystem/ENCHANTED_FOREST_VEGETATION_REFERENCE.md`) |
+| Ashram planting | one landmark Peepal near the main courtyard + sitting area; Tulsi + Marigold only in the Ashram garden | **APPROVED** (`ashram/ASHRAM_LANDSCAPING_PLAN.md`) |
+| Wildlife | not finalized | **PENDING** (`ecosystem/WILDLIFE_SELECTION_SHEET.md`) |
+| Season | Spring = proposed primary season, consistent across connected scenes | **APPROVED** (`ecosystem/SEASON_REFERENCE_SPRING.md`) |
+
+Region IDs verified against Map Revision 01 data (`3d_world/01_GEOGRAPHY/data/world_features.json` → `c1_regions`; `map_v2/data/features.json` →
+`c1_regions`, `c1_city_codes`). World coordinates (km, origin = map centre; Ashram = (−2275, +1238)):
+R-03 (−2185.5, +1523.4) 3 538 m · R-06 (−3570.8, +320.0) 314 m · R-08 (−1851.0, +1151.6) 315 m ·
+C-01 (−1882.7, +647.1) · C-02 (−2851.2, −4.1) · C-03 (−3459.8, +290.0) — all on continent C1 AETHERIA. **No map geometry was changed.**
+Sky Realms map position: **PENDING** — candidate options (proposal only, not drawn): (a) above the southern flank of R-03, visible from the
+Ashram valley; (b) above R-08 Lake District; (c) over the sea west of C1. Director picks before any map update.
+
 ## Pending Director approvals (nothing is locked)
 
 1. Overall layout: 5 continents + 3 archipelagos — approve / change shapes, sizes, positions?
@@ -98,3 +116,4 @@ its detailed map so the two maps match.
 5. GEM: accept the proposed hidden ancient region in Veylora + chamber, or another place?
 6. Which portal connections exist in the story (map I shows none as confirmed).
 7. Which regions the story actually uses → only those get detailed 3D environments.
+8. Sky Realms map position (candidates above; Decision 01 §2 — region PROPOSED, not a dimension).

@@ -2,7 +2,8 @@
 
 ## Session 4 (21 Nov)
 - Restore: branch `ccr-a129fdfc-g3v4k0` ka kaam working branch `ccr-c375d59d-2qaoyn` par (same history), `setup_session.sh` chalaya. Kuch rebuild nahi.
-- **TASK 06 (Ecosystem & Vegetation Bible) — MILESTONE 1 DONE → Director review ka intezaar (22 Nov).**
+- **DECISION SHEET 01 APPLIED (22 Nov):** mapping APPROVED (R-03/R-06/R-08, C-01/02/03 separate sites), Sky Realms = PROPOSED region of the main world (not a dimension), EF 70–80 % natural / 20–30 % fantasy + subtle glow, Peepal landmark at the Ashram courtyard + Tulsi/Marigold only in the garden, Spring season, wildlife PENDING. Record: `02_world/ecosystem/DECISION_SHEET_01.md`, verification 33/33 (`DECISION_SHEET_01_VERIFICATION.md`). Wildlife selection sheet: `02_world/ecosystem/WILDLIFE_SELECTION_SHEET.md` → **Director selection pending**. Director feedback: wind me aur physics → NEXT.
+- **TASK 06 (Ecosystem & Vegetation Bible) — MILESTONE 1 DONE → Director: "baaki theek hai" (22 Nov).**
   - Libraries: `03_assets/vegetation/library/T6_VEG_{ASHRAM_VALLEY,ENCHANTED_FOREST,MOUNTAIN_KINGDOM}_v001.blend` — 42 real 3D assets (17 trees, 4 shrubs, 21 plants), wind-ready.
   - Sheets: `03_assets/vegetation/sheets/` (21 tree sheets, 3 plant libraries, 3 regional sheets, contact sheet `T6_SHEET_M1.png`), wind clip `renders/WIND_TEST.mp4`.
   - Docs: `02_world/ecosystem/ECOSYSTEM_BIBLE.md` (6 questions §12), `WILDLIFE_PROPOSAL.png`. QC `03_assets/vegetation/qc/T06_QC_REPORT.md`: 337/337 (Blender 4.5) + 337/337 (5.3) + 25/25 textures.

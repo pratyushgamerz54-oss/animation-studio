@@ -11,7 +11,7 @@ from mathutils import Vector
 import t6kit as K
 from t6kit import Geo, perp, rot_about, UP
 
-SI, PF = 'SPECIES-INSPIRED', 'PROPOSED FANTASY'
+SI, PF = 'SPECIES-INSPIRED', 'FANTASY (APPROVED R-02)'
 
 
 # ====================================================================== primitives
@@ -468,9 +468,9 @@ def plant_mats(D):
         elif kind == 'bark':
             out.append(K.mat_bark(nm, v, '#B0A898', moss=.3))
         elif kind == 'glow':
-            out.append(K.mat_simple(nm, v, rough=.4, sss=.4, emission=v, em_strength=1.5, transl=.3))
+            out.append(K.mat_simple(nm, v, rough=.4, sss=.4, emission=v, em_strength=.5, transl=.3))      # subtle (Decision 01 §3)
         elif kind == 'glow_dim':
-            out.append(K.mat_simple(nm, v, rough=.5, emission=v, em_strength=.4))
+            out.append(K.mat_simple(nm, v, rough=.5, emission=v, em_strength=.15))
     return out
 
 
