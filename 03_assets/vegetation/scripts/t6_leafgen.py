@@ -17,7 +17,7 @@ from PIL import Image, ImageFilter
 from scipy.ndimage import gaussian_filter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.abspath(os.path.join(HERE, '..', 'textures', 'leaves'))
+OUT = os.environ.get('T6_LEAF_OUT') or os.path.abspath(os.path.join(HERE, '..', 'textures', 'leaves'))
 TILE = 1024          # final tile resolution (atlas 2048²)
 SS = 2               # supersampling
 N = TILE * SS
@@ -98,9 +98,9 @@ class Tile:
         sl = self.box(min(base[0], tip[0]) - pad, min(base[1], tip[1]) - pad, max(base[0], tip[0]) + pad, max(base[1], tip[1]) + pad)
         X, Y = self.X[sl] - base[0], self.Y[sl] - base[1]
         u = (X * ca + Y * sa) / length; v = (-X * sa + Y * ca) / (width / 2)          # v ∈ [-1, 1] at the widest point
-        shape = P['shape']; uu = np.clip(u, 0, 1)
-        if shape == 'heart':          # cordate base, long drip tip (Ficus religiosa)
-            body = np.sqrt(np.clip(1 - ((uu - .30) / .38) ** 2, 0, 1)) * (1 - .15 * uu)
+        shape = P['shape']; u_lo = -.07 if shape == 'heart' else 0.0; uu = np.clip(u, u_lo, 1)
+        if shape == 'heart':          # broad ROUNDED base around the petiole (slight notch), long drip tip (Ficus religiosa)
+            body = np.sqrt(np.clip(1 - ((uu - .31) / .385) ** 2, 0, 1)) * (1 - .15 * np.clip(uu, 0, 1))
             tail = np.clip((1 - uu) / .42, 0, 1) ** 1.3 * .22
             w = np.maximum(body, np.where(uu > .5, tail, 0))
         elif shape == 'lance':
@@ -120,7 +120,13 @@ class Tile:
         ser = P.get('serr', 0.0)
         if ser:
             w = w * (1 - ser * (.5 + .5 * np.sin(uu * P.get('teeth', 40) * np.pi)) ** 3)
-        inside = (u >= 0) & (u <= 1) & (np.abs(v) <= w)
+        inside = (u >= u_lo) & (u <= 1) & (np.abs(v) <= w)
+        if P.get('bites', True) and shape not in ('fan',) and self.rng.random() < .2:     # insect bites / torn margins (real leaves)
+            for _ in range(self.rng.integers(1, 3)):
+                bu = self.rng.uniform(.3, .85); sgn = self.rng.choice([-1, 1]); rb = self.rng.uniform(.05, .11) * length
+                wb = np.interp(bu, np.linspace(0, 1, 50), np.clip(np.sin(np.pi * np.linspace(0, 1, 50)) ** .7, 0, 1))
+                du_ = (u - bu) * length; dv_ = (v - sgn * wb * 1.05) * width / 2
+                inside &= ~(np.sqrt(du_ ** 2 + dv_ ** 2) < rb)
         if not inside.any():
             return
         q = np.clip(np.abs(v) / np.maximum(w, 1e-4), 0, 1)
@@ -132,13 +138,28 @@ class Tile:
         c = top * (1 - f) + edge * f
         c = c * (.86 + .26 * nz[..., None]) * (1 + jitter * .0)
         c = c * (1 - .25 * np.clip(1 - uu / .25, 0, 1)[..., None] * P.get('basedark', 1))
-        # veins: midrib + lateral veins slanting to the tip
-        mid = np.abs(v) * w * width / 2 < length * P.get('rib', .010) * (1.2 - uu)
+        # veins (realism pass 22 Nov): soft-edged, low colour contrast, fading towards the margin; relief carried by the normal map
+        ribw = length * P.get('rib', .010) * (1.2 - uu)
+        dmid = np.abs(v) * w * width / 2
+        mid_s = np.clip(1 - dmid / np.maximum(ribw, 1e-6), 0, 1) ** 1.2
         nv = P.get('veins', 9)
-        lat = (np.abs(((uu - np.abs(v) * P.get('slant', .22)) * nv) % 1 - .5) < .055) & (q < .92) & (uu > .05)
-        vm = (mid | (lat & (P.get('veinvis', 1) > 0)))
-        c = np.where(vm[..., None], c * .35 + vein * .65, c)
-        h = .55 * np.sqrt(np.clip(1 - q * q, 0, 1)) * P.get('dome', 1) + .15 - .22 * lat - .3 * mid + .05 * nz
+        dl = np.abs(((uu - np.abs(v) * P.get('slant', .22)) * nv) % 1 - .5)
+        lat_s = np.clip(1 - dl / .04, 0, 1) ** 1.5 * np.clip(1 - q ** 2, 0, 1) * (uu > .05) * (P.get('veinvis', 1) > 0)
+        a = (.42 * mid_s + .26 * lat_s)[..., None]
+        c = c * (1 - a) + vein * a
+        # natural variation inside the blade: lighter along the midrib, darker margin, a few small blemish spots
+        c = c * (1 + .07 * (1 - q[..., None]) ** 4) * (1 - .09 * q[..., None] ** 6)
+        rng = self.rng
+        if rng.random() < .3 and P.get('spots', True):
+            for _ in range(rng.integers(1, 4)):
+                su, sv = rng.uniform(.2, .85), rng.uniform(-.7, .7)
+                rs = rng.uniform(.012, .03) * length
+                du_ = (u - su) * length; dv_ = (v - sv) * width / 2
+                sm = np.clip(1 - np.sqrt(du_ ** 2 + dv_ ** 2) / rs, 0, 1) ** .8
+                spot = np.array(srgb2lin(np.array([.45, .36, .16])), np.float32)
+                c = c * (1 - .55 * sm[..., None]) + spot * .55 * sm[..., None]
+        mid, lat = mid_s, lat_s
+        h = .55 * np.sqrt(np.clip(1 - q * q, 0, 1)) * P.get('dome', 1) + .15 - .20 * lat - .28 * mid + .05 * nz
         if P.get('cup', 0):
             h = h + P['cup'] * q * q
         r = np.clip(P.get('rough', .42) + .18 * lat + .12 * (nz - .5), .15, .95)
@@ -368,7 +389,8 @@ def build(name):
     C = np.zeros((2 * TILE, 2 * TILE, 4), np.uint8); NOR = np.zeros((2 * TILE, 2 * TILE, 3), np.uint8)
     RO = np.zeros((2 * TILE, 2 * TILE), np.uint8)
     seed = rng.integers(1 << 30)
-    for z in (1.0, 1.12, 1.25, 1.4, 1.6, 1.85):
+    z0 = A.get('zoom', 1.0)                                         # keep the previous card size when the spray still fits
+    for z in sorted({z0} | {z for z in (1.0, 1.12, 1.25, 1.4, 1.6, 1.85) if z >= z0}):
         tiles = []
         for var in range(4):
             T = spray(Tile(np.random.default_rng(seed + var), z), A, var); tiles.append(T)
@@ -416,7 +438,7 @@ if __name__ == '__main__':
     mp = os.path.join(OUT, 'atlases.json')
     old = json.load(open(mp)) if os.path.exists(mp) else {}
     for k, v in old.items():
-        if k in ATLASES and k not in names:
+        if k in ATLASES:                                   # previous zoom = starting card size (also for rebuilt atlases)
             ATLASES[k]['zoom'] = v.get('zoom', 1)
     for n in names:
         build(n)

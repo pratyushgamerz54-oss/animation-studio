@@ -1017,10 +1017,10 @@ def mat_herbleaf(name, base, vein='#9AC070', rough=.45, transl=.35):
     geo = b.n('ShaderNodeNewGeometry'); nz = b.noise(geo.outputs['Position'], 60, 3, .5)
     col = b.mix(b.math('MULTIPLY', sep.outputs['Y'], .5), hexc(base), tuple(min(1, c * 1.35) for c in hexc(base)[:3]) + (1,))
     col = b.mix(b.math('MULTIPLY', nz.outputs['Fac'], .25), col, (0.02, .03, .01, 1), 'MULTIPLY') if False else col
-    col = b.mix(b.math('MULTIPLY', veins, .7), col, hexc(vein))
+    col = b.mix(b.math('MULTIPLY', veins, .35), col, hexc(vein))      # realism: veins subtle in colour, visible in relief
     col = b.mix(b.math('MULTIPLY', b.math('SUBTRACT', nz.outputs['Fac'], .5), .3), col, (0, 0, 0, 1))
     b.l(col, bsdf.inputs['Base Color']); bsdf.inputs['Roughness'].default_value = rough
-    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = .35; bp.inputs['Distance'].default_value = .002
+    bp = b.n('ShaderNodeBump'); bp.inputs['Strength'].default_value = .5; bp.inputs['Distance'].default_value = .002
     b.l(b.math('SUBTRACT', 1.0, veins), bp.inputs['Height']); b.l(bp.outputs['Normal'], bsdf.inputs['Normal'])
     tl = b.n('ShaderNodeBsdfTranslucent'); b.l(col, tl.inputs['Color']); b.l(bp.outputs['Normal'], tl.inputs['Normal'])
     mx = b.n('ShaderNodeMixShader'); mx.inputs[0].default_value = transl; b.l(bsdf.outputs[0], mx.inputs[1]); b.l(tl.outputs[0], mx.inputs[2])

@@ -221,7 +221,9 @@ for name, v in INV.items():
         break
     o = bpy.data.objects[name]
     sc.collection.objects.link(o)
-    if v['kind'] in ('tree', 'shrub'):
+    if v['kind'] in ('tree', 'shrub') and ONLY == 'closeups':      # only the leaf close-up (texture detail); ortho views kept
+        V, L, C = bounds(o); ov = dict(VIEWS.get(name, {})); ov.update(tree_closeups(o, name, V, L, C))
+    elif v['kind'] in ('tree', 'shrub'):
         ov, V, L, C = ortho_views(o, name, v['kind'])
         ov.update(tree_closeups(o, name, V, L, C))
     else:
@@ -229,7 +231,7 @@ for name, v in INV.items():
     VIEWS[name] = ov
     sc.collection.objects.unlink(o)
     json.dump(VIEWS, open(VJ, 'w'), indent=1)
-if ONLY in ('', 'lineup') and not SEL:
+if ONLY in ('', 'lineup') and not SEL:   # (closeups mode never re-renders the lineups)
     lineup('trees'); lineup('plants')
 json.dump(VIEWS, open(VJ, 'w'), indent=1)
 print('T6_RENDER_DONE', REG)
