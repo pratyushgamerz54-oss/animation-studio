@@ -1,7 +1,8 @@
-# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 21 Nov 2026 (session 3 end — TASK 05 APPROVED + CLOSED)
+# HANDOFF — poora kaam ek jagah (nayi session ke liye) · updated 22 Nov 2026 (session 4 — TASK 06 M1 + Decision Sheet 01 + realism / wind physics)
 
 > **Nayi session: sabse pehle YE file padho**, phir `STATUS.md`, `PROJECT_LOG.md`, `CLAUDE.md`. Director ko Hinglish mein short
-> summary do aur **seedha agle task (TASK 05) se kaam shuru karo**. ⚠️ Jo bana hai use **DOBARA MAT BANAO** — sab git mein hai (§7).
+> summary do aur **TASK 06 wahin se continue karo jahan ruka (§6b)**. ⚠️ Jo bana hai use **DOBARA MAT BANAO** — sab git mein hai (§7).
+> Director ke asli shabd (TASK 06 brief, Decision Sheet 01, saare feedback): `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`.
 
 ---
 
@@ -25,6 +26,14 @@
 ### PROMPT (nayi session mein paste karo)
 ```
 Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-c375d59d-2qaoyn).
+Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md aur 02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md padho.
+Setup: bash setup_session.sh (SCRATCH = scratchpad). Phir adhoora render poora karo: SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_finish_pending.sh
+(wind v3 clip + leaf realism v2 re-render; jo ho chuka hai woh skip hota hai), commit + push. Jo bana hai dobara mat banana.
+CLAUDE.md ka REAL-WORLD REALISM RULE (textures + motion + physics/destruction) hamesha follow karna.
+Mujhe short Hinglish summary do, phir TASK 06 full production (HANDOFF §6b "Next") ya mera agla feedback — usi se kaam shuru karna.
+Har bade kaam ke baad commit + push aur STATUS.md update.
+```
+Hum animation-studio project par kaam kar rahe hain (repo pratyushgamerz54-oss/animation-studio, branch ccr-c375d59d-2qaoyn).
 Branch checkout karo, HANDOFF.md, STATUS.md, PROJECT_LOG.md, CLAUDE.md padho. Setup: bash setup_session.sh (SCRATCH = scratchpad).
 Jo bana hai dobara mat banana. TASK 06 milestone 1 (vegetation concepts) review ke liye ready hai. Mujhe short Hinglish summary do, phir mera feedback / agla
 brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit + push aur STATUS.md update.
@@ -41,6 +50,13 @@ brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit
 - **Story/script document abhi tak NAHI mila** → koi story event, lore, ruler, portal rule, location invent nahi. Labels: CONFIRMED / PROPOSED / NOT CONFIRMED.
 - **Blender 4.5 compatibility** (Director ka PC) — Task 04 se naya world kaam 4.5 se banao aur test karo.
 - Backups before major changes; approved baselines kabhi overwrite nahi.
+- **REAL-WORLD REALISM RULE (Director, 22 Nov — CLAUDE.md):** textures asli (polished / plastic nahi) · har motion real physics
+  (inertia, natural frequency, stiff root → flexible tip, damping, phase variation — "lakdi jaisa" nahi) · physics + destruction real
+  (scale, gravity, material-based fracture, rigid body, Mantaflow dust). Har animated preview frame-by-frame check.
+- **Decision Sheet 01 (22 Nov):** mapping APPROVED (Mountain Kingdom = R-03, Green Plains = R-06, Crystal Lakes = R-08, Ancient City =
+  C-01/C-02/C-03 separate sites) · Sky Realms = PROPOSED region of the main world (NOT a dimension) · Enchanted Forest 70–80 % natural /
+  20–30 % fantasy, subtle glow · ONE Peepal at the Ashram courtyard + sitting platform; Tulsi + Marigold ONLY in the Ashram garden ·
+  **Season = Spring** · wildlife selection PENDING. Record: `02_world/ecosystem/DECISION_SHEET_01.md`.
 
 ---
 
@@ -174,6 +190,12 @@ m_pad = playa, m_gravel = pavement, m_grove = wadi shrubs (MAT_T5_TERRAIN_DESERT
 A scheduled check-in (send_later, 21 Nov 17:47 UTC) resumes the work if a usage limit stopped the session; notify the Director when TASK 05 is complete.
 **Director rule (21 Nov):** final MP4 FHD se zyada (4K), zoom par blur nahi — CLAUDE.md "FINAL OUTPUT RESOLUTION RULE".
 
+**TASK 05 realism pass (session 4, Director OK "Ha laga do"):** only `11_MATERIALS/T5_TERRAIN_MATERIALS_v002.blend` changed (specular
+.5/.4/.35 → .3/.28, dry roughness ≥ .45, wet ground .22, glacier ice .3 + coat .08); approved file backed up →
+`13_BACKUPS/T5_TERRAIN_MATERIALS_v002__backup_20261122_011920.blend`; 8 shots re-rendered → `12_RENDER/T5/cycles_realism/` +
+`12_RENDER/T5/T5_REALISM_BEFORE_AFTER.png` (approved renders in `12_RENDER/T5/cycles/` untouched); QC M1 56/56 (check list now
+covers the M2 ground-mist volume + black crater water), M2 45/45.
+
 ## 6b. TASK 06 — Ecosystem & Vegetation Bible · MILESTONE 1 (concepts) — session 4, 21–22 Nov
 Brief: complete ecosystem + vegetation system (trees, plants, regional ecosystems, wildlife proposal, real Blender assets, PBR,
 scattering, wind, QC). **FIRST MILESTONE = Ashram Valley vegetation library + Enchanted Forest tree collection + Mountain Kingdom
@@ -192,22 +214,46 @@ Hidden Underground = CV caves, Sky Realms = NOT on the map (nothing designed). F
 Lessons: Blender ortho cam → set `sensor_fit` explicitly; custom-prop changes need `obj.update_tag()` before frame_set; leaf atlases
 auto-fit (zoom) so sprays never touch tile edges; branches need a ground "floor" guard; height-normalise trees (±10 %);
 CPU Cycles ≈ 30 s per 600×840 tree view (transparent leaves, 64 transparent bounces).
-**Decision Sheet 01 (22 Nov) applied** → `02_world/ecosystem/DECISION_SHEET_01.md` (mapping, Sky Realms = proposed region not dimension, EF 70–80/20–30 + subtle glow ≤ 1.0, Peepal at Ashram courtyard, Tulsi/Marigold garden only, Spring, wildlife PENDING → `WILDLIFE_SELECTION_SHEET.md`). Fantasy label = `FANTASY (APPROVED R-02)`.
-**Next (after approval):** wind physics upgrade (Director asked), 3–5 variants + LOD1/2 per species, NG_T6_ECOSYSTEM scatter on the TASK 05 terrains, remaining regions
-(R-04/05/06/08, cities, caves), natural details, wildlife (only approved list).
+**Status at the end of session 4 (22 Nov):** milestone 1 DONE (Director: "baaki theek hai") · Decision Sheet 01 applied (verification
+33/33) · TASK 06 overall ≈ 45 % (remaining list below).
+| Done in session 4 | Where |
+|---|---|
+| 43 assets (17 trees, 4 shrubs, 22 plants incl. **spring kans** `AV_G02B_KANS_GRASS_SPRING`), labels `SPECIES-INSPIRED` / `FANTASY (APPROVED R-02)` | `03_assets/vegetation/library/T6_VEG_*_v001.blend` + `*_inventory.json` |
+| **Realism pass** on all vegetation materials (`realism()` in t6kit: rough / matte, low specular, mottling, blemishes, AO dirt, micro-bump, blade streaks, fibrous fungus caps, organic lathe wobble) + scanned ground `mat_ground` | `scripts/t6kit.py` |
+| **Leaf realism v2** (soft low-contrast veins in relief, midrib / margin tone, spots, insect bites, rounded Peepal base) | `scripts/t6_leafgen.py` (atlases regenerate in `t6_finish_pending.sh`) |
+| **Wind v3 physics** — `NG_T6_WIND` v3 (drag ∝ v², natural freq ≈ 4/H, advected gusts, lag, crosswind, length-preserving arc bend, `Bend Offset`), `NG_T6_WIND_INSTANCES` (scatter tilt); near-camera vegetation realized for per-blade bending | `scripts/t6kit.py`, test `scripts/t6_wind_test.py`, clips `renders/WIND_TEST_v2.mp4` (+ v3 pending) |
+| Decision Sheet 01 docs: Ecosystem Bible v2, World Bible + GEOGRAPHY blocks, EF vegetation reference, Ashram landscaping plan (+ image), wildlife selection sheet (60 animals, PENDING), Spring reference, Blender 4.5 checklist | `02_world/ecosystem/*.md`, `02_world/ashram/ASHRAM_LANDSCAPING_PLAN.md`, `02_world/ashram/00_REFERENCE/ASHRAM_landscaping_plan_v1.png` |
+| QC | vegetation 379/379 (Blender 4.5 + 5.3) `03_assets/vegetation/qc/T06_QC_REPORT.md` · decisions 33/33 `02_world/ecosystem/DECISION_SHEET_01_VERIFICATION.md` |
+
+**⚠️ IN PROGRESS when session 4 ended → finish with ONE command** (idempotent, skips what is done):
+`SCRATCH=<scratchpad> bash 03_assets/vegetation/scripts/t6_finish_pending.sh` → (1) `renders/WIND_TEST_v3.mp4` (resumes at the first
+missing frame), (2) leaf realism v2: atlases → 3 libraries → all sheet renders → compose → contact sheet → QC 4.5 + 5.3 → report
+(marker `textures/leaves/.leaf_realism_v2`). Then `git add -A && git commit && git push`, send the Director the clip + contact sheet.
+
+**Next (TASK 06 full production, ≈ 12–18 h):** (a) 3–5 variants + LOD1/LOD2/far proxy per species (keep each .blend < 100 MB — split
+per region / species group) · (b) remaining regions: R-06 Green Plains, R-08 Crystal Lakes (water-lily, reeds, willow/alder), R-04 Golden
+Desert (khejri / acacia / date palm, Poly Haven Namaqualand succulents), R-05 Forbidden (charred snags, lichen), C-01/02/03 surroundings
+(banyan / neem / ivy on ruins), CV caves (cave moss / fungi), Sky Realms (proposed; main-world spring flora on islands), MK silver fir /
+blue pine, EF glow-moss variant (≤ 0.3) · (c) `NG_T6_ECOSYSTEM` scatter on the TASK 05 terrains (region recipes, slope / altitude /
+water rules, density / ha, near = realized + v3 wind, far = instance tilt; Ashram garden + Peepal per landscaping plan; EF 75/25 mix) ·
+(d) natural details (leaf litter per species, fallen branches, giant log, ivy, floating leaves) · (e) populated cinematic previews per
+region · (f) scatter-level QC + closeout. Wildlife: ONLY after the Director's selection.
 
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
 (all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,
 forbidden crater R05, enchanted forest R02, Great Northern Range R03 + cave, main world v002, material + nature libraries, masters,
-heightfields, data_v002 npz, renders, QC) · **TASK 06 M1: vegetation libraries, atlases, sheets, bible** (§6b). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
+heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43 assets), leaf atlases, sheets, renders, wind clips, Ecosystem Bible + Decision Sheet 01 docs** (§6b) · **TASK 05 realism re-renders** (`12_RENDER/T5/cycles_realism/`). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
 1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
 2. World map revision 01 ka **canon** approval (abhi sirf blockout layout approved) · GEM location (unconfirmed) · kaunse portal routes sach hain.
 3. Story / script document.
 4. ~~Ramarat K-01~~ → **cloth sim** at scene stage ✅ (21 Nov).
-5. ~~TASK 05~~ ✅ closed. **Next: TASK 06 brief** (aur aage ke prompts ek-ek karke, ≈17 total).
+5. ~~TASK 05~~ ✅ closed. TASK 06 milestone 1 ✅ ("baaki theek hai"); Decision Sheet 01 ✅ applied.
+6. **Wildlife selection** (`02_world/ecosystem/WILDLIFE_SELECTION_SHEET.md`) — select / reject per animal.
+7. Sky Realms map position (candidates in `WORLD_BIBLE.md`) + story role · Ashram: exact Peepal spot + garden position (PROPOSED in the landscaping plan) · Ashram layout v3 approval.
+8. Review: `WIND_TEST_v3.mp4` (near plants bend per blade) + updated sheets after leaf realism v2.
 
 ## 9. Technical lessons (CLAUDE.md mein bhi)
 - Background waiter: `pgrep -f` mat use karo — log marker (ALLDONE) grep karo. Long renders: background + log + marker.
@@ -221,6 +267,16 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06 M1: vegetation libraries,
 - Big terrain: ONE height grid cut into pieces (shared verts + global custom normals) → seamless. Coarse LOD: river channel ≥ 1 vertex row.
 - Linked data can't be edited in memory → hide overlays via view-layer collection exclude. Workbench shadows at km scale = streak artefacts → off.
 - CPU Cycles 1280×720 @32 spp: world ≈ 40–100 s, valley (haze + instances) ≈ 90 s per image.
+- Vegetation wind: collection instances share ONE evaluated mesh → identical motion for every instance; per-instance motion = tilt the
+  instances in the scatter tree (`NG_T6_WIND_INSTANCES`), per-blade bending near camera = Realize Instances + `NG_T6_WIND` (world
+  position via Self Object). Rigid whole-plant rotation looks like a stick ("lakdi") — never use it for close plants.
+- GN wind phase per object: Self Object → Object Info location + position. Calm must be exactly static (all terms ∝ q = (U/10)²).
+- Custom-prop drivers: SINGLE_PROP / AVERAGE (no Python). After changing a custom prop from a script: `obj.update_tag()` before `frame_set`.
+- Blender ortho camera: set `sensor_fit` explicitly (VERTICAL for portrait sheets) or the ruler mapping is wrong.
+- Leaf atlases: auto-fit zoom so sprays never touch tile edges; keep the previous zoom (card size) when regenerating.
+- Realism: Specular IOR Level ≈ .25–.3 for plants / ground; dry roughness ≥ .45; AO-node dirt + micro-bump; perfect lathe shapes look CG → wobble.
+- QC check lists must be extended when new materials are added in a later milestone (M1 check vs M2 mist volume / black water).
+- Container restarts can stop background renders: animation renders must support resume (`FSTART`), long chains write log markers.
 
 ## 10. Session history (short)
 - **Session 1 (19–21 Nov):** setup, 7 characters (design → production → Rigify, QC), VFX library, world maps v1 + v2 (rev 01), World Bible,
@@ -234,4 +290,9 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06 M1: vegetation libraries,
   scatter systems, QC 56/56) → Director approved; milestone 2 (desert R04, forbidden crater R05, enchanted forest R02, Great Northern
   Range R03 + cave entrance, main world v002, QC 45/45) → Director fixes (crater wall + black lake, cave realism, dunes) → **"Badhiya hai",
   TASK 05 CLOSED**. 4K stills: Director said not needed now. Final film = re-render everything 4K on the Director's GPU PC (Stage 4/5).
-
+- **Session 4 (21–22 Nov):** restore; **TASK 06** brief → own procedural vegetation generator (Blender 4.5: trees with roots / buttresses /
+  multi-leaders / whorls, plants with real geometry), 25 leaf atlases, 16 Poly Haven barks, 43 assets in 3 regional libraries, sheets for
+  every tree + plant + region, Ecosystem Bible, wildlife proposal, QC; Director: "wind me aur physics, baaki theek hai" + **Decision
+  Sheet 01** (mapping, Sky Realms, EF mix, Ashram Peepal / garden, wildlife pending, Spring) → all docs + verification 33/33; Director
+  rules: **real textures, real motion, real physics / destruction** (CLAUDE.md); realism pass on vegetation + TASK 05 terrain materials
+  (approved); wind v2 → v3 (per-blade bending near camera); spring kans; leaf realism v2 (finish with `t6_finish_pending.sh`).

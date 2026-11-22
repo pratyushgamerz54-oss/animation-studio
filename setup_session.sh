@@ -7,6 +7,7 @@ SP=${SCRATCH:-/tmp/claude_scratch}; mkdir -p "$SP"
 echo "== 1. Blender 5.3 Python module (characters, Ashram v3) + scipy"
 python3 -c "import bpy" 2>/dev/null || pip install -q bpy scipy
 python3 -c "import scipy" 2>/dev/null || pip install -q scipy
+python3 -c "import PIL" 2>/dev/null || pip install -q pillow      # TASK 06 leaf atlases + sheets
 echo "== 2. Blender 4.5 LTS Python module (TASK 04+ world files MUST use 4.5)"
 export PATH="$HOME/.local/bin:$PATH"
 command -v uv >/dev/null || pip install -q uv
@@ -27,4 +28,5 @@ m = json.load(open('02_world/3d_world/TASK04_BASELINE_MANIFEST.json'))
 bad = [f for f, v in m['files'].items() if hashlib.sha256(open(os.path.join('02_world/3d_world', f), 'rb').read()).hexdigest() != v['sha256']]
 print('  baseline files:', len(m['files']), '| changed:', bad or 'none')
 EOF
+echo "  TASK 06 pending renders (if any): SCRATCH=$SP bash 03_assets/vegetation/scripts/t6_finish_pending.sh"
 echo "SETUP_DONE — use:  BPY45=$SP/bpy45/bin/python   (EGL_PLATFORM=surfaceless for Workbench renders)"

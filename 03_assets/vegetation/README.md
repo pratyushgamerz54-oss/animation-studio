@@ -21,6 +21,7 @@ python3 t6_compose_sheets.py AV EF MK       # sheets
 BPY45 t6_qc.py && python3 t6_qc.py --report # QC
 SCR=<dir> BPY45 t6_wind_test.py             # wind test frames → ffmpeg → renders/WIND_TEST.mp4
 python3 t6_wildlife_sheet.py
+SCRATCH=<dir> bash t6_finish_pending.sh  # finishes renders that were running when a session ended (idempotent)
 ```
 * `t6_species.py` — tree + shrub catalogue (parameters, labels, habitat, palette) · `t6_plants.py` — plant generators + catalogue
 * `t6kit.py` — tree generator, materials (bark / leaf / herb leaf / petal / moss / simple), wind node group + control, `add_wind()`
