@@ -1,0 +1,38 @@
+{
+ "ND_L01_LEAF_LITTER_BROADLEAF": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.03183230385184288,
+  "spread_m": 1.9313451647758484
+ },
+ "ND_L02_NEEDLE_LITTER": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.09513988345861435,
+  "spread_m": 1.7985455989837646
+ },
+ "ND_B01_FALLEN_BRANCHES": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.3613163232803345,
+  "spread_m": 5.723697781562805
+ },
+ "ND_B02_GIANT_LOG": {
+  "hero": true,
+  "detail": true,
+  "height_m": 3.135366201400757,
+  "spread_m": 18.748140811920166
+ },
+ "ND_I01_GROUND_IVY": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.1328400820493698,
+  "spread_m": 2.294508695602417
+ },
+ "ND_W01_FLOATING_LEAVES": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.03,
+  "spread_m": 2.5187512636184692
+ }
+}

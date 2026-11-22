@@ -1,0 +1,20 @@
+{
+ "CV_M01_PALE_CAVE_MOSS": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.04482465237379074,
+  "spread_m": 0.5967008173465729
+ },
+ "CV_MU01_CAVE_FUNGI": {
+  "hero": true,
+  "detail": true,
+  "height_m": 0.08142591267824173,
+  "spread_m": 0.18076351284980774
+ },
+ "CV_V01_ROOT_CURTAIN": {
+  "hero": true,
+  "detail": true,
+  "height_m": 3.5999999046325684,
+  "spread_m": 2.9803097248077393
+ }
+}
