@@ -53,6 +53,10 @@ brief main bhejta hoon — usi se kaam shuru karna. Har bade kaam ke baad commit
 - **REAL-WORLD REALISM RULE (Director, 22 Nov — CLAUDE.md):** textures asli (polished / plastic nahi) · har motion real physics
   (inertia, natural frequency, stiff root → flexible tip, damping, phase variation — "lakdi jaisa" nahi) · physics + destruction real
   (scale, gravity, material-based fracture, rigid body, Mantaflow dust). Har animated preview frame-by-frame check.
+- **SAVE RULE + AUTOSAVE (Director, 22 Nov — CLAUDE.md):** project Stop hook `.claude/hooks/autosave.sh` commits + pushes all
+  changes at the end of every reply (current branch, no force, files > 95 MB left out + reported); Director inputs verbatim per task;
+  outputs inside the repo; resume scripts for long renders; HANDOFF / STATUS / LOG at every milestone; `.git` ≈ 3 GB → no repeated
+  commits of big .blend iterations.
 - **Decision Sheet 01 (22 Nov):** mapping APPROVED (Mountain Kingdom = R-03, Green Plains = R-06, Crystal Lakes = R-08, Ancient City =
   C-01/C-02/C-03 separate sites) · Sky Realms = PROPOSED region of the main world (NOT a dimension) · Enchanted Forest 70–80 % natural /
   20–30 % fantasy, subtle glow · ONE Peepal at the Ashram courtyard + sitting platform; Tulsi + Marigold ONLY in the Ashram garden ·

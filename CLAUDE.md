@@ -82,6 +82,22 @@ mein ruki ya bina wazan ke nahi; energy ke hisaab se speed (chhoti takkar = kam 
 check, phir final high-res sim (Director ke GPU PC par).
 
 
+## 💾 SAVE RULE — kuch bhi gumna nahi chahiye (Director, 22 Nov)
+1. **Autosave (automatic):** project Stop hook `.claude/settings.json` → `.claude/hooks/autosave.sh` — har jawab ke ant mein saare
+   badlav `git add -A` → commit "autosave: …" → push (sirf current branch, kabhi force nahi; > 95 MB files chhod kar report;
+   merge/rebase ke beech skip). Bade kaam ke baad phir bhi descriptive commit message ke saath khud commit + push karo.
+2. **Director ke shabd verbatim:** har TASK brief, decision sheet aur feedback us task ki `DIRECTOR_INPUTS_TASKxx.md` mein
+   (jaise `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`) + kya kiya / kahan — summary kaafi nahi.
+3. **Har output repo ke andar:** renders, sheets, .blend, clips, QC seedhe project folders mein; scratchpad sirf temporary frames /
+   tests ke liye. Lambe renders: resume-able script (frame-wise `FSTART`) + `*_finish_pending.sh` + HANDOFF "IN PROGRESS" section.
+4. **Har milestone par:** `HANDOFF.md` (§0 prompt, §6x status, §7 do-not-rebuild, §8 pending, §10 history), `STATUS.md`,
+   `PROJECT_LOG.md` update + push. Approved files kabhi overwrite nahi — backup (`13_BACKUPS/` ya `_backups/`) aur naya version.
+5. **Repo size (22 Nov: `.git` ≈ 3 GB):** bade binaries (.blend > 20 MB) ko iteration ke dauran baar-baar commit mat karo — scratchpad
+   mein iterate, milestone par ek baar repo mein; har file < 95 MB (GitHub limit 100 MB); repo 4 GB ke paas ho to Director se
+   LFS / release / external storage ka plan poochho.
+6. **Git mein jaan-boojh kar nahi (setup se dobara bante hain):** Poly Haven downloads (`polyhaven_fetch.py`), Blender 4.5 module
+   (`$SCRATCH/bpy45`), scratchpad temp files — `bash setup_session.sh` sab wapas laata hai.
+
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
 0. **SABSE PEHLE** `HANDOFF.md` padho (+ Director ke verbatim inputs `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`) aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.
