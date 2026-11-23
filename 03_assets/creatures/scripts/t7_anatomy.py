@@ -174,7 +174,7 @@ def antlers_sambar(m, beam=0.62, r0=0.028):
     H = m['head']; hl = m['hl']
     a = S.Part('antlers', voxel=0.003)
     base = H.to((0.04 * hl, 0.17 * hl, 0.27 * hl))
-    pts = _path(base, [(-0.15, 1.40, 0.55), (-0.25, 0.90, 0.95), (-0.10, 0.25, 1.0), (-0.05, 0.05, 1.0)], beam, 10)   # wide lyre (photo refs): out, up, tips in
+    pts = _path(base, [(-0.05, 1.25, 0.75), (-0.12, 0.85, 1.0), (0.02, 0.45, 1.0), (0.15, 0.05, 1.0)], beam, 10)   # V-spread, tips up-forward (photos 01-03)   # wide lyre (photo refs): out, up, tips in
     rad = [r0 * (1 - 0.5 * i / 10) for i in range(11)]
     a.chain(pts, rad, 'antler', 0.004, mirror=True)
     a.rcone(base - V(0, 0, 0.012), base + V(0, 0, 0.012), r0 * 1.4, r0 * 1.3, 'burr', 0.004, mirror=True)       # burr / coronet

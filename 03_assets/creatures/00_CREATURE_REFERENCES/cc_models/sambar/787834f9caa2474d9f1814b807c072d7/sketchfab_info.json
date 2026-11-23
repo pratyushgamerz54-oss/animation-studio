@@ -1,0 +1,322 @@
+{
+ "animationCount": 53,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 15,
+ "createdAt": "2025-03-10T18:06:48.171445",
+ "embedUrl": "https://sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/embed",
+ "faceCount": 7886,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 463,
+ "name": "Realistic Animated Elk 3D Model",
+ "publishedAt": "2025-03-10T18:16:41.102878",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "bear",
+   "slug": "bear",
+   "uri": "https://api.sketchfab.com/v3/tags/bear"
+  },
+  {
+   "name": "forest",
+   "slug": "forest",
+   "uri": "https://api.sketchfab.com/v3/tags/forest"
+  },
+  {
+   "name": "toon",
+   "slug": "toon",
+   "uri": "https://api.sketchfab.com/v3/tags/toon"
+  },
+  {
+   "name": "bird",
+   "slug": "bird",
+   "uri": "https://api.sketchfab.com/v3/tags/bird"
+  },
+  {
+   "name": "sheep",
+   "slug": "sheep",
+   "uri": "https://api.sketchfab.com/v3/tags/sheep"
+  },
+  {
+   "name": "animals",
+   "slug": "animals",
+   "uri": "https://api.sketchfab.com/v3/tags/animals"
+  },
+  {
+   "name": "deer",
+   "slug": "deer",
+   "uri": "https://api.sketchfab.com/v3/tags/deer"
+  },
+  {
+   "name": "mammal",
+   "slug": "mammal",
+   "uri": "https://api.sketchfab.com/v3/tags/mammal"
+  },
+  {
+   "name": "stag",
+   "slug": "stag",
+   "uri": "https://api.sketchfab.com/v3/tags/stag"
+  },
+  {
+   "name": "realistic",
+   "slug": "realistic",
+   "uri": "https://api.sketchfab.com/v3/tags/realistic"
+  },
+  {
+   "name": "nature",
+   "slug": "nature",
+   "uri": "https://api.sketchfab.com/v3/tags/nature"
+  },
+  {
+   "name": "reptile",
+   "slug": "reptile",
+   "uri": "https://api.sketchfab.com/v3/tags/reptile"
+  },
+  {
+   "name": "doe",
+   "slug": "doe",
+   "uri": "https://api.sketchfab.com/v3/tags/doe"
+  },
+  {
+   "name": "Jungle",
+   "slug": "jungle",
+   "uri": "https://api.sketchfab.com/v3/tags/jungle"
+  },
+  {
+   "name": "Fauna*",
+   "slug": "fauna",
+   "uri": "https://api.sketchfab.com/v3/tags/fauna"
+  },
+  {
+   "name": "Free3DModel",
+   "slug": "free3dmodel",
+   "uri": "https://api.sketchfab.com/v3/tags/free3dmodel"
+  },
+  {
+   "name": "Wildlife",
+   "slug": "wildlife",
+   "uri": "https://api.sketchfab.com/v3/tags/wildlife"
+  },
+  {
+   "name": "Elk",
+   "slug": "elk",
+   "uri": "https://api.sketchfab.com/v3/tags/elk"
+  },
+  {
+   "name": "moose",
+   "slug": "moose",
+   "uri": "https://api.sketchfab.com/v3/tags/moose"
+  },
+  {
+   "name": "freedownload",
+   "slug": "freedownload",
+   "uri": "https://api.sketchfab.com/v3/tags/freedownload"
+  },
+  {
+   "name": "cervo",
+   "slug": "cervo",
+   "uri": "https://api.sketchfab.com/v3/tags/cervo"
+  },
+  {
+   "name": "free-download",
+   "slug": "free-download",
+   "uri": "https://api.sketchfab.com/v3/tags/free-download"
+  },
+  {
+   "name": "freemodel",
+   "slug": "freemodel",
+   "uri": "https://api.sketchfab.com/v3/tags/freemodel"
+  },
+  {
+   "name": "free-model",
+   "slug": "free-model",
+   "uri": "https://api.sketchfab.com/v3/tags/free-model"
+  },
+  {
+   "name": "3d",
+   "slug": "3d",
+   "uri": "https://api.sketchfab.com/v3/tags/3d"
+  },
+  {
+   "name": "pbr",
+   "slug": "pbr",
+   "uri": "https://api.sketchfab.com/v3/tags/pbr"
+  },
+  {
+   "name": "lowpoly",
+   "slug": "lowpoly",
+   "uri": "https://api.sketchfab.com/v3/tags/lowpoly"
+  },
+  {
+   "name": "model",
+   "slug": "model",
+   "uri": "https://api.sketchfab.com/v3/tags/model"
+  },
+  {
+   "name": "creature",
+   "slug": "creature",
+   "uri": "https://api.sketchfab.com/v3/tags/creature"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  },
+  {
+   "name": "free",
+   "slug": "free",
+   "uri": "https://api.sketchfab.com/v3/tags/free"
+  },
+  {
+   "name": "stylized",
+   "slug": "stylized",
+   "uri": "https://api.sketchfab.com/v3/tags/stylized"
+  },
+  {
+   "name": "animated",
+   "slug": "animated",
+   "uri": "https://api.sketchfab.com/v3/tags/animated"
+  },
+  {
+   "name": "anime",
+   "slug": "anime",
+   "uri": "https://api.sketchfab.com/v3/tags/anime"
+  },
+  {
+   "name": "rigged",
+   "slug": "rigged",
+   "uri": "https://api.sketchfab.com/v3/tags/rigged"
+  },
+  {
+   "name": "gameready",
+   "slug": "gameready",
+   "uri": "https://api.sketchfab.com/v3/tags/gameready"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "4ced4d1f7ac4420cb9fe9d1fc9206f75",
+    "width": 64,
+    "height": 36,
+    "size": 1035,
+    "url": "https://media.sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/thumbnails/a0b7e0d79ceb442e82c99b1fcb40f620/ba4dc8044aea4715a5f59ac736ebed71.jpeg"
+   },
+   {
+    "uid": "f7764a09f0464794a9f769c6f3f0fbb0",
+    "width": 256,
+    "height": 144,
+    "size": 4382,
+    "url": "https://media.sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/thumbnails/a0b7e0d79ceb442e82c99b1fcb40f620/fd9f400a543a4b27ad2bf77d28758c78.jpeg"
+   },
+   {
+    "uid": "c0afaf39ffb94f5585890d1c8c968532",
+    "width": 720,
+    "height": 405,
+    "size": 21684,
+    "url": "https://media.sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/thumbnails/a0b7e0d79ceb442e82c99b1fcb40f620/967ba048d150432aa7f8e04e8868fe5f.jpeg"
+   },
+   {
+    "uid": "97bf84b8047b49c39b30a1b6a6de8340",
+    "width": 1024,
+    "height": 576,
+    "size": 38475,
+    "url": "https://media.sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/thumbnails/a0b7e0d79ceb442e82c99b1fcb40f620/07893677bcb34adcae9369b4f68d7e0e.jpeg"
+   },
+   {
+    "uid": "13b8eabdebce49418f18def205f6b23d",
+    "width": 1920,
+    "height": 1080,
+    "size": 121323,
+    "url": "https://media.sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/thumbnails/a0b7e0d79ceb442e82c99b1fcb40f620/e1154c8e796d463cbfac0a92f8b427e3.jpeg"
+   }
+  ]
+ },
+ "uid": "787834f9caa2474d9f1814b807c072d7",
+ "uri": "https://api.sketchfab.com/v3/models/787834f9caa2474d9f1814b807c072d7",
+ "user": {
+  "uid": "1dd1873cac4a4be2bf72479d61ba97d0",
+  "username": "WildMesh_3D",
+  "displayName": "WildMesh 3D",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/WildMesh_3D",
+  "avatar": {
+   "uid": "cd07f6548e064ceaab7879210f0ba8e8",
+   "uri": "https://api.sketchfab.com/v3/avatars/cd07f6548e064ceaab7879210f0ba8e8",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 2174,
+     "url": "https://media.sketchfab.com/avatars/cd07f6548e064ceaab7879210f0ba8e8/d4a2a4e28c7d4e2c8c50892b3e12342e.png"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 4289,
+     "url": "https://media.sketchfab.com/avatars/cd07f6548e064ceaab7879210f0ba8e8/3d0431c99b884d709b4896bf6725fa96.png"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 12363,
+     "url": "https://media.sketchfab.com/avatars/cd07f6548e064ceaab7879210f0ba8e8/c832ee79a70e403ba2373f4d83eecf4a.png"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 14739,
+     "url": "https://media.sketchfab.com/avatars/cd07f6548e064ceaab7879210f0ba8e8/32416b0ac2804edf90a1da80ab9a8427.png"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/1dd1873cac4a4be2bf72479d61ba97d0"
+ },
+ "vertexCount": 4003,
+ "viewCount": 16828,
+ "viewerUrl": "https://sketchfab.com/3d-models/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "# [\ud83d\udd17DOWNLOAD THE ULTIMATE 3D ANIMAL PACK +100 ANIMALS 80% OFF](https://www.patreon.com/wildmesh/shop)\n\nThis model is now **free** because it is an older, outdated version and contains known rigging problems.\n\nFeel free to **download it, modify it, use it in personal or commercial projects, or do whatever you want with it.** No worries \u2014 enjoy it! \u2764\ufe0f\n\nIf you find it useful and would like a cleaner, updated version, consider checking out the **2.0 models on [Patreon](http://www.patreon.com/wildmesh/shop)**.\n\n[Get 100+ Updated Game-Ready Animal Models on Patreon](http://www.patreon.com/wildmesh/shop)\n\nThe Patreon collection includes:\n\n\u2705 Updated 2.0 versions\n\u2705 Improved rigs & cleaner files\n\u2705 Game-ready FBX / OBJ / BLEND formats\n\u2705 Optimized for Unity & Unreal\n\u2705 Realistic & stylized animals\n\u2705 100+ high-quality animal models\n\nIf this free model helps your project, supporting the project through Patreon would mean a lot. Thanks and have fun creating! \ud83d\ude4f",
+ "price": null,
+ "downloadCount": 7179,
+ "editorUrl": "https://sketchfab.com/models/787834f9caa2474d9f1814b807c072d7/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2026-06-15T03:05:14.139477",
+ "pbrType": null,
+ "textureCount": 7,
+ "materialCount": 4
+}
