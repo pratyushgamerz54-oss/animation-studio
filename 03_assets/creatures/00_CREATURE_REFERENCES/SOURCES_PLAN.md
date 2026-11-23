@@ -1,7 +1,7 @@
 # TASK 07 · Base-model sources plan (mix pipeline, Director 23 Nov) — candidates, NOT final
 
 Rule: only CC0 / CC-BY / CC-BY-SA (no NC — film may be commercial; no ND — we modify). Every used base gets `LICENSE.md`
-(author, licence, link) → film credits. Base files stay untouched in `cc_models/<species>/<uid>/`; all changes are new files.
+(author, licence, link) → film credits. Base files stay untouched in `cc_models/<species>/<uid>/`; all changes are new files. Rejected candidates are not kept (download to the scratchpad first, commit only the chosen base).
 If no good base exists → Meshy (when the Director allows login) → else own procedural kit (`t7_build.py`).
 
 | Species (M1) | Region | Best candidate found (Sketchfab) | Licence | Notes | Status |
