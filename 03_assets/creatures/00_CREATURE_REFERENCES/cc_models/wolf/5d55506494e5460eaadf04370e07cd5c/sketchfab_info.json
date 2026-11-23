@@ -1,0 +1,186 @@
+{
+ "animationCount": 6,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "2d643ff5ed03405b9c34ecdffff9d8d8",
+   "name": "Characters & Creatures",
+   "slug": "characters-creatures",
+   "uri": "https://api.sketchfab.com/v3/categories/2d643ff5ed03405b9c34ecdffff9d8d8",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/f778c3dbe6efa00a06c257762c0e27ef-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/2d643ff5ed03405b9c34ecdffff9d8d8/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/2d643ff5ed03405b9c34ecdffff9d8d8/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 4,
+ "createdAt": "2018-12-29T05:33:07.219368",
+ "embedUrl": "https://sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/embed",
+ "faceCount": 11776,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 19,
+ "name": "Animated Wolf Scene",
+ "publishedAt": "2018-12-29T11:29:58.867763",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "realism",
+   "slug": "realism",
+   "uri": "https://api.sketchfab.com/v3/tags/realism"
+  },
+  {
+   "name": "game",
+   "slug": "game",
+   "uri": "https://api.sketchfab.com/v3/tags/game"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  },
+  {
+   "name": "animation",
+   "slug": "animation",
+   "uri": "https://api.sketchfab.com/v3/tags/animation"
+  },
+  {
+   "name": "wolf",
+   "slug": "wolf",
+   "uri": "https://api.sketchfab.com/v3/tags/wolf"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "8457e2a9675a42caacf376df9a901a6e",
+    "width": 64,
+    "height": 36,
+    "size": 520,
+    "url": "https://media.sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/thumbnails/21ffaf084db747a88257fdbe5e2b572d/17fd56e9392c409998af89a1633bbca7.jpeg"
+   },
+   {
+    "uid": "6e55ec02f82546b9bb8c351f34c46258",
+    "width": 256,
+    "height": 144,
+    "size": 1849,
+    "url": "https://media.sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/thumbnails/21ffaf084db747a88257fdbe5e2b572d/4f438bae031f4be68ef306286c2899f1.jpeg"
+   },
+   {
+    "uid": "bc49673ea1ab4f18a3cf209f17dab796",
+    "width": 720,
+    "height": 405,
+    "size": 7514,
+    "url": "https://media.sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/thumbnails/21ffaf084db747a88257fdbe5e2b572d/179a890c5c9e42cd98f699e593330540.jpeg"
+   },
+   {
+    "uid": "41a546d74bc04005b3df7254b659de70",
+    "width": 1024,
+    "height": 576,
+    "size": 12402,
+    "url": "https://media.sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/thumbnails/21ffaf084db747a88257fdbe5e2b572d/07efe96657554a0bac1ec954dc2b7a47.jpeg"
+   },
+   {
+    "uid": "a62294d8435b4af889c4245a26cf49b6",
+    "width": 1920,
+    "height": 1080,
+    "size": 36878,
+    "url": "https://media.sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/thumbnails/21ffaf084db747a88257fdbe5e2b572d/2714ba8972224ec9b663b593d045ba9b.jpeg"
+   }
+  ]
+ },
+ "uid": "5d55506494e5460eaadf04370e07cd5c",
+ "uri": "https://api.sketchfab.com/v3/models/5d55506494e5460eaadf04370e07cd5c",
+ "user": {
+  "uid": "a2c2706591b14373ad32ec15d53cc601",
+  "username": "roo3d",
+  "displayName": "Roo",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/roo3d",
+  "avatar": {
+   "uid": "412d1813ffe24a1da11ea9fe08cf0548",
+   "uri": "https://api.sketchfab.com/v3/avatars/412d1813ffe24a1da11ea9fe08cf0548",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 2644,
+     "url": "https://media.sketchfab.com/avatars/412d1813ffe24a1da11ea9fe08cf0548/01f3960420b14c4a9f03434fa35a25cd.png"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 5084,
+     "url": "https://media.sketchfab.com/avatars/412d1813ffe24a1da11ea9fe08cf0548/6c5675242893432f9124e4016c29aada.png"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 13194,
+     "url": "https://media.sketchfab.com/avatars/412d1813ffe24a1da11ea9fe08cf0548/7c78038057c24d4696c1e3cddb2b404a.png"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 15589,
+     "url": "https://media.sketchfab.com/avatars/412d1813ffe24a1da11ea9fe08cf0548/65ef7e5c6346456fb055fd2c5b9837c4.png"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/a2c2706591b14373ad32ec15d53cc601"
+ },
+ "vertexCount": 6436,
+ "viewCount": 2825,
+ "viewerUrl": "https://sketchfab.com/3d-models/animated-wolf-scene-5d55506494e5460eaadf04370e07cd5c",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "A realistic wolf model!!\nIt has been animated aswell.\n3 animations :\n1. Wolf running  \n2. Idle Wolf  \n3. Wolf crawling",
+ "price": null,
+ "downloadCount": 760,
+ "editorUrl": "https://sketchfab.com/models/5d55506494e5460eaadf04370e07cd5c/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2022-07-20T12:49:49.471279",
+ "pbrType": null,
+ "textureCount": 3,
+ "materialCount": 5
+}

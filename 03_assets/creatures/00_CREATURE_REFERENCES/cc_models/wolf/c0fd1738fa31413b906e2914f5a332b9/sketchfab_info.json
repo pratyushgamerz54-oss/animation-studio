@@ -1,0 +1,147 @@
+{
+ "animationCount": 1,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2024-02-19T04:22:16.875626",
+ "embedUrl": "https://sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/embed",
+ "faceCount": 30484,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 69,
+ "name": "Grey Wolf Rebuilt",
+ "publishedAt": "2024-02-19T04:23:33.340658",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "wolf",
+   "slug": "wolf",
+   "uri": "https://api.sketchfab.com/v3/tags/wolf"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "02d2aacfe319457699a69fe0881caf67",
+    "width": 64,
+    "height": 36,
+    "size": 1007,
+    "url": "https://media.sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/thumbnails/56b63e9e0229407cb9320ac6df432725/93206bc7b2ee4de88b90980a50b2d809.jpeg"
+   },
+   {
+    "uid": "8eacb15d7039446ba006a9241306d841",
+    "width": 256,
+    "height": 144,
+    "size": 3553,
+    "url": "https://media.sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/thumbnails/56b63e9e0229407cb9320ac6df432725/ea6f555918b141a7bfcc7821647e6aab.jpeg"
+   },
+   {
+    "uid": "90b3a4e9fa574d138974653a6d6e1826",
+    "width": 720,
+    "height": 405,
+    "size": 16697,
+    "url": "https://media.sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/thumbnails/56b63e9e0229407cb9320ac6df432725/56b2f3dba9c74bce92636d9b01f24a6c.jpeg"
+   },
+   {
+    "uid": "35dfe23c922442da8cdfe79054493fdc",
+    "width": 1024,
+    "height": 576,
+    "size": 30221,
+    "url": "https://media.sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/thumbnails/56b63e9e0229407cb9320ac6df432725/f9e9b22d632b4eb29a7225993146faad.jpeg"
+   },
+   {
+    "uid": "3d3550db415e434180731b729604198d",
+    "width": 1920,
+    "height": 1080,
+    "size": 101720,
+    "url": "https://media.sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/thumbnails/56b63e9e0229407cb9320ac6df432725/da3502446e3d4e8bac8cf1a429594703.jpeg"
+   }
+  ]
+ },
+ "uid": "c0fd1738fa31413b906e2914f5a332b9",
+ "uri": "https://api.sketchfab.com/v3/models/c0fd1738fa31413b906e2914f5a332b9",
+ "user": {
+  "uid": "644e287b3ced464588c56833c5d116db",
+  "username": "kenchoo",
+  "displayName": "kenchoo",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/kenchoo",
+  "avatar": {
+   "uid": "1ed41e64e9ba4644936cd75a07be88a2",
+   "uri": "https://api.sketchfab.com/v3/avatars/1ed41e64e9ba4644936cd75a07be88a2",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 2226,
+     "url": "https://media.sketchfab.com/avatars/1ed41e64e9ba4644936cd75a07be88a2/402c020ff1e947dda431263c86356daf.png"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 4022,
+     "url": "https://media.sketchfab.com/avatars/1ed41e64e9ba4644936cd75a07be88a2/ea22c7dbcafc45d3a234e6a170cf871e.png"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 10228,
+     "url": "https://media.sketchfab.com/avatars/1ed41e64e9ba4644936cd75a07be88a2/ad050724818246b38caf2f8d9361451a.png"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 11933,
+     "url": "https://media.sketchfab.com/avatars/1ed41e64e9ba4644936cd75a07be88a2/b5b0674e3ca14c28b962406b1e99d8aa.png"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/644e287b3ced464588c56833c5d116db"
+ },
+ "vertexCount": 15485,
+ "viewCount": 5870,
+ "viewerUrl": "https://sketchfab.com/3d-models/grey-wolf-rebuilt-c0fd1738fa31413b906e2914f5a332b9",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "Rebuilt Wolf\n\"Grey Wolf\" (https://skfb.ly/oF8Mt) by all of life is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
+ "price": null,
+ "downloadCount": 1576,
+ "editorUrl": "https://sketchfab.com/models/c0fd1738fa31413b906e2914f5a332b9/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2024-03-14T04:00:43.633249",
+ "pbrType": "metalness",
+ "textureCount": 4,
+ "materialCount": 1
+}

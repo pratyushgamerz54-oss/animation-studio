@@ -43,7 +43,7 @@ if act and act in bpy.data.actions:
     d = os.path.join(OUT, 'clip_' + act); os.makedirs(d, exist_ok=True)
     pel = next((b for b in arm.pose.bones if 'Pelvis' in b.name or 'pelvis' in b.name or 'Hips' in b.name), arm.pose.bones[0])
     sc.frame_set(f0); p0 = np.array((arm.matrix_world @ pel.head)[:]); cam0 = np.array(cam.location[:])
-    for f in range(f0, f1 + 1):
+    for f in range(f0, f1 + 1, int(opt('--step', 1))):
         sc.frame_set(f)
         pf = np.array((arm.matrix_world @ pel.head)[:]); dd = pf - p0; dd[2] = 0          # tracking camera (dolly with the animal)
         cam.location = tuple(cam0 + dd)

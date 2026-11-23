@@ -1,0 +1,187 @@
+{
+ "animationCount": 1,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 2,
+ "createdAt": "2023-05-10T16:41:53.939338",
+ "embedUrl": "https://sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/embed",
+ "faceCount": 27268,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 22,
+ "name": "Animated Wolf",
+ "publishedAt": "2023-05-10T16:43:56.244084",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "forest",
+   "slug": "forest",
+   "uri": "https://api.sketchfab.com/v3/tags/forest"
+  },
+  {
+   "name": "animals",
+   "slug": "animals",
+   "uri": "https://api.sketchfab.com/v3/tags/animals"
+  },
+  {
+   "name": "realistic",
+   "slug": "realistic",
+   "uri": "https://api.sketchfab.com/v3/tags/realistic"
+  },
+  {
+   "name": "nature",
+   "slug": "nature",
+   "uri": "https://api.sketchfab.com/v3/tags/nature"
+  },
+  {
+   "name": "Wildlife",
+   "slug": "wildlife",
+   "uri": "https://api.sketchfab.com/v3/tags/wildlife"
+  },
+  {
+   "name": "model",
+   "slug": "model",
+   "uri": "https://api.sketchfab.com/v3/tags/model"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  },
+  {
+   "name": "animated",
+   "slug": "animated",
+   "uri": "https://api.sketchfab.com/v3/tags/animated"
+  },
+  {
+   "name": "wolf",
+   "slug": "wolf",
+   "uri": "https://api.sketchfab.com/v3/tags/wolf"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "9fe0c74a42054d728925434b0a1290fd",
+    "width": 64,
+    "height": 36,
+    "size": 951,
+    "url": "https://media.sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/thumbnails/fc8982cba1b045dbbb5a045ce2d99a63/fad71445854342c0a79939df794c3fc1.jpeg"
+   },
+   {
+    "uid": "d02d07fd740d44e0b4d13d0a98ab0cc0",
+    "width": 256,
+    "height": 144,
+    "size": 2748,
+    "url": "https://media.sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/thumbnails/fc8982cba1b045dbbb5a045ce2d99a63/9929fdce9277464b839935b3161a326f.jpeg"
+   },
+   {
+    "uid": "58e909552805474fa2daec3d166f0f5b",
+    "width": 720,
+    "height": 405,
+    "size": 11211,
+    "url": "https://media.sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/thumbnails/fc8982cba1b045dbbb5a045ce2d99a63/6bab47f2c987460da836f3b69866ecfd.jpeg"
+   },
+   {
+    "uid": "e2e6abdb05a74eb0b3c6164d52897501",
+    "width": 1024,
+    "height": 576,
+    "size": 19358,
+    "url": "https://media.sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/thumbnails/fc8982cba1b045dbbb5a045ce2d99a63/87f5b9d378f0431ab0751ab67afb87bf.jpeg"
+   },
+   {
+    "uid": "e50adf7f75ac4e75a9b5cf3cdfe6e4ed",
+    "width": 1920,
+    "height": 1080,
+    "size": 59037,
+    "url": "https://media.sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/thumbnails/fc8982cba1b045dbbb5a045ce2d99a63/90c50c1438824706a2a011891df2a179.jpeg"
+   }
+  ]
+ },
+ "uid": "23a3a563d48049d5b9844ddc1b5b6e79",
+ "uri": "https://api.sketchfab.com/v3/models/23a3a563d48049d5b9844ddc1b5b6e79",
+ "user": {
+  "uid": "8a287682ce1c422d867b93f81cabf169",
+  "username": "igor-lir",
+  "displayName": "igor-lir",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/igor-lir",
+  "avatar": {
+   "uid": "1f230c7b2be644b890d06f37cb416f25",
+   "uri": "https://api.sketchfab.com/v3/avatars/1f230c7b2be644b890d06f37cb416f25",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 1163,
+     "url": "https://media.sketchfab.com/avatars/1f230c7b2be644b890d06f37cb416f25/dd233483a88a4bdfa0270a4ed8ead97c.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1797,
+     "url": "https://media.sketchfab.com/avatars/1f230c7b2be644b890d06f37cb416f25/ccf13fcd9c944881ae0915ea061a7826.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 4793,
+     "url": "https://media.sketchfab.com/avatars/1f230c7b2be644b890d06f37cb416f25/cb8f08acac354f1180b7e8f1e04a6087.jpeg"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 6089,
+     "url": "https://media.sketchfab.com/avatars/1f230c7b2be644b890d06f37cb416f25/9dc67628b991473081573122c5b6c602.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/8a287682ce1c422d867b93f81cabf169"
+ },
+ "vertexCount": 14076,
+ "viewCount": 3667,
+ "viewerUrl": "https://sketchfab.com/3d-models/animated-wolf-23a3a563d48049d5b9844ddc1b5b6e79",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "An animated realistic standing wolf",
+ "price": null,
+ "downloadCount": 871,
+ "editorUrl": "https://sketchfab.com/models/23a3a563d48049d5b9844ddc1b5b6e79/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2023-05-10T16:43:56.389785",
+ "pbrType": null,
+ "textureCount": 1,
+ "materialCount": 1
+}

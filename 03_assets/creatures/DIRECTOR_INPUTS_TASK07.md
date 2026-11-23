@@ -245,3 +245,17 @@ In teeno ki mix kar use kar  samjha lekin animation time koi jhamela na ho hona 
 **Claude's reading:** continue the current way, but MIX all three sources (own procedural kit + free-licence CC models + Meshy) to get
 realistic results faster; ONE creature at a time → preview → Director approval → next. Animation must have no problems: real-world
 animal behaviour and gaits (no "anything goes" motion). Meshy login stopped on request (not used until the Director says so).
+
+---
+
+## E. Director (23 Nov, after the Sambar v002 preview + status question) — verbatim
+
+```
+Kya task seven ka sara kaam hogaya hai kitna bacha hai
+```
+```
+Ha tu karna aur baki creture ko bhi yhi se na loge pehle jo kiye the wo bhi na sara na kitn
+```
+**Claude's reading:** go ahead (Sambar v002 direction OK to continue); ALL remaining creatures from the same mix pipeline
+(Sketchfab CC base + own work + real photos), and the earlier procedural tests (wolf, red fox, golden eagle) are redone the same way.
+One creature at a time, preview → Director → next. Next: Himalayan wolf.
