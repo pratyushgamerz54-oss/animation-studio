@@ -340,3 +340,11 @@ Chor usko ek kaam kar jaha pe maine tere ko jah pe roka tha na fix wale me wha s
 ```
 **Status:** Three.js viewer DROPPED (rule removed from CLAUDE.md; viewer page never published). Reviews = Blender renders + clips as
 before. Resume at the red fox (v002 conversion) and keep going creature by creature.
+
+---
+
+## N. Director (23 Nov) — verbatim
+```
+Ha gara khi lage ab jaru hi hai three js ka to waha use kar le urgent need ho tab ya phir kuch chutevtab smajhna
+```
+**Rule now:** Three.js ONLY when really needed (urgent need, or when something would otherwise be missed). Default = Blender renders + clips.

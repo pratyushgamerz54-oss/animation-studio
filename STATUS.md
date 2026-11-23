@@ -1,5 +1,7 @@
-# STATUS — last updated 2026-11-22 (session 6: restored, waiting for the TASK 07 brief)
+# STATUS — last updated 2026-11-23 (session 6: TASK 07 milestone 1 in progress)
 
+## Session 6 (22–23 Nov)
+- **NOW: TASK 07 milestone 1** — creatures one by one (mix pipeline). Done: sambar (walk OK), wolf, black bear (APPROVED), golden eagle (APPROVED); red fox preview rendering; bharal WIP. Details: HANDOFF §6d, `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md`.
 ## Session 6 (22 Nov)
 - Restored: Director branch `ccr-c375d59d-2qaoyn` merged into this session's working branch `ccr-abff2182-3t78h4` (both repos; same history, nothing rebuilt). `setup_session.sh` OK: bpy 5.3.0 + bpy 4.5.16 LTS, Mesa EGL, Poly Haven fetched, Task 04 baseline 21 files unchanged, scenes repo side by side ✓.
 - **NOW: waiting for the TASK 07 brief.** TASK 06 APPROVED + CLOSED (`02_world/ecosystem/TASK06_CLOSEOUT.md`).

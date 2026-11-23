@@ -268,6 +268,24 @@ no oasis water → no date palms placed; Ashram valley masks have no m_dry / m_f
 grove cores (L0) + forest belts (L1); populated previews use camera clearance (no trees within 7–18 m of the lens; set 0 for moving shots);
 dead-grass "ground friction" wind fix is built into DS + CT, the other grass libraries get it on their next rebuild (they pass QC already).
 
+### 6d. TASK 07 — Wildlife & Creature Production · MILESTONE 1 (concept collection EF / MK / CL) — session 6, 23 Nov — IN PROGRESS
+Director inputs verbatim: `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md` (§A brief … §N). Production fix list: `03_assets/creatures/PRODUCTION_FIX_LIST.md`.
+**Method (Director "mix" decision):** free-licence base (Sketchfab CC0/CC-BY, token in the environment's network secrets) + own work
+(photo-matched coat recolour + 3D-region UV paint, own antlers / horns, real size, ground contact, smooth continuous clips) + real photos
+(Wikimedia Commons, `t7_fetch_refs.py`, credits per species). ONE creature at a time → preview → Director → next. Three.js only if really needed (§N).
+| Creature | File | Status |
+|---|---|---|
+| Sambar | `01_FOREST_WILDLIFE/sambar/T7_SAMBAR_CC_v002.blend` (+ preview_v002, smooth walk v002b) | walk fix OK |
+| Himalayan wolf | `02_MOUNTAIN_WILDLIFE/wolf/T7_WOLF_CC_v002.blend` | preview shown ("Ok chalu karo") |
+| Asiatic black bear | `01_FOREST_WILDLIFE/black_bear/T7_BLACK_BEAR_CC_v002.blend` | **APPROVED** |
+| Golden eagle (juvenile, museum scan CC0) | `06_AERIAL_CREATURES/golden_eagle/T7_GOLDEN_EAGLE_SCAN_v002.blend` | **APPROVED** |
+| Red fox | `02_MOUNTAIN_WILDLIFE/red_fox/T7_RED_FOX_CC_v002.blend` | preview rendering |
+| Bharal | script `t7_bharal_cc.py` (cel base) | WIP — needs a better base / own texture |
+Tools: `scripts/t7_sketchfab.py`, `t7_ccbase.py`, `t7_cc_species.py` (config per species), `t7_sambar_cc.py`, `t7_bharal_cc.py`,
+`t7_scan_reduce.py`, `t7_preview_rig.py` (stills + continuous clips, `--cycles`, `--step`, constant-velocity camera), own procedural kit
+`t7sdf.py` / `t7_anatomy.py` / `t7kit.py` (fur = hair-Curves object, feathers) for parts and fantasy creatures. Behaviour baker design:
+`09_RIGS/T7_BEHAVIOUR_SYSTEM.md` (milestone 2). Next: Himalayan monal, snow leopard, marmot, owl, hornbill, butterflies / insects, Crystal-Lakes set, fantasy proposals.
+
 ## 7. ⚠️ DOBARA MAT BANAO (sab git mein, ready)
 Characters v002/v003/v004 + sheets + exports · VFX library · world maps v1/v2 + data · World Bible · Ashram v1/v2/v3 + renders · Task 04 3D world
 (all v001 files, renders, QC, backups) · **TASK 05: saari v002 files** (valley, forest belt, NW01 mountain + cascade, water, desert R04,

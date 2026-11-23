@@ -19,7 +19,7 @@ def pts():
 st = opt('--still-action', 'Stand_Breathing_01')
 if arm and st in bpy.data.actions:
     arm.animation_data.action = bpy.data.actions[st]
-bpy.context.scene.frame_set(1)
+bpy.context.scene.frame_set(int(opt('--still-frame', 1)))
 P = pts(); lo, hi = P.min(0), P.max(0); c = (lo + hi) / 2; ext = hi - lo; L = ext.max()
 ax = 0 if ext[0] >= ext[1] else 1
 # which end is the head: head bone side
@@ -59,6 +59,6 @@ if act and act in bpy.data.actions:
         dd = vel * (f - f0)          # tracking camera: constant-velocity dolly (real camera, no surge jitter)
         cam.location = tuple(cam0 + dd)
         sc.render.filepath = os.path.join(d, f'{k_:04d}.png'); bpy.ops.render.render(write_still=True)
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(24 // int(opt('--step', 1))), '-start_number', '0', '-i', os.path.join(d, '%04d.png'),
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '%.3f' % (24 / int(opt('--step', 1))), '-start_number', '0', '-i', os.path.join(d, '%04d.png'),
                     '-pix_fmt', 'yuv420p', '-vf', 'scale=960:-2', os.path.join(OUT, f'clip_{act}.mp4')])
 print('ALLDONE')

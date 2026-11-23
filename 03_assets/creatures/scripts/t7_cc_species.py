@@ -24,7 +24,8 @@ CC = {
                        palette=dict(dark='#070606', mid='#100E0D', light='#2A2420', cap=1.6, gamma=1.0),
                        paint=[('chest_v', '#E8E0CF', 'chest_v', 'Material_003'), ('muzzle', '#6A4C36', 'muzzle', 'Material_001')], rough=0.55),
     'red_fox': dict(base='red_fox/4e37c303f8a241aaa2511bd9f3019273', withers=0.40, pelvis='Fox_ Pelvis_02', chest='Fox_ Spine1_012',
-                    delete=('Icosphere',), still_action='root.001|Waking Up', still_frame=480, palette=None, rough=0.6),
+                    delete=('Icosphere',), still_action='root.001|Waking Up', still_frame=480, palette=None, rough=0.6,
+                    ground_snap='root.001|Waking Up'),
 }
 
 
@@ -141,6 +142,20 @@ def main():
     root.location.z -= P[:, 2].min(); root.location.x -= (P[:, 0].max() + P[:, 0].min()) / 2
     root.location.y -= (P[:, 1].max() + P[:, 1].min()) / 2; bpy.context.view_layer.update()
     print('scale', round(s, 3))
+    if cfg.get('ground_snap') in bpy.data.actions:
+        # ground contact: per-frame lowest point → 0 (smoothed, no jitter); keyed on the root empty (object-level, separate from the rig action)
+        act = bpy.data.actions[cfg['ground_snap']]; arm.animation_data.action = act
+        f0, f1 = map(int, act.frame_range); sc = bpy.context.scene; base_z = root.location.z; mins = []
+        for f in range(f0, f1 + 1):
+            sc.frame_set(f); mins.append(min(mesh_world(o)[:, 2].min() for o in meshes))
+        m = np.array(mins)                      # world lowest point per frame (root at base_z)
+        k = np.ones(7) / 7; ms = np.convolve(np.pad(m, 3, mode='edge'), k, mode='valid')
+        for i, f in enumerate(range(f0, f1 + 1)):
+            root.location.z = base_z - ms[i]; root.keyframe_insert('location', index=2, frame=f)
+        print('ground snap: raw offsets cm min/max', round(m.min() * 100 - base_z * 0, 1), round(m.max() * 100, 1))
+        if cfg.get('still_action') in bpy.data.actions:
+            arm.animation_data.action = bpy.data.actions[cfg['still_action']]
+        sc.frame_set(cfg.get('still_frame', 0))
     tex = os.path.join(K.CR, '11_TEXTURES', sid)
     pal = cfg.get('palette')
     for mat in bpy.data.materials:
