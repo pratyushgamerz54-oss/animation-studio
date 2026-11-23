@@ -521,3 +521,11 @@ def feathers(m, p, collection_mesh):
         Lt = tl * (1 - p.get('tail_fork', 0.0) * (1 - abs(u)) - p.get('tail_round', 0.08) * abs(u) ** 2)
         blade(t0 + V(0, u * p['bw'] * 0.18, 0.002 * abs(u)), d, V(0, 0, 1), Lt, Lt * tw, asym=0.8, curve=0.02, kind=2)
     return np.array(V_, F), np.array(F_, np.int32), {k: np.array(v, F) for k, v in A_.items()}
+
+
+def saddle(P, W, C, col, z0, z1, zones, strength=0.85):
+    """darker dorsal saddle (wolves, foxes, deer): blend toward col with height, only on the given zones."""
+    h = col.lstrip('#'); c = np.array([int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)])
+    c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4).astype(F)
+    a = np.clip((P[:, 2] - z0) / (z1 - z0), 0, 1) ** 1.5 * sum((W.get(z, 0) for z in zones), np.zeros(len(P))) * strength
+    return C * (1 - a[:, None]) + c[None, :] * a[:, None]

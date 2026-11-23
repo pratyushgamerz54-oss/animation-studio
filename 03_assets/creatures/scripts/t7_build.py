@@ -47,7 +47,9 @@ def build(sid):
         fl = sum(W[z] * spec.get('fur_len', {}).get(z, spec.get('fur_len', {}).get('*', 0.0)) for z in W)
         K.set_attr(o, 'fur_len', fl)
         fd = sum(W[z] * spec.get('fur_dens', {}).get(z, spec.get('fur_dens', {}).get('*', 1.0)) for z in W)
-        fd = np.where(fl > 1e-4, fd, 0.0)
+        fl0 = [z for z in W if spec.get('fur_len', {}).get(z, spec.get('fur_len', {}).get('*', 0.0)) <= 0.0025]
+        bare_w = sum((W[z] for z in fl0), np.zeros(len(P)))
+        fd = np.where((fl > 1e-4) & (bare_w < 0.3), fd, 0.0)            # no hair on nose leather, lids, hooves, claws
         K.set_attr(o, 'fur_density', fd)
         cr = dict(COMB); cr.update(spec.get('comb', {}))
         Cb = K.comb_field(P, N, {z: (v(P, marks) if callable(v) else v) for z, v in cr.items()}, W)

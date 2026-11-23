@@ -8,7 +8,7 @@ import sys, os, json, re, time, urllib.request, urllib.parse, urllib.error
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '00_CREATURE_REFERENCES', 'photo_refs')
-UA = 'T7ReferenceFetcher/0.1 (3D animation reference research; contact via project)'
+UA = 'AnimationReferenceFetcher/0.2 (https://code.claude.com; non-commercial reference research) python-urllib'
 API = 'https://commons.wikimedia.org/w/api.php'
 OK = re.compile(r'^(cc0|pd|public domain|cc by(-sa)? ?[1-4]\.0|cc-by(-sa)?-[1-4]\.0)', re.I)
 
@@ -48,9 +48,9 @@ def fetch(sid, query, n=5, min_w=1000):
         lic = clean(md.get('LicenseShortName', {}).get('value'))
         if ii.get('mime') != 'image/jpeg' or ii.get('width', 0) < min_w or not OK.match(lic) or pg['title'] in have:
             continue
-        url = ii['url']                                   # original on upload.wikimedia.org (thumb host not allowed) → resized locally
-        if ii.get('size', 0) > 30e6:
-            continue
+        # Wikimedia asks bots to use standard thumbnail sizes (https://w.wiki/GHai), not originals
+        orig = ii['url']; name = orig.rsplit('/', 1)[1]
+        url = orig.replace('/wikipedia/commons/', '/wikipedia/commons/thumb/') + f'/1280px-{name}' if ii.get('width', 0) > 1280 else orig
         fn = f'{len(credits) + 1:02d}_' + re.sub(r'[^A-Za-z0-9]+', '_', pg['title'][5:])[:60].strip('_') + '.jpg'
         import io
         from PIL import Image
@@ -58,7 +58,7 @@ def fetch(sid, query, n=5, min_w=1000):
         im.thumbnail((1280, 1280)); im.save(os.path.join(d, fn), quality=88)
         credits.append(dict(file=fn, title=pg['title'], author=clean(md.get('Artist', {}).get('value'))[:120], license=lic,
                             source=ii.get('descriptionurl'), query=query))
-        got += 1; time.sleep(3)
+        got += 1; time.sleep(8)
     json.dump(credits, open(os.path.join(d, 'credits.json'), 'w'), indent=1)
     with open(os.path.join(d, 'CREDITS.md'), 'w') as f:
         f.write(f'# Reference photos — {sid} (Wikimedia Commons, reference only)\n\n| File | Author | Licence | Source |\n|---|---|---|---|\n')

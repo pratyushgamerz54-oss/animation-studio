@@ -192,14 +192,17 @@ def fur_group():
                           ('Lift', 0.35, 0, 3), ('Droop', 0.25, 0, 3), ('Frizz', 0.15, 0, 2), ('Seed', 0.0, 0, 1000)):
         s = it.new_socket(nm, in_out='INPUT', socket_type='NodeSocketFloat'); s.default_value = d; s.min_value = lo; s.max_value = hi
     s = it.new_socket('Material', in_out='INPUT', socket_type='NodeSocketMaterial')
+    it.new_socket('Surface', in_out='INPUT', socket_type='NodeSocketObject')
     it.new_socket('Geometry', in_out='OUTPUT', socket_type='NodeSocketGeometry')
     N = ng.nodes; L = ng.links
     gi = _node(ng, 'NodeGroupInput', (-1400, 0)); go = _node(ng, 'NodeGroupOutput', (1400, 0))
     fd = _node(ng, 'GeometryNodeInputNamedAttribute', (-1200, -250), data_type='FLOAT'); fd.inputs['Name'].default_value = 'fur_density'
     dist = _node(ng, 'GeometryNodeDistributePointsOnFaces', (-950, 0), distribute_method='RANDOM')
+    oi = _node(ng, 'GeometryNodeObjectInfo', (-1250, 150)); oi.transform_space = 'RELATIVE'
+    L.new(gi.outputs['Surface'], oi.inputs['Object'])
     dmul = _node(ng, 'ShaderNodeMath', (-1100, -150), operation='MULTIPLY')    # Random mode: density is a field
     L.new(gi.outputs['Density'], dmul.inputs[0]); L.new(fd.outputs['Attribute'], dmul.inputs[1])
-    L.new(gi.outputs['Geometry'], dist.inputs['Mesh']); L.new(dmul.outputs[0], dist.inputs['Density'])
+    L.new(oi.outputs['Geometry'], dist.inputs['Mesh']); L.new(dmul.outputs[0], dist.inputs['Density'])
     # strand: 5-point line along +Z
     line = _node(ng, 'GeometryNodeCurvePrimitiveLine', (-950, 300)); line.inputs['End'].default_value = (0, 0, 1)
     res = _node(ng, 'GeometryNodeResampleCurve', (-750, 300)); res.inputs['Count'].default_value = 5
@@ -255,19 +258,25 @@ def fur_group():
     L.new(rad.outputs[0], rad2.inputs[0])
     setr = _node(ng, 'GeometryNodeSetCurveRadius', (850, 0)); L.new(setp.outputs['Geometry'], setr.inputs['Curve']); L.new(rad2.outputs[0], setr.inputs['Radius'])
     setm = _node(ng, 'GeometryNodeSetMaterial', (1050, 0)); L.new(setr.outputs['Curve'], setm.inputs['Geometry']); L.new(gi.outputs['Material'], setm.inputs['Material'])
-    join = _node(ng, 'GeometryNodeJoinGeometry', (1250, 0))
-    L.new(gi.outputs['Geometry'], join.inputs[0]); L.new(setm.outputs['Geometry'], join.inputs[0])
-    L.new(join.outputs[0], go.inputs[0])
+    L.new(setm.outputs['Geometry'], go.inputs[0])       # curves only (rendered by a Curves object — see fur())
     return ng
 
 
 def fur(o, mat, density=40000, length=1.0, radius=0.00012, lift=0.35, droop=0.25, frizz=0.15):
-    m = o.modifiers.new('T7_FUR', 'NODES'); m.node_group = fur_group()
+    """groom = separate hair-Curves object '<body>_FUR' (Cycles renders Curves objects; GN curves on a mesh object are not
+    rendered by the bpy module), surface = the body mesh via Object Info. Parented to the body, identity transform."""
+    hc = bpy.data.hair_curves.new(o.name + '_FUR')
+    hc.materials.append(mat)
+    fo = bpy.data.objects.new(o.name + '_FUR', hc)
+    for c in o.users_collection:
+        c.objects.link(fo)
+    fo.matrix_world = o.matrix_world.copy(); fo.parent = o; fo.matrix_parent_inverse = o.matrix_world.inverted()
+    m = fo.modifiers.new('T7_FUR', 'NODES'); m.node_group = fur_group()
     ids = {s.name: s.identifier for s in m.node_group.interface.items_tree if getattr(s, 'in_out', '') == 'INPUT'}
     for k, v in (('Density', density), ('Length', length), ('Radius', radius), ('Lift', lift), ('Droop', droop),
-                 ('Frizz', frizz), ('Material', mat)):
+                 ('Frizz', frizz), ('Material', mat), ('Surface', o)):
         m[ids[k]] = v
-    return m
+    return fo
 
 
 # ==============================================================================================================================
@@ -322,7 +331,7 @@ def mat_hair(name, coat_attr='coat', rough=0.42, coat_var=0.12):
     a = _attr(nt, coat_attr, (-900, 300))
     hi = nt.nodes.new('ShaderNodeHairInfo'); hi.location = (-900, 0)
     # tip slightly lighter (sun-bleached), base darker (real guard hairs)
-    mr = nt.nodes.new('ShaderNodeMapRange'); mr.location = (-700, 0); mr.inputs['To Min'].default_value = 0.75; mr.inputs['To Max'].default_value = 1.18
+    mr = nt.nodes.new('ShaderNodeMapRange'); mr.location = (-700, 0); mr.inputs['To Min'].default_value = 0.55; mr.inputs['To Max'].default_value = 0.80   # hair BSDF reads brighter than skin: base darker, tip lighter
     L.new(hi.outputs['Intercept'], mr.inputs['Value'])
     mul = nt.nodes.new('ShaderNodeVectorMath'); mul.operation = 'SCALE'; mul.location = (-500, 250)
     L.new(a.outputs['Vector'], mul.inputs[0]); L.new(mr.outputs[0], mul.inputs['Scale'])
@@ -381,6 +390,7 @@ def mat_eye(name, iris='#3A2412', pupil_r=0.45, pupil_shape='round', sclera='#1A
     cmb = nt.nodes.new('ShaderNodeCombineXYZ'); cmb.location = (-550, 0); L.new(cy.outputs[0], cmb.inputs['Y']); L.new(cz.outputs[0], cmb.inputs['Z'])
     ln = nt.nodes.new('ShaderNodeVectorMath'); ln.operation = 'LENGTH'; ln.location = (-400, 0); L.new(cmb.outputs[0], ln.inputs[0])
     ramp = nt.nodes.new('ShaderNodeValToRGB'); ramp.location = (-250, 0)
+    L.new(ln.outputs['Value'], ramp.inputs['Fac'])                     # radial distance from the eye axis → pupil / iris / sclera
     e = ramp.color_ramp.elements
     e[0].position = 0.0; e[0].color = (0.004, 0.003, 0.003, 1)
     e[1].position = pupil_r * iris_r; e[1].color = (0.004, 0.003, 0.003, 1)
