@@ -44,23 +44,38 @@ def region(kind, P, N, B):
 
 
 def paint_uv(img_path, ob, weights, color, feather_px=3):
-    """rasterise per-face weights (mean of its vertices) into the object's UV texture, blending toward colour."""
-    from PIL import Image, ImageDraw, ImageFilter
+    """paint a soft per-vertex weight field into the object's UV texture: per-pixel barycentric interpolation of the vertex weights
+    inside every UV triangle (smooth, no faceted blotches), blend toward colour while keeping the base's hair detail."""
+    from PIL import Image, ImageFilter
     im = Image.open(img_path).convert('RGBA'); W_, H_ = im.size
-    mask = Image.new('L', (W_, H_), 0); dr = ImageDraw.Draw(mask)
+    mask = np.zeros((H_, W_), np.float32)
     uv = ob.data.uv_layers.active.data
-    for p in ob.data.polygons:
-        w = float(np.mean([weights[v] for v in p.vertices]))
-        if w <= 0.02:
+    me = ob.data; me.calc_loop_triangles()
+    wv = np.asarray(weights, np.float32)
+    for t in me.loop_triangles:
+        w3 = wv[list(t.vertices)]
+        if w3.max() <= 0.01:
             continue
-        pts = [(uv[li].uv[0] * W_, (1 - uv[li].uv[1]) * H_) for li in p.loop_indices]
-        dr.polygon(pts, fill=int(255 * min(w, 1)))
-    mask = mask.filter(ImageFilter.GaussianBlur(feather_px))
-    c = Image.new('RGBA', im.size, tuple(int(x * 255) for x in hexlin(color)) + (255,))
-    # keep the base's fur detail: multiply colour by normalised luminance
-    a = np.asarray(im).astype(np.float32) / 255; Y = a[..., :3] @ np.array([.2126, .7152, .0722]); Y = Y / max(np.median(Y), 1e-3)
-    cc = np.asarray(c).astype(np.float32)[..., :3] / 255 * np.clip(0.75 + 0.25 * Y, 0.5, 1.3)[..., None]
-    m = np.asarray(mask).astype(np.float32)[..., None] / 255
+        P = np.array([[uv[li].uv[0] * W_, (1 - uv[li].uv[1]) * H_] for li in t.loops])
+        x0, y0 = np.floor(P.min(0)).astype(int); x1, y1 = np.ceil(P.max(0)).astype(int)
+        x0, y0 = max(x0, 0), max(y0, 0); x1, y1 = min(x1, W_ - 1), min(y1, H_ - 1)
+        if x1 < x0 or y1 < y0:
+            continue
+        X, Y = np.meshgrid(np.arange(x0, x1 + 1) + 0.5, np.arange(y0, y1 + 1) + 0.5)
+        (ax, ay), (bx, by), (cx, cy) = P
+        den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
+        if abs(den) < 1e-9:
+            continue
+        l1 = ((by - cy) * (X - cx) + (cx - bx) * (Y - cy)) / den
+        l2 = ((cy - ay) * (X - cx) + (ax - cx) * (Y - cy)) / den
+        l3 = 1 - l1 - l2
+        inside = (l1 >= -0.02) & (l2 >= -0.02) & (l3 >= -0.02)
+        val = l1 * w3[0] + l2 * w3[1] + l3 * w3[2]
+        sub = mask[y0:y1 + 1, x0:x1 + 1]
+        sub[inside] = np.maximum(sub[inside], np.clip(val[inside], 0, 1))
+    m = np.asarray(Image.fromarray((mask * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(feather_px))).astype(np.float32)[..., None] / 255
+    a = np.asarray(im).astype(np.float32) / 255; Yl = a[..., :3] @ np.array([.2126, .7152, .0722]); Yl = Yl / max(np.median(Yl), 1e-3)
+    cc = hexlin(color)[None, None, :] * np.clip(0.75 + 0.25 * Yl, 0.5, 1.3)[..., None]
     out = a.copy(); out[..., :3] = a[..., :3] * (1 - m) + np.clip(cc, 0, 1) * m
     Image.fromarray((out * 255).astype(np.uint8)).save(img_path)
 
@@ -176,4 +191,5 @@ def main():
     print('SAVED', fn)
 
 
-main()
+if __name__ == '__main__':
+    main()

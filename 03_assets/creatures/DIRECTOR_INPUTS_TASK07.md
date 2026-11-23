@@ -270,3 +270,12 @@ Thoda dhyan se dekho na sambhar ka walk me ek jerk aarha hai thoda wo fix karke 
 **Claude:** (1) sambar walk jerk → find + fix, smooth continuous walk; (2) RDR2-style behaviour: creatures act on their own like
 real animals (graze, look around, alert, flee) and REACT to a character's presence / movement — built as a behaviour system
 for the scene files (Blender: reacts per shot to the character's path; film = baked, not a real-time game).
+
+---
+
+## G. Director (23 Nov) — verbatim
+```
+Ha ab shi hai RDR2 jaise creatures — haan, aisa hoga, ek fark ke saath: [quoted Claude's behaviour-baker plan] … Thik hai ab aage kaam chalu karo
+```
+**Status:** Sambar walk fix v002b OK ("ab shi hai"); behaviour-baker plan (`09_RIGS/T7_BEHAVIOUR_SYSTEM.md`) accepted → build in
+milestone 2. Continue with the next creatures (one by one, preview → Director).
