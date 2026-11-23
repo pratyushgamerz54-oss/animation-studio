@@ -10,7 +10,7 @@ FN, OUT = a[0], a[1]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
 bpy.ops.wm.open_mainfile(filepath=FN)
 arm = next((o for o in bpy.data.objects if o.type == 'ARMATURE'), None)
-meshes = [o for o in bpy.data.objects if o.type == 'MESH']
+meshes = [o for o in bpy.data.objects if o.type == 'MESH' and o.visible_get() and not o.hide_render]
 def pts():
     dg = bpy.context.evaluated_depsgraph_get(); P = []
     for o in meshes:

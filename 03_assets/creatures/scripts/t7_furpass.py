@@ -26,8 +26,8 @@ CFG = {
                        hair_rough=0.55, hair_coat=0.0,
                        length={'Head': 0.022, 'Neck': 0.08, 'Chest': 0.07, 'Collarbone': 0.09, 'Ankle': 0.03, 'Digit': 0.012,
                                'Ear': 0.03, 'Jaw': 0.006, 'Tongue': 0.0, 'Leg2': 0.05, '*': 0.07}, lift=0.5, droop=0.55, frizz=0.5, hair_gain=0.6),
-    'sambar': dict(body_mat=['Body', 'Head'], card_mat=None, density=200000, radius=0.00030,
-                   length={'Neck': 0.06, 'Head': 0.010, 'Jaw': 0.008, 'Ear': 0.006, 'Leg3': 0.010, 'Ankle': 0.006, 'Tail': 0.05, '*': 0.025},
+    'sambar': dict(body_mat=['Body', 'Head'], card_mat=None, density=120000, radius=0.00028,
+                   length={'Neck': 0.055, 'Head': 0.006, 'Jaw': 0.005, 'Ear': 0.004, 'Leg3': 0.006, 'Ankle': 0.004, 'Tail': 0.045, '*': 0.011},   # short coarse deer coat (texture shows through), shaggy neck mane
                    lift=0.25, droop=0.35, frizz=0.35, hair_rough=0.6, hair_coat=0.0, hair_tint=(1.04, 0.97, 0.90), hair_gain=0.85),
 }
 
