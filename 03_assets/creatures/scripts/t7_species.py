@@ -90,3 +90,17 @@ for _sid, _spr, _nm in (('golden_eagle', 0.0, 'Golden eagle (perched)'), ('golde
        coat=_EAGLE_COAT, fur_len={'*': 0.0}, mat={'body': 'feather', 'wings': 'feather'}, plume_scale=110,
        bare=('bill', 'cere', 'leg', 'toe', 'claw', 'lid'), gloss=('bill', 'claw'), mottle=0.18, mottle_scale=14,
        eye=dict(iris='#8A5A22', pupil_r=0.5, sclera='#5A3A16'), ground='#6B6458')
+
+sp('red_fox', name='Red fox (Himalayan)', latin='Vulpes vulpes montana', kind='ORDINARY', region='R-03 Mountain Kingdom', cat='Mountain wildlife',
+   builder=A.carnivore,
+   p=dict(sh=0.40, bl=0.50, hl=0.165, neck=0.13, neck_ang=38, head_pitch=10, head_w=0.56, muzzle=0.42, muzzle_r=0.18, ear=0.085,
+          ear_w=0.85, leg_r=0.95, paw=0.045, tail=0.42, tail_r0=0.035, tail_r1=0.050, tail_droop=0.55, tail_tip=0.7, belly_tuck=0.5,
+          eye_r=0.0095, eye_open=(0.95, 0.5), voxel=0.003),
+   coat={'*': '#A8582A', 'body': '#A65A2C', 'belly': '#E4DCCB', 'chest': '#DCD2BE', 'neck': '#A4582B', 'throat': '#EDE6D8',
+         'head': '#A9602F', 'face': '#B4673A', 'chin': '#F0EADD', 'nose': '#151313', 'lid': '#1E1A18', 'leg': '#2A2220', 'paw': '#1E1918',
+         'claw': '#2B2724', 'tail': '#9C5A30', 'ear': '#2C2421', 'ear_in': '#D8CDBA'},
+   coat_fn=lambda P, W, C, m: A.tail_tip(A.saddle(P, W, C, '#8E4A24', 0.30, 0.44, ('body', 'neck')), m, '#EFEAE0', 0.18)(P, W),
+   fur_len={'*': 0.035, 'neck': 0.05, 'throat': 0.045, 'body': 0.04, 'belly': 0.03, 'chest': 0.04, 'head': 0.012, 'face': 0.007,
+            'chin': 0.010, 'nose': 0.0, 'lid': 0.0, 'leg': 0.010, 'paw': 0.008, 'claw': 0.0, 'tail': 0.07, 'ear': 0.006, 'ear_in': 0.014},
+   fur={'density': 200000, 'radius': 0.00026, 'lift': 0.6, 'droop': 0.4, 'frizz': 0.35},
+   gloss=('nose',), eye=dict(iris='#B07A22', pupil_r=0.5, pupil_shape='vert', sclera='#3A2C1C'), ground='#6B6458')

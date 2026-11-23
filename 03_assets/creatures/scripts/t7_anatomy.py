@@ -529,3 +529,14 @@ def saddle(P, W, C, col, z0, z1, zones, strength=0.85):
     c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4).astype(F)
     a = np.clip((P[:, 2] - z0) / (z1 - z0), 0, 1) ** 1.5 * sum((W.get(z, 0) for z in zones), np.zeros(len(P))) * strength
     return C * (1 - a[:, None]) + c[None, :] * a[:, None]
+
+
+def tail_tip(C, m, col, frac):
+    """colour the last `frac` of the tail (fox white tip, wolf dark tip)."""
+    pts = np.asarray(m['tail'], F); tip = pts[-1]; L = sum(np.linalg.norm(pts[i + 1] - pts[i]) for i in range(len(pts) - 1))
+    h = col.lstrip('#'); c = np.array([int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)])
+    c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4).astype(F)
+    def f(P, W):
+        d = np.linalg.norm(P - tip, axis=1); a = np.clip(1 - d / (L * frac), 0, 1) ** 0.5 * W.get('tail', 0)
+        return C * (1 - a[:, None]) + c[None, :] * a[:, None]
+    return f
