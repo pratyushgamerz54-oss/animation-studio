@@ -35,6 +35,11 @@
   "dur": 0
  },
  {
+  "t": 6.937,
+  "type": "shutter",
+  "dur": 0
+ },
+ {
   "t": 7.037,
   "type": "drumroll",
   "dur": 1.6
