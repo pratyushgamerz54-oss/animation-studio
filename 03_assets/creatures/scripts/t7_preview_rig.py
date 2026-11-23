@@ -38,14 +38,25 @@ act = opt('--action')
 if act and act in bpy.data.actions:
     arm.animation_data.action = bpy.data.actions[act]
     f0, f1 = map(int, opt('--frames', '%d-%d' % tuple(map(int, bpy.data.actions[act].frame_range))).split('-'))
+    ncyc = int(opt('--cycles', 1))
+    if ncyc > 1:   # continuous cycles: Cycles F-modifiers (root location REPEAT_OFFSET → real forward travel, no loop seam)
+        A_ = bpy.data.actions[act]; cl = f1 - f0 + 1
+        for fc in A_.fcurves:
+            for m in list(fc.modifiers):
+                fc.modifiers.remove(m)
+            m = fc.modifiers.new('CYCLES')
+            root_loc = fc.data_path.endswith('location') and any(k in fc.data_path for k in ('Root', 'root'))
+            m.mode_before = m.mode_after = 'REPEAT_OFFSET' if root_loc else 'REPEAT'
+        f1 = f0 + cl * ncyc - 1
     sc = bpy.context.scene; sc.render.resolution_x, sc.render.resolution_y = 960, 540; sc.cycles.samples = 24
     cam = K.camera('CAM_clip', tuple(c + v(0.2, -2.3, 0.15) * L), tuple(c), lens=50); sc.camera = cam
     d = os.path.join(OUT, 'clip_' + act); os.makedirs(d, exist_ok=True)
-    pel = next((b for b in arm.pose.bones if 'Pelvis' in b.name or 'pelvis' in b.name or 'Hips' in b.name), arm.pose.bones[0])
+    pel = next((b for b in arm.pose.bones if 'Pelvis' in b.name or 'pelvis' in b.name or 'Hips' in b.name or 'Back' in b.name), arm.pose.bones[0])
     sc.frame_set(f0); p0 = np.array((arm.matrix_world @ pel.head)[:]); cam0 = np.array(cam.location[:])
+    sc.frame_set(f1); vel = (np.array((arm.matrix_world @ pel.head)[:]) - p0) / max(f1 - f0, 1); vel[2] = 0   # mean velocity
     for k_, f in enumerate(range(f0, f1 + 1, int(opt('--step', 1)))):
         sc.frame_set(f)
-        pf = np.array((arm.matrix_world @ pel.head)[:]); dd = pf - p0; dd[2] = 0          # tracking camera (dolly with the animal)
+        dd = vel * (f - f0)          # tracking camera: constant-velocity dolly (real camera, no surge jitter)
         cam.location = tuple(cam0 + dd)
         sc.render.filepath = os.path.join(d, f'{k_:04d}.png'); bpy.ops.render.render(write_still=True)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(24 // int(opt('--step', 1))), '-start_number', '0', '-i', os.path.join(d, '%04d.png'),

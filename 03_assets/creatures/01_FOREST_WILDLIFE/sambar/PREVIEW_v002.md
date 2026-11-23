@@ -26,3 +26,10 @@ Walk = 24 frames @ 24 fps (1 stride / s), 4-beat lateral sequence — matches re
 3. Real fur groom (own NG_T7_FUR system) for the shaggy neck mane + coat at close range; tail underside white.
 4. Antler texture (velvet-free hard antler, pale tips) and terminal fork read; brow-tine length check vs more photos.
 5. 4K texture pass (FINAL OUTPUT RULE).
+
+## Fix v002b (Director 23 Nov: "walk me ek jerk")
+Cause: (1) the 1-s clip was looped 4× in the MP4 → a hitch at every join; (2) the tracking camera followed the pelvis surge
+(1.2 ↔ 1.8 m/s, twice per stride — real) → background jitter. The walk animation itself was smooth.
+Fix: 3 continuous cycles from Cycles F-modifiers (root location REPEAT_OFFSET → real forward travel, no seam) + constant-velocity
+dolly camera. Frame-by-frame check: frame-to-frame image change uniform & periodic, max / median = 1.25 (no spike), seam frame 23→24 normal.
+→ `preview_v002/sambar_walk_v002b_smooth.mp4` (old `sambar_walk_v002.mp4` kept for comparison).

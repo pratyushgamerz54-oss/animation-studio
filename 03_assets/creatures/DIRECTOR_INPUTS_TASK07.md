@@ -259,3 +259,14 @@ Ha tu karna aur baki creture ko bhi yhi se na loge pehle jo kiye the wo bhi na s
 **Claude's reading:** go ahead (Sambar v002 direction OK to continue); ALL remaining creatures from the same mix pipeline
 (Sketchfab CC base + own work + real photos), and the earlier procedural tests (wolf, red fox, golden eagle) are redone the same way.
 One creature at a time, preview → Director → next. Next: Himalayan wolf.
+
+---
+
+## F. Director feedback (23 Nov, after the Himalayan wolf preview) — verbatim
+
+```
+Thoda dhyan se dekho na sambhar ka walk me ek jerk aarha hai thoda wo fix karke smooth animation karo jaise radr 2 game me jo creture hai apne aap kaam karte hai real world jaise kya ye bhi waise hi karege bahle mai waha pe hu ya nhi jaise real hi agar mai mai koi harkat karta hu to waise act karenge jaise real world me hota hai kya ye ho ga na
+```
+**Claude:** (1) sambar walk jerk → find + fix, smooth continuous walk; (2) RDR2-style behaviour: creatures act on their own like
+real animals (graze, look around, alert, flee) and REACT to a character's presence / movement — built as a behaviour system
+for the scene files (Blender: reacts per shot to the character's path; film = baked, not a real-time game).
