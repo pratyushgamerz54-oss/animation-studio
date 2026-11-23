@@ -287,3 +287,12 @@ milestone 2. Continue with the next creatures (one by one, preview → Director)
 Ha approve hai jo kami hoga theek kar lena
 ```
 **Status:** Asiatic black bear v002 APPROVED (concept/preview stage); listed gaps to be fixed in production (`PRODUCTION_FIX_LIST.md`).
+
+---
+
+## I. Director (23 Nov, after the golden eagle preview) — verbatim
+```
+Aur agar jarurat pade to three js ka bhi use kar kena
+```
+**Claude:** Three.js may be used where it helps (e.g. interactive 3D previews the Director can rotate on the phone). Eagle approval +
+juvenile/adult choice still open.
