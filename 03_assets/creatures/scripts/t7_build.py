@@ -117,6 +117,8 @@ def shots(sid, coll, marks, meas, samples=64, size=(1400, 1000)):
         ct = K.camera('CAM_TOP', tuple(c + np.array([0, 0, 4 * L])), tuple(c), ortho=L * 1.15)
         ct.rotation_euler = (0, 0, 0)
         K.render(ct, os.path.join(out, f'{sid}_top.png'))
+    fr = K.camera('CAM_FRONT', tuple(c + np.array([4 * L, 0, 0])), tuple(c), ortho=L * 1.25)
+    K.render(fr, os.path.join(out, f'{sid}_front.png'))
     if not TEST:
         cs = K.camera('CAM_SIDE', tuple(c + np.array([0, -4 * L, 0])), tuple(c), ortho=L * 1.25)
         K.render(cs, os.path.join(out, f'{sid}_side.png'))

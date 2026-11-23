@@ -70,16 +70,16 @@ def ungulate(p):
     xf, xr = 0.5 * L, -0.5 * L                      # chest front / buttock
     # ---------------- trunk
     b.ell(V(0.22 * L, 0, sh - 0.50 * cd), V(0.28 * L, cw * 0.50, cd * 0.50), zone='body', k=0.08)               # rib cage
-    b.ell(V(0.06 * L, 0, sh - 0.48 * cd), V(0.26 * L, cw * 0.52, cd * 0.42), zone='body', k=0.10)              # belly
+    b.ell(V(0.06 * L, 0, sh - 0.46 * cd), V(0.26 * L, cw * 0.44, cd * 0.42), zone='body', k=0.10)              # belly
     b.ell(V(0.02 * L, 0, sh - 0.95 * cd), V(0.22 * L, cw * 0.36, cd * 0.10), zone='belly', k=0.10)              # underline
-    b.ell(V(-0.28 * L, 0, hh - 0.32 * cd), V(0.21 * L, cw * 0.38, cd * 0.32), zone='body', k=0.09)              # haunch
+    b.ell(V(-0.27 * L, 0, hh - 0.30 * cd), V(0.19 * L, cw * 0.34, cd * 0.26), zone='body', k=0.09)              # haunch
     b.ell(V(-0.20 * L, cw * 0.30, hh - 0.14 * cd), V(0.05 * L, cw * 0.10, cd * 0.07), zone='body', k=0.05, mirror=True)  # hip point (tuber coxae)
-    b.ell(V(-0.25 * L, cw * 0.25, 0.70 * sh), V(0.13 * L, cw * 0.17, 0.24 * sh), S.rot_mat(0, -22, 0), zone='body', k=0.07, mirror=True)  # thigh muscles
+    b.ell(V(-0.25 * L, cw * 0.18, 0.68 * sh), V(0.12 * L, cw * 0.13, 0.21 * sh), S.rot_mat(0, -22, 0), zone='body', k=0.07, mirror=True)  # thigh muscles
     b.ell(V(0.30 * L, 0, sh - 0.06 * sh), V(0.16 * L, cw * 0.22, cd * 0.16), zone='body', k=0.08)               # withers
     b.rcone(V(0.30 * L, 0, sh - 0.12 * cd), V(-0.36 * L, 0, hh - 0.12 * cd), 0.12 * cd, 0.13 * cd, zone='body', k=0.10)  # topline
     b.ell(V(0.40 * L, 0, sh - 0.62 * cd), V(0.10 * L, cw * 0.36, cd * 0.30), zone='chest', k=0.07)              # brisket
     b.ell(V(0.33 * L, cw * 0.36, sh - 0.33 * cd), V(0.13 * L, cw * 0.12, cd * 0.30), S.rot_mat(0, -25, 0), zone='body', k=0.06, mirror=True)  # scapula
-    b.ell(V(-0.40 * L, 0, hh - 0.50 * cd), V(0.10 * L, cw * 0.30, cd * 0.30), zone='rump', k=0.07)              # rump / buttock
+    b.ell(V(-0.38 * L, 0, hh - 0.42 * cd), V(0.09 * L, cw * 0.26, cd * 0.24), zone='rump', k=0.07)              # rump / buttock
     # ---------------- neck + head
     nb = V(0.40 * L, 0, sh - 0.36 * cd)
     na = np.radians(p.get('neck_ang', 48))
@@ -121,9 +121,9 @@ def ungulate(p):
     b.rcone(fl[4], fl[4] + V(0, 0, 0.012), fr[4] * 1.35, fr[4] * 1.2, 'leg', 0.015, mirror=True)                 # fetlock
     hl_ = [V(-0.30 * L, yh, hh - 0.30 * cd), V(-0.14 * L, yh * 1.05, 0.56 * sh), V(-0.35 * L, yh * 0.9, 0.36 * sh),
            V(-0.335 * L, yh * 0.9, 0.085 * sh), V(-0.31 * L, yh * 0.9, 0.03 * sh)]
-    hr = [0.17 * lr, 0.080 * lr, 0.034 * lr, 0.024 * lr, 0.020 * lr]
+    hr = [0.10 * lr, 0.070 * lr, 0.034 * lr, 0.024 * lr, 0.020 * lr]   # thigh r ≈ 0.13 m for a 1.3 m stag (was a ball)
     b.chain(hl_[:2], hr[:2], 'body', 0.07, mirror=True)
-    b.rcone(V(-0.47 * L, yh * 0.8, hh - 0.45 * cd), hl_[2] + V(0.0, 0, 0.10 * sh), 0.10 * lr, 0.045 * lr, 'body', 0.06, mirror=True)  # hamstrings (buttock → hock)
+    b.rcone(V(-0.47 * L, yh * 0.8, hh - 0.45 * cd), hl_[2] + V(0.0, 0, 0.10 * sh), 0.065 * lr, 0.040 * lr, 'body', 0.06, mirror=True)  # hamstrings (buttock → hock)
     b.rcone(hl_[1], hl_[2], 0.070 * lr, 0.036 * lr, 'leg', 0.03, mirror=True)                                    # gaskin
     b.ell(hl_[1] * 0.55 + hl_[2] * 0.45 + V(-0.03 * lr, 0, 0.02), V(0.05 * lr, 0.035 * lr, 0.10 * lr), S.rot_mat(0, -40, 0), zone='leg', k=0.03, mirror=True)  # gastrocnemius
     b.rcone(hl_[2] + V(-0.04 * lr, 0, 0.03 * lr), hl_[2], 0.022 * lr, 0.03 * lr, 'leg', 0.02, mirror=True)       # calcaneus (point of hock)
@@ -174,16 +174,16 @@ def antlers_sambar(m, beam=0.62, r0=0.028):
     H = m['head']; hl = m['hl']
     a = S.Part('antlers', voxel=0.003)
     base = H.to((0.04 * hl, 0.17 * hl, 0.27 * hl))
-    pts = _path(base, [(-0.10, 0.60, 1.0), (-0.45, 0.62, 1.0), (-0.35, 0.35, 1.0), (-0.05, 0.10, 1.0)], beam, 10)
+    pts = _path(base, [(-0.15, 1.40, 0.55), (-0.25, 0.90, 0.95), (-0.10, 0.25, 1.0), (-0.05, 0.05, 1.0)], beam, 10)   # wide lyre (photo refs): out, up, tips in
     rad = [r0 * (1 - 0.5 * i / 10) for i in range(11)]
     a.chain(pts, rad, 'antler', 0.004, mirror=True)
     a.rcone(base - V(0, 0, 0.012), base + V(0, 0, 0.012), r0 * 1.4, r0 * 1.3, 'burr', 0.004, mirror=True)       # burr / coronet
     a.rcone(base - V(0, 0, 0.05), base, r0 * 1.0, r0 * 1.1, 'burr', 0.006, mirror=True)                            # pedicle
     p0 = pts[1]
-    br = _path(p0, [(1.0, 0.25, 0.45), (0.7, 0.15, 0.9)], beam * 0.42, 6)
+    br = _path(p0, [(1.0, 0.35, 0.35), (0.75, 0.25, 0.85)], beam * 0.40, 6)
     a.chain(br, [rad[1] * 0.85 * (1 - 0.75 * i / 6) for i in range(7)], 'antler', 0.006, mirror=True)           # brow tine
     p1 = pts[8]
-    it = _path(p1, [(0.35, -0.10, 1.0), (0.15, -0.15, 1.0)], beam * 0.30, 5)
+    it = _path(p1, [(0.55, -0.15, 0.9), (0.25, -0.30, 1.0)], beam * 0.26, 5)
     a.chain(it, [rad[8] * 0.9 * (1 - 0.75 * i / 5) for i in range(6)], 'antler', 0.005, mirror=True)           # inner tine
     a.rcone(pts[-2], pts[-1] + (pts[-1] - pts[-2]) * 1.2, rad[-2], rad[-1] * 0.25, 'antler', 0.004, mirror=True)
     return a
@@ -234,10 +234,11 @@ def carnivore(p):
     b.ell(H.to((0.20 * hl, 0, 0.06 * hl)), V(0.34 * hl, hw * 0.44 * hl, 0.30 * hl), H.R, zone='head', k=0.08 * hl)       # cranium
     b.ell(H.to((0.26 * hl, 0, -0.06 * hl)), V(0.18 * hl, hw * 0.52 * hl, 0.20 * hl), H.R, zone='head', k=0.10 * hl)      # zygomatic / cheeks
     b.ell(H.to((0.16 * hl, 0, 0.26 * hl)), V(0.24 * hl, hw * 0.30 * hl, 0.08 * hl), H.R, zone='head', k=0.08 * hl)      # sagittal / forehead
+    b.ell(H.to((0.42 * hl, 0, 0.16 * hl)), V(0.12 * hl, hw * 0.26 * hl, 0.08 * hl), H.R, zone='head', k=0.06 * hl)      # brow / stop
     m0 = 0.52 * hl; m1 = m0 + mz * hl
-    b.rcone(H.to((m0 - 0.08 * hl, 0, -0.02 * hl)), H.to((m1 - 0.04 * hl, 0, -0.03 * hl)), mr * hl * 1.15, mr * hl * 0.70, zone='face', k=0.08 * hl)  # muzzle
+    b.rcone(H.to((m0 - 0.08 * hl, 0, -0.02 * hl)), H.to((m1 - 0.04 * hl, 0, -0.03 * hl)), mr * hl * 1.15, mr * hl * 0.52, zone='face', k=0.08 * hl)  # muzzle (narrows to the nose, photo)
     b.ell(H.to(((m0 + m1) / 2, 0, -0.11 * hl)), V(mz * hl * 0.48, hw * 0.24 * hl, 0.09 * hl), H.R, zone='chin', k=0.06 * hl)  # lower jaw / lips
-    b.ell(H.to((m1 - 0.01 * hl, 0, 0.01 * hl)), V(0.075 * hl, 0.10 * hl * mr / 0.2, 0.07 * hl), H.R, zone='nose', k=0.02 * hl)   # nose leather
+    b.ell(H.to((m1 + 0.02 * hl, 0, 0.02 * hl)), V(0.075 * hl, 0.12 * hl * mr / 0.2, 0.085 * hl), H.R, zone='nose', k=0.010 * hl)   # nose leather proud of the muzzle (photo)   # nose leather
     b.ell(H.to((m1 + 0.015 * hl, 0.035 * hl, -0.005 * hl)), V(0.025 * hl, 0.018 * hl, 0.02 * hl), H.R, zone='nose', k=0.01 * hl, sub=True, mirror=True)
     eye = H.to(p.get('eye_pos', (0.46 * hl, hw * 0.30 * hl, 0.10 * hl))); er = p.get('eye_r', 0.065 * hl)
     edir = S._n(H.R @ S._n(p.get('eye_dir', (0.75, 0.62, 0.12))))

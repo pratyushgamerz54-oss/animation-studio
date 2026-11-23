@@ -38,7 +38,7 @@ def fetch(sid, query, n=5, min_w=1000):
     credits = json.load(open(os.path.join(d, 'credits.json'))) if os.path.exists(os.path.join(d, 'credits.json')) else []
     have = {c['title'] for c in credits}
     r = get(dict(action='query', generator='search', gsrsearch=f'filetype:bitmap {query}', gsrnamespace=6, gsrlimit=40,
-                 prop='imageinfo', iiprop='url|size|extmetadata|mime'))
+                 prop='imageinfo', iiprop='url|size|extmetadata|mime', iiurlwidth=1280))
     pages = sorted(r.get('query', {}).get('pages', {}).values(), key=lambda p: p.get('index', 99))
     got = 0
     for pg in pages:
@@ -48,9 +48,7 @@ def fetch(sid, query, n=5, min_w=1000):
         lic = clean(md.get('LicenseShortName', {}).get('value'))
         if ii.get('mime') != 'image/jpeg' or ii.get('width', 0) < min_w or not OK.match(lic) or pg['title'] in have:
             continue
-        # Wikimedia asks bots to use standard thumbnail sizes (https://w.wiki/GHai), not originals
-        orig = ii['url']; name = orig.rsplit('/', 1)[1]
-        url = orig.replace('/wikipedia/commons/', '/wikipedia/commons/thumb/') + f'/1280px-{name}' if ii.get('width', 0) > 1280 else orig
+        url = ii.get('thumburl') or ii['url']            # official 1280 px thumbnail (thumb.wikimedia.org), as Wikimedia asks
         fn = f'{len(credits) + 1:02d}_' + re.sub(r'[^A-Za-z0-9]+', '_', pg['title'][5:])[:60].strip('_') + '.jpg'
         import io
         from PIL import Image
