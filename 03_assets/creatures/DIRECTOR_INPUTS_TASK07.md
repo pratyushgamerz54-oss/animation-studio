@@ -226,3 +226,22 @@ Continue aur gaa real world se dekho kaya creature aur animal ka animation aur p
 field-guide measurements + coat / feather pattern notes → compare side by side with the 3D render → fix shape / coat → only then the
 concept sheet. Movement references (gait timing, wingbeat frequency, swim cycle) are collected now and used in milestone 2 (rig + animation tests).
 Reference board per species: `00_CREATURE_REFERENCES/photo_refs/<species>/` + `REFERENCE_NOTES.md`.
+
+---
+
+## D. Director decision — model source (23 Nov, verbatim)
+
+1. (via `/meshy-3d-agent:meshy-openclaw` command)
+```
+/meshy-3d-agent:meshy-3d-generation   use both for work for model and mere creture ko taiyar karke phele ek karke hamko preview dikhana fir mai approve Kari to aage badho
+```
+2. (after the Meshy login started — login stopped, no credential stored)
+```
+Mat kar isse rehne de tu jais ekar rha tha waise hi kaam kar apan
+In teeno ki mix kar use kar  samjha lekin animation time koi jhamela na ho hona chaiye real jaise hona chiye us samay aur ye log real animals jaise behave karne chiye naki aise hi kuch bhi jaise world me hote hai to ye to baa fka kama hai tu in teno ka use mix karke kar taki jaldi aur realistic output aaye 1. Isi tarike se continue: har species ko photo se milakar baar-baar sudhaarunga. Kaam hoga, par dheere, aur chehre poori tarah asli shayad na ban paayein.
+2. Ready-made CC models base banayein (recommended): asli jaanwar jaise free-license 3D models (jaise Sketchfab ke CC-BY scan / sculpt) ko base banaun, phir unhe saaf karun, apna rig, fur aur texture lagaun. Isse sabse asli result aayega. Iske liye ek aur website allow karni padegi.
+3. Meshy (AI 3D generation): is session mein available hai. Ye external service hai, isliye aapki permission ke bina use nahi karunga.
+```
+**Claude's reading:** continue the current way, but MIX all three sources (own procedural kit + free-licence CC models + Meshy) to get
+realistic results faster; ONE creature at a time → preview → Director approval → next. Animation must have no problems: real-world
+animal behaviour and gaits (no "anything goes" motion). Meshy login stopped on request (not used until the Director says so).
