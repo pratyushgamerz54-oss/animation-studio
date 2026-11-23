@@ -279,3 +279,11 @@ Ha ab shi hai RDR2 jaise creatures — haan, aisa hoga, ek fark ke saath: [quote
 ```
 **Status:** Sambar walk fix v002b OK ("ab shi hai"); behaviour-baker plan (`09_RIGS/T7_BEHAVIOUR_SYSTEM.md`) accepted → build in
 milestone 2. Continue with the next creatures (one by one, preview → Director).
+
+---
+
+## H. Director (23 Nov, after the Asiatic black bear preview) — verbatim
+```
+Ha approve hai jo kami hoga theek kar lena
+```
+**Status:** Asiatic black bear v002 APPROVED (concept/preview stage); listed gaps to be fixed in production (`PRODUCTION_FIX_LIST.md`).

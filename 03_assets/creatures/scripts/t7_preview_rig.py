@@ -9,7 +9,7 @@ a = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
 FN, OUT = a[0], a[1]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
 bpy.ops.wm.open_mainfile(filepath=FN)
-arm = next(o for o in bpy.data.objects if o.type == 'ARMATURE')
+arm = next((o for o in bpy.data.objects if o.type == 'ARMATURE'), None)
 meshes = [o for o in bpy.data.objects if o.type == 'MESH']
 def pts():
     dg = bpy.context.evaluated_depsgraph_get(); P = []
@@ -17,13 +17,13 @@ def pts():
         e = o.evaluated_get(dg); me = e.to_mesh(); P += [(e.matrix_world @ v.co)[:] for v in me.vertices]; e.to_mesh_clear()
     return np.array(P)
 st = opt('--still-action', 'Stand_Breathing_01')
-if st in bpy.data.actions:
+if arm and st in bpy.data.actions:
     arm.animation_data.action = bpy.data.actions[st]
 bpy.context.scene.frame_set(1)
 P = pts(); lo, hi = P.min(0), P.max(0); c = (lo + hi) / 2; ext = hi - lo; L = ext.max()
 ax = 0 if ext[0] >= ext[1] else 1
 # which end is the head: head bone side
-hb = np.array((arm.matrix_world @ arm.pose.bones[opt('--face-bone', 'RigHead_00')].head)[:])
+hb = np.array((arm.matrix_world @ arm.pose.bones[opt('--face-bone', 'RigHead_00')].head)[:]) if arm else (P[P[:, 2] > hi[2] - 0.12 * ext[2]].mean(0))   # static scan: head = top of the model
 sgn = 1 if hb[ax] > c[ax] else -1
 def v(f, l, z):   # forward, lateral(-), up in body axes
     out = np.zeros(3); out[ax] = f * sgn; out[1 - ax] = l * (1 if ax == 0 else -1) * sgn; out[2] = z; return out
