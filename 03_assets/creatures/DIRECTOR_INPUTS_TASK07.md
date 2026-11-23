@@ -348,3 +348,12 @@ before. Resume at the red fox (v002 conversion) and keep going creature by creat
 Ha gara khi lage ab jaru hi hai three js ka to waha use kar le urgent need ho tab ya phir kuch chutevtab smajhna
 ```
 **Rule now:** Three.js ONLY when really needed (urgent need, or when something would otherwise be missed). Default = Blender renders + clips.
+
+---
+
+## O. Director (23 Nov, red fox) — verbatim
+```
+Are bhai ye foz jo hai kyu itna ghatiya hai skin aisa lga rahabhai jaise koi plastic ho realistic fir jaisa feel hi nhi aarha hai baki approve hai
+```
+**Status:** red fox APPROVED except the look — skin reads as plastic → fix now: real fur groom (own NG_T7_FUR on a hair-Curves object,
+colour sampled from the base texture, length by region) + matte skin (no specular sheen). Same fix later for all furred bases.

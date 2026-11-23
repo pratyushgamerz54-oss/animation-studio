@@ -273,6 +273,9 @@ def fur(o, mat, density=40000, length=1.0, radius=0.00012, lift=0.35, droop=0.25
     fo.matrix_world = o.matrix_world.copy(); fo.parent = o; fo.matrix_parent_inverse = o.matrix_world.inverted()
     m = fo.modifiers.new('T7_FUR', 'NODES'); m.node_group = fur_group()
     ids = {s.name: s.identifier for s in m.node_group.interface.items_tree if getattr(s, 'in_out', '') == 'INPUT'}
+    # the groom is built in the surface's LOCAL space: compensate a scaled object (e.g. cm-unit bases scaled 0.01 / 0.004)
+    sc = sum(o.matrix_world.to_scale()) / 3.0
+    density, length, radius = density * sc * sc, length / sc, radius / sc
     for k, v in (('Density', density), ('Length', length), ('Radius', radius), ('Lift', lift), ('Droop', droop),
                  ('Frizz', frizz), ('Material', mat), ('Surface', o)):
         m[ids[k]] = v

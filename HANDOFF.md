@@ -279,7 +279,7 @@ Director inputs verbatim: `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md` (§A b
 | Himalayan wolf | `02_MOUNTAIN_WILDLIFE/wolf/T7_WOLF_CC_v002.blend` | preview shown ("Ok chalu karo") |
 | Asiatic black bear | `01_FOREST_WILDLIFE/black_bear/T7_BLACK_BEAR_CC_v002.blend` | **APPROVED** |
 | Golden eagle (juvenile, museum scan CC0) | `06_AERIAL_CREATURES/golden_eagle/T7_GOLDEN_EAGLE_SCAN_v002.blend` | **APPROVED** |
-| Red fox | `02_MOUNTAIN_WILDLIFE/red_fox/T7_RED_FOX_CC_v002.blend` | preview rendering |
+| Red fox | `02_MOUNTAIN_WILDLIFE/red_fox/T7_RED_FOX_CC_v003_fur.blend` (real fur) | approved (look fix v003) |
 | Bharal | script `t7_bharal_cc.py` (cel base) | WIP — needs a better base / own texture |
 Tools: `scripts/t7_sketchfab.py`, `t7_ccbase.py`, `t7_cc_species.py` (config per species), `t7_sambar_cc.py`, `t7_bharal_cc.py`,
 `t7_scan_reduce.py`, `t7_preview_rig.py` (stills + continuous clips, `--cycles`, `--step`, constant-velocity camera), own procedural kit
