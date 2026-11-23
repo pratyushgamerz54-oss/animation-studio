@@ -22,12 +22,13 @@ CFG = {
     'wolf': dict(body_mat=['1074'], card_mat=None, density=220000, radius=0.00026,
                  length={'Tail': 0.07, 'Head': 0.012, 'Neck': 0.060, 'LowerLeg': 0.010, 'Ear': 0.008, 'Torso': 0.040, '*': 0.036},
                  lift=0.45, droop=0.4, frizz=0.4, hair_tint=(1.10, 0.92, 0.72), hair_gain=0.85),
-    'black_bear': dict(body_mat=['Material_003', 'Material_001'], card_mat=None, density=200000, radius=0.00032,
-                       length={'Head': 0.025, 'Neck': 0.11, 'Chest': 0.09, 'Collarbone': 0.10, 'Ankle': 0.03, 'Digit': 0.012,
-                               'Ear': 0.03, 'Jaw': 0.012, 'Leg2': 0.05, '*': 0.07}, lift=0.5, droop=0.55, frizz=0.5),
+    'black_bear': dict(body_mat=['Material_003', 'Material_001'], card_mat=None, hide_mats=('Material_002',), density=200000, radius=0.00032,
+                       hair_rough=0.55, hair_coat=0.0,
+                       length={'Head': 0.022, 'Neck': 0.08, 'Chest': 0.07, 'Collarbone': 0.09, 'Ankle': 0.03, 'Digit': 0.012,
+                               'Ear': 0.03, 'Jaw': 0.006, 'Tongue': 0.0, 'Leg2': 0.05, '*': 0.07}, lift=0.5, droop=0.55, frizz=0.5, hair_gain=0.6),
     'sambar': dict(body_mat=['Body', 'Head'], card_mat=None, density=200000, radius=0.00030,
                    length={'Neck': 0.06, 'Head': 0.010, 'Jaw': 0.008, 'Ear': 0.006, 'Leg3': 0.010, 'Ankle': 0.006, 'Tail': 0.05, '*': 0.025},
-                   lift=0.35, droop=0.35, frizz=0.4),
+                   lift=0.25, droop=0.35, frizz=0.35, hair_rough=0.6, hair_coat=0.0, hair_tint=(1.04, 0.97, 0.90), hair_gain=0.85),
 }
 
 
@@ -46,10 +47,13 @@ def main():
         b.inputs['Metallic'].default_value = 0.0; b.inputs['Roughness'].default_value = 0.82
         b.inputs['Specular IOR Level'].default_value = 0.2
         if m.name == cfg.get('card_mat'):
-            tex = next((n for n in m.node_tree.nodes if n.type == 'TEX_IMAGE' and 'base' in n.image.name.lower()), None)
+            tex = next((n for n in m.node_tree.nodes if n.type == 'TEX_IMAGE' and n.image and ('base' in n.image.name.lower() or 'diffuse' in n.image.name.lower())), None)
             if tex:
                 L.new(tex.outputs['Alpha'], b.inputs['Alpha'])
                 m.blend_method = 'HASHED'
+    for o in bpy.data.objects:                       # crude base hair strips replaced by the real groom
+        if o.type == 'MESH' and o.active_material and o.active_material.name in cfg.get('hide_mats', ()):
+            o.hide_render = True; o.hide_viewport = True
     for body in [o for o in bpy.data.objects if o.type == 'MESH' and o.active_material and o.active_material.name in cfg['body_mat']]:
         me = body.data; print("STEP body", body.name, flush=True)
         # per-vertex colour from the base texture (average of the vertex's UV corners)
@@ -108,7 +112,7 @@ def main():
         dens = np.where(lum < np.percentile(lum, 1.5), 0.0, 1.0).astype(np.float32)
         K.set_attr(body, 'fur_density', dens)
         K.set_attr(body, "comb", comb, "FLOAT_VECTOR"); print("STEP attrs", flush=True)
-        hm = bpy.data.materials.get(f'T7_{sid.upper()}_HAIR') or K.mat_hair(f'T7_{sid.upper()}_HAIR', rough=0.38, coat_var=0.14)
+        hm = bpy.data.materials.get(f'T7_{sid.upper()}_HAIR') or K.mat_hair(f'T7_{sid.upper()}_HAIR', rough=cfg.get('hair_rough', 0.38), coat_var=0.14, coat=cfg.get('hair_coat', 0.1))
         fo = K.fur(body, hm, density=cfg['density'], radius=cfg['radius'], lift=cfg['lift'], droop=cfg['droop'], frizz=cfg['frizz'])
     bpy.ops.wm.save_as_mainfile(filepath=dst, compress=True, relative_remap=True)
     print('FURPASS SAVED', dst)

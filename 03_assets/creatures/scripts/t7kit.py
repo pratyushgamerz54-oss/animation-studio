@@ -322,7 +322,7 @@ def mat_skin(name, coat_attr='coat', rough=0.62, spec=0.28, sss=0.06, bump=0.25,
     return m
 
 
-def mat_hair(name, coat_attr='coat', rough=0.42, coat_var=0.12):
+def mat_hair(name, coat_attr='coat', rough=0.42, coat_var=0.12, coat=0.1):
     """Principled Hair (Chiang) with the strand colour taken from the coat; tip lightening + random variation."""
     m = new_mat(name); nt = m.node_tree; L = nt.links
     nt.nodes.remove(nt.nodes['Principled BSDF'])
@@ -345,7 +345,7 @@ def mat_hair(name, coat_attr='coat', rough=0.42, coat_var=0.12):
     L.new(mul2.outputs[0], h.inputs['Color'])
     h.inputs['Roughness'].default_value = rough
     h.inputs['Radial Roughness'].default_value = 0.6
-    h.inputs['Coat'].default_value = 0.1
+    h.inputs['Coat'].default_value = coat
     L.new(h.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
     return m
 
