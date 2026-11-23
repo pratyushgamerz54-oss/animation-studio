@@ -315,3 +315,28 @@ Ek baat bata de rha hai three js ka use karte rehna ab se taki aacha kaam ho aur
 **Claude:** from now on every review (world, environment, creatures / fauna, flora, characters, anything) also gets an interactive
 Three.js 3D viewer (GLB export) so the Director can rotate / zoom / play animations on the phone and catch problems before finals.
 Added to CLAUDE.md (project rule).
+
+---
+
+## L. Director (23 Nov) — verbatim
+```
+Sun sun uska use mat kar
+```
+```
+Is kuch fayada hai
+```
+```
+A b c me se jo badhiya ho wo tu dekh le kyuki mere ko apna project me kami nhi chiye aur details me
+```
+**Decision (Claude, as asked):** option (c) — every creature preview ALSO goes into ONE interactive Three.js viewer page (same link,
+updated with each creature): real-size grid + 1.80 m human for scale, all animation clips, status, credits. Renders / clips stay.
+
+---
+
+## M. Director (23 Nov) — verbatim (REVOKES K + L)
+```
+Aur apna kaam jaha pe maine rok diya tha waha se suru kar lekin
+Chor usko ek kaam kar jaha pe maine tere ko jah pe roka tha na fix wale me wha se apna kaam suru kar aur is three js ko Claude md se hata de aur apna kaam continue kar aage badhte jaa
+```
+**Status:** Three.js viewer DROPPED (rule removed from CLAUDE.md; viewer page never published). Reviews = Blender renders + clips as
+before. Resume at the red fox (v002 conversion) and keep going creature by creature.
