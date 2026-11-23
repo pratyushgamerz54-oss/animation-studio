@@ -18,7 +18,51 @@ CC = {
                  delete=('Icosphere',), still_action='Animation',
                  # photo ref 01 (Himalayan wolf, Zoo Zurich): tawny flanks, dark grizzled saddle, cream belly / legs / cheeks
                  palette=dict(dark='#3E342A', mid='#A47A52', light='#E4D8C4', cap=1.9, gamma=0.9, tint=0.65)),
+    'black_bear': dict(base='black_bear/bffc3c87d2d148ff8533e1cc8a11c9f1', withers=0.85, pelvis='RigPelvis_02', chest='RigChest_013',
+                       delete=('Icosphere',), still_action='Stand_Breathing_01',
+                       # photo refs 01-03 (Commons): black shaggy coat, cream-white chest crescent / V, tan-brown muzzle
+                       palette=dict(dark='#070606', mid='#100E0D', light='#2A2420', cap=1.6, gamma=1.0),
+                       paint=[('chest_v', '#E8E0CF', 'chest_v', 'Material_003'), ('muzzle', '#6A4C36', 'muzzle', 'Material_001')], rough=0.55),
 }
+
+
+def region(kind, P, N, B):
+    """soft 0..1 weight of an anatomical region on the (+X-facing, ground at z=0) body. B = dict of bone points."""
+    ch, hd = B['chest'], B['head']
+    if kind == 'chest_v':       # crescent / V on the FRONT of the chest between the forelegs (photo 02), opening upward
+        W = B['W']; zl, zh = 0.50 * W, 0.70 * W
+        face_fwd = np.clip((N[:, 0] - 0.55) / 0.3, 0, 1)
+        inz = (P[:, 2] > zl) & (P[:, 2] < zh) & (P[:, 0] > ch[0])
+        arm_ = (P[:, 2] - zl) * 1.1                                   # half-width of the V at this height
+        band = (np.abs(P[:, 1]) < arm_) & (np.abs(P[:, 1]) > arm_ - 0.07 * W)
+        base = (P[:, 2] - zl < 0.11 * W) & (P[:, 2] > zl - 0.03 * W) & (np.abs(P[:, 1]) < 0.10 * W) & (P[:, 0] > ch[0])  # centre of the crescent (sternum)
+        return np.clip(inz * band * face_fwd * 1.5 + base * np.clip(N[:, 0] + 0.2, 0, 1) * 1.5, 0, 1)
+    if kind == 'muzzle':        # tan muzzle: last ~12 cm (scaled) before the nose tip, below the eye line
+        d = P[:, 0] - (B['nose'][0] - 0.14 * B['W'])
+        return np.clip(d / (0.04 * B['W']), 0, 1) * (P[:, 2] < B['nose'][2] + 0.05 * B['W'])
+    return np.zeros(len(P))
+
+
+def paint_uv(img_path, ob, weights, color, feather_px=3):
+    """rasterise per-face weights (mean of its vertices) into the object's UV texture, blending toward colour."""
+    from PIL import Image, ImageDraw, ImageFilter
+    im = Image.open(img_path).convert('RGBA'); W_, H_ = im.size
+    mask = Image.new('L', (W_, H_), 0); dr = ImageDraw.Draw(mask)
+    uv = ob.data.uv_layers.active.data
+    for p in ob.data.polygons:
+        w = float(np.mean([weights[v] for v in p.vertices]))
+        if w <= 0.02:
+            continue
+        pts = [(uv[li].uv[0] * W_, (1 - uv[li].uv[1]) * H_) for li in p.loop_indices]
+        dr.polygon(pts, fill=int(255 * min(w, 1)))
+    mask = mask.filter(ImageFilter.GaussianBlur(feather_px))
+    c = Image.new('RGBA', im.size, tuple(int(x * 255) for x in hexlin(color)) + (255,))
+    # keep the base's fur detail: multiply colour by normalised luminance
+    a = np.asarray(im).astype(np.float32) / 255; Y = a[..., :3] @ np.array([.2126, .7152, .0722]); Y = Y / max(np.median(Y), 1e-3)
+    cc = np.asarray(c).astype(np.float32)[..., :3] / 255 * np.clip(0.75 + 0.25 * Y, 0.5, 1.3)[..., None]
+    m = np.asarray(mask).astype(np.float32)[..., None] / 255
+    out = a.copy(); out[..., :3] = a[..., :3] * (1 - m) + np.clip(cc, 0, 1) * m
+    Image.fromarray((out * 255).astype(np.uint8)).save(img_path)
 
 
 def mesh_world(o):
@@ -99,6 +143,31 @@ def main():
         for l in list(b.inputs['Roughness'].links):
             mat.node_tree.links.remove(l)
         b.inputs['Roughness'].default_value = cfg.get('rough', 0.6); b.inputs['Specular IOR Level'].default_value = 0.28
+    if cfg.get('paint'):
+        Pb = mesh_world(body)
+        Bp = dict(chest=np.array((arm.matrix_world @ pb[cfg['chest']].head)[:]),
+                  head=np.array((arm.matrix_world @ pb[[b.name for b in pb if 'Head' in b.name][0]].head)[:]), L=float(np.ptp(Pb[:, 0])), W=cfg['withers'])
+        for ob in meshes:
+            if not ob.active_material or not ob.active_material.use_nodes or not ob.data.uv_layers:
+                continue
+            img_node = next((n for n in ob.active_material.node_tree.nodes if n.type == 'TEX_IMAGE' and n.image and
+                             'diffuse_v002' in (n.image.filepath or '')), None)
+            if img_node is None:
+                continue
+            Pw = mesh_world(ob); Nw = np.array([(ob.matrix_world.to_3x3() @ v.normal).normalized()[:] for v in ob.data.vertices])
+            if len(Pw) != len(ob.data.vertices):
+                continue
+            Bp['nose'] = Pw[np.argmax(Pw[:, 0])] if 'nose' not in Bp else Bp['nose']
+            for name, colr, kind, matname in cfg['paint']:
+                if ob.active_material.name != matname:
+                    continue
+                if kind == 'muzzle':
+                    Bp['nose'] = Pw[np.argmax(Pw[:, 0])]
+                w = region(kind, Pw, Nw, Bp)
+                print('paint', ob.name, name, 'verts', int((w > 0.1).sum()))
+                if w.max() > 0:
+                    paint_uv(bpy.path.abspath(img_node.image.filepath), ob, w, colr)
+            img_node.image.reload()
     if os.path.exists(os.path.join(tex, '_src.png')):
         os.remove(os.path.join(tex, '_src.png'))
     os.makedirs(out, exist_ok=True)

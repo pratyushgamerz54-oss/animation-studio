@@ -31,9 +31,9 @@ os.makedirs(OUT, exist_ok=True)
 K.studio(size=(1400, 1000), samples=int(opt('--samples', 64)), ground='#5E5848')
 shots = {'34': (v(1.2, -1.5, 0.35), 55, None), 'side': (v(0, -4, 0), None, L * 1.2), 'front': (v(4, 0, 0), None, L * 1.2),
          'back': (v(-4, 0, 0), None, L * 1.2)}
-for k, (off, lens, ortho) in shots.items():
+for k, (off, lens, ortho) in ({} if '--clip-only' in a else shots).items():
     K.render(K.camera('CAM_' + k, tuple(c + off * L), tuple(c), lens=lens or 50, ortho=ortho), os.path.join(OUT, f'{k}.png'))
-K.render(K.camera('CAM_face', tuple(hb + v(1.0, -1.1, 0.25) * 0.9), tuple(hb + v(0.15, 0, -0.05)), lens=85), os.path.join(OUT, 'face.png'))
+None if '--clip-only' in a else K.render(K.camera('CAM_face', tuple(hb + v(1.0, -1.1, 0.25) * 0.9), tuple(hb + v(0.15, 0, -0.05)), lens=85), os.path.join(OUT, 'face.png'))
 act = opt('--action')
 if act and act in bpy.data.actions:
     arm.animation_data.action = bpy.data.actions[act]
@@ -43,11 +43,11 @@ if act and act in bpy.data.actions:
     d = os.path.join(OUT, 'clip_' + act); os.makedirs(d, exist_ok=True)
     pel = next((b for b in arm.pose.bones if 'Pelvis' in b.name or 'pelvis' in b.name or 'Hips' in b.name), arm.pose.bones[0])
     sc.frame_set(f0); p0 = np.array((arm.matrix_world @ pel.head)[:]); cam0 = np.array(cam.location[:])
-    for f in range(f0, f1 + 1, int(opt('--step', 1))):
+    for k_, f in enumerate(range(f0, f1 + 1, int(opt('--step', 1)))):
         sc.frame_set(f)
         pf = np.array((arm.matrix_world @ pel.head)[:]); dd = pf - p0; dd[2] = 0          # tracking camera (dolly with the animal)
         cam.location = tuple(cam0 + dd)
-        sc.render.filepath = os.path.join(d, f'{f:04d}.png'); bpy.ops.render.render(write_still=True)
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '24', '-start_number', str(f0), '-i', os.path.join(d, '%04d.png'),
+        sc.render.filepath = os.path.join(d, f'{k_:04d}.png'); bpy.ops.render.render(write_still=True)
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(24 // int(opt('--step', 1))), '-start_number', '0', '-i', os.path.join(d, '%04d.png'),
                     '-pix_fmt', 'yuv420p', '-vf', 'scale=960:-2', os.path.join(OUT, f'clip_{act}.mp4')])
 print('ALLDONE')
