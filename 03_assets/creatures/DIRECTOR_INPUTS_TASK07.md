@@ -357,3 +357,12 @@ Are bhai ye foz jo hai kyu itna ghatiya hai skin aisa lga rahabhai jaise koi pla
 ```
 **Status:** red fox APPROVED except the look — skin reads as plastic → fix now: real fur groom (own NG_T7_FUR on a hair-Curves object,
 colour sampled from the base texture, length by region) + matte skin (no specular sheen). Same fix later for all furred bases.
+
+---
+
+## P. Director (23 Nov, red fox v003 fur) — verbatim — QUALITY STANDARD
+```
+Ha ab shi hai aise hi realistic banana hai sabko
+```
+**Standard for every creature:** red fox v003 level — real strand fur (colour from texture, length by region), matte skin, no plastic
+sheen, photo-matched. Applying the fur pass now to sambar, wolf and bear too.
