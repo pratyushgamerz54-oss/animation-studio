@@ -366,3 +366,17 @@ Ha ab shi hai aise hi realistic banana hai sabko
 ```
 **Standard for every creature:** red fox v003 level — real strand fur (colour from texture, length by region), matte skin, no plastic
 sheen, photo-matched. Applying the fur pass now to sambar, wolf and bear too.
+
+---
+
+## Q. Director (23 Nov) — verbatim
+```
+Ek kaam jaru karna animation ke samay tum far bhi to hilega jab hawa chelgi to
+```
+**Plan (milestone 2, required):** fur moves in the wind AND with the body's motion:
+1. Wind — the SAME wind as the vegetation (`T6_WIND_CONTROL`: direction, strength, gust, speed from TASK 06) drives the fur
+   strands, so grass, trees and fur move together in one shot; bend grows toward the tip (root stiff, tip flexible), per-strand phase.
+2. Body motion — inertia / follow-through: strand tips lag behind when the animal walks, runs, turns or shakes, then settle
+   (damped spring per strand in a geometry-nodes simulation zone); long hair (tail, mane, ruff) moves more than short face fur.
+3. Wet / calm: calm = still (no fake motion); strength 0 → static.
+Checked frame by frame in the animation tests (no jitter, no hair through the body).

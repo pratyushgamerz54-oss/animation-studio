@@ -9,4 +9,5 @@
 | Bharal | WIP | — | cel-shaded base texture → better realistic base or fully own texture; horns OK |
 | Red fox | v002 → v003 fur | **APPROVED** (look fixed with real fur) | walk / trot / pounce on the rig, IK foot-lock, winter-coat option, 4K |
 | ALL furred (sambar, wolf, bear) | — | — | apply t7_furpass.py (matte skin + strand groom) — Director: plastic look not OK |
+| ALL furred | — | Director Q | fur motion: wind (shared T6_WIND_CONTROL) + inertia / follow-through (GN simulation zone), calm = still |
 | ALL | — | — | behaviour baker (`09_RIGS/T7_BEHAVIOUR_SYSTEM.md`), IK foot-lock on terrain, 4K textures, LOD0 close-ups, credits list (CC-BY authors) |
