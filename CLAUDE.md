@@ -102,6 +102,11 @@ check, phir final high-res sim (Director ke GPU PC par).
 6. **Git mein jaan-boojh kar nahi (setup se dobara bante hain):** Poly Haven downloads (`polyhaven_fetch.py`), Blender 4.5 module
    (`$SCRATCH/bpy45`), scratchpad temp files — `bash setup_session.sh` sab wapas laata hai.
 
+## 🧊 THREE.JS REVIEW RULE (Director, 23 Nov — standing)
+Har review ke saath (world, environment, creatures / fauna, flora, characters — kuch bhi) ek **interactive Three.js 3D viewer** bhi do:
+GLB export (textures + animations), viewer page jahan Director phone par ghuma / zoom / animation play kar sake — taaki final se pehle
+har kami pakdi ja sake. Renders + clips phir bhi bante hain (Cycles = final look); viewer = shape / scale / motion check.
+
 ## 🔁 NEW SESSION? Start here (memory reset ke baad)
 0. **Session mein DONO repos chahiye:** `animation-studio` + `animation-studio-scenes` (side by side). **SABSE PEHLE** `HANDOFF.md` padho (+ Director ke verbatim inputs `02_world/ecosystem/DIRECTOR_INPUTS_TASK06.md`) aur `bash setup_session.sh` chalao (SCRATCH=scratchpad; jo bana hai DOBARA MAT BANAO). `HANDOFF.md` (poora handoff + restore steps) + `PROJECT_LOG.md` + `STATUS.md` + `01_characters/PRODUCTION_INVENTORY.md` padho aur Director ko
    Hinglish mein **poora detailed summary** do: kya kya bana, kya chal raha tha, kya pending hai, kaunse sawaal baaki hain.

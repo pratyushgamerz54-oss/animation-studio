@@ -296,3 +296,22 @@ Aur agar jarurat pade to three js ka bhi use kar kena
 ```
 **Claude:** Three.js may be used where it helps (e.g. interactive 3D previews the Director can rotate on the phone). Eagle approval +
 juvenile/adult choice still open.
+
+---
+
+## J. Director (23 Nov, golden eagle) — verbatim
+```
+Approve hai
+```
+**Status:** Golden eagle v002 (museum scan, juvenile plumage as shown) APPROVED. Age not changed (juvenile kept; adult recolour only if
+the Director asks). Next: red fox.
+
+---
+
+## K. Director (23 Nov) — STANDING RULE, verbatim
+```
+Ek baat bata de rha hai three js ka use karte rehna ab se taki aacha kaam ho aur mafa mile last me agar koi badhiya se na hua hi to ho jaye chae world hi enviyho creture ya faun ya flora hi ya phir chracter ho ye sa phir kuch bhi ho smaj ena
+```
+**Claude:** from now on every review (world, environment, creatures / fauna, flora, characters, anything) also gets an interactive
+Three.js 3D viewer (GLB export) so the Director can rotate / zoom / play animations on the phone and catch problems before finals.
+Added to CLAUDE.md (project rule).

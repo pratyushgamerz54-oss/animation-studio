@@ -23,6 +23,8 @@ CC = {
                        # photo refs 01-03 (Commons): black shaggy coat, cream-white chest crescent / V, tan-brown muzzle
                        palette=dict(dark='#070606', mid='#100E0D', light='#2A2420', cap=1.6, gamma=1.0),
                        paint=[('chest_v', '#E8E0CF', 'chest_v', 'Material_003'), ('muzzle', '#6A4C36', 'muzzle', 'Material_001')], rough=0.55),
+    'red_fox': dict(base='red_fox/4e37c303f8a241aaa2511bd9f3019273', withers=0.40, pelvis='Fox_ Pelvis_02', chest='Fox_ Spine1_012',
+                    delete=('Icosphere',), still_action='root.001|Waking Up', still_frame=480, palette=None, rough=0.6),
 }
 
 
@@ -112,7 +114,8 @@ def main():
     a = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
     sid, out = a[0], a[1]; cfg = CC[sid]
     K.clean()
-    g = glob.glob(os.path.join(K.CR, '00_CREATURE_REFERENCES', 'cc_models', cfg['base'], 'scene.gltf'))[0]
+    g = (glob.glob(os.path.join(K.CR, '00_CREATURE_REFERENCES', 'cc_models', cfg['base'], 'scene.gltf')) +
+         glob.glob(os.path.join(os.environ.get('T7_CAND', '/nonexistent'), cfg['base'], 'scene.gltf')))[0]
     bpy.ops.import_scene.gltf(filepath=g)
     for n in cfg.get('delete', ()):
         o = bpy.data.objects.get(n)
@@ -139,7 +142,7 @@ def main():
     root.location.y -= (P[:, 1].max() + P[:, 1].min()) / 2; bpy.context.view_layer.update()
     print('scale', round(s, 3))
     tex = os.path.join(K.CR, '11_TEXTURES', sid)
-    pal = cfg['palette']
+    pal = cfg.get('palette')
     for mat in bpy.data.materials:
         if not mat.use_nodes:
             continue
@@ -147,7 +150,7 @@ def main():
         if not b:
             continue
         L = b.inputs['Base Color'].links
-        if L and L[0].from_node.type == 'TEX_IMAGE' and L[0].from_node.image:
+        if pal and L and L[0].from_node.type == 'TEX_IMAGE' and L[0].from_node.image:
             n = L[0].from_node; img = n.image
             src = bpy.path.abspath(img.filepath) if img.filepath else None
             if not src or not os.path.exists(src):
