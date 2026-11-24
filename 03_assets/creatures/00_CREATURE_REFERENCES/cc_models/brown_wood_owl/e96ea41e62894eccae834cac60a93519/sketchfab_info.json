@@ -1,0 +1,196 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "86f23935367b4a1f9647c8a20e03d716",
+   "name": "Cultural Heritage & History",
+   "slug": "cultural-heritage-history",
+   "uri": "https://api.sketchfab.com/v3/categories/86f23935367b4a1f9647c8a20e03d716",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/bb22d75450272105e64c47756c323f1f-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/86f23935367b4a1f9647c8a20e03d716/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/86f23935367b4a1f9647c8a20e03d716/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2024-11-13T17:37:25.780281",
+ "embedUrl": "https://sketchfab.com/models/e96ea41e62894eccae834cac60a93519/embed",
+ "faceCount": 433603,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 38,
+ "name": "Pel's Fishing owl",
+ "publishedAt": "2024-11-13T17:47:55.140093",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "owl",
+   "slug": "owl",
+   "uri": "https://api.sketchfab.com/v3/tags/owl"
+  },
+  {
+   "name": "bird",
+   "slug": "bird",
+   "uri": "https://api.sketchfab.com/v3/tags/bird"
+  },
+  {
+   "name": "natural",
+   "slug": "natural",
+   "uri": "https://api.sketchfab.com/v3/tags/natural"
+  },
+  {
+   "name": "museum",
+   "slug": "museum",
+   "uri": "https://api.sketchfab.com/v3/tags/museum"
+  },
+  {
+   "name": "taxidermy",
+   "slug": "taxidermy",
+   "uri": "https://api.sketchfab.com/v3/tags/taxidermy"
+  },
+  {
+   "name": "sciences",
+   "slug": "sciences",
+   "uri": "https://api.sketchfab.com/v3/tags/sciences"
+  },
+  {
+   "name": "pelsowl",
+   "slug": "pelsowl",
+   "uri": "https://api.sketchfab.com/v3/tags/pelsowl"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "c09f9afb097c4b9ebc18d3a4746fbe0f",
+    "width": 64,
+    "height": 36,
+    "size": 1031,
+    "url": "https://media.sketchfab.com/models/e96ea41e62894eccae834cac60a93519/thumbnails/6bdb908dc635499994d8c4208867848e/29e538867a144992b2ae9d7451324d29.jpeg"
+   },
+   {
+    "uid": "e03f9415ca1941b280cec5296162e5be",
+    "width": 256,
+    "height": 144,
+    "size": 3976,
+    "url": "https://media.sketchfab.com/models/e96ea41e62894eccae834cac60a93519/thumbnails/6bdb908dc635499994d8c4208867848e/2ebf0f315f2241e4b9790d27f38da8b6.jpeg"
+   },
+   {
+    "uid": "19fa739a29e740eb85cb391a01f329c1",
+    "width": 720,
+    "height": 405,
+    "size": 19211,
+    "url": "https://media.sketchfab.com/models/e96ea41e62894eccae834cac60a93519/thumbnails/6bdb908dc635499994d8c4208867848e/f2f5a427333c4d5cb21beef494dd1547.jpeg"
+   },
+   {
+    "uid": "a877060b857f4ac6b1b6f6c75b8baa29",
+    "width": 1024,
+    "height": 576,
+    "size": 33990,
+    "url": "https://media.sketchfab.com/models/e96ea41e62894eccae834cac60a93519/thumbnails/6bdb908dc635499994d8c4208867848e/4150c9a093d449008b0a3d2fcc94fd4d.jpeg"
+   },
+   {
+    "uid": "c893bc2d23cc493bb035b12891b2af8b",
+    "width": 1920,
+    "height": 1080,
+    "size": 99840,
+    "url": "https://media.sketchfab.com/models/e96ea41e62894eccae834cac60a93519/thumbnails/6bdb908dc635499994d8c4208867848e/e2c3eb3d87064ac98b2633e8bd557b78.jpeg"
+   }
+  ]
+ },
+ "uid": "e96ea41e62894eccae834cac60a93519",
+ "uri": "https://api.sketchfab.com/v3/models/e96ea41e62894eccae834cac60a93519",
+ "user": {
+  "uid": "1fec6555024d486bad1a033b70a4f26d",
+  "username": "wattinstitution",
+  "displayName": "The Watt Institution",
+  "account": "pro",
+  "profileUrl": "https://sketchfab.com/wattinstitution",
+  "avatar": {
+   "uid": "bb1c239360fb4c28997588c6c880a318",
+   "uri": "https://api.sketchfab.com/v3/avatars/bb1c239360fb4c28997588c6c880a318",
+   "images": [
+    {
+     "width": 100,
+     "height": 100,
+     "size": 2949,
+     "url": "https://media.sketchfab.com/avatars/bb1c239360fb4c28997588c6c880a318/988954fcbe884dfa9710c5b841d73b48.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 2721,
+     "url": "https://media.sketchfab.com/avatars/bb1c239360fb4c28997588c6c880a318/2197d889832b4251ba3889e6faa95db7.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1433,
+     "url": "https://media.sketchfab.com/avatars/bb1c239360fb4c28997588c6c880a318/0c74c8e0e44048e4a54abb88a15b5e09.jpeg"
+    },
+    {
+     "width": 32,
+     "height": 32,
+     "size": 1035,
+     "url": "https://media.sketchfab.com/avatars/bb1c239360fb4c28997588c6c880a318/ab7877b51da34d88b07413d315faa57a.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/1fec6555024d486bad1a033b70a4f26d"
+ },
+ "vertexCount": 249187,
+ "viewCount": 1635,
+ "viewerUrl": "https://sketchfab.com/3d-models/pels-fishing-owl-e96ea41e62894eccae834cac60a93519",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "Pel\u2019s Fishing Owl (Scotopelia peli)\n\nPel\u2019s Fishing Owl, native to sub-Saharan Africa, is a unique owl adapted for hunting fish. Unlike other owls, its rough talons help grip slippery prey, and its wings lack the silent flight typical of owls, as it doesn\u2019t need stealth to hunt fish. Recognisable by its tawny-brown feathers and large wingspan (up to 153 cm), this owl glides low over rivers at dusk, skillfully catching fish and frogs.\n\nSpecimen from Kafue River - Zambia, 25/8/1914, shot by Robert Lyon Scott",
+ "price": null,
+ "downloadCount": 374,
+ "editorUrl": "https://sketchfab.com/models/e96ea41e62894eccae834cac60a93519/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2024-11-13T22:37:39.769411",
+ "pbrType": null,
+ "textureCount": 2,
+ "materialCount": 2
+}

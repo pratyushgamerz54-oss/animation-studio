@@ -468,3 +468,11 @@ Approve
 ```
 **Status:** Indian bullfrog v001 APPROVED → Crystal Lakes (R-08) set COMPLETE (grey heron, golden mahseer, ruddy shelduck, Eurasian otter,
 Indian roofed turtle, lesser emperor dragonfly, Indian bullfrog). Next: Enchanted Forest — red panda.
+
+---
+
+## AB. Director (24 Nov, red panda v001) — verbatim
+```
+Approved
+```
+**Status:** red panda v001 APPROVED (gaps → PRODUCTION_FIX_LIST). Next: brown wood owl.

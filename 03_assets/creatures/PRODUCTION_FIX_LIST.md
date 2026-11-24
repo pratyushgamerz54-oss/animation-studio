@@ -23,3 +23,18 @@
 
 ## Eurasian otter (v001 preview 24 Nov)
 - Whiskers re-aim, wet clumped-fur variant, greyer colour variant, rig + swim / lope / dive, webbed toes.
+
+## Roofed turtle (v001 approved 24 Nov)
+- 3rd vertebral scute spine, yellow neck stripes, plastron blotches, female size, swim + basking.
+
+## Lesser emperor dragonfly (v002 approved 24 Nov)
+- Rig (4 wings), 30 Hz wing beat + motion blur, hover / dart / perch (legs open to grip).
+
+## Indian bullfrog (v001 approved 24 Nov)
+- Sitting pose via rig, jump / swim kick / croak (vocal sacs), breeding-male yellow variant.
+
+## Red panda (v001 approved 24 Nov)
+- White whiskers, longer white cheek tufts, whiter fluffy ear rims, brighter face fur, climbing / branch-sitting animation.
+
+## Brown wood owl (v001 preview 24 Nov)
+- Underparts fine horizontal barring (scan = Pel's spots), rig (body / head turn), blink, take-off, silent flight, disc feather fuzz.
