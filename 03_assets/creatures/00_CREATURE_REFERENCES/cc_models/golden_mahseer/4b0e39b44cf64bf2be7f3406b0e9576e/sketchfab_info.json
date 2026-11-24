@@ -1,0 +1,221 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "1a99e2b67fc84de0b3ea0d3925208a04",
+   "name": "Nature & Plants",
+   "slug": "nature-plants",
+   "uri": "https://api.sketchfab.com/v3/categories/1a99e2b67fc84de0b3ea0d3925208a04",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/98a605cec9718b6f02f1a5759039a5ad-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/1a99e2b67fc84de0b3ea0d3925208a04/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/1a99e2b67fc84de0b3ea0d3925208a04/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2026-01-07T22:39:52.915381",
+ "embedUrl": "https://sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/embed",
+ "faceCount": 18670,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 4,
+ "name": "Common Carp (Cyprinus Carpio) Final",
+ "publishedAt": "2026-01-07T22:40:41.918512",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "fish",
+   "slug": "fish",
+   "uri": "https://api.sketchfab.com/v3/tags/fish"
+  },
+  {
+   "name": "detailed",
+   "slug": "detailed",
+   "uri": "https://api.sketchfab.com/v3/tags/detailed"
+  },
+  {
+   "name": "aquatic",
+   "slug": "aquatic",
+   "uri": "https://api.sketchfab.com/v3/tags/aquatic"
+  },
+  {
+   "name": "realistic",
+   "slug": "realistic",
+   "uri": "https://api.sketchfab.com/v3/tags/realistic"
+  },
+  {
+   "name": "nature",
+   "slug": "nature",
+   "uri": "https://api.sketchfab.com/v3/tags/nature"
+  },
+  {
+   "name": "common",
+   "slug": "common",
+   "uri": "https://api.sketchfab.com/v3/tags/common"
+  },
+  {
+   "name": "Wildlife",
+   "slug": "wildlife",
+   "uri": "https://api.sketchfab.com/v3/tags/wildlife"
+  },
+  {
+   "name": "carp",
+   "slug": "carp",
+   "uri": "https://api.sketchfab.com/v3/tags/carp"
+  },
+  {
+   "name": "freshwater",
+   "slug": "freshwater",
+   "uri": "https://api.sketchfab.com/v3/tags/freshwater"
+  },
+  {
+   "name": "3dsmax",
+   "slug": "3dsmax",
+   "uri": "https://api.sketchfab.com/v3/tags/3dsmax"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  },
+  {
+   "name": "paintshoppro",
+   "slug": "paintshoppro",
+   "uri": "https://api.sketchfab.com/v3/tags/paintshoppro"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "b0ff462e852440abb98cc63d15d0d937",
+    "width": 64,
+    "height": 36,
+    "size": 891,
+    "url": "https://media.sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/thumbnails/7ed9bd45a1a74ad7b5122cea03e1502a/82dcc62c2f034243bc53ccab4d2a208c.jpeg"
+   },
+   {
+    "uid": "398e6bb6cdc74bddab133514b098c8e4",
+    "width": 256,
+    "height": 144,
+    "size": 2732,
+    "url": "https://media.sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/thumbnails/7ed9bd45a1a74ad7b5122cea03e1502a/4e1cdaf54a6c477c9890303a26bc2407.jpeg"
+   },
+   {
+    "uid": "a152f38bb23346639e19796954432df1",
+    "width": 720,
+    "height": 405,
+    "size": 13597,
+    "url": "https://media.sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/thumbnails/7ed9bd45a1a74ad7b5122cea03e1502a/d38f40940f62471d82e520046543d027.jpeg"
+   },
+   {
+    "uid": "463d5c14f85448f5b14edcb0f1a335ed",
+    "width": 1024,
+    "height": 576,
+    "size": 24707,
+    "url": "https://media.sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/thumbnails/7ed9bd45a1a74ad7b5122cea03e1502a/0bb94986e5ae45d8bae63712a27b3fba.jpeg"
+   },
+   {
+    "uid": "586d547e04374cf292775da5bd7cdd66",
+    "width": 1920,
+    "height": 1080,
+    "size": 79027,
+    "url": "https://media.sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/thumbnails/7ed9bd45a1a74ad7b5122cea03e1502a/bd9cdfade074438dbf5e35edc52ad2f7.jpeg"
+   }
+  ]
+ },
+ "uid": "4b0e39b44cf64bf2be7f3406b0e9576e",
+ "uri": "https://api.sketchfab.com/v3/models/4b0e39b44cf64bf2be7f3406b0e9576e",
+ "user": {
+  "uid": "dc93343fca6647c6bdeaf39994345752",
+  "username": "Nullifiedit",
+  "displayName": "Nullified",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/Nullifiedit",
+  "avatar": {
+   "uid": "2b24c5a2051e48eeb16a3598d1131617",
+   "uri": "https://api.sketchfab.com/v3/avatars/2b24c5a2051e48eeb16a3598d1131617",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 917,
+     "url": "https://media.sketchfab.com/avatars/2b24c5a2051e48eeb16a3598d1131617/cee218b7456e46df9511c1f9fb7f98e0.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1143,
+     "url": "https://media.sketchfab.com/avatars/2b24c5a2051e48eeb16a3598d1131617/2d512d39bb034429b9ff5f1eedd0dc7d.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 2062,
+     "url": "https://media.sketchfab.com/avatars/2b24c5a2051e48eeb16a3598d1131617/62a4fcc8129e4e6eb4951485ebb0444c.jpeg"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 2342,
+     "url": "https://media.sketchfab.com/avatars/2b24c5a2051e48eeb16a3598d1131617/2eb1ae9960ee4c6d8d53f84bbac9192f.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/dc93343fca6647c6bdeaf39994345752"
+ },
+ "vertexCount": 9382,
+ "viewCount": 226,
+ "viewerUrl": "https://sketchfab.com/3d-models/common-carp-cyprinus-carpio-final-4b0e39b44cf64bf2be7f3406b0e9576e",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "Im not making it less common but the Common Carp is a freshwater fish that can easily be kept in any aquarium, though it will become 75cm at least which would then require it to be the size of your living room, unless youre living in a deserted castle like me ofcourse, anyway, its a great gamefish too, my record is 92cm in length and 35 pounds in weight. Compared to variants with less scales, i.e. mirror carp, this one is much more resistant to diseases and parasites, but its looks are quite ehm common.",
+ "price": null,
+ "downloadCount": 115,
+ "editorUrl": "https://sketchfab.com/models/4b0e39b44cf64bf2be7f3406b0e9576e/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "unknown",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2026-01-10T16:01:00.787818",
+ "pbrType": null,
+ "textureCount": 2,
+ "materialCount": 1
+}
