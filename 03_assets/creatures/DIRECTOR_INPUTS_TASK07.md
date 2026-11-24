@@ -407,3 +407,11 @@ What was deleted under R: exactly the four remade ones (sambar / wolf / bear / f
 Karo do thik ho kami hai uske baad aage badh jana
 ```
 **Done:** marmot v004 face fix (eyes, nose, whiskers, mask, dark paws) → accepted per "uske baad aage badh jana"; v003 deleted (same asset). Next creature.
+
+---
+
+## U. Director (24 Nov, grey heron) — verbatim
+```
+Ha thik hai approve hai tu kami theek kar lena aur ye bata aur kitna creature bacha hai
+```
+**Status:** grey heron v002 APPROVED (gaps → production fix list). Remaining milestone-1 creatures listed to the Director (23 left).
