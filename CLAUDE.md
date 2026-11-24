@@ -153,3 +153,11 @@ check, phir final high-res sim (Director ke GPU PC par).
   for memory (T5 landscape master with NW01 + forest north + 64 waterfalls ≈ 12 GB).
 - Never name a scratch script like a stdlib module (`inspect.py` → bpy crashes "InitGoogleLogging twice"). `K.new_mat(name)` deletes
   an existing same-name material → temporary material names must be unique.
+- (TASK 07) Fur: the bpy module's Cycles renders strands only from a hair **Curves object** (GN curves on a mesh object are skipped)
+  → groom = separate Curves object + Object Info(surface). Scaled bases (cm units ×0.01/0.004): compensate density ×s², length & radius ÷s
+  (else billions of strands → OOM). Very dark fur: matte strand shader (hair-BSDF sheen reads blue-grey). glTF metallicRoughness maps can
+  carry metal → set metallic 0 (plastic look). Read big textures with `img.pixels.foreach_get` (a Python list of pixels = GBs).
+- (TASK 07) QuadriFlow rejects meshes with edges < 0.1 mm → merge-by-distance 0.15 × voxel first. glTF import may PACK 8K images →
+  write them out / replace before saving (else 190 MB .blend). Wikimedia: originals rate-limited (429) → API `thumburl` 1280 px
+  (thumb.wikimedia.org), polite retry. Looping a short clip in ffmpeg = hitch at every join → render continuous cycles (F-curve CYCLES,
+  root REPEAT_OFFSET) + constant-velocity camera. Bases with root motion float/sink → per-frame ground snap (smoothed) or IK foot-lock.
