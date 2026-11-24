@@ -25,7 +25,7 @@ CFG = {
     'black_bear': dict(body_mat=['Material_003', 'Material_001'], card_mat=None, hide_mats=('Material_002',), density=200000, radius=0.00032,
                        hair_rough=0.55, hair_coat=0.0,
                        length={'Head': 0.022, 'Neck': 0.08, 'Chest': 0.07, 'Collarbone': 0.09, 'Ankle': 0.03, 'Digit': 0.012,
-                               'Ear': 0.03, 'Jaw': 0.006, 'Tongue': 0.0, 'Leg2': 0.05, '*': 0.07}, lift=0.5, droop=0.55, frizz=0.5, hair_gain=0.6),
+                               'Ear': 0.03, 'Jaw': 0.006, 'Tongue': 0.0, 'Leg2': 0.05, '*': 0.07}, lift=0.5, droop=0.55, frizz=0.5, hair_gain=0.6, hair_shader='matte'),
     'sambar': dict(body_mat=['Body', 'Head'], card_mat=None, density=120000, radius=0.00028,
                    length={'Neck': 0.055, 'Head': 0.006, 'Jaw': 0.005, 'Ear': 0.004, 'Leg3': 0.006, 'Ankle': 0.004, 'Tail': 0.045, '*': 0.011},   # short coarse deer coat (texture shows through), shaggy neck mane
                    lift=0.25, droop=0.35, frizz=0.35, hair_rough=0.6, hair_coat=0.0, hair_tint=(1.04, 0.97, 0.90), hair_gain=0.85),
@@ -51,9 +51,9 @@ def main():
             if tex:
                 L.new(tex.outputs['Alpha'], b.inputs['Alpha'])
                 m.blend_method = 'HASHED'
-    for o in bpy.data.objects:                       # crude base hair strips replaced by the real groom
+    for o in list(bpy.data.objects):                 # crude base hair strips replaced by the real groom
         if o.type == 'MESH' and o.active_material and o.active_material.name in cfg.get('hide_mats', ()):
-            o.hide_render = True; o.hide_viewport = True
+            bpy.data.objects.remove(o)                    # removed (hiding alone still let it render in some passes)
     for body in [o for o in bpy.data.objects if o.type == 'MESH' and o.active_material and o.active_material.name in cfg['body_mat']]:
         me = body.data; print("STEP body", body.name, flush=True)
         # per-vertex colour from the base texture (average of the vertex's UV corners)
@@ -112,7 +112,11 @@ def main():
         dens = np.where(lum < np.percentile(lum, 1.5), 0.0, 1.0).astype(np.float32)
         K.set_attr(body, 'fur_density', dens)
         K.set_attr(body, "comb", comb, "FLOAT_VECTOR"); print("STEP attrs", flush=True)
-        hm = bpy.data.materials.get(f'T7_{sid.upper()}_HAIR') or K.mat_hair(f'T7_{sid.upper()}_HAIR', rough=cfg.get('hair_rough', 0.38), coat_var=0.14, coat=cfg.get('hair_coat', 0.1))
+        hm = bpy.data.materials.get(f'T7_{sid.upper()}_HAIR')
+        if hm is None and cfg.get('hair_shader') == 'matte':          # very dark fur: matte strands (hair-BSDF sheen reads blue-grey on black)
+            hm = K.mat_attr(f'T7_{sid.upper()}_HAIR', attr='coat', rough=0.9, spec=0.15, bump=0.0)
+        if hm is None:
+            hm = K.mat_hair(f'T7_{sid.upper()}_HAIR', rough=cfg.get('hair_rough', 0.38), coat_var=0.14, coat=cfg.get('hair_coat', 0.1))
         fo = K.fur(body, hm, density=cfg['density'], radius=cfg['radius'], lift=cfg['lift'], droop=cfg['droop'], frizz=cfg['frizz'])
     bpy.ops.wm.save_as_mainfile(filepath=dst, compress=True, relative_remap=True)
     print('FURPASS SAVED', dst)
