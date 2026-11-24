@@ -432,3 +432,12 @@ Ha approve hai dono, otter suru karo thik hai apna kami sudhar ke akr lena
 ```
 **Status:** ruddy shelduck v001 APPROVED, golden mahseer v003 APPROVED → mahseer v002 .blend deleted (rule 5b). Quick fix: shelduck
 underwing (white coverts). Next: Eurasian otter.
+
+---
+
+## X. Director (24 Nov, Eurasian otter v001) — verbatim
+```
+Ha approve hai kami thik karke aage badho
+```
+**Status:** Eurasian otter v001 APPROVED. Quick fixes now: otter whiskers re-aim (v002), shelduck underwing white coverts (v002).
+Next: roofed turtle.

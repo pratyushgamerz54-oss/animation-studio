@@ -19,7 +19,7 @@ CFG = {
     # black primaries, green speculum, black bill + legs, dark brown eye.
     'ruddy_shelduck': dict(head_dir_deg=-45, length=0.64, body_half=0.085,
                            body='#AC4A1A', head='#C48F55', face='#DAB680', bill_len=0.045, collar='#141210', tail='#161412', bill='#1E1C1B',
-                           legs='#2A2725', detail=0.55, eye_r=0.0055, eye_iris='#2A1A10', eye_back=0.055, eye_up=0.012),
+                           legs='#2A2725', detail=0.55, underwing='#E4E0D6', underwing_frac=0.62, eye_r=0.0055, eye_iris='#2A1A10', eye_back=0.055, eye_up=0.012),
 }
 
 
@@ -96,6 +96,7 @@ def main():
     T = np.asarray(Image.open(srcp).convert('RGB')).astype(np.float32) / 255; H, W = T.shape[:2]
     Tl = np.where(T <= 0.04045, T / 12.92, ((T + 0.055) / 1.055) ** 2.4)                      # linear
     pos, cov = raster(bird, P.astype(np.float32), W, H); pos = dilate(pos, cov)
+    Nv = np.array([v.normal[:] for v in bird.data.vertices], np.float32); nrm, _ = raster(bird, Nv, W, H); nrm = dilate(nrm, cov)
     sx = 1 + pos[..., 0] / Lb                       # 1 = bill tip, 0 = tail tip
     lat = np.abs(pos[..., 1]); z = pos[..., 2]
     Y = Tl @ np.array([.2126, .7152, .0722], np.float32)
@@ -133,6 +134,9 @@ def main():
     mm = np.asarray(Image.fromarray((head * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2))).astype(np.float32)[..., None] / 255
     outc[:] = outc * (1 - mm) + np.clip(hc * det[..., None] ** 0.7, 0, 1) * mm
     wd = wing & (Y < 0.22); put(wd, '#0E0D0C', d=np.clip(Y / 0.05, 0.6, 2.2) ** 0.5, feather=1.0)   # black primaries / secondaries
+    if c.get('underwing'):                         # underwing: white coverts on the inner wing (flight feathers stay dark)
+        uw = wing & (nrm[..., 2] < -0.25) & (lat < c['underwing_frac'] * lat.max())
+        put(uw, c['underwing'], d=np.clip(det, 0.8, 1.2), feather=3.0)
     put(reg['bill'], c['bill'], d=det ** 0.5, feather=1.0); put(reg['legs'], c['legs'], d=det ** 0.5, feather=1.0)
     tex = os.path.join(K.CR, '11_TEXTURES', sid); os.makedirs(tex, exist_ok=True)
     dst = os.path.join(tex, f'T7_{sid.upper()}_diffuse_v001.jpg')

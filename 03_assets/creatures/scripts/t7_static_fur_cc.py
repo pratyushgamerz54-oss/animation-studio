@@ -89,6 +89,22 @@ def main():
     eyeL = np.median(P[dk], 0); print('FUR eye spot', np.round(eyeL, 3), 'nose', np.round(nose, 3), flush=True)
     # ---- voxel remesh: one clean surface
     m = body.modifiers.new('rm', 'REMESH'); m.mode = 'VOXEL'; m.voxel_size = c['voxel']; m.adaptivity = 0.0; K._apply(body, m)
+    import bmesh                                       # keep only the main body: drop loose remnants (old whisker strips etc.)
+    bm = bmesh.new(); bm.from_mesh(body.data); bm.verts.ensure_lookup_table(); seen = np.zeros(len(bm.verts), bool); isl = []
+    for v0 in bm.verts:
+        if seen[v0.index]:
+            continue
+        st = [v0]; seen[v0.index] = True; ids = []
+        while st:
+            v = st.pop(); ids.append(v.index)
+            for e in v.link_edges:
+                w = e.other_vert(v)
+                if not seen[w.index]:
+                    seen[w.index] = True; st.append(w)
+        isl.append(ids)
+    big = max(len(i) for i in isl); kill = [bm.verts[i] for ids in isl if len(ids) < 0.05 * big for i in ids]
+    bmesh.ops.delete(bm, geom=kill, context='VERTS'); bm.to_mesh(body.data); bm.free()
+    print('FUR loose islands removed', sum(1 for i in isl if len(i) < 0.05 * big), 'verts', len(kill), flush=True)
     m = body.modifiers.new('sm', 'SMOOTH'); m.factor = 0.5; m.iterations = c['smooth']; K._apply(body, m)
     for p_ in body.data.polygons:
         p_.use_smooth = True
@@ -137,10 +153,10 @@ def main():
             h = bvh.ray_cast(Vector((nose[0] - 0.012 - 0.016 * t, sg * 0.08, nose[2] - 0.004 - 0.010 * t)), Vector((0, -sg, 0)))
             if h[0] is None:
                 continue
-            dirn = Vector((-0.45 - 0.2 * rg.random(), sg * 0.85, 0.12 - 0.35 * t)).normalized()
+            dirn = Vector((-0.40 - 0.2 * rg.random(), sg * 0.90, 0.20 - 0.18 * t)).normalized()   # out-back, fanned, not drooping
             Lw = c['whisker_len'] * (0.6 + 0.4 * rg.random()); sp = cu.splines.new('POLY'); sp.points.add(3)
             for k in range(4):
-                q = k / 3; pp = h[0] + dirn * Lw * q - Vector((0, 0, 0.2 * Lw * q * q))
+                q = k / 3; pp = h[0] + dirn * Lw * q - Vector((0, 0, 0.07 * Lw * q * q))
                 sp.points[k].co = (*pp, 1.0); sp.points[k].radius = 1.0 - 0.85 * q
     wo = bpy.data.objects.new(f'{sid}_whiskers', cu); coll.objects.link(wo)
     cu.materials.append(K.mat_simple(f'T7_{sid.upper()}_WHISKER', c['whisker_col'], rough=0.4, spec=0.35, var=0.1, bump=0.0))
