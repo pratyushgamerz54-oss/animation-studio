@@ -485,3 +485,11 @@ Approve
 ```
 **Status:** brown wood owl v002, Indian bullfrog v002, lesser emperor dragonfly v003 APPROVED → owl v001, bullfrog v001, dragonfly v002
 .blend deleted (rule 5b; each is rebuilt by its script chain: scan_reduce → species pass → t7_feather_fuzz). Next: great hornbill.
+
+---
+
+## AD. Director (24 Nov, great hornbill v001) — verbatim
+```
+Approved
+```
+**Status:** great hornbill v001 APPROVED (AI-assisted base; gaps → PRODUCTION_FIX_LIST). Next: Paris peacock butterfly.

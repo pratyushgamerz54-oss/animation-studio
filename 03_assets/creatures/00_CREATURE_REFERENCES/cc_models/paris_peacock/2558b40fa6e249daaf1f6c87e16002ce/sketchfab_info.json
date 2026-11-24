@@ -1,0 +1,221 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "17d20ca7b35243d4a45171838b50704c",
+   "name": "Science & Technology",
+   "slug": "science-technology",
+   "uri": "https://api.sketchfab.com/v3/categories/17d20ca7b35243d4a45171838b50704c",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/86b1bae49e0ed3f43b2d59b26700234e-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 4,
+ "createdAt": "2022-12-28T04:01:33.969102",
+ "embedUrl": "https://sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/embed",
+ "faceCount": 323550,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/7c23a1ba438d4306920229c12afcb5f9",
+  "label": "CC0 Public Domain",
+  "fullName": "CC0 Public Domain",
+  "requirements": "Credit is not mandatory. Commercial use is allowed.",
+  "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "slug": "cc0"
+ },
+ "likeCount": 100,
+ "name": "CC0 \u30e4\u30a8\u30e4\u30de\u30ab\u30e9\u30b9\u30a2\u30b2\u30cf \ud83e\udd8b Common Peacock, Papilio bianor",
+ "publishedAt": "2022-12-28T04:05:33.892244",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "butterfly",
+   "slug": "butterfly",
+   "uri": "https://api.sketchfab.com/v3/tags/butterfly"
+  },
+  {
+   "name": "moth",
+   "slug": "moth",
+   "uri": "https://api.sketchfab.com/v3/tags/moth"
+  },
+  {
+   "name": "lepidoptera",
+   "slug": "lepidoptera",
+   "uri": "https://api.sketchfab.com/v3/tags/lepidoptera"
+  },
+  {
+   "name": "cc0",
+   "slug": "cc0",
+   "uri": "https://api.sketchfab.com/v3/tags/cc0"
+  },
+  {
+   "name": "publicdomain",
+   "slug": "publicdomain",
+   "uri": "https://api.sketchfab.com/v3/tags/publicdomain"
+  },
+  {
+   "name": "insecta",
+   "slug": "insecta",
+   "uri": "https://api.sketchfab.com/v3/tags/insecta"
+  },
+  {
+   "name": "arthropoda",
+   "slug": "arthropoda",
+   "uri": "https://api.sketchfab.com/v3/tags/arthropoda"
+  },
+  {
+   "name": "papilio",
+   "slug": "papilio",
+   "uri": "https://api.sketchfab.com/v3/tags/papilio"
+  },
+  {
+   "name": "animalia",
+   "slug": "animalia",
+   "uri": "https://api.sketchfab.com/v3/tags/animalia"
+  },
+  {
+   "name": "ffishasia",
+   "slug": "ffishasia",
+   "uri": "https://api.sketchfab.com/v3/tags/ffishasia"
+  },
+  {
+   "name": "papilionidae",
+   "slug": "papilionidae",
+   "uri": "https://api.sketchfab.com/v3/tags/papilionidae"
+  },
+  {
+   "name": "bianor",
+   "slug": "bianor",
+   "uri": "https://api.sketchfab.com/v3/tags/bianor"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "dc1b0a641ed34447be78c1e1b72d92f7",
+    "width": 64,
+    "height": 36,
+    "size": 1057,
+    "url": "https://media.sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/thumbnails/7f3ef01f29fb4cb6bd5a31898888f946/96c9e840d5924472b4da8f206360c59b.jpeg"
+   },
+   {
+    "uid": "3e67498888a946d2a9cee01247bccc84",
+    "width": 256,
+    "height": 144,
+    "size": 4643,
+    "url": "https://media.sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/thumbnails/7f3ef01f29fb4cb6bd5a31898888f946/69030aa71fcf4c21a95c20799500fa57.jpeg"
+   },
+   {
+    "uid": "676f024bf3c74d3abd8382d77e8b3a84",
+    "width": 720,
+    "height": 405,
+    "size": 26820,
+    "url": "https://media.sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/thumbnails/7f3ef01f29fb4cb6bd5a31898888f946/3e47859245b5448185a48e211e9aa0a7.jpeg"
+   },
+   {
+    "uid": "9baf3205e443480e8ce3c5bfdec0c3a0",
+    "width": 1024,
+    "height": 576,
+    "size": 51251,
+    "url": "https://media.sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/thumbnails/7f3ef01f29fb4cb6bd5a31898888f946/fcfcdd9f1c9e4b23951440487aa08970.jpeg"
+   },
+   {
+    "uid": "10ae7a9490024734ba9dc986f7bdd0fc",
+    "width": 1920,
+    "height": 1080,
+    "size": 170364,
+    "url": "https://media.sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/thumbnails/7f3ef01f29fb4cb6bd5a31898888f946/90117ec9bc7a435cb32db546c3871333.jpeg"
+   }
+  ]
+ },
+ "uid": "2558b40fa6e249daaf1f6c87e16002ce",
+ "uri": "https://api.sketchfab.com/v3/models/2558b40fa6e249daaf1f6c87e16002ce",
+ "user": {
+  "uid": "19cfc338f034437189579a2aa1f0e1ff",
+  "username": "ffishAsia-and-floraZia",
+  "displayName": "ffish.asia / floraZia.com",
+  "account": "pro",
+  "profileUrl": "https://sketchfab.com/ffishAsia-and-floraZia",
+  "avatar": {
+   "uid": "fcacc84a68154e3a98b9f3d1ce7a413a",
+   "uri": "https://api.sketchfab.com/v3/avatars/fcacc84a68154e3a98b9f3d1ce7a413a",
+   "images": [
+    {
+     "width": 100,
+     "height": 100,
+     "size": 3622,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/821da58844df4e568d1939081d023caa.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 3053,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/dbec28e52d1f4e6b8ff6baa0e9551c94.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1061,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b749d50bb80b45c0b66f1eaa289272f2.jpeg"
+    },
+    {
+     "width": 32,
+     "height": 32,
+     "size": 665,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b671f00bdb8d4e6e8500bdb66b61e727.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/19cfc338f034437189579a2aa1f0e1ff"
+ },
+ "vertexCount": 161799,
+ "viewCount": 1528,
+ "viewerUrl": "https://sketchfab.com/3d-models/cc0-common-peacock-papilio-bianor-2558b40fa6e249daaf1f6c87e16002ce",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "License: **CC0**  \n\n  \nAnimalia \u52d5\u7269\u754c  \n\u3000Arthropoda \u7bc0\u8db3\u52d5\u7269\u9580  \n\u3000\u3000Insecta \u6606\u866b\u7db1  \n\u3000\u3000\u3000Lepidoptera \u30c1\u30e7\u30a6\u76ee  \n\u3000\u3000\u3000\u3000Papilionidae \u30a2\u30b2\u30cf\u30c1\u30e7\u30a6\u79d1  \n\u3000\u3000\u3000\u3000\u3000Papilio \u30a2\u30b2\u30cf\u30c1\u30e7\u30a6\u5c5e  \n\u3000\u3000\u3000\u3000\u3000\u3000Papilio bianor \u30e4\u30a8\u30e4\u30de\u30ab\u30e9\u30b9\u30a2\u30b2\u30cf  \n  \n\u30c1\u30e7\u30a6 \u8776",
+ "price": null,
+ "downloadCount": 435,
+ "editorUrl": "https://sketchfab.com/models/2558b40fa6e249daaf1f6c87e16002ce/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2025-03-06T03:12:31.647269",
+ "pbrType": null,
+ "textureCount": 2,
+ "materialCount": 2
+}

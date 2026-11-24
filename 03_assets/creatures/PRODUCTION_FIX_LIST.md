@@ -38,3 +38,10 @@
 
 ## Brown wood owl (v001 preview 24 Nov)
 - Underparts fine horizontal barring (scan = Pel's spots), rig (body / head turn), blink, take-off, silent flight, disc feather fuzz.
+
+## Great hornbill (v001 approved 24 Nov)
+- Chunky AI-sculpted feathers → feather-card groom (or better base), casque shape + black casque front, brighter red eye (male),
+  yellow preen staining on neck / wing bar, rig: hop, loud flight, fig feeding. Base (115 MB) outside git — re-download command in PREVIEW_v001.md.
+
+## Paris peacock butterfly (v001 preview 24 Nov)
+- Patch shape (irregular blue band), denser green speckle, faint forewing band, rig (flat basking / closed perching), flap 8–10 Hz + glide, thin-film iridescence.
