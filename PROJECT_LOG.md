@@ -104,3 +104,9 @@
 37. **22 Nov — TASK 06 APPROVED + CLOSED** (Director: "mai task 6 ko approve kar rha hai"). Closeout with the complete file map, systems, QC, limits, pending items and the exact restart steps: `02_world/ecosystem/TASK06_CLOSEOUT.md`. Next: TASK 07 brief.
 38. **22 Nov — Session 6 restore:** both repos synced (Director branch `ccr-c375d59d-2qaoyn` → working branch `ccr-abff2182-3t78h4`), setup_session.sh OK (bpy 5.3 + 4.5, Poly Haven, baseline unchanged). Nothing rebuilt. Waiting for TASK 07 brief.
 39. **23 Nov — TASK 07 brief** (Wildlife & Creature Production) saved verbatim; milestone 1 started. Own procedural creature kit (SDF anatomy → Quadriflow quads, fur on hair-Curves objects, feather blades) → Director wanted real-world realism → real photos (Wikimedia) + **mix pipeline** (Sketchfab CC0/CC-BY bases + own work). Previews: sambar (walk jerk fixed, OK), Himalayan wolf, Asiatic black bear (APPROVED), golden eagle museum scan (APPROVED), red fox; bharal WIP. Behaviour-baker design (RDR2-style reactions). Three.js viewer tried then dropped (only if really needed).
+40. **24 Nov — TASK 07 M1: Crystal Lakes complete** (all Director-approved): golden mahseer v003 (all fins orange, thickness mask), ruddy shelduck
+    v002 (CC0 shelduck museum scan → per-pixel region recolour, white underwing), Eurasian otter v002 (fragmented AI base → voxel remesh +
+    photo coat + 262 k-strand fur + eyes / whiskers), Indian roofed turtle v001 (CC0 rigged pond turtle + roof keel), lesser emperor dragonfly
+    v002 (CC0 specimen, clear vein wings, folded flight legs), Indian bullfrog v001 (CC0 ranid scan, golden eyes, floating-in-pond preview).
+    Old versions removed only after approval (rule 5b). Director TASK 17 final-showcase brief saved (2K here now, 8K later).
+

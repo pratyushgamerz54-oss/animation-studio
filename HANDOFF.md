@@ -269,6 +269,11 @@ grove cores (L0) + forest belts (L1); populated previews use camera clearance (n
 dead-grass "ground friction" wind fix is built into DS + CT, the other grass libraries get it on their next rebuild (they pass QC already).
 
 ### 6d. TASK 07 — Wildlife & Creature Production · MILESTONE 1 (concept collection EF / MK / CL) — session 6, 23 Nov — IN PROGRESS
+
+**24 Nov update:** Crystal Lakes set COMPLETE + approved (mahseer v003, shelduck v002, otter v002, roofed turtle v001, dragonfly v002,
+bullfrog v001 — files under `03_assets/creatures/05_AQUATIC_WILDLIFE/` + `06_AERIAL_CREATURES/ruddy_shelduck/`). Next: Enchanted Forest
+(red panda first). Scripts: t7_bird_scan_cc / t7_static_fur_cc / t7_turtle_pass / t7_insect_pass / t7_dragonfly_pass / t7_frog_pass /
+t7_water_preview. Verbatim approvals: DIRECTOR_INPUTS_TASK07.md §V–§AA.
 Director inputs verbatim: `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md` (§A brief … §N). Production fix list: `03_assets/creatures/PRODUCTION_FIX_LIST.md`.
 **Method (Director "mix" decision):** free-licence base (Sketchfab CC0/CC-BY, token in the environment's network secrets) + own work
 (photo-matched coat recolour + 3D-region UV paint, own antlers / horns, real size, ground contact, smooth continuous clips) + real photos

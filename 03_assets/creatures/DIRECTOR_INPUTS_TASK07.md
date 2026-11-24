@@ -459,3 +459,12 @@ Approve
 ```
 **Status:** lesser emperor dragonfly v002 APPROVED → v001 .blend deleted (rule 5b; v001 is rebuilt any time by
 `t7_scan_reduce` → `t7_insect_pass`, then `t7_dragonfly_pass` makes v002). Next: Indian bullfrog (last Crystal Lakes species).
+
+---
+
+## AA. Director (24 Nov, Indian bullfrog v001) — verbatim
+```
+Approve
+```
+**Status:** Indian bullfrog v001 APPROVED → Crystal Lakes (R-08) set COMPLETE (grey heron, golden mahseer, ruddy shelduck, Eurasian otter,
+Indian roofed turtle, lesser emperor dragonfly, Indian bullfrog). Next: Enchanted Forest — red panda.

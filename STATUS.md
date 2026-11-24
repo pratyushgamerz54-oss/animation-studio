@@ -1,4 +1,13 @@
-# STATUS — last updated 2026-11-23 (session 6: TASK 07 milestone 1 in progress)
+# STATUS — last updated 2026-11-24 (session 6: TASK 07 milestone 1 in progress)
+
+## Session 6 (24 Nov)
+- **TASK 07 M1:** APPROVED so far — sambar, wolf, black bear, golden eagle, red fox v003 (real fur standard), marmot, grey heron,
+  **Crystal Lakes COMPLETE:** golden mahseer v003, ruddy shelduck v002, Eurasian otter v002, Indian roofed turtle v001,
+  lesser emperor dragonfly v002, Indian bullfrog v001. **NOW:** Enchanted Forest — red panda next (then owl, hornbill, butterflies,
+  moth, stag beetle, newt), Mountain Kingdom rest (bharal, snow leopard, woolly hare, monal, snow trout, Apollo), fantasy proposals.
+- New tools: t7_bird_scan_cc, t7_static_fur_cc (remesh + fur for broken AI bases), t7_turtle_pass, t7_insect_pass, t7_dragonfly_pass,
+  t7_frog_pass, t7_water_preview; scan_reduce --length / --delete-mat. Gaps per creature: `03_assets/creatures/PRODUCTION_FIX_LIST.md`.
+- Director (24 Nov): **TASK 17** final showcase saved (`DIRECTOR_INPUTS_TASK17_FINAL_SHOWCASE.md`, 2K here, 8K later).
 
 ## Session 6 (22–23 Nov)
 - **NOW: TASK 07 milestone 1** — creatures one by one (mix pipeline). Done: sambar (walk OK), wolf, black bear (APPROVED), golden eagle (APPROVED); red fox preview rendering; bharal WIP. Details: HANDOFF §6d, `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md`.
