@@ -84,7 +84,7 @@ check, phir final high-res sim (Director ke GPU PC par).
 
 ## ⭐ TASK 17 — FINAL SHOWCASE (Director, 24 Nov)
 Kul 17 tasks. Sab pura hone par: SAARA world + flora + fauna + sab kaam ek living-world cinematic mein (janwar apna kaam
-khud karte rahein, din-raat badle, real-world jaisa); TASK 1–17 sab dobara 8K (Director GPU PC), yahan 2K MP4.
+khud karte rahein, din-raat badle, real-world jaisa); TASK 1–17 sab dobara render **2K mein yahan** (Director: abhi GPU nahi); 8K baad mein jab GPU mile.
 Poora verbatim: `DIRECTOR_INPUTS_TASK17_FINAL_SHOWCASE.md`. Har asset abhi se 8K-ready banao (LOD0, 8K textures ka source rakho).
 
 ## 💾 SAVE RULE — kuch bhi gumna nahi chahiye (Director, 22 Nov)

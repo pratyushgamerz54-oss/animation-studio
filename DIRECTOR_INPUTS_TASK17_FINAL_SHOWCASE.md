@@ -19,3 +19,10 @@ Ek baat yaad rakhna save karo kul mera task 17 hai jab ye sab pura ho jaye to me
 - **Delivery:** MP4. Yahan (CPU, no GPU) **2K** version banana; 8K master render Director ke GPU PC par
   (Claude render scripts / resume-able `*_finish_pending.sh` dega). 8K/4K masters git mein NAHI (Drive / PC).
 - Purpose: Director story / showcase upload karega. Iske baad aage ka kaam.
+
+## Director clarification (24 Nov) — verbatim
+```
+Abhi 2k me bana smajh task 17 ke baad ye sab kaam karna hai us samay kar lena smajh kyuki abhi gpu nhi hai isi liye
+```
+**Final decision:** TASK 17 ka showcase + TASK 1–17 ka re-render → **2K mein, yahan (CPU)** banana, TASK 17 ke time par.
+8K tab hoga jab GPU milega (baad mein). Assets phir bhi 8K-ready rakhna (sources / LOD0 / 8K textures) taaki baad mein seedha 8K ho sake.
