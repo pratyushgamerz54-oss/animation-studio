@@ -25,6 +25,8 @@ CC = {
                        paint=[('chest_v', '#E8E0CF', 'chest_v', 'Material_003'), ('muzzle', '#6A4C36', 'muzzle', 'Material_001')], rough=0.55),
     'roofed_turtle': dict(base='roofed_turtle/b6377a0d28cf45349dda4945669e4ec1', withers=0.095, pelvis='tail1_29', chest='neck4_5',
                           delete=('Icosphere',), still_action=None, palette=None, rough=0.6, head_bone='head_1', nose_bone='head.001_0'),
+    'red_panda': dict(base='red_panda/c003c2985e0e462684063a893a0e85ee', withers=0.27, pelvis='Bip01 Pelvis_30', chest='Bip01 Spine2_25',
+                      delete=('Icosphere',), still_action='Animation', palette=None, rough=0.7, head_bone='Bip01 Head_23'),
     'red_fox': dict(base='red_fox/4e37c303f8a241aaa2511bd9f3019273', withers=0.40, pelvis='Fox_ Pelvis_02', chest='Fox_ Spine1_012',
                     delete=('Icosphere',), still_action='root.001|Waking Up', still_frame=480, palette=None, rough=0.6,
                     ground_snap='root.001|Waking Up'),
