@@ -99,8 +99,9 @@ check, phir final high-res sim (Director ke GPU PC par).
    (`//../../animation-studio/...`). Autosave pushes BOTH repos. Big binaries only at milestones (iterate in scratchpad), every
    file < 95 MB, files > 50 MB = warning; final 4K renders / MP4 masters NOT in git (Director's PC / Drive). Next storage step when
    a repo nears ~5 GB: another repo per stage (no LFS / no history rewrite without the Director).
-5b. **Purana version hatao (Director, 24 Nov):** jab usi asset ka naya version APPROVE ho jaaye, purani .blend delete karo (git history mein rehti hai,
-   scripts se dobara banti hai); chhote preview images / clips review record ke liye rakh sakte ho.
+5b. **Purana version hatao — SIRF usi file ka (Director, 24 Nov):** jab kisi file ko NAYA banaya jaaye (naya version) aur wo approve ho,
+   to sirf USI file ka purana version delete karo (jaise `T7_WOLF_CC_v002.blend` → `v003` approved → v002 hatao). Koi aur purani
+   file (doosre assets, doosre tasks, approved baselines) KABHI mat hatao. Git history mein purana version rehta hai.
 6. **Git mein jaan-boojh kar nahi (setup se dobara bante hain):** Poly Haven downloads (`polyhaven_fetch.py`), Blender 4.5 module
    (`$SCRATCH/bpy45`), scratchpad temp files — `bash setup_session.sh` sab wapas laata hai.
 

@@ -390,3 +390,12 @@ Abe to jab ek hi file ko jab tum naya bana dete ho aur same hi ho to purani wali
 **Status:** v003 fur versions of sambar, wolf, black bear (and red fox) APPROVED. Rule from now on: when a new version of the SAME
 asset is approved, delete the old .blend (git history keeps it; scripts can rebuild it). Deleted: the four v002 .blend files.
 Kept: small preview images / clips as the review record (incl. the approved sambar smooth walk).
+
+---
+
+## S. Director (24 Nov) — verbatim (clarifies R)
+```
+Mera matlab tha ki agar koi file ko naya banaye ho to uski purani wali hatani hai naki koi bhi purani wali hat dena
+```
+**Clarified rule:** delete ONLY the old version of the file that was remade (new version approved) — never any other old file.
+What was deleted under R: exactly the four remade ones (sambar / wolf / bear / fox v002 .blend). Nothing else was touched.
