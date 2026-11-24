@@ -1,0 +1,172 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2018-02-08T12:39:46.315038",
+ "embedUrl": "https://sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/embed",
+ "faceCount": 120920,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/7c23a1ba438d4306920229c12afcb5f9",
+  "label": "CC0 Public Domain",
+  "fullName": "CC0 Public Domain",
+  "requirements": "Credit is not mandatory. Commercial use is allowed.",
+  "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "slug": "cc0"
+ },
+ "likeCount": 61,
+ "name": "\u041f\u0435\u0433\u0430\u043d\u043a\u0430 | Common shelduck",
+ "publishedAt": "2018-02-08T12:44:44.362511",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "bird",
+   "slug": "bird",
+   "uri": "https://api.sketchfab.com/v3/tags/bird"
+  },
+  {
+   "name": "birds",
+   "slug": "birds",
+   "uri": "https://api.sketchfab.com/v3/tags/birds"
+  },
+  {
+   "name": "museum",
+   "slug": "museum",
+   "uri": "https://api.sketchfab.com/v3/tags/museum"
+  },
+  {
+   "name": "common-shelduck",
+   "slug": "common-shelduck",
+   "uri": "https://api.sketchfab.com/v3/tags/common-shelduck"
+  },
+  {
+   "name": "tadorna-tadorna",
+   "slug": "tadorna-tadorna",
+   "uri": "https://api.sketchfab.com/v3/tags/tadorna-tadorna"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "0e02a26efe0b44b9964a31352e840f1f",
+    "width": 1920,
+    "height": 1080,
+    "size": 145626,
+    "url": "https://media.sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/thumbnails/1f9c723086584f56adf79864dbeedb9c/e407be4b00aa407bbc1d36cce3c30701.jpeg"
+   },
+   {
+    "uid": "164ea65b0521405ab0b130e03fd57817",
+    "width": 1024,
+    "height": 576,
+    "size": 47857,
+    "url": "https://media.sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/thumbnails/1f9c723086584f56adf79864dbeedb9c/7fc479933c5c407d9574d3b30f999424.jpeg"
+   },
+   {
+    "uid": "db2d766785a54728a02ef9cdb7ed63b9",
+    "width": 720,
+    "height": 405,
+    "size": 27468,
+    "url": "https://media.sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/thumbnails/1f9c723086584f56adf79864dbeedb9c/f8ca4483e12e417cb8e1fb88a2c95c35.jpeg"
+   },
+   {
+    "uid": "a508fa1d9f79419086ceb44ba2ec716a",
+    "width": 256,
+    "height": 144,
+    "size": 5684,
+    "url": "https://media.sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/thumbnails/1f9c723086584f56adf79864dbeedb9c/7b769c730b5e4b79a00f2a378d07a06b.jpeg"
+   },
+   {
+    "uid": "99769f25560c4c6a88e854a0e01be2df",
+    "width": 64,
+    "height": 36,
+    "size": 990,
+    "url": "https://media.sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/thumbnails/1f9c723086584f56adf79864dbeedb9c/93447d4c6a324f89ab383970c33f81d6.jpeg"
+   }
+  ]
+ },
+ "uid": "7ab7629b3dc4467e9c3bd4e4f722f635",
+ "uri": "https://api.sketchfab.com/v3/models/7ab7629b3dc4467e9c3bd4e4f722f635",
+ "user": {
+  "uid": "f936ca6f10e4479b86f0d9b63776ee67",
+  "username": "darwinmuseum.ru",
+  "displayName": "darwinmuseum.ru",
+  "account": "pro",
+  "profileUrl": "https://sketchfab.com/darwinmuseum.ru",
+  "avatar": {
+   "uid": "381c0be16b3b42fb941c5c9ccc91e9cc",
+   "uri": "https://api.sketchfab.com/v3/avatars/381c0be16b3b42fb941c5c9ccc91e9cc",
+   "images": [
+    {
+     "width": 100,
+     "height": 100,
+     "size": 3029,
+     "url": "https://media.sketchfab.com/avatars/381c0be16b3b42fb941c5c9ccc91e9cc/5ef16c7146ba438dab12b5623a3f7641.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 2575,
+     "url": "https://media.sketchfab.com/avatars/381c0be16b3b42fb941c5c9ccc91e9cc/149aa8d0fe724103bc796ad7c8ea2109.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1176,
+     "url": "https://media.sketchfab.com/avatars/381c0be16b3b42fb941c5c9ccc91e9cc/77c6e9606b504b6ea8f0d6c3e186921e.jpeg"
+    },
+    {
+     "width": 32,
+     "height": 32,
+     "size": 685,
+     "url": "https://media.sketchfab.com/avatars/381c0be16b3b42fb941c5c9ccc91e9cc/9de2a0ab5e9248e68711286507f8cd88.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/f936ca6f10e4479b86f0d9b63776ee67"
+ },
+ "vertexCount": 60665,
+ "viewCount": 2104,
+ "viewerUrl": "https://sketchfab.com/3d-models/common-shelduck-7ab7629b3dc4467e9c3bd4e4f722f635",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "\u0412\u0438\u0434\u043e\u0432\u043e\u0435: Tadorna tadorna (L.,1758)\n\n\u041e\u0442\u0440\u044f\u0434: Anseriformes\n\n\u0421\u0435\u043c\u0435\u0439\u0441\u0442\u0432\u043e: Anatidae\n\n\u041f\u043e\u043b: \u0441\u0430\u043c\u0435\u0446\n\n\u0412\u043e\u0437\u0440\u0430\u0441\u0442: ad\n\n\u0414\u0430\u0442\u0430: ??/04-1909\n\n\u0421\u0442\u0440\u0430\u043d\u0430: \u0420\u043e\u0441\u0441\u0438\u044f\n\n\u0420\u0435\u0433\u0438\u043e\u043d: \u041a\u0440\u044b\u043c\n\n\u041c\u0435\u0441\u0442\u043e: \u043e\u043a\u0440.\u0433.\u041a\u0435\u0440\u0447\u044c\n\n\u0418\u0437 \u043a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u0438:\u0411\u043e\u0431\u0440\u0438\u043d\u0441\u043a\u0438\u0439 \u041d.\u0410.\n\n\u0421\u043a\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u0438\u043b \u0410\u0445\u0442\u0430\u043c\u0437\u044f\u043d \u0410.\u0418.\n\nOF 1943",
+ "price": null,
+ "downloadCount": 540,
+ "editorUrl": "https://sketchfab.com/models/7ab7629b3dc4467e9c3bd4e4f722f635/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website-archived",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2022-08-11T09:43:23.177054",
+ "pbrType": null,
+ "textureCount": 2,
+ "materialCount": 2
+}
