@@ -30,7 +30,8 @@ CC = {
                    delete=('Icosphere',), still_action=None, rough=0.7, chest='Bone.001_11', nose_bone='Bone.004_0', head_bone='Bone.004_0',
                    # photo refs 01-03 (Himalayan marmot, Commons): golden-tawny coat, dark brown face mask / crown, pale cream muzzle
                    palette=dict(dark='#3E2E1E', mid='#86643A', light='#C2A068', cap=1.5, gamma=1.0),
-                   paint=[('dorsal', '#5A4228', 'dorsal', '*'), ('face_mask', '#33271C', 'face_mask', '*'), ('muzzle_pale', '#CDB690', 'muzzle_pale', '*')]),
+                   paint=[('dorsal', '#5A4228', 'dorsal', '*'), ('face_mask', '#33271C', 'face_mask', '*'), ('muzzle_pale', '#CDB690', 'muzzle_pale', '*'),
+                          ('paws', '#3A2C20', 'bones:Bone.020,Bone.025,Bone.012,Bone.016', '*')]),
 }
 
 
@@ -47,13 +48,14 @@ def region(kind, P, N, B):
         return np.clip(inz * band * face_fwd * 1.5 + base * np.clip(N[:, 0] + 0.2, 0, 1) * 1.5, 0, 1)
     if kind == 'face_mask':     # marmot: dark crown + eye band + upper muzzle (photo refs)
         d = np.linalg.norm(P - B['nose'], axis=1); W = B['W']
-        up = P[:, 2] > B['nose'][2] - 0.035 * W
-        return np.clip(1 - (d - 0.07 * W) / (0.14 * W), 0, 1) * up * (d > 0.028 * W)
+        up = P[:, 2] > B['nose'][2] - 0.012 * W
+        mid = np.clip(1 - (np.abs(P[:, 1] - B['nose'][1]) - 0.04 * W) / (0.05 * W), 0, 1)       # band over the nose bridge / crown, not the cheeks
+        return np.clip(1 - (d - 0.06 * W) / (0.12 * W), 0, 1) * up * mid * (d > 0.022 * W)
     if kind == 'dorsal':        # marmot: darker back (upright pose → the back faces −X), grizzled dark over the shoulders
         return np.clip((-N[:, 0] - 0.2) / 0.5, 0, 1) * np.clip((P[:, 2] - 0.25 * B['W']) / (0.3 * B['W']), 0, 1) * 0.85
     if kind == 'muzzle_pale':   # marmot: cream muzzle / chin around the nose
         d = np.linalg.norm(P - B['nose'], axis=1); W = B['W']
-        return np.clip(1 - (d - 0.02 * W) / (0.05 * W), 0, 1) * (P[:, 2] < B['nose'][2] + 0.01 * W)
+        return np.clip(1 - (d - 0.035 * W) / (0.06 * W), 0, 1) * (P[:, 2] < B['nose'][2] + 0.004 * W)
     if kind == 'muzzle':        # tan muzzle: last ~12 cm (scaled) before the nose tip, below the eye line
         d = P[:, 0] - (B['nose'][0] - 0.14 * B['W'])
         return np.clip(d / (0.04 * B['W']), 0, 1) * (P[:, 2] < B['nose'][2] + 0.05 * B['W'])
@@ -217,7 +219,11 @@ def main():
                     continue
                 if kind == 'muzzle' and not cfg.get('nose_bone'):
                     Bp['nose'] = Pw[np.argmax(Pw[:, 0])]
-                w = region(kind, Pw, Nw, Bp)
+                if kind.startswith('bones:'):                            # region by skin weights of the listed bones
+                    names = kind[6:].split(','); idx = [g.index for g in ob.vertex_groups if any(g.name.startswith(n) for n in names)]
+                    w = np.array([max([gg.weight for gg in v.groups if gg.group in idx] or [0.0]) for v in ob.data.vertices], np.float32)
+                else:
+                    w = region(kind, Pw, Nw, Bp)
                 print('paint', ob.name, name, 'verts', int((w > 0.1).sum()))
                 if w.max() > 0:
                     paint_uv(bpy.path.abspath(img_node.image.filepath), ob, w, colr)

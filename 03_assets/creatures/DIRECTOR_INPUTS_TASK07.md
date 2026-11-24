@@ -399,3 +399,11 @@ Mera matlab tha ki agar koi file ko naya banaye ho to uski purani wali hatani ha
 ```
 **Clarified rule:** delete ONLY the old version of the file that was remade (new version approved) — never any other old file.
 What was deleted under R: exactly the four remade ones (sambar / wolf / bear / fox v002 .blend). Nothing else was touched.
+
+---
+
+## T. Director (24 Nov, marmot) — verbatim
+```
+Karo do thik ho kami hai uske baad aage badh jana
+```
+**Done:** marmot v004 face fix (eyes, nose, whiskers, mask, dark paws) → accepted per "uske baad aage badh jana"; v003 deleted (same asset). Next creature.

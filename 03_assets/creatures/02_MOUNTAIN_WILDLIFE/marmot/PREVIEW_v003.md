@@ -15,3 +15,8 @@ Searched alternatives: no better free realistic marmot exists (only skull scans,
 Known gaps (production): face detail (eyes / nose small in the base → sculpt pass or Meshy base if allowed), darker paws,
 all animations authored (no clips in the base): sentinel look-around, alarm whistle (jaw + chest pulse), drop on all fours,
 gallop to the burrow, dive in, sunbathing on a rock; fur motion (wind + inertia, Director Q).
+
+## v004 — FACE FIX (Director 24 Nov: "karo thik ho kami hai uske baad aage badh jana")
+`scripts/t7_face_parts.py marmot`: real eyeballs (wet cornea, dark iris) ray-cast onto the posed head and parented to the head bone,
+wet nose leather, 2 × 14 whiskers (curves); mask narrowed to the nose bridge → crown band, wider cream muzzle / cheeks, dark paws
+(by paw / foot bone weights). File `T7_MARMOT_CC_v004_face.blend` (v003 deleted — same asset remade, Director §R/§S).
