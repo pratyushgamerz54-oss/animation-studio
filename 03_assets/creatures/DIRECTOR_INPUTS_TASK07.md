@@ -476,3 +476,12 @@ Indian roofed turtle, lesser emperor dragonfly, Indian bullfrog). Next: Enchante
 Approved
 ```
 **Status:** red panda v001 APPROVED (gaps → PRODUCTION_FIX_LIST). Next: brown wood owl.
+
+---
+
+## AC. Director (24 Nov, owl v002 + bullfrog v002 + dragonfly v003 relit) — verbatim
+```
+Approve
+```
+**Status:** brown wood owl v002, Indian bullfrog v002, lesser emperor dragonfly v003 APPROVED → owl v001, bullfrog v001, dragonfly v002
+.blend deleted (rule 5b; each is rebuilt by its script chain: scan_reduce → species pass → t7_feather_fuzz). Next: great hornbill.
