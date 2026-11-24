@@ -167,3 +167,5 @@ Poora verbatim: `DIRECTOR_INPUTS_TASK17_FINAL_SHOWCASE.md`. Har asset abhi se 8K
   write them out / replace before saving (else 190 MB .blend). Wikimedia: originals rate-limited (429) → API `thumburl` 1280 px
   (thumb.wikimedia.org), polite retry. Looping a short clip in ffmpeg = hitch at every join → render continuous cycles (F-curve CYCLES,
   root REPEAT_OFFSET) + constant-velocity camera. Bases with root motion float/sink → per-frame ground snap (smoothed) or IK foot-lock.
+- (TASK 07) Some Sketchfab scans ship UNLIT materials (Emission + Light Path, lighting baked into the texture) → flat / plastic look and
+  roughness edits silently do nothing. Check every scan (`EMISSION` without `BSDF_PRINCIPLED`) and relight (`t7_feather_fuzz.py`).
