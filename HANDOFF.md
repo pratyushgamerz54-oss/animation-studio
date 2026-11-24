@@ -275,13 +275,14 @@ Director inputs verbatim: `03_assets/creatures/DIRECTOR_INPUTS_TASK07.md` (§A b
 (Wikimedia Commons, `t7_fetch_refs.py`, credits per species). ONE creature at a time → preview → Director → next. Three.js only if really needed (§N).
 | Creature | File | Status |
 |---|---|---|
-| Sambar | `01_FOREST_WILDLIFE/sambar/T7_SAMBAR_CC_v002.blend` (+ preview_v002, smooth walk v002b) | walk fix OK |
-| Himalayan wolf | `02_MOUNTAIN_WILDLIFE/wolf/T7_WOLF_CC_v002.blend` | preview shown ("Ok chalu karo") |
-| Asiatic black bear | `01_FOREST_WILDLIFE/black_bear/T7_BLACK_BEAR_CC_v002.blend` | **APPROVED** |
+| Sambar | `01_FOREST_WILDLIFE/sambar/T7_SAMBAR_CC_v003_fur.blend` (+ preview_v002 walk v002b, preview_v003_fur) | **APPROVED** (v003 fur) |
+| Himalayan wolf | `02_MOUNTAIN_WILDLIFE/wolf/T7_WOLF_CC_v003_fur.blend` | **APPROVED** (v003 fur) |
+| Asiatic black bear | `01_FOREST_WILDLIFE/black_bear/T7_BLACK_BEAR_CC_v003_fur.blend` | **APPROVED** (v003 fur) |
 | Golden eagle (juvenile, museum scan CC0) | `06_AERIAL_CREATURES/golden_eagle/T7_GOLDEN_EAGLE_SCAN_v002.blend` | **APPROVED** |
 | Red fox | `02_MOUNTAIN_WILDLIFE/red_fox/T7_RED_FOX_CC_v003_fur.blend` (real fur) | approved (look fix v003) |
 | Bharal | script `t7_bharal_cc.py` (cel base) | WIP — needs a better base / own texture |
-Tools: `scripts/t7_sketchfab.py`, `t7_ccbase.py`, `t7_cc_species.py` (config per species), `t7_sambar_cc.py`, `t7_bharal_cc.py`,
+Old versions of an approved asset are deleted (Director §R; git history keeps them). Real-fur standard (§P): `scripts/t7_furpass.py`
+(its input = the v002 conversion output, rebuilt by `t7_cc_species.py <id>` / `t7_sambar_cc.py`). Tools: `scripts/t7_sketchfab.py`, `t7_ccbase.py`, `t7_cc_species.py` (config per species), `t7_sambar_cc.py`, `t7_bharal_cc.py`,
 `t7_scan_reduce.py`, `t7_preview_rig.py` (stills + continuous clips, `--cycles`, `--step`, constant-velocity camera), own procedural kit
 `t7sdf.py` / `t7_anatomy.py` / `t7kit.py` (fur = hair-Curves object, feathers) for parts and fantasy creatures. Behaviour baker design:
 `09_RIGS/T7_BEHAVIOUR_SYSTEM.md` (milestone 2). Next: Himalayan monal, snow leopard, marmot, owl, hornbill, butterflies / insects, Crystal-Lakes set, fantasy proposals.

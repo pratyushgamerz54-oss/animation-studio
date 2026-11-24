@@ -380,3 +380,13 @@ Ek kaam jaru karna animation ke samay tum far bhi to hilega jab hawa chelgi to
    (damped spring per strand in a geometry-nodes simulation zone); long hair (tail, mane, ruff) moves more than short face fur.
 3. Wet / calm: calm = still (no fake motion); strength 0 → static.
 Checked frame by frame in the animation tests (no jitter, no hair through the body).
+
+---
+
+## R. Director (24 Nov) — verbatim
+```
+Abe to jab ek hi file ko jab tum naya bana dete ho aur same hi ho to purani wali hata do jaise tmye teeno ke naye Wale approve hai purane wale hata do
+```
+**Status:** v003 fur versions of sambar, wolf, black bear (and red fox) APPROVED. Rule from now on: when a new version of the SAME
+asset is approved, delete the old .blend (git history keeps it; scripts can rebuild it). Deleted: the four v002 .blend files.
+Kept: small preview images / clips as the review record (incl. the approved sambar smooth walk).
