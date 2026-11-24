@@ -82,6 +82,11 @@ mein ruki ya bina wazan ke nahi; energy ke hisaab se speed (chhoti takkar = kam 
 check, phir final high-res sim (Director ke GPU PC par).
 
 
+## ⭐ TASK 17 — FINAL SHOWCASE (Director, 24 Nov)
+Kul 17 tasks. Sab pura hone par: SAARA world + flora + fauna + sab kaam ek living-world cinematic mein (janwar apna kaam
+khud karte rahein, din-raat badle, real-world jaisa); TASK 1–17 sab dobara 8K (Director GPU PC), yahan 2K MP4.
+Poora verbatim: `DIRECTOR_INPUTS_TASK17_FINAL_SHOWCASE.md`. Har asset abhi se 8K-ready banao (LOD0, 8K textures ka source rakho).
+
 ## 💾 SAVE RULE — kuch bhi gumna nahi chahiye (Director, 22 Nov)
 1. **Autosave (automatic):** project Stop hook `.claude/settings.json` → `.claude/hooks/autosave.sh` — har jawab ke ant mein saare
    badlav `git add -A` → commit "autosave: …" → push (sirf current branch, kabhi force nahi; > 95 MB files chhod kar report;

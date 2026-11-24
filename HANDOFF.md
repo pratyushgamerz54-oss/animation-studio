@@ -295,6 +295,10 @@ heightfields, data_v002 npz, renders, QC) · **TASK 06: vegetation libraries (43
 impostors, 39 atlases, sheets, populated files R-01…R-05, previews, QC). Sirf setup (`setup_session.sh`) chalao. Rebuild tabhi jab Director change maange.
 
 ## 8. Director se PENDING
+
+### ⭐ TASK 17 (Director, 24 Nov) — FINAL SHOWCASE (sab tasks ke baad)
+Total 17 tasks. Ant mein: saara world + flora + fauna + sab kaam ek living-world cinematic (janwar khud behave, din-raat chakra,
+real-world), sab kuch TASK 1–17 dobara 8K mein (Director PC), yahan 2K MP4. Verbatim + checklist: `DIRECTOR_INPUTS_TASK17_FINAL_SHOWCASE.md`.
 1. ~~Hero 1 ka naam~~ = **Shiv** ✅ · Soul ka weapon story mein hai?
 2. World map revision 01 ka **canon** approval (abhi sirf blockout layout approved) · GEM location (unconfirmed) · kaunse portal routes sach hain.
 3. Story / script document.
