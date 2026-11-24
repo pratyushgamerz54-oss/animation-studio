@@ -15,6 +15,25 @@ ratio, texs = opt('--ratio', 0.35), opt('--tex', 2048)
 K.clean()
 bpy.ops.import_scene.gltf(filepath=src)
 meshes = [o for o in bpy.data.objects if o.type == 'MESH']
+if '--join' in a and len(meshes) > 1:                 # split scans / AI meshes: join + weld seams first (decimating pieces separately opens holes)
+    for x in bpy.context.view_layer.objects:
+        x.select_set(False)
+    for o in meshes:
+        o.select_set(True)
+    bpy.context.view_layer.objects.active = meshes[0]
+    with bpy.context.temp_override(active_object=meshes[0], selected_editable_objects=meshes, selected_objects=meshes):
+        bpy.ops.object.join()
+    meshes = [meshes[0]]
+    import bmesh
+    bm = bmesh.new(); bm.from_mesh(meshes[0].data)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=opt('--weld', 0.0005)); bm.to_mesh(meshes[0].data); bm.free()
+for m_ in bpy.data.materials:                          # realism: no metal / plastic sheen from glTF metallicRoughness maps
+    b_ = m_.node_tree.nodes.get('Principled BSDF') if m_.use_nodes else None
+    if b_:
+        for k in ('Metallic', 'Roughness'):
+            for l in list(b_.inputs[k].links):
+                m_.node_tree.links.remove(l)
+        b_.inputs['Metallic'].default_value = 0.0; b_.inputs['Roughness'].default_value = 0.7; b_.inputs['Specular IOR Level'].default_value = 0.25
 for o in (meshes if ratio < 0.999 else []):
     m = o.modifiers.new('dec', 'DECIMATE'); m.ratio = ratio; m.use_collapse_triangulate = True
     K._apply(o, m)
