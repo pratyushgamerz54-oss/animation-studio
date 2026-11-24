@@ -73,7 +73,8 @@ def main():
     hd = (h1 - h0) / np.linalg.norm(h1 - h0); hl = np.linalg.norm(h1 - h0)
     rel = pos - h0; t_ = rel @ hd                       # along the head (0 = head base)
     col = np.broadcast_to(lin(C['skin']), Tl.shape).copy()
-    shell = ws > 0.5
+    xs0, xs1 = P[sh, 0].min(), P[sh, 0].max()
+    shell = (ws > 0.5) | ((pos[..., 2] > zr) & (pos[..., 0] > xs0) & (pos[..., 0] < xs1) & (np.abs(pos[..., 1]) < Wy * 1.05) & (wh < 0.3) & (nrm[..., 2] > 0.05))   # front of the carapace is weighted to the neck
     under = shell & (nrm[..., 2] < -0.3)                # plastron
     col[shell] = lin(C['carapace']); col[under] = lin(C['plastron'])
     keel = shell & (np.abs(pos[..., 1]) < 0.0035) & (nrm[..., 2] > 0.4)
