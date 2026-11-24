@@ -415,3 +415,11 @@ Karo do thik ho kami hai uske baad aage badh jana
 Ha thik hai approve hai tu kami theek kar lena aur ye bata aur kitna creature bacha hai
 ```
 **Status:** grey heron v002 APPROVED (gaps → production fix list). Remaining milestone-1 creatures listed to the Director (23 left).
+
+---
+
+## V. Director (24 Nov, golden mahseer) — verbatim
+```
+Ha approve hai kami theek karke aage badho
+```
+**Status:** golden mahseer v002 APPROVED; quick fix now: all fins orange (body-core ellipse test); rig + swim → milestone 2.

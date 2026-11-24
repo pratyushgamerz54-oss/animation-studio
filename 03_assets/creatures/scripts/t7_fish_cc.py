@@ -60,6 +60,16 @@ def main():
                     zc = np.median(Pm[:, 2]); hz = np.percentile(np.abs(Pm[:, 2] - zc), 93)   # only the real fins stick out beyond ~93 %
                     w = np.clip(((x0 + 0.13 * Lx) - Pm[:, 0]) / (0.03 * Lx), 0, 1)
                     w = np.maximum(w, np.clip((np.abs(Pm[:, 2] - zc) - hz) / (0.12 * hz), 0, 1) * (np.abs(Pm[:, 1]) < 0.012))
+                    # every fin (pectoral, pelvic, anal, dorsal) = THIN parts: ray from each vertex inward along -normal; a fin's
+                    # opposite face is a few mm away (or none for a single-sided fin), the body's is ~10+ cm away → body stays golden
+                    from mathutils.bvhtree import BVHTree
+                    bvh = BVHTree.FromPolygons([v.co for v in o.data.vertices], [p_.vertices for p_ in o.data.polygons])
+                    th = np.full(len(Pm), 1.0)
+                    for i, v in enumerate(o.data.vertices):
+                        n = v.normal; h = bvh.ray_cast(v.co - n * 1e-4, -n, 0.2)
+                        th[i] = h[3] if h[0] is not None else 0.0
+                    thin = 0.025 * c['length']                  # ≈ 2.2 cm for a 0.9 m fish
+                    w = np.maximum(w, np.clip((thin - th) / (0.4 * thin), 0, 1) * (Pm[:, 0] < x0 + 0.80 * Lx))
                     CS.paint_uv(dst, o, w.astype(np.float32), c['fin_col'], 3)
             L[0].from_node.image = bpy.data.images.load(dst, check_existing=False); os.remove(srcp)
         for k in ('Metallic', 'Roughness'):
