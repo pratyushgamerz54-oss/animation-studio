@@ -1,0 +1,221 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "17d20ca7b35243d4a45171838b50704c",
+   "name": "Science & Technology",
+   "slug": "science-technology",
+   "uri": "https://api.sketchfab.com/v3/categories/17d20ca7b35243d4a45171838b50704c",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/86b1bae49e0ed3f43b2d59b26700234e-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 2,
+ "createdAt": "2023-07-27T14:39:55.150017",
+ "embedUrl": "https://sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/embed",
+ "faceCount": 265813,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/7c23a1ba438d4306920229c12afcb5f9",
+  "label": "CC0 Public Domain",
+  "fullName": "CC0 Public Domain",
+  "requirements": "Credit is not mandatory. Commercial use is allowed.",
+  "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "slug": "cc0"
+ },
+ "likeCount": 125,
+ "name": "CC0 \u30ae\u30f3\u30e4\u30f3\u30de \u2642 Lesser Emperor",
+ "publishedAt": "2023-07-31T11:52:30.013192",
+ "soundCount": 0,
+ "staffpickedAt": "2023-08-08T12:55:18.949628",
+ "tags": [
+  {
+   "name": "dragonfly",
+   "slug": "dragonfly",
+   "uri": "https://api.sketchfab.com/v3/tags/dragonfly"
+  },
+  {
+   "name": "Odonata",
+   "slug": "odonata",
+   "uri": "https://api.sketchfab.com/v3/tags/odonata"
+  },
+  {
+   "name": "Julius",
+   "slug": "julius",
+   "uri": "https://api.sketchfab.com/v3/tags/julius"
+  },
+  {
+   "name": "cc0",
+   "slug": "cc0",
+   "uri": "https://api.sketchfab.com/v3/tags/cc0"
+  },
+  {
+   "name": "publicdomain",
+   "slug": "publicdomain",
+   "uri": "https://api.sketchfab.com/v3/tags/publicdomain"
+  },
+  {
+   "name": "insecta",
+   "slug": "insecta",
+   "uri": "https://api.sketchfab.com/v3/tags/insecta"
+  },
+  {
+   "name": "arthropoda",
+   "slug": "arthropoda",
+   "uri": "https://api.sketchfab.com/v3/tags/arthropoda"
+  },
+  {
+   "name": "animalia",
+   "slug": "animalia",
+   "uri": "https://api.sketchfab.com/v3/tags/animalia"
+  },
+  {
+   "name": "ffishasia",
+   "slug": "ffishasia",
+   "uri": "https://api.sketchfab.com/v3/tags/ffishasia"
+  },
+  {
+   "name": "anax",
+   "slug": "anax",
+   "uri": "https://api.sketchfab.com/v3/tags/anax"
+  },
+  {
+   "name": "parthenope",
+   "slug": "parthenope",
+   "uri": "https://api.sketchfab.com/v3/tags/parthenope"
+  },
+  {
+   "name": "aeshnidae",
+   "slug": "aeshnidae",
+   "uri": "https://api.sketchfab.com/v3/tags/aeshnidae"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "b903173e3d5d4ed0a62fb63999b7dce9",
+    "width": 64,
+    "height": 36,
+    "size": 1059,
+    "url": "https://media.sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/thumbnails/6f135c29ecb04fd996c39353adbb3801/4726a518e7214a9b884d6b791d475ef8.jpeg"
+   },
+   {
+    "uid": "4472dfa2b509476397f9d06669f42249",
+    "width": 256,
+    "height": 144,
+    "size": 4588,
+    "url": "https://media.sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/thumbnails/6f135c29ecb04fd996c39353adbb3801/7c612c064ac04cedb00144a81850347a.jpeg"
+   },
+   {
+    "uid": "334a383ae1294e79b0041323b60c8d9a",
+    "width": 720,
+    "height": 405,
+    "size": 23850,
+    "url": "https://media.sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/thumbnails/6f135c29ecb04fd996c39353adbb3801/a42d8464a1414593973d42410d8bb27c.jpeg"
+   },
+   {
+    "uid": "86563c9ae219416c8b8332b78557eb5d",
+    "width": 1024,
+    "height": 576,
+    "size": 41850,
+    "url": "https://media.sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/thumbnails/6f135c29ecb04fd996c39353adbb3801/36c044d24ef34dd68c28986dc5fc03cd.jpeg"
+   },
+   {
+    "uid": "a0a8c4a369764d9da6ade56b3a700de7",
+    "width": 1920,
+    "height": 1080,
+    "size": 127899,
+    "url": "https://media.sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/thumbnails/6f135c29ecb04fd996c39353adbb3801/19e702c243944f6ca37042446c326b82.jpeg"
+   }
+  ]
+ },
+ "uid": "dfb6e8479b9245739a66e8d1b413969d",
+ "uri": "https://api.sketchfab.com/v3/models/dfb6e8479b9245739a66e8d1b413969d",
+ "user": {
+  "uid": "19cfc338f034437189579a2aa1f0e1ff",
+  "username": "ffishAsia-and-floraZia",
+  "displayName": "ffish.asia / floraZia.com",
+  "account": "pro",
+  "profileUrl": "https://sketchfab.com/ffishAsia-and-floraZia",
+  "avatar": {
+   "uid": "fcacc84a68154e3a98b9f3d1ce7a413a",
+   "uri": "https://api.sketchfab.com/v3/avatars/fcacc84a68154e3a98b9f3d1ce7a413a",
+   "images": [
+    {
+     "width": 100,
+     "height": 100,
+     "size": 3622,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/821da58844df4e568d1939081d023caa.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 3053,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/dbec28e52d1f4e6b8ff6baa0e9551c94.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1061,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b749d50bb80b45c0b66f1eaa289272f2.jpeg"
+    },
+    {
+     "width": 32,
+     "height": 32,
+     "size": 665,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b671f00bdb8d4e6e8500bdb66b61e727.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/19cfc338f034437189579a2aa1f0e1ff"
+ },
+ "vertexCount": 133481,
+ "viewCount": 5904,
+ "viewerUrl": "https://sketchfab.com/3d-models/cc0-lesser-emperor-dfb6e8479b9245739a66e8d1b413969d",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "License: **CC0**  \n\n  \nAnimalia \u52d5\u7269\u754c  \n\u3000Arthropoda \u7bc0\u8db3\u52d5\u7269\u9580  \n\u3000\u3000Insecta \u6606\u866b\u7db1  \n\u3000\u3000\u3000Odonata \u30c8\u30f3\u30dc\u76ee  \n\u3000\u3000\u3000\u3000Aeshnidae \u30e4\u30f3\u30de\u79d1  \n\u3000\u3000\u3000\u3000\u3000Anax \u30ae\u30f3\u30e4\u30f3\u30de\u5c5e  \n\u3000\u3000\u3000\u3000\u3000\u3000Anax parthenope julius \u30ae\u30f3\u30e4\u30f3\u30de  \n  \n\u30c8\u30f3\u30dc \u873b\u86c9",
+ "price": null,
+ "downloadCount": 833,
+ "editorUrl": "https://sketchfab.com/models/dfb6e8479b9245739a66e8d1b413969d/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2025-03-06T02:19:04.489565",
+ "pbrType": null,
+ "textureCount": 3,
+ "materialCount": 3
+}

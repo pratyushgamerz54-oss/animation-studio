@@ -14,6 +14,10 @@ opt = lambda k, d: type(d)(a[a.index(k) + 1]) if k in a else d
 ratio, texs = opt('--ratio', 0.35), opt('--tex', 2048)
 K.clean()
 bpy.ops.import_scene.gltf(filepath=src)
+if '--delete-mat' in a:                               # helper objects in specimen scans (colour checker card, scale cube) by material
+    dm = a[a.index('--delete-mat') + 1].split(',')
+    for o in [o for o in bpy.data.objects if o.type == 'MESH' and o.active_material and o.active_material.name in dm]:
+        bpy.data.objects.remove(o)
 meshes = [o for o in bpy.data.objects if o.type == 'MESH']
 if '--join' in a and len(meshes) > 1:                 # split scans / AI meshes: join + weld seams first (decimating pieces separately opens holes)
     for x in bpy.context.view_layer.objects:
@@ -68,6 +72,10 @@ root = next(o for o in bpy.data.objects if o.parent is None)
 L = opt('--height', 0.0)
 if L:
     s = L / np.ptp(P[:, 2]); root.scale = tuple(x * s for x in root.scale); bpy.context.view_layer.update()
+    P = np.concatenate([np.array([(o.matrix_world @ v.co)[:] for v in o.data.vertices]) for o in meshes])
+Lh = opt('--length', 0.0)
+if Lh:                                                    # insects / flat subjects: longest horizontal extent → real length
+    s = Lh / max(np.ptp(P[:, 0]), np.ptp(P[:, 1])); root.scale = tuple(x * s for x in root.scale); bpy.context.view_layer.update()
     P = np.concatenate([np.array([(o.matrix_world @ v.co)[:] for v in o.data.vertices]) for o in meshes])
 root.location.z -= P[:, 2].min(); bpy.context.view_layer.update()
 os.makedirs(os.path.dirname(out), exist_ok=True)
