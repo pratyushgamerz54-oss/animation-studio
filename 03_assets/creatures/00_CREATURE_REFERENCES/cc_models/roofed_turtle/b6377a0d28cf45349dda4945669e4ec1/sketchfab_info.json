@@ -1,0 +1,221 @@
+{
+ "animationCount": 1,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "17d20ca7b35243d4a45171838b50704c",
+   "name": "Science & Technology",
+   "slug": "science-technology",
+   "uri": "https://api.sketchfab.com/v3/categories/17d20ca7b35243d4a45171838b50704c",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/86b1bae49e0ed3f43b2d59b26700234e-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2025-01-05T12:52:30.753431",
+ "embedUrl": "https://sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/embed",
+ "faceCount": 37044,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/7c23a1ba438d4306920229c12afcb5f9",
+  "label": "CC0 Public Domain",
+  "fullName": "CC0 Public Domain",
+  "requirements": "Credit is not mandatory. Commercial use is allowed.",
+  "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "slug": "cc0"
+ },
+ "likeCount": 48,
+ "name": "CC0 \u30cb\u30db\u30f3\u30a4\u30b7\u30ac\u30e1 \ud83d\udc22 \u2642 Japanese Pond Turtle",
+ "publishedAt": "2025-01-05T13:04:38.120257",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "turtle",
+   "slug": "turtle",
+   "uri": "https://api.sketchfab.com/v3/tags/turtle"
+  },
+  {
+   "name": "tortoise",
+   "slug": "tortoise",
+   "uri": "https://api.sketchfab.com/v3/tags/tortoise"
+  },
+  {
+   "name": "cc0",
+   "slug": "cc0",
+   "uri": "https://api.sketchfab.com/v3/tags/cc0"
+  },
+  {
+   "name": "publicdomain",
+   "slug": "publicdomain",
+   "uri": "https://api.sketchfab.com/v3/tags/publicdomain"
+  },
+  {
+   "name": "reptilia",
+   "slug": "reptilia",
+   "uri": "https://api.sketchfab.com/v3/tags/reptilia"
+  },
+  {
+   "name": "testudines",
+   "slug": "testudines",
+   "uri": "https://api.sketchfab.com/v3/tags/testudines"
+  },
+  {
+   "name": "japonica",
+   "slug": "japonica",
+   "uri": "https://api.sketchfab.com/v3/tags/japonica"
+  },
+  {
+   "name": "chordata",
+   "slug": "chordata",
+   "uri": "https://api.sketchfab.com/v3/tags/chordata"
+  },
+  {
+   "name": "animalia",
+   "slug": "animalia",
+   "uri": "https://api.sketchfab.com/v3/tags/animalia"
+  },
+  {
+   "name": "ffishasia",
+   "slug": "ffishasia",
+   "uri": "https://api.sketchfab.com/v3/tags/ffishasia"
+  },
+  {
+   "name": "mauremys",
+   "slug": "mauremys",
+   "uri": "https://api.sketchfab.com/v3/tags/mauremys"
+  },
+  {
+   "name": "geoemydidae",
+   "slug": "geoemydidae",
+   "uri": "https://api.sketchfab.com/v3/tags/geoemydidae"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "ce5b721b58224ff892a2db3ce7116d50",
+    "width": 64,
+    "height": 36,
+    "size": 1155,
+    "url": "https://media.sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/thumbnails/fbade7cb18a144078421a1ffe42d8ea0/6355e2cf45984d2ab4e6dc23e2512417.jpeg"
+   },
+   {
+    "uid": "fcc0bb2f113a43f0a8fbb5d4563ae20d",
+    "width": 256,
+    "height": 144,
+    "size": 4687,
+    "url": "https://media.sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/thumbnails/fbade7cb18a144078421a1ffe42d8ea0/d868355d9a3045279cce60939a75f93c.jpeg"
+   },
+   {
+    "uid": "96cf8bf643794bd1b3ed70c43c33094a",
+    "width": 720,
+    "height": 405,
+    "size": 22932,
+    "url": "https://media.sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/thumbnails/fbade7cb18a144078421a1ffe42d8ea0/5a8d8b4ad115409084c460b13b469b6a.jpeg"
+   },
+   {
+    "uid": "8230496812654f3386b8110618600adc",
+    "width": 1024,
+    "height": 576,
+    "size": 40185,
+    "url": "https://media.sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/thumbnails/fbade7cb18a144078421a1ffe42d8ea0/374b03b88b2c4cb482b03625bce4d0d6.jpeg"
+   },
+   {
+    "uid": "1defd8ad24f147d2a1db8edcafeef276",
+    "width": 1920,
+    "height": 1080,
+    "size": 121665,
+    "url": "https://media.sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/thumbnails/fbade7cb18a144078421a1ffe42d8ea0/6147e881b1f245fb96e1b5ba22cfa2a1.jpeg"
+   }
+  ]
+ },
+ "uid": "b6377a0d28cf45349dda4945669e4ec1",
+ "uri": "https://api.sketchfab.com/v3/models/b6377a0d28cf45349dda4945669e4ec1",
+ "user": {
+  "uid": "19cfc338f034437189579a2aa1f0e1ff",
+  "username": "ffishAsia-and-floraZia",
+  "displayName": "ffish.asia / floraZia.com",
+  "account": "pro",
+  "profileUrl": "https://sketchfab.com/ffishAsia-and-floraZia",
+  "avatar": {
+   "uid": "fcacc84a68154e3a98b9f3d1ce7a413a",
+   "uri": "https://api.sketchfab.com/v3/avatars/fcacc84a68154e3a98b9f3d1ce7a413a",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 665,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b671f00bdb8d4e6e8500bdb66b61e727.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1061,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/b749d50bb80b45c0b66f1eaa289272f2.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 3053,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/dbec28e52d1f4e6b8ff6baa0e9551c94.jpeg"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 3622,
+     "url": "https://media.sketchfab.com/avatars/fcacc84a68154e3a98b9f3d1ce7a413a/821da58844df4e568d1939081d023caa.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/19cfc338f034437189579a2aa1f0e1ff"
+ },
+ "vertexCount": 18502,
+ "viewCount": 1848,
+ "viewerUrl": "https://sketchfab.com/3d-models/cc0-japanese-pond-turtle-b6377a0d28cf45349dda4945669e4ec1",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "License: **CC0**  \n\n  \nAnimalia \u52d5\u7269\u754c  \n\u3000Chordata \u810a\u7d22\u52d5\u7269\u9580  \n\u3000\u3000Reptilia \u722c\u866b\u7db1  \n\u3000\u3000\u3000Testudines \u30ab\u30e1\u76ee  \n\u3000\u3000\u3000\u3000Geoemydidae \u30a4\u30b7\u30ac\u30e1\u79d1  \n\u3000\u3000\u3000\u3000\u3000Mauremys \u30a4\u30b7\u30ac\u30e1\u5c5e  \n\u3000\u3000\u3000\u3000\u3000\u3000Mauremys japonica \u30cb\u30db\u30f3\u30a4\u30b7\u30ac\u30e1 \u30bc\u30cb\u30ac\u30e1  \n  \n\u4e80",
+ "price": null,
+ "downloadCount": 442,
+ "editorUrl": "https://sketchfab.com/models/b6377a0d28cf45349dda4945669e4ec1/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2025-03-07T07:54:12.559993",
+ "pbrType": null,
+ "textureCount": 1,
+ "materialCount": 1
+}
