@@ -14,6 +14,16 @@ opt = lambda k, d: type(d)(a[a.index(k) + 1]) if k in a else d
 ratio, texs = opt('--ratio', 0.35), opt('--tex', 2048)
 K.clean()
 bpy.ops.import_scene.gltf(filepath=src)
+if '--frame' in a:                                    # animated bases: pose at this frame (e.g. wings spread flat) before joining
+    bpy.context.scene.frame_set(int(opt('--frame', 0))); bpy.context.view_layer.update()
+    for o in [o for o in bpy.data.objects if o.type == 'MESH']:
+        mw = o.matrix_world.copy(); o.parent = None; o.matrix_world = mw
+    for o in bpy.data.objects:
+        o.animation_data_clear()
+if '--delete-obj' in a:                               # stray helper objects by name (e.g. a 'Cube' left in the export)
+    for n in a[a.index('--delete-obj') + 1].split(','):
+        for o in [o for o in bpy.data.objects if o.name == n]:
+            bpy.data.objects.remove(o)
 if '--delete-mat' in a:                               # helper objects in specimen scans (colour checker card, scale cube) by material
     dm = a[a.index('--delete-mat') + 1].split(',')
     for o in [o for o in bpy.data.objects if o.type == 'MESH' and o.active_material and o.active_material.name in dm]:

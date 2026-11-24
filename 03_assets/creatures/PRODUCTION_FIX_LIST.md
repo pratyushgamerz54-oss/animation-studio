@@ -45,3 +45,6 @@
 
 ## Paris peacock butterfly (v001 preview 24 Nov)
 - Patch shape (irregular blue band), denser green speckle, faint forewing band, rig (flat basking / closed perching), flap 8–10 Hz + glide, thin-film iridescence.
+
+## Atlas moth (v001 preview 24 Nov)
+- Translucent windows, hairier thorax + feathery male antennae, body volume, rig (slow heavy flaps, resting flat on bark).

@@ -6,7 +6,7 @@
    (faint forewing band skipped); underside keeps the base (dark with orange-red lunules, like P. paris)
 3. scale-wing shading: low roughness sheen on the upper side so the green scales glint
 
-usage: $BPY45 t7_butterfly_pass.py <in.blend> <out.blend>
+usage: $BPY45 t7_butterfly_pass.py <in.blend> <out.blend> [--orient-only]   (orient-only: any lepidopteran, keeps its pattern)
 """
 import os, sys, math
 import numpy as np
@@ -59,6 +59,9 @@ def main():
     tx = float(np.median(P[legs, 0])) if legs.any() else 0.0      # thorax x
     W = float(np.abs(P[:, 1]).max())
     print('BFLY basking: span', np.round(np.ptp(P, 0), 3), 'thorax x', round(tx, 4), 'half-span', round(W, 4), flush=True)
+    if '--orient-only' in a:                                     # other species: only the basking orientation (keep the base's own pattern)
+        ob.name = 'T7_' + os.path.splitext(os.path.basename(dst))[0].split('_SCAN')[0].replace('T7_', '')
+        bpy.ops.wm.save_as_mainfile(filepath=dst, compress=True, relative_remap=True); print('BFLY SAVED (orient only)', dst, flush=True); return
     N = np.array([v.normal[:] for v in me.vertices], np.float32)
     A = np.concatenate([P, N], 1).astype(np.float32)
     from PIL import Image, ImageFilter

@@ -493,3 +493,11 @@ Approve
 Approved
 ```
 **Status:** great hornbill v001 APPROVED (AI-assisted base; gaps → PRODUCTION_FIX_LIST). Next: Paris peacock butterfly.
+
+---
+
+## AE. Director (24 Nov, Paris peacock butterfly v001) — verbatim
+```
+Approved
+```
+**Status:** Paris peacock v001 APPROVED (gaps → PRODUCTION_FIX_LIST). Next: atlas moth.
