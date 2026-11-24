@@ -441,3 +441,12 @@ Ha approve hai kami thik karke aage badho
 ```
 **Status:** Eurasian otter v001 APPROVED. Quick fixes now: otter whiskers re-aim (v002), shelduck underwing white coverts (v002).
 Next: roofed turtle.
+
+---
+
+## Y. Director (24 Nov, after dragonfly v001 / turtle v001 / otter v002 / shelduck v002) — verbatim
+```
+Kami hai usko theek karo aur isko realistic banao samjhe na baki approve
+```
+**Status:** roofed turtle v001, otter v002, shelduck v002 APPROVED → otter v001 + shelduck v001 .blend deleted (rule 5b).
+Dragonfly: fix gaps + make more realistic (natural leg pose instead of pinned-specimen legs, bright blue S2 saddle, darker olive abdomen) → v002.
