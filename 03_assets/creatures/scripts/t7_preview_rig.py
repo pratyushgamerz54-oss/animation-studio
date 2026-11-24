@@ -21,6 +21,7 @@ if arm and st in bpy.data.actions:
     arm.animation_data.action = bpy.data.actions[st]
 bpy.context.scene.frame_set(int(opt('--still-frame', 1)))
 P = pts(); lo, hi = P.min(0), P.max(0); c = (lo + hi) / 2; ext = hi - lo; L = ext.max()
+L = L * max(1.0, 1.35 * ext[2] / max(ext[0], ext[1]) * 0.75)   # tall subjects (upright marmot, perched bird): pull the camera back
 ax = 0 if ext[0] >= ext[1] else 1
 # which end is the head: head bone side
 hb = np.array((arm.matrix_world @ arm.pose.bones[opt('--face-bone', 'RigHead_00')].head)[:]) if arm else (P[P[:, 2] > hi[2] - 0.12 * ext[2]].mean(0))   # static scan: head = top of the model

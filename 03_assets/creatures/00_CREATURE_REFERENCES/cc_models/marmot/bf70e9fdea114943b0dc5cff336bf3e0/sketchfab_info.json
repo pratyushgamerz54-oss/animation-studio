@@ -1,0 +1,167 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 3,
+ "createdAt": "2022-08-23T15:08:07.472834",
+ "embedUrl": "https://sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/embed",
+ "faceCount": 13988,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 18,
+ "name": "Marmot rig",
+ "publishedAt": "2022-08-23T15:18:08.952272",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "rig",
+   "slug": "rig",
+   "uri": "https://api.sketchfab.com/v3/tags/rig"
+  },
+  {
+   "name": "Groundhog",
+   "slug": "groundhog",
+   "uri": "https://api.sketchfab.com/v3/tags/groundhog"
+  },
+  {
+   "name": "woodchuck",
+   "slug": "woodchuck",
+   "uri": "https://api.sketchfab.com/v3/tags/woodchuck"
+  },
+  {
+   "name": "marmot",
+   "slug": "marmot",
+   "uri": "https://api.sketchfab.com/v3/tags/marmot"
+  },
+  {
+   "name": "rigged",
+   "slug": "rigged",
+   "uri": "https://api.sketchfab.com/v3/tags/rigged"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "8047cc9590c34f98a8584445d9ad01b4",
+    "width": 64,
+    "height": 36,
+    "size": 887,
+    "url": "https://media.sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/thumbnails/e9d57edb6e0949e1a5d6f36c6618d892/e675771ab99144b18bccb930f3cf7f1f.jpeg"
+   },
+   {
+    "uid": "24736c7508dc4fad82f33b3bbfed2a3a",
+    "width": 256,
+    "height": 144,
+    "size": 2756,
+    "url": "https://media.sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/thumbnails/e9d57edb6e0949e1a5d6f36c6618d892/f02c13ef2e284cd2b1bdb5fec87981fb.jpeg"
+   },
+   {
+    "uid": "a7dd869522c14e0db175530f3cd61448",
+    "width": 720,
+    "height": 405,
+    "size": 19353,
+    "url": "https://media.sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/thumbnails/e9d57edb6e0949e1a5d6f36c6618d892/0b5ade90043545c0afc85b33447fc84e.jpeg"
+   },
+   {
+    "uid": "93b54e9f2a5447d3b050adecd332c32f",
+    "width": 1024,
+    "height": 576,
+    "size": 47413,
+    "url": "https://media.sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/thumbnails/e9d57edb6e0949e1a5d6f36c6618d892/82784dd6c52e41be938d1b133b24107b.jpeg"
+   },
+   {
+    "uid": "e0bf29ada57740e0bbec9973f6b415d6",
+    "width": 1920,
+    "height": 1080,
+    "size": 384966,
+    "url": "https://media.sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/thumbnails/e9d57edb6e0949e1a5d6f36c6618d892/89be626215204c49a5165b2f8b03326b.jpeg"
+   }
+  ]
+ },
+ "uid": "bf70e9fdea114943b0dc5cff336bf3e0",
+ "uri": "https://api.sketchfab.com/v3/models/bf70e9fdea114943b0dc5cff336bf3e0",
+ "user": {
+  "uid": "668ebc36df634dc1ac2f6c4678a88ff9",
+  "username": "quentin.cdt",
+  "displayName": "quentin.cdt",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/quentin.cdt",
+  "avatar": {
+   "uid": "6eec62ab010c479d8439948a5089f98b",
+   "uri": "https://api.sketchfab.com/v3/avatars/6eec62ab010c479d8439948a5089f98b",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 2513,
+     "url": "https://media.sketchfab.com/avatars/6eec62ab010c479d8439948a5089f98b/b617c198b3a846248e5a8e8e5ad0731f.png"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 4867,
+     "url": "https://media.sketchfab.com/avatars/6eec62ab010c479d8439948a5089f98b/7c299ed4d3f14a1390e40d26b61b2d36.png"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 15726,
+     "url": "https://media.sketchfab.com/avatars/6eec62ab010c479d8439948a5089f98b/05a5ab39b1144b8cb178c127348f1407.png"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 19246,
+     "url": "https://media.sketchfab.com/avatars/6eec62ab010c479d8439948a5089f98b/66a52956a01c457396c2f5488917a9b2.png"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/668ebc36df634dc1ac2f6c4678a88ff9"
+ },
+ "vertexCount": 7576,
+ "viewCount": 2929,
+ "viewerUrl": "https://sketchfab.com/3d-models/marmot-rig-bf70e9fdea114943b0dc5cff336bf3e0",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "3d model of a marmot rigged",
+ "price": null,
+ "downloadCount": 787,
+ "editorUrl": "https://sketchfab.com/models/bf70e9fdea114943b0dc5cff336bf3e0/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2022-08-23T15:33:42.457681",
+ "pbrType": null,
+ "textureCount": 4,
+ "materialCount": 2
+}

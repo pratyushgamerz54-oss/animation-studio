@@ -29,6 +29,10 @@ CFG = {
     'sambar': dict(body_mat=['Body', 'Head'], card_mat=None, density=120000, radius=0.00028,
                    length={'Neck': 0.055, 'Head': 0.006, 'Jaw': 0.005, 'Ear': 0.004, 'Leg3': 0.006, 'Ankle': 0.004, 'Tail': 0.045, '*': 0.011},   # short coarse deer coat (texture shows through), shaggy neck mane
                    lift=0.25, droop=0.35, frizz=0.35, hair_rough=0.6, hair_coat=0.0, hair_tint=(1.04, 0.97, 0.90), hair_gain=0.85),
+    'marmot': dict(body_mat=['auto', 'auto9'], card_mat=None, density=260000, radius=0.00024,
+                   length={'Bone.004': 0.012, 'Bone.003': 0.030, 'Bone.005': 0.05, 'Bone.006': 0.05, 'Bone.007': 0.05, 'Bone.008': 0.04,
+                           'Bone.012': 0.006, 'Bone.016': 0.006, 'Bone.020': 0.006, 'Bone.025': 0.006, '*': 0.042},
+                   lift=0.5, droop=0.4, frizz=0.5, hair_rough=0.45, hair_coat=0.0, hair_gain=0.72),
 }
 
 

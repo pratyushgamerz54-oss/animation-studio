@@ -26,6 +26,11 @@ CC = {
     'red_fox': dict(base='red_fox/4e37c303f8a241aaa2511bd9f3019273', withers=0.40, pelvis='Fox_ Pelvis_02', chest='Fox_ Spine1_012',
                     delete=('Icosphere',), still_action='root.001|Waking Up', still_frame=480, palette=None, rough=0.6,
                     ground_snap='root.001|Waking Up'),
+    'marmot': dict(base='marmot/bf70e9fdea114943b0dc5cff336bf3e0', height=0.50, orient_deg=90.0,
+                   delete=('Icosphere',), still_action=None, rough=0.7, chest='Bone.001_11', nose_bone='Bone.004_0', head_bone='Bone.004_0',
+                   # photo refs 01-03 (Himalayan marmot, Commons): golden-tawny coat, dark brown face mask / crown, pale cream muzzle
+                   palette=dict(dark='#3E2E1E', mid='#86643A', light='#C2A068', cap=1.5, gamma=1.0),
+                   paint=[('dorsal', '#5A4228', 'dorsal', '*'), ('face_mask', '#33271C', 'face_mask', '*'), ('muzzle_pale', '#CDB690', 'muzzle_pale', '*')]),
 }
 
 
@@ -40,6 +45,15 @@ def region(kind, P, N, B):
         band = (np.abs(P[:, 1]) < arm_) & (np.abs(P[:, 1]) > arm_ - 0.07 * W)
         base = (P[:, 2] - zl < 0.11 * W) & (P[:, 2] > zl - 0.03 * W) & (np.abs(P[:, 1]) < 0.10 * W) & (P[:, 0] > ch[0])  # centre of the crescent (sternum)
         return np.clip(inz * band * face_fwd * 1.5 + base * np.clip(N[:, 0] + 0.2, 0, 1) * 1.5, 0, 1)
+    if kind == 'face_mask':     # marmot: dark crown + eye band + upper muzzle (photo refs)
+        d = np.linalg.norm(P - B['nose'], axis=1); W = B['W']
+        up = P[:, 2] > B['nose'][2] - 0.035 * W
+        return np.clip(1 - (d - 0.07 * W) / (0.14 * W), 0, 1) * up * (d > 0.028 * W)
+    if kind == 'dorsal':        # marmot: darker back (upright pose → the back faces −X), grizzled dark over the shoulders
+        return np.clip((-N[:, 0] - 0.2) / 0.5, 0, 1) * np.clip((P[:, 2] - 0.25 * B['W']) / (0.3 * B['W']), 0, 1) * 0.85
+    if kind == 'muzzle_pale':   # marmot: cream muzzle / chin around the nose
+        d = np.linalg.norm(P - B['nose'], axis=1); W = B['W']
+        return np.clip(1 - (d - 0.02 * W) / (0.05 * W), 0, 1) * (P[:, 2] < B['nose'][2] + 0.01 * W)
     if kind == 'muzzle':        # tan muzzle: last ~12 cm (scaled) before the nose tip, below the eye line
         d = P[:, 0] - (B['nose'][0] - 0.14 * B['W'])
         return np.clip(d / (0.04 * B['W']), 0, 1) * (P[:, 2] < B['nose'][2] + 0.05 * B['W'])
@@ -126,23 +140,28 @@ def main():
     root = next(o for o in bpy.data.objects if o.parent is None and o.type == 'EMPTY')
     meshes = [o for o in bpy.data.objects if o.type == 'MESH']
     body = max(meshes, key=lambda o: len(o.data.polygons))
-    if cfg.get('still_action') in bpy.data.actions:
+    if cfg.get('still_action') and cfg['still_action'] in bpy.data.actions:
         arm.animation_data.action = bpy.data.actions[cfg['still_action']]
     bpy.context.scene.frame_set(cfg.get('still_frame', 0)); bpy.context.view_layer.update()
     pb = arm.pose.bones
-    pel = arm.matrix_world @ pb[cfg['pelvis']].head; ch = arm.matrix_world @ pb[cfg['chest']].head
-    d = ch - pel; ang = math.atan2(d.y, d.x)
-    root.matrix_world = Matrix.Rotation(-ang, 4, 'Z') @ root.matrix_world; bpy.context.view_layer.update()
-    P = mesh_world(body)
-    chest = arm.matrix_world @ pb[cfg['chest']].head
-    near = np.abs(P[:, 0] - chest[0]) < 0.12 * np.ptp(P[:, 0])
-    s = cfg['withers'] / (P[near, 2].max() - P[:, 2].min())
+    if cfg.get('height'):                 # upright / unusual poses: fixed facing rotation + total height
+        root.matrix_world = Matrix.Rotation(math.radians(cfg.get('orient_deg', 0.0)), 4, 'Z') @ root.matrix_world; bpy.context.view_layer.update()
+        P = np.concatenate([mesh_world(o) for o in meshes])
+        s = cfg['height'] / np.ptp(P[:, 2])
+    else:
+        pel = arm.matrix_world @ pb[cfg['pelvis']].head; ch = arm.matrix_world @ pb[cfg['chest']].head
+        d = ch - pel; ang = math.atan2(d.y, d.x)
+        root.matrix_world = Matrix.Rotation(-ang, 4, 'Z') @ root.matrix_world; bpy.context.view_layer.update()
+        P = mesh_world(body)
+        chest = arm.matrix_world @ pb[cfg['chest']].head
+        near = np.abs(P[:, 0] - chest[0]) < 0.12 * np.ptp(P[:, 0])
+        s = cfg['withers'] / (P[near, 2].max() - P[:, 2].min())
     root.scale = tuple(x * s for x in root.scale); bpy.context.view_layer.update()
     P = mesh_world(body)
     root.location.z -= P[:, 2].min(); root.location.x -= (P[:, 0].max() + P[:, 0].min()) / 2
     root.location.y -= (P[:, 1].max() + P[:, 1].min()) / 2; bpy.context.view_layer.update()
     print('scale', round(s, 3))
-    if cfg.get('ground_snap') in bpy.data.actions:
+    if cfg.get('ground_snap') and cfg['ground_snap'] in bpy.data.actions:
         # ground contact: per-frame lowest point → 0 (smoothed, no jitter); keyed on the root empty (object-level, separate from the rig action)
         act = bpy.data.actions[cfg['ground_snap']]; arm.animation_data.action = act
         f0, f1 = map(int, act.frame_range); sc = bpy.context.scene; base_z = root.location.z; mins = []
@@ -153,7 +172,7 @@ def main():
         for i, f in enumerate(range(f0, f1 + 1)):
             root.location.z = base_z - ms[i]; root.keyframe_insert('location', index=2, frame=f)
         print('ground snap: raw offsets cm min/max', round(m.min() * 100 - base_z * 0, 1), round(m.max() * 100, 1))
-        if cfg.get('still_action') in bpy.data.actions:
+        if cfg.get('still_action') and cfg['still_action'] in bpy.data.actions:
             arm.animation_data.action = bpy.data.actions[cfg['still_action']]
         sc.frame_set(cfg.get('still_frame', 0))
     tex = os.path.join(K.CR, '11_TEXTURES', sid)
@@ -179,7 +198,7 @@ def main():
     if cfg.get('paint'):
         Pb = mesh_world(body)
         Bp = dict(chest=np.array((arm.matrix_world @ pb[cfg['chest']].head)[:]),
-                  head=np.array((arm.matrix_world @ pb[[b.name for b in pb if 'Head' in b.name][0]].head)[:]), L=float(np.ptp(Pb[:, 0])), W=cfg['withers'])
+                  head=np.array((arm.matrix_world @ pb[cfg.get('head_bone') or [b.name for b in pb if 'Head' in b.name][0]].head)[:]), L=float(np.ptp(Pb[:, 0])), W=cfg.get('withers', cfg.get('height', 1.0)))
         for ob in meshes:
             if not ob.active_material or not ob.active_material.use_nodes or not ob.data.uv_layers:
                 continue
@@ -190,11 +209,13 @@ def main():
             Pw = mesh_world(ob); Nw = np.array([(ob.matrix_world.to_3x3() @ v.normal).normalized()[:] for v in ob.data.vertices])
             if len(Pw) != len(ob.data.vertices):
                 continue
+            if cfg.get('nose_bone'):                                    # nose = tip of the head bone (paws can be further forward)
+                Bp['nose'] = np.array((arm.matrix_world @ pb[cfg['nose_bone']].tail)[:])
             Bp['nose'] = Pw[np.argmax(Pw[:, 0])] if 'nose' not in Bp else Bp['nose']
             for name, colr, kind, matname in cfg['paint']:
-                if ob.active_material.name != matname:
+                if matname != '*' and ob.active_material.name != matname:
                     continue
-                if kind == 'muzzle':
+                if kind == 'muzzle' and not cfg.get('nose_bone'):
                     Bp['nose'] = Pw[np.argmax(Pw[:, 0])]
                 w = region(kind, Pw, Nw, Bp)
                 print('paint', ob.name, name, 'verts', int((w > 0.1).sum()))
