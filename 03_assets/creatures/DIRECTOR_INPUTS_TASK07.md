@@ -450,3 +450,12 @@ Kami hai usko theek karo aur isko realistic banao samjhe na baki approve
 ```
 **Status:** roofed turtle v001, otter v002, shelduck v002 APPROVED → otter v001 + shelduck v001 .blend deleted (rule 5b).
 Dragonfly: fix gaps + make more realistic (natural leg pose instead of pinned-specimen legs, bright blue S2 saddle, darker olive abdomen) → v002.
+
+---
+
+## Z. Director (24 Nov, dragonfly v002) — verbatim
+```
+Approve
+```
+**Status:** lesser emperor dragonfly v002 APPROVED → v001 .blend deleted (rule 5b; v001 is rebuilt any time by
+`t7_scan_reduce` → `t7_insect_pass`, then `t7_dragonfly_pass` makes v002). Next: Indian bullfrog (last Crystal Lakes species).

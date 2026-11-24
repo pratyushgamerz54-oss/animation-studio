@@ -29,11 +29,14 @@ def lin(h):
     return CS.hexlin(h)
 
 
-def raster(ob, A, W, H):
-    """per-pixel barycentric interpolation of a per-vertex attribute A (N x k) over the UV layout → (H, W, k) map + coverage mask"""
+def raster(ob, A, W, H, mat_index=None):
+    """per-pixel barycentric interpolation of a per-vertex attribute A (N x k) over the UV layout → (H, W, k) map + coverage mask
+    (mat_index: only the triangles of that material slot — joined meshes with one texture per material)"""
     me = ob.data; me.calc_loop_triangles(); uv = me.uv_layers.active.data
     k = A.shape[1]; out = np.zeros((H, W, k), np.float32); cov = np.zeros((H, W), bool)
     for t in me.loop_triangles:
+        if mat_index is not None and t.material_index != mat_index:
+            continue
         P = np.array([[uv[li].uv[0] % 1.0 * W, (1 - uv[li].uv[1] % 1.0) * H] for li in t.loops])
         x0, y0 = np.floor(P.min(0)).astype(int); x1, y1 = np.ceil(P.max(0)).astype(int)
         x0, y0 = max(x0, 0), max(y0, 0); x1, y1 = min(x1, W - 1), min(y1, H - 1)
