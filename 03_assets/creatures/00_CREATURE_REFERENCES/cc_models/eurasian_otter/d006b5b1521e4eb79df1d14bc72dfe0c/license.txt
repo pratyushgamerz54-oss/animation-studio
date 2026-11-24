@@ -1,0 +1,11 @@
+Model Information:
+* title:	Slender Otter Realistic Standing
+* source:	https://sketchfab.com/3d-models/slender-otter-realistic-standing-d006b5b1521e4eb79df1d14bc72dfe0c
+* author:	Pigcraft (https://sketchfab.com/s8819296)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Slender Otter Realistic Standing" (https://sketchfab.com/3d-models/slender-otter-realistic-standing-d006b5b1521e4eb79df1d14bc72dfe0c) by Pigcraft (https://sketchfab.com/s8819296) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

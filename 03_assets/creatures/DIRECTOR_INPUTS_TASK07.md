@@ -423,3 +423,12 @@ Ha thik hai approve hai tu kami theek kar lena aur ye bata aur kitna creature ba
 Ha approve hai kami theek karke aage badho
 ```
 **Status:** golden mahseer v002 APPROVED; quick fix now: all fins orange (body-core ellipse test); rig + swim → milestone 2.
+
+---
+
+## W. Director (24 Nov, ruddy shelduck v001 + mahseer v003) — verbatim
+```
+Ha approve hai dono, otter suru karo thik hai apna kami sudhar ke akr lena
+```
+**Status:** ruddy shelduck v001 APPROVED, golden mahseer v003 APPROVED → mahseer v002 .blend deleted (rule 5b). Quick fix: shelduck
+underwing (white coverts). Next: Eurasian otter.

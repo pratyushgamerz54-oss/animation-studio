@@ -14,3 +14,12 @@
 | ALL furred (sambar, wolf, bear, fox) | v003 | DONE | t7_furpass.py applied (matte skin + strand groom) |
 | ALL furred | — | Director Q | fur motion: wind (shared T6_WIND_CONTROL) + inertia / follow-through (GN simulation zone), calm = still |
 | ALL | — | — | behaviour baker (`09_RIGS/T7_BEHAVIOUR_SYSTEM.md`), IK foot-lock on terrain, 4K textures, LOD0 close-ups, credits list (CC-BY authors) |
+
+## Ruddy shelduck (v001 approved 24 Nov)
+- Underwing: white coverts underneath (now grey), standing / swimming pose (wing fold via rig), female variant, feather fuzz pass.
+
+## Golden mahseer (v003 approved 24 Nov)
+- Rig + swim cycle (body wave, fin flutter), wet clear-coat check underwater.
+
+## Eurasian otter (v001 preview 24 Nov)
+- Whiskers re-aim, wet clumped-fur variant, greyer colour variant, rig + swim / lope / dive, webbed toes.

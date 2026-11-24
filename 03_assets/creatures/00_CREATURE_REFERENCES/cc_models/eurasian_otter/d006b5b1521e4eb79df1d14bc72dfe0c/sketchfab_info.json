@@ -1,0 +1,231 @@
+{
+ "animationCount": 0,
+ "categories": [
+  {
+   "uid": "ed9e048550b2478eb1ab2faaba192832",
+   "name": "Animals & Pets",
+   "slug": "animals-pets",
+   "uri": "https://api.sketchfab.com/v3/categories/ed9e048550b2478eb1ab2faaba192832",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/926733e187aa5a479aedd2581bffb3ea-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/ed9e048550b2478eb1ab2faaba192832/800x450.png"
+    }
+   ]
+  },
+  {
+   "uid": "1a99e2b67fc84de0b3ea0d3925208a04",
+   "name": "Nature & Plants",
+   "slug": "nature-plants",
+   "uri": "https://api.sketchfab.com/v3/categories/1a99e2b67fc84de0b3ea0d3925208a04",
+   "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/98a605cec9718b6f02f1a5759039a5ad-v2.svg",
+   "thumbnails": [
+    {
+     "width": "512",
+     "height": "288",
+     "url": "https://static.sketchfab.com/categories/1a99e2b67fc84de0b3ea0d3925208a04/512x288.png"
+    },
+    {
+     "width": "800",
+     "height": "450",
+     "url": "https://static.sketchfab.com/categories/1a99e2b67fc84de0b3ea0d3925208a04/800x450.png"
+    }
+   ]
+  }
+ ],
+ "commentCount": 0,
+ "createdAt": "2026-01-09T17:04:25.781543",
+ "embedUrl": "https://sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/embed",
+ "faceCount": 432610,
+ "isAgeRestricted": false,
+ "license": {
+  "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+  "label": "CC Attribution",
+  "fullName": "Creative Commons Attribution",
+  "requirements": "Author must be credited. Commercial use is allowed.",
+  "url": "http://creativecommons.org/licenses/by/4.0/",
+  "slug": "by"
+ },
+ "likeCount": 27,
+ "name": "Slender Otter Realistic Standing",
+ "publishedAt": "2026-01-09T17:06:07.787280",
+ "soundCount": 0,
+ "staffpickedAt": null,
+ "tags": [
+  {
+   "name": "cute",
+   "slug": "cute",
+   "uri": "https://api.sketchfab.com/v3/tags/cute"
+  },
+  {
+   "name": "river",
+   "slug": "river",
+   "uri": "https://api.sketchfab.com/v3/tags/river"
+  },
+  {
+   "name": "standing",
+   "slug": "standing",
+   "uri": "https://api.sketchfab.com/v3/tags/standing"
+  },
+  {
+   "name": "mammal",
+   "slug": "mammal",
+   "uri": "https://api.sketchfab.com/v3/tags/mammal"
+  },
+  {
+   "name": "brown",
+   "slug": "brown",
+   "uri": "https://api.sketchfab.com/v3/tags/brown"
+  },
+  {
+   "name": "otter",
+   "slug": "otter",
+   "uri": "https://api.sketchfab.com/v3/tags/otter"
+  },
+  {
+   "name": "tail",
+   "slug": "tail",
+   "uri": "https://api.sketchfab.com/v3/tags/tail"
+  },
+  {
+   "name": "realistic",
+   "slug": "realistic",
+   "uri": "https://api.sketchfab.com/v3/tags/realistic"
+  },
+  {
+   "name": "Wildlife",
+   "slug": "wildlife",
+   "uri": "https://api.sketchfab.com/v3/tags/wildlife"
+  },
+  {
+   "name": "lowpoly",
+   "slug": "lowpoly",
+   "uri": "https://api.sketchfab.com/v3/tags/lowpoly"
+  },
+  {
+   "name": "poly",
+   "slug": "poly",
+   "uri": "https://api.sketchfab.com/v3/tags/poly"
+  },
+  {
+   "name": "creature",
+   "slug": "creature",
+   "uri": "https://api.sketchfab.com/v3/tags/creature"
+  },
+  {
+   "name": "animal",
+   "slug": "animal",
+   "uri": "https://api.sketchfab.com/v3/tags/animal"
+  },
+  {
+   "name": "fourlegs",
+   "slug": "fourlegs",
+   "uri": "https://api.sketchfab.com/v3/tags/fourlegs"
+  }
+ ],
+ "thumbnails": {
+  "images": [
+   {
+    "uid": "1689c0d3b0704b519b1c681ec81f0cac",
+    "width": 64,
+    "height": 36,
+    "size": 956,
+    "url": "https://media.sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/thumbnails/5562d6d63b0f4f96965954be7c2eb089/dd966e082d654ab5803a5a7eee6480c5.jpeg"
+   },
+   {
+    "uid": "9f9d3696a77f400698560bf6b9fbe497",
+    "width": 256,
+    "height": 144,
+    "size": 3260,
+    "url": "https://media.sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/thumbnails/5562d6d63b0f4f96965954be7c2eb089/33d10caa058b41998b2a9dd90633f748.jpeg"
+   },
+   {
+    "uid": "9d9d27c32edf424db1798d364f140db1",
+    "width": 720,
+    "height": 405,
+    "size": 15140,
+    "url": "https://media.sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/thumbnails/5562d6d63b0f4f96965954be7c2eb089/e4de8fa84a7c431fb08ad69edd78cf6b.jpeg"
+   },
+   {
+    "uid": "92993147220c4195b1963679a3005b48",
+    "width": 1024,
+    "height": 576,
+    "size": 28014,
+    "url": "https://media.sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/thumbnails/5562d6d63b0f4f96965954be7c2eb089/5610811e489747e48404de9d82b5c7e6.jpeg"
+   },
+   {
+    "uid": "5b7dea88acc849e3afda3b29c9224df7",
+    "width": 1920,
+    "height": 1080,
+    "size": 129194,
+    "url": "https://media.sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/thumbnails/5562d6d63b0f4f96965954be7c2eb089/1e854d1b7df446b699a01178185b48d4.jpeg"
+   }
+  ]
+ },
+ "uid": "d006b5b1521e4eb79df1d14bc72dfe0c",
+ "uri": "https://api.sketchfab.com/v3/models/d006b5b1521e4eb79df1d14bc72dfe0c",
+ "user": {
+  "uid": "c0e7cb6abbb54c4fbed332c1f658479d",
+  "username": "s8819296",
+  "displayName": "Pigcraft",
+  "account": "basic",
+  "profileUrl": "https://sketchfab.com/s8819296",
+  "avatar": {
+   "uid": "7797ae77db2943ff8057f36882c126a7",
+   "uri": "https://api.sketchfab.com/v3/avatars/7797ae77db2943ff8057f36882c126a7",
+   "images": [
+    {
+     "width": 32,
+     "height": 32,
+     "size": 912,
+     "url": "https://media.sketchfab.com/avatars/7797ae77db2943ff8057f36882c126a7/641a80e3656e4f619687ec58200ffc86.jpeg"
+    },
+    {
+     "width": 48,
+     "height": 48,
+     "size": 1244,
+     "url": "https://media.sketchfab.com/avatars/7797ae77db2943ff8057f36882c126a7/4f74af7c9e17476b97fc30e551115c65.jpeg"
+    },
+    {
+     "width": 90,
+     "height": 90,
+     "size": 2524,
+     "url": "https://media.sketchfab.com/avatars/7797ae77db2943ff8057f36882c126a7/1979744444a44908b96f3bcaf009a9c4.jpeg"
+    },
+    {
+     "width": 100,
+     "height": 100,
+     "size": 2809,
+     "url": "https://media.sketchfab.com/avatars/7797ae77db2943ff8057f36882c126a7/cff0eb04a21445cb82338bb2738345f6.jpeg"
+    }
+   ]
+  },
+  "uri": "https://api.sketchfab.com/v3/users/c0e7cb6abbb54c4fbed332c1f658479d"
+ },
+ "vertexCount": 216307,
+ "viewCount": 1213,
+ "viewerUrl": "https://sketchfab.com/3d-models/slender-otter-realistic-standing-d006b5b1521e4eb79df1d14bc72dfe0c",
+ "isDownloadable": true,
+ "isProtected": false,
+ "description": "A realistic 3D model of a slender otter with shiny brown fur and a long, streamlined body. The otter is positioned on all fours, leaning slightly forward, with a round head and attentive eyes. Its short, strong paws and flat, extended tail enhance the natural, lifelike posture. Perfect for wildlife scenes or educational content.",
+ "price": null,
+ "downloadCount": 281,
+ "editorUrl": "https://sketchfab.com/models/d006b5b1521e4eb79df1d14bc72dfe0c/edit",
+ "status": {
+  "warning": {},
+  "processing": "SUCCEEDED"
+ },
+ "source": "website",
+ "hasCommentsDisabled": false,
+ "updatedAt": "2026-01-09T17:06:07.962608",
+ "pbrType": "metalness",
+ "textureCount": 4,
+ "materialCount": 1
+}

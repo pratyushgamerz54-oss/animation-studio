@@ -24,6 +24,8 @@ CFG = {
 
 
 def lin(h):
+    # NOTE: CS.hexlin gives sRGB 0..1 values; this script uses them directly as linear (approved shelduck v001 was tuned by eye
+    # with this convention: hex values here read lighter than the hex itself). New scripts convert properly (t7_static_fur_cc).
     return CS.hexlin(h)
 
 
