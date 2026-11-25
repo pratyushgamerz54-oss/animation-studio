@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body style="margin:0"><div id=wrap></div>
+<script type="module">
+import * as THREE from 'three'; import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+const R = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); R.setSize(1920, 1080); document.getElementById('wrap').appendChild(R.domElement); R.toneMapping = THREE.ACESFilmicToneMapping; R.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x777777); const hdr = await new RGBELoader().loadAsync('assets/ph/hdri/wasteland_clouds_puresky_2k.hdr'); hdr.mapping = THREE.EquirectangularReflectionMapping; scene.environment = hdr;
+const dl = new THREE.DirectionalLight(0xffffff, 1.5); dl.position.set(2, 4, 5); scene.add(dl);
+const ids = ['143a2b1ea5eb4385ae90a73657aca3bc', 'c659bd0accab47c6bbe390cf822a2b92', 'dc448c3be0e74f96a55fb475a13433cf', 'e65e0fef4e0743868c8d5bff36d61116'];
+const L = new GLTFLoader(); const out = []; let i = 0;
+for (const id of ids) { let g; try { g = await L.loadAsync(`assets/chars/${id}.glb`); } catch (e) { out.push(id + ' LOAD FAIL ' + e.message); continue; }
+  const o = g.scene; o.updateMatrixWorld(true); const b = new THREE.Box3().setFromObject(o), sz = b.getSize(new THREE.Vector3()), c = b.getCenter(new THREE.Vector3());
+  const bones = [], morphs = new Set(); let skinned = 0, tris = 0; o.traverse(m => { if (m.isBone) bones.push(m.name); if (m.isSkinnedMesh) skinned++; if (m.isMesh) { tris += (m.geometry.index ? m.geometry.index.count : m.geometry.attributes.position.count) / 3; if (m.morphTargetDictionary) Object.keys(m.morphTargetDictionary).forEach(k => morphs.add(k)); } });
+  out.push(`${id.slice(0, 8)}: size ${sz.x.toFixed(2)}x${sz.y.toFixed(2)}x${sz.z.toFixed(2)} skinned ${skinned} tris ${tris | 0} anims ${g.animations.map(a => a.name).join('/')}\n   bones(${bones.length}): ${bones.slice(0, 60).join(',')}\n   morphs(${morphs.size}): ${[...morphs].slice(0, 60).join(',')}`);
+  const s = 1.8 / sz.y; o.scale.setScalar(s); o.position.set((i % 4) * 1.6 - 2.4 - c.x * s, -b.min.y * s - Math.floor(i / 4) * 2.3 + 0.3, -c.z * s); scene.add(o); i++; }
+const cam = new THREE.PerspectiveCamera(35, 16 / 9, 0.1, 100); cam.position.set(0, 0.2, 8.5); cam.lookAt(0, -0.2, 0); R.render(scene, cam); console.log(out.join('\n')); document.title = 'ready';
+</script></body></html>

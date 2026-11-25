@@ -1,0 +1,12 @@
+{"_note": "User's chosen ElevenLabs library voices (names as given). voice_id still needed.",
+ "Aarav": {"voice": "Viraj - calm devotional narrator", "voice_id": ""},
+ "Kabir": {"voice": "Takshya - deep, encouraging and clear", "voice_id": ""},
+ "Ryan": {"voice": "Reyaansh - sharp, smooth and confident", "voice_id": ""},
+ "Dev": {"voice": "Harsh - resonant, serious and dramatic", "voice_id": ""},
+ "Ishaan": {"voice": "Bunty - explainer", "voice_id": ""},
+ "Vikram": {"voice": "Kabir - serious, calm and raspy", "voice_id": ""},
+ "Zeno Commander": {"voice": "Alok - deep and suspenseful", "voice_id": ""},
+ "Dr. Meera": {"voice": "Pari M. - relatable Hindi friend", "voice_id": ""},
+ "Zoya": {"voice": "Muskan - friendly, calm and inviting", "voice_id": ""},
+ "Sara": {"voice": "Rhea - natural and real angry girl", "voice_id": ""},
+ "Ananya": {"voice": "Geet - talkative girl next door", "voice_id": ""}}

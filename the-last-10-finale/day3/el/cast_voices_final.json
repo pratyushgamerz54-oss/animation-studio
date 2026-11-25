@@ -1,0 +1,90 @@
+{
+ "Aarav": {
+  "voice": "Viraj - Calm Devotional Narrator",
+  "voice_id": "uuyFQegRan8rpIQCGu9K",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "uuyFQegRan8rpIQCGu9K"
+ },
+ "Kabir": {
+  "voice": "Taksh - Deep, Encouraging and Clear",
+  "voice_id": "6Iq2c772ZFrYvSuWijYS",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "6Iq2c772ZFrYvSuWijYS"
+ },
+ "Ryan": {
+  "voice": "Reyaansh – Sharp, Smooth & Confident ",
+  "voice_id": "uO1t9fkaawZM44iBD8YR",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "uO1t9fkaawZM44iBD8YR"
+ },
+ "Dev": {
+  "voice": "Harsh - Resonant, Serious and Dramatic",
+  "voice_id": "HTUuC7OeeEt6OL5fViVe",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "HTUuC7OeeEt6OL5fViVe"
+ },
+ "Ishaan": {
+  "voice": "Bunty - Explainer",
+  "voice_id": "2I56yvR6ubAyIbBlNfn7",
+  "public_owner_id": "5a02ad8d4d453ff9112232c91bb8194df306fbd3a3522751972e610b81fdb4a2",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "2I56yvR6ubAyIbBlNfn7"
+ },
+ "Vikram": {
+  "voice": "Kabir - Serious, Calm and Raspy",
+  "voice_id": "NAuCjDa0V2FYHGI2F2CS",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "NAuCjDa0V2FYHGI2F2CS"
+ },
+ "Zeno Commander": {
+  "voice": "Alok - Deep and Suspenseful",
+  "voice_id": "oABbH1EqNQfpzYZZOAPR",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "male",
+  "language": "hi",
+  "my_voice_id": "oABbH1EqNQfpzYZZOAPR"
+ },
+ "Dr. Meera": {
+  "voice": "Pari M - Relatable Hindi Friend",
+  "voice_id": "06llJPvI62CjqSWOX9Gp",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "female",
+  "language": "hi",
+  "my_voice_id": "06llJPvI62CjqSWOX9Gp"
+ },
+ "Zoya": {
+  "voice": "Muskaan - Friendly, Calm and Inviting",
+  "voice_id": "xoV6iGVuOGYHLWjXhVC7",
+  "public_owner_id": "f87f057c2250691953ac2e6227859706764bd08c88a055a18c74261957885a51",
+  "gender": "female",
+  "language": "hi",
+  "my_voice_id": "xoV6iGVuOGYHLWjXhVC7"
+ },
+ "Sara": {
+  "voice": "Rhea - Natural & Real Angry Girl",
+  "voice_id": "JG3V6gojK42M5cRu9q07",
+  "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+  "gender": "female",
+  "language": "hi",
+  "my_voice_id": "JG3V6gojK42M5cRu9q07"
+ },
+ "Ananya": {
+  "voice": "Geet - Talkative girl next door",
+  "voice_id": "2lLgWMtK52t50e2eLKAk",
+  "public_owner_id": "af18d54d1e197369f7cce2882ba018f769a4645127b9afe8cab0374fb2b30bc9",
+  "gender": "female",
+  "language": "hi",
+  "my_voice_id": "2lLgWMtK52t50e2eLKAk"
+ }
+}

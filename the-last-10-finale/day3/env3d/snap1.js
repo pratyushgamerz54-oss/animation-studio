@@ -1,0 +1,5 @@
+const { chromium } = require('playwright'); const http = require('http'), fs = require('fs'), path = require('path'); const [, , dir, page, out] = process.argv;
+const srv = http.createServer((q, r) => { const f = path.join(dir, decodeURIComponent(q.url.split('?')[0])); if (!fs.existsSync(f)) { r.writeHead(404); return r.end(); } r.writeHead(200, { 'Content-Type': f.endsWith('.js') ? 'text/javascript' : f.endsWith('.html') ? 'text/html' : 'application/octet-stream' }); fs.createReadStream(f).pipe(r); });
+srv.listen(0, '127.0.0.1', async () => { const b = await chromium.launch({ args: ['--enable-unsafe-swiftshader'] }), p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
+  p.on('console', m => console.log(m.text())); p.on('pageerror', e => console.log('ERR', e.message));
+  await p.goto(`http://127.0.0.1:${srv.address().port}/${page}`); await p.waitForFunction(() => document.title === 'ready', null, { timeout: 300000 }); await p.screenshot({ path: out }); await b.close(); srv.close(); });

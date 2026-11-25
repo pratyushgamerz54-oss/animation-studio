@@ -1,0 +1,409 @@
+<title>Shaam ki Patang</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;600&display=swap">
+<style>
+  /* Layout: one cinematic 16:9 stage, a slim transport bar beneath it, credits below. Single dusk look by design. */
+  :root {
+    --ink: #0d0f24;
+    --panel: #171a38;
+    --line: #2c3061;
+    --text: #f3ead8;
+    --muted: #a9a6c4;
+    --saffron: #ff9f43;
+    --font-display: "Yatra One", "Georgia", serif;
+    --font-body: "Hind", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  html { background: var(--ink); }
+  body {
+    background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 15px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 32px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 14px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 4vw, 38px); margin: 0; color: var(--saffron); text-wrap: balance; }
+  header p { margin: 0; color: var(--muted); }
+  .stage { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  canvas { display: block; width: 100%; height: 100%; }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+  button, select {
+    font: inherit; color: var(--text); background: transparent; border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 12px; cursor: pointer;
+  }
+  button:hover, select:hover { border-color: var(--saffron); }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+  #play { min-width: 92px; background: var(--saffron); color: var(--ink); border-color: var(--saffron); font-weight: 600; }
+  .scrub { flex: 1 1 220px; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  input[type=range] { flex: 1; min-width: 0; accent-color: var(--saffron); }
+  .time { font-variant-numeric: tabular-nums; color: var(--muted); min-width: 84px; text-align: right; }
+  .scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .scene { background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; text-align: left; display: grid; gap: 2px; }
+  .scene b { font-weight: 600; }
+  .scene span { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .scene.on { border-color: var(--saffron); }
+  .hint { color: var(--muted); font-size: 13px; margin: 0; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Shaam ki Patang</h1>
+    <p>Ek chhat, ek patang, aur din se raat tak ka safar.</p>
+  </header>
+
+  <div class="stage"><canvas id="c" aria-label="Animated scene: a child flies a kite on a rooftop as the day turns to night"></canvas></div>
+
+  <div class="bar">
+    <button id="play" type="button">Pause</button>
+    <button id="restart" type="button">Restart</button>
+    <div class="scrub">
+      <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Timeline">
+      <span class="time" id="time">0.0 / 24.0s</span>
+    </div>
+    <select id="speed" aria-label="Playback speed">
+      <option value="0.5">0.5×</option>
+      <option value="1" selected>1×</option>
+      <option value="2">2×</option>
+    </select>
+  </div>
+
+  <div class="scenes" id="scenes"></div>
+  <p class="hint">Space = play/pause · ← → = 1 second aage/peeche · Scene card dabao to wahin jump karo.</p>
+</div>
+
+<script>
+(() => {
+  const W = 1280, H = 720, DUR = 24;
+  const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- helpers ----------
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+  const mix = (c1, c2, t) => { const a = hex(c1), b = hex(c2); return `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], t))).join(',')})`; };
+  const ramp = (stops, p) => { // stops: [[p, color], ...]
+    for (let i = 1; i < stops.length; i++) if (p <= stops[i][0]) {
+      const [p0, c0] = stops[i - 1], [p1, c1] = stops[i];
+      return mix(c0, c1, (p - p0) / (p1 - p0));
+    }
+    return mix(stops.at(-1)[1], stops.at(-1)[1], 0);
+  };
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  // ---------- static world data (seeded, so scrubbing is deterministic) ----------
+  const stars = Array.from({ length: 140 }, () => ({ x: rnd() * W, y: rnd() * 420, r: rnd() * 1.6 + 0.3, ph: rnd() * 6.28 }));
+  const makeCity = (n, minH, maxH, minW, maxW) => {
+    const out = []; let x = 0;
+    while (x < W * 2) {
+      const w = lerp(minW, maxW, rnd()), h = lerp(minH, maxH, rnd());
+      const wins = [];
+      for (let wy = 14; wy < h - 10; wy += 22) for (let wx = 8; wx < w - 10; wx += 16) wins.push({ x: wx, y: wy, on: rnd(), warm: rnd() > 0.3 });
+      out.push({ x, w, h, wins, dome: rnd() > 0.85 }); x += w + rnd() * 6;
+    }
+    return { list: out, span: x };
+  };
+  const farCity = makeCity(0, 90, 200, 40, 90);
+  const midCity = makeCity(0, 120, 260, 60, 120);
+  const clouds = Array.from({ length: 6 }, (_, i) => ({ x: i * 260 + rnd() * 100, y: 80 + rnd() * 200, s: 0.6 + rnd() * 0.8, v: 6 + rnd() * 10 }));
+  const flies = Array.from({ length: 34 }, () => ({ x: rnd() * W, y: 470 + rnd() * 220, ph: rnd() * 6.28, sp: 0.4 + rnd() * 0.8 }));
+
+  // ---------- scenes (for the timeline cards) ----------
+  const scenes = [
+    { name: 'Dopahar', at: 0, note: 'Patang udaan bharti hai' },
+    { name: 'Panchhi', at: 5, note: 'Chidiyon ka jhund' },
+    { name: 'Suryast', at: 10, note: 'Aasmaan narangi' },
+    { name: 'Chaand', at: 15, note: 'Batti jalti hai' },
+    { name: 'Jugnu', at: 19, note: 'Raat ki chamak' },
+  ];
+
+  // ---------- drawing ----------
+  function sky(p) {
+    const top = ramp([[0, '#5aa9e6'], [0.35, '#6a7fc9'], [0.5, '#3d3a86'], [0.68, '#1a1b4b'], [1, '#060920']], p);
+    const bot = ramp([[0, '#ffe7b0'], [0.35, '#ffb36b'], [0.5, '#ff7b5c'], [0.68, '#a24a78'], [1, '#1f2154']], p);
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, top); g.addColorStop(0.75, bot); g.addColorStop(1, bot);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+
+  function starsAndMoon(p, t) {
+    const a = smooth(0.5, 0.78, p);
+    if (a > 0) {
+      for (const s of stars) {
+        ctx.globalAlpha = a * (0.55 + 0.45 * Math.sin(t * 2 + s.ph));
+        ctx.fillStyle = '#fff6e0'; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    const m = smooth(0.55, 0.9, p);
+    if (m > 0) {
+      const mx = 230, my = lerp(520, 140, m);
+      const g = ctx.createRadialGradient(mx, my, 10, mx, my, 120);
+      g.addColorStop(0, `rgba(255,245,210,${0.35 * m})`); g.addColorStop(1, 'rgba(255,245,210,0)');
+      ctx.fillStyle = g; ctx.fillRect(mx - 120, my - 120, 240, 240);
+      // crescent: outer disc minus an offset disc, so the sky shows through
+      ctx.save(); ctx.beginPath(); ctx.arc(mx, my, 34, 0, 7); ctx.clip();
+      ctx.fillStyle = '#fbf1d3'; ctx.beginPath(); ctx.rect(mx - 40, my - 40, 80, 80);
+      ctx.arc(mx + 14, my - 8, 30, 0, 7); ctx.fill('evenodd'); ctx.restore();
+    }
+  }
+
+  function sun(p) {
+    const s = smooth(0, 0.6, p);
+    const x = lerp(960, 1040, s), y = lerp(170, 640, s);
+    const col = ramp([[0, '#fff3c4'], [0.4, '#ffc15a'], [0.6, '#ff6a3d']], p);
+    const g = ctx.createRadialGradient(x, y, 20, x, y, 260);
+    g.addColorStop(0, 'rgba(255,220,150,.55)'); g.addColorStop(1, 'rgba(255,200,120,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - 260, y - 260, 520, 520);
+    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 52, 0, 7); ctx.fill();
+  }
+
+  function cloud(x, y, s, col) {
+    ctx.fillStyle = col; ctx.beginPath();
+    [[0, 0, 34], [36, -14, 40], [78, 0, 32], [40, 12, 34], [-30, 8, 24], [108, 10, 22]].forEach(([dx, dy, r]) => {
+      ctx.moveTo(x + dx * s + r * s, y + dy * s); ctx.arc(x + dx * s, y + dy * s, r * s, 0, 7);
+    });
+    ctx.fill();
+  }
+
+  function cloudsLayer(p, t) {
+    const col = ramp([[0, '#ffffff'], [0.4, '#ffd6c0'], [0.55, '#d98aa0'], [0.75, '#3a3a72'], [1, '#22244e']], p);
+    ctx.globalAlpha = lerp(0.9, 0.55, p);
+    for (const c of clouds) {
+      const x = ((c.x + t * c.v) % (W + 400)) - 200;
+      cloud(x, c.y, c.s, col);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function city(layer, offset, body, winOn, winAlpha, baseY) {
+    const span = layer.span;
+    for (const b of layer.list) {
+      let x = ((b.x - offset) % span + span) % span - 120;
+      if (x > W + 20) continue;
+      const top = baseY - b.h;
+      ctx.fillStyle = body; ctx.fillRect(x, top, b.w, b.h + 200);
+      if (b.dome) { ctx.beginPath(); ctx.arc(x + b.w / 2, top, b.w / 3, Math.PI, 0); ctx.fill(); }
+      if (winAlpha > 0) for (const w of b.wins) {
+        if (w.on > winOn) continue;
+        ctx.fillStyle = w.warm ? `rgba(255,200,110,${winAlpha})` : `rgba(170,210,255,${winAlpha * 0.8})`;
+        ctx.fillRect(x + w.x, top + w.y, 7, 10);
+      }
+    }
+  }
+
+  function birds(t) {
+    const k = (t - 4.5) / 7; if (k < 0 || k > 1) return;
+    ctx.strokeStyle = '#2a2440'; ctx.lineWidth = 2.4; ctx.lineCap = 'round';
+    for (let i = 0; i < 7; i++) {
+      const row = Math.abs(i - 3);
+      const x = lerp(-150, W + 200, k) - row * 38, y = 150 + row * 22 + Math.sin(t * 1.5 + i) * 6;
+      const f = Math.sin(t * 9 + i * 0.8) * 7;
+      ctx.beginPath(); ctx.moveTo(x - 12, y - f); ctx.quadraticCurveTo(x - 5, y - 4, x, y);
+      ctx.quadraticCurveTo(x + 5, y - 4, x + 12, y - f); ctx.stroke();
+    }
+  }
+
+  // kite flight path, analytic so the tail can sample the past
+  function kitePos(t) {
+    const fly = { x: 840 + 90 * Math.sin(t * 0.55) + 26 * Math.sin(t * 1.7), y: 230 + 45 * Math.sin(t * 0.8 + 1) + 12 * Math.sin(t * 2.3) };
+    const hand = { x: 418, y: 488 };
+    const e = smooth(0.4, 3.6, t);
+    return { x: lerp(hand.x + 40, fly.x, e), y: lerp(hand.y - 30, fly.y, e), e };
+  }
+
+  function rivalKite(t, p) {
+    const x = 560 + 50 * Math.sin(t * 0.7 + 2), y = 160 + 25 * Math.sin(t * 1.1);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(0.2 * Math.sin(t * 1.4)); ctx.scale(0.45, 0.45);
+    ctx.globalAlpha = 1 - smooth(0.7, 0.95, p) * 0.6;
+    ctx.fillStyle = '#d6336c'; ctx.beginPath(); ctx.moveTo(0, -40); ctx.lineTo(30, 0); ctx.lineTo(0, 46); ctx.lineTo(-30, 0); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, y + 20); ctx.quadraticCurveTo(x - 60, y + 260, x - 180, 560); ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function kite(t, p, hand) {
+    const k = kitePos(t);
+    const tilt = 0.28 * Math.sin(t * 1.3) + (k.e < 1 ? -0.3 * (1 - k.e) : 0);
+    // string
+    ctx.strokeStyle = p < 0.6 ? 'rgba(255,255,255,.75)' : 'rgba(255,240,220,.5)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(hand.x, hand.y);
+    ctx.quadraticCurveTo(lerp(hand.x, k.x, 0.55), lerp(hand.y, k.y, 0.35) + 70, k.x, k.y + 26); ctx.stroke();
+    // tail: sample past positions
+    ctx.strokeStyle = '#ffd23f'; ctx.lineWidth = 3; ctx.beginPath();
+    for (let i = 0; i <= 14; i++) {
+      const q = kitePos(t - i * 0.05);
+      const x = q.x + (k.x - q.x) * 0.4 - i * 2, y = k.y + 46 + i * 7 + Math.sin(t * 6 - i * 0.7) * (2 + i * 0.6);
+      i ? ctx.lineTo(x, y) : ctx.moveTo(k.x, k.y + 46);
+    }
+    ctx.stroke();
+    // body
+    ctx.save(); ctx.translate(k.x, k.y); ctx.rotate(tilt);
+    ctx.fillStyle = '#ff9f43'; ctx.beginPath(); ctx.moveTo(0, -48); ctx.lineTo(38, 0); ctx.lineTo(0, 48); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#2e86de'; ctx.beginPath(); ctx.moveTo(0, -48); ctx.lineTo(-38, 0); ctx.lineTo(0, 48); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#fff4dc'; ctx.beginPath(); ctx.arc(0, 0, 9, 0, 7); ctx.fill();
+    ctx.strokeStyle = '#5b3a1a'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, -48); ctx.lineTo(0, 48); ctx.moveTo(-38, 0); ctx.quadraticCurveTo(0, -22, 38, 0); ctx.stroke();
+    ctx.restore();
+  }
+
+  function rooftop(p, t) {
+    const wall = ramp([[0, '#c98f6a'], [0.5, '#8a4f56'], [0.75, '#2d2546'], [1, '#1b1934']], p);
+    const top = ramp([[0, '#e2ad86'], [0.5, '#a5626a'], [0.75, '#3a3058'], [1, '#26223f']], p);
+    ctx.fillStyle = wall; ctx.fillRect(0, 600, W, 120);
+    ctx.fillStyle = top; ctx.fillRect(0, 588, W, 16);
+    // parapet jaali pattern
+    ctx.fillStyle = 'rgba(0,0,0,.18)';
+    for (let x = 30; x < W; x += 46) { ctx.beginPath(); ctx.arc(x, 640, 9, 0, 7); ctx.fill(); }
+    // water tank
+    const tank = ramp([[0, '#3b3b3b'], [1, '#121225']], p);
+    ctx.fillStyle = tank; ctx.fillRect(1080, 500, 110, 90); ctx.fillRect(1072, 494, 126, 12);
+    ctx.fillStyle = ramp([[0, '#555'], [1, '#1c1c34']], p); ctx.fillRect(1095, 520, 80, 4); ctx.fillRect(1095, 556, 80, 4);
+    // clothesline
+    ctx.strokeStyle = 'rgba(30,20,30,.7)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(600, 520); ctx.quadraticCurveTo(780, 545, 960, 520); ctx.stroke();
+    ctx.fillStyle = 'rgba(30,20,30,.8)'; ctx.fillRect(596, 520, 6, 70); ctx.fillRect(958, 520, 6, 70);
+    const cloth = ['#e84f6b', '#f7c548', '#4ea8de', '#7bc47f'];
+    cloth.forEach((c, i) => {
+      const x = 650 + i * 75, yb = 520 + Math.sin((i + 1) / 5 * Math.PI) * 24;
+      const sw = Math.sin(t * 2.2 + i) * 6;
+      ctx.fillStyle = mix(c, '#1b1934', smooth(0.55, 1, p) * 0.7);
+      ctx.beginPath(); ctx.moveTo(x, yb); ctx.lineTo(x + 44, yb);
+      ctx.lineTo(x + 44 + sw, yb + 50); ctx.lineTo(x + sw, yb + 54); ctx.closePath(); ctx.fill();
+    });
+    // diya on the ledge, lit at night
+    const d = smooth(0.62, 0.72, p);
+    if (d > 0) {
+      const fx = 210, fy = 578, fl = Math.sin(t * 13) * 1.5;
+      const g = ctx.createRadialGradient(fx, fy - 6, 2, fx, fy - 6, 70);
+      g.addColorStop(0, `rgba(255,190,90,${0.55 * d})`); g.addColorStop(1, 'rgba(255,190,90,0)');
+      ctx.fillStyle = g; ctx.fillRect(fx - 70, fy - 76, 140, 140);
+      ctx.fillStyle = '#a4552d'; ctx.beginPath(); ctx.ellipse(fx, fy + 4, 14, 6, 0, 0, Math.PI); ctx.fill();
+      ctx.fillStyle = `rgba(255,210,120,${d})`; ctx.beginPath(); ctx.ellipse(fx + fl * 0.3, fy - 6, 4, 9 + fl, 0, 0, 7); ctx.fill();
+    }
+  }
+
+  function kid(p, t) {
+    const x = 400, base = 588;
+    const pull = Math.max(0, Math.sin(t * 2.6)) ** 3 * 8; // little tugs on the string
+    const shade = smooth(0.55, 1, p) * 0.65;
+    const skin = mix('#a86b45', '#2a2138', shade), shirt = mix('#f2c14e', '#2a2138', shade);
+    const shorts = mix('#2e5aa8', '#1a1830', shade), hair = mix('#1d1414', '#0e0c18', shade);
+    ctx.lineCap = 'round';
+    // legs
+    ctx.strokeStyle = skin; ctx.lineWidth = 9;
+    ctx.beginPath(); ctx.moveTo(x - 8, base - 50); ctx.lineTo(x - 14, base); ctx.moveTo(x + 8, base - 50); ctx.lineTo(x + 14, base); ctx.stroke();
+    ctx.fillStyle = shorts; ctx.fillRect(x - 17, base - 66, 34, 22);
+    // torso
+    ctx.fillStyle = shirt; ctx.beginPath(); ctx.roundRect(x - 19, base - 118, 38, 58, 10); ctx.fill();
+    // arms: one holds the string up, the other holds the reel (charkhi)
+    const hand = { x: 418 + pull * 0.4, y: 488 + pull };
+    ctx.strokeStyle = skin; ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.moveTo(x + 14, base - 110); ctx.lineTo(x + 24, base - 92 + pull * 0.4); ctx.lineTo(hand.x, hand.y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x - 14, base - 108); ctx.lineTo(x - 30, base - 82); ctx.lineTo(x - 22, base - 66); ctx.stroke();
+    // charkhi (reel), spinning
+    ctx.save(); ctx.translate(x - 22, base - 64); ctx.rotate(t * 3);
+    ctx.strokeStyle = mix('#8b5a2b', '#1a1830', shade); ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(-12, 0); ctx.lineTo(12, 0); ctx.moveTo(0, -12); ctx.lineTo(0, 12); ctx.stroke();
+    ctx.fillStyle = mix('#e9e2d0', '#2a2138', shade); ctx.beginPath(); ctx.arc(0, 0, 6, 0, 7); ctx.fill();
+    ctx.restore();
+    // head, looking up at the kite
+    const hx = x + 4, hy = base - 138;
+    ctx.fillStyle = skin; ctx.beginPath(); ctx.arc(hx, hy, 18, 0, 7); ctx.fill();
+    ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(hx - 2, hy - 4, 19, Math.PI * 0.95, Math.PI * 2.05); ctx.fill();
+    ctx.fillStyle = mix('#1b1010', '#0b0a14', shade); ctx.beginPath(); ctx.arc(hx + 10, hy - 2, 2.2, 0, 7); ctx.fill();
+    ctx.strokeStyle = mix('#5a2a1a', '#120f1c', shade); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(hx + 9, hy + 5, 5, 0.1, 1.2); ctx.stroke();
+    return hand;
+  }
+
+  function fireflies(p, t) {
+    const a = smooth(0.72, 0.85, p); if (a <= 0) return;
+    for (const f of flies) {
+      const x = f.x + Math.sin(t * f.sp + f.ph) * 30, y = f.y + Math.cos(t * f.sp * 1.3 + f.ph) * 18;
+      const blink = 0.4 + 0.6 * Math.max(0, Math.sin(t * 3 * f.sp + f.ph));
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 12);
+      g.addColorStop(0, `rgba(220,255,140,${a * blink})`); g.addColorStop(1, 'rgba(220,255,140,0)');
+      ctx.fillStyle = g; ctx.fillRect(x - 12, y - 12, 24, 24);
+    }
+  }
+
+  function titles(t) {
+    const show = (txt, sub, t0, t1) => {
+      const a = smooth(t0, t0 + 0.8, t) * (1 - smooth(t1 - 0.8, t1, t)); if (a <= 0) return;
+      ctx.globalAlpha = a; ctx.textAlign = 'center'; ctx.fillStyle = '#fff6e0';
+      ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 12;
+      ctx.font = '64px "Yatra One", Georgia, serif'; ctx.fillText(txt, W / 2, 110);
+      ctx.font = '24px Hind, system-ui, sans-serif'; ctx.fillText(sub, W / 2, 150);
+      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+    };
+    show('शाम की पतंग', 'Shaam ki Patang', 0.6, 4.2);
+    show('शुभ रात्रि', 'Shubh Ratri', 20.6, 23.4);
+  }
+
+  function frame(t) {
+    const p = clamp(t / DUR);
+    sky(p); starsAndMoon(p, t); sun(p); cloudsLayer(p, t);
+    // haze between sky and city
+    city(farCity, t * 8, ramp([[0, '#9fb3d6'], [0.5, '#7c5f93'], [0.75, '#2c2a5a'], [1, '#191a3f']], p), smooth(0.55, 0.85, p) * 0.8, smooth(0.55, 0.7, p) * 0.6, 560);
+    birds(t); rivalKite(t, p);
+    city(midCity, t * 18, ramp([[0, '#6d7fa6'], [0.5, '#4f3d6e'], [0.75, '#1d1c40'], [1, '#111230']], p), smooth(0.58, 0.9, p), smooth(0.58, 0.72, p), 610);
+    rooftop(p, t);
+    fireflies(p, t);
+    const hand = kid(p, t);
+    kite(t, p, hand);
+    titles(t);
+    // fade in/out at the loop seam
+    const fade = Math.max(1 - smooth(0, 0.7, t), smooth(DUR - 0.7, DUR, t));
+    if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade})`; ctx.fillRect(0, 0, W, H); }
+  }
+
+  // ---------- canvas sizing ----------
+  function resize() {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    ctx.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0);
+    frame(time);
+  }
+
+  // ---------- playback ----------
+  let time = reduce ? 9 : 0, playing = !reduce, speed = 1, last = performance.now();
+  const $ = id => document.getElementById(id);
+  const playBtn = $('play'), seek = $('seek'), label = $('time'), cards = $('scenes');
+  cards.innerHTML = scenes.map((s, i) => `<button type="button" class="scene" data-i="${i}"><b>${s.name}</b><span>${s.at.toFixed(0)}s · ${s.note}</span></button>`).join('');
+
+  function ui() {
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    seek.value = Math.round(time / DUR * 1000);
+    label.textContent = `${time.toFixed(1)} / ${DUR.toFixed(1)}s`;
+    let cur = 0; scenes.forEach((s, i) => { if (time >= s.at) cur = i; });
+    [...cards.children].forEach((c, i) => c.classList.toggle('on', i === cur));
+  }
+  function setTime(v) { time = ((v % DUR) + DUR) % DUR; frame(time); ui(); }
+
+  function tick(now) {
+    const dt = Math.min(0.1, (now - last) / 1000); last = now;
+    if (playing) setTime(time + dt * speed);
+    requestAnimationFrame(tick);
+  }
+
+  playBtn.onclick = () => { playing = !playing; ui(); };
+  $('restart').onclick = () => { setTime(0); playing = true; ui(); };
+  $('speed').onchange = e => speed = +e.target.value;
+  seek.oninput = () => setTime(seek.value / 1000 * DUR);
+  cards.onclick = e => { const b = e.target.closest('.scene'); if (b) setTime(scenes[b.dataset.i].at + 0.01); };
+  addEventListener('keydown', e => {
+    if (e.target.matches('input, select')) return;
+    if (e.code === 'Space') { e.preventDefault(); playing = !playing; ui(); }
+    if (e.code === 'ArrowRight') setTime(time + 1);
+    if (e.code === 'ArrowLeft') setTime(time - 1);
+  });
+  addEventListener('resize', resize);
+  document.fonts?.ready.then(() => frame(time));
+  resize(); ui(); requestAnimationFrame(tick);
+})();
+</script>

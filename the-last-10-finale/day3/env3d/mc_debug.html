@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body>
+<script type="module">
+import * as THREE from 'three'; import * as MC from './mocap.js';
+const out = []; const f = v => v.toArray().map(x => x.toFixed(2)).join(',');
+for (const [file, map, clip] of [['Soldier', 'mixamo', 'Idle'], ['nerd_survivor', 'nerd', 'Loop Idle Default']]) {
+  const S = await MC.Mocap.load(`assets/mocap/${file}.glb`, map); out.push(`${file} bones ${Object.keys(S.B).length}`);
+  for (const k of ['hips', 'spine', 'chest', 'chest2', 'neck', 'head', 'upperArmL', 'thighL']) if (S.rest[k]) { const up = new THREE.Vector3(0, 1, 0).applyQuaternion(S.rest[k].q); out.push(`  rest ${k} pos ${f(S.rest[k].p)} localY->${f(up)}`); }
+  const D = S.sample(clip, 0.5); for (const k of ['hips', 'spine', 'chest', 'neck', 'head', 'thighL', 'upperArmL']) if (D[k]) { const a = 2 * Math.acos(Math.min(1, Math.abs(D[k].w))); const ax = new THREE.Vector3(D[k].x, D[k].y, D[k].z).normalize(); out.push(`  delta ${k} ${(a * 57.3).toFixed(1)}° axis ${f(ax)}`); } }
+console.log(out.join('\n')); document.title = 'ready';
+</script></body></html>

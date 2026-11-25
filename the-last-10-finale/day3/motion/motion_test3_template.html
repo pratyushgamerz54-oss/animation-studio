@@ -1,0 +1,102 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<style>html,body{margin:0;background:#0b0c10}canvas{display:block;width:100vw;height:auto}</style></head><body>
+<canvas id=c width=1920 height=1080></canvas>
+<script>/*__MOTION__*/</script>
+<script>
+const RIGS = /*__RIGS__*/null;
+const c = document.getElementById('c'), ctx = c.getContext('2d'), M = MOTION2, DUR = 24, W = 1920, Hh = 1080;
+const HGT = { aarav: 178, meera: 165, kabir: 175, zoya: 162, ryan: 180, ananya: 164, dev: 183, ishaan: 172, sara: 168, vikram: 181 };
+const IMG = {}, clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lerp = (a, b, t) => a + (b - a) * t, sm = x => x * x * (3 - 2 * x);
+const mk = (w, h) => { const q = document.createElement('canvas'); q.width = w; q.height = h; return q; };
+const shade = (hex, f) => { const n = parseInt(hex.slice(1), 16); let r = n >> 16, g = (n >> 8) & 255, b = n & 255; const t = f < 0 ? 0 : 255, p = Math.abs(f);
+  return `rgb(${Math.round((t - r) * p + r)},${Math.round((t - g) * p + g)},${Math.round((t - b) * p + b)})`; };
+function loadRigs() { const jobs = [];
+  for (const [k, parts] of Object.entries(RIGS)) { IMG[k] = { _colors: parts._colors };
+    for (const [n, p] of Object.entries(parts)) { if (n === '_colors') continue; const vb = p.svg.match(/viewBox="([^"]+)"/)[1].trim().split(/[\s,]+/).map(Number); const img = new Image();
+      IMG[k][n] = { img, vb, pivot: p.pivot }; jobs.push(new Promise(r => { img.onload = r; img.onerror = r; })); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(p.svg); } }
+  return Promise.all(jobs).then(buildBacks); }
+function buildBacks() { for (const [k, P] of Object.entries(IMG)) { const col = P._colors || { top: '#444444', hair: '#222222' };
+  const mkBack = (n, fn) => { const q = P[n]; const w = Math.round(q.vb[2] * 4), h = Math.round(q.vb[3] * 4), cv = mk(w, h), g = cv.getContext('2d'); g.drawImage(q.img, 0, 0, w, h); g.globalCompositeOperation = 'source-atop'; fn(g, w, h); P[n + 'Back'] = { img: cv, vb: q.vb, pivot: q.pivot }; };
+  mkBack('torso', (g, w, h) => { const gr = g.createLinearGradient(0, 0, w, 0); gr.addColorStop(0, shade(col.top, -0.35)); gr.addColorStop(0.5, shade(col.top, 0.08)); gr.addColorStop(1, shade(col.top, -0.4)); g.fillStyle = gr; g.fillRect(0, h * 0.04, w, h);
+    g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = w * 0.012; g.beginPath(); g.moveTo(w / 2, h * 0.08); g.lineTo(w / 2, h); g.stroke(); g.beginPath(); g.moveTo(w * 0.2, h * 0.22); g.quadraticCurveTo(w / 2, h * 0.3, w * 0.8, h * 0.22); g.stroke(); });
+  mkBack('head', (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, shade(col.hair, 0.12)); gr.addColorStop(0.62, col.hair); gr.addColorStop(0.7, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, w, h * 0.72); }); } }
+// ---------- camera / world ----------
+const F = 1150, CAMH = 1.6, HOR = 430;
+const proj = (X, Y, Z) => [W / 2 + F * X / Z, HOR + F * (CAMH - Y) / Z];
+const scaleAt = (k, Z) => F / Z * (HGT[k] / 100) / 700;
+function quad(pts, fill) { ctx.fillStyle = fill; ctx.beginPath(); pts.forEach(([X, Y, Z], i) => { const [x, y] = proj(X, Y, Math.max(0.3, Z)); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.fill(); }
+function world(camZ, t) {     // camZ: camera dolly (world z of the camera)
+  const sky = ctx.createLinearGradient(0, 0, 0, HOR + 40); sky.addColorStop(0, '#3b3d42'); sky.addColorStop(1, '#8a8780'); ctx.fillStyle = sky; ctx.fillRect(0, 0, W, Hh);
+  const gr = ctx.createLinearGradient(0, HOR, 0, Hh); gr.addColorStop(0, '#55534f'); gr.addColorStop(1, '#2a2927'); ctx.fillStyle = gr; ctx.fillRect(0, HOR, W, Hh - HOR);
+  // sidewalks
+  quad([[-7, 0, 1], [-4.2, 0, 1], [-4.2, 0, 90], [-7, 0, 90]], '#6b6862'); quad([[4.2, 0, 1], [7, 0, 1], [7, 0, 90], [4.2, 0, 90]], '#6b6862');
+  // lane dashes fixed in the world (they slide past only when the camera moves)
+  for (let z = Math.floor(camZ / 4) * 4 + 4; z < camZ + 90; z += 4) { const a = z - camZ, b = a + 1.8; if (b < 0.6) continue; quad([[-0.08, 0, Math.max(0.6, a)], [0.08, 0, Math.max(0.6, a)], [0.08, 0, b], [-0.08, 0, b]], 'rgba(220,214,190,.8)'); }
+  // cracks / patches
+  for (let i = 0; i < 26; i++) { const z = 3 + (M.hash(i) * 70), x = (M.hash(i + 9) - 0.5) * 7, a = z - camZ; if (a < 1) continue; quad([[x, 0, a], [x + 0.6, 0, a + 0.1], [x + 0.5, 0, a + 0.5], [x - 0.1, 0, a + 0.4]], 'rgba(30,28,26,.35)'); }
+  // buildings, far to near
+  const bl = []; for (let i = 0; i < 18; i++) for (const side of [-1, 1]) { const z0 = i * 6 + 2, d = 6 * (0.85 + M.hash(i * 3 + side) * 0.1), h = 9 + M.hash(i * 7 + side) * 16; bl.push({ side, z0, d, h, i }); }
+  bl.sort((a, b) => b.z0 - a.z0);
+  for (const B of bl) { const a = B.z0 - camZ, b = a + B.d; if (b < 0.4) continue; const x = B.side * 7, x2 = B.side * 13;
+    const fog = clamp((a - 10) / 70), base = B.i % 3 === 0 ? [96, 90, 84] : B.i % 3 === 1 ? [112, 74, 58] : [84, 88, 92];
+    const col = (k) => `rgb(${lerp(base[0] * k, 138, fog)},${lerp(base[1] * k, 135, fog)},${lerp(base[2] * k, 128, fog)})`;
+    quad([[x, 0, Math.max(0.4, a)], [x, B.h, Math.max(0.4, a)], [x, B.h, b], [x, 0, b]], col(0.8));                // facade facing the street
+    quad([[x, 0, Math.max(0.4, a)], [x2, 0, Math.max(0.4, a)], [x2, B.h, Math.max(0.4, a)], [x, B.h, Math.max(0.4, a)]], col(1));  // front side
+    for (let fy = 1.5; fy < B.h - 1; fy += 3) for (let fz = 0.6; fz < B.d - 0.8; fz += 1.6) { const za = a + fz, zb = za + 0.9; if (za < 0.5) continue;
+      quad([[x - B.side * 0.01, fy, za], [x - B.side * 0.01, fy + 1.6, za], [x - B.side * 0.01, fy + 1.6, zb], [x - B.side * 0.01, fy, zb]], M.hash(fy * 13 + fz * 7 + B.i) > 0.7 ? 'rgba(20,22,26,.9)' : `rgba(40,48,58,${0.75 - fog * 0.5})`); } }
+  // haze over the distance
+  const hz = ctx.createLinearGradient(0, HOR - 200, 0, HOR + 60); hz.addColorStop(0, 'rgba(140,138,132,0)'); hz.addColorStop(0.7, 'rgba(140,138,132,.55)'); hz.addColorStop(1, 'rgba(140,138,132,0)'); ctx.fillStyle = hz; ctx.fillRect(0, HOR - 200, W, 260);
+}
+// dust puffs at running foot contacts (stay where the foot hit the ground)
+function dust(list, camZ, t) { for (const d of list) { const age = t - d.t; if (age < 0 || age > 0.9) continue; const Z = d.Z - camZ; if (Z < 0.8) continue; const [x, y] = proj(d.X, 0, Z), r = F / Z * (0.12 + age * 0.45);
+  const g = ctx.createRadialGradient(x, y - r * 0.3, 1, x, y - r * 0.3, r); g.addColorStop(0, `rgba(170,160,140,${0.45 * (1 - age / 0.9)})`); g.addColorStop(1, 'rgba(170,160,140,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y - r * 0.25, r * 1.4, r * 0.7, 0, 0, 7); ctx.fill(); } }
+// actor path helpers: position along z with speed changes; phase integrates speed so feet never slide
+function actor(k, X, Z, back, P) { return { k, X, Z, back, P }; }
+const STRIDE_W = 1.4, STRIDE_R = 3.1;        // metres per full cycle (two steps)
+function draw3(t) {
+  ctx.clearRect(0, 0, W, Hh);
+  let camZ = 0, A = [], puffs = [], title = '';
+  if (t < 8) {                       // A: three walk toward the camera; Kabir limps behind
+    title = 'A · chalte hue camera ki taraf (pair zameen par fisalte nahi)';
+    const z = 15 - 1.33 * t, zs = 15.6 - 1.25 * t, zk = 14 - 0.85 * t;
+    A.push(actor('aarav', 0.1, z, false, M.walk(t, 0, { phase: (15 - z) / STRIDE_W * Math.PI * 2 })));
+    A.push(actor('sara', -1.0, zs, false, M.walk(t, 2.1, { phase: (15.6 - zs) / STRIDE_W * 1.06 * Math.PI * 2, amp: 0.9 })));
+    A.push(actor('kabir', 1.1, zk, false, M.limp(t, 1.3)));
+  } else if (t < 14) {               // B: walking away (back view)
+    title = 'B · peeche se — door jaate hue'; const u = t - 8;
+    const z = 3.6 + 1.33 * u, zs = 3.2 + 1.3 * u, zk = 3.9 + 1.28 * u;
+    A.push(actor('aarav', 0.15, z, true, M.walk(t, 0, { phase: (z - 3.6) / STRIDE_W * Math.PI * 2 })));
+    A.push(actor('sara', -1.0, zs, true, M.walk(t, 2.1, { phase: (zs - 3.2) / STRIDE_W * Math.PI * 2, amp: 0.9 })));
+    A.push(actor('kabir', 1.15, zk, true, M.walk(t, 1.3, { phase: (zk - 3.9) / STRIDE_W * Math.PI * 2, amp: 0.85 })));
+  } else if (t < 20) {               // C: two run toward the camera, brake, then pant with hands on knees
+    title = 'C · daudte hue aana → rukna → haanfna'; const u = t - 14;
+    const runner = (k, X, z0, v, tStop, seed, delay) => {
+      const uu = Math.max(0, u - delay), brake = 0.9;
+      const zAt = q => q < tStop ? z0 - v * q : z0 - v * tStop - v * (Math.min(q, tStop + brake) - tStop) * (1 - (Math.min(q, tStop + brake) - tStop) / (2 * brake));
+      const Z = zAt(uu), dist = z0 - Z, ph = dist / STRIDE_R * Math.PI * 2;
+      let P;
+      if (uu < tStop) P = M.run(t, seed, { phase: ph });
+      else if (uu < tStop + brake) { const w = sm((uu - tStop) / brake); P = M.blend(M.run(t, seed, { phase: ph }), M.walk(t, seed, { phase: dist / STRIDE_W * Math.PI * 2, amp: 0.5 }), w); P.drop = (P.drop || 0) + Math.sin(w * Math.PI) * 14; }
+      else P = M.panting(t, 14 + delay + tStop + brake, seed);
+      // dust: one puff per foot contact while running
+      for (let n = 0; n < 40; n++) { const dc = (n * 0.5) * STRIDE_R; if (dc > z0 - zAt(Math.min(uu, tStop))) break; const qc = dc / v; if (qc > tStop) break; puffs.push({ t: 14 + delay + qc, X: X + (n % 2 ? 0.12 : -0.12), Z: z0 - dc }); }
+      A.push(actor(k, X, Z, false, P)); };
+    runner('ishaan', -0.7, 19, 4.6, 2.75, 0.4, 0); runner('dev', 0.9, 21, 4.7, 3.05, 1.9, 0.15);
+  } else {                            // D: Vikram runs away from camera (back view)
+    title = 'D · peeche se — door daudte hue'; const u = t - 20, v = 4.8, Z = 2.6 + v * u, dist = Z - 2.6;
+    A.push(actor('vikram', 0.2, Z, true, M.run(t, 0.7, { phase: dist / STRIDE_R * Math.PI * 2 })));
+    for (let n = 1; n < 30; n++) { const dc = n * 0.5 * STRIDE_R; if (dc > dist) break; puffs.push({ t: 20 + dc / v, X: 0.2 + (n % 2 ? 0.12 : -0.12), Z: 2.6 + dc }); }
+  }
+  world(camZ, t); dust(puffs, camZ, t);
+  A.sort((a, b) => b.Z - a.Z);
+  for (const a of A) { const Z = a.Z - camZ; if (Z < 1) continue; const [x, y] = proj(a.X, 0, Z); if (a.k === 'ishaan') a.P.backHairFront = true; M.drawChar2(ctx, IMG, a.k, x, y, scaleAt(a.k, Z), { ...a.P, back: a.back }); }
+  // shot transitions: short dips between the four shots
+  for (const tb of [8, 14, 20]) { const d = Math.abs(t - tb); if (d < 0.25) { ctx.fillStyle = `rgba(0,0,0,${1 - d / 0.25})`; ctx.fillRect(0, 0, W, Hh); } }
+  if (t < 0.3) { ctx.fillStyle = `rgba(0,0,0,${1 - t / 0.3})`; ctx.fillRect(0, 0, W, Hh); }
+  const vg = ctx.createRadialGradient(W / 2, Hh / 2, Hh * 0.35, W / 2, Hh / 2, Hh * 0.95); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.5)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, Hh);
+  ctx.fillStyle = 'rgba(0,0,0,.5)'; ctx.fillRect(0, 0, W, 50); ctx.font = '600 24px "Noto Sans", sans-serif'; ctx.fillStyle = '#E9E6F0'; ctx.fillText(title, 20, 34);
+  ctx.font = '500 20px "Noto Sans", sans-serif'; ctx.fillStyle = '#A79FB5'; ctx.fillText(`motion test v3 · chal + daud · ${t.toFixed(1)} s`, 1520, 34);
+}
+window.draw = draw3;
+loadRigs().then(() => { if (location.hash !== '#render') { const t0 = performance.now(); const loop = () => { draw3(((performance.now() - t0) / 1000) % DUR); requestAnimationFrame(loop); }; loop(); } else draw3(0); document.title = 'ready'; });
+</script></body></html>
