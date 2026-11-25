@@ -1,0 +1,136 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<style>html,body{margin:0;background:#000}#wrap{position:relative;width:1920px;height:1080px}#wrap canvas{position:absolute;left:0;top:0}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body><div id=wrap></div>
+<script type="module">
+// Shot 3D — "Teeno renagte; Zeno plasma fire karta — bench phatti; teeno daudte; Kabir girta". Tracking back view, lab → back door → service corridor.
+import * as THREE from 'three'; import * as C3 from './char3d.js'; import * as MC from './mocap.js'; import * as SETS from './sets.js'; import * as K from './shotkit.js';
+import * as CANNON from './node_modules/cannon-es/dist/cannon-es.js';
+const { clamp, lerp, sm, hash } = K;
+const { renderer, scene, camera, pg } = K.setup({ fog: [0x0b0d12, 0.02] });
+const LAB = SETS.buildLab(scene), COR = SETS.buildCorridor(scene, { x0: -6.12, len: 18, zc: 2.6 });
+const PAL = await (await fetch('palette.json')).json(), LN = await K.loadLines('3D');
+const CH = { sara: C3.buildCharacter('sara', PAL), kabir: C3.buildCharacter('kabir', PAL), aarav: C3.buildCharacter('aarav', PAL) }, ZENO = C3.buildZenoRig(); C3.addPlasmaRifle(ZENO);
+for (const c of [...Object.values(CH), ZENO]) { scene.add(c); MC.adoptC3(c); MC.restParents(c); }
+const NERD = await MC.Mocap.load('assets/mocap/nerd_survivor.glb', 'nerd'), XB = await MC.Mocap.load('assets/mocap/Xbot.glb', 'mixamo');
+const CMU = await MC.Mocap.loadBVH({ duck: 'assets/cmu/77_09.bvh', fall: 'assets/cmu/90_16.bvh' });
+K.toonify(scene); K.outlineChars([...Object.values(CH), ZENO]); const outline = K.makeOutline(renderer);
+const COL = { sara: K.collider(CH.sara), kabir: K.collider(CH.kabir), aarav: K.collider(CH.aarav), zeno: K.collider(ZENO) };
+const PAIRS = [[COL.kabir, COL.aarav, 'b', 'kabir-aarav'], [COL.kabir, COL.sara, 'b', 'kabir-sara'], [COL.aarav, COL.sara, 'both', 'aarav-sara'], [COL.zeno, COL.aarav, 'b', 'zeno-aarav'], [COL.zeno, COL.kabir, 'b', 'zeno-kabir'], [COL.zeno, COL.sara, 'b', 'zeno-sara']];
+// blood patch on Kabir's right shin (shown after the glass cut)
+const cut = new THREE.Mesh(new THREE.SphereGeometry(0.035, 10, 8), K.toonMat(new THREE.MeshStandardMaterial({ color: 0x6a0d0d, roughness: 0.4 }))); cut.scale.set(1.2, 1.6, 0.5); cut.position.set(0, -0.2, 0.045); CH.kabir.userData.J.shinR.add(cut); cut.visible = false;
+const pool = new THREE.Mesh(new THREE.CircleGeometry(1, 24), new THREE.MeshStandardMaterial({ color: 0x4a0707, roughness: 0.25, transparent: true, opacity: 0.9, polygonOffset: true, polygonOffsetFactor: -4 })); pool.rotation.x = -Math.PI / 2; pool.visible = false; scene.add(pool);
+// FX: plasma bolt, blast light, sparks, dust
+const boltM = new THREE.MeshBasicMaterial({ color: 0xc27bff, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false });
+const bolt = new THREE.Group(); { const a = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.7, 10), boltM); a.rotation.x = Math.PI / 2; bolt.add(a); const b = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.75, 8), new THREE.MeshBasicMaterial({ color: 0xffffff })); b.rotation.x = Math.PI / 2; bolt.add(b); } scene.add(bolt); bolt.visible = false;
+const boltL = new THREE.PointLight(0xb060ff, 0, 7, 1.5); scene.add(boltL); const muzzleL = new THREE.PointLight(0xc080ff, 0, 5, 1.5); scene.add(muzzleL);
+const blastL = new THREE.PointLight(0xff9a50, 0, 12, 1.4); scene.add(blastL);
+const NS = 90, sparkG = new THREE.BufferGeometry(); sparkG.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(NS * 3), 3));
+const sparks = new THREE.Points(sparkG, new THREE.PointsMaterial({ color: 0xffc070, size: 0.045, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false })); sparks.frustumCulled = false; scene.add(sparks); sparks.visible = false;
+const dust = []; for (let i = 0; i < 16; i++) { const s = new THREE.Sprite(K.softSprite(0x7d746a)); scene.add(s); dust.push(s); }
+const T = { aim: 2.75, fire: 3.4, hit: 3.66, up: 4.85, kabirFall: 8.35, zenoIn: 12.3, cutC: 9.0 };
+const HIT = new THREE.Vector3(-1.2, 0.55, 1.1);
+// ---------- physics: the overturned bench breaks into slabs + legs at the hit ----------
+const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) }); world.addBody(new CANNON.Body({ mass: 0, shape: new CANNON.Plane(), quaternion: new CANNON.Quaternion().setFromEuler(-Math.PI / 2, 0, 0) }));
+const pieces = []; const slabM = K.toonMat(new THREE.MeshStandardMaterial({ color: 0x2b2d31, roughness: 0.4 })), legM = K.toonMat(new THREE.MeshStandardMaterial({ color: 0x6d6f72, roughness: 0.5 }));
+function spawnPieces() { LAB.bench.visible = false; LAB.bench.updateMatrixWorld(true);
+  const defs = [...[-0.8, 0, 0.8].map(x => ({ size: [0.78, 0.86, 0.06], p: [x, 0.45, 0], m: slabM })), ...[-1.1, 1.1].flatMap(x => [-0.2, 0.2].map(z => ({ size: [0.05, 0.05, 0.85], p: [x, 0.9, -0.42], m: legM })))];
+  for (const [i, d] of defs.entries()) { const mesh = new THREE.Mesh(new THREE.BoxGeometry(...d.size), d.m); mesh.castShadow = true; scene.add(mesh);
+    const wp = LAB.bench.localToWorld(new THREE.Vector3(...d.p)), wq = LAB.bench.getWorldQuaternion(new THREE.Quaternion());
+    const body = new CANNON.Body({ mass: d.m === slabM ? 6 : 1.5, shape: new CANNON.Box(new CANNON.Vec3(d.size[0] / 2, d.size[1] / 2, d.size[2] / 2)), position: new CANNON.Vec3(wp.x, wp.y + 0.02, wp.z), quaternion: new CANNON.Quaternion(wq.x, wq.y, wq.z, wq.w), linearDamping: 0.05, angularDamping: 0.1 });
+    const away = wp.clone().sub(HIT); away.y = 0; away.normalize(); const k = d.m === slabM ? 1.6 : 2.6;
+    body.velocity.set(away.x * k + (hash(i) - 0.5) * 0.8 - 0.6, 2.4 + hash(i + 3) * 1.4, away.z * k - 0.9); body.angularVelocity.set((hash(i + 5) - 0.5) * 9, (hash(i + 6) - 0.5) * 7, (hash(i + 7) - 0.5) * 9);
+    world.addBody(body); pieces.push({ mesh, body }); } }
+// ---------- pose helpers ----------
+const JK = c => Object.entries(c.userData.J).filter(([, o]) => o && o.isObject3D);
+const snap = c => Object.fromEntries(JK(c).map(([k, o]) => [k, o.quaternion.clone()]));
+function mix(c, A, B, w) { if (w <= 0) return A(); if (w >= 1) return B(); A(); const a = snap(c); B(); for (const [k, o] of JK(c)) { const b = o.quaternion.clone(); o.quaternion.copy(a[k]).slerp(b, w); } }
+function crouch(ch, t, seed) { const br = Math.sin(t * 6.5 + seed) * 0.02, look = Math.sin(t * 0.6 + seed) * 0.25;
+  C3.applyPose(ch, { hips: [0.25, 0, 0], spine: [0.22 + br, 0, 0], chest: [0.15 + br, 0, 0], neck: [-0.15, look, 0], head: [0.05, 0, 0], thighL: [-1.75, 0, 0.18], thighR: [-1.75, 0, -0.18], shinL: [2.35, 0, 0], shinR: [2.35, 0, 0], footL: [-0.55, 0, 0], footR: [-0.55, 0, 0],
+    upperArmL: [-0.95, 0, 0.32], upperArmR: [-0.95, 0, -0.32], foreArmL: [-1.25, 0, 0.5], foreArmR: [-1.25, 0, -0.5], handL: [0, 0, 0], handR: [0, 0, 0] }); }
+const mo = (src, name, tt, loop = true) => (c) => () => MC.applyD(c, src, src.sample(name, tt, loop));
+// ---------- per-character plan ----------
+const HIDE = { aarav: [-0.4, 2.0, 0.12], kabir: [-1.25, 2.05, -0.08], sara: [-2.25, 2.0, 0.05] }, GO = { sara: 1.55, kabir: 1.75, aarav: 2.0 };
+const S = {}; function reset() { for (const [k, c] of Object.entries(CH)) { const [x, z, ry] = HIDE[k]; c.position.set(x, 0, z); c.rotation.set(0, ry, 0); S[k] = { feet: {}, rm: {}, mode: 'hide', yaw: ry, door: false }; }
+  for (const p of pieces) { scene.remove(p.mesh); world.removeBody(p.body); } pieces.length = 0; LAB.bench.visible = true; S.spawned = false; S.zf = {}; S.cam = null; S.doorOpen = null; S.kRest = null; S.aStop = null; S.sStop = null; S.lastT = -1; }
+reset();
+const yawTo = (c, x, z) => Math.atan2(x - c.position.x, z - c.position.z), wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
+const DOOR = new THREE.Vector3(-6.3, 0, 2.6), FAR = new THREE.Vector3(-40, 0, 2.6);
+function steer(k, c, dt, rate = 3.2) { const tgt = c.position.x > DOOR.x + 0.25 ? DOOR : FAR; const want = yawTo(c, tgt.x, tgt.z); S[k].yaw += clamp(wrapA(want - S[k].yaw), -rate * dt, rate * dt); c.rotation.y = S[k].yaw; }
+function trio(t, dt) { const hips = {};
+  for (const [k, c] of Object.entries(CH)) { const st = S[k], go = GO[k], seed = k.length; let move = true;
+    const UP = T.up + (k === 'aarav' ? 0.5 : k === 'kabir' ? 0.15 : 0); const sneakT = (t - go) * 1.2, runT = (t - UP) * 1.35, duckT = Math.min(2.62, 2.05 + Math.max(0, t - T.hit) * 1.3) + (k === 'kabir' ? 0.02 : k === 'sara' ? -0.03 : 0);
+    const SNK = mo(NERD, 'Sneak Forward', sneakT + seed * 0.3)(c), RUN = mo(NERD, 'Run Forward', runT + seed * 0.21)(c), DUCK = mo(CMU.duck, 'duck', duckT, false)(c), CR = () => crouch(c, t, seed);
+    if (t < go) { CR(); move = false; if (k === 'aarav' && t > 0.9 && t < 2.0) { const w = sm(clamp((t - 0.9) / 0.3)) * (1 - sm(clamp((t - 1.7) / 0.3))); c.userData.J.upperArmR.rotation.x -= 1.1 * w; c.userData.J.upperArmR.rotation.z += 0.5 * w; c.userData.J.foreArmR.rotation.x = lerp(c.userData.J.foreArmR.rotation.x, -0.15, w); C3.setHand(c, 'R', 'point'); } }
+    else if (t < T.hit) { mix(c, CR, SNK, sm(clamp((t - go) / 0.55))); steer(k, c, dt, sm(clamp((t - go) / 0.5)) * 3); move = t - go > 0.3; }
+    else if (t < UP) { mix(c, SNK, DUCK, sm(clamp((t - T.hit) / 0.22))); move = false; }
+    else if (k === 'kabir' && t >= T.kabirFall) { const ft = 2.88 + Math.min(1.7, (t - T.kabirFall) * 1.05); const D = CMU.fall.sample('fall', ft, false);
+      mix(c, RUN, () => MC.applyD(c, CMU.fall, D), sm(clamp((t - T.kabirFall) / 0.18))); move = false; if (t - T.kabirFall < 1.4) MC.rootMotion(c, D, st.rm, c.userData.H / D._height * 0.93);
+      if (t > T.kabirFall + 1.6) { const J = c.userData.J; J.chest.rotateX(Math.sin(t * 5) * 0.02); J.neck.rotateX(-0.25 + Math.sin(t * 1.3) * 0.05); J.neck.rotateY(0.35); } }
+    else if (k === 'aarav' && S.aStop !== null) { const u = t - S.aStop; const face = () => { CR(); const J = c.userData.J; for (const sd of ['L', 'R']) { J['upperArm' + sd].rotation.set(-1.05, 0, sd === 'L' ? 0.12 : -0.12); J['foreArm' + sd].rotation.set(-0.45, 0, 0); C3.setHand(c, sd, 'open'); } J.neck.rotation.y = t > 12.9 ? lerp(0, 1.25, sm(clamp((t - 12.9) / 0.5))) : 0; };
+      mix(c, RUN, face, sm(clamp(u / 0.45))); move = u < 0.3; const kp = CH.kabir.userData.J.hips.getWorldPosition(new THREE.Vector3()); const want = yawTo(c, kp.x, kp.z) + Math.PI / 2 * 0.0; st.yaw += clamp(wrapA(want - st.yaw), -4 * dt, 4 * dt); c.rotation.y = st.yaw; }
+    else if (k === 'sara' && S.sStop !== null) { const u = t - S.sStop; mix(c, RUN, mo(NERD, 'Loop Idle Wounded 1', u)(c), sm(clamp(u / 0.4))); move = u < 0.35; if (u > 0.45) { st.yaw += clamp(wrapA(Math.PI / 2 - st.yaw), -3 * dt, 3 * dt); c.rotation.y = st.yaw; } }
+    else { mix(c, DUCK, RUN, sm(clamp((t - UP) / 0.35))); steer(k, c, dt); }
+    if (move) MC.plantFeet(c, st.feet, { move: true, forwardOnly: true }); else { const tmp = {}; MC.plantFeet(c, tmp, { move: false }); st.feet = {}; }
+    hips[k] = c.userData.J.hips.getWorldPosition(new THREE.Vector3()); }
+  // events: Kabir's cry stops the others
+  const kx = hips.kabir;
+  const kh = CH.kabir.userData.J.head.getWorldPosition(new THREE.Vector3()); if (S.aStop === null && t > T.kabirFall + 0.2 && CH.aarav.position.x < kh.x + 1.25) S.aStop = t;
+  if (S.aStop === null && t > T.kabirFall + 1.4) S.aStop = t;
+  if (S.sStop === null && t > T.kabirFall + 0.45) S.sStop = t;
+  // door: Sara reaches it first and shoves it open (hand on the push bar), it swings into the corridor with a little bounce
+  if (S.doorOpen === null && CH.sara.position.x < DOOR.x + 1.05 && t > T.up) S.doorOpen = t;
+  if (S.doorOpen !== null) { const u = t - S.doorOpen; if (u < 0.35) { const J = CH.sara.userData.J, w = Math.sin(u / 0.35 * Math.PI); J.upperArmR.rotation.x -= 1.2 * w; J.foreArmR.rotation.x = lerp(J.foreArmR.rotation.x, -0.2, w); C3.setHand(CH.sara, 'R', 'open'); } }
+  const da = S.doorOpen === null ? 0 : (() => { const u = Math.max(0, t - S.doorOpen - 0.12); return clamp(u / 0.28) * 1.75 + Math.sin(clamp((u - 0.28) / 0.9) * Math.PI * 2) * Math.exp(-u * 2.2) * 0.12 * (u > 0.28 ? 1 : 0); })();
+  LAB.door.rotation.y = -da;
+  return hips; }
+function zeno(t, dt) { const z = ZENO, st = S.zf; z.visible = true;
+  if (t < 6) { z.position.set(0.6, 0, -1.6); const want = yawTo(z, HIT.x, HIT.z), base = 0.6 + Math.sin(t * 0.8) * 0.5; z.rotation.y = lerp(base, want, sm(clamp((t - T.aim + 0.6) / 0.6)));
+    mix(z, mo(NERD, 'Idle Rifle', t)(z), mo(NERD, 'Rifle Aim', 0.2, false)(z), sm(clamp((t - T.aim) / 0.4)) * (1 - sm(clamp((t - 5.0) / 0.6))));
+    if (t > T.fire && t < T.fire + 0.12) z.userData.J.chest.rotateX(-0.12 * (1 - (t - T.fire) / 0.12));   // recoil
+    const tmp = {}; MC.plantFeet(z, tmp, { move: false }); z.userData.J.neck.rotateY(t < T.aim - 0.6 ? Math.sin(t * 1.6) * 0.5 : 0); }
+  else if (t < T.zenoIn) z.visible = false;
+  else { if (!st.placed) { z.position.set(-5.55, 0, 2.6); z.rotation.y = -Math.PI / 2; st.placed = true; st.feet = {}; }
+    const wk = sm(clamp((t - T.zenoIn) / 0.3)) * (1 - sm(clamp((t - T.zenoIn - 0.9) / 0.4))); mix(z, () => MC.applyD(z, XB, XB.sample('idle', t)), () => MC.applyD(z, XB, XB.sample('walk', (t - T.zenoIn) * 0.75)), wk); MC.plantFeet(z, st.feet, { move: wk > 0.5, forwardOnly: true }); if (wk <= 0.5) st.feet = {}; z.userData.J.neck.rotateY(Math.sin((t - T.zenoIn) * 0.9) * 0.35); }
+  z.userData.neckGlow.intensity = 1.2 + 0.4 * Math.sin(t * 4); }
+function faces(t) { const fearBase = t < T.hit ? 0.8 : 0.95;
+  for (const [k, c] of Object.entries(CH)) { const L = LN.at(k, t), f = C3.idle(t, k.length).face, startle = t > T.hit && t < T.hit + 0.9; let emo = { fear: fearBase, surprise: startle ? 0.8 : 0 };
+    if (L.emo) for (const [e, v] of Object.entries(L.emo)) emo[e] = Math.max(emo[e] || 0, v);
+    if (k === 'kabir' && t > T.kabirFall) emo = { pain: 0.95, cry: t > T.kabirFall + 2.5 ? 0.35 : 0, fear: 0.5 };
+    if (k === 'aarav' && S.aStop !== null) emo = { fear: t > 12.9 ? 1 : 0.6, sad: 0.4 };
+    const mouth = L.line ? L.mouth : (k === 'kabir' && t > T.kabirFall + 2.1 ? 'grit' : (t > T.up && t < T.kabirFall ? 'B' : 'X'));
+    c.userData.face.draw({ ...f, look: k === 'aarav' && t > 12.9 ? [0.9, 0] : [0, -0.1], blink: startle ? 0.85 : f.blink, emo, mouth, t }); } }
+function fx(t) { // bolt
+  const m0 = ZENO.userData.rifle.localToWorld(ZENO.userData.muzzle.clone()); const u = (t - T.fire) / (T.hit - T.fire);
+  bolt.visible = u >= 0 && u <= 1; boltL.intensity = bolt.visible ? 9 : 0; if (bolt.visible) { if (!S.m0 || t < T.fire + 0.04) S.m0 = m0.clone(); const p = S.m0.clone().lerp(HIT, u); bolt.position.copy(p); bolt.lookAt(HIT); boltL.position.copy(p); }
+  muzzleL.position.copy(m0); muzzleL.intensity = t > T.fire && t < T.fire + 0.12 ? 7 : 0;
+  const a = t - T.hit; if (a >= 0 && !S.spawned) { spawnPieces(); S.spawned = true; }
+  blastL.position.copy(HIT).add(new THREE.Vector3(0, 0.4, 0.3)); blastL.intensity = a >= 0 ? 16 * Math.exp(-a * 6) + (a < 2.5 ? 1.5 * (1 - a / 2.5) * (0.6 + 0.4 * Math.sin(t * 40)) : 0) : 0;
+  sparks.visible = a >= 0 && a < 1.2; if (sparks.visible) { const P = sparkG.attributes.position.array; for (let i = 0; i < NS; i++) { const v = new THREE.Vector3(hash(i) - 0.5, hash(i + 40) * 0.9 + 0.3, hash(i + 80) - 0.25).normalize().multiplyScalar(3 + hash(i + 120) * 5); const tt = a * (0.8 + hash(i + 7) * 0.4);
+      P[i * 3] = HIT.x + v.x * tt; P[i * 3 + 1] = Math.max(0.01, HIT.y + v.y * tt - 4.9 * tt * tt); P[i * 3 + 2] = HIT.z + v.z * tt; } sparkG.attributes.position.needsUpdate = true; sparks.material.opacity = 1 - a / 1.2; }
+  for (const [i, s] of dust.entries()) { if (a < 0 || a > 3) { s.material.opacity = 0; continue; } const ang = i / dust.length * 6.28; s.position.set(HIT.x + Math.cos(ang) * a * 0.9, 0.3 + a * 0.35 + hash(i) * 0.3, HIT.z + Math.sin(ang) * a * 0.9 + a * 0.3); s.scale.setScalar(0.5 + a * 1.1); s.material.opacity = 0.5 * (1 - a / 3); }
+  // Zeno's search-light: red glow through the back door when he arrives
+  LAB.update(t + 23.8, { beam: t < 6 ? 1 : 0.6, sweep: (t + 23.8) * 0.55, screen: 1, alarm: 1 });
+  if (t > T.zenoIn - 1) { LAB.spot.target.position.set(-6, 0.5, 2.6); }
+  COR.update(t);
+  // blood (PG-13): cut on Kabir's shin after he hits the glass, small pool where he lies
+  cut.visible = t > T.kabirFall + 0.3; if (t > T.kabirFall + 1.0) { if (!S.kRest) { const p = CH.kabir.userData.J.shinR.localToWorld(new THREE.Vector3(0, -0.2, 0)); S.kRest = p; } pool.visible = true; pool.position.set(S.kRest.x, 0.006, S.kRest.z); pool.scale.setScalar(0.04 + 0.1 * sm(clamp((t - T.kabirFall - 1) / 3))); } else pool.visible = false; }
+function cam(t) { const A = CH.aarav.position; let pos, tgt, fov = 40;
+  if (t < 1.6) { pos = new THREE.Vector3(0.95, 0.9, 3.95); tgt = new THREE.Vector3(-1.25, 0.55, 2.0); }
+  else if (t < T.cutC) { const lead = CH.sara.position.x < -6 ? 0.4 : 0; const p = new THREE.Vector3(A.x + 2.4 - lead, 1.0, 2.6 + (A.z - 2.6) * 0.6 + 0.25), q = new THREE.Vector3(A.x - 3.2, 0.6, 2.55);
+    if (!S.cam) S.cam = { p: p.clone(), q: q.clone() }; S.cam.p.lerp(p, 0.12); S.cam.q.lerp(q, 0.15); const w = sm(clamp((t - 1.6) / 0.9)); pos = new THREE.Vector3(0.95, 0.9, 3.95).lerp(S.cam.p, w); tgt = new THREE.Vector3(-1.25, 0.55, 2.0).lerp(S.cam.q, w);
+    if (pos.x < -6.2) pos.z = clamp(pos.z, 1.85, 3.35); }
+  else { if (!S.kHead || t < T.kabirFall + 1.3) S.kHead = CH.kabir.userData.J.head.getWorldPosition(new THREE.Vector3()); const kp = S.kHead, push = sm(clamp((t - 11.5) / 4)) * 0.3; const kr = CH.kabir.position; pos = new THREE.Vector3(kr.x - 2.75 + push, 1.4, 1.8); tgt = new THREE.Vector3(kr.x + 3.5, 0.8, 2.62); fov = 40; fov = 40; }
+  const blast = t - T.hit, shake = (blast > 0 && blast < 0.8 ? (1 - blast / 0.8) * 0.06 : 0) + (t > T.up && t < T.cutC ? 0.012 : 0) + (t > T.zenoIn && t < T.zenoIn + 0.4 ? 0.01 : 0);
+  const FK = new URLSearchParams(location.search).get('feet'); if (FK) { const c = CH[FK].position, side = new THREE.Vector3(Math.cos(CH[FK].rotation.y), 0, -Math.sin(CH[FK].rotation.y)); pos = c.clone().addScaledVector(side, 1.6).add(new THREE.Vector3(0, 0.25, 0)); tgt = c.clone().add(new THREE.Vector3(0, 0.25, 0)); fov = 35; LAB.bench.visible = false; }
+  camera.fov = fov; camera.updateProjectionMatrix(); camera.position.copy(pos).add(new THREE.Vector3((hash(t * 97) - 0.5) * shake, (hash(t * 71) - 0.5) * shake + Math.sin(t * 9) * shake * 0.3, 0)); camera.lookAt(tgt); }
+function draw(t, noRender = false) {
+  if (t < S.lastT - 1e-6) reset(); const dt = S.lastT < 0 ? 1 / 30 : Math.max(0, t - S.lastT); S.lastT = t;
+  trio(t, dt); zeno(t, dt); faces(t); fx(t);
+  K.resolve(PAIRS); for (const k of Object.keys(CH)) { const pu = CH[k].userData.push; if (pu && S[k].feet.p) S[k].feet.p.add(pu); } if (ZENO.userData.push && S.zf.feet?.p) S.zf.feet.p.add(ZENO.userData.push);
+  if (location.search.includes('qa')) K.qa(PAIRS, t, '3D');
+  if (S.spawned) { const n = Math.max(1, Math.round(dt * 120)); for (let i = 0; i < n; i++) world.step(1 / 120); for (const p of pieces) { p.mesh.position.copy(p.body.position); p.mesh.quaternion.copy(p.body.quaternion); } }
+  if (location.search.includes('log') && Math.abs(t * 30 - Math.round(t * 30)) < 1e-3 && Math.round(t * 30) % 15 === 0) console.error('T', t.toFixed(2), Object.entries(CH).map(([k, c]) => k + ':' + c.position.x.toFixed(2) + ',' + c.position.z.toFixed(2)).join(' ') + ' zeno:' + ZENO.position.x.toFixed(2) + ' khead:' + CH.kabir.userData.J.head.getWorldPosition(new THREE.Vector3()).x.toFixed(2));
+  cam(t); if (noRender) return; outline.render(scene, camera);
+  const fl = t > T.hit && t < T.hit + 0.2 ? 0.28 * (1 - (t - T.hit) / 0.25) : 0; K.finish(pg, t, { flash: fl }); }
+window.draw = draw; draw(0, true); document.title = 'ready';
+</script></body></html>

@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body style="margin:0"><div id=wrap style="position:relative;width:1920px;height:1080px"></div>
+<script type="module">
+import * as THREE from 'three'; import * as C3 from './char3d.js'; import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
+const R = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); R.setSize(1920, 1080); R.shadowMap.enabled = true; R.shadowMap.type = THREE.VSMShadowMap; R.outputColorSpace = THREE.SRGBColorSpace; document.getElementById('wrap').appendChild(R.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x6f7176);
+const hemi = new THREE.HemisphereLight(0xb8bec6, 0x3d3a38, 3.2); scene.add(hemi); const L = new THREE.DirectionalLight(0xc0c6cc, 1.1); L.position.set(-3, 8, 6); L.castShadow = true; L.shadow.mapSize.set(2048, 2048); L.shadow.radius = 6; Object.assign(L.shadow.camera, { left: -10, right: 10, top: 5, bottom: -2 }); scene.add(L);
+const grad = new THREE.DataTexture(new Uint8Array([70, 70, 70, 255, 150, 150, 150, 255, 235, 235, 235, 255]), 3, 1, THREE.RGBAFormat); grad.minFilter = grad.magFilter = THREE.NearestFilter; grad.needsUpdate = true;
+const fl = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), new THREE.MeshToonMaterial({ color: 0x55534f, gradientMap: grad })); fl.rotation.x = -Math.PI / 2; fl.receiveShadow = true; scene.add(fl);
+const PAL = await (await fetch('palette.json')).json(); const keys = ['aarav', 'meera', 'kabir', 'zoya', 'ryan', 'ananya', 'dev', 'ishaan', 'sara', 'vikram'];
+const names = { aarav: 'Aarav', meera: 'Dr. Meera', kabir: 'Kabir', zoya: 'Zoya', ryan: 'Ryan', ananya: 'Ananya', dev: 'Dev', ishaan: 'Ishaan', sara: 'Sara', vikram: 'Vikram' };
+keys.forEach((k, i) => { const c = C3.buildCharacter(k, PAL); c.position.set((i - 4.5) * 0.95, 0, 0); c.rotation.y = (i - 4.5) * -0.04; scene.add(c);
+  c.traverse(o => { if (o.isMesh && o.material && o.material.isMeshStandardMaterial) { const m = o.material; o.material = new THREE.MeshToonMaterial({ color: m.color, map: m.map, gradientMap: grad, transparent: m.transparent, side: m.side, depthWrite: m.depthWrite, polygonOffset: m.polygonOffset, polygonOffsetFactor: m.polygonOffsetFactor }); o.material.userData.outlineParameters = { visible: !m.transparent, thickness: 0.004, color: [0.08, 0.06, 0.06] }; } });
+  C3.applyPose(c, C3.idle(1.2, i * 1.7)); C3.setHand(c, 'L', 'relaxed'); C3.setHand(c, 'R', 'relaxed'); c.userData.face.draw({ look: [0, 0.05], blink: 0, mouth: 'X', smile: 0.6, emo: { happy: 0.15 } }); });
+const cam = new THREE.PerspectiveCamera(30, 16 / 9, 0.1, 100); cam.position.set(0, 1.25, 11.5); cam.lookAt(0, 0.95, 0);
+new OutlineEffect(R, { defaultThickness: 0.003 }).render(scene, cam);
+const o = document.createElement('canvas'); o.width = 1920; o.height = 1080; o.style.cssText = 'position:absolute;left:0;top:0'; document.getElementById('wrap').appendChild(o); const g = o.getContext('2d');
+g.font = '700 30px "Noto Sans", sans-serif'; g.fillStyle = '#f2eee6'; g.fillText('THE LAST 10 — 3D cast (stylized) · v1', 30, 50); g.font = '600 22px "Noto Sans", sans-serif';
+keys.forEach((k, i) => { const p = new THREE.Vector3((i - 4.5) * 0.95, -0.05, 0).project(cam); g.fillStyle = '#f2eee6'; g.textAlign = 'center'; g.fillText(names[k], (p.x + 1) / 2 * 1920, (1 - p.y) / 2 * 1080 + 34); });
+document.title = 'ready';
+</script></body></html>

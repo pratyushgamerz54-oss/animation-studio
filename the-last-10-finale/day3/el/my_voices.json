@@ -1,0 +1,1 @@
+{"detail":{"type":"authentication_error","code":"unauthorized","message":"The API key you used is missing the permission voices_read to execute this operation.","status":"missing_permissions","request_id":"1312b094081332e7f0a2eed8e65760e9"}}

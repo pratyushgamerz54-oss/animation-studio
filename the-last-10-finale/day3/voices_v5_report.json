@@ -1,0 +1,1958 @@
+{
+ "split": {
+  "Dev": {
+   "file": "dev_all_voices.mp3",
+   "expected": 19,
+   "found_gaps": 35,
+   "shortest_gap_used_s": 0.2,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.01,
+    3.74,
+    7.64,
+    11.85,
+    15.44,
+    19.49,
+    21.83,
+    25.28,
+    26.52,
+    30.78,
+    33.81,
+    37.45,
+    42.1,
+    42.68,
+    45.37,
+    46.59,
+    48.56,
+    51.69,
+    54.57,
+    58.82
+   ]
+  },
+  "Vikram": {
+   "file": "Vikram_all_voices.mp3",
+   "expected": 15,
+   "found_gaps": 32,
+   "shortest_gap_used_s": 0.37,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.01,
+    4.84,
+    7.09,
+    9.84,
+    12.69,
+    16.31,
+    18.57,
+    21.98,
+    24.54,
+    27.27,
+    31.03,
+    37.87,
+    39.73,
+    42.95,
+    45.87,
+    48.03
+   ]
+  },
+  "Zeno Commander": {
+   "file": "Zeno_Commander_all_voices.mp3",
+   "expected": 5,
+   "found_gaps": 11,
+   "shortest_gap_used_s": 0.51,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.07,
+    3.63,
+    7.84,
+    10.14,
+    13.44,
+    17.09
+   ]
+  },
+  "Ryan": {
+   "file": "ryan_all_voices.mp3",
+   "expected": 22,
+   "found_gaps": 40,
+   "shortest_gap_used_s": 0.3,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.12,
+    2.15,
+    9.11,
+    11.59,
+    15.68,
+    17.68,
+    20.07,
+    23.15,
+    25.52,
+    29.9,
+    31.75,
+    33.87,
+    37.9,
+    41.1,
+    42.51,
+    48.23,
+    50.8,
+    52.47,
+    55.4,
+    56.75,
+    61.25,
+    63.89,
+    64.71
+   ]
+  },
+  "Ananya": {
+   "file": "ananya_all_voices.mp3",
+   "expected": 12,
+   "found_gaps": 25,
+   "shortest_gap_used_s": 0.26,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.04,
+    3.37,
+    8.15,
+    9.73,
+    11.41,
+    15.2,
+    19.36,
+    21.9,
+    24.35,
+    27.23,
+    29.31,
+    32.89,
+    33.74
+   ]
+  },
+  "Sara": {
+   "file": "sara_all_voices.mp3",
+   "expected": 11,
+   "found_gaps": 21,
+   "shortest_gap_used_s": 0.22,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.13,
+    3.05,
+    4.03,
+    6.46,
+    10.77,
+    15.37,
+    17.73,
+    23.58,
+    26.04,
+    28.04,
+    30.76,
+    33.9
+   ]
+  },
+  "Ishaan": {
+   "file": "ishaan_all_voices.mp3",
+   "expected": 21,
+   "found_gaps": 35,
+   "shortest_gap_used_s": 0.21,
+   "longest_unused_gap_s": null,
+   "method": "stt",
+   "cuts_s": [
+    0.07,
+    5.52,
+    8.61,
+    10.17,
+    13.31,
+    15.88,
+    18.5,
+    21.22,
+    24.18,
+    26.72,
+    30.45,
+    33.86,
+    37.58,
+    40.65,
+    44.52,
+    47.72,
+    48.61,
+    50.63,
+    53.02,
+    55.23,
+    57.87,
+    60.04
+   ]
+  }
+ },
+ "lines": [
+  {
+   "file": "aarav_01",
+   "who": "Aarav",
+   "text": "साँस धीमी रख... धीमी...",
+   "dur": 4.58,
+   "est": 2.54,
+   "ratio": 1.8,
+   "flag": false
+  },
+  {
+   "file": "kabir_01",
+   "who": "Kabir",
+   "text": "ये सपना है... ये सपना है...",
+   "dur": 4.81,
+   "est": 2.86,
+   "ratio": 1.68,
+   "flag": false
+  },
+  {
+   "file": "sara_01",
+   "who": "Sara",
+   "text": "श्श्श... वो सुन सकता है।",
+   "dur": 2.92,
+   "est": 2.27,
+   "ratio": 1.29,
+   "flag": false
+  },
+  {
+   "file": "kabir_02",
+   "who": "Kabir",
+   "text": "...शुक्रिया।",
+   "dur": 1.21,
+   "est": 1.31,
+   "ratio": 0.92,
+   "flag": false
+  },
+  {
+   "file": "aarav_02",
+   "who": "Aarav",
+   "text": "अभी! पीछे वाले रास्ते से।",
+   "dur": 2.45,
+   "est": 2.0,
+   "ratio": 1.23,
+   "flag": false
+  },
+  {
+   "file": "sara_02",
+   "who": "Sara",
+   "text": "नीचे झुको!",
+   "dur": 0.92,
+   "est": 0.9,
+   "ratio": 1.02,
+   "flag": false
+  },
+  {
+   "file": "kabir_03",
+   "who": "Kabir",
+   "text": "भाग Kabir... भाग!",
+   "dur": 3.14,
+   "est": 1.71,
+   "ratio": 1.84,
+   "flag": false
+  },
+  {
+   "file": "kabir_04",
+   "who": "Kabir",
+   "text": "आह—!",
+   "dur": 2.09,
+   "est": 0.9,
+   "ratio": 2.32,
+   "flag": true
+  },
+  {
+   "file": "kabir_05",
+   "who": "Kabir",
+   "text": "सुनो... तुम जाओ। Data ज़रूरी है, मैं नहीं।",
+   "dur": 5.14,
+   "est": 3.71,
+   "ratio": 1.39,
+   "flag": false
+  },
+  {
+   "file": "aarav_03",
+   "who": "Aarav",
+   "text": "चुप! हम दस बचे हैं, Kabir... और दस ही रहेंगे।",
+   "dur": 4.54,
+   "est": 3.95,
+   "ratio": 1.15,
+   "flag": false
+  },
+  {
+   "file": "aarav_04",
+   "who": "Aarav",
+   "text": "हाथ दे। मेरे कंधे पर वज़न डाल।",
+   "dur": 3.4,
+   "est": 2.4,
+   "ratio": 1.42,
+   "flag": false
+  },
+  {
+   "file": "kabir_06",
+   "who": "Kabir",
+   "text": "धीरे... ये पैर अभी भी मेरा ही है।",
+   "dur": 4.56,
+   "est": 2.99,
+   "ratio": 1.53,
+   "flag": false
+  },
+  {
+   "file": "sara_03",
+   "who": "Sara",
+   "text": "वो... इंसान नहीं था।",
+   "dur": 2.43,
+   "est": 1.95,
+   "ratio": 1.25,
+   "flag": false
+  },
+  {
+   "file": "aarav_05",
+   "who": "Aarav",
+   "text": "नाले में उतरो। बदबू सह लो, ज़िंदा रहोगे।",
+   "dur": 4.9,
+   "est": 3.2,
+   "ratio": 1.53,
+   "flag": false
+  },
+  {
+   "file": "kabir_07",
+   "who": "Kabir",
+   "text": "वाह... आज की सबसे अच्छी ख़बर।",
+   "dur": 3.49,
+   "est": 2.67,
+   "ratio": 1.31,
+   "flag": false
+  },
+  {
+   "file": "zoya_01",
+   "who": "Zoya",
+   "text": "बस... अब हिलना मत। एक दिन आराम।",
+   "dur": 3.94,
+   "est": 2.83,
+   "ratio": 1.39,
+   "flag": false
+  },
+  {
+   "file": "kabir_08",
+   "who": "Kabir",
+   "text": "आराम? दुनिया ख़त्म हो रही है, doctor।",
+   "dur": 3.6,
+   "est": 2.96,
+   "ratio": 1.22,
+   "flag": false
+  },
+  {
+   "file": "zoya_02",
+   "who": "Zoya",
+   "text": "दुनिया बाद में बचाना, पहले ये पैर।",
+   "dur": 3.83,
+   "est": 2.72,
+   "ratio": 1.41,
+   "flag": false
+  },
+  {
+   "file": "vikram_01",
+   "who": "Vikram",
+   "text": "तीन घंटे देर। Radio भी बंद। पता है यहाँ क्या हालत थी?",
+   "dur": 4.69,
+   "est": 4.24,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "aarav_06",
+   "who": "Aarav",
+   "text": "पता है। माफ़ी... लेकिन हम खाली हाथ नहीं आए।",
+   "dur": 5.5,
+   "est": 3.79,
+   "ratio": 1.45,
+   "flag": false
+  },
+  {
+   "file": "ishaan_01",
+   "who": "Ishaan",
+   "text": "Data खुल गया! Sector 07... चालीस किलोमीटर उत्तर में, पुराना dam।",
+   "dur": 5.24,
+   "est": 5.47,
+   "ratio": 0.96,
+   "flag": false
+  },
+  {
+   "file": "ananya_01",
+   "who": "Ananya",
+   "text": "रुको... ये frame... zoom करो।",
+   "dur": 3.33,
+   "est": 3.02,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "ishaan_02",
+   "who": "Ishaan",
+   "text": "Lab का camera... यही उतरा था ना?",
+   "dur": 3.09,
+   "est": 2.91,
+   "ratio": 1.06,
+   "flag": false
+  },
+  {
+   "file": "ryan_01",
+   "who": "Ryan",
+   "text": "मैंने इन्हें पहले देखा है।",
+   "dur": 2.03,
+   "est": 2.08,
+   "ratio": 0.98,
+   "flag": false
+  },
+  {
+   "file": "meera_01",
+   "who": "Dr. Meera",
+   "text": "Ryan?",
+   "dur": 0.97,
+   "est": 0.9,
+   "ratio": 1.08,
+   "flag": false
+  },
+  {
+   "file": "ryan_02",
+   "who": "Ryan",
+   "text": "मेरे आख़िरी mission पर... इन्होंने मेरी पूरी crew उठा ली थी। मैं अकेला लौटा।",
+   "dur": 6.85,
+   "est": 6.43,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "ryan_03",
+   "who": "Ryan",
+   "text": "हम इन्हें 'Zeno' कहते थे।",
+   "dur": 2.48,
+   "est": 2.0,
+   "ratio": 1.24,
+   "flag": false
+  },
+  {
+   "file": "ryan_04",
+   "who": "Ryan",
+   "text": "इनकी गर्दन की नीली रोशनी... वही इनका ship से link है।",
+   "dur": 4.09,
+   "est": 4.59,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "vikram_02",
+   "who": "Vikram",
+   "text": "मतलब मारे जा सकते हैं।",
+   "dur": 2.12,
+   "est": 1.76,
+   "ratio": 1.2,
+   "flag": false
+  },
+  {
+   "file": "ryan_05",
+   "who": "Ryan",
+   "text": "रोके जा सकते हैं। बस।",
+   "dur": 1.98,
+   "est": 1.68,
+   "ratio": 1.18,
+   "flag": false
+  },
+  {
+   "file": "meera_02",
+   "who": "Dr. Meera",
+   "text": "अगर ये dam तक पहुँच गए... तो वो रास्ता उनका दरवाज़ा बन जाएगा।",
+   "dur": 6.24,
+   "est": 5.23,
+   "ratio": 1.19,
+   "flag": false
+  },
+  {
+   "file": "meera_03",
+   "who": "Dr. Meera",
+   "text": "और energy चार percent। दो दिन... शायद तीन।",
+   "dur": 5.61,
+   "est": 3.71,
+   "ratio": 1.51,
+   "flag": false
+  },
+  {
+   "file": "vikram_03",
+   "who": "Vikram",
+   "text": "वहाँ जाना मतलब सीधा उनके सामने।",
+   "dur": 2.75,
+   "est": 2.48,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "aarav_07",
+   "who": "Aarav",
+   "text": "और यहाँ रुकना मतलब अंधेरे में ख़त्म होना। हम सब साथ जाएँगे।",
+   "dur": 5.38,
+   "est": 4.72,
+   "ratio": 1.14,
+   "flag": false
+  },
+  {
+   "file": "ishaan_03",
+   "who": "Ishaan",
+   "text": "सब? Kabir भी?",
+   "dur": 1.56,
+   "est": 1.04,
+   "ratio": 1.5,
+   "flag": false
+  },
+  {
+   "file": "kabir_09",
+   "who": "Kabir",
+   "text": "लंगड़ा हूँ, मरा नहीं।",
+   "dur": 4.54,
+   "est": 1.68,
+   "ratio": 2.7,
+   "flag": true
+  },
+  {
+   "file": "dev_01",
+   "who": "Dev",
+   "text": "तो रस्सी बाँध लो। कोई पीछे नहीं छूटेगा।",
+   "dur": 3.73,
+   "est": 3.12,
+   "ratio": 1.2,
+   "flag": false
+  },
+  {
+   "file": "ananya_02",
+   "who": "Ananya",
+   "text": "दिन चार। कल हम निकलेंगे... पता नहीं लौटेंगे या नहीं।",
+   "dur": 4.78,
+   "est": 4.51,
+   "ratio": 1.06,
+   "flag": false
+  },
+  {
+   "file": "kabir_10",
+   "who": "Kabir",
+   "text": "Filter गया। Pump की membrane फट गई।",
+   "dur": 3.82,
+   "est": 2.8,
+   "ratio": 1.36,
+   "flag": false
+  },
+  {
+   "file": "meera_04",
+   "who": "Dr. Meera",
+   "text": "कितना पानी बचा है?",
+   "dur": 1.7,
+   "est": 1.44,
+   "ratio": 1.18,
+   "flag": false
+  },
+  {
+   "file": "kabir_11",
+   "who": "Kabir",
+   "text": "दस लोगों के लिए... दो दिन। अगर कोई नहाने की ज़िद न करे।",
+   "dur": 5.58,
+   "est": 4.75,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "vikram_04",
+   "who": "Vikram",
+   "text": "आज से राशन आधा। सबके लिए।",
+   "dur": 2.85,
+   "est": 2.0,
+   "ratio": 1.43,
+   "flag": false
+  },
+  {
+   "file": "ishaan_04",
+   "who": "Ishaan",
+   "text": "आधा? पहले ही भूख से चक्कर आ रहे हैं!",
+   "dur": 3.08,
+   "est": 2.88,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "vikram_05",
+   "who": "Vikram",
+   "text": "चक्कर से कोई नहीं मरता। प्यास से मरता है।",
+   "dur": 3.62,
+   "est": 3.28,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "zoya_03",
+   "who": "Zoya",
+   "text": "Kabir का हिस्सा मत काटो। Infection से लड़ने के लिए पानी चाहिए।",
+   "dur": 4.42,
+   "est": 4.96,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "kabir_12",
+   "who": "Kabir",
+   "text": "नहीं... मेरा भी आधा। मैं special नहीं हूँ।",
+   "dur": 6.41,
+   "est": 3.71,
+   "ratio": 1.73,
+   "flag": false
+  },
+  {
+   "file": "dev_02",
+   "who": "Dev",
+   "text": "मेरा आधा उसे दे दो। मैं ऊँट हूँ, आदत है।",
+   "dur": 3.9,
+   "est": 3.2,
+   "ratio": 1.22,
+   "flag": false
+  },
+  {
+   "file": "ryan_06",
+   "who": "Ryan",
+   "text": "फिर से... ये आवाज़ें...",
+   "dur": 2.24,
+   "est": 2.54,
+   "ratio": 0.88,
+   "flag": false
+  },
+  {
+   "file": "commander_01",
+   "who": "Zeno Commander",
+   "text": "...दरवाज़ा... खोलो...",
+   "dur": 3.43,
+   "est": 2.73,
+   "ratio": 1.26,
+   "flag": false
+  },
+  {
+   "file": "ananya_03",
+   "who": "Ananya",
+   "text": "Ryan? तुम ठीक हो?",
+   "dur": 1.58,
+   "est": 1.36,
+   "ratio": 1.16,
+   "flag": false
+  },
+  {
+   "file": "ryan_07",
+   "who": "Ryan",
+   "text": "सिर दर्द। Space की पुरानी आदत।",
+   "dur": 3.08,
+   "est": 2.4,
+   "ratio": 1.28,
+   "flag": false
+  },
+  {
+   "file": "ananya_04",
+   "who": "Ananya",
+   "text": "...ये रोशनी कैसी थी?",
+   "dur": 1.62,
+   "est": 1.95,
+   "ratio": 0.83,
+   "flag": false
+  },
+  {
+   "file": "dev_03",
+   "who": "Dev",
+   "text": "सड़क से नहीं, खंडहरों से चलो। खुले में हम निशाना हैं।",
+   "dur": 4.21,
+   "est": 4.24,
+   "ratio": 0.99,
+   "flag": false
+  },
+  {
+   "file": "ishaan_05",
+   "who": "Ishaan",
+   "text": "आउच! ये रस्सी है या फाँसी?",
+   "dur": 2.57,
+   "est": 2.08,
+   "ratio": 1.24,
+   "flag": false
+  },
+  {
+   "file": "dev_04",
+   "who": "Dev",
+   "text": "रस्सी है। तेरे जैसे को उड़ने से रोकती है।",
+   "dur": 3.59,
+   "est": 3.28,
+   "ratio": 1.09,
+   "flag": false
+  },
+  {
+   "file": "sara_04",
+   "who": "Sara",
+   "text": "ये पत्थर... गरम है। ज़मीन के अंदर कुछ हो रहा है।",
+   "dur": 4.31,
+   "est": 4.19,
+   "ratio": 1.03,
+   "flag": false
+  },
+  {
+   "file": "vikram_06",
+   "who": "Vikram",
+   "text": "चलते रहो। पीछे मैं हूँ।",
+   "dur": 2.19,
+   "est": 1.84,
+   "ratio": 1.19,
+   "flag": false
+  },
+  {
+   "file": "sara_05",
+   "who": "Sara",
+   "text": "हवा का रंग देखो... ये धूल नहीं, राख है। ज़हरीली।",
+   "dur": 4.6,
+   "est": 4.19,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "dev_05",
+   "who": "Dev",
+   "text": "कपड़ा गीला करो, नाक-मुँह पर बाँधो। रस्सी मत छोड़ना!",
+   "dur": 4.05,
+   "est": 4.08,
+   "ratio": 0.99,
+   "flag": false
+  },
+  {
+   "file": "ishaan_06",
+   "who": "Ishaan",
+   "text": "कुछ... कुछ दिख नहीं रहा...",
+   "dur": 2.62,
+   "est": 2.78,
+   "ratio": 0.94,
+   "flag": false
+  },
+  {
+   "file": "vikram_07",
+   "who": "Vikram",
+   "text": "मेरी आवाज़ सुनो! Ishaan, गिनती बोल!",
+   "dur": 3.35,
+   "est": 2.8,
+   "ratio": 1.2,
+   "flag": false
+  },
+  {
+   "file": "ishaan_07",
+   "who": "Ishaan",
+   "text": "एक... दो... तीन...",
+   "dur": 2.66,
+   "est": 2.49,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "aarav_08",
+   "who": "Aarav",
+   "text": "सब गिनो! दस तक! कोई चुप नहीं रहेगा!",
+   "dur": 3.67,
+   "est": 2.8,
+   "ratio": 1.31,
+   "flag": false
+  },
+  {
+   "file": "ishaan_08",
+   "who": "Ishaan",
+   "text": "पानी! बोतलें! पूरी shelf भरी है!",
+   "dur": 2.96,
+   "est": 2.56,
+   "ratio": 1.16,
+   "flag": false
+  },
+  {
+   "file": "kabir_13",
+   "who": "Kabir",
+   "text": "और biscuit... expire हो चुके हैं। पर कौन देख रहा है।",
+   "dur": 5.78,
+   "est": 4.51,
+   "ratio": 1.28,
+   "flag": false
+  },
+  {
+   "file": "dev_06",
+   "who": "Dev",
+   "text": "धीरे! फ़र्श कमज़ोर है।",
+   "dur": 2.34,
+   "est": 1.76,
+   "ratio": 1.33,
+   "flag": false
+  },
+  {
+   "file": "ryan_08",
+   "who": "Ryan",
+   "text": "शोर... उन्होंने सुना होगा।",
+   "dur": 2.37,
+   "est": 2.43,
+   "ratio": 0.98,
+   "flag": false
+  },
+  {
+   "file": "vikram_08",
+   "who": "Vikram",
+   "text": "Freezer room में! सब! अभी!",
+   "dur": 2.45,
+   "est": 2.08,
+   "ratio": 1.18,
+   "flag": false
+  },
+  {
+   "file": "aarav_09",
+   "who": "Aarav",
+   "text": "कोई साँस भी ज़ोर से नहीं लेगा।",
+   "dur": 3.5,
+   "est": 2.4,
+   "ratio": 1.46,
+   "flag": false
+  },
+  {
+   "file": "ishaan_09",
+   "who": "Ishaan",
+   "text": "प्लीज़... प्लीज़ बजना मत...",
+   "dur": 2.54,
+   "est": 2.86,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "kabir_14",
+   "who": "Kabir",
+   "text": "मेरी जान... आधी निकल गई।",
+   "dur": 3.98,
+   "est": 2.27,
+   "ratio": 1.75,
+   "flag": false
+  },
+  {
+   "file": "sara_06",
+   "who": "Sara",
+   "text": "बाकी आधी पानी के लिए बचा के रखो।",
+   "dur": 2.36,
+   "est": 2.56,
+   "ratio": 0.92,
+   "flag": false
+  },
+  {
+   "file": "zoya_04",
+   "who": "Zoya",
+   "text": "अगली बार ये ghadi मैं तोड़ दूँगी।",
+   "dur": 2.68,
+   "est": 2.64,
+   "ratio": 1.02,
+   "flag": false
+  },
+  {
+   "file": "ishaan_10",
+   "who": "Ishaan",
+   "text": "ठंड से उँगलियाँ जम गईं... keyboard भी नहीं चला पाऊँगा।",
+   "dur": 3.73,
+   "est": 4.67,
+   "ratio": 0.8,
+   "flag": false
+  },
+  {
+   "file": "zoya_05",
+   "who": "Zoya",
+   "text": "हाथ आग के पास रखो, सीधे आग में नहीं।",
+   "dur": 3.4,
+   "est": 2.88,
+   "ratio": 1.18,
+   "flag": false
+  },
+  {
+   "file": "kabir_15",
+   "who": "Kabir",
+   "text": "जिस दिन ये सब हुआ... माँ का call आया था।",
+   "dur": 5.3,
+   "est": 3.55,
+   "ratio": 1.49,
+   "flag": false
+  },
+  {
+   "file": "kabir_16",
+   "who": "Kabir",
+   "text": "मैंने नहीं उठाया। सोचा... बाद में कर लूँगा।",
+   "dur": 5.41,
+   "est": 3.79,
+   "ratio": 1.43,
+   "flag": false
+  },
+  {
+   "file": "kabir_17",
+   "who": "Kabir",
+   "text": "वो 'बाद में'... कभी आया ही नहीं।",
+   "dur": 4.81,
+   "est": 2.91,
+   "ratio": 1.65,
+   "flag": false
+  },
+  {
+   "file": "zoya_06",
+   "who": "Zoya",
+   "text": "मेरा छोटा भाई... उस दिन मेरा हाथ पकड़े था।",
+   "dur": 4.11,
+   "est": 3.71,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "zoya_07",
+   "who": "Zoya",
+   "text": "भीड़ में छूट गया। मैं doctor बनने वाली थी... और उसे बचा नहीं पाई।",
+   "dur": 6.39,
+   "est": 5.55,
+   "ratio": 1.15,
+   "flag": false
+  },
+  {
+   "file": "dev_07",
+   "who": "Dev",
+   "text": "इसलिए अब हम हाथ नहीं... रस्सी पकड़ते हैं।",
+   "dur": 3.45,
+   "est": 3.63,
+   "ratio": 0.95,
+   "flag": false
+  },
+  {
+   "file": "ryan_09",
+   "who": "Ryan",
+   "text": "ऊपर से धरती नीली दिखती थी... अब सिर्फ़ धुआँ।",
+   "dur": 4.38,
+   "est": 3.87,
+   "ratio": 1.13,
+   "flag": false
+  },
+  {
+   "file": "ananya_05",
+   "who": "Ananya",
+   "text": "दिन पाँच। हम दस हैं... और हम चल रहे हैं।",
+   "dur": 3.78,
+   "est": 3.55,
+   "ratio": 1.06,
+   "flag": false
+  },
+  {
+   "file": "ryan_10",
+   "who": "Ryan",
+   "text": "रुको। हवा बदल गई।",
+   "dur": 1.85,
+   "est": 1.36,
+   "ratio": 1.36,
+   "flag": false
+  },
+  {
+   "file": "ishaan_11",
+   "who": "Ishaan",
+   "text": "Drones! ऊपर से... तीन, चार... बहुत सारे!",
+   "dur": 3.41,
+   "est": 3.9,
+   "ratio": 0.87,
+   "flag": false
+  },
+  {
+   "file": "vikram_09",
+   "who": "Vikram",
+   "text": "सब पुल के खंभों के पीछे! अभी!",
+   "dur": 2.64,
+   "est": 2.32,
+   "ratio": 1.14,
+   "flag": false
+  },
+  {
+   "file": "ryan_11",
+   "who": "Ryan",
+   "text": "गर्दन! नीली रोशनी पर मारो!",
+   "dur": 2.12,
+   "est": 2.08,
+   "ratio": 1.02,
+   "flag": false
+  },
+  {
+   "file": "dev_08",
+   "who": "Dev",
+   "text": "Ananya, नीचे!",
+   "dur": 1.22,
+   "est": 1.04,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "ishaan_12",
+   "who": "Ishaan",
+   "text": "चल, चल, चल... हाँ! मेरा drone अब हमारी तरफ़ है!",
+   "dur": 3.72,
+   "est": 4.11,
+   "ratio": 0.91,
+   "flag": false
+  },
+  {
+   "file": "kabir_18",
+   "who": "Kabir",
+   "text": "बच्चा genius है, मान गए!",
+   "dur": 3.26,
+   "est": 1.92,
+   "ratio": 1.7,
+   "flag": false
+  },
+  {
+   "file": "vikram_10",
+   "who": "Vikram",
+   "text": "Dev, सबको पार ले जाओ। मैं इन्हें रोकता हूँ।",
+   "dur": 3.69,
+   "est": 3.44,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "aarav_10",
+   "who": "Aarav",
+   "text": "नहीं! हम साथ चलेंगे।",
+   "dur": 2.33,
+   "est": 1.6,
+   "ratio": 1.46,
+   "flag": false
+  },
+  {
+   "file": "vikram_11",
+   "who": "Vikram",
+   "text": "Security chief का काम है... सबसे आगे चलना, और ज़रूरत पड़े तो सबसे पीछे रुकना।",
+   "dur": 6.84,
+   "est": 6.51,
+   "ratio": 1.05,
+   "flag": false
+  },
+  {
+   "file": "vikram_12",
+   "who": "Vikram",
+   "text": "चलो... आओ मेरे पास।",
+   "dur": 1.72,
+   "est": 1.87,
+   "ratio": 0.92,
+   "flag": false
+  },
+  {
+   "file": "aarav_11",
+   "who": "Aarav",
+   "text": "Vikram!!",
+   "dur": 1.29,
+   "est": 0.9,
+   "ratio": 1.43,
+   "flag": false
+  },
+  {
+   "file": "ishaan_13",
+   "who": "Ishaan",
+   "text": "Radio... कुछ भी नहीं। सिर्फ़ शोर।",
+   "dur": 3.07,
+   "est": 2.99,
+   "ratio": 1.03,
+   "flag": false
+  },
+  {
+   "file": "aarav_12",
+   "who": "Aarav",
+   "text": "मैंने वादा किया था... दस के दस।",
+   "dur": 5.23,
+   "est": 2.83,
+   "ratio": 1.85,
+   "flag": false
+  },
+  {
+   "file": "zoya_08",
+   "who": "Zoya",
+   "text": "वादा तूने नहीं तोड़ा, Aarav। उसने हमें बचाने के लिए चुना।",
+   "dur": 4.81,
+   "est": 4.56,
+   "ratio": 1.05,
+   "flag": false
+  },
+  {
+   "file": "zoya_09",
+   "who": "Zoya",
+   "text": "अब उसकी चुनी हुई राह मत छोड़ना।",
+   "dur": 2.6,
+   "est": 2.48,
+   "ratio": 1.05,
+   "flag": false
+  },
+  {
+   "file": "dev_09",
+   "who": "Dev",
+   "text": "भीग मत, बीमार पड़ेगा। Vikram होता तो डाँटता।",
+   "dur": 4.25,
+   "est": 3.52,
+   "ratio": 1.21,
+   "flag": false
+  },
+  {
+   "file": "zoya_10",
+   "who": "Zoya",
+   "text": "बुखार बहुत तेज़ है... घाव में infection है। Antibiotic के बिना... कल तक नहीं।",
+   "dur": 6.44,
+   "est": 6.86,
+   "ratio": 0.94,
+   "flag": false
+  },
+  {
+   "file": "kabir_19",
+   "who": "Kabir",
+   "text": "माँ... फ़ोन उठा रहा हूँ... रुको...",
+   "dur": 5.7,
+   "est": 3.77,
+   "ratio": 1.51,
+   "flag": false
+  },
+  {
+   "file": "dev_10",
+   "who": "Dev",
+   "text": "सामने hospital है। आधा पानी में डूबा।",
+   "dur": 2.83,
+   "est": 2.96,
+   "ratio": 0.96,
+   "flag": false
+  },
+  {
+   "file": "zoya_11",
+   "who": "Zoya",
+   "text": "मैं जाऊँगी। दवा मुझे पहचाननी है।",
+   "dur": 3.42,
+   "est": 2.56,
+   "ratio": 1.34,
+   "flag": false
+  },
+  {
+   "file": "dev_11",
+   "who": "Dev",
+   "text": "तो रस्सी मैं पकड़ूँगा। इस बार हाथ नहीं छूटेगा।",
+   "dur": 3.64,
+   "est": 3.68,
+   "ratio": 0.99,
+   "flag": false
+  },
+  {
+   "file": "zoya_12",
+   "who": "Zoya",
+   "text": "डरना मत, Zoya... बस एक साँस।",
+   "dur": 3.69,
+   "est": 2.59,
+   "ratio": 1.42,
+   "flag": false
+  },
+  {
+   "file": "dev_12",
+   "who": "Dev",
+   "text": "बीस... पच्चीस... तीस... चल बेटा, ऊपर आ...",
+   "dur": 4.65,
+   "est": 4.68,
+   "ratio": 0.99,
+   "flag": false
+  },
+  {
+   "file": "dev_13",
+   "who": "Dev",
+   "text": "अब!",
+   "dur": 0.58,
+   "est": 0.9,
+   "ratio": 0.64,
+   "flag": false
+  },
+  {
+   "file": "zoya_13",
+   "who": "Zoya",
+   "text": "मिल गई! Antibiotic... पूरा डिब्बा!",
+   "dur": 4.55,
+   "est": 3.07,
+   "ratio": 1.48,
+   "flag": false
+  },
+  {
+   "file": "dev_14",
+   "who": "Dev",
+   "text": "आज फिर किसी का हाथ नहीं छूटा।",
+   "dur": 2.58,
+   "est": 2.32,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "ananya_06",
+   "who": "Ananya",
+   "text": "Aarav... ये देखो। पुल पर... Ryan की गर्दन।",
+   "dur": 3.89,
+   "est": 4.06,
+   "ratio": 0.96,
+   "flag": false
+  },
+  {
+   "file": "aarav_13",
+   "who": "Aarav",
+   "text": "ये... नीली रोशनी?",
+   "dur": 2.18,
+   "est": 1.71,
+   "ratio": 1.27,
+   "flag": false
+  },
+  {
+   "file": "ishaan_14",
+   "who": "Ishaan",
+   "text": "तो इसलिए वो हर बार हमें ढूंढ लेते हैं! ये signal भेज रहा है!",
+   "dur": 3.87,
+   "est": 4.8,
+   "ratio": 0.81,
+   "flag": false
+  },
+  {
+   "file": "ryan_12",
+   "who": "Ryan",
+   "text": "मुझे नहीं पता ये क्या है! क़सम से... मुझे नहीं पता।",
+   "dur": 4.03,
+   "est": 4.43,
+   "ratio": 0.91,
+   "flag": false
+  },
+  {
+   "file": "meera_05",
+   "who": "Dr. Meera",
+   "text": "शांत! अभी किसी पर इल्ज़ाम नहीं।",
+   "dur": 3.32,
+   "est": 2.48,
+   "ratio": 1.34,
+   "flag": false
+  },
+  {
+   "file": "ishaan_15",
+   "who": "Ishaan",
+   "text": "Vikram मर गया, Meera! किसी की तो ग़लती है!",
+   "dur": 3.2,
+   "est": 3.36,
+   "ratio": 0.95,
+   "flag": false
+  },
+  {
+   "file": "aarav_14",
+   "who": "Aarav",
+   "text": "बस!",
+   "dur": 0.8,
+   "est": 0.9,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "aarav_15",
+   "who": "Aarav",
+   "text": "Ryan हमारे साथ चलेगा। मेरे बगल में।",
+   "dur": 3.57,
+   "est": 2.8,
+   "ratio": 1.28,
+   "flag": false
+  },
+  {
+   "file": "ryan_13",
+   "who": "Ryan",
+   "text": "अगर मैं ख़तरा बना... तो रुकना मत, Aarav।",
+   "dur": 3.2,
+   "est": 3.55,
+   "ratio": 0.9,
+   "flag": false
+  },
+  {
+   "file": "aarav_16",
+   "who": "Aarav",
+   "text": "तब तक तू हमारा है।",
+   "dur": 2.41,
+   "est": 1.44,
+   "ratio": 1.67,
+   "flag": false
+  },
+  {
+   "file": "sara_07",
+   "who": "Sara",
+   "text": "ये दरार dam के नीचे से निकल रही है... पूरी धरती का सबसे कमज़ोर हिस्सा यहीं है।",
+   "dur": 5.85,
+   "est": 6.59,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "meera_06",
+   "who": "Dr. Meera",
+   "text": "पानी... उल्टा बह रहा है। ऊपर की तरफ़।",
+   "dur": 3.73,
+   "est": 3.31,
+   "ratio": 1.13,
+   "flag": false
+  },
+  {
+   "file": "ananya_07",
+   "who": "Ananya",
+   "text": "दिन सात। अब हम नौ हैं।",
+   "dur": 2.54,
+   "est": 1.76,
+   "ratio": 1.44,
+   "flag": false
+  },
+  {
+   "file": "kabir_20",
+   "who": "Kabir",
+   "text": "ये machine हमारी नहीं है... ये dam के अंदर उग आई है।",
+   "dur": 5.03,
+   "est": 4.51,
+   "ratio": 1.12,
+   "flag": false
+  },
+  {
+   "file": "ishaan_16",
+   "who": "Ishaan",
+   "text": "छू के देखूँ?",
+   "dur": 0.89,
+   "est": 0.96,
+   "ratio": 0.93,
+   "flag": false
+  },
+  {
+   "file": "meera_07",
+   "who": "Dr. Meera",
+   "text": "नहीं!",
+   "dur": 1.05,
+   "est": 0.9,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "kabir_21",
+   "who": "Kabir",
+   "text": "पहली बार किसी ने तुझे रोका और तूने सुना।",
+   "dur": 4.58,
+   "est": 3.2,
+   "ratio": 1.43,
+   "flag": false
+  },
+  {
+   "file": "kabir_22",
+   "who": "Kabir",
+   "text": "दवा काम कर गई... अब बस ये dam मुझे न खा जाए।",
+   "dur": 5.12,
+   "est": 3.87,
+   "ratio": 1.32,
+   "flag": false
+  },
+  {
+   "file": "ishaan_17",
+   "who": "Ishaan",
+   "text": "इसमें Ryan के mission का log है!",
+   "dur": 1.99,
+   "est": 2.56,
+   "ratio": 0.78,
+   "flag": false
+  },
+  {
+   "file": "ryan_14",
+   "who": "Ryan",
+   "text": "ये पिंजरा नहीं है...",
+   "dur": 1.37,
+   "est": 1.95,
+   "ratio": 0.7,
+   "flag": false
+  },
+  {
+   "file": "ryan_15",
+   "who": "Ryan",
+   "text": "ये कवच है। किसी ने धरती को इनसे बचाने के लिए बंद किया था।",
+   "dur": 5.71,
+   "est": 4.56,
+   "ratio": 1.25,
+   "flag": false
+  },
+  {
+   "file": "sara_08",
+   "who": "Sara",
+   "text": "तो जिसे हम जेल समझ रहे थे...",
+   "dur": 2.46,
+   "est": 2.59,
+   "ratio": 0.95,
+   "flag": false
+  },
+  {
+   "file": "meera_08",
+   "who": "Dr. Meera",
+   "text": "वो ढाल थी।",
+   "dur": 2.03,
+   "est": 0.9,
+   "ratio": 2.26,
+   "flag": true
+  },
+  {
+   "file": "meera_09",
+   "who": "Dr. Meera",
+   "text": "और ये दरवाज़ा... सिर्फ़ इंसान का हाथ खोल सकता है।",
+   "dur": 5.95,
+   "est": 4.27,
+   "ratio": 1.39,
+   "flag": false
+  },
+  {
+   "file": "meera_10",
+   "who": "Dr. Meera",
+   "text": "इसलिए वो हमें मार नहीं रहे थे। वो हमें ढूंढ रहे थे।",
+   "dur": 4.92,
+   "est": 4.08,
+   "ratio": 1.21,
+   "flag": false
+  },
+  {
+   "file": "ishaan_18",
+   "who": "Ishaan",
+   "text": "Mothership आ रहा है... सुबह से पहले।",
+   "dur": 2.39,
+   "est": 3.23,
+   "ratio": 0.74,
+   "flag": false
+  },
+  {
+   "file": "aarav_17",
+   "who": "Aarav",
+   "text": "तो हम आज रात इसे बंद करेंगे।",
+   "dur": 4.54,
+   "est": 2.24,
+   "ratio": 2.03,
+   "flag": false
+  },
+  {
+   "file": "dev_15",
+   "who": "Dev",
+   "text": "और अगर नहीं कर पाए?",
+   "dur": 1.17,
+   "est": 1.52,
+   "ratio": 0.77,
+   "flag": false
+  },
+  {
+   "file": "aarav_18",
+   "who": "Aarav",
+   "text": "तो कल सुबह किसी को ये सवाल पूछने का मौका नहीं मिलेगा।",
+   "dur": 5.62,
+   "est": 4.24,
+   "ratio": 1.33,
+   "flag": false
+  },
+  {
+   "file": "commander_02",
+   "who": "Zeno Commander",
+   "text": "हाथ रखो... और तुम्हारी crew लौट आएगी।",
+   "dur": 4.11,
+   "est": 3.31,
+   "ratio": 1.24,
+   "flag": false
+  },
+  {
+   "file": "ryan_16",
+   "who": "Ryan",
+   "text": "मेरी crew... ज़िंदा है?",
+   "dur": 2.57,
+   "est": 2.19,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "sara_09",
+   "who": "Sara",
+   "text": "Ryan! वहाँ से हटो!",
+   "dur": 2.0,
+   "est": 1.44,
+   "ratio": 1.39,
+   "flag": false
+  },
+  {
+   "file": "ryan_17",
+   "who": "Ryan",
+   "text": "मैं... मैं यहाँ कैसे आया?",
+   "dur": 1.63,
+   "est": 2.35,
+   "ratio": 0.69,
+   "flag": false
+  },
+  {
+   "file": "meera_11",
+   "who": "Dr. Meera",
+   "text": "Turbine की पूरी ताक़त node में गई... तो दरार सिल सकती है।",
+   "dur": 4.64,
+   "est": 4.91,
+   "ratio": 0.95,
+   "flag": false
+  },
+  {
+   "file": "kabir_23",
+   "who": "Kabir",
+   "text": "Turbine मेरा काम। Ishaan, मेरे साथ।",
+   "dur": 3.01,
+   "est": 2.8,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "dev_16",
+   "who": "Dev",
+   "text": "दरवाज़ा मैं संभालूँगा।",
+   "dur": 1.94,
+   "est": 1.76,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "ananya_08",
+   "who": "Ananya",
+   "text": "आज record नहीं... आज लड़ना है।",
+   "dur": 2.45,
+   "est": 2.75,
+   "ratio": 0.89,
+   "flag": false
+  },
+  {
+   "file": "kabir_24",
+   "who": "Kabir",
+   "text": "EMP तैयार! आँखें बंद करो!",
+   "dur": 2.58,
+   "est": 2.0,
+   "ratio": 1.29,
+   "flag": false
+  },
+  {
+   "file": "ananya_09",
+   "who": "Ananya",
+   "text": "मेरे पास बस एक flash बचा है... ये लो!",
+   "dur": 2.88,
+   "est": 3.31,
+   "ratio": 0.87,
+   "flag": false
+  },
+  {
+   "file": "ishaan_19",
+   "who": "Ishaan",
+   "text": "Drone दाएँ से! Dev, दाएँ!",
+   "dur": 2.21,
+   "est": 2.0,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "zoya_14",
+   "who": "Zoya",
+   "text": "Aarav!!",
+   "dur": 2.42,
+   "est": 0.9,
+   "ratio": 2.69,
+   "flag": true
+  },
+  {
+   "file": "vikram_13",
+   "who": "Vikram",
+   "text": "Security chief... ड्यूटी पर वापस।",
+   "dur": 3.02,
+   "est": 2.99,
+   "ratio": 1.01,
+   "flag": false
+  },
+  {
+   "file": "zoya_15",
+   "who": "Zoya",
+   "text": "तुम... ज़िंदा हो!",
+   "dur": 3.69,
+   "est": 1.71,
+   "ratio": 2.16,
+   "flag": false
+  },
+  {
+   "file": "vikram_14",
+   "who": "Vikram",
+   "text": "गले बाद में मिलना। पहले लड़ो।",
+   "dur": 2.92,
+   "est": 2.32,
+   "ratio": 1.26,
+   "flag": false
+  },
+  {
+   "file": "dev_17",
+   "who": "Dev",
+   "text": "Aarav, जाओ! दरवाज़ा मैं पकड़े हूँ!",
+   "dur": 3.13,
+   "est": 2.72,
+   "ratio": 1.15,
+   "flag": false
+  },
+  {
+   "file": "commander_03",
+   "who": "Zeno Commander",
+   "text": "अभी, Ryan। खोलो।",
+   "dur": 2.15,
+   "est": 1.28,
+   "ratio": 1.68,
+   "flag": false
+  },
+  {
+   "file": "aarav_19",
+   "who": "Aarav",
+   "text": "Ryan! मेरी तरफ़ देख! तेरा नाम क्या है?",
+   "dur": 3.35,
+   "est": 3.04,
+   "ratio": 1.1,
+   "flag": false
+  },
+  {
+   "file": "ryan_18",
+   "who": "Ryan",
+   "text": "Ryan... मैं... Ryan हूँ...",
+   "dur": 2.93,
+   "est": 3.13,
+   "ratio": 0.94,
+   "flag": false
+  },
+  {
+   "file": "aarav_20",
+   "who": "Aarav",
+   "text": "और तू किसके साथ है?",
+   "dur": 1.84,
+   "est": 1.52,
+   "ratio": 1.21,
+   "flag": false
+  },
+  {
+   "file": "ryan_19",
+   "who": "Ryan",
+   "text": "...तुम्हारे साथ।",
+   "dur": 1.35,
+   "est": 1.63,
+   "ratio": 0.83,
+   "flag": false
+  },
+  {
+   "file": "ryan_20",
+   "who": "Ryan",
+   "text": "मैं जाऊँगा। एक बार ऊपर गया था... इस बार नीचे सही।",
+   "dur": 4.5,
+   "est": 4.27,
+   "ratio": 1.05,
+   "flag": false
+  },
+  {
+   "file": "aarav_21",
+   "who": "Aarav",
+   "text": "नहीं Ryan। कोई अकेला नहीं जाएगा। हम साथ चलेंगे।",
+   "dur": 4.08,
+   "est": 3.76,
+   "ratio": 1.09,
+   "flag": false
+  },
+  {
+   "file": "sara_10",
+   "who": "Sara",
+   "text": "बाएँ पत्थर पर पैर मत रखना, टूटेगा!",
+   "dur": 2.66,
+   "est": 2.72,
+   "ratio": 0.98,
+   "flag": false
+  },
+  {
+   "file": "ryan_21",
+   "who": "Ryan",
+   "text": "गरम है... बहुत गरम...",
+   "dur": 2.64,
+   "est": 2.38,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "kabir_25",
+   "who": "Kabir",
+   "text": "अब!!",
+   "dur": 1.63,
+   "est": 0.9,
+   "ratio": 1.81,
+   "flag": false
+  },
+  {
+   "file": "meera_12",
+   "who": "Dr. Meera",
+   "text": "दरार... बंद हो रही है!",
+   "dur": 2.59,
+   "est": 2.11,
+   "ratio": 1.23,
+   "flag": false
+  },
+  {
+   "file": "ishaan_20",
+   "who": "Ishaan",
+   "text": "वो भाग रहे हैं! सब ऊपर जा रहे हैं!",
+   "dur": 2.64,
+   "est": 2.72,
+   "ratio": 0.97,
+   "flag": false
+  },
+  {
+   "file": "dev_18",
+   "who": "Dev",
+   "text": "रस्सी... मत छोड़ना...",
+   "dur": 2.86,
+   "est": 2.38,
+   "ratio": 1.2,
+   "flag": false
+  },
+  {
+   "file": "zoya_16",
+   "who": "Zoya",
+   "text": "Dev? Dev... आँखें खोलो...",
+   "dur": 3.55,
+   "est": 2.7,
+   "ratio": 1.32,
+   "flag": false
+  },
+  {
+   "file": "dev_19",
+   "who": "Dev",
+   "text": "इतना मत हिलाओ, doctor... ज़िंदा हूँ।",
+   "dur": 4.25,
+   "est": 3.23,
+   "ratio": 1.32,
+   "flag": false
+  },
+  {
+   "file": "ananya_10",
+   "who": "Ananya",
+   "text": "आसमान... देखो।",
+   "dur": 2.08,
+   "est": 1.47,
+   "ratio": 1.41,
+   "flag": false
+  },
+  {
+   "file": "zoya_17",
+   "who": "Zoya",
+   "text": "धूप... इतने दिनों बाद।",
+   "dur": 4.41,
+   "est": 2.11,
+   "ratio": 2.09,
+   "flag": false
+  },
+  {
+   "file": "ishaan_21",
+   "who": "Ishaan",
+   "text": "गर्मी... असली गर्मी।",
+   "dur": 2.17,
+   "est": 1.95,
+   "ratio": 1.11,
+   "flag": false
+  },
+  {
+   "file": "ananya_11",
+   "who": "Ananya",
+   "text": "दिन दस। धूप लौट आई... और हम सब भी।",
+   "dur": 3.58,
+   "est": 3.07,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "kabir_26",
+   "who": "Kabir",
+   "text": "बाद में नहीं... अभी बोल रहा हूँ — शुक्रिया, Dev। और Vikram, तुझे भी।",
+   "dur": 8.22,
+   "est": 5.79,
+   "ratio": 1.42,
+   "flag": false
+  },
+  {
+   "file": "meera_13",
+   "who": "Dr. Meera",
+   "text": "Dam की बिजली bunker तक पहुँच गई... 100 percent।",
+   "dur": 4.34,
+   "est": 4.11,
+   "ratio": 1.06,
+   "flag": false
+  },
+  {
+   "file": "vikram_15",
+   "who": "Vikram",
+   "text": "अब कोई अंधेरे में नहीं सोएगा।",
+   "dur": 2.13,
+   "est": 2.32,
+   "ratio": 0.92,
+   "flag": false
+  },
+  {
+   "file": "aarav_22",
+   "who": "Aarav",
+   "text": "हम दस थे...",
+   "dur": 2.1,
+   "est": 1.23,
+   "ratio": 1.71,
+   "flag": false
+  },
+  {
+   "file": "aarav_23",
+   "who": "Aarav",
+   "text": "...और दस ही हैं।",
+   "dur": 1.74,
+   "est": 1.63,
+   "ratio": 1.07,
+   "flag": false
+  },
+  {
+   "file": "sara_11",
+   "who": "Sara",
+   "text": "पत्थर ठंडा हो गया... ज़मीन चैन में है।",
+   "dur": 3.06,
+   "est": 3.39,
+   "ratio": 0.9,
+   "flag": false
+  },
+  {
+   "file": "commander_04",
+   "who": "Zeno Commander",
+   "text": "दरवाज़ा बंद हुआ है... टूटा नहीं।",
+   "dur": 3.15,
+   "est": 2.91,
+   "ratio": 1.08,
+   "flag": false
+  },
+  {
+   "file": "commander_05",
+   "who": "Zeno Commander",
+   "text": "और उनमें से एक... अब भी हमारा है।",
+   "dur": 3.5,
+   "est": 2.99,
+   "ratio": 1.17,
+   "flag": false
+  },
+  {
+   "file": "ryan_22",
+   "who": "Ryan",
+   "text": "...ये क्या है?",
+   "dur": 0.81,
+   "est": 1.47,
+   "ratio": 0.55,
+   "flag": false
+  },
+  {
+   "file": "ananya_12",
+   "who": "Ananya",
+   "text": "...फिर से।",
+   "dur": 0.85,
+   "est": 1.15,
+   "ratio": 0.74,
+   "flag": false
+  }
+ ],
+ "dp_vs_stt": {
+  "Dev": [
+   0.58,
+   0.31,
+   0.36,
+   0.2,
+   0.21,
+   0.26,
+   1.62,
+   1.42,
+   2.12,
+   1.71,
+   2.18,
+   0.31,
+   0.03,
+   0.21,
+   0.02,
+   0.21,
+   0.21,
+   0.49
+  ],
+  "Vikram": [
+   0.02,
+   0.29,
+   0.26,
+   0.23,
+   0.28,
+   0.04,
+   0.2,
+   0.05,
+   0.01,
+   0.3,
+   0.26,
+   0.06,
+   0.08,
+   0.24
+  ],
+  "Zeno Commander": [
+   0.05,
+   0.3,
+   0.06,
+   0.01
+  ],
+  "Ryan": [
+   0.01,
+   1.99,
+   2.75,
+   2.12,
+   2.26,
+   2.38,
+   3.17,
+   1.57,
+   1.9,
+   1.32,
+   1.54,
+   1.49,
+   1.37,
+   1.91,
+   0.2,
+   0.22,
+   1.06,
+   1.17,
+   1.02,
+   0.22,
+   0.25
+  ],
+  "Ananya": [
+   0.3,
+   0.23,
+   0.03,
+   0.06,
+   0.2,
+   0.94,
+   0.23,
+   0.16,
+   0.23,
+   0.26,
+   0.17
+  ],
+  "Sara": [
+   0.16,
+   0.05,
+   0.22,
+   0.24,
+   0.29,
+   0.22,
+   0.18,
+   0.19,
+   0.2,
+   0.01
+  ],
+  "Ishaan": [
+   2.64,
+   3.19,
+   3.11,
+   4.08,
+   4.8,
+   5.45,
+   5.57,
+   5.9,
+   5.64,
+   5.36,
+   5.48,
+   7.32,
+   6.92,
+   7.11,
+   8.35,
+   8.07,
+   4.64,
+   1.37,
+   2.38,
+   0.24
+  ]
+ }
+}

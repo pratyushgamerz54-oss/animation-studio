@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body style="margin:0"><div id=wrap></div>
+<script type="module">
+import * as THREE from 'three'; import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+const R = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); R.setSize(1920, 1080); document.getElementById('wrap').appendChild(R.domElement); R.toneMapping = THREE.ACESFilmicToneMapping; R.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene(); const hdr = await new RGBELoader().loadAsync('assets/ph/hdri/wasteland_clouds_puresky_2k.hdr'); hdr.mapping = THREE.EquirectangularReflectionMapping; scene.background = hdr; scene.environment = hdr;
+scene.add(new THREE.DirectionalLight(0xffffff, 1.5));
+const files = [['sf/701066df', 'assets/sketchfab/701066df6b914fd08318524c7ccd96a7/model.glb'], ['sf/66ef51a8', 'assets/sketchfab/66ef51a84c9843dda53bf0b4b9020011/model.glb'], ['sf/32498418', 'assets/sketchfab/32498418a32d43a78d0847ce4c55fcb0/model.glb'],
+ ['sf/efc4dfe2', 'assets/sketchfab/efc4dfe2c7284a64bc9281eb4f61d402/model.glb'], ['sf/fdf39ca8 bus', 'assets/sketchfab/fdf39ca893a64368af45f82a6b6d68a4/model.glb'], ['sf/2964ff64', 'assets/sketchfab/2964ff64db8646f1a61f3ef70092c041/model.glb'],
+ ['covered_car', 'assets/ph/models/covered_car/covered_car.gltf'], ['fire_hydrant', 'assets/ph/models/fire_hydrant/fire_hydrant.gltf'], ['street_lamp_01', 'assets/ph/models/street_lamp_01/street_lamp_01.gltf'], ['barrel_03', 'assets/ph/models/barrel_03/barrel_03.gltf']];
+const L = new GLTFLoader(); const out = []; let i = 0;
+for (const [name, f] of files) { const g = await L.loadAsync(f); const o = g.scene; const b = new THREE.Box3().setFromObject(o), sz = b.getSize(new THREE.Vector3()), c = b.getCenter(new THREE.Vector3());
+  let tris = 0; o.traverse(m => { if (m.isMesh) tris += (m.geometry.index ? m.geometry.index.count : m.geometry.attributes.position.count) / 3; });
+  out.push(`${name}: size ${sz.x.toFixed(2)} x ${sz.y.toFixed(2)} x ${sz.z.toFixed(2)}  min.y ${b.min.y.toFixed(2)} center ${c.x.toFixed(2)},${c.z.toFixed(2)} tris ${tris|0}`);
+  const s = 3 / Math.max(sz.x, sz.y, sz.z); o.scale.setScalar(s); o.position.set((i % 5) * 4.2 - 8.4 - c.x * s, -b.min.y * s - (Math.floor(i / 5)) * 4 + 1, -c.z * s); scene.add(o); i++; }
+const cam = new THREE.PerspectiveCamera(40, 16 / 9, 0.1, 100); cam.position.set(0, 3, 16); cam.lookAt(0, -1, 0); R.render(scene, cam); console.log(out.join('\n')); window.draw = () => R.render(scene, cam); document.title = 'ready';
+</script></body></html>

@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset=utf-8><title>loading</title>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head><body>
+<script type="module">
+import * as THREE from 'three'; import * as MC from './mocap.js'; import * as C3 from './char3d.js';
+const PAL = await (await fetch('palette.json')).json(); const ch = C3.buildCharacter('aarav', PAL); const sc = new THREE.Scene(); sc.add(ch); MC.adoptC3(ch); MC.restParents(ch);
+const S = await MC.Mocap.load('assets/mocap/Xbot.glb', 'mixamo'); const out = [];
+const ang = (a, b, c) => { const u = b.clone().sub(a).normalize(), v = c.clone().sub(b).normalize(); return (Math.acos(Math.max(-1, Math.min(1, u.dot(v)))) * 57.3).toFixed(0); };
+for (const t of [0, 0.25, 0.5]) { const D = S.sample('walk', t); const P = D._pos; out.push(`t ${t} src elbowL ${ang(P.upperArmL.p, P.foreArmL.p, P.handL.p)} kneeL ${ang(P.thighL.p, P.shinL.p, P.footL.p)}`);
+  MC.applyD(ch, S, D); ch.updateMatrixWorld(true); const J = ch.userData.J, w = k => J[k].getWorldPosition(new THREE.Vector3()); const hand = new THREE.Vector3(0, -0.15 * 1.78, 0); J.foreArmL.localToWorld(hand);
+  out.push(`      tgt elbowL ${ang(w('upperArmL'), w('foreArmL'), w('handL'))} kneeL ${ang(w('thighL'), w('shinL'), w('footL'))}  srcRestElbow ${ang(S.rest.upperArmL.p, S.rest.foreArmL.p, S.rest.handL.p)}`); }
+console.log(out.join('\n')); document.title = 'ready';
+</script></body></html>

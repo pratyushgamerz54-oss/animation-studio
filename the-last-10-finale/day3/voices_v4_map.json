@@ -1,0 +1,1046 @@
+{
+ "model": "eleven_multilingual_v2",
+ "voices": {
+  "Aarav": {
+   "voice": "Viraj - Calm Devotional Narrator",
+   "voice_id": "uuyFQegRan8rpIQCGu9K",
+   "why": "user's choice"
+  },
+  "Kabir": {
+   "voice": "Taksh - Deep, Encouraging and Clear",
+   "voice_id": "6Iq2c772ZFrYvSuWijYS",
+   "why": "user's choice"
+  },
+  "Ryan": {
+   "voice": "Reyaansh – Sharp, Smooth & Confident ",
+   "voice_id": "uO1t9fkaawZM44iBD8YR",
+   "why": "user's choice"
+  },
+  "Dev": {
+   "voice": "Harsh - Resonant, Serious and Dramatic",
+   "voice_id": "HTUuC7OeeEt6OL5fViVe",
+   "why": "user's choice"
+  },
+  "Ishaan": {
+   "voice": "Bunty - Explainer",
+   "voice_id": "2I56yvR6ubAyIbBlNfn7",
+   "why": "user's choice"
+  },
+  "Vikram": {
+   "voice": "Kabir - Serious, Calm and Raspy",
+   "voice_id": "NAuCjDa0V2FYHGI2F2CS",
+   "why": "user's choice"
+  },
+  "Zeno Commander": {
+   "voice": "Alok - Deep and Suspenseful",
+   "voice_id": "oABbH1EqNQfpzYZZOAPR",
+   "why": "user's choice"
+  },
+  "Dr. Meera": {
+   "voice": "Pari M - Relatable Hindi Friend",
+   "voice_id": "06llJPvI62CjqSWOX9Gp",
+   "why": "user's choice"
+  },
+  "Zoya": {
+   "voice": "Muskaan - Friendly, Calm and Inviting",
+   "voice_id": "xoV6iGVuOGYHLWjXhVC7",
+   "why": "user's choice"
+  },
+  "Sara": {
+   "voice": "Rhea - Natural & Real Angry Girl",
+   "voice_id": "JG3V6gojK42M5cRu9q07",
+   "why": "user's choice"
+  },
+  "Ananya": {
+   "voice": "Geet - Talkative girl next door",
+   "voice_id": "2lLgWMtK52t50e2eLKAk",
+   "why": "user's choice"
+  }
+ },
+ "lines": [
+  {
+   "file": "aarav_01.mp3",
+   "who": "Aarav",
+   "text": "साँस धीमी रख... धीमी...",
+   "tags": "",
+   "shot": "3A",
+   "t_script": 2.5
+  },
+  {
+   "file": "kabir_01.mp3",
+   "who": "Kabir",
+   "text": "ये सपना है... ये सपना है...",
+   "tags": "",
+   "shot": "3B",
+   "t_script": 12.0
+  },
+  {
+   "file": "sara_01.mp3",
+   "who": "Sara",
+   "text": "श्श्श... वो सुन सकता है।",
+   "tags": "",
+   "shot": "3B",
+   "t_script": 15.3
+  },
+  {
+   "file": "kabir_02.mp3",
+   "who": "Kabir",
+   "text": "...शुक्रिया।",
+   "tags": "",
+   "shot": "3B",
+   "t_script": 19.6
+  },
+  {
+   "file": "aarav_02.mp3",
+   "who": "Aarav",
+   "text": "अभी! पीछे वाले रास्ते से।",
+   "tags": "",
+   "shot": "3D",
+   "t_script": 31.0
+  },
+  {
+   "file": "sara_02.mp3",
+   "who": "Sara",
+   "text": "नीचे झुको!",
+   "tags": "",
+   "shot": "3D",
+   "t_script": 33.5
+  },
+  {
+   "file": "kabir_03.mp3",
+   "who": "Kabir",
+   "text": "भाग Kabir... भाग!",
+   "tags": "",
+   "shot": "3D",
+   "t_script": 35.0
+  },
+  {
+   "file": "kabir_04.mp3",
+   "who": "Kabir",
+   "text": "आह—!",
+   "tags": "",
+   "shot": "3D",
+   "t_script": 37.2
+  },
+  {
+   "file": "kabir_05.mp3",
+   "who": "Kabir",
+   "text": "सुनो... तुम जाओ। Data ज़रूरी है, मैं नहीं।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 45.0
+  },
+  {
+   "file": "aarav_03.mp3",
+   "who": "Aarav",
+   "text": "चुप! हम दस बचे हैं, Kabir... और दस ही रहेंगे।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 49.2
+  },
+  {
+   "file": "aarav_04.mp3",
+   "who": "Aarav",
+   "text": "हाथ दे। मेरे कंधे पर वज़न डाल।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 53.6
+  },
+  {
+   "file": "kabir_06.mp3",
+   "who": "Kabir",
+   "text": "धीरे... ये पैर अभी भी मेरा ही है।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 56.4
+  },
+  {
+   "file": "sara_03.mp3",
+   "who": "Sara",
+   "text": "वो... इंसान नहीं था।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 59.9
+  },
+  {
+   "file": "aarav_05.mp3",
+   "who": "Aarav",
+   "text": "नाले में उतरो। बदबू सह लो, ज़िंदा रहोगे।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 62.3
+  },
+  {
+   "file": "kabir_07.mp3",
+   "who": "Kabir",
+   "text": "वाह... आज की सबसे अच्छी ख़बर।",
+   "tags": "",
+   "shot": "3E",
+   "t_script": 65.9
+  },
+  {
+   "file": "zoya_01.mp3",
+   "who": "Zoya",
+   "text": "बस... अब हिलना मत। एक दिन आराम।",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 70.6
+  },
+  {
+   "file": "kabir_08.mp3",
+   "who": "Kabir",
+   "text": "आराम? दुनिया ख़त्म हो रही है, doctor।",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 73.9
+  },
+  {
+   "file": "zoya_02.mp3",
+   "who": "Zoya",
+   "text": "दुनिया बाद में बचाना, पहले ये पैर।",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 77.3
+  },
+  {
+   "file": "vikram_01.mp3",
+   "who": "Vikram",
+   "text": "तीन घंटे देर। Radio भी बंद। पता है यहाँ क्या हालत थी?",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 80.5
+  },
+  {
+   "file": "aarav_06.mp3",
+   "who": "Aarav",
+   "text": "पता है। माफ़ी... लेकिन हम खाली हाथ नहीं आए।",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 85.1
+  },
+  {
+   "file": "ishaan_01.mp3",
+   "who": "Ishaan",
+   "text": "Data खुल गया! Sector 07... चालीस किलोमीटर उत्तर में, पुराना dam।",
+   "tags": "",
+   "shot": "4A",
+   "t_script": 89.4
+  },
+  {
+   "file": "ananya_01.mp3",
+   "who": "Ananya",
+   "text": "रुको... ये frame... zoom करो।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 96.7
+  },
+  {
+   "file": "ishaan_02.mp3",
+   "who": "Ishaan",
+   "text": "Lab का camera... यही उतरा था ना?",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 100.2
+  },
+  {
+   "file": "ryan_01.mp3",
+   "who": "Ryan",
+   "text": "मैंने इन्हें पहले देखा है।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 103.5
+  },
+  {
+   "file": "meera_01.mp3",
+   "who": "Dr. Meera",
+   "text": "Ryan?",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 106.1
+  },
+  {
+   "file": "ryan_02.mp3",
+   "who": "Ryan",
+   "text": "मेरे आख़िरी mission पर... इन्होंने मेरी पूरी crew उठा ली थी। मैं अकेला लौटा।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 107.6
+  },
+  {
+   "file": "ryan_03.mp3",
+   "who": "Ryan",
+   "text": "हम इन्हें 'Zeno' कहते थे।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 114.5
+  },
+  {
+   "file": "ryan_04.mp3",
+   "who": "Ryan",
+   "text": "इनकी गर्दन की नीली रोशनी... वही इनका ship से link है।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 116.9
+  },
+  {
+   "file": "vikram_02.mp3",
+   "who": "Vikram",
+   "text": "मतलब मारे जा सकते हैं।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 122.0
+  },
+  {
+   "file": "ryan_05.mp3",
+   "who": "Ryan",
+   "text": "रोके जा सकते हैं। बस।",
+   "tags": "",
+   "shot": "4B",
+   "t_script": 124.2
+  },
+  {
+   "file": "meera_02.mp3",
+   "who": "Dr. Meera",
+   "text": "अगर ये dam तक पहुँच गए... तो वो रास्ता उनका दरवाज़ा बन जाएगा।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 127.7
+  },
+  {
+   "file": "meera_03.mp3",
+   "who": "Dr. Meera",
+   "text": "और energy चार percent। दो दिन... शायद तीन।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 133.4
+  },
+  {
+   "file": "vikram_03.mp3",
+   "who": "Vikram",
+   "text": "वहाँ जाना मतलब सीधा उनके सामने।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 137.5
+  },
+  {
+   "file": "aarav_07.mp3",
+   "who": "Aarav",
+   "text": "और यहाँ रुकना मतलब अंधेरे में ख़त्म होना। हम सब साथ जाएँगे।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 140.5
+  },
+  {
+   "file": "ishaan_03.mp3",
+   "who": "Ishaan",
+   "text": "सब? Kabir भी?",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 145.6
+  },
+  {
+   "file": "kabir_09.mp3",
+   "who": "Kabir",
+   "text": "लंगड़ा हूँ, मरा नहीं।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 147.2
+  },
+  {
+   "file": "dev_01.mp3",
+   "who": "Dev",
+   "text": "तो रस्सी बाँध लो। कोई पीछे नहीं छूटेगा।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 149.3
+  },
+  {
+   "file": "ananya_02.mp3",
+   "who": "Ananya",
+   "text": "दिन चार। कल हम निकलेंगे... पता नहीं लौटेंगे या नहीं।",
+   "tags": "",
+   "shot": "4C",
+   "t_script": 152.9
+  },
+  {
+   "file": "dev_02.mp3",
+   "who": "Dev",
+   "text": "सड़क से नहीं, खंडहरों से चलो। खुले में हम निशाना हैं।",
+   "tags": "",
+   "shot": "5A",
+   "t_script": 159.4
+  },
+  {
+   "file": "ishaan_04.mp3",
+   "who": "Ishaan",
+   "text": "आउच! ये रस्सी है या फाँसी?",
+   "tags": "",
+   "shot": "5A",
+   "t_script": 164.1
+  },
+  {
+   "file": "dev_03.mp3",
+   "who": "Dev",
+   "text": "रस्सी है। तेरे जैसे को उड़ने से रोकती है।",
+   "tags": "",
+   "shot": "5A",
+   "t_script": 166.6
+  },
+  {
+   "file": "sara_04.mp3",
+   "who": "Sara",
+   "text": "ये पत्थर... गरम है। ज़मीन के अंदर कुछ हो रहा है।",
+   "tags": "",
+   "shot": "5A",
+   "t_script": 170.3
+  },
+  {
+   "file": "vikram_04.mp3",
+   "who": "Vikram",
+   "text": "चलते रहो। पीछे मैं हूँ।",
+   "tags": "",
+   "shot": "5A",
+   "t_script": 175.0
+  },
+  {
+   "file": "ishaan_05.mp3",
+   "who": "Ishaan",
+   "text": "ठंड से उँगलियाँ जम गईं... keyboard भी नहीं चला पाऊँगा।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 178.8
+  },
+  {
+   "file": "zoya_03.mp3",
+   "who": "Zoya",
+   "text": "हाथ आग के पास रखो, सीधे आग में नहीं।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 183.9
+  },
+  {
+   "file": "kabir_10.mp3",
+   "who": "Kabir",
+   "text": "जिस दिन ये सब हुआ... माँ का call आया था।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 188.0
+  },
+  {
+   "file": "kabir_11.mp3",
+   "who": "Kabir",
+   "text": "मैंने नहीं उठाया। सोचा... बाद में कर लूँगा।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 192.3
+  },
+  {
+   "file": "kabir_12.mp3",
+   "who": "Kabir",
+   "text": "वो 'बाद में'... कभी आया ही नहीं।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 196.9
+  },
+  {
+   "file": "zoya_04.mp3",
+   "who": "Zoya",
+   "text": "मेरा छोटा भाई... उस दिन मेरा हाथ पकड़े था।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 201.3
+  },
+  {
+   "file": "zoya_05.mp3",
+   "who": "Zoya",
+   "text": "भीड़ में छूट गया। मैं doctor बनने वाली थी... और उसे बचा नहीं पाई।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 205.5
+  },
+  {
+   "file": "dev_04.mp3",
+   "who": "Dev",
+   "text": "इसलिए अब हम हाथ नहीं... रस्सी पकड़ते हैं।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 212.1
+  },
+  {
+   "file": "ryan_06.mp3",
+   "who": "Ryan",
+   "text": "ऊपर से धरती नीली दिखती थी... अब सिर्फ़ धुआँ।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 216.7
+  },
+  {
+   "file": "ananya_03.mp3",
+   "who": "Ananya",
+   "text": "दिन पाँच। हम दस हैं... और हम चल रहे हैं।",
+   "tags": "",
+   "shot": "5B",
+   "t_script": 221.0
+  },
+  {
+   "file": "ryan_07.mp3",
+   "who": "Ryan",
+   "text": "रुको। हवा बदल गई।",
+   "tags": "",
+   "shot": "6A",
+   "t_script": 226.6
+  },
+  {
+   "file": "ishaan_06.mp3",
+   "who": "Ishaan",
+   "text": "Drones! ऊपर से... तीन, चार... बहुत सारे!",
+   "tags": "",
+   "shot": "6A",
+   "t_script": 228.4
+  },
+  {
+   "file": "vikram_05.mp3",
+   "who": "Vikram",
+   "text": "सब पुल के खंभों के पीछे! अभी!",
+   "tags": "",
+   "shot": "6A",
+   "t_script": 232.8
+  },
+  {
+   "file": "ryan_08.mp3",
+   "who": "Ryan",
+   "text": "गर्दन! नीली रोशनी पर मारो!",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 238.4
+  },
+  {
+   "file": "dev_05.mp3",
+   "who": "Dev",
+   "text": "Ananya, नीचे!",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 240.9
+  },
+  {
+   "file": "ishaan_07.mp3",
+   "who": "Ishaan",
+   "text": "चल, चल, चल... हाँ! मेरा drone अब हमारी तरफ़ है!",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 242.5
+  },
+  {
+   "file": "kabir_13.mp3",
+   "who": "Kabir",
+   "text": "बच्चा genius है, मान गए!",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 247.0
+  },
+  {
+   "file": "vikram_06.mp3",
+   "who": "Vikram",
+   "text": "Dev, सबको पार ले जाओ। मैं इन्हें रोकता हूँ।",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 249.4
+  },
+  {
+   "file": "aarav_08.mp3",
+   "who": "Aarav",
+   "text": "नहीं! हम साथ चलेंगे।",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 253.3
+  },
+  {
+   "file": "vikram_07.mp3",
+   "who": "Vikram",
+   "text": "Security chief का काम है... सबसे आगे चलना, और ज़रूरत पड़े तो सबसे पीछे रुकना।",
+   "tags": "",
+   "shot": "6B",
+   "t_script": 255.3
+  },
+  {
+   "file": "vikram_08.mp3",
+   "who": "Vikram",
+   "text": "चलो... आओ मेरे पास।",
+   "tags": "",
+   "shot": "6C",
+   "t_script": 264.9
+  },
+  {
+   "file": "aarav_09.mp3",
+   "who": "Aarav",
+   "text": "Vikram!!",
+   "tags": "",
+   "shot": "6C",
+   "t_script": 269.3
+  },
+  {
+   "file": "ishaan_08.mp3",
+   "who": "Ishaan",
+   "text": "Radio... कुछ भी नहीं। सिर्फ़ शोर।",
+   "tags": "",
+   "shot": "7A",
+   "t_script": 279.4
+  },
+  {
+   "file": "aarav_10.mp3",
+   "who": "Aarav",
+   "text": "मैंने वादा किया था... दस के दस।",
+   "tags": "",
+   "shot": "7A",
+   "t_script": 283.4
+  },
+  {
+   "file": "zoya_06.mp3",
+   "who": "Zoya",
+   "text": "वादा तूने नहीं तोड़ा, Aarav। उसने हमें बचाने के लिए चुना।",
+   "tags": "",
+   "shot": "7A",
+   "t_script": 286.7
+  },
+  {
+   "file": "zoya_07.mp3",
+   "who": "Zoya",
+   "text": "अब उसकी चुनी हुई राह मत छोड़ना।",
+   "tags": "",
+   "shot": "7A",
+   "t_script": 291.7
+  },
+  {
+   "file": "dev_06.mp3",
+   "who": "Dev",
+   "text": "भीग मत, बीमार पड़ेगा। Vikram होता तो डाँटता।",
+   "tags": "",
+   "shot": "7A",
+   "t_script": 294.6
+  },
+  {
+   "file": "sara_05.mp3",
+   "who": "Sara",
+   "text": "ये दरार dam के नीचे से निकल रही है... पूरी धरती का सबसे कमज़ोर हिस्सा यहीं है।",
+   "tags": "",
+   "shot": "7B",
+   "t_script": 300.6
+  },
+  {
+   "file": "meera_04.mp3",
+   "who": "Dr. Meera",
+   "text": "पानी... उल्टा बह रहा है। ऊपर की तरफ़।",
+   "tags": "",
+   "shot": "7B",
+   "t_script": 307.6
+  },
+  {
+   "file": "ananya_04.mp3",
+   "who": "Ananya",
+   "text": "दिन सात। अब हम नौ हैं।",
+   "tags": "",
+   "shot": "7B",
+   "t_script": 311.9
+  },
+  {
+   "file": "kabir_14.mp3",
+   "who": "Kabir",
+   "text": "ये machine हमारी नहीं है... ये dam के अंदर उग आई है।",
+   "tags": "",
+   "shot": "8A",
+   "t_script": 317.6
+  },
+  {
+   "file": "ishaan_09.mp3",
+   "who": "Ishaan",
+   "text": "छू के देखूँ?",
+   "tags": "",
+   "shot": "8A",
+   "t_script": 322.6
+  },
+  {
+   "file": "meera_05.mp3",
+   "who": "Dr. Meera",
+   "text": "नहीं!",
+   "tags": "",
+   "shot": "8A",
+   "t_script": 324.1
+  },
+  {
+   "file": "kabir_15.mp3",
+   "who": "Kabir",
+   "text": "पहली बार किसी ने तुझे रोका और तूने सुना।",
+   "tags": "",
+   "shot": "8A",
+   "t_script": 325.7
+  },
+  {
+   "file": "ishaan_10.mp3",
+   "who": "Ishaan",
+   "text": "इसमें Ryan के mission का log है!",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 330.7
+  },
+  {
+   "file": "ryan_09.mp3",
+   "who": "Ryan",
+   "text": "ये पिंजरा नहीं है...",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 333.7
+  },
+  {
+   "file": "ryan_10.mp3",
+   "who": "Ryan",
+   "text": "ये कवच है। किसी ने धरती को इनसे बचाने के लिए बंद किया था।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 336.1
+  },
+  {
+   "file": "sara_06.mp3",
+   "who": "Sara",
+   "text": "तो जिसे हम जेल समझ रहे थे...",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 341.1
+  },
+  {
+   "file": "meera_06.mp3",
+   "who": "Dr. Meera",
+   "text": "वो ढाल थी।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 344.2
+  },
+  {
+   "file": "meera_07.mp3",
+   "who": "Dr. Meera",
+   "text": "और ये दरवाज़ा... सिर्फ़ इंसान का हाथ खोल सकता है।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 345.7
+  },
+  {
+   "file": "meera_08.mp3",
+   "who": "Dr. Meera",
+   "text": "इसलिए वो हमें मार नहीं रहे थे। वो हमें ढूंढ रहे थे।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 350.4
+  },
+  {
+   "file": "ishaan_11.mp3",
+   "who": "Ishaan",
+   "text": "Mothership आ रहा है... सुबह से पहले।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 355.0
+  },
+  {
+   "file": "aarav_11.mp3",
+   "who": "Aarav",
+   "text": "तो हम आज रात इसे बंद करेंगे।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 358.6
+  },
+  {
+   "file": "dev_07.mp3",
+   "who": "Dev",
+   "text": "और अगर नहीं कर पाए?",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 361.3
+  },
+  {
+   "file": "aarav_12.mp3",
+   "who": "Aarav",
+   "text": "तो कल सुबह किसी को ये सवाल पूछने का मौका नहीं मिलेगा।",
+   "tags": "",
+   "shot": "8B",
+   "t_script": 363.3
+  },
+  {
+   "file": "meera_09.mp3",
+   "who": "Dr. Meera",
+   "text": "Turbine की पूरी ताक़त node में गई... तो दरार सिल सकती है।",
+   "tags": "",
+   "shot": "9A",
+   "t_script": 369.3
+  },
+  {
+   "file": "kabir_16.mp3",
+   "who": "Kabir",
+   "text": "Turbine मेरा काम। Ishaan, मेरे साथ।",
+   "tags": "",
+   "shot": "9A",
+   "t_script": 374.7
+  },
+  {
+   "file": "dev_08.mp3",
+   "who": "Dev",
+   "text": "दरवाज़ा मैं संभालूँगा।",
+   "tags": "",
+   "shot": "9A",
+   "t_script": 377.9
+  },
+  {
+   "file": "ananya_05.mp3",
+   "who": "Ananya",
+   "text": "आज record नहीं... आज लड़ना है।",
+   "tags": "",
+   "shot": "9A",
+   "t_script": 380.1
+  },
+  {
+   "file": "kabir_17.mp3",
+   "who": "Kabir",
+   "text": "EMP तैयार! आँखें बंद करो!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 384.5
+  },
+  {
+   "file": "ananya_06.mp3",
+   "who": "Ananya",
+   "text": "मेरे पास बस एक flash बचा है... ये लो!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 386.9
+  },
+  {
+   "file": "ishaan_12.mp3",
+   "who": "Ishaan",
+   "text": "Drone दाएँ से! Dev, दाएँ!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 390.7
+  },
+  {
+   "file": "zoya_08.mp3",
+   "who": "Zoya",
+   "text": "Aarav!!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 393.2
+  },
+  {
+   "file": "vikram_09.mp3",
+   "who": "Vikram",
+   "text": "Security chief... ड्यूटी पर वापस।",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 394.7
+  },
+  {
+   "file": "zoya_09.mp3",
+   "who": "Zoya",
+   "text": "तुम... ज़िंदा हो!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 398.1
+  },
+  {
+   "file": "vikram_10.mp3",
+   "who": "Vikram",
+   "text": "गले बाद में मिलना। पहले लड़ो।",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 400.3
+  },
+  {
+   "file": "dev_09.mp3",
+   "who": "Dev",
+   "text": "Aarav, जाओ! दरवाज़ा मैं पकड़े हूँ!",
+   "tags": "",
+   "shot": "9B",
+   "t_script": 403.1
+  },
+  {
+   "file": "ryan_11.mp3",
+   "who": "Ryan",
+   "text": "मैं जाऊँगा। एक बार ऊपर गया था... इस बार नीचे सही।",
+   "tags": "",
+   "shot": "9C",
+   "t_script": 413.7
+  },
+  {
+   "file": "aarav_13.mp3",
+   "who": "Aarav",
+   "text": "नहीं Ryan। कोई अकेला नहीं जाएगा। हम साथ चलेंगे।",
+   "tags": "",
+   "shot": "9C",
+   "t_script": 418.4
+  },
+  {
+   "file": "sara_07.mp3",
+   "who": "Sara",
+   "text": "बाएँ पत्थर पर पैर मत रखना, टूटेगा!",
+   "tags": "",
+   "shot": "9C",
+   "t_script": 422.6
+  },
+  {
+   "file": "ryan_12.mp3",
+   "who": "Ryan",
+   "text": "गरम है... बहुत गरम...",
+   "tags": "",
+   "shot": "9C",
+   "t_script": 425.8
+  },
+  {
+   "file": "kabir_18.mp3",
+   "who": "Kabir",
+   "text": "अब!!",
+   "tags": "",
+   "shot": "9C",
+   "t_script": 429.2
+  },
+  {
+   "file": "meera_10.mp3",
+   "who": "Dr. Meera",
+   "text": "दरार... बंद हो रही है!",
+   "tags": "",
+   "shot": "9D",
+   "t_script": 437.9
+  },
+  {
+   "file": "ishaan_13.mp3",
+   "who": "Ishaan",
+   "text": "वो भाग रहे हैं! सब ऊपर जा रहे हैं!",
+   "tags": "",
+   "shot": "9D",
+   "t_script": 440.5
+  },
+  {
+   "file": "dev_10.mp3",
+   "who": "Dev",
+   "text": "रस्सी... मत छोड़ना...",
+   "tags": "",
+   "shot": "9D",
+   "t_script": 446.2
+  },
+  {
+   "file": "zoya_10.mp3",
+   "who": "Zoya",
+   "text": "Dev? Dev... आँखें खोलो...",
+   "tags": "",
+   "shot": "9D",
+   "t_script": 449.0
+  },
+  {
+   "file": "dev_11.mp3",
+   "who": "Dev",
+   "text": "इतना मत हिलाओ, doctor... ज़िंदा हूँ।",
+   "tags": "",
+   "shot": "9D",
+   "t_script": 453.7
+  },
+  {
+   "file": "ananya_07.mp3",
+   "who": "Ananya",
+   "text": "आसमान... देखो।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 465.9
+  },
+  {
+   "file": "zoya_11.mp3",
+   "who": "Zoya",
+   "text": "धूप... इतने दिनों बाद।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 467.8
+  },
+  {
+   "file": "ishaan_14.mp3",
+   "who": "Ishaan",
+   "text": "गर्मी... असली गर्मी।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 470.4
+  },
+  {
+   "file": "ananya_08.mp3",
+   "who": "Ananya",
+   "text": "दिन दस। धूप लौट आई... और हम सब भी।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 472.8
+  },
+  {
+   "file": "kabir_19.mp3",
+   "who": "Kabir",
+   "text": "बाद में नहीं... अभी बोल रहा हूँ — शुक्रिया, Dev। और Vikram, तुझे भी।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 476.3
+  },
+  {
+   "file": "meera_11.mp3",
+   "who": "Dr. Meera",
+   "text": "Dam की बिजली bunker तक पहुँच गई... 100 percent।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 482.5
+  },
+  {
+   "file": "vikram_11.mp3",
+   "who": "Vikram",
+   "text": "अब कोई अंधेरे में नहीं सोएगा।",
+   "tags": "",
+   "shot": "10A",
+   "t_script": 487.1
+  },
+  {
+   "file": "aarav_14.mp3",
+   "who": "Aarav",
+   "text": "हम दस थे...",
+   "tags": "",
+   "shot": "10B",
+   "t_script": 491.9
+  },
+  {
+   "file": "aarav_15.mp3",
+   "who": "Aarav",
+   "text": "...और दस ही हैं।",
+   "tags": "",
+   "shot": "10B",
+   "t_script": 494.3
+  },
+  {
+   "file": "sara_08.mp3",
+   "who": "Sara",
+   "text": "पत्थर ठंडा हो गया... ज़मीन चैन में है।",
+   "tags": "",
+   "shot": "10B",
+   "t_script": 497.5
+  },
+  {
+   "file": "commander_01.mp3",
+   "who": "Zeno Commander",
+   "text": "दरवाज़ा बंद हुआ है... टूटा नहीं।",
+   "tags": "",
+   "shot": "10C",
+   "t_script": 514.4
+  },
+  {
+   "file": "commander_02.mp3",
+   "who": "Zeno Commander",
+   "text": "और उनमें से एक... अब भी हमारा है।",
+   "tags": "",
+   "shot": "10C",
+   "t_script": 519.3
+  },
+  {
+   "file": "ryan_13.mp3",
+   "who": "Ryan",
+   "text": "...ये क्या है?",
+   "tags": "",
+   "shot": "10C",
+   "t_script": 526.3
+  }
+ ]
+}
